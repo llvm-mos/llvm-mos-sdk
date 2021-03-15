@@ -1,2 +1,2 @@
-# sdk
-SDK for developing the llvm-mos compiler.
+# LLVM-MOS SDK
+A WIP SDK for developing with the llvm-mos compiler.

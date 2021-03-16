@@ -1,1 +1,2 @@
-add_library(c64_basic_header STATIC basic_header.s)
+add_subdirectory(include)
+add_subdirectory(lib)

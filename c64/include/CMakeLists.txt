@@ -1,1 +1,1 @@
-configure_file(c64_bas.ld c64_bas.ld COPYONLY)
+configure_file(c64.ld c64.ld COPYONLY)

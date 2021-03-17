@@ -4,5 +4,5 @@
 	.asciz "2061" ; the location of the _start symbol, in ASCII
 .endm
 
-.include "common/lib/basic_header.s"
+.include "lib/basic_header.s"
 

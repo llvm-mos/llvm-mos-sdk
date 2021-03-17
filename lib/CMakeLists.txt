@@ -1,0 +1,1 @@
+add_library(c64_basic_header STATIC c64_basic_header.s)

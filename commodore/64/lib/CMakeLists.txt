@@ -7,5 +7,7 @@ add_custom_target("${name}_copy" ALL
     DEPENDS ${name})
 endfunction()
 
-add_object_file(c64_basic_header c64_basic_header.s)
+add_object_file(basic_header basic_header.s)
 add_object_file(crt0 crt0.s)
+
+add_library(os STATIC chrout.c)

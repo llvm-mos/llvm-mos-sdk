@@ -5,10 +5,9 @@
  * Produces a PRG file with a SYS command to start the program.
  */
 
-OUTPUT_FORMAT(binary);
+OUTPUT_FORMAT(binary)
 
-INPUT(../lib/c64_basic_header.o);
-INPUT(../lib/crt0.o);
+INPUT(basic_header.o crt0.o)
 
 SECTIONS {
     /* Tells the C64 LOAD command where to place the file's contents. */
@@ -22,5 +21,5 @@ SECTIONS {
     .data : { *(.data .data.*) }
 }
 
-ASSERT(ADDR(__basic_header) == 0x0801, "BASIC header at incorrect address.");
-ASSERT(_start == 2061, "_start began at different address than BASIC header expects.");
+ASSERT(ADDR(__basic_header) == 0x0801, "BASIC header at incorrect address.")
+ASSERT(_start == 2061, "_start began at different address than BASIC header expects.")

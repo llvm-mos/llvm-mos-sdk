@@ -40,6 +40,7 @@ $ cd build
 $ cmake -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="MOS" \
         -DLLVM_TARGETS_TO_BUILD="" \
         -DLLVM_ENABLE_PROJECTS="clang;lld" \
+        -G "Ninja" \
         ../llvm
 $ ninja clang lld llvm-ar llvm-ranlib
 $ alias clang-mos=$HOME/llvm-mos/build/bin/clang

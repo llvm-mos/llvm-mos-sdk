@@ -1,1 +1,1 @@
-configure_file(link.ld link.ld COPYONLY)
+configure_file(chrout.h chrout.h COPYONLY)

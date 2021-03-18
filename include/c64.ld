@@ -15,9 +15,7 @@ SECTIONS {
     __prg_header 0x0801 - 2 : { SHORT(0x0801) }
 
     /* BASIC program that jumps to _start = 2061. */
-    __basic_header : {
-        *(__basic_header)
-    }
+    __basic_header : { *(__basic_header) }
 
     .text : { *(__start) *(.text .text.*) }
     .rodata : { *(.rodata .rodata.*) }

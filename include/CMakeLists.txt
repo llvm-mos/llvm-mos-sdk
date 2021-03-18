@@ -1,1 +1,0 @@
-configure_file(c64.ld c64.ld COPYONLY)

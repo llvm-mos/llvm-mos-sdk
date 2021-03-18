@@ -72,9 +72,9 @@ Once you have the SDK, you can compile the sample program using the alias create
 
 ```console
 $ cd ..
-$ clang-mos --target=mos-commodore-64 --sysroot=../build -Os -flto -o hello.prg hello_world.c
+$ clang-mos --target=mos-commodore-64 --sysroot=build -Os -flto -o hello.prg examples/hello_world.c
 
-$ cat hello_world.c
+$ cat examples/hello_world.c
 int main(void) {
   const char *cur = "HELLO, WORLD!\n";
   while (*cur)
@@ -103,7 +103,7 @@ Here's what's going on in the clang command line:
     <code>mos</code> becomes a directory in the path, relative to the
     sysroot.
   </dd>
-  <dt><code>--sysroot=../build</code></dt>
+  <dt><code>--sysroot=build</code></dt>
   <dd>
     Identify the root directory of the built SDK. The target-specific path
     from the triple is relative to this path.

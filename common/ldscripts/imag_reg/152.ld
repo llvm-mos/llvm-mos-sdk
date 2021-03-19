@@ -1,0 +1,3 @@
+/* GENERATED FILE -- DO NOT MANUALLY EDIT. */
+INCLUDE "common/ldscripts/imag_reg/151.ld"
+PROVIDE(__rc152 = __rc151 + 1);

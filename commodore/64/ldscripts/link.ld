@@ -22,9 +22,11 @@ SECTIONS {
 
 }
 
-/* Provide imaginary (zero page) registers. */
-INCLUDE common/ldscripts/imag_reg.inc.ld
+/* Provide 142 imaginary (zero page) registers (the BASIC area from $02 to $8f) */
 PROVIDE(__rc0 = 0x0002);
+INCLUDE common/ldscripts/imag_reg/141.ld
+ASSERT(__rc0 == 0x0002, "Inconsistent zero page map.")
+ASSERT(__rc141 == 0x008f, "Inconsistent zero page map.")
 
 ASSERT(ADDR(__basic_header) == 0x0801, "BASIC header at incorrect address.")
 ASSERT(_start == 2061, "_start began at different address than BASIC header expects.")

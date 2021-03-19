@@ -1,0 +1,3 @@
+/* GENERATED FILE -- DO NOT MANUALLY EDIT. */
+INCLUDE "common/ldscripts/imag_reg/64.ld"
+PROVIDE(__rc65 = __rc64 + 1);

@@ -1,1 +1,1 @@
-configure_file(imag_reg.inc.ld imag_reg.inc.ld COPYONLY)
+add_subdirectory(imag_reg)

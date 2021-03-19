@@ -16,4 +16,6 @@ set(CMAKE_C_FLAGS "--target=mos -flto -Os")
 
 include_directories(.)
 
+add_subdirectory(common)
+
 add_subdirectory(commodore/64)

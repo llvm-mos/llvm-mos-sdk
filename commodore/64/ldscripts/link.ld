@@ -19,7 +19,12 @@ SECTIONS {
     .text : { *(__start) *(.text .text.*) }
     .rodata : { *(.rodata .rodata.*) }
     .data : { *(.data .data.*) }
+
 }
+
+/* Provide imaginary (zero page) registers. */
+INCLUDE common/ldscripts/imag_reg.inc.ld
+PROVIDE(__rc0 = 0x0002);
 
 ASSERT(ADDR(__basic_header) == 0x0801, "BASIC header at incorrect address.")
 ASSERT(_start == 2061, "_start began at different address than BASIC header expects.")

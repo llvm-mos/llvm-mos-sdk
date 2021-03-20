@@ -23,7 +23,7 @@ address to make sure that the math works out.
 PROVIDE(__rc0 = 10);
 PROVIDE(__rc10 = 25);
 PROVIDE(__rc12 = 30);
-INCLUDE common/ldscripts/imag_reg/21.ld
+INCLUDE imag_reg/21.ld
 ASSERT(__rc0 == 0, "...")
 ASSERT(__rc21 == 39, "...")
 

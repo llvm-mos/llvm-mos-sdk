@@ -1,3 +1,3 @@
 /* GENERATED FILE -- DO NOT MANUALLY EDIT. */
-INCLUDE "common/ldscripts/imag_reg/18.ld"
+INCLUDE imag_reg/18.ld
 PROVIDE(__rc19 = __rc18 + 1);

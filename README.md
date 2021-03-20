@@ -69,11 +69,16 @@ The SDK will now be present in the build (current) directory.
 
 ### Compile the example
 
-Once you have the SDK, you can compile the sample program using the alias created earlier. You'll need to use `--sysroot` to tell clang where the SDK is; this will go away once a release/install solution is created.
+Once you have the SDK, you can compile the sample program using the alias
+created earlier. You'll need to provide `--config=`, which should point to
+one of the target-specific Clang configuration files (at present, there's
+only `.../commodore/64.cfg`). These configuration files provide the
+command-line arguments necessary to generate executables for a specific MOS
+target.
 
 ```console
 $ cd ..
-$ clang-mos --target=mos-commodore-64 --sysroot=build -Os -flto -o hello.prg examples/hello_world.c
+$ clang-mos --config=build/commodore/64.cfg -o hello.prg examples/hello_world.c
 
 $ cat examples/hello_world.c
 int main(void) {
@@ -90,35 +95,3 @@ $ hexdump -C hello.prg
 00000030  44 21 0a 00                                       |D!..|
 00000034
 ```
-
-### Clang Command Line Breakdown
-
-Here's what's going on in the clang command line:
-
-<dl>
-  <dt><code>--target=mos-commodore-64</code></dt>
-  <dd>
-    Target the Commodore 64. Target "triples" are turned directly into the
-    set of directories where headers, libraries, and linker scripts are
-    expected to be in the built SDK. Each component of the triple after the
-    <code>mos</code> becomes a directory in the path, relative to the
-    sysroot.
-  </dd>
-  <dt><code>--sysroot=build</code></dt>
-  <dd>
-    Identify the root directory of the built SDK. The target-specific path
-    from the triple is relative to this path.
-  </dd>
-  <dt><code>-flto</code></dt>
-  <dd>
-    Generate final assembly code in the linker, not in the compiler. The
-    LLVM-MOS SDK ships its libraries as LLVM bitcode files, not as machine
-    code object files, allowing the linker to generate and optimize code as a
-    whole. In this example, this causes the <code>__chrout</code> routine to
-    be fully inlined into the main routine and deleted from the resulting
-    binary. This won't be strictly required in the future, but today,
-    omitting it causes the emission of worse enough assembly that
-    <code>hello_world.c</code> walks into unimplemented regions of the C
-    runtime.
-  </dd>
-</dl>

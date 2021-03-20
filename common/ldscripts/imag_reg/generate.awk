@@ -8,7 +8,7 @@ BEGIN {
     if (i == 0)
       print "PROVIDE(__rc0 = 0);" > file;
     else {
-      printf "INCLUDE \"common/ldscripts/imag_reg/%s.ld\"\n", i - 1 > file;
+      printf "INCLUDE imag_reg/%s.ld\n", i - 1 > file;
       printf "PROVIDE(__rc%s = __rc%s + 1);\n", i, i - 1 > file;
     }
     printf "configure_file(%s %s COPYONLY)\n", file, file > "CMakeLists.txt";

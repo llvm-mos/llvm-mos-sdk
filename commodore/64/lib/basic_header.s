@@ -1,7 +1,7 @@
 ; C64 BASIC header that jumps to _start = 2061. This address immediately
 ; follows the header if it's at the beginning of BASIC memory ($0801).
 
-.section __basic_header,"a",@progbits
+.section .basic_header,"a",@progbits
 	.short next_line	; address of next BASIC line
 	.short 7773 		; line number: l33t for LLVM, a hint that this program was
 						; compiled with LLVM

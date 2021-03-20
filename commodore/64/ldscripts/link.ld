@@ -24,7 +24,7 @@ SECTIONS {
 
 /* Provide 142 imaginary (zero page) registers (the BASIC area from $02 to $8f) */
 PROVIDE(__rc0 = 0x0002);
-INCLUDE common/ldscripts/imag_reg/141.ld
+INCLUDE imag_reg/141.ld
 ASSERT(__rc0 == 0x0002, "Inconsistent zero page map.")
 ASSERT(__rc141 == 0x008f, "Inconsistent zero page map.")
 

@@ -19,7 +19,8 @@ SECTIONS {
     .text : { *(.start) *(.text .text.*) }
     .rodata : { *(.rodata .rodata.*) }
     .data : { *(.data .data.*) }
-
+    .bss (NOLOAD) : { *(.bss .bss.* COMMON) }
+    .noinit (NOLOAD) : { *(.noinit .noinit.*) }
 }
 
 /* Provide 142 imaginary (zero page) registers (the BASIC area from $02 to $8f) */

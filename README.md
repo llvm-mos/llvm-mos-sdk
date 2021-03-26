@@ -81,6 +81,8 @@ $ cd ..
 $ clang-mos --config build/commodore/64.cfg -o hello.prg examples/hello_world.c
 
 $ cat examples/hello_world.c
+#include <chrout.h>
+
 int main(void) {
   const char *cur = "HELLO, WORLD!\n";
   while (*cur)

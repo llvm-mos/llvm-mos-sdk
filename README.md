@@ -78,7 +78,7 @@ target.
 
 ```console
 $ cd ..
-$ clang-mos --config=build/commodore/64.cfg -o hello.prg examples/hello_world.c
+$ clang-mos --config build/commodore/64.cfg -o hello.prg examples/hello_world.c
 
 $ cat examples/hello_world.c
 int main(void) {
@@ -94,4 +94,38 @@ $ hexdump -C hello.prg
 00000020  a9 00 a2 00 60 48 45 4c  4c 4f 2c 20 57 4f 52 4c  |....`HELLO, WORL|
 00000030  44 21 0a 00                                       |D!..|
 00000034
+
+$ clang-mos --config build/commodore/64.cfg -o hello.s -Wl,--lto-emit-asm examples/hello_world.c
+
+$ cat hello.s
+	.text
+	.file	"ld-temp.o"
+	.section	.text.main,"ax",@progbits
+	.globl	main
+	.type	main,@function
+main:
+	ldx	#0
+	lda	#72
+LBB0_1:
+	;APP
+	jsr	65490
+	;NO_APP
+	lda	.str+1,x
+	inx
+	cpx	#14
+	bne	LBB0_1
+LBB0_2:
+	lda	#0
+	ldx	#0
+	rts
+.Lfunc_end0:
+	.size	main, .Lfunc_end0-main
+
+	.type	.str,@object
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.str:
+	.asciz	"HELLO, WORLD!\n"
+	.size	.str, 15
+
+	.addrsig
 ```

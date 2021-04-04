@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(llvm-mos-sdk LANGUAGES C ASM)
 
 if (NOT DEFINED LLVM_MOS)
-message(FATAL_ERROR "LLVM-MOS must be set to the LLVM binary directory.")
+message(FATAL_ERROR "LLVM_MOS must be set to the LLVM binary directory.")
 endif()
 
 set(CMAKE_ASM_COMPILER "${LLVM_MOS}/clang")
@@ -13,6 +13,8 @@ set(CMAKE_RANLIB "${LLVM_MOS}/llvm-ranlib")
 
 set(CMAKE_ASM_FLAGS "--target=mos")
 set(CMAKE_C_FLAGS "--target=mos -flto -Os")
+
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 
 include_directories(.)
 

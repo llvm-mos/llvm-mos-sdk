@@ -13,15 +13,3 @@
     .global _SaveY
     _SaveY:
         .space 1
-
-    .global _SaveP
-    _SaveP:
-        .space 1
-
-    .global _SaveImagLo
-    _SaveImagLo:
-        .space 1
-
-    .global _SaveImagHi
-    _SaveImagHi:
-        .space 1

@@ -7,7 +7,7 @@
 
 OUTPUT_FORMAT(binary)
 
-INPUT(basic_header.o crt0.o)
+INPUT(basic_header.o)
 
 SECTIONS {
     /* Tells the C64 LOAD command where to place the file's contents. */

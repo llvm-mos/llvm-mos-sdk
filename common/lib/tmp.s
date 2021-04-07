@@ -17,3 +17,9 @@
     .global __save_y
     __save_y:
         .space 1
+
+    ; Pointer containing target of indirect call.
+    .global __call_indir_target
+    __call_indir_target:
+        .align 2    ; Prevent NMOS bug when the pointer is on a page boundary.
+        .space 2

@@ -78,13 +78,13 @@ target.
 
 ```console
 $ cd ..
-$ clang-mos --config build/commodore/64.cfg -o hello.prg examples/hello_world.c
+$ clang-mos --config build/commodore/64.cfg -o hello.prg examples/hello_chrout.c
 
-$ cat examples/hello_world.c
+$ cat examples/hello_chrout.c
 #include <chrout.h>
 
 int main(void) {
-  const char *cur = "HELLO, WORLD!\n";
+  const char *cur = "HELLO, CHROUT!\n";
   while (*cur)
     __chrout(*cur++);
   return 0;
@@ -93,11 +93,11 @@ int main(void) {
 $ hexdump -C hello.prg
 00000000  01 08 0b 08 5d 1e 9e 32  30 36 31 00 00 00 4c 10  |....]..2061...L.|
 00000010  08 a2 00 a9 48 20 d2 ff  bd 25 08 e8 e0 0e d0 f5  |....H ...%......|
-00000020  a9 00 a2 00 60 48 45 4c  4c 4f 2c 20 57 4f 52 4c  |....`HELLO, WORL|
-00000030  44 21 0a 00                                       |D!..|
+00000020  a9 00 a2 00 60 48 45 4c  4c 4f 2c 20 43 48 52 4f  |....`HELLO, CHRO|
+00000030  55 54 21 0a 00                                    |UT!..|
 00000034
 
-$ clang-mos --config build/commodore/64.cfg -o hello.s -Wl,--lto-emit-asm examples/hello_world.c
+$ clang-mos --config build/commodore/64.cfg -o hello.s -Wl,--lto-emit-asm examples/hello_chrout.c
 
 $ cat hello.s
 	.text
@@ -114,11 +114,10 @@ LBB0_1:
 	;NO_APP
 	lda	.str+1,x
 	inx
-	cpx	#14
+	cpx	#15
 	bne	LBB0_1
-LBB0_2:
-	lda	#0
 	ldx	#0
+	lda	#0
 	rts
 .Lfunc_end0:
 	.size	main, .Lfunc_end0-main
@@ -126,8 +125,7 @@ LBB0_2:
 	.type	.str,@object
 	.section	.rodata.str1.1,"aMS",@progbits,1
 .str:
-	.asciz	"HELLO, WORLD!\n"
-	.size	.str, 15
+	.asciz	"HELLO, CHROUT!\n"
+	.size	.str, 16
 
 	.addrsig
-```

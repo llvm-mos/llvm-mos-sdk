@@ -2,7 +2,7 @@ include(AddObjectFile)
 
 add_object_file(crt0 crt0.s)
 
-add_library(common_crt OBJECT call_indir.s tmp.s)
+add_library(common_crt OBJECT call_indir.s const.s tmp.s)
 
 add_library(common_c OBJECT printf.c)
 set_property(SOURCE printf.c PROPERTY COMPILE_DEFINITIONS

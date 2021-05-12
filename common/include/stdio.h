@@ -29,8 +29,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _PRINTF_H_
-#define _PRINTF_H_
+#ifndef _STDIO_H_
+#define _STDIO_H_
 
 #include <stdarg.h>
 #include <stddef.h>
@@ -78,4 +78,4 @@ int vprintf(const char* format, va_list va);
 // To be defined by platform.
 void __putchar(char c);
 
-#endif  // _PRINTF_H_
+#endif  // not _STDIO_H_

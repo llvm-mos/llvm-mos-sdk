@@ -3,7 +3,14 @@ include(AddObjectFile)
 add_object_file(crt0 crt0.s)
 
 add_library(common_crt OBJECT
-   call_indir.s const.s mul.c tmp.s)
+   const.s
+   tmp.s
+
+   call_indir.s
+
+   mul.c
+   divmod.c
+)
 
 add_library(common_c OBJECT
    mem.c printf.c)

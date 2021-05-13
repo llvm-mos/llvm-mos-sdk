@@ -31,3 +31,6 @@ ASSERT(__rc141 == 0x008f, "Inconsistent zero page map.")
 
 ASSERT(ADDR(.basic_header) == 0x0801, "BASIC header at incorrect address.")
 ASSERT(_start == 2061, "_start began at different address than BASIC header expects.")
+
+/* Set initial soft stack address to end of BASIC area. (It grows down.) */
+__stack = 0x9FFF;

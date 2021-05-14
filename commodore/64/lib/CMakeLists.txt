@@ -1,4 +1,7 @@
 include(AddObjectFile)
+include(CompileForMOS)
+
+compile_for_mos()
 
 add_object_file(basic_header basic_header.s)
 

@@ -1,4 +1,10 @@
 include(AddObjectFile)
+include(CompileForMOS)
+
+compile_for_mos()
+
+add_object_file(sim_crt0 crt0.s crt0)
+set_target_properties(sim_crt0 PROPERTIES OUTPUT_NAME crt0)
 
 add_library(sim_crt STATIC $<TARGET_OBJECTS:common_crt>)
 set_target_properties(sim_crt PROPERTIES OUTPUT_NAME crt)

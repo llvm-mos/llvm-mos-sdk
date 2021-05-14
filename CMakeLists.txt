@@ -6,18 +6,10 @@ if (NOT DEFINED LLVM_MOS)
 message(FATAL_ERROR "LLVM_MOS must be set to the LLVM binary directory.")
 endif()
 
-set(CMAKE_ASM_COMPILER "${LLVM_MOS}/clang")
-set(CMAKE_C_COMPILER "${LLVM_MOS}/clang")
-set(CMAKE_AR "${LLVM_MOS}/llvm-ar")
-set(CMAKE_RANLIB "${LLVM_MOS}/llvm-ranlib")
-
-set(CMAKE_ASM_FLAGS "--target=mos")
-set(CMAKE_C_FLAGS "--target=mos -flto -Os")
-
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 
-include_directories(.)
-include_directories(common/include)
+# Place all binaries in {build}/bin.
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_subdirectory(common)
 add_subdirectory(commodore)

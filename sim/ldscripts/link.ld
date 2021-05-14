@@ -15,7 +15,7 @@ SECTIONS {
     .vectors 0xFFFA : { SHORT(0) SHORT(_start) SHORT(0) }
 }
 
-/* Provide 142 imaginary (zero page) registers (the BASIC area from $02 to $8f) */
+/* Provide 256 imaginary (zero page) registers. */
 INCLUDE imag_reg/255.ld
 ASSERT(__rc0 == 0x0000, "Inconsistent zero page map.")
 ASSERT(__rc255 == 0x00ff, "Inconsistent zero page map.")

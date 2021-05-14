@@ -19,7 +19,5 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 include_directories(.)
 include_directories(common/include)
 
-configure_file(common.cfg common.cfg)
-
 add_subdirectory(common)
 add_subdirectory(commodore)

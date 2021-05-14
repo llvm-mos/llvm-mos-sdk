@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Generates VICE (C64) labels from the given MOS ELF file(s).
+
+nm $@ | awk '{ print "add_label", substr($1, 5), gensub(/^[^.]/, ".\\0", 1, $3); }'

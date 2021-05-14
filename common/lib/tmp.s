@@ -1,7 +1,7 @@
 ; Compiler temporary locations. These essentially behave as caller-saved
 ; registers; in particular, interrupt handlers must preserve them.
 
-.section .noinit
+.section .noinit,"aw"
 
 ; Location to temporarily save the value of the A register.
 .global __save_a

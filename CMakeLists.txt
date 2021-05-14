@@ -21,3 +21,4 @@ include_directories(common/include)
 
 add_subdirectory(common)
 add_subdirectory(commodore)
+add_subdirectory(sim)

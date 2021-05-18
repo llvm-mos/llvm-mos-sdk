@@ -1,0 +1,1 @@
+// Stub for libraries that must be present but have no present contents.

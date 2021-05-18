@@ -18,6 +18,8 @@ add_library(common_crt OBJECT
 add_library(common_c OBJECT
    mem.c printf.c)
 
+add_library(m STATIC stub.c)
+
 # Prevent the implementation of memset from being reduced to a call of memset.
 set_property(SOURCE mem.c PROPERTY COMPILE_FLAGS
     -fno-builtin-memset)

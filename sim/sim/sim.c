@@ -5,6 +5,8 @@
 #include "netlist_sim.h"
 #include "perfect6502.h"
 
+#define TRACE 0
+
 static const char usage[] =
     "Usage: sim [image]\n"
     "\n"
@@ -43,8 +45,12 @@ int main(int argc, const char *argv[]) {
   while (!memory[0xFFF8]) {
     step(state);
     BOOL clk = isNodeHigh(state, 1171);
-    if (clk && !readRW(state)) {
-      if (readAddressBus(state) == 0xFFF9)
+    if (clk) {
+      if (TRACE)
+        printf("%c: %4x, %2x\n", readRW(state) ? 'R' : 'W',
+               readAddressBus(state), readDataBus(state));
+
+      if (!readRW(state) && readAddressBus(state) == 0xFFF9)
         putchar(readDataBus(state));
     }
   }

@@ -8,4 +8,7 @@ _start:
     STA mos8(__rc1)
 
     ; FIXME: Zero BSS.
-    JMP main
+    JSR main
+
+    ; It's no longer safe to reenter BASIC.
+    end: JMP end

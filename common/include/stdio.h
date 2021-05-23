@@ -35,6 +35,10 @@
 #include <stdarg.h>
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Tiny printf implementation
  * \param format A string that specifies the format of the output
@@ -77,5 +81,9 @@ int vprintf(const char* format, va_list va);
 
 // To be defined by platform.
 void __putchar(char c);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // not _STDIO_H_

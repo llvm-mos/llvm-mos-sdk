@@ -3,8 +3,6 @@ include(CompileForMOS)
 
 compile_for_mos()
 
-add_object_file(crt0 crt0.s)
-
 add_library(common_crt OBJECT
    const.s
    tmp.s

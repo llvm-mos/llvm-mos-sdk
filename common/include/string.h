@@ -15,7 +15,7 @@ void* memset(void *ptr, int value, size_t num);
 // Version of memset with better arguments for MOS. All non-pointer arguments
 // can fit in registers, and there is no superfluous return value. Compiler
 // intrinsic memset calls use this version, and user code is free to as well.
-void __memset(char *ptr, char value, size_t num);
+void __memset(char *ptr, char value, size_t num) __attribute__((used));
 
 #ifdef __cplusplus
 }

@@ -5,7 +5,7 @@ OUTPUT_FORMAT(binary)
 
 SECTIONS {
     /* XEX header */
-    .prg_header 0x1000 - 6 : {SHORT(0xffff), SHORT(0x1000), SHORT(0x1000 + ADDR(.bss) - ADDR(.basic_header) - 1), }
+    .prg_header 0x1000 - 6 : {SHORT(0xffff), SHORT(0x1000), SHORT(0x1000 + ADDR(.bss) - ADDR(.header) - 1), }
 
     .header : { *(.prg_header) }
 

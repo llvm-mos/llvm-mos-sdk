@@ -29,6 +29,3 @@ ASSERT(__rc127 == 0x00ff, "Inconsistent zero page map.")
 
 ASSERT(ADDR(.header) == 0x2000, "header at incorrect address.")
 ASSERT(_start == 0x2000, "_start began at different address than expected.")
-
-/* Set initial soft stack address (It grows down.) */
-__stack = 0x1FFF;

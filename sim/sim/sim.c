@@ -15,7 +15,8 @@ static const char usage[] =
     "\n"
     "The simulated 6502 will execute a reset sequence through the vector at\n"
     "$FFFC like a real 6502.\n"
-    "Writing a nonzero value to $FFF8 quits.\n"
+    "Writing to $FFF7 aborts.\n"
+    "Writing to $FFF8 quits normally.\n"
     "Writing to $FFF9 writes to stdout.\n";
 
 int main(int argc, const char *argv[]) {
@@ -42,7 +43,7 @@ int main(int argc, const char *argv[]) {
   }
 
   state_t *state = initAndResetChip();
-  while (!memory[0xFFF8]) {
+  for (;;) {
     step(state);
     BOOL clk = isNodeHigh(state, 1171);
     if (clk) {
@@ -50,8 +51,17 @@ int main(int argc, const char *argv[]) {
         printf("%c: %4x, %2x\n", readRW(state) ? 'R' : 'W',
                readAddressBus(state), readDataBus(state));
 
-      if (!readRW(state) && readAddressBus(state) == 0xFFF9)
-        putchar(readDataBus(state));
+      if (!readRW(state)) {
+        switch(readAddressBus(state)) {
+          case 0xFFF7:
+            abort();
+          case 0xFFF8:
+            return 0;
+          case 0xFFF9:
+            putchar(readDataBus(state));
+            break;
+        }
+      }
     }
   }
   destroyChip(state);

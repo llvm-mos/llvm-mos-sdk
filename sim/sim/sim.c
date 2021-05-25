@@ -19,7 +19,7 @@ static const char usage[] =
     "Writing to $FFF9 writes to stdout.\n";
 
 int main(int argc, const char *argv[]) {
-  if (argc != 2) {
+  if (argc < 2) {
     fputs(usage, stderr);
     return 1;
   }

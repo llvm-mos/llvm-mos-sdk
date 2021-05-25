@@ -13,4 +13,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_subdirectory(common)
 add_subdirectory(commodore)
+add_subdirectory(atari)
 add_subdirectory(sim)

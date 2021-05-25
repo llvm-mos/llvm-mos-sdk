@@ -2,7 +2,7 @@
 extern "C" {
 #endif
 
-// KERNAL CHROUT routine.
+// Atari OS EOUTCH routine.
 void __chrout(char c);
 
 #ifdef __cplusplus

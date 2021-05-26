@@ -113,5 +113,5 @@ $ cat hello.s
 
 The generated ASM output may contain more than actually ends up in the
 binary. In the default MOS configuration, LLD runs a very late garbage
-collection pass through the output sections to discards any functions not
+collection pass through the output sections to discard any functions not
 actually referenced.

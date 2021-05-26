@@ -1,5 +1,7 @@
 # LLVM-MOS SDK
+
 A WIP SDK for developing with the llvm-mos compiler.
+
 ## Project Status
 
 At present, only one configuration for the Commodore 64 is supported, but
@@ -91,41 +93,25 @@ int main(void) {
 }
 
 $ hexdump -C hello.prg
-00000000  01 08 0b 08 5d 1e 9e 32  30 36 31 00 00 00 4c 10  |....]..2061...L.|
-00000010  08 a2 00 a9 48 20 d2 ff  bd 25 08 e8 e0 0e d0 f5  |....H ...%......|
-00000020  a9 00 a2 00 60 48 45 4c  4c 4f 2c 20 43 48 52 4f  |....`HELLO, CHRO|
-00000030  55 54 21 0a 00                                    |UT!..|
-00000034
+00000000  01 08 0b 08 5d 1e 9e 32  30 36 31 00 00 00 a9 ff  |....]..2061.....|
+00000010  85 02 a9 9f 85 03 a9 94  85 04 a9 08 85 05 a9 00  |................|
+00000020  a2 00 a0 00 20 40 08 20  2c 08 4c 29 08 a2 00 a9  |.... @. ,.L)....|
+00000030  48 20 d2 ff bd 85 08 e8  e0 0f d0 f5 a2 00 a9 00  |H ..............|
+00000040  60 85 0e 84 09 8a 05 09  c9 00 f0 38 8a a8 86 08  |`..........8....|
+00000050  a0 00 a5 08 18 69 ff aa  a5 09 69 ff 85 09 18 a5  |.....i....i.....|
+00000060  04 69 01 85 0c a5 05 69  00 85 0d 86 08 a5 0e 91  |.i.....i........|
+00000070  04 8a 05 09 48 a5 0c 85  04 68 48 a5 0d 85 05 68  |....H....hH....h|
+00000080  c9 00 d0 ce 60 48 45 4c  4c 4f 2c 20 43 48 52 4f  |....`HELLO, CHRO|
+00000090  55 54 21 0a 00                                    |UT!..|
+00000095
 
 $ clang-mos --config build/commodore/64.cfg -o hello.s -Wl,--lto-emit-asm examples/hello_chrout.c
 
 $ cat hello.s
-	.text
-	.file	"ld-temp.o"
-	.section	.text.main,"ax",@progbits
-	.globl	main
-	.type	main,@function
-main:
-	ldx	#0
-	lda	#72
-LBB0_1:
-	;APP
-	jsr	65490
-	;NO_APP
-	lda	.str+1,x
-	inx
-	cpx	#15
-	bne	LBB0_1
-	ldx	#0
-	lda	#0
-	rts
-.Lfunc_end0:
-	.size	main, .Lfunc_end0-main
+...ASM output...
+```
 
-	.type	.str,@object
-	.section	.rodata.str1.1,"aMS",@progbits,1
-.str:
-	.asciz	"HELLO, CHROUT!\n"
-	.size	.str, 16
-
-	.addrsig
+The generated ASM output may contain more than actually ends up in the
+binary. In the default MOS configuration, LLD runs a very late garbage
+collection pass through the output sections to discards any functions not
+actually referenced.

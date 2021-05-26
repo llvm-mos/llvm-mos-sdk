@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(llvm-mos-sdk LANGUAGES C ASM)
+project(llvm-mos-sdk LANGUAGES C CXX ASM)
 
 if (NOT DEFINED LLVM_MOS)
 message(FATAL_ERROR "LLVM_MOS must be set to the LLVM binary directory.")

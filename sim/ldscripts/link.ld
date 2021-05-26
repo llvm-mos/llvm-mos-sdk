@@ -7,11 +7,7 @@ OUTPUT_FORMAT(binary)
 
 SECTIONS {
     .fill : { . = 0x200; }
-    .text : { *(.start) *(.text .text.*) }
-    .rodata : { *(.rodata .rodata.*) }
-    .data : { *(.data .data.*) }
-    .bss : { *(.bss .bss.* COMMON) }
-    .noinit : { *(.noinit .noinit.*) }
+    INCLUDE c_sections.ld
     .vectors 0xFFFA : { SHORT(0) SHORT(_start) SHORT(0) }
 }
 

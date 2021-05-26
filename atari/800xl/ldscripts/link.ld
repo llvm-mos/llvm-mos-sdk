@@ -4,16 +4,23 @@
 OUTPUT_FORMAT(binary)
 
 SECTIONS {
-    /* XEX header */
-    .prg_header 0x2000 - 6 : {SHORT(0xffff), SHORT(0x2000), SHORT(0x2000 + ADDR(.bss) - ADDR(.header) - 1), }
+    .xex_header 0x2000 - 12 : {
+      /* XEX magic number. */
+      SHORT(0xffff),
+      /* First byte of Run vector. */
+      SHORT(0x02e0),
+      /* Last byte of Run vector. */
+      SHORT(0x02e1),
+      /* Segment to be loaded to Run vector. */
+      SHORT(_start),
+      /* Address where first byte of main segment should be loaded. */
+      SHORT(__load_begin),
+      /* Address of last byte of main segment. */
+      SHORT(__load_end - 1),
+      /* The main segment follows. */
+    }
 
-    .header : { *(.prg_header) }
-
-    .text : { *(.start) *(.text .text.*) }
-    .rodata : { *(.rodata .rodata.*) }
-    .data : { *(.data .data.*) }
-    .bss (NOLOAD) : { *(.bss .bss.* COMMON) }
-    .noinit (NOLOAD) : { *(.noinit .noinit.*) }
+    INCLUDE c_sections.ld
 }
 
 /* Provide 128 imaginary (zero page) registers located in 0x80 - 0xff range.
@@ -22,10 +29,9 @@ SECTIONS {
    Basic and Floating Point routines also use this part of zero page.
 */
 
+ASSERT(__load_begin == 0x2000, "text at incorrect address.")
+
 PROVIDE(__rc0 = 0x80);
 INCLUDE imag_reg/127.ld
 ASSERT(__rc0 == 0x0080, "Inconsistent zero page map.")
 ASSERT(__rc127 == 0x00ff, "Inconsistent zero page map.")
-
-ASSERT(ADDR(.header) == 0x2000, "header at incorrect address.")
-ASSERT(_start == 0x2000, "_start began at different address than expected.")

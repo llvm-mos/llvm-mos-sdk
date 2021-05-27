@@ -10,6 +10,4 @@ _start:
     ; Note: BSS is already zeroed.
     JSR main
 
-    ; Write a nonzero value to FFF8 to quit.
-    LDA #1
-    STA $FFF8
+    JMP exit

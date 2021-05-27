@@ -7,6 +7,8 @@ extern "C" {
 
 void abort(void);
 
+void exit(int status);
+
 #ifdef __cplusplus
 }
 #endif

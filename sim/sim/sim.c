@@ -56,7 +56,7 @@ int main(int argc, const char *argv[]) {
           case 0xFFF7:
             abort();
           case 0xFFF8:
-            return 0;
+            return readDataBus(state);
           case 0xFFF9:
             putchar(readDataBus(state));
             break;

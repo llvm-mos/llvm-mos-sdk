@@ -14,7 +14,13 @@ add_library(common_crt OBJECT
 )
 
 add_library(common_c OBJECT
-   mem.c printf.c)
+   # stdio.h
+   printf.c
+
+   # string.h
+   mem.c
+   string.c
+)
 
 add_library(m STATIC stub.c)
 

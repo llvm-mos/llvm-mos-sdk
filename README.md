@@ -80,7 +80,7 @@ target.
 
 ```console
 $ cd ..
-$ clang-mos --config build/commodore/64.cfg -o hello.prg examples/hello_chrout.c
+$ clang-mos --config build/commodore/64.cfg -Os -o hello.prg examples/hello_chrout.c
 
 $ cat examples/hello_chrout.c
 #include <chrout.h>
@@ -105,7 +105,7 @@ $ hexdump -C hello.prg
 00000090  55 54 21 0a 00                                    |UT!..|
 00000095
 
-$ clang-mos --config build/commodore/64.cfg -o hello.s -Wl,--lto-emit-asm examples/hello_chrout.c
+$ clang-mos --config build/commodore/64.cfg -Os -o hello.s -Wl,--lto-emit-asm examples/hello_chrout.c
 
 $ cat hello.s
 ...ASM output...

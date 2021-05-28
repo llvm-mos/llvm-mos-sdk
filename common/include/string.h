@@ -19,6 +19,8 @@ void __memset(char *ptr, char value, size_t num);
 
 char *strchr(const char *s, int c);
 
+int strcmp(const char *s1, const char *s2);
+
 #ifdef __cplusplus
 }
 #endif

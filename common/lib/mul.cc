@@ -1,4 +1,4 @@
-template <typename T> T __mul(T a, T b) {
+template <typename T> static inline T mul(T a, T b) {
   T result = 0;
   while (b) {
     if (b & 1)
@@ -12,19 +12,19 @@ template <typename T> T __mul(T a, T b) {
 extern "C" {
 
 char __mulqi3(char a, char b) {
-  return __mul(a, b);
+  return mul(a, b);
 }
 
 unsigned __mulhi3(unsigned a, unsigned b) {
-  return __mul(a, b);
+  return mul(a, b);
 }
 
 unsigned long __mulsi3(unsigned long a, unsigned long b) {
-  return __mul(a, b);
+  return mul(a, b);
 }
 
 unsigned long long __muldi3(unsigned long long a, unsigned long long b) {
-  return __mul(a, b);
+  return mul(a, b);
 }
 
 }

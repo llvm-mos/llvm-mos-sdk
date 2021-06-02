@@ -80,32 +80,32 @@ target.
 
 ```console
 $ cd ..
-$ clang-mos --config build/commodore/64.cfg -Os -o hello.prg examples/hello_chrout.c
+$ clang-mos --config build/commodore/64.cfg -Os -o hello.prg examples/hello_putchar.c
 
-$ cat examples/hello_chrout.c
-#include <chrout.h>
+$ cat examples/hello_putchar.c
+#include <stdio.h>
 
 int main(void) {
-  const char *cur = "HELLO, CHROUT!\n";
+  const char *cur = "HELLO, PUTCHAR!\n";
   while (*cur)
-    __chrout(*cur++);
+    __putchar(*cur++);
   return 0;
 }
 
 $ hexdump -C hello.prg
 00000000  01 08 0b 08 5d 1e 9e 32  30 36 31 00 00 00 a9 ff  |....]..2061.....|
-00000010  85 02 a9 9f 85 03 a9 94  85 04 a9 08 85 05 a9 00  |................|
+00000010  85 02 a9 9f 85 03 a9 93  85 04 a9 08 85 05 a9 00  |................|
 00000020  a2 00 a0 00 20 40 08 20  2c 08 4c 29 08 a2 00 a9  |.... @. ,.L)....|
-00000030  48 20 d2 ff bd 85 08 e8  e0 0f d0 f5 a2 00 a9 00  |H ..............|
-00000040  60 85 0e 84 09 8a 05 09  c9 00 f0 38 8a a8 86 08  |`..........8....|
-00000050  a0 00 a5 08 18 69 ff aa  a5 09 69 ff 85 09 18 a5  |.....i....i.....|
-00000060  04 69 01 85 0c a5 05 69  00 85 0d 86 08 a5 0e 91  |.i.....i........|
-00000070  04 8a 05 09 48 a5 0c 85  04 68 48 a5 0d 85 05 68  |....H....hH....h|
-00000080  c9 00 d0 ce 60 48 45 4c  4c 4f 2c 20 43 48 52 4f  |....`HELLO, CHRO|
-00000090  55 54 21 0a 00                                    |UT!..|
-00000095
+00000030  48 20 d2 ff bd 83 08 e8  e0 10 d0 f5 a2 00 a9 00  |H ..............|
+00000040  60 85 09 84 08 8a 05 08  c9 00 f0 36 86 0e a0 00  |`..........6....|
+00000050  18 a5 0e 69 ff aa a5 08  69 ff 85 08 a5 04 18 69  |...i....i......i|
+00000060  01 85 0c a5 05 69 00 85  0d a5 09 91 04 8a 86 0e  |.....i..........|
+00000070  05 08 48 a5 0c 85 04 68  48 a5 0d 85 05 68 c9 00  |..H....hH....h..|
+00000080  d0 ce 60 48 45 4c 4c 4f  2c 20 50 55 54 43 48 41  |..`HELLO, PUTCHA|
+00000090  52 21 0a 00                                       |R!..|
+00000094
 
-$ clang-mos --config build/commodore/64.cfg -Os -o hello.s -Wl,--lto-emit-asm examples/hello_chrout.c
+$ clang-mos --config build/commodore/64.cfg -Os -o hello.s -Wl,--lto-emit-asm examples/hello_putchar.c
 
 $ cat hello.s
 ...ASM output...

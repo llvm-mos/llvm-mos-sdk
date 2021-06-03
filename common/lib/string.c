@@ -17,6 +17,15 @@ int strcmp(const char *s1, const char *s2) {
   }
 }
 
+char* strcpy(char *restrict s1, const char *restrict s2) {
+  char *ret = s1;
+  for (;; ++s1, ++s2) {
+    *s1 = *s2;
+    if (!*s1)
+      return ret;
+  }
+}
+
 size_t strlen(const char *s) {
   size_t len = 0;
   for (; *s; ++s)

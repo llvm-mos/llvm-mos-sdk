@@ -1,5 +1,7 @@
-#ifndef _STDLIB_H_
-#define _STDLIB_H_
+#ifndef _SIM_STDLIB_H_
+#define _SIM_STDLIB_H_
+
+#include_next <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -13,4 +15,4 @@ void exit(int status);
 }
 #endif
 
-#endif // not _STDLIB_H_
+#endif // not _SIM_STDLIB_H_

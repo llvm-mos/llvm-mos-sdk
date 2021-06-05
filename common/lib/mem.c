@@ -1,5 +1,15 @@
 #include <string.h>
 
+int memcmp(const void *s1, const void *s2, size_t n) {
+  const char *a = s1, *b = s2;
+  for (;; ++a, ++b, --n) {
+    if (!n)
+      return 0;
+    if (*a != *b)
+      return *a - *b;
+  }
+}
+
 void* memcpy(void *dest, const void *src, size_t count) {
   char *d = dest;
   const char *s = src;

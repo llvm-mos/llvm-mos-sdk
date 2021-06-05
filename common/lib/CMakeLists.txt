@@ -9,7 +9,7 @@ add_library(common_crt OBJECT
 
    call_indir.s
 
-   divmod.c
+   divmod.cc
    mul.cc
    shift.cc
 )

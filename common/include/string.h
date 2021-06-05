@@ -20,6 +20,7 @@ void __memset(char *ptr, char value, size_t num);
 char *strchr(const char *s, int c);
 
 int strcmp(const char *s1, const char *s2);
+int strncmp(const char *s1, const char *s2, size_t n);
 
 char* strcpy(char *restrict s1, const char *restrict s2);
 

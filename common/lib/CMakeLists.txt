@@ -18,6 +18,9 @@ add_library(common_c OBJECT
    # stdio.h
    printf.c
 
+   # stdlib.h
+   abs.cc
+
    # string.h
    mem.c
    string.c

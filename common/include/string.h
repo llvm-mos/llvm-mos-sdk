@@ -21,7 +21,9 @@ char* strcpy(char *restrict s1, const char *restrict s2);
 
 size_t strlen(const char *s);
 int strncmp(const char *s1, const char *s2, size_t n);
+char *strncpy(char *restrict s1, const char *restrict s2, size_t n);
 
+char *strrchr(const char *s, int c);
 
 // Version of memset with better arguments for MOS. All non-pointer arguments
 // can fit in registers, and there is no superfluous return value. Compiler

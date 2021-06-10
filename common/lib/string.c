@@ -41,3 +41,25 @@ int strncmp(const char *s1, const char *s2, size_t n) {
       return *s1 - *s2;
   }
 }
+
+char *strncpy(char *restrict s1, const char *restrict s2, size_t n) {
+  char *ret = s1;
+  for (;n ; ++s1, ++s2, --n) {
+    *s1 = *s2;
+    if (!*s1) {
+      for (--n; n; ++s1, --n)
+        *s1 = '\0';
+      break;
+    }
+  }
+  return ret;
+}
+
+char *strrchr(const char *s, int c) {
+  char ch = (char)c;
+  const char *last = NULL;
+  for (; *s; ++s)
+    if (*s == ch)
+      last = s;
+  return (char *)last;
+}

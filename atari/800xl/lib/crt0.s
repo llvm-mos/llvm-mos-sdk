@@ -1,5 +1,3 @@
-.include "zero_bss.s"
-
 .section .start,"ax",@progbits
 .global _start
 _start:
@@ -9,6 +7,6 @@ _start:
     LDA $2e6
     STA mos8(__rc1)
 
-    __zero_bss
+    JSR __zero_bss
 
     JMP main

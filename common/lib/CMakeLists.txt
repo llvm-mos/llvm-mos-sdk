@@ -6,6 +6,7 @@ compile_for_mos()
 add_library(common_crt OBJECT
    const.s
    tmp.s
+   zero_bss.c
 
    call_indir.s
 

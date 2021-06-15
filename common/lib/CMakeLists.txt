@@ -16,6 +16,9 @@ add_library(common_crt OBJECT
 )
 
 add_library(common_c OBJECT
+   # ctype.h
+   ctype.c
+
    # stdio.h
    printf.c
 

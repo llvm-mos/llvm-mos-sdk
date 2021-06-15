@@ -1,9 +1,8 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "types.h"
-#include "netlist_sim.h"
-#include "perfect6502.h"
 
 #define TRACE 0
 
@@ -18,6 +17,27 @@ static const char usage[] =
     "Writing to $FFF7 aborts.\n"
     "Writing to $FFF8 quits normally.\n"
     "Writing to $FFF9 writes to stdout.\n";
+
+void reset6502();
+void step6502();
+
+uint8_t memory[65536];
+
+int8_t read6502(uint16_t address) { return memory[address]; }
+void write6502(uint16_t address, uint8_t value) {
+  switch (address) {
+  default:
+    memory[address] = value;
+    break;
+  case 0xFFF7:
+    abort();
+  case 0xFFF8:
+    exit(value);
+  case 0xFFF9:
+    putchar(value);
+    break;
+  }
+}
 
 int main(int argc, const char *argv[]) {
   if (argc < 2) {
@@ -42,29 +62,8 @@ int main(int argc, const char *argv[]) {
     }
   }
 
-  state_t *state = initAndResetChip();
-  for (;;) {
-    step(state);
-    BOOL clk = isNodeHigh(state, 1171);
-    if (clk) {
-      if (TRACE)
-        printf("%c: %4x, %2x\n", readRW(state) ? 'R' : 'W',
-               readAddressBus(state), readDataBus(state));
-
-      if (!readRW(state)) {
-        switch(readAddressBus(state)) {
-          case 0xFFF7:
-            abort();
-          case 0xFFF8:
-            return readDataBus(state);
-          case 0xFFF9:
-            putchar(readDataBus(state));
-            break;
-        }
-      }
-    }
-  }
-  destroyChip(state);
-
+  reset6502();
+  for (;;)
+    step6502();
   return 0;
 }

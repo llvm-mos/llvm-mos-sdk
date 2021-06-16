@@ -110,33 +110,26 @@ template <> struct make_unsigned<long long> {
   typedef unsigned long long type;
 };
 
+// Version of abs that returns INT_MIN for INT_MIN, without undefined behavior.
 template <typename T>
-static inline typename make_unsigned<T>::type div_arg_to_unsigned(T a, bool &neg) {
+static inline typename make_unsigned<T>::type safe_abs(T a) {
   typedef typename make_unsigned<T>::type UT;
-  if (a >= 0)
-    return static_cast<UT>(a);
-  neg = !neg;
   UT int_min = static_cast<UT>(1) << sizeof(UT) * 8 - 1;
-  // -int_min is a signed overflow, which is undefined behavior.
-  return static_cast<UT>(a) == int_min ? int_min : static_cast<UT>(-a);
+  UT ua = static_cast<UT>(a);
+  return (a >= 0 || ua == int_min) ? ua : static_cast<UT>(-a);
 }
 
 template <typename T> static inline T div(T a, T b) {
   typedef typename make_unsigned<T>::type UT;
-  bool neg = false;
-  UT au = div_arg_to_unsigned(a, neg);
-  UT bu = div_arg_to_unsigned(b, neg);
-  T u = static_cast<T>(au / bu);
+  T u = static_cast<T>(safe_abs(a) / safe_abs(b));
   // Negating int_min here is fine, since it's only undefined behavior if the
   // signed division itself is.
-  return neg ? -u : u;
+  return (a < 0 != b < 0) ? -u : u;
 }
 
 template <typename T> static inline T mod(T a, T b) {
   typedef typename make_unsigned<T>::type UT;
-  UT au = static_cast<UT>(a);
-  UT bu = static_cast<UT>(b);
-  T u = static_cast<T>(au % bu);
+  T u = static_cast<T>(safe_abs(a) % safe_abs(b));
   // Negating int_min here is fine, since it's only undefined behavior if the
   // signed mod itself is.
   return a < 0 ? -u : u;

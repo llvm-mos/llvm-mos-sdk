@@ -10,7 +10,6 @@ add_library(common_crt OBJECT
 
    call_indir.s
 
-   bswap.cc
    divmod.cc
    mul.cc
    shift.cc
@@ -33,9 +32,8 @@ add_library(common_c OBJECT
 
 add_library(m STATIC stub.c)
 
-# Prevent the implementation of memset from being reduced to a call of memset.
-set_property(SOURCE mem.c PROPERTY COMPILE_FLAGS
-    -fno-builtin-memset)
+# Prevent the implementation of libcalls from being reduced to a call of those libcalls.
+set_property(SOURCE mem.c PROPERTY COMPILE_FLAGS -fno-builtin-memset)
 
 set_property(SOURCE printf.c PROPERTY COMPILE_DEFINITIONS
     PRINTF_DISABLE_SUPPORT_FLOAT

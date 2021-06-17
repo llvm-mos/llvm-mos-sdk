@@ -46,8 +46,8 @@ char *strncpy(char *restrict s1, const char *restrict s2, size_t n) {
   char *ret = s1;
   for (;n ; ++s1, ++s2, --n) {
     *s1 = *s2;
-    if (!*s1) {
-      for (--n; n; ++s1, --n)
+    if (!*s2) {
+      for (++s1, --n; n; ++s1, --n)
         *s1 = '\0';
       break;
     }

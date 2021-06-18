@@ -1,4 +1,4 @@
-void __chrout(char c) {
+__attribute__((noinline)) void __chrout(char c) {
   if(c == '\n') c = 0x9b;
   __attribute__((leaf)) asm volatile(
     "tax\n"

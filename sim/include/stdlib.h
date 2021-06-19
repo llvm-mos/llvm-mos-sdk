@@ -10,6 +10,8 @@ extern "C" {
 void abort(void);
 
 void exit(int status);
+unsigned long clock();
+void reset_clock();
 
 #ifdef __cplusplus
 }

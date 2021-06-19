@@ -140,6 +140,10 @@ exit:
 
 ...Superfluous ASM...
 
+.str:
+        .asciz  "HELLO, PUTCHAR!\n"
+        .size   .str, 17
+
 ```
 
 The generated ASM output will contain more than actually ends up in the binary.

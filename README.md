@@ -108,10 +108,40 @@ $ hexdump -C hello.prg
 $ clang-mos --config build/commodore/64.cfg -Os -o hello.s -Wl,--lto-emit-asm examples/hello_putchar.c
 
 $ cat hello.s
-...ASM output...
+        .text
+        .file   "ld-temp.o"
+        .section        .text.main,"ax",@progbits
+        .globl  main
+        .type   main,@function
+main:
+        ldx     #0
+        lda     #72
+.LBB0_1:
+        sta     65529
+        lda     .str+1,x
+        inx
+        cpx     #16
+        bne     .LBB0_1
+        ldx     #0
+        lda     #0
+        rts
+.Lfunc_end0:
+        .size   main, .Lfunc_end0-main
+
+        .section        .text.exit,"ax",@progbits
+        .globl  exit
+        .type   exit,@function
+exit:
+        sta     65528
+        ;APP
+        ;NO_APP
+.Lfunc_end1:
+        .size   exit, .Lfunc_end1-exit
+
+...Superfluous ASM...
+
 ```
 
-The generated ASM output may contain more than actually ends up in the
-binary. In the default MOS configuration, LLD runs a very late garbage
-collection pass through the output sections to discard any functions not
-actually referenced.
+The generated ASM output will contain more than actually ends up in the binary.
+In the default MOS configuration, LLD runs a very late garbage collection pass
+through the output sections to discard any functions not actually referenced.

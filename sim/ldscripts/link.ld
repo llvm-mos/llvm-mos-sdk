@@ -17,4 +17,4 @@ ASSERT(__rc0 == 0x0000, "Inconsistent zero page map.")
 ASSERT(__rc255 == 0x00ff, "Inconsistent zero page map.")
 
 /* Set initial soft stack address to just above last memory address. (It grows down.) */
-__stack = 0xFFF7;
+__stack = 0xFFF0;

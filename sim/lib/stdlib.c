@@ -19,3 +19,17 @@ void exit(int status) {
 
   __builtin_unreachable();
 }
+
+unsigned long clock() {
+  // reading first byte latches whole 32-bit value
+  // so it needs to be read byte by byte in correct order
+  unsigned long ticks;
+  for(int i=0; i < 4; i++) {
+    ((unsigned char *)&ticks)[i] = *((volatile unsigned char *)0xFFF0 + i);
+  }
+  return ticks;
+}
+
+void reset_clock() {
+  *((volatile unsigned char *)0xFFF0) = 0;
+}

@@ -25,11 +25,11 @@ unsigned long clock() {
   // so it needs to be read byte by byte in correct order
   unsigned long ticks;
   for(int i=0; i < 4; i++) {
-    ((unsigned char *)&ticks)[i] = *((volatile unsigned char *)0xFFF0 + i);
+    ((char *)&ticks)[i] = *((volatile char *)0xFFF0 + i);
   }
   return ticks;
 }
 
 void reset_clock() {
-  *((volatile unsigned char *)0xFFF0) = 0;
+  *((volatile char *)0xFFF0) = 0;
 }

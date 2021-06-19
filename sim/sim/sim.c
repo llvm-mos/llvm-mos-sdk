@@ -20,14 +20,25 @@ static const char usage[] =
 
 void reset6502();
 void step6502();
+extern uint32_t clockticks6502;
 
 uint8_t memory[65536];
+uint32_t clock_start = 0;
 
-int8_t read6502(uint16_t address) { return memory[address]; }
+int8_t read6502(uint16_t address) {
+  if(address == 0xfff0) {
+    *((uint32_t *)(memory + address)) = clockticks6502 - clock_start;
+  }
+  return memory[address];
+}
+
 void write6502(uint16_t address, uint8_t value) {
   switch (address) {
   default:
     memory[address] = value;
+    break;
+  case 0xFFF0:
+    clock_start = clockticks6502;
     break;
   case 0xFFF7:
     abort();

@@ -18,6 +18,11 @@ __save_x:
 __save_y:
     .space 1
 
+; Location to temporarily save the value of the P register.
+.global __save_p
+__save_p:
+    .space 1
+
 ; Pointer containing target of indirect call.
 .align 2 ; Prevent NMOS bug when the pointer is on a page boundary.
 .global __call_indir_target

@@ -12,6 +12,7 @@ void *memchr(const void *s, int c, size_t n);
 int memcmp(const void *s1, const void *s2, size_t n);
 void *memcpy(void *dest, const void *src, size_t count);
 void *memset(void *ptr, int value, size_t num);
+void *memmove(void *dest, const void *src, size_t num);
 
 char *strchr(const char *s, int c);
 

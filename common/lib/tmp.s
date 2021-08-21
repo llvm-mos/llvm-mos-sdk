@@ -8,11 +8,6 @@
 __save_a:
     .space 1
 
-; Location to temporarily save the value of the X register.
-.global __save_x
-__save_x:
-    .space 1
-
 ; Location to temporarily save the value of the Y register.
 .global __save_y
 __save_y:

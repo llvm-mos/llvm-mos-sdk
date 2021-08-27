@@ -1,6 +1,8 @@
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "types.h"
 
@@ -10,10 +12,15 @@ static const char usage[] =
     "Usage: sim [image]\n"
     "\n"
     "6502 simulator.\n"
-    "Takes a 64KiB memory image file as its only argument.\n"
+    "\n"
+    "Takes a memory image file as its only argument.\n"
+    "The image file is a collection of blocks. Each block consists of a\n"
+    "16-bit starting address, then a 16-bit block size, then that many bytes\n"
+    "of contents. Both the address and size are stored little-endian.\n"
     "\n"
     "The simulated 6502 will execute a reset sequence through the vector at\n"
     "$FFFC like a real 6502.\n"
+    "\n"
     "Writing to $FFF7 aborts.\n"
     "Writing to $FFF8 quits normally.\n"
     "Writing to $FFF9 writes to stdout.\n";
@@ -26,7 +33,7 @@ uint8_t memory[65536];
 uint32_t clock_start = 0;
 
 int8_t read6502(uint16_t address) {
-  if(address == 0xfff0) {
+  if (address == 0xfff0) {
     *((uint32_t *)(memory + address)) = clockticks6502 - clock_start;
   }
   return memory[address];
@@ -64,12 +71,47 @@ int main(int argc, const char *argv[]) {
     return 1;
   }
 
-  size_t size = fread(memory, 1, 65536, file);
-  if (size != 65536) {
-    if (feof(file)) {
+  while (1) {
+    // Assumes host is little-endian.
+    uint16_t address;
+    if (fread(&address, 2, 1, file) != 1) {
+      if (feof(file))
+        break;
+      else {
+        fprintf(stderr, "Error reading image file '%s': ", filename);
+        perror(NULL);
+        return 1;
+      }
+    }
+
+    uint16_t size;
+    if (fread(&size, 2, 1, file) != 1) {
+      fprintf(stderr, "Error reading image file '%s': ", filename);
+      if (feof(file))
+        fputs("expected block size, found EOF.", stderr);
+      else
+        perror(NULL);
+      return 1;
+    }
+
+    uint32_t lastAddress = address + size - 1;
+    if (lastAddress >= 65536) {
       fprintf(stderr,
-              "Provided image file '%s' was not exactly 64KiB: was %zu bytes\n",
-              filename, size);
+              "Invalid block: block of %d bytes at address %d would reach "
+              "location %d, which is out of bounds.\n",
+              size, address, lastAddress);
+      return 1;
+    }
+
+    size_t readSize = fread(&memory[address], 1, size, file);
+    if (readSize != size) {
+      fprintf(stderr, "Error reading image file '%s': ", filename);
+      if (feof(file)) {
+        fprintf(stderr, "expected %d byte block, found %zu bytes.", size,
+                readSize);
+      } else
+        perror(NULL);
+      return 1;
     }
   }
 

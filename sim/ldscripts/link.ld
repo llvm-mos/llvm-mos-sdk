@@ -6,9 +6,32 @@
 OUTPUT_FORMAT(binary)
 
 SECTIONS {
-    .fill : { . = 0x200; }
-    INCLUDE c_sections.ld
-    .vectors 0xFFFA : { SHORT(0) SHORT(_start) SHORT(0) }
+    .load_block_header 0x200 - 4 : {
+        SHORT(__load_begin)
+        SHORT(__load_end - __load_begin)
+    }
+
+    __load_begin = .;
+    .text : { *(.start) *(.text .text.*) }
+    .rodata : { *(.rodata .rodata.*) }
+    .data : { *(.data .data.*) }
+    __load_end = .;
+
+    .vector_block_header : {
+        SHORT(0xFFFA)
+        SHORT(6)
+    }
+
+    .vector_block : {
+        SHORT(0)
+        SHORT(_start)
+        SHORT(0)
+    }
+
+    __bss_begin = .;
+    .bss (NOLOAD) : { *(.bss .bss.* COMMON) }
+    __bss_end = .;
+    .noinit (NOLOAD) : { *(.noinit .noinit.*) }
 }
 
 /* Provide 256 imaginary (zero page) registers. */

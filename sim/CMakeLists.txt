@@ -1,5 +1,3 @@
-include_directories(include)
-
 configure_file(sim.cfg ..)
 
 add_subdirectory(include)

@@ -1,6 +1,8 @@
 include(AddObjectFile)
 include(CompileForMOS)
 
+include_directories(../include)
+
 compile_for_mos()
 
 add_object_file(sim_crt0 crt0.s crt0)

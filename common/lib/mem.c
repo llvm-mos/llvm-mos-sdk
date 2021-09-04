@@ -36,8 +36,8 @@ void __memset(char *ptr, char value, size_t num) {
 }
 
 void *memmove(void *dest, const void *src, size_t num) {
-  unsigned long udest = (unsigned long)dest;
-  unsigned long usrc = (unsigned long)src;
+  unsigned int udest = (unsigned int)dest;
+  unsigned int usrc = (unsigned int)src;
   if (udest <= usrc)
     return memcpy(dest, src, num);
 

@@ -79,6 +79,9 @@ int vsnprintf(char* buffer, size_t count, const char* format, va_list va);
  */
 int vprintf(const char* format, va_list va);
 
+int putchar(int c);
+int puts(const char *s);
+
 // To be defined by platform.
 void __putchar(char c);
 

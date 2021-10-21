@@ -20,6 +20,7 @@ add_library(common_c OBJECT
 
    # stdio.h
    printf.c
+   stdio.c
 
    # stdlib.h
    abs.cc

@@ -30,15 +30,18 @@ static const char usage[] =
     "Writing to $FFF9 writes to stdout.\n"
     "\n"
     "OPTIONS:\n"
-    "\t--cycles: Print cycle count to stderr.";
+    "\t--cycles: Print cycle count to stderr.\n"
+    "\t--trace: Print each instruction address to stderr.\n";
 
 void reset6502();
 void step6502();
 extern uint32_t clockticks6502;
+extern uint16_t pc;
 
 uint8_t memory[65536];
 uint32_t clock_start = 0;
 bool shouldPrintCycles = false;
+bool shouldTrace = false;
 
 int8_t read6502(uint16_t address) {
   if (address == 0xfff0) {
@@ -73,21 +76,32 @@ void write6502(uint16_t address, uint8_t value) {
   }
 }
 
+bool parseFlag(int *argc, const char ***argv) {
+  if (*argc < 2)
+    return false;
+  const char *flag = (*argv)[1];
+  if (!strcmp(flag, "--cycles")) {
+    shouldPrintCycles = true;
+  } else if (!strcmp(flag, "--trace")) {
+    shouldTrace = true;
+  } else
+    return false;
+
+  for (int i = 2; i < *argc; ++i) {
+    (*argv)[i - 1] = (*argv)[i];
+  }
+  --*argc;
+  return true;
+}
+
+
 int main(int argc, const char *argv[]) {
+  while (parseFlag(&argc, &argv));
+
   if (argc < 2) {
     fputs(usage, stderr);
     return 1;
   }
-
-  if (!strcmp(argv[1], "--cycles")) {
-    shouldPrintCycles = true;
-    if (argc < 3) {
-      fputs(usage, stderr);
-      return 1;
-    }
-    argv[1] = argv[2];
-  }
-
   const char *filename = argv[1];
 
   FILE *file = fopen(filename, "rb");
@@ -142,7 +156,10 @@ int main(int argc, const char *argv[]) {
   }
 
   reset6502();
-  for (;;)
+  for (;;) {
+    if (shouldTrace)
+      fprintf(stderr, "%04x\n", pc);
     step6502();
+  }
   return 0;
 }

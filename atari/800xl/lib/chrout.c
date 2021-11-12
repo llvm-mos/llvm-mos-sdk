@@ -1,5 +1,5 @@
 __attribute__((noinline)) void __chrout(char c) {
-  if(c == '\n') c = 0x9b;
+  if(__builtin_expect(c == '\n', 0)) c = 0x9b;
   __attribute__((leaf)) asm volatile(
     "tax\n"
     "lda $e407\n"

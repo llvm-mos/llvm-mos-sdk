@@ -18,6 +18,9 @@ add_library(common_c OBJECT
    # ctype.h
    ctype.c
 
+   # setjmp.h
+   setjmp.s
+
    # stdio.h
    printf.c
    stdio.c

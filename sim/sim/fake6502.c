@@ -79,8 +79,10 @@ limitations under the License.
  *****************************************************
  * Useful functions in this emulator:                *
  *                                                   *
- * void reset6502()                                  *
+ * void reset6502(uint8_t cmos)                      *
  *   - Call this once before you begin execution.    *
+ *   - 65C02 emulation is enabled by setting the     *
+ *     cmos flag.                                    *
  *                                                   *
  * void exec6502(uint32_t tickcount)                 *
  *   - Execute 6502 code up to the next specified    *
@@ -214,18 +216,10 @@ uint8_t pull8() {
     return (read6502(BASE_STACK + ++sp));
 }
 
-void reset6502() {
-    pc = (uint16_t)read6502(0xFFFC) | ((uint16_t)read6502(0xFFFD) << 8);
-    a = 0;
-    x = 0;
-    y = 0;
-    sp = 0xFD;
-    status |= FLAG_CONSTANT;
-}
 
-
-static void (*addrtable[256])();
-static void (*optable[256])();
+static void (**addrtable)() = NULL;
+static void (**optable)() = NULL;
+static const uint32_t *ticktable = NULL;
 uint8_t penaltyop, penaltyaddr;
 
 //addressing mode functions, calculates effective addresses
@@ -252,6 +246,12 @@ static void zpy() { //zero-page,Y
 }
 
 static void rel() { //relative for branch ops (8-bit immediate value, sign-extended)
+    reladdr = (uint16_t)read6502(pc++);
+    if (reladdr & 0x80) reladdr |= 0xFF00;
+}
+
+static void zpr() { //combined zp, rel for bbr/bbs
+    ea = (uint16_t)read6502((uint16_t)pc++);
     reladdr = (uint16_t)read6502(pc++);
     if (reladdr & 0x80) reladdr |= 0xFF00;
 }
@@ -295,10 +295,24 @@ static void ind() { //indirect
     pc += 2;
 }
 
+static void inzp() { //indirectZP
+    uint16_t eahelp;
+    eahelp = (uint16_t)(((uint16_t)read6502(pc++)) & 0xFF); //zero-page wraparound for table pointer
+    ea = (uint16_t)read6502(eahelp & 0x00FF) | ((uint16_t)read6502((eahelp+1) & 0x00FF) << 8);
+}
+
 static void indx() { // (indirect,X)
     uint16_t eahelp;
     eahelp = (uint16_t)(((uint16_t)read6502(pc++) + (uint16_t)x) & 0xFF); //zero-page wraparound for table pointer
     ea = (uint16_t)read6502(eahelp & 0x00FF) | ((uint16_t)read6502((eahelp+1) & 0x00FF) << 8);
+}
+
+static void inax() { // (indirectABS,X)
+    uint16_t eahelp, eahelp2;
+    eahelp = ((uint16_t)read6502(pc) | (uint16_t)((uint16_t)read6502(pc+1) << 8)) + (uint16_t)x;
+    eahelp2 = (eahelp & 0xFF00) | ((eahelp + 1) & 0x00FF); //replicate 6502 page-boundary wraparound bug
+    ea = (uint16_t)read6502(eahelp) | ((uint16_t)read6502(eahelp2) << 8);
+    pc += 2;
 }
 
 static void indy() { // (indirect),Y
@@ -402,6 +416,12 @@ static void beq() {
         if ((oldpc & 0xFF00) != (pc & 0xFF00)) clockticks6502 += 2; //check if jump crossed a page boundary
             else clockticks6502++;
     }
+}
+
+static void bra() {
+    oldpc = pc;
+    pc += reladdr;
+    if ((oldpc & 0xFF00) != (pc & 0xFF00)) clockticks6502 += 1; //check if jump crossed a page boundary
 }
 
 static void bit() {
@@ -654,6 +674,14 @@ static void php() {
     push8(status | FLAG_BREAK);
 }
 
+static void phx() {
+    push8(x);
+}
+
+static void phy() {
+    push8(y);
+}
+
 static void pla() {
     a = pull8();
 
@@ -663,6 +691,20 @@ static void pla() {
 
 static void plp() {
     status = pull8() | FLAG_CONSTANT;
+}
+
+static void plx() {
+    x = pull8();
+
+    zerocalc(x);
+    signcalc(x);
+}
+
+static void ply() {
+    y = pull8();
+
+    zerocalc(y);
+    signcalc(y);
 }
 
 static void rol() {
@@ -753,6 +795,10 @@ static void sty() {
     putvalue(y);
 }
 
+static void stz() {
+    putvalue(0);
+}
+
 static void tax() {
     x = a;
 
@@ -791,6 +837,90 @@ static void tya() {
     zerocalc(a);
     signcalc(a);
 }
+
+static void tsb() {
+    value = getvalue();
+    zerocalc(value & a);
+    putvalue(value | a);
+}
+
+static void trb() {
+    value = getvalue();
+    zerocalc(value & a);
+    putvalue(value & ~a);
+}
+
+#define DEF_BBR(idx)                                                           \
+static void bbr##idx() {                                                       \
+    value = getvalue();                                                        \
+    if ((value & (1 << (idx))) == 0) {                                         \
+        oldpc = pc;                                                            \
+        pc += reladdr;                                                         \
+        if ((oldpc & 0xFF00) != (pc & 0xFF00)) clockticks6502 += 2;            \
+            else clockticks6502++;                                             \
+    }                                                                          \
+}
+DEF_BBR(0)
+DEF_BBR(1)
+DEF_BBR(2)
+DEF_BBR(3)
+DEF_BBR(4)
+DEF_BBR(5)
+DEF_BBR(6)
+DEF_BBR(7)
+
+#define DEF_BBS(idx)                                                           \
+static void bbs##idx() {                                                       \
+    value = getvalue();                                                        \
+    if ((value & (1 << (idx))) != 0) {                                         \
+        oldpc = pc;                                                            \
+        pc += reladdr;                                                         \
+        if ((oldpc & 0xFF00) != (pc & 0xFF00)) clockticks6502 += 2;            \
+            else clockticks6502++;                                             \
+    }                                                                          \
+}
+DEF_BBS(0)
+DEF_BBS(1)
+DEF_BBS(2)
+DEF_BBS(3)
+DEF_BBS(4)
+DEF_BBS(5)
+DEF_BBS(6)
+DEF_BBS(7)
+
+#define DEF_RMB(idx)                                                           \
+static void rmb##idx() {                                                       \
+    value = getvalue();                                                        \
+    value &= ~(1 << (idx));                                                    \
+    putvalue(value);                                                           \
+}
+DEF_RMB(0)
+DEF_RMB(1)
+DEF_RMB(2)
+DEF_RMB(3)
+DEF_RMB(4)
+DEF_RMB(5)
+DEF_RMB(6)
+DEF_RMB(7)
+
+#define DEF_SMB(idx)                                                           \
+static void smb##idx() {                                                       \
+    value = getvalue();                                                        \
+    value |= 1 << (idx);                                                       \
+    putvalue(value);                                                           \
+}
+DEF_SMB(0)
+DEF_SMB(1)
+DEF_SMB(2)
+DEF_SMB(3)
+DEF_SMB(4)
+DEF_SMB(5)
+DEF_SMB(6)
+DEF_SMB(7)
+
+// TODO: Implement these by adding emulation wait and stop states.
+static void wai() {}
+static void stp() {}
 
 //undocumented instructions
 #ifdef UNDOCUMENTED
@@ -853,7 +983,7 @@ static void tya() {
 #endif
 
 
-static void (*addrtable[256])() = {
+static void (*addrtable_nmos[256])() = {
 /*        |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F  |     */
 /* 0 */     imp, indx,  imp, indx,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imm, abso, abso, abso, abso, /* 0 */
 /* 1 */     rel, indy,  imp, indy,  zpx,  zpx,  zpx,  zpx,  imp, absy,  imp, absy, absx, absx, absx, absx, /* 1 */
@@ -873,27 +1003,27 @@ static void (*addrtable[256])() = {
 /* F */     rel, indy,  imp, indy,  zpx,  zpx,  zpx,  zpx,  imp, absy,  imp, absy, absx, absx, absx, absx  /* F */
 };
 
-static void (*optable[256])() = {
-/*        |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F  |      */
-/* 0 */      brk,  ora,  nop,  slo,  nop,  ora,  asl,  slo,  php,  ora,  asl,  nop,  nop,  ora,  asl,  slo, /* 0 */
-/* 1 */      bpl,  ora,  nop,  slo,  nop,  ora,  asl,  slo,  clc,  ora,  nop,  slo,  nop,  ora,  asl,  slo, /* 1 */
-/* 2 */      jsr,  and,  nop,  rla,  bit,  and,  rol,  rla,  plp,  and,  rol,  nop,  bit,  and,  rol,  rla, /* 2 */
-/* 3 */      bmi,  and,  nop,  rla,  nop,  and,  rol,  rla,  sec,  and,  nop,  rla,  nop,  and,  rol,  rla, /* 3 */
-/* 4 */      rti,  eor,  nop,  sre,  nop,  eor,  lsr,  sre,  pha,  eor,  lsr,  nop,  jmp,  eor,  lsr,  sre, /* 4 */
-/* 5 */      bvc,  eor,  nop,  sre,  nop,  eor,  lsr,  sre,  cli,  eor,  nop,  sre,  nop,  eor,  lsr,  sre, /* 5 */
-/* 6 */      rts,  adc,  nop,  rra,  nop,  adc,  ror,  rra,  pla,  adc,  ror,  nop,  jmp,  adc,  ror,  rra, /* 6 */
-/* 7 */      bvs,  adc,  nop,  rra,  nop,  adc,  ror,  rra,  sei,  adc,  nop,  rra,  nop,  adc,  ror,  rra, /* 7 */
-/* 8 */      nop,  sta,  nop,  sax,  sty,  sta,  stx,  sax,  dey,  nop,  txa,  nop,  sty,  sta,  stx,  sax, /* 8 */
-/* 9 */      bcc,  sta,  nop,  nop,  sty,  sta,  stx,  sax,  tya,  sta,  txs,  nop,  nop,  sta,  nop,  nop, /* 9 */
-/* A */      ldy,  lda,  ldx,  lax,  ldy,  lda,  ldx,  lax,  tay,  lda,  tax,  nop,  ldy,  lda,  ldx,  lax, /* A */
-/* B */      bcs,  lda,  nop,  lax,  ldy,  lda,  ldx,  lax,  clv,  lda,  tsx,  lax,  ldy,  lda,  ldx,  lax, /* B */
-/* C */      cpy,  cmp,  nop,  dcp,  cpy,  cmp,  dec,  dcp,  iny,  cmp,  dex,  nop,  cpy,  cmp,  dec,  dcp, /* C */
-/* D */      bne,  cmp,  nop,  dcp,  nop,  cmp,  dec,  dcp,  cld,  cmp,  nop,  dcp,  nop,  cmp,  dec,  dcp, /* D */
-/* E */      cpx,  sbc,  nop,  isb,  cpx,  sbc,  inc,  isb,  inx,  sbc,  nop,  sbc,  cpx,  sbc,  inc,  isb, /* E */
-/* F */      beq,  sbc,  nop,  isb,  nop,  sbc,  inc,  isb,  sed,  sbc,  nop,  isb,  nop,  sbc,  inc,  isb  /* F */
+static void (*optable_nmos[256])() = {
+/*        |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F  |     */
+/* 0 */     brk,  ora,  nop,  slo,  nop,  ora,  asl,  slo,  php,  ora,  asl,  nop,  nop,  ora,  asl,  slo, /* 0 */
+/* 1 */     bpl,  ora,  nop,  slo,  nop,  ora,  asl,  slo,  clc,  ora,  nop,  slo,  nop,  ora,  asl,  slo, /* 1 */
+/* 2 */     jsr,  and,  nop,  rla,  bit,  and,  rol,  rla,  plp,  and,  rol,  nop,  bit,  and,  rol,  rla, /* 2 */
+/* 3 */     bmi,  and,  nop,  rla,  nop,  and,  rol,  rla,  sec,  and,  nop,  rla,  nop,  and,  rol,  rla, /* 3 */
+/* 4 */     rti,  eor,  nop,  sre,  nop,  eor,  lsr,  sre,  pha,  eor,  lsr,  nop,  jmp,  eor,  lsr,  sre, /* 4 */
+/* 5 */     bvc,  eor,  nop,  sre,  nop,  eor,  lsr,  sre,  cli,  eor,  nop,  sre,  nop,  eor,  lsr,  sre, /* 5 */
+/* 6 */     rts,  adc,  nop,  rra,  nop,  adc,  ror,  rra,  pla,  adc,  ror,  nop,  jmp,  adc,  ror,  rra, /* 6 */
+/* 7 */     bvs,  adc,  nop,  rra,  nop,  adc,  ror,  rra,  sei,  adc,  nop,  rra,  nop,  adc,  ror,  rra, /* 7 */
+/* 8 */     nop,  sta,  nop,  sax,  sty,  sta,  stx,  sax,  dey,  nop,  txa,  nop,  sty,  sta,  stx,  sax, /* 8 */
+/* 9 */     bcc,  sta,  nop,  nop,  sty,  sta,  stx,  sax,  tya,  sta,  txs,  nop,  nop,  sta,  nop,  nop, /* 9 */
+/* A */     ldy,  lda,  ldx,  lax,  ldy,  lda,  ldx,  lax,  tay,  lda,  tax,  nop,  ldy,  lda,  ldx,  lax, /* A */
+/* B */     bcs,  lda,  nop,  lax,  ldy,  lda,  ldx,  lax,  clv,  lda,  tsx,  lax,  ldy,  lda,  ldx,  lax, /* B */
+/* C */     cpy,  cmp,  nop,  dcp,  cpy,  cmp,  dec,  dcp,  iny,  cmp,  dex,  nop,  cpy,  cmp,  dec,  dcp, /* C */
+/* D */     bne,  cmp,  nop,  dcp,  nop,  cmp,  dec,  dcp,  cld,  cmp,  nop,  dcp,  nop,  cmp,  dec,  dcp, /* D */
+/* E */     cpx,  sbc,  nop,  isb,  cpx,  sbc,  inc,  isb,  inx,  sbc,  nop,  sbc,  cpx,  sbc,  inc,  isb, /* E */
+/* F */     beq,  sbc,  nop,  isb,  nop,  sbc,  inc,  isb,  sed,  sbc,  nop,  isb,  nop,  sbc,  inc,  isb  /* F */
 };
 
-static const uint32_t ticktable[256] = {
+static const uint32_t ticktable_nmos[256] = {
 /*        |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F  |     */
 /* 0 */      7,    6,    2,    8,    3,    3,    5,    5,    3,    2,    2,    2,    4,    4,    6,    6,  /* 0 */
 /* 1 */      2,    5,    2,    8,    4,    4,    6,    6,    2,    4,    2,    7,    4,    4,    7,    7,  /* 1 */
@@ -913,6 +1043,65 @@ static const uint32_t ticktable[256] = {
 /* F */      2,    5,    2,    8,    4,    4,    6,    6,    2,    4,    2,    7,    4,    4,    7,    7   /* F */
 };
 
+static void (*addrtable_cmos[256])() = {
+/*        |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F  |     */
+/* 0 */     imp, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imp, abso, abso, abso,  zpr, /* 0 */
+/* 1 */     rel, indy, inzp,  imp,   zp,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, abso, absx, absx,  zpr, /* 1 */
+/* 2 */    abso, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imp, abso, abso, abso,  zpr, /* 2 */
+/* 3 */     rel, indy, inzp,  imp,  zpx,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, absx, absx, absx,  zpr, /* 3 */
+/* 4 */     imp, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imp, abso, abso, abso,  zpr, /* 4 */
+/* 5 */     rel, indy, inzp,  imp,  zpx,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, abso, absx, absx,  zpr, /* 5 */
+/* 6 */     imp, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imp,  ind, abso, abso,  zpr, /* 6 */
+/* 7 */     rel, indy, inzp,  imp,  zpx,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, inax, absx, absx,  zpr, /* 7 */
+/* 8 */     rel, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  imp,  imp, abso, abso, abso,  zpr, /* 8 */
+/* 9 */     rel, indy, inzp,  imp,  zpx,  zpx,  zpy,   zp,  imp, absy,  imp,  imp, abso, absx, absx,  zpr, /* 9 */
+/* A */     imm, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  imp,  imp, abso, abso, abso,  zpr, /* A */
+/* B */     rel, indy, inzp,  imp,  zpx,  zpx,  zpy,   zp,  imp, absy,  imp,  imp, absx, absx, absy,  zpr, /* B */
+/* C */     imm, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  imp,  imp, abso, abso, abso,  zpr, /* C */
+/* D */     rel, indy, inzp,  imp,  zpx,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, abso, absx, absx,  zpr, /* D */
+/* E */     imm, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  imp,  imp, abso, abso, abso,  zpr, /* E */
+/* F */     rel, indy, inzp,  imp,  zpx,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, abso, absx, absx,  zpr  /* F */
+};
+
+static void (*optable_cmos[256])() = {
+/*        |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7   |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F   |     */
+/* 0 */     brk,  ora,  nop,  nop,  tsb,  ora,  asl,  rmb0,  php,  ora,  asl,  nop,  tsb,  ora,  asl,  bbr0, /* 0 */
+/* 1 */     bpl,  ora,  ora,  nop,  trb,  ora,  asl,  rmb1,  clc,  ora,  inc,  nop,  trb,  ora,  asl,  bbr1, /* 1 */
+/* 2 */     jsr,  and,  nop,  nop,  bit,  and,  rol,  rmb2,  plp,  and,  rol,  nop,  bit,  and,  rol,  bbr2, /* 2 */
+/* 3 */     bmi,  and,  and,  nop,  bit,  and,  rol,  rmb3,  sec,  and,  dec,  nop,  bit,  and,  rol,  bbr3, /* 3 */
+/* 4 */     rti,  eor,  nop,  nop,  nop,  eor,  lsr,  rmb4,  pha,  eor,  lsr,  nop,  jmp,  eor,  lsr,  bbr4, /* 4 */
+/* 5 */     bvc,  eor,  eor,  nop,  nop,  eor,  lsr,  rmb5,  cli,  eor,  phy,  nop,  nop,  eor,  lsr,  bbr5, /* 5 */
+/* 6 */     rts,  adc,  nop,  nop,  stz,  adc,  ror,  rmb6,  pla,  adc,  ror,  nop,  jmp,  adc,  ror,  bbr6, /* 6 */
+/* 7 */     bvs,  adc,  adc,  nop,  stz,  adc,  ror,  rmb7,  sei,  adc,  ply,  nop,  jmp,  adc,  ror,  bbr7, /* 7 */
+/* 8 */     bra,  sta,  nop,  nop,  sty,  sta,  stx,  smb0,  dey,  bit,  txa,  nop,  sty,  sta,  stx,  bbs0, /* 8 */
+/* 9 */     bcc,  sta,  sta,  nop,  sty,  sta,  stx,  smb1,  tya,  sta,  txs,  nop,  stz,  sta,  stz,  bbs1, /* 9 */
+/* A */     ldy,  lda,  ldx,  nop,  ldy,  lda,  ldx,  smb2,  tay,  lda,  tax,  nop,  ldy,  lda,  ldx,  bbs2, /* A */
+/* B */     bcs,  lda,  lda,  nop,  ldy,  lda,  ldx,  smb3,  clv,  lda,  tsx,  nop,  ldy,  lda,  ldx,  bbs3, /* B */
+/* C */     cpy,  cmp,  nop,  nop,  cpy,  cmp,  dec,  smb4,  iny,  cmp,  dex,  wai,  cpy,  cmp,  dec,  bbs4, /* C */
+/* D */     bne,  cmp,  cmp,  nop,  nop,  cmp,  dec,  smb5,  cld,  cmp,  phx,  stp,  nop,  cmp,  dec,  bbs5, /* D */
+/* E */     cpx,  sbc,  nop,  nop,  cpx,  sbc,  inc,  smb6,  inx,  sbc,  nop,  nop,  cpx,  sbc,  inc,  bbs6, /* E */
+/* F */     beq,  sbc,  sbc,  nop,  nop,  sbc,  inc,  smb7,  sed,  sbc,  plx,  nop,  nop,  sbc,  inc,  bbs7  /* F */
+};
+
+static const uint32_t ticktable_cmos[256] = {
+/*        |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F  |     */
+/* 0 */      7,    6,    2,    1,    5,    3,    5,    5,    3,    2,    2,    1,    6,    4,    6,    5,  /* 0 */
+/* 1 */      2,    5,    5,    1,    5,    4,    6,    5,    2,    4,    2,    1,    6,    4,    6,    5,  /* 1 */
+/* 2 */      6,    6,    2,    1,    3,    3,    5,    5,    4,    2,    2,    1,    4,    4,    6,    5,  /* 2 */
+/* 3 */      2,    5,    5,    1,    4,    4,    6,    5,    2,    4,    2,    1,    4,    4,    6,    5,  /* 3 */
+/* 4 */      6,    6,    2,    1,    3,    3,    5,    5,    3,    2,    2,    1,    3,    4,    6,    5,  /* 4 */
+/* 5 */      2,    5,    5,    1,    4,    4,    6,    5,    2,    4,    3,    1,    8,    4,    6,    5,  /* 5 */
+/* 6 */      6,    6,    2,    1,    3,    3,    5,    5,    4,    2,    2,    1,    6,    4,    6,    5,  /* 6 */
+/* 7 */      2,    5,    5,    1,    4,    4,    6,    5,    2,    4,    4,    1,    6,    4,    6,    5,  /* 7 */
+/* 8 */      3,    6,    2,    1,    3,    3,    3,    5,    2,    2,    2,    1,    4,    4,    4,    5,  /* 8 */
+/* 9 */      2,    6,    5,    1,    4,    4,    4,    5,    2,    5,    2,    1,    4,    5,    5,    5,  /* 9 */
+/* A */      2,    6,    2,    1,    3,    3,    3,    5,    2,    2,    2,    1,    4,    4,    4,    5,  /* A */
+/* B */      2,    5,    5,    1,    4,    4,    4,    5,    2,    4,    2,    1,    4,    4,    4,    5,  /* B */
+/* C */      2,    6,    2,    1,    3,    3,    5,    5,    2,    2,    2,    1,    4,    4,    6,    5,  /* C */
+/* D */      2,    5,    5,    1,    4,    4,    6,    5,    2,    4,    3,    1,    4,    4,    7,    5,  /* D */
+/* E */      2,    6,    2,    1,    3,    3,    5,    5,    2,    2,    2,    1,    4,    4,    6,    5,  /* E */
+/* F */      2,    5,    5,    1,    4,    4,    6,    5,    2,    4,    4,    1,    4,    4,    7,    5   /* F */
+};
 
 void nmi6502() {
     push16(pc);
@@ -951,6 +1140,25 @@ void exec6502(uint32_t tickcount) {
         if (callexternal) (*loopexternal)();
     }
 
+}
+
+void reset6502(uint8_t cmos) {
+    if (cmos != 0) {
+        addrtable = addrtable_cmos;
+        optable = optable_cmos;
+        ticktable = ticktable_cmos;
+    } else {
+        addrtable = addrtable_nmos;
+        optable = optable_nmos;
+        ticktable = ticktable_nmos;
+    }
+
+    pc = (uint16_t)read6502(0xFFFC) | ((uint16_t)read6502(0xFFFD) << 8);
+    a = 0;
+    x = 0;
+    y = 0;
+    sp = 0xFD;
+    status |= FLAG_CONSTANT;
 }
 
 void step6502() {

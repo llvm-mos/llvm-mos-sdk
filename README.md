@@ -69,6 +69,12 @@ $ ninja
 
 The SDK will now be present in the build (current) directory.
 
+Compiler flags for MOS targets in the SDK may be set using -DLLVM_MOS_ARCH_FLAGS:
+
+```console
+$ cmake -DLLVM_MOS=$HOME/llvm-mos/build/bin -DLLVM_MOS_ARCH_FLAGS=-mcpu=mos65c02 -G "Ninja" ..
+```
+
 ### Compile the example
 
 Once you have the SDK, you can compile the sample program using the alias

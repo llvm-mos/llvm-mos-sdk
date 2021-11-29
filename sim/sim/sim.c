@@ -33,7 +33,7 @@ static const char usage[] =
     "\t--cycles: Print cycle count to stderr.\n"
     "\t--trace: Print each instruction address to stderr.\n";
 
-void reset6502();
+void reset6502(uint8_t cmos);
 void step6502();
 extern uint32_t clockticks6502;
 extern uint16_t pc;
@@ -42,6 +42,7 @@ uint8_t memory[65536];
 uint32_t clock_start = 0;
 bool shouldPrintCycles = false;
 bool shouldTrace = false;
+bool cmos = false;
 
 int8_t read6502(uint16_t address) {
   if (address == 0xfff0) {
@@ -84,6 +85,8 @@ bool parseFlag(int *argc, const char ***argv) {
     shouldPrintCycles = true;
   } else if (!strcmp(flag, "--trace")) {
     shouldTrace = true;
+  } else if (!strcmp(flag, "--cmos")) {
+    cmos = true;
   } else
     return false;
 
@@ -155,7 +158,7 @@ int main(int argc, const char *argv[]) {
     }
   }
 
-  reset6502();
+  reset6502(cmos);
   for (;;) {
     if (shouldTrace)
       fprintf(stderr, "%04x\n", pc);

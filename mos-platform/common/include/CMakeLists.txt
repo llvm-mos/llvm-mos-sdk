@@ -1,0 +1,9 @@
+llvm_mos_sdk_install(FILES
+  alloca.h
+  ctype.h
+  inttypes.h
+  setjmp.h
+  stdio.h
+  stdlib.h
+  string.h
+  init_stack.S)

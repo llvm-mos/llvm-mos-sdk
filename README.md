@@ -10,13 +10,27 @@ official release, several other first-class targets will be created to
 provide examples to aid our users to port to other platforms.
 
 A hello world example application can be built for the C64, but much of the
-expected runtime is missing. As the compile approaches C99 compatibility,
-this will fill out to become a full frestanding C99 implementation.
+expected runtime is missing. As the compiler approaches C99 compatibility,
+this will fill out to become a full freestanding C99 implementation.
+
+A 6502/65C02 interpreting simulator is also provided in this repository.
+Its primary use-case is testing with the LLVM-MOS fork of
+[llvm-test-suite](https://github.com/llvm-mos/llvm-test-suite/).
 
 ## Build
 
 Building the SDK first requires a working LLVM-MOS compiler. There isn't an
 official release yet, but if you're eager to try it out, you can compile it yourself.
+
+### Note for Windows users
+
+It is recommended to [enable Developer Mode in Settings](ms-settings:developers)
+so that symlinks work correctly during the installation process.
+
+Microsoft officially deploys CMake and Ninja as part of Visual Studio if
+"C++ CMake tools for Windows" enabled in the Visual Studio Installer.
+If this is installed, the following steps may be performed from an
+"x64 Native Tools Command Prompt" in the Start Menu.
 
 ### Install ninja
 
@@ -29,7 +43,20 @@ standard UNIX Makefiles, or you can substitute any other CMake-supported
 generator. Your compile times may take a hit, and LLVM is already very slow
 to build, so Ninja is highly recommended.
 
-### Build LLVM-MOS
+### [Optional] Build and Install LLVM-MOS
+
+**Note:** LLVM-MOS-SDK will automatically download a binary release of
+LLVM-MOS from GitHub if it cannot be found on your system or if
+`-DLLVM_MOS_BOOTSTRAP_COMPILER=On`. The following section is only necessary if
+you wish to use your own build of llvm-mos or are using a host platform that
+is not Linux|MacOS|Windows.
+
+Installing LLVM-MOS and LLVM-MOS-SDK into the same prefix is necessary to
+establish a complete cross-compilation environment. This prefix does not
+have to be a system location; any user-accessible directory is fine.
+
+**Note:** It is *not* recommended to install LLVM-MOS where it may conflict
+with a vanilla LLVM/Clang installation.
 
 See https://github.com/llvm-mos for more information.
 
@@ -39,23 +66,25 @@ $ git clone https://github.com/llvm-mos/llvm-mos.git
 $ cd llvm-mos
 $ mkdir build
 $ cd build
-$ cmake -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="MOS" \
-        -DLLVM_TARGETS_TO_BUILD="" \
-        -DLLVM_ENABLE_PROJECTS="clang;lld" \
+$ cmake -C ../clang/cmake/caches/MOS.cmake \
         -G "Ninja" \
+        -DCMAKE_INSTALL_PREFIX=<arbitrary-install-directory> \
         ../llvm
-$ ninja clang lld llvm-ar llvm-ranlib
-$ alias clang-mos=$HOME/llvm-mos/build/bin/clang
+$ ninja install
 ```
 
-This will place binaries in a newly-created "bin" directory. An alias will
-allow easily using clang later.
+This will build and install a MOS-enabled clang toolchain into the provided
+prefix directory.
 
-### Build LLVM-MOS-SDK
+### Build and Install LLVM-MOS-SDK
 
-Once you have a working compiler, you can use it to build the SDK itself.
-You'll need to point the SDK at the compiler using -DLLVM_MOS, which requires
-an absolute path to the bin directory. If you compiled the compiler somewhere else, make sure to modify the snippet below with the correct path.
+Now it is time to build the SDK itself. If you manually built and installed
+LLVM-MOS, ensure that `CMAKE_INSTALL_PREFIX` is the same as LLVM-MOS and the
+compiler will be located automatically. If you wish to use another LLVM-MOS
+compiler, point to it using `-DLLVM_MOS=<llvm-mos-bin-directory>`. By default,
+the latest LLVM-MOS release will be downloaded from GitHub. To force
+downloading from GitHub, set `-DLLVM_MOS_BOOTSTRAP_COMPILER=On`. A downloaded
+LLVM-MOS is automatically installed into the LLVM-MOS-SDK prefix.
 
 ```console
 $ cd ../..
@@ -63,32 +92,59 @@ $ git clone https://github.com/llvm-mos/llvm-mos-sdk.git
 $ cd llvm-mos-sdk
 $ mkdir build
 $ cd build
-$ cmake -DLLVM_MOS=$HOME/llvm-mos/build/bin -G "Ninja" ..
-$ ninja
+$ cmake -G "Ninja" -DCMAKE_INSTALL_PREFIX=<arbitrary-install-directory> ..
+$ ninja install
 ```
 
-The SDK will now be present in the build (current) directory.
+The complete SDK will now be present in the install prefix.
 
-Compiler flags for MOS targets in the SDK may be set using -DLLVM_MOS_ARCH_FLAGS:
+### [Optional] Add LLVM-MOS to PATH
+
+This will make accessing LLVM-MOS from the command line easier:
+
+#### POSIX
+
+Add the following line to your shell profile (`~/.bashrc`, `~/.zshrc`, etc...):
 
 ```console
-$ cmake -DLLVM_MOS=$HOME/llvm-mos/build/bin -DLLVM_MOS_ARCH_FLAGS=-mcpu=mos65c02 -G "Ninja" ..
+export PATH=$PATH:<arbitrary-install-directory>/bin
 ```
 
-### Compile the example
+To work with CMake-enabled IDEs, it may also need to be added to your desktop
+profile (`~/.gnomerc`,
+[KDE](https://userbase.kde.org/Session_Environment_Variables), etc...).
 
-Once you have the SDK, you can compile the sample program using the alias
-created earlier. You'll need to provide `--config=`, which should point to
-one of the target-specific Clang configuration files (at present, there's
-only `.../commodore/64.cfg`). These configuration files provide the
-command-line arguments necessary to generate executables for a specific MOS
-target.
+#### Windows
+
+```console
+rundll32.exe sysdm.cpl,EditEnvironmentVariables
+# Edit "Path" user variable
+# Add entry for "<arbitrary-install-directory>\bin"
+```
+
+Afterwards, new shells will have direct access to LLVM-MOS.
+
+### Compile the Example
+
+**Note:** LLVM-MOS-SDK will compile the examples for each platform on its own,
+but this effectively demonstrates compiler usage.
+
+Assuming you have added LLVM-MOS to PATH, you can compile the sample program
+with a direct command. You will need to prefix `clang` (or `clang++`) with a
+specific MOS platform provided by the SDK. This will ensure clang loads the
+correct configuration to generate executables and libraries for that target.
+
+Current platform `clang` commands are:
+
+* `mos-a800xl-clang`
+* `mos-c64-clang`
+* `mos-sim-clang`
 
 ```console
 $ cd ..
-$ clang-mos --config build/commodore/64.cfg -Os -o hello.prg examples/hello_putchar.c
+$ mos-c64-clang -Os -o hello.prg examples/hello-putchar.c
 
-$ cat examples/hello_putchar.c
+$ cat examples/hello-putchar.c
 #include <stdio.h>
 
 int main(void) {
@@ -111,7 +167,7 @@ $ hexdump -C hello.prg
 00000090  52 21 0a 00                                       |R!..|
 00000094
 
-$ clang-mos --config build/commodore/64.cfg -Os -o hello.s -Wl,--lto-emit-asm examples/hello_putchar.c
+$ mos-c64-clang -Os -o hello.s -Wl,--lto-emit-asm examples/hello-putchar.c
 
 $ cat hello.s
         .text
@@ -155,3 +211,23 @@ exit:
 The generated ASM output will contain more than actually ends up in the binary.
 In the default MOS configuration, LLD runs a very late garbage collection pass
 through the output sections to discard any functions not actually referenced.
+
+### Developing with CMake
+
+A CMake package and toolchain file are provided to make targeting MOS from
+CMake easy.
+
+Create a new source directory with a `CMakeLists.txt` like the following where
+`LLVM_MOS_PLATFORM` is set to any platform supported by the SDK:
+
+```cmake
+cmake_minimum_required(VERSION 3.13)
+set(LLVM_MOS_PLATFORM c64)
+find_package(llvm-mos-sdk REQUIRED)
+project(llvm-mos-sdk-foo)
+add_executable(foo foo.c)
+```
+
+**Note:** If LLVM-MOS was *not* added to PATH, set
+`-DCMAKE_PREFIX_PATH=<arbitrary-install-directory>` to match the install prefix
+of LLVM-MOS so `find_package` will work correctly.

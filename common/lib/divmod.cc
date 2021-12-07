@@ -79,6 +79,50 @@ template <typename T> static inline T umod(T a, T b) {
   return a;
 }
 
+template <typename T> static inline T udivmod(T a, T b, T *rem) {
+  if (!b || b > a) {
+    *rem = a;
+    return 0;
+  }
+
+  // Here b <= a.
+
+  // Shift b as far left as possible without exceeding a. If the hightest bit of
+  // b is 1, then the next shift, if were performed at a higher bit width, would
+  // make it exceed a.
+  char num_digits_remaining = 0;
+  while (!(b & static_cast<T>(1) << (sizeof(T) * 8 - 1)) && (b << 1) <= a) {
+    b <<= 1;
+    ++num_digits_remaining;
+  }
+
+  // Since b <= a, the first digit is always 1. This is not counted in
+  // num_digits_remaining.
+  T q = 1;
+  a -= b;
+  b >>= 1;
+
+  for (; num_digits_remaining; --num_digits_remaining) {
+    // Prepare q to receive the next digit as its LSB.
+    q <<= 1;
+
+    // If the quotient digit is a 1
+    if (b <= a) {
+      q |= 1;
+
+      // Subtract out 1 * the divisor.
+      a -= b;
+    }
+
+    // The next quotient digit corrsponds to one smaller power of 2 times the
+    // divisor.
+    b >>= 1;
+  }
+
+  *rem = a;
+  return q;
+}
+
 #else // __SLOW_DIV
 
 // Very slow versions of the division algorithm. Still useful for validating
@@ -135,6 +179,17 @@ template <typename T> static inline T mod(T a, T b) {
   return a < 0 ? -u : u;
 }
 
+template <typename T> static inline T divmod(T a, T b, T *rem) {
+  typedef typename make_unsigned<T>::type UT;
+  UT urem;
+  T uq = static_cast<T>(udivmod(safe_abs(a), safe_abs(b), &urem));
+
+  // Negating int_min here is fine, since it's only undefined behavior if the
+  // signed division itself is.
+  *rem = a < 0 ? -urem : urem;
+  return (a < 0 != b < 0) ? -uq : uq;
+}
+
 extern "C" {
 char __udivqi3(char a, char b) { return udiv(a, b); }
 unsigned __udivhi3(unsigned a, unsigned b) { return udiv(a, b); }
@@ -150,6 +205,19 @@ unsigned long long __umoddi3(unsigned long long a, unsigned long long b) {
   return umod(a, b);
 }
 
+char __udivmodqi4(char a, char b, char *rem) { return udivmod(a, b, rem); }
+unsigned __udivmodhi4(unsigned a, unsigned b, unsigned *rem) {
+  return udivmod(a, b, rem);
+}
+unsigned long __udivmodsi4(unsigned long a, unsigned long b,
+                           unsigned long *rem) {
+  return udivmod(a, b, rem);
+}
+unsigned long long __udivmoddi4(unsigned long long a, unsigned long long b,
+                                unsigned long long *rem) {
+  return udivmod(a, b, rem);
+}
+
 signed char __divqi3(signed char a, signed char b) { return div(a, b); }
 int __divhi3(int a, int b) { return div(a, b); }
 long __divsi3(long a, long b) { return div(a, b); }
@@ -159,4 +227,13 @@ signed char __modqi3(signed char a, signed char b) { return mod(a, b); }
 int __modhi3(int a, int b) { return mod(a, b); }
 long __modsi3(long a, long b) { return mod(a, b); }
 long long __moddi3(long long a, long long b) { return mod(a, b); }
+
+signed char __divmodqi4(signed char a, signed char b, signed char *rem) {
+  return divmod(a, b, rem);
+}
+int __divmodhi4(int a, int b, int *rem) { return divmod(a, b, rem); }
+long __divmodsi4(long a, long b, long *rem) { return divmod(a, b, rem); }
+long long __divmoddi4(long long a, long long b, long long *rem) {
+  return divmod(a, b, rem);
+}
 }

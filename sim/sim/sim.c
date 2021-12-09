@@ -37,6 +37,7 @@ void reset6502(uint8_t cmos);
 void step6502();
 extern uint32_t clockticks6502;
 extern uint16_t pc;
+extern uint8_t a, x, y, sp, status;
 
 uint8_t memory[65536];
 uint32_t clock_start = 0;
@@ -161,7 +162,7 @@ int main(int argc, const char *argv[]) {
   reset6502(cmos);
   for (;;) {
     if (shouldTrace)
-      fprintf(stderr, "%04x\n", pc);
+      fprintf(stderr, "%04x a:%02x x:%02x y:%02x s: %02x st:%02x\n", pc, a, x, y, sp, status);
     step6502();
   }
   return 0;

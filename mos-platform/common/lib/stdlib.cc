@@ -30,9 +30,4 @@ extern "C"
         __memset(static_cast<char *>(block), 0, sz);
         return block;
     }
-
-    void abort()
-    {
-        asm volatile("brk" : );
-    }
 }

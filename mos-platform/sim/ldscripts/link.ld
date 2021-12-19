@@ -32,6 +32,7 @@ SECTIONS {
     .bss (NOLOAD) : { *(.bss .bss.* COMMON) }
     __bss_end = .;
     .noinit (NOLOAD) : { *(.noinit .noinit.*) }
+    __heap_start = .;
 }
 
 /* Provide 256 imaginary (zero page) registers. */

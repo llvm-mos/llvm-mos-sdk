@@ -47,7 +47,9 @@ namespace
         unique_ptr & operator=(const unique_ptr &) = delete;
         
         T & operator[](uint8_t idx) { return m_ptr[idx]; }
+        T & operator[](std::size_t idx) { return m_ptr[idx]; }
         const T &operator[](uint8_t idx) const { return const_cast<unique_ptr *>(this)->operator[](idx); }
+        T & operator[](std::size_t idx) const { return const_cast<unique_ptr *>(this)->operator[](idx); }
 
         ~unique_ptr() { delete [] m_ptr; }
         T * get() const { return m_ptr; }
@@ -62,8 +64,12 @@ namespace
     }
 }
 
+extern std::byte __heap_start;
+
 int main()
 {
+    logva("DEFAULT HEAP IS %d BYTES\n", heap_limit());
+
     {
         unique_ptr<char> an_alloc {500};
         logva("ALLOCATED 500 BYTES AT %p\n", an_alloc.get());
@@ -122,7 +128,58 @@ int main()
         }
     }
 
+    {
+        printf("HEAP IS FROM $%p TO $%p\n", &__heap_start, &__heap_start + ::heap_limit());
+
+        // heap limiting tests
+        // Use the heap to allocate pointers to some allocations:
+        constexpr auto ALLOC_COUNT = 1000;
+        unique_ptr<std::size_t *> vector_of_ptrs{ALLOC_COUNT, std::nothrow};
+
+        printf("BYTES IN USE: %u\n", ::heap_bytes_used());
+
+        for (std::size_t j = 0; j < ALLOC_COUNT; j += 1)
+        {
+            vector_of_ptrs[j] = nullptr;
+        }
+
+        std::size_t i = 0;
+
+        for (; i < ALLOC_COUNT; i += 1)
+        {
+            auto int_ptr = new (std::nothrow) std::size_t{i};
+            if (!int_ptr)
+            {
+                printf("HEAP ALLOCATION FAILED AFTER ALLOCATING %u TIMES\n", i);
+                printf("BYTES IN USE: %u\n", ::heap_bytes_used());
+                break;
+            }
+            
+            vector_of_ptrs[i] = int_ptr;
+        }
+
+        const auto new_limit = ::heap_limit() + 8192;
+        printf("SETTING HEAP LIMIT TO %u\n", new_limit);
+        ::set_heap_limit(new_limit);
+        for (; i < 1000; i += 1)
+        {
+            vector_of_ptrs[i] = new std::size_t{i};
+        }
+
+        printf("FINISHED ALLOCATIONS. USING %u BYTES.\n", ::heap_bytes_used());
+        for (i = 0; i < ALLOC_COUNT; i += 1)
+        {
+            delete vector_of_ptrs[i]; // manual delete required for raw ptrs.
+        }
+    }
+
     puts("NEW AND DELETE WORKS");
+    
+    // At the end of the program, there should only be a few bytes in use by the 
+    // heap's internal data structures.  For example, assuming the heap combined
+    // all freed blocks of memory, there should just be the overhead of a single
+    // block description
     logva("HEAP IN USE AT END OF PROGRAM IS %u\n", ::heap_bytes_used());
+    //dump();
     return 0;
 }

@@ -85,7 +85,7 @@ void *calloc(size_t num, size_t size);
    on the available address space of the target platform.
 3. After the first allocation has been made, the heap may only increase in size.
    Any attempt to decrease the size of the heap limit will be ignored. Increasing
-   the heap limit does not do any validation to ensure the heap will collide
+   the heap limit does not do any validation to ensure the heap will not collide
    with the stack. You must leave enough space for whatever stack usage your program
    needs. */
 

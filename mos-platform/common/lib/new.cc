@@ -6,6 +6,9 @@ extern std::byte __heap_start;
 
 namespace
 {
+
+    // An arbitrary block of memory. This struct only holds the size of the block,
+    // and the data in the block directly follows
     struct block
     {
         block(std::size_t size) : m_size { size } {}
@@ -19,19 +22,24 @@ namespace
 
         std::byte * data() noexcept { return static_cast<std::byte *>(m_data); }
 
-        std::byte   m_data[];        
+        std::byte   m_data[]; 
     };
 
     static_assert(sizeof(block) == sizeof(std::size_t), "!!!");
 
+    // A doubly-linked list of blocks of memory.
+    // The next node pointer, the previous node pointer, and the size of the block
+    // are stored at the beginning of the block. 
     class blocklist
     {
+        // pointers to next and previous.
         struct list_node
         {
             list_node *m_next = nullptr;
             list_node *m_prev = nullptr;
         };
 
+        // The entire block node pointer, which is embedded in the block itself.
         struct block_node : public list_node
         {
             block_node(std::size_t initsz)
@@ -47,11 +55,14 @@ namespace
         };
 
     public:
-        static constexpr std::uint8_t MIN_ALLOC_SIZE = sizeof(blocklist::block_node) + 2;
+        static constexpr std::uint8_t MIN_ALLOC_SIZE = sizeof(block_node) + 2;
 
         blocklist()
         {
-            add_block(&__heap_start, 4096);
+            m_heap_limit = m_heap_limit == SIZE_MAX ? HEAP_DEFAULT_LIMIT : m_heap_limit;
+            m_head = new (&__heap_start) block_node{m_heap_limit};
+            m_used = sizeof(block_node);
+            m_free = m_head->m_block.m_size;
         }
         
         struct iterator
@@ -98,7 +109,7 @@ namespace
         static_assert(sizeof(list_node) == sizeof(list_node::m_next) + sizeof(list_node::m_prev), "unexpected padding");
         static_assert(sizeof(block_node) == sizeof(list_node) + sizeof(std::size_t), "unexpected padding");
  
-        std::byte * split_block(block *freeblock, std::size_t size)
+        std::byte * split_block(block *freeblock, std::size_t size) noexcept
         {
             if (!freeblock)
             {
@@ -130,6 +141,7 @@ namespace
                 }
 
                 // new node in free list was allocated, remove it from the total bytes free.
+                m_used += sizeof(block_node);
                 m_free -= sizeof(block_node);
             }
             else
@@ -160,11 +172,11 @@ namespace
             return freeblock->data();
         }
 
-        block *find_first_fit(std::size_t sz)
+        block *find_first_fit(std::size_t sz) noexcept
         {
             for (auto &block : *this)
             {
-                if (block.m_size >= sz)
+                if (block.m_size >= (sz + sizeof(block_node)))
                 {
                     return &block;
                 }
@@ -173,7 +185,7 @@ namespace
             return nullptr;
         }
 
-        void free_block(block * const block)
+        void free_block(block * const block) noexcept
         {
             block_node * last_block_node = nullptr;
             for (auto & free_blk : *this)
@@ -213,7 +225,7 @@ namespace
             m_used -= block->m_size;
         }
 
-        void coallesce_blocks()
+        void coallesce_blocks() noexcept
         {
             block * last_block = nullptr;
 
@@ -233,7 +245,8 @@ namespace
                         {
                             last_block_node->m_next->m_prev = last_block_node;
                         }
-                        m_free += sizeof(*block_node_ptr);
+                        m_used -= sizeof(block_node);
+                        m_free += sizeof(block_node);
                         continue;
                     }
                 }
@@ -242,33 +255,61 @@ namespace
             }
         }
 
+        void set_new_limit(std::size_t new_limit)
+        {
+            if (new_limit >= (m_heap_limit + MIN_ALLOC_SIZE))
+            {
+                add_block(
+                    // new block address will be directly after the region defined by the previous limit.
+                    &__heap_start + m_heap_limit,
+                    new_limit - m_heap_limit
+                );
+
+                m_heap_limit = new_limit;
+            }
+        }
+
+        // void dump()
+        // {
+        //     for (const auto & block : *this)
+        //     {
+        //         printf("BLOCK %p LEN %u\n", &block, block.m_size+sizeof(block_node));
+        //     }
+        // }
+
     private:
+        // nodes are added at the end of the list.
         void add_node(block_node * node)
         {
-            node->m_next = m_head;
-            node->m_prev = nullptr;
-            if (m_head)
-            {
-                m_head->m_prev = node;
-            }
-            m_head = node;
+            list_node * node_last = m_head;
+            for (; node_last->m_next; node_last = node_last->m_next) {}
+
+            node_last->m_next = node;
+            node->m_prev = node_last;
         }
 
         void add_block(std::byte *address, std::size_t size)
         {
             // assume zero alignment padding.
             add_node(new (address) block_node{size});
+            m_used += sizeof(block_node);
             m_free += m_head->m_block.m_size;
         }
 
         block_node *m_head = nullptr;
 
     public:
+        // heap limit is essentially a global var.  It can 
+        // be set prior to ctor of blocklist.
+        static constexpr std::size_t HEAP_DEFAULT_LIMIT = 4096;
+        static std::size_t m_heap_limit;
+
+        // accounting.
         std::size_t m_free = 0;
         std::size_t m_used = 0;
     };
 
-    blocklist &get_free_list()
+    blocklist &get_free_list() noexcept
     {
         static blocklist free_list;
         return free_list;
@@ -283,6 +324,8 @@ namespace
         }
     }
 }
+
+std::size_t blocklist::m_heap_limit = SIZE_MAX;
 
 void * operator new(std::size_t size)
 {
@@ -301,13 +344,13 @@ void * operator new[](std::size_t size)
     return operator new(size);
 }
 
-void * operator new(std::size_t count, const std::nothrow_t &)
+void * operator new(std::size_t count, const std::nothrow_t &) noexcept
 {
     auto &free_list = get_free_list();
     return free_list.split_block(free_list.find_first_fit(count), count);
 }
 
-void *operator new[](std::size_t count, const std::nothrow_t &)
+void *operator new[](std::size_t count, const std::nothrow_t &) noexcept
 {
     return operator new(count, std::nothrow);
 }
@@ -337,16 +380,6 @@ void operator delete(void *ptr) noexcept
 void operator delete[](void * ptr) noexcept
 {
     operator delete(ptr);
-}
-
-std::size_t heap_bytes_used()
-{
-    return get_free_list().m_used;
-}
-
-std::size_t heap_bytes_free()
-{
-    return get_free_list().m_free;
 }
 
 // helper functions for getting/setting flags in guard_object
@@ -398,3 +431,42 @@ namespace std
     }
 }
 
+extern "C"
+{
+    
+size_t heap_limit()
+{
+    return blocklist::m_heap_limit == SIZE_MAX ? blocklist::HEAP_DEFAULT_LIMIT : blocklist::m_heap_limit;
+}
+
+void set_heap_limit(size_t new_size)
+{
+    // uninitialized.
+    if (blocklist::m_heap_limit == SIZE_MAX)
+    {
+        blocklist::m_heap_limit = (new_size < blocklist::MIN_ALLOC_SIZE)
+            ? blocklist::MIN_ALLOC_SIZE
+            : new_size;
+    }
+    else
+    {
+        get_free_list().set_new_limit(new_size);
+    }
+}
+
+size_t heap_bytes_used()
+{
+    return get_free_list().m_used;
+}
+
+size_t heap_bytes_free()
+{
+    return get_free_list().m_free;
+}
+
+}
+
+// void dump()
+// {
+//     get_free_list().dump();
+// }

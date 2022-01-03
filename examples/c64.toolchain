@@ -1,0 +1,23 @@
+# Example CMake cross-compile toolchain file.  Adjust paths as needed.
+
+set(CMAKE_SYSTEM_NAME C64)
+set(CMAKE_SYSTEM_PROCESSOR MOS)
+
+set(CMAKE_SYSROOT $ENV{HOME}/llvm-mos-sdk/build)
+set(CMAKE_STAGING_PREFIX $ENV{HOME}/llvm-mos-stage)
+
+set(tools $ENV{HOME}/llvm-mos/build)
+set(CMAKE_C_COMPILER ${tools}/bin/clang)
+set(CMAKE_C_COMPILER_TARGET mos)
+set(CMAKE_CXX_COMPILER ${tools}/bin/clang++)
+set(CMAKE_CXX_COMPILER_TARGET mos)
+set(CMAKE_C_FLAGS "--config $ENV{HOME}/llvm-mos-sdk/build/commodore/64.cfg -Os")
+set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
+
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
+set(CMAKE_EXECUTABLE_SUFFIX_C .prg)
+set(CMAKE_EXECUTABLE_SUFFIX_CXX ${CMAKE_EXECUTABLE_SUFFIX_C})

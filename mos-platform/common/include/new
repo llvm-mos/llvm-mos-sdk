@@ -3,11 +3,9 @@
 
 #include <cstddef>
 
-namespace std
-{
-struct nothrow_t
-{
-    explicit nothrow_t() = default;
+namespace std {
+struct nothrow_t {
+  explicit nothrow_t() = default;
 };
 
 extern const nothrow_t nothrow;
@@ -17,17 +15,17 @@ typedef void (*new_handler)();
 new_handler get_new_handler() noexcept;
 new_handler set_new_handler(new_handler new_p) noexcept;
 
-}
+} // namespace std
 
-void * operator new(std::size_t size);
-void * operator new[](std::size_t size);
-void * operator new(std::size_t count, const std::nothrow_t &tag) noexcept;
-void * operator new[](std::size_t count, const std::nothrow_t &tag) noexcept;
-void * operator new(std::size_t count, void *ptr);
-void * operator new[](std::size_t count, void *ptr);
+void *operator new(std::size_t size);
+void *operator new[](std::size_t size);
+void *operator new(std::size_t count, const std::nothrow_t &tag) noexcept;
+void *operator new[](std::size_t count, const std::nothrow_t &tag) noexcept;
+void *operator new(std::size_t count, void *ptr);
+void *operator new[](std::size_t count, void *ptr);
 void operator delete(void *ptr) noexcept;
 void operator delete[](void *ptr) noexcept;
 
-//void dump();
+// void dump();
 
 #endif

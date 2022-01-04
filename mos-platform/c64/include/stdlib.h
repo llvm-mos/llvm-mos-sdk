@@ -4,12 +4,11 @@
 #include_next <stdlib.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-    void abort();
-    
+void abort();
+
 #ifdef __cplusplus
 }
 #endif

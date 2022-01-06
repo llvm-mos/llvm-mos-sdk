@@ -223,15 +223,6 @@ public:
     }
   }
 
-  // void dump()
-  // {
-  //     for (const auto & block : *this)
-  //     {
-  //         printf("BLOCK %p LEN %u\n", &block,
-  //         block.m_size+sizeof(block_node));
-  //     }
-  // }
-
 private:
   // nodes are added at the end of the list.
   void add_node(block_node *node) {
@@ -373,8 +364,3 @@ size_t heap_bytes_used() { return get_free_list().m_used; }
 
 size_t heap_bytes_free() { return get_free_list().m_free; }
 }
-
-// void dump()
-// {
-//     get_free_list().dump();
-// }

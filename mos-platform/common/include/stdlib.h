@@ -91,23 +91,31 @@ collide with the stack. You must leave enough space for whatever stack usage
 your program needs.
 */
 
-/* Return the current maximium size of the heap.*/
-size_t heap_limit();
+/* Return the current maximium size of the heap. */
+size_t __heap_limit();
 
 /* Set the maximum size of the heap.  Note the limitations above. */
 /* Setting the heap limit implicitly allocates the heap.  Don't call this
    function if you aren't going to use the heap. */
-void set_heap_limit(size_t new_size);
+void __set_heap_limit(size_t new_size);
 
-/* return heap bytes in use, including overhead for heap data structures in
+/* Return heap bytes in use, including overhead for heap data structures in
    the existing allocations. */
-size_t heap_bytes_used();
+size_t __heap_bytes_used();
 
-/* return heap bytes available for future allocations.  Does not take into
+/* Return heap bytes available for future allocations.  This does not take into
    account the overhead of the heap itself, which depends on how many
-   allocations are made.
-*/
-size_t heap_bytes_free();
+   allocations are made.*/
+size_t __heap_bytes_free();
+
+#ifdef _MOS_SOURCE
+
+#define heap_limit __heap_limit
+#define set_heap_limit __set_heap_limit
+#define heap_bytes_used __heap_bytes_used
+#define heap_bytes_free __heap_bytes_free
+
+#endif // _MOS_SOURCE
 
 #ifdef __cplusplus
 }

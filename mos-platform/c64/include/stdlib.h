@@ -12,4 +12,4 @@ void abort();
 #ifdef __cplusplus
 }
 #endif
-#endif
+#endif // _C64_STDLIB_H_

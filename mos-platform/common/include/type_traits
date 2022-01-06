@@ -59,4 +59,4 @@ template <class T> using make_unsigned_t = typename make_unsigned<T>::type;
 
 } // namespace std
 
-#endif // _TYPE_TRATIS_
+#endif // _TYPE_TRAITS_

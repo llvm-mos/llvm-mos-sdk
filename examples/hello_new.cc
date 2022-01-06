@@ -1,6 +1,7 @@
 #include <new>
 #include <stdint.h>
 #include <stdio.h>
+#define _MOS_SOURCE 1
 #include <stdlib.h>
 
 #define VERBOSE 1

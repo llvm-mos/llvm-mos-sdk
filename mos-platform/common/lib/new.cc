@@ -344,23 +344,26 @@ new_handler set_new_handler(new_handler new_p) noexcept {
 
 extern "C" {
 
-size_t heap_limit() {
+size_t __heap_limit() {
   return blocklist::m_heap_limit == SIZE_MAX ? blocklist::HEAP_DEFAULT_LIMIT
                                              : blocklist::m_heap_limit;
 }
 
-void set_heap_limit(size_t new_size) {
-  // uninitialized.
+void __set_heap_limit(size_t new_size) {
+  
   if (blocklist::m_heap_limit == SIZE_MAX) {
+    // Heap is uninitialized... set it up for the first call
     blocklist::m_heap_limit = (new_size < blocklist::MIN_ALLOC_SIZE)
                                   ? blocklist::MIN_ALLOC_SIZE
                                   : new_size;
   } else {
+    // heap is initialized.
     get_free_list().set_new_limit(new_size);
   }
 }
 
-size_t heap_bytes_used() { return get_free_list().m_used; }
+size_t __heap_bytes_used() { return get_free_list().m_used; }
 
-size_t heap_bytes_free() { return get_free_list().m_free; }
+size_t __heap_bytes_free() { return get_free_list().m_free; }
+
 }

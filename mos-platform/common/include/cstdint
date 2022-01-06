@@ -34,4 +34,4 @@ using uintmax_t = ::uintmax_t;
 using uintptr_t = ::uintptr_t;
 } // namespace std
 
-#endif
+#endif // __CSTDINT_H__

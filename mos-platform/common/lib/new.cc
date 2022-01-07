@@ -7,7 +7,7 @@ extern std::byte __heap_start;
 namespace {
 
 // An arbitrary block of memory. This struct only holds the size of the block,
-// and the data in the block directly follows
+// and the data in the block directly follows.
 struct block {
   block(std::size_t size) : m_size{size} {}
 
@@ -116,12 +116,12 @@ public:
         m_head = new_blk;
       }
 
-      // new node in free list was allocated, remove it from the total bytes
+      // A new node in free list was allocated. Remove it from the total bytes
       // free.
       m_used += sizeof(block_node);
       m_free -= sizeof(block_node);
     } else {
-      // drop the block from the free list entirely.
+      // Drop the block from the free list entirely.
       const auto freeblock_node_ptr = block_node::get_node(*freeblock);
       const auto prev_block_ptr = freeblock_node_ptr->m_prev;
       const auto next_block_ptr = freeblock_node_ptr->m_next;
@@ -137,7 +137,7 @@ public:
       }
     }
 
-    // update stats for actual size allocated
+    // Update stats for actual size allocated.
     m_used += freeblock->m_size;
     m_free -= freeblock->m_size;
     return freeblock->data();
@@ -215,7 +215,7 @@ public:
   void set_new_limit(std::size_t new_limit) {
     if (new_limit >= (m_heap_limit + MIN_ALLOC_SIZE)) {
       add_block(
-          // new block address will be directly after the region defined by the
+          // New block address will be directly after the region defined by the
           // previous limit.
           &__heap_start + m_heap_limit, new_limit - m_heap_limit);
 
@@ -224,7 +224,7 @@ public:
   }
 
 private:
-  // nodes are added at the end of the list.
+  // Nodes are added at the end of the list.
   void add_node(block_node *node) {
     list_node *node_last = m_head;
     for (; node_last->m_next; node_last = node_last->m_next) {
@@ -235,7 +235,7 @@ private:
   }
 
   void add_block(std::byte *address, std::size_t size) {
-    // assume zero alignment padding.
+    // Assume zero alignment padding.
     add_node(new (address) block_node{size});
     m_used += sizeof(block_node);
     m_free += m_head->m_block.m_size;
@@ -244,7 +244,7 @@ private:
   block_node *m_head = nullptr;
 
 public:
-  // heap limit is essentially a global var.  It can
+  // Heap limit is essentially a global var.  It can
   // be set prior to ctor of blocklist.
   static constexpr std::size_t HEAP_DEFAULT_LIMIT = 4096;
   static std::size_t m_heap_limit;

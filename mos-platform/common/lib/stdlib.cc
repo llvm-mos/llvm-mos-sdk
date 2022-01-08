@@ -1,11 +1,6 @@
 #include "stdlib.h"
 
-#include <new>
-
 extern "C" {
-void *malloc(size_t size) { return new (std::nothrow) std::byte[size]; }
-
-void free(void *ptr) { delete[] static_cast<std::byte *>(ptr); }
 
 void __memset(char *ptr, char value, size_t num);
 void *memcpy(void *dest, const void *src, size_t count);

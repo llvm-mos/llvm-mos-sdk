@@ -18,6 +18,8 @@ int abs(int i);
 long labs(long i);
 long long llabs(long long i);
 
+void abort(void);
+
 /**
 Simple malloc/free implementation.
 

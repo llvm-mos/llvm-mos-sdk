@@ -1,6 +1,7 @@
 #include <cstdint>
 #include <new>
 #include <stdio.h>
+#include <stdlib.h>
 
 extern std::byte __heap_start;
 
@@ -263,6 +264,13 @@ void run_new_handler() {
   const auto newp = std::get_new_handler();
   if (newp) {
     newp();
+  }
+  else {
+    // Standard c++ requires throwing bad_alloc here.
+    // TODO: implement throw.
+    // Calling abort() here behaves similarly to a caller that 
+    // does not catch bad_alloc, and therefore has an unhandled exception.
+    abort();
   }
 }
 } // namespace

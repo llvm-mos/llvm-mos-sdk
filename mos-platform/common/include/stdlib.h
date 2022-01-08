@@ -3,6 +3,10 @@
 
 #include <stddef.h>
 
+#ifndef __LLVM_MOS_SDK
+#define __LLVM_MOS_SDK 1
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -26,6 +26,7 @@ function(llvm_mos_sdk_add_crt)
     COMMON_SOURCES
       const.S
       zero_bss.c
+      main.S
 
       call_indir.S
 
@@ -55,6 +56,7 @@ function(llvm_mos_sdk_add_c)
 
       # stdlib.h
       abs.cc
+      exit.c
 
       # string.h
       mem.c

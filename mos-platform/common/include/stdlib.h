@@ -5,6 +5,9 @@
 extern "C" {
 #endif
 
+void abort(void);
+void exit(int status);
+
 int abs(int i);
 long labs(long i);
 long long llabs(long long i);

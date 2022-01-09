@@ -7,7 +7,7 @@ _start:
 
     JSR __zero_bss
 
-    JSR main
+    JSR __main
 
     ; It's no longer safe to reenter BASIC.
     end: JMP end

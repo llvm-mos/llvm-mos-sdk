@@ -4,5 +4,6 @@ llvm_mos_sdk_add_crt()
 llvm_mos_sdk_add_c(
   chrout.c
   putchar.c
+  abort.c
 )
 llvm_mos_sdk_add_m()

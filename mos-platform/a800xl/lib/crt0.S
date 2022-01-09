@@ -9,4 +9,4 @@ _start:
 
     JSR __zero_bss
 
-    JMP main
+    JMP __main

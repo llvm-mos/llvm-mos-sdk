@@ -8,6 +8,5 @@ _start:
     STA mos8(__rc1)
 
     ; Note: BSS is already zeroed.
-    JSR main
-
-    JMP exit
+    JSR __main
+    JMP __sim_exit

@@ -5,7 +5,7 @@
 
 namespace std {
 struct nothrow_t {
-  explicit nothrow_t() = default;
+  explicit nothrow_t() noexcept = default;
 };
 
 extern const nothrow_t nothrow;

@@ -379,6 +379,9 @@ new_handler set_new_handler(new_handler new_p) noexcept {
   current_new_handler = new_p;
   return old_handler;
 }
+
+const nothrow_t nothrow;
+
 } // namespace std
 
 extern "C" {

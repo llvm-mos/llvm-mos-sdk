@@ -11,7 +11,7 @@ __main:
     JMP main
 
 ; Restore hardware stack register to value saved in __main and 'longjmp' to
-; main caller
+; __main caller
 
 __exit:
    STX mos8(__rc2)

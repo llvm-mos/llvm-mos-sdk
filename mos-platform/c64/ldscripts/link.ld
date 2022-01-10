@@ -20,7 +20,8 @@ SECTIONS {
 }
 
 ASSERT(ADDR(.basic_header) == 0x0801, "BASIC header at incorrect address.")
-ASSERT(_start == 2061, "_start began at different address than BASIC header expects.")
+ASSERT(SIZEOF(.basic_header) == 0xD, "BASIC header was not 0xD bytes.")
+ASSERT(_start == 2062, "_start began at different address than BASIC header expects.")
 
 /* Provide 142 imaginary (zero page) registers (the BASIC area from $02 to $8f) */
 PROVIDE(__rc0 = 0x0002);

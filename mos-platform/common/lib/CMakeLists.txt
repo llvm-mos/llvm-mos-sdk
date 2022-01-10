@@ -57,6 +57,8 @@ function(llvm_mos_sdk_add_c)
       # stdlib.h
       abs.cc
       exit.c
+      stdlib.cc
+      new.cc
 
       # string.h
       mem.c

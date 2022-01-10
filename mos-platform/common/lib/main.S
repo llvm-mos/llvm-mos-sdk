@@ -2,19 +2,23 @@
 .global __main
 .global __exit
 
+; For now the only task of this wrapper is to store hardware stack register.
+; It allows us to 'longjmp' to __main caller in __exit function below
+
 __main:
     TSX
-    STX __save_sp
+    STX __save_s
     JMP main
 
-__exit:
-   STX __save_x
-   LDX __save_sp
-   TXS
-   LDX __save_x
-   rts
+; Restore hardware stack register to value saved in __main and 'longjmp' to
+; main caller
 
-__save_sp:
-    .byte 00
-__save_x:
+__exit:
+   STX mos8(__rc2)
+   LDX __save_s
+   TXS
+   LDX mos8(__rc2)
+   RTS
+
+__save_s:
     .byte 00

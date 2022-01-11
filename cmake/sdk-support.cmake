@@ -15,6 +15,13 @@ function(llvm_mos_sdk_install)
   install(${ARGN} DESTINATION ${path})
 endfunction()
 
+# All platform object files depend on platform config files.
+function(_target_depend_config_files name)
+  get_target_property(sources ${name} SOURCES)
+  set_source_files_properties(${sources} PROPERTIES OBJECT_DEPENDS
+    "${LLVM_MOS_CURRENT_PLATFORM_CONFIG_FILES}")
+endfunction()
+
 # Runtime targets (i.e. crt,c,m) are tracked per-platform. When example
 # executable targets are created, these tracked targets are automatically
 # set up as target dependencies with no installation necessary.
@@ -23,6 +30,7 @@ endfunction()
 # specialization functions that the common "platform" defines.
 function(llvm_mos_sdk_track_platform_target name)
   set_property(GLOBAL APPEND PROPERTY LLVM_MOS_CURRENT_PLATFORM_TARGETS ${name})
+  _target_depend_config_files(${name})
 endfunction()
 
 # Creates a single-source platform target that is installed as a .o file.
@@ -50,9 +58,9 @@ function(llvm_mos_sdk_add_object_file name src)
   # does not allow us to customize the output location of our one-and-only
   # object file, this is necessary to place the object in the normal library
   # search path for examples to link with.
-  add_custom_command(TARGET ${target_name} POST_BUILD COMMAND ${CMAKE_COMMAND} ARGS -DNAME=${outname}
-          -DTARGET=$<TARGET_OBJECTS:${target_name}> -DOUTDIR=${CMAKE_CURRENT_BINARY_DIR}
-          -P ${CMAKE_SOURCE_DIR}/cmake/create-symlink.cmake DEPENDS $<TARGET_OBJECTS:${target_name}>)
+  add_custom_command(TARGET ${target_name} POST_BUILD COMMAND ${CMAKE_COMMAND} ARGS
+    -DNAME=${outname} -DTARGET=$<TARGET_OBJECTS:${target_name}> -DOUTDIR=${CMAKE_CURRENT_BINARY_DIR}
+    -P ${CMAKE_SOURCE_DIR}/cmake/create-symlink.cmake DEPENDS $<TARGET_OBJECTS:${target_name}>)
 endfunction()
 
 # Creates (or copies) a target file as a symlink during install.
@@ -113,6 +121,25 @@ function(llvm_mos_sdk_add_platform name)
     # Tracks all added targets for platform.
     set_property(GLOBAL PROPERTY LLVM_MOS_CURRENT_PLATFORM_TARGETS "")
 
+    # Gather config and linker script files from root cfg.
+    # Config files are set as object file dependencies for libraries and examples.
+    # Linker scripts are set as example executable dependencies.
+    include(read-config-deps)
+    include(read-linker-script-deps)
+    set(cfg_file_abs ${CMAKE_CURRENT_SOURCE_DIR}/${cfg_file})
+    read_config_deps(${cfg_file_abs} LLVM_MOS_CURRENT_PLATFORM_CONFIG_FILES ld_list link_dir_list)
+    foreach(ld ${ld_list})
+      read_linker_script_deps(${ld} LLVM_MOS_CURRENT_PLATFORM_LDSCRIPT_FILES ${link_dir_list})
+    endforeach()
+    unset(platform_link_dirs)
+    foreach(link_dir ${link_dir_list})
+      if (link_dir MATCHES "^${CMAKE_CURRENT_SOURCE_DIR}/")
+        # In-tree linking requires source -> binary search path translation.
+        file(RELATIVE_PATH link_dir ${CMAKE_CURRENT_SOURCE_DIR} ${link_dir})
+        list(APPEND platform_link_dirs ${CMAKE_CURRENT_BINARY_DIR}/${link_dir})
+      endif()
+    endforeach()
+
     # Add optional platform artifact directory.
     if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${name}/)
       add_subdirectory(${name})
@@ -126,7 +153,7 @@ function(llvm_mos_sdk_add_platform name)
     if(MOS)
       # link_directories() cannot be used here because it is not scoped.
       set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY
-        LINK_DIRECTORIES ${CMAKE_CURRENT_BINARY_DIR}/${name}/lib)
+        LINK_DIRECTORIES "${platform_link_dirs}")
     endif()
 
     # For llvm_mos_sdk_add_example_executable to ensure it is in the correct scope.
@@ -161,7 +188,9 @@ function(llvm_mos_sdk_add_example_executable name)
     add_executable(${target_name} ${ARGN})
     get_property(dependencies GLOBAL PROPERTY LLVM_MOS_CURRENT_PLATFORM_TARGETS)
     add_dependencies(${target_name} ${dependencies})
-    set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${dependencies}")
+    set_target_properties(${target_name} PROPERTIES LINK_DEPENDS
+      "${dependencies};${LLVM_MOS_CURRENT_PLATFORM_LDSCRIPT_FILES}")
+    _target_depend_config_files(${target_name})
   elseif(LLVM_MOS_CURRENT_PLATFORM STREQUAL sim)
     # Create simulator "run" target.
     file(RELATIVE_PATH bin_rel_path ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/${target_name})

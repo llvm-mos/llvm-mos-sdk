@@ -1,4 +1,4 @@
 llvm_mos_sdk_add_example_executable(hello-putchar hello-putchar.c)
 llvm_mos_sdk_add_example_executable(hello-printf hello-printf.c)
-llvm_mos_sdk_add_example_executable(hello_malloc hello_malloc.c)
-llvm_mos_sdk_add_example_executable(hello_new hello_new.cc)
+llvm_mos_sdk_add_example_executable(hello-malloc hello-malloc.c)
+llvm_mos_sdk_add_example_executable(hello-new hello-new.cc)

@@ -25,6 +25,23 @@ struct block {
 
 static_assert(sizeof(block) == sizeof(std::size_t), "!!!");
 
+
+// This is a first fit free list allocator.
+// It is initialized with a single element; and only increases in size if the heap
+// becomes fragmented.  So; even though it's operations are linear with respect
+// to the number of "holes" made in the heap through fragmentation.  
+
+// This allocator is suitable for 8-bit systems with 16-bit, 64kbyte address spaces.  In that
+// scenario the worst case scenario would be the maximum amount of allcations where each allocation
+// is the smallest allocation, which is 2 bytes.
+// The maximum number of allocations is 64kbyte / 8 bytes = 8 k allocs:  
+//   6 bytes per block + 2 byte minimum allocation.
+// In order to have holes, each allocation would have to be separated from an adjacent
+// allocation by some free memory.  So the maximum number of holes is half the maximum 
+// number of allocs: 8k / 2 = 4k.
+// In that scenario; randomly freeing or allocing, there would be, at most, 4096 entries to traverse.
+
+
 // A doubly-linked list of blocks of memory.
 // The next node pointer, the previous node pointer, and the size of the block
 // are stored at the beginning of the block.
@@ -144,6 +161,8 @@ public:
     return freeblock->data();
   }
 
+  // Traverse the free block list to find the first one big enough to handle 
+  // the requested allocation.  This is O(n) terms of free blocks.
   block *find_first_fit(std::size_t sz) {
     for (auto &block : *this) {
       if (block.m_size >= (sz + sizeof(block_node))) {
@@ -154,6 +173,10 @@ public:
     return nullptr;
   }
 
+  // Free a block by re-inserting it in the free list.
+  // Freeing blocks is O(n) in terms of number of free segments that have to be traversed
+  // to find the place in the free list to restore the block.  In cases of low fragmentation,
+  // the size of this list will be low.
   void free_block(block *const block) {
     block_node *last_block_node = nullptr;
     for (auto &free_blk : *this) {
@@ -188,7 +211,11 @@ public:
     m_used -= block->m_size;
   }
 
-  void coallesce_blocks() {
+  // Run a linear scan through the free list to find adjacent free blocks,
+  // and join adjacent blocks.  This is linear in terms of the number of
+  // blocks. Coallescing is run after every free_block operation in order
+  // to keep the size of the free list small.
+  void coalesce_blocks() {
     block *last_block = nullptr;
 
     for (auto &block : *this) {
@@ -274,6 +301,11 @@ void run_new_handler() {
 }
 } // namespace
 
+// Heap limit is set to SIZE_MAX at initialization to indicate that
+// the size limit has not been set.  If, at the time the heap is initialized,
+// the m_heap_limit is still SIZE_MAX, the m_heap_limit will be reset to
+// the default limit value.  If the m_heap_limit is not SIZE_MAX when the
+// heap is intialized, the user-requsted limit is used.
 std::size_t blocklist::m_heap_limit = SIZE_MAX;
 
 extern "C" {
@@ -292,7 +324,7 @@ __attribute__((weak)) void free(void *ptr) {
 
   auto &free_list = get_free_list();
   free_list.free_block(block::get_block(static_cast<std::byte *>(ptr)));
-  free_list.coallesce_blocks();
+  free_list.coalesce_blocks();
 }
 
 }
@@ -399,7 +431,7 @@ void __set_heap_limit(size_t new_size) {
                                   ? blocklist::MIN_ALLOC_SIZE
                                   : new_size;
   } else {
-    // heap is initialized.
+    // Heap is initialized.
     get_free_list().set_new_limit(new_size);
   }
 }

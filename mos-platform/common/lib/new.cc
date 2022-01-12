@@ -12,13 +12,13 @@ namespace {
 struct block {
   block(std::size_t size) : m_size{size} {}
 
-  static block *get_block(std::byte *data) noexcept {
+  static block *get_block(std::byte *data) {
     return reinterpret_cast<block *>(data - sizeof(m_size));
   }
 
   std::size_t m_size;
 
-  std::byte *data() noexcept { return static_cast<std::byte *>(m_data); }
+  std::byte *data() { return static_cast<std::byte *>(m_data); }
 
   std::byte m_data[];
 };
@@ -60,20 +60,20 @@ public:
   struct iterator {
   public:
     iterator() = default;
-    iterator(block_node *ptr) noexcept : m_ptr{ptr} {}
+    iterator(block_node *ptr) : m_ptr{ptr} {}
 
-    block &operator*() const noexcept { return m_ptr->m_block; }
+    block &operator*() const { return m_ptr->m_block; }
 
-    iterator &operator++() noexcept {
+    iterator &operator++() {
       m_ptr = static_cast<block_node *>(m_ptr->m_next);
       return *this;
     }
 
-    bool operator==(const iterator &rhs) const noexcept {
+    bool operator==(const iterator &rhs) const {
       return m_ptr == rhs.m_ptr;
     }
 
-    bool operator!=(const iterator &rhs) const noexcept {
+    bool operator!=(const iterator &rhs) const {
       return !this->operator==(rhs);
     }
 
@@ -91,7 +91,7 @@ public:
   static_assert(sizeof(block_node) == sizeof(list_node) + sizeof(std::size_t),
                 "unexpected padding");
 
-  std::byte *split_block(block *freeblock, std::size_t size) noexcept {
+  std::byte *split_block(block *freeblock, std::size_t size) {
     if (!freeblock) {
       return nullptr;
     }
@@ -144,7 +144,7 @@ public:
     return freeblock->data();
   }
 
-  block *find_first_fit(std::size_t sz) noexcept {
+  block *find_first_fit(std::size_t sz) {
     for (auto &block : *this) {
       if (block.m_size >= (sz + sizeof(block_node))) {
         return &block;
@@ -154,7 +154,7 @@ public:
     return nullptr;
   }
 
-  void free_block(block *const block) noexcept {
+  void free_block(block *const block) {
     block_node *last_block_node = nullptr;
     for (auto &free_blk : *this) {
       if (&free_blk > block) {
@@ -188,7 +188,7 @@ public:
     m_used -= block->m_size;
   }
 
-  void coallesce_blocks() noexcept {
+  void coallesce_blocks() {
     block *last_block = nullptr;
 
     for (auto &block : *this) {
@@ -255,7 +255,7 @@ public:
   std::size_t m_used = 0;
 };
 
-blocklist &get_free_list() noexcept {
+blocklist &get_free_list() {
   static blocklist free_list;
   return free_list;
 }

@@ -6,4 +6,9 @@ llvm_mos_sdk_install(FILES
   stdio.h
   stdlib.h
   string.h
-  init_stack.S)
+  init_stack.S
+  new
+  cstddef
+  cstdint
+  type_traits
+  )

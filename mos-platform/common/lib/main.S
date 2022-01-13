@@ -20,6 +20,6 @@ __exit:
    LDX mos8(__rc2)
    RTS
 
-.section .noinit
+.section .noinit,"aw"
 __save_s:
     .byte 00

@@ -64,6 +64,9 @@ function(llvm_mos_sdk_add_c)
       mem.c
       string.c
 
+      # exception
+      exception.cc
+
     PLATFORM_SOURCES
       ${ARGN}
   )

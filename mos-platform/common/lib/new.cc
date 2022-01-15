@@ -1,5 +1,6 @@
 #include <cstdint>
 #include <new>
+#include <exception>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -294,9 +295,9 @@ void run_new_handler() {
   } else {
     // Standard c++ requires throwing bad_alloc here.
     // TODO: implement throw.
-    // Calling abort() here behaves similarly to a caller that
+    // Calling terminate here behaves similarly to a caller that
     // does not catch bad_alloc, and therefore has an unhandled exception.
-    abort();
+    std::terminate();
   }
 }
 } // namespace

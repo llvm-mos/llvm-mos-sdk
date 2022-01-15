@@ -259,7 +259,7 @@ public:
 
 private:
   // Nodes are added at the end of the list.
-  auto add_node(block_node *node) {
+  block_node * add_node(block_node *node) {
     list_node *node_last = m_head;
     for (; node_last->m_next; node_last = node_last->m_next) {
     }
@@ -293,18 +293,6 @@ blocklist &get_free_list() {
   return free_list;
 }
 
-void run_new_handler() {
-  const auto newp = std::get_new_handler();
-  if (newp) {
-    newp();
-  } else {
-    // Standard c++ requires throwing bad_alloc here.
-    // TODO: implement throw.
-    // Calling terminate here behaves similarly to a caller that
-    // does not catch bad_alloc, and therefore has an unhandled exception.
-    std::terminate();
-  }
-}
 } // namespace
 
 // Heap limit is set to SIZE_MAX at initialization to indicate that
@@ -335,11 +323,6 @@ __attribute__((weak)) void free(void *ptr) {
 
 }
 
-// All operator new implementations forward to this overload.
-// This is slightly against the standard, which states that the nothrow overloads
-// forward to the throwing overloads. We do not implement it this
-// way because such an implementation would require the nothrow overloads to
-// catch bad_alloc thrown by the throwing overload.  
 __attribute__((weak)) void *operator new(std::size_t count,
                                          const std::nothrow_t &) noexcept {
   // The allocating new functions must allow any user-installed

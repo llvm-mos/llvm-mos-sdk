@@ -17,13 +17,31 @@ new_handler set_new_handler(new_handler new_p) noexcept;
 
 } // namespace std
 
+/**
+The standard forms of the new are implicitly declared by the compiler, 
+and are automatically declared in every translation unit.  
+These are provided here for exposition.  The user may provide their
+own definitions of these functions to override their behavior.
+
 void *operator new(std::size_t size);
 void *operator new[](std::size_t size);
+
+Likewise, for the the default implementation of delete:
+void operator delete(void *ptr) noexcept;
+void operator delete[](void *ptr) noexcept
+*/
+
+// All default implementations of all allocating overloads of operator new forward 
+// to this overload.
+// This is slightly against the standard, which states that the nothrow overloads
+// forward to the throwing overloads. We do not implement it this
+// way because such an implementation would require the nothrow overloads to
+// catch bad_alloc thrown by the throwing overload.  
 void *operator new(std::size_t count, const std::nothrow_t &tag) noexcept;
+
 void *operator new[](std::size_t count, const std::nothrow_t &tag) noexcept;
+
 void *operator new(std::size_t count, void *ptr);
 void *operator new[](std::size_t count, void *ptr);
-void operator delete(void *ptr) noexcept;
-void operator delete[](void *ptr) noexcept;
 
 #endif //__NEW_H__

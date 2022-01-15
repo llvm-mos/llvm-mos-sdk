@@ -11,4 +11,5 @@ llvm_mos_sdk_install(FILES
   cstddef
   cstdint
   type_traits
+  exception
   )

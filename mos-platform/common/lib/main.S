@@ -8,7 +8,7 @@
 __main:
     TSX
     STX __save_s
-    JMP main
+    JMP __init_main
 
 ; Restore hardware stack register to value saved in __main and 'longjmp' to
 ; __main caller

@@ -16,4 +16,12 @@ void *calloc(size_t num, size_t size) {
   __memset(static_cast<char *>(block), 0, sz);
   return block;
 }
+
+// From cxx_abi.
+int __cxa_atexit(void (*function)(void *), void * data, void * dso);
+
+int atexit(void (*function)(void)) {
+  return __cxa_atexit(reinterpret_cast<void (*)(void *)>(function), nullptr, nullptr);
+}
+
 }

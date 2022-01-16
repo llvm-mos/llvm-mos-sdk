@@ -20,6 +20,8 @@ long long llabs(long long i);
 
 void abort(void);
 
+int atexit(void (*function)(void));
+
 /**
 Simple malloc/free implementation.
 

@@ -67,6 +67,11 @@ function(llvm_mos_sdk_add_c)
       # exception
       exception.cc
 
+      # Itanium ABI implementation
+      cxa_abi.cc
+
+      init.c
+
     PLATFORM_SOURCES
       ${ARGN}
   )

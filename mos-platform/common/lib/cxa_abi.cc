@@ -38,16 +38,16 @@ using FinalizerPtr = void (*)();
 static void NoOpFinalize() {}
 
 // Function pointers in .fini_array are invoked from _fini.
-__attribute__((retain, section(".fini_array"))) FinalizerPtr CxaFinalizer = NoOpFinalize;
+static __attribute__((retain, section(".fini_array"))) FinalizerPtr CxaFinalizer = NoOpFinalize;
 
 namespace {
 
-struct ExitFn {
-    void (*m_f)(void *);
-    void * p;
+struct ExitFunctionStorage {
+    void (*m_functionptr)(void *);
+    void * m_userdata;
 
     void operator()() const {
-        m_f(p);
+        m_functionptr(m_userdata);
     }
 };
 
@@ -58,19 +58,19 @@ struct ExitFn {
 class RegistrationList {
 private:
 
-    // FnBlock is an array of function pointers and their arguments
+    // FnBlock is an array of function pointers and their arguments.
     // The logical "front" of the block is the last item appended to 
     // the array.
     struct FnBlock {
         static constexpr std::uint8_t BLOCK_SZ = 32;
 
-        ExitFn m_funcs[BLOCK_SZ];
+        ExitFunctionStorage m_funcs[BLOCK_SZ];
         std::uint8_t m_sz;
 
         bool full() const { return m_sz == BLOCK_SZ; }
 
-        void push_front(const ExitFn &newfn) {
-            m_funcs[m_sz++] = newfn;
+        void push_front(const ExitFunctionStorage &newfn) {
+          m_funcs[m_sz++] = newfn;
         }
 
         void run_all() {
@@ -88,7 +88,7 @@ private:
     };
 
 public:
-    static bool push_front(const ExitFn & new_exit) {
+    static bool push_front(const ExitFunctionStorage & new_exit) {
 
         auto & current_block = *m_list;
 
@@ -116,7 +116,7 @@ public:
 
             const auto current_node_ptr = static_cast<FnNode *>(m_list);
             const auto next_block = current_node_ptr->m_next;
-            delete current_node_ptr;
+            // current_node_ptr is leaked here. We are shutting down.
             m_list = next_block;
         }
 
@@ -141,7 +141,7 @@ RegistrationList::FnBlock * RegistrationList::m_list = &m_tail;
 // is invoked from __fini which is called from exit();
 static void __finalize_noargs() { RegistrationList::run_all_exits(); }
 
-// atexit / finalize are implemented under the assumptin that there is only a single 
+// atexit / finalize are implemented under the assumption that there is only a single 
 // loaded binary, with no dynamic loading.  Therefore; the mechanism for holding a DSO
 // handle (the third parameter to _cxa_atexit), is ignored.  
 extern "C" int __cxa_atexit(void (*f)(void *), void *p, void * /* dso_handle */) {
@@ -151,7 +151,7 @@ extern "C" int __cxa_atexit(void (*f)(void *), void *p, void * /* dso_handle */)
     // of having the __atexit mechanism.  
     CxaFinalizer = __finalize_noargs;
 
-    // Return values equal to C/C++ at_exit() return value. 
-    return RegistrationList::push_front(ExitFn{f, p}) ? 0 : -1;
+    // Return values equal to C/C++ at_exit() return value.
+    return RegistrationList::push_front(ExitFunctionStorage{f, p}) ? 0 : -1;
 }
 

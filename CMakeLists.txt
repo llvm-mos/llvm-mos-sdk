@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.15)
 
 # MinSizeRel is the preferred default for building the SDK.
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -72,6 +72,10 @@ if(NOT MOS)
     INSTALL_COMMAND ""
     BUILD_ALWAYS On
     USES_TERMINAL_BUILD On)
+
+  # Clean the mos-build directory with the host project.
+  set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY
+    ADDITIONAL_CLEAN_FILES "${CMAKE_BINARY_DIR}/mos-build")
 
   # Have the host project trigger the mos installation.
   # ExternalProject wants to install even if we're just building.

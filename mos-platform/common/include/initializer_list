@@ -1,0 +1,48 @@
+#ifndef __INITIALIZER_LIST__
+#define __INITIALIZER_LIST__
+
+#include <cstddef>
+
+namespace std {
+
+template <class E> class initializer_list {
+public:
+  using value_type = E;
+  using reference = const E &;
+  using const_reference = const E &;
+  using size_type = size_t;
+
+  using iterator = const E *;
+  using const_iterator = const E *;
+
+  constexpr initializer_list() noexcept = default;
+
+  constexpr size_t size() const noexcept { return m_size; }    // number of elements
+  constexpr const E *begin() const noexcept { return m_data; } // first element
+  constexpr const E *end() const noexcept { return m_data+m_size; }   // one past the last element
+
+private:
+
+  // This constructor is not required by Clang, but some IDE's expect
+  // it to exist, and generate warnings if it does not.
+  constexpr initializer_list(const E *data, size_t sz) noexcept
+      : m_data{data}, m_size{sz} {}
+
+  // Clang++ directly initializes these fields when instantiating an
+  // initializer_list.
+  const E *const m_data = nullptr;
+  size_t m_size = 0;
+};
+
+// initializer list range access
+template <class E> constexpr const E *begin(initializer_list<E> il) noexcept {
+  return il.begin();
+}
+
+template <class E> constexpr const E *end(initializer_list<E> il) noexcept {
+  return il.end();
+}
+
+}
+
+#endif // __INITIALIZER_LIST__

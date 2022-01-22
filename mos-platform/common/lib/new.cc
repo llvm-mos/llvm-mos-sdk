@@ -3,6 +3,7 @@
 #include <exception>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 extern std::byte __heap_start;
 
@@ -174,6 +175,40 @@ public:
     return nullptr;
   }
 
+  // Traverse the free block list to find the free block after the given block.
+  // If the block is
+  // 1. directly following the given block
+  // 2. large enough to hold the given size request
+  // then the the block is returned.
+  block *find_adjacent_fit(block *base_blk_ptr, std::size_t sz) {
+
+    const auto adjacent_ptr =
+        static_cast<void *>(base_blk_ptr->data() + base_blk_ptr->m_size);
+
+    for (auto &free_blk : *this) {
+      const auto free_node_ptr = block_node::get_node(free_blk);
+      if (block_node::get_node(free_blk) == adjacent_ptr) {
+        // Adjacent block is free.
+        // See if there is enough space free to realloc. We do not need
+        // to account for creating another block, since the free_blk m_size
+        // member already excludes the bytes for the free block node, and that block
+        // node will just get moved further into the free block.
+        if (free_blk.m_size >= sz) {
+          // Adjacent block is free and large enough.
+          return &free_blk;
+        } else {
+          // Adjacent block is not large enough.
+          return nullptr;
+        }
+      } else if (&free_blk > adjacent_ptr) {
+        // Adjacent block not found in free list.  Early exit.
+        return nullptr;
+      }
+      // Continue to next block.
+    }
+    return nullptr;
+  }
+
   // Free a block by re-inserting it in the free list.
   // Freeing blocks is O(n) in terms of number of free segments that have to be traversed
   // to find the place in the free list to restore the block.  In cases of low fragmentation,
@@ -257,6 +292,13 @@ public:
     }
   }
 
+  void merge_adjacent_allocated(block & left, block & right) {
+    // Merging two allocations makes the left allocation larger
+    // by the size of the right allocation, plus the size of the right
+    // allocations node.
+    left.m_size += (right.m_size + sizeof(block_node));
+  }
+
 private:
   // Nodes are added at the end of the list.
   block_node * add_node(block_node *node) {
@@ -293,6 +335,20 @@ blocklist &get_free_list() {
   return free_list;
 }
 
+// Implement a reallocation by allocating a new region and copying
+// old data to new.
+void * realloc_copy(void * orig, size_t sz) {
+  const auto new_alloc = malloc(sz);
+  if (new_alloc) {
+    const auto orig_sz = block::get_block(static_cast<std::byte *>(orig))->m_size;
+    memmove(new_alloc, orig, sz < orig_sz ? sz : orig_sz);
+    free(orig);
+    return new_alloc;
+  }
+  
+  return nullptr; 
+}
+
 } // namespace
 
 // Heap limit is set to SIZE_MAX at initialization to indicate that
@@ -309,6 +365,35 @@ extern "C" {
 __attribute__((weak)) void *malloc(size_t count) {
   auto &free_list = get_free_list();
   return free_list.split_block(free_list.find_first_fit(count), count);
+}
+
+__attribute__((weak)) void *realloc(void *orig, size_t count) {
+  if (!orig) {
+    return malloc(count);
+  }
+
+  const auto orig_block_ptr = block::get_block(static_cast<std::byte *>(orig));
+  if (count > orig_block_ptr->m_size) {
+    auto &free_list = get_free_list();
+    const auto grow_sz = count - orig_block_ptr->m_size;
+
+    // Find the adjacent block, and if found split it.
+    const auto adjacent_block =
+        free_list.find_adjacent_fit(orig_block_ptr, grow_sz);
+    if (adjacent_block) {
+      free_list.merge_adjacent_allocated(
+          *orig_block_ptr,
+          *block::get_block(free_list.split_block(adjacent_block, grow_sz)));
+      return orig;
+    } else {
+      // There was no free space after the current allocation.
+      return realloc_copy(orig, count);
+    }
+  }
+
+  // No reallocation occurs if the requested size isn't increasing. The original
+  // reallocation is returned.
+  return orig;
 }
 
 __attribute__((weak)) void free(void *ptr) {

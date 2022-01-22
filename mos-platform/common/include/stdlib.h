@@ -82,6 +82,7 @@ Typical memory map, for a target that loads programs into RAM:
 void *malloc(size_t size);
 void free(void *ptr);
 void *calloc(size_t num, size_t size);
+void *realloc(void *ptr, size_t size);
 
 /* The maximum heap size can be limited in the following ways:
 1. If no heap allocation has been made yet, the heap limit can be set to any

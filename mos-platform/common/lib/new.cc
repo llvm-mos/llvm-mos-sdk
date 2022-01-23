@@ -337,16 +337,15 @@ blocklist &get_free_list() {
 
 // Implement a reallocation by allocating a new region and copying
 // old data to new.
-void * realloc_copy(void * orig, size_t sz) {
+void *realloc_copy(void *orig, size_t sz) {
   const auto new_alloc = malloc(sz);
-  if (new_alloc) {
-    const auto orig_sz = block::get_block(static_cast<std::byte *>(orig))->m_size;
-    memmove(new_alloc, orig, sz < orig_sz ? sz : orig_sz);
-    free(orig);
-    return new_alloc;
-  }
-  
-  return nullptr; 
+  if (!new_alloc)
+    return nullptr;
+
+  const auto orig_sz = block::get_block(static_cast<std::byte *>(orig))->m_size;
+  memmove(new_alloc, orig, sz < orig_sz ? sz : orig_sz);
+  free(orig);
+  return new_alloc;
 }
 
 } // namespace
@@ -373,26 +372,26 @@ __attribute__((weak)) void *realloc(void *orig, size_t count) {
   }
 
   const auto orig_block_ptr = block::get_block(static_cast<std::byte *>(orig));
-  if (count > orig_block_ptr->m_size) {
-    auto &free_list = get_free_list();
-    const auto grow_sz = count - orig_block_ptr->m_size;
-
-    // Find the adjacent block, and if found split it.
-    const auto adjacent_block =
-        free_list.find_adjacent_fit(orig_block_ptr, grow_sz);
-    if (adjacent_block) {
-      free_list.merge_adjacent_allocated(
-          *orig_block_ptr,
-          *block::get_block(free_list.split_block(adjacent_block, grow_sz)));
-      return orig;
-    } else {
-      // There was no free space after the current allocation.
-      return realloc_copy(orig, count);
-    }
+  if (count <= orig_block_ptr->m_size) {
+    // No reallocation occurs if the requested size isn't increasing. The
+    // original allocation is returned.
+    return orig;
   }
 
-  // No reallocation occurs if the requested size isn't increasing. The original
-  // reallocation is returned.
+  auto &free_list = get_free_list();
+  const auto grow_sz = count - orig_block_ptr->m_size;
+
+  // Find the adjacent block, and if found split it.
+  const auto adjacent_block =
+      free_list.find_adjacent_fit(orig_block_ptr, grow_sz);
+  if (!adjacent_block) {
+    // There was no free space after the current allocation.
+    return realloc_copy(orig, count);
+  }
+
+  free_list.merge_adjacent_allocated(
+      *orig_block_ptr,
+      *block::get_block(free_list.split_block(adjacent_block, grow_sz)));
   return orig;
 }
 

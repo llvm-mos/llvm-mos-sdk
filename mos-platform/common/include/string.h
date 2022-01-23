@@ -6,9 +6,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#define __RESTRICT
-#else
-#define __RESTRICT restrict
 #endif
 
 void *memchr(const void *s, int c, size_t n);
@@ -21,11 +18,11 @@ char *strchr(const char *s, int c);
 
 int strcmp(const char *s1, const char *s2);
 
-char *strcpy(char * __RESTRICT s1, const char * __RESTRICT s2);
+char *strcpy(char * __restrict__ s1, const char * __restrict__ s2);
 
 size_t strlen(const char *s);
 int strncmp(const char *s1, const char *s2, size_t n);
-char *strncpy(char * __RESTRICT s1, const char * __RESTRICT s2, size_t n);
+char *strncpy(char * __restrict__ s1, const char * __restrict__ s2, size_t n);
 
 char *strrchr(const char *s, int c);
 

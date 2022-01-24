@@ -1,0 +1,24 @@
+#ifndef __TYPEINFO__
+#define __TYPEINFO__
+
+namespace std {
+class type_info {
+public:
+  virtual ~type_info() noexcept;
+  
+  bool operator==(const type_info &rhs) const noexcept;
+  bool operator!=(const type_info &rhs) const noexcept;
+  bool before(const type_info &) const noexcept;
+  const char *name() const noexcept;
+
+private:
+  type_info(const type_info &rhs) = delete;
+  type_info() = delete;
+  type_info &operator=(const type_info &rhs) = delete;
+
+  const char *const __type_name;
+};
+
+} // namespace std
+
+#endif // __TYPEINFO__

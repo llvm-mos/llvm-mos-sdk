@@ -1,5 +1,9 @@
 #include <cstdint>
 #include <new>
+#include <stdio.h>
+#include <stdlib.h>
+#include <typeinfo>
+#include <exception>
 
 /** Trivial implementation of __cxa_guard_acquire and __cxa_guard_release
  *  as described in the c++ Itanium ABI.
@@ -154,3 +158,54 @@ extern "C" int __cxa_atexit(void (*f)(void *), void *p, void * /* dso_handle */)
     // Return values equal to C/C++ at_exit() return value.
     return RegistrationList::push_front(ExitFunctionStorage{f, p}) ? 0 : -1;
 }
+
+extern "C" void __cxa_pure_virtual() {
+  puts("PURE VIRTUAL FUNCTION CALLED");
+  std::terminate();
+}
+
+extern "C" void __cxa_deleted_virtual() {
+  puts("DELETED VIRTUAL FUNCTION CALLED");
+  std::terminate();
+}
+
+namespace std {
+type_info::~type_info() noexcept = default;
+
+// "It is intended that two type_info pointers point to equivalent type
+// descriptions if and only if the pointers are equal."
+// Itanium ABI 2.9
+bool type_info::operator==(const type_info &rhs) const noexcept {
+  return this == &rhs;
+}
+
+bool type_info::operator!=(const type_info &rhs) const noexcept {
+  return !operator==(rhs);
+}
+
+bool type_info::before(const type_info &rhs) const noexcept {
+  // Define ordering by order in memory. Assume all type_info instances
+  // are placed in a single, flat address space.
+  return this < &rhs;
+}
+
+const char *type_info::name() const noexcept { return __type_name; }
+
+} // namespace std
+
+namespace __cxxabiv1 {
+class __class_type_info : public std::type_info {
+protected:
+  ~__class_type_info() noexcept;
+};
+
+__class_type_info::~__class_type_info() noexcept = default;
+
+class __si_class_type_info final : public __class_type_info {
+  ~__si_class_type_info() noexcept;
+  const __class_type_info *__base_type;
+};
+
+__si_class_type_info::~__si_class_type_info() noexcept = default;
+
+} // namespace __cxxabiv1

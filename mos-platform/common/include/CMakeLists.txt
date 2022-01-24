@@ -13,4 +13,5 @@ llvm_mos_sdk_install(FILES
   type_traits
   exception
   initializer_list
+  typeinfo
   )

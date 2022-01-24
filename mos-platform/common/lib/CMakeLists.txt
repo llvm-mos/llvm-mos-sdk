@@ -12,7 +12,9 @@ function(_add_common_target name)
   # TODO: When CMake 3.17 is more widespread, this hard-coded path can be
   # replaced with CMAKE_CURRENT_FUNCTION_LIST_DIR.
   set(source_dir ${CMAKE_SOURCE_DIR}/mos-platform/common/lib)
-  list(REMOVE_ITEM ARG_COMMON_SOURCES ${ARG_EXCLUDE_COMMON_SOURCES})
+  if(${ARG_EXCLUDE_COMMON_SOURCES})
+    list(REMOVE_ITEM ARG_COMMON_SOURCES ${ARG_EXCLUDE_COMMON_SOURCES})
+  endif()
   list(TRANSFORM ARG_COMMON_SOURCES PREPEND ${source_dir}/)
   add_library(${target_name} STATIC ${ARG_COMMON_SOURCES} ${ARG_PLATFORM_SOURCES})
   set_target_properties(${target_name} PROPERTIES OUTPUT_NAME ${name})

@@ -29,6 +29,6 @@ int main() {
     ::atexit(C_AtExit);
 
     puts("LEAVING MAIN");
-    
+
     return 40;
 }

@@ -36,47 +36,47 @@ software-defined stack.
 
 Typical memory map, for a target that loads programs into RAM:
 
-                                                                                      
-                                                                                      
-                                         ┌─────────────────────────────────┐       
-                                         │Reserved or otherwise unavailable│       
-0xFFFF┌────────────────────────────┐  ┌──│     memory. Ex: ROM or I/O      │       
-      │                            │◀─┘  └─────────────────────────────────┘       
-      │                            │                                               
-      ├────────────────────────────┤◀┐                                             
-      │               │            │ │  ┌───────────────────────────────────────┐  
-      │     Stack     │            │ │  │Stack base.  As stack usage grows, more│  
-      │               │            │ └──│memory below this address is utilized. │  
-      │               ▼            │    └───────────────────────────────────────┘  
-      │                            │                                               
+
+
+                                         ┌─────────────────────────────────┐
+                                         │Reserved or otherwise unavailable│
+0xFFFF┌────────────────────────────┐  ┌──│     memory. Ex: ROM or I/O      │
+      │                            │◀─┘  └─────────────────────────────────┘
+      │                            │
+      ├────────────────────────────┤◀┐
+      │               │            │ │  ┌───────────────────────────────────────┐
+      │     Stack     │            │ │  │Stack base.  As stack usage grows, more│
+      │               │            │ └──│memory below this address is utilized. │
+      │               ▼            │    └───────────────────────────────────────┘
+      │                            │
       ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│◀─┐  ┌────────────────────────────────────────┐
       │                            │  │  │Actual lower limit for stack depends on │
       │                            │  │  │how much stack space your code actually │
       │                            │  └──│needs.  Generally it can't be determined│
       │                            │     │             ahead of time.             │
       │                            │     └────────────────────────────────────────┘
-      ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│◀┐                                             
-      │                            │ │                                             
-      │                            │ │                                             
-      │                            │ │                                             
-      │                            │ │  ┌───────────────────────────────────────┐  
-      │                            │ │  │Heap limit.  You can set this from     │  
-      │            ▲               │ └──│within your program.                   │  
-      │     Heap   │               │    └───────────────────────────────────────┘  
-      │            │               │                                               
-      ├────────────────────────────┤◀┐                                             
-      │                            │ │  ┌───────────────────────────────────────┐  
-      │   Your program is loaded   │ │  │   Heap base pointer.  It's location   │  
-      │           here.            │ │  │depends on how big your program is and │  
-      │                            │ └──│how much memory it allocated in global │  
-      ├────────────────────────────┤    │         and static variables.         │  
-      │                            │    └───────────────────────────────────────┘  
-      │   Reserved lower memory:   │                                               
-      │         zero-page,         │                                               
-      │    hardware stack, etc.    │                                               
-      │                            │                                               
-      │                            │                                               
-0x0000└────────────────────────────┘                                               
+      ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│◀┐
+      │                            │ │
+      │                            │ │
+      │                            │ │
+      │                            │ │  ┌───────────────────────────────────────┐
+      │                            │ │  │Heap limit.  You can set this from     │
+      │            ▲               │ └──│within your program.                   │
+      │     Heap   │               │    └───────────────────────────────────────┘
+      │            │               │
+      ├────────────────────────────┤◀┐
+      │                            │ │  ┌───────────────────────────────────────┐
+      │   Your program is loaded   │ │  │   Heap base pointer.  It's location   │
+      │           here.            │ │  │depends on how big your program is and │
+      │                            │ └──│how much memory it allocated in global │
+      ├────────────────────────────┤    │         and static variables.         │
+      │                            │    └───────────────────────────────────────┘
+      │   Reserved lower memory:   │
+      │         zero-page,         │
+      │    hardware stack, etc.    │
+      │                            │
+      │                            │
+0x0000└────────────────────────────┘
 */
 
 void *malloc(size_t size);

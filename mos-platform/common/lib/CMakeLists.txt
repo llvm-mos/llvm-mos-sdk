@@ -38,8 +38,27 @@ function(llvm_mos_sdk_add_crt)
       mul.cc
       shift.cc
 
+      init.c
+      fini.c
+
     PLATFORM_SOURCES
       ${ARGN}
+  )
+
+  # TODO: When CMake 3.17 is more widespread, this hard-coded path can be
+  # replaced with CMAKE_CURRENT_FUNCTION_LIST_DIR.
+  set(source_dir ${CMAKE_SOURCE_DIR}/mos-platform/common/lib)
+
+  # _init and _fini use weak linking and an assembler trick to only get pulled
+  # in to the binary if the .init_array and .fini_array sections are actually
+  # used. This is intrinsically incompatible with LTO, which would try to
+  # preemptively add these symbols to the link to optimize them together with
+  # the program.
+  set_property(
+    SOURCE
+      ${source_dir}/init.c
+      ${source_dir}/fini.c
+    PROPERTY COMPILE_FLAGS -fno-lto
   )
 endfunction()
 
@@ -76,7 +95,7 @@ function(llvm_mos_sdk_add_c)
       cxa_abi.cc
       cxa_atexit.cc
 
-      init.c
+      init_main.c
 
     PLATFORM_SOURCES
       ${ARGN}

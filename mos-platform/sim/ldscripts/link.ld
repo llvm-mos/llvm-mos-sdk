@@ -12,7 +12,7 @@ SECTIONS {
     }
 
     __load_begin = .;
-    .text : { *(.start) *(.text .text.*) }
+    .text : { *(.text .text.*) }
 
     /* .init_array is a sorted list of initialization function pointers.
         Clang registers global constructor calls as function pointers in .init_array */

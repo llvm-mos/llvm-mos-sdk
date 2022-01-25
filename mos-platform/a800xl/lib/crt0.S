@@ -1,4 +1,4 @@
-.section .start,"ax",@progbits
+.text
 .global _start
 _start:
     ; Initialize soft stack pointer to MEMTOP

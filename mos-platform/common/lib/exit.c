@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-__attribute__((noreturn)) void __exit(int status);
+__attribute__((noreturn)) void _exit(int status);
 void _fini();
 
 void exit(int status) {
   _fini();
-  __exit(status);
+  _exit(status);
 }

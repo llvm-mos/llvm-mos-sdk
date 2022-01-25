@@ -7,11 +7,11 @@ OUTPUT_FORMAT(binary)
 
 SECTIONS {
     .load_block_header 0x200 - 4 : {
-        SHORT(__load_begin)
-        SHORT(__load_end - __load_begin)
+        SHORT(__load_start)
+        SHORT(__load_end - __load_start)
     }
 
-    __load_begin = .;
+    __load_start = .;
     INCLUDE ro_sections.ld
     INCLUDE rw_sections.ld
     __load_end = .;

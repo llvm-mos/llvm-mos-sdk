@@ -1,4 +1,4 @@
-__bss_begin = .;
+__bss_start = .;
 .bss (NOLOAD) : { *(.bss .bss.* COMMON) }
 __bss_end = .;
 .noinit (NOLOAD) : { *(.noinit .noinit.*) }

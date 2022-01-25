@@ -74,6 +74,7 @@ function(llvm_mos_sdk_add_c)
 
       # Itanium ABI implementation
       cxa_abi.cc
+      cxa_atexit.cc
 
       init.c
 

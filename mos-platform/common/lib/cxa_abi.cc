@@ -138,7 +138,7 @@ RegistrationList::FnBlock * RegistrationList::m_list = &m_tail;
 }
 
 // Currently the compiler does not generate any calls to this __cxa_finalize.  Finalization
-// is invoked from __fini which is called from exit();
+// is invoked from _fini which is called from exit();
 static void __finalize_noargs() { RegistrationList::run_all_exits(); }
 
 // atexit / finalize are implemented under the assumption that there is only a single 

@@ -59,7 +59,7 @@ class RegistrationList {
 private:
 
     // FnBlock is an array of function pointers and their arguments.
-    // The logical "front" of the block is the last item appended to 
+    // The logical "front" of the block is the last item appended to
     // the array.
     struct FnBlock {
         static constexpr std::uint8_t BLOCK_SZ = 32;
@@ -141,17 +141,16 @@ RegistrationList::FnBlock * RegistrationList::m_list = &m_tail;
 // is invoked from _fini which is called from exit();
 static void __finalize_noargs() { RegistrationList::run_all_exits(); }
 
-// atexit / finalize are implemented under the assumption that there is only a single 
+// atexit / finalize are implemented under the assumption that there is only a single
 // loaded binary, with no dynamic loading.  Therefore; the mechanism for holding a DSO
-// handle (the third parameter to _cxa_atexit), is ignored.  
+// handle (the third parameter to _cxa_atexit), is ignored.
 extern "C" int __cxa_atexit(void (*f)(void *), void *p, void * /* dso_handle */) {
-    // Ensure the CxaFinalizer entry in the finalizer table is pointing to the 
+    // Ensure the CxaFinalizer entry in the finalizer table is pointing to the
     // real finalizer function.  This is done within __cxa_atexit to ensure that
     // only code that actually registers something with __cxa_atexit pays the cost
-    // of having the __atexit mechanism.  
+    // of having the __atexit mechanism.
     CxaFinalizer = __finalize_noargs;
 
     // Return values equal to C/C++ at_exit() return value.
     return RegistrationList::push_front(ExitFunctionStorage{f, p}) ? 0 : -1;
 }
-

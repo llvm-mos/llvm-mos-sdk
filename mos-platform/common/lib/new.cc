@@ -31,15 +31,15 @@ static_assert(sizeof(block) == sizeof(std::size_t), "!!!");
 // This is a first fit free list allocator.
 // It is initialized with a single element; and only increases in size if the heap
 // becomes fragmented.  So; even though it's operations are linear with respect
-// to the number of "holes" made in the heap through fragmentation.  
+// to the number of "holes" made in the heap through fragmentation.
 
 // This allocator is suitable for 8-bit systems with 16-bit, 64kbyte address spaces.  In that
 // scenario the worst case scenario would be the maximum amount of allcations where each allocation
 // is the smallest allocation, which is 2 bytes.
-// The maximum number of allocations is 64kbyte / 8 bytes = 8 k allocs:  
+// The maximum number of allocations is 64kbyte / 8 bytes = 8 k allocs:
 //   6 bytes per block + 2 byte minimum allocation.
 // In order to have holes, each allocation would have to be separated from an adjacent
-// allocation by some free memory.  So the maximum number of holes is half the maximum 
+// allocation by some free memory.  So the maximum number of holes is half the maximum
 // number of allocs: 8k / 2 = 4k.
 // In that scenario; randomly freeing or allocing, there would be, at most, 4096 entries to traverse.
 
@@ -163,7 +163,7 @@ public:
     return freeblock->data();
   }
 
-  // Traverse the free block list to find the first one big enough to handle 
+  // Traverse the free block list to find the first one big enough to handle
   // the requested allocation.  This is O(n) terms of free blocks.
   block *find_first_fit(std::size_t sz) {
     for (auto &block : *this) {
@@ -358,7 +358,7 @@ void *realloc_copy(void *orig, size_t sz) {
 std::size_t blocklist::m_heap_limit = SIZE_MAX;
 
 extern "C" {
-  
+
 // Weakly-defined malloc and free symbols serve as a call gate
 // for default operator new and delete.
 __attribute__((weak)) void *malloc(size_t count) {

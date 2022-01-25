@@ -3,7 +3,7 @@
 __load_begin = .;
 .text : { *(.start) *(.text .text.*) }
 
-/* .init_array is a sorted list of initialization function pointers.  
+/* .init_array is a sorted list of initialization function pointers.
     Clang registers global constructor calls as function pointers in .init_array */
 __init_array_begin = .;
 .init_array : {
@@ -16,7 +16,7 @@ __init_array_end = .;
 .data : { *(.data .data.*) }
 
 /* .fini_array is a sorted list of deinitialization function pointers.
-   The compiler could place function pointers in this array. The equivalent of 
+   The compiler could place function pointers in this array. The equivalent of
    __cxa_finalize has an entry here. For this reason, .fini_array must be writeable. */
 __fini_array_begin = .;
 .fini_array : {

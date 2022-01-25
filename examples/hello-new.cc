@@ -48,7 +48,7 @@ int main() {
 
     // Using the heap limit functionality.  Default heap limit
     // is shown above.
-    
+
     // Use the heap to allocate pointers to some allocations:
     constexpr auto ALLOC_COUNT = 1000;
     const auto vector_of_ptrs = new std::size_t *[ALLOC_COUNT];
@@ -79,7 +79,7 @@ int main() {
     ::set_heap_limit(new_limit);
 
     for (; i < 1000; i += 1) {
-      // use throwing allocations-- these should all succeed since we 
+      // use throwing allocations-- these should all succeed since we
       // increased the size of the heap.
       vector_of_ptrs[i] = new std::size_t{i};
     }

@@ -1,6 +1,6 @@
 #include <init_stack.S>
 
-.section .start,"ax",@progbits
+.text
 .global _start
 _start:
     __init_stack

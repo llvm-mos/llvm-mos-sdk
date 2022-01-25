@@ -14,7 +14,7 @@ SECTIONS {
       /* Segment to be loaded to Run vector. */
       SHORT(_start),
       /* Address where first byte of main segment should be loaded. */
-      SHORT(__load_begin),
+      SHORT(__load_start),
       /* Address of last byte of main segment. */
       SHORT(__load_end - 1),
       /* The main segment follows. */
@@ -29,7 +29,7 @@ SECTIONS {
    Basic and Floating Point routines also use this part of zero page.
 */
 
-ASSERT(__load_begin == 0x2000, "text at incorrect address.")
+ASSERT(__load_start == 0x2000, "text at incorrect address.")
 
 PROVIDE(__rc0 = 0x80);
 INCLUDE imag_reg/127.ld

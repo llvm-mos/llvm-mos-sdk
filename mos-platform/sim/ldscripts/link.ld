@@ -18,7 +18,7 @@ SECTIONS {
         Clang registers global constructor calls as function pointers in .init_array */
     __init_array_begin = .;
     .init_array : {
-        KEEP (*(SORT(.init_array.*)))
+        KEEP (*(SORT_BY_INIT_PRIORITY(.init_array.*)))
         KEEP (*(.init_array))
     }
     __init_array_end = .;
@@ -31,7 +31,7 @@ SECTIONS {
     __cxa_finalize has an entry here. For this reason, .fini_array must be writeable. */
     __fini_array_begin = .;
     .fini_array : {
-        KEEP (*(SORT(.fini_array.*)))
+        KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*)))
         KEEP (*(.fini_array))
     }
     __fini_array_end = .;

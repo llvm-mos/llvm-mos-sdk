@@ -1,13 +1,9 @@
+#include <start.S>
+
 #include <init_stack.S>
 
-.text
-.global _start
-_start:
-    __init_stack
+.global __do_zero_bss
 
-    JSR __zero_bss
-
-    JSR __main
-
-    ; It's no longer safe to reenter BASIC.
-    end: JMP end
+.section .init_last,"axR",@progbits
+  jsr main
+  jmp __exit_return ; Return to OS

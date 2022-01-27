@@ -22,24 +22,22 @@ function(_add_common_target name)
   llvm_mos_sdk_track_platform_target(${target_name})
 endfunction()
 
-# Specializes crt target for the current platform named <platform>-crt.
+# Specializes start target for the current platform named <platform>-start.
 # Additional arguments add source files to the target.
 # EXCLUDE_COMMON_SOURCES excludes common source files from the target.
-function(llvm_mos_sdk_add_crt)
-  _add_common_target(crt
+#
+# libstart is a collection of initialization and finalization routines that may
+# or may not be needed by a given program. These are basically the optional
+# portions of crt0.o.
+function(llvm_mos_sdk_add_start)
+  _add_common_target(start
     COMMON_SOURCES
-      const.S
       zero_bss.c
-      main.S
 
-      call_indir.S
+      init_array.c
+      fini_array.c
 
-      divmod.cc
-      mul.cc
-      shift.cc
-
-      init.c
-      fini.c
+      exit_return.c
 
     PLATFORM_SOURCES
       ${ARGN}
@@ -49,17 +47,42 @@ function(llvm_mos_sdk_add_crt)
   # replaced with CMAKE_CURRENT_FUNCTION_LIST_DIR.
   set(source_dir ${CMAKE_SOURCE_DIR}/mos-platform/common/lib)
 
-  # _init and _fini use weak linking and an assembler trick to only get pulled
-  # in to the binary if the .init_array and .fini_array sections are actually
-  # used. This is intrinsically incompatible with LTO, which would try to
-  # preemptively add these symbols to the link to optimize them together with
-  # the program.
+  # __do_init_array and __do_fini_array use weak linking and an assembler trick
+  # to only get pulled in to the binary if the .init_array and .fini_array
+  # sections are actually used. This means that LTO bitcode wouldn't obviously
+  # reference them until after code generation, which causes a subtle ordering
+  # problem in the linker.  Usually, symbols like this are added to a list of
+  # libcalls to preemptively add to the LTO module, but that's precisely what
+  # we're trying to avoid. Hence, disable LTO.
   set_property(
     SOURCE
-      ${source_dir}/init.c
-      ${source_dir}/fini.c
+      ${source_dir}/init_array.c
+      ${source_dir}/fini_array.c
     PROPERTY COMPILE_FLAGS -fno-lto
   )
+endfunction()
+
+# Specializes crt target for the current platform named <platform>-crt.
+# Additional arguments add source files to the target.
+# EXCLUDE_COMMON_SOURCES excludes common source files from the target.
+function(llvm_mos_sdk_add_crt)
+  _add_common_target(crt
+    COMMON_SOURCES
+      const.S
+
+      call_indir.S
+
+      divmod.cc
+      mul.cc
+      shift.cc
+
+    PLATFORM_SOURCES
+      ${ARGN}
+  )
+
+  # TODO: When CMake 3.17 is more widespread, this hard-coded path can be
+  # replaced with CMAKE_CURRENT_FUNCTION_LIST_DIR.
+  set(source_dir ${CMAKE_SOURCE_DIR}/mos-platform/common/lib)
 endfunction()
 
 # Specializes c target for the current platform named <platform>-c.
@@ -94,8 +117,6 @@ function(llvm_mos_sdk_add_c)
       # Itanium ABI implementation
       cxa_abi.cc
       cxa_atexit.cc
-
-      init_main.c
 
     PLATFORM_SOURCES
       ${ARGN}

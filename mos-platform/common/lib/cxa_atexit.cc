@@ -95,15 +95,17 @@ RegistrationList::FnBlock *RegistrationList::m_list = &m_tail;
 
 extern "C" {
 
-// Note: This symbol is weakly linked elsewhere, so it will only be included if
-// __cxa_atexit is actually referenced.
-void __call_atexit() { RegistrationList::run_all_exits(); }
+asm (
+  ".section .fini.10,\"axR\",@progbits\n"
+  "jsr __do_atexit\n"
+);
+
+void __do_atexit() { RegistrationList::run_all_exits(); }
 
 // atexit / finalize are implemented under the assumption that there is only a
 // single loaded binary, with no dynamic loading.  Therefore; the mechanism for
 // holding a DSO handle (the third parameter to _cxa_atexit), is ignored.
-extern "C" int __cxa_atexit(void (*f)(void *), void *p,
-                            void * /* dso_handle */) {
+int __cxa_atexit(void (*f)(void *), void *p, void * /* dso_handle */) {
   // Return values equal to C/C++ at_exit() return value.
   return RegistrationList::push_front(ExitFunctionStorage{f, p}) ? 0 : -1;
 }

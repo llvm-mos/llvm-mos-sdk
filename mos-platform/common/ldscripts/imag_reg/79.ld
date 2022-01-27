@@ -1,3 +1,0 @@
-/* GENERATED FILE -- DO NOT MANUALLY EDIT. */
-INCLUDE imag_reg/78.ld
-PROVIDE(__rc79 = __rc78 + 1);

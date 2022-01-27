@@ -21,11 +21,11 @@ SECTIONS {
 
 ASSERT(ADDR(.basic_header) == 0x0801, "BASIC header at incorrect address.")
 
-/* Provide 142 imaginary (zero page) registers (the BASIC area from $02 to $8f) */
+/* Provide imaginary (zero page) registers in the BASIC area. */
 PROVIDE(__rc0 = 0x0002);
-INCLUDE imag_reg/141.ld
+INCLUDE imag_regs.ld
 ASSERT(__rc0 == 0x0002, "Inconsistent zero page map.")
-ASSERT(__rc141 == 0x008f, "Inconsistent zero page map.")
+ASSERT(__rc31 == 0x0021, "Inconsistent zero page map.")
 
 /* Set initial soft stack address to end of BASIC area. (It grows down.) */
 __stack = 0x9FFF;

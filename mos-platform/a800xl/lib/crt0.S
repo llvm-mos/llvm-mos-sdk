@@ -1,12 +1,14 @@
-.text
-.global _start
-_start:
-    ; Initialize soft stack pointer to MEMTOP
-    LDA $2e5
-    STA mos8(__rc0)
-    LDA $2e6
-    STA mos8(__rc1)
+#include <start.S>
 
-    JSR __zero_bss
+; Initialize soft stack pointer to MEMTOP
+.section .init.10,"axR",@progbits
+  lda $2e5
+  sta mos8(__rc0)
+  lda $2e6
+  sta mos8(__rc1)
 
-    JMP __main
+.global __do_zero_bss
+
+.section .init_last,"axR",@progbits
+  jsr main
+  jmp __exit_return ; Return to OS

@@ -13,6 +13,8 @@ extern "C" {
 
 void abort(void);
 void exit(int status);
+void _exit(int status);
+void _Exit(int status);
 
 int abs(int i);
 long labs(long i);

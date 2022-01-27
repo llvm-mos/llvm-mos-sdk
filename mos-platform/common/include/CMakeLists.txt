@@ -1,17 +1,19 @@
 llvm_mos_sdk_install(FILES
+  _exit.S
   alloca.h
+  cstddef
+  cstdint
   ctype.h
+  exception
+  init_stack.S
+  initializer_list
   inttypes.h
+  new
   setjmp.h
+  start.S
   stdio.h
   stdlib.h
   string.h
-  init_stack.S
-  new
-  cstddef
-  cstdint
   type_traits
-  exception
-  initializer_list
   typeinfo
   )

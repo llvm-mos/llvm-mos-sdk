@@ -1,3 +1,0 @@
-/* GENERATED FILE -- DO NOT MANUALLY EDIT. */
-INCLUDE imag_reg/215.ld
-PROVIDE(__rc216 = __rc215 + 1);

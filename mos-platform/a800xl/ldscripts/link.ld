@@ -32,6 +32,6 @@ SECTIONS {
 ASSERT(__load_start == 0x2000, "text at incorrect address.")
 
 PROVIDE(__rc0 = 0x80);
-INCLUDE imag_reg/127.ld
+INCLUDE imag_regs.ld
 ASSERT(__rc0 == 0x0080, "Inconsistent zero page map.")
-ASSERT(__rc127 == 0x00ff, "Inconsistent zero page map.")
+ASSERT(__rc31 == 0x009f, "Inconsistent zero page map.")

@@ -22,36 +22,26 @@ public:
 
   _LIBCXXABI_HIDDEN virtual void noop1() const;
   _LIBCXXABI_HIDDEN virtual void noop2() const;
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *thrown_type,
-                                           void *&adjustedPtr) const = 0;
 };
 
 class _LIBCXXABI_TYPE_VIS __fundamental_type_info : public __shim_type_info {
 public:
   _LIBCXXABI_HIDDEN virtual ~__fundamental_type_info();
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *,
-                                           void *&) const;
 };
 
 class _LIBCXXABI_TYPE_VIS __array_type_info : public __shim_type_info {
 public:
   _LIBCXXABI_HIDDEN virtual ~__array_type_info();
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *,
-                                           void *&) const;
 };
 
 class _LIBCXXABI_TYPE_VIS __function_type_info : public __shim_type_info {
 public:
   _LIBCXXABI_HIDDEN virtual ~__function_type_info();
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *,
-                                           void *&) const;
 };
 
 class _LIBCXXABI_TYPE_VIS __enum_type_info : public __shim_type_info {
 public:
   _LIBCXXABI_HIDDEN virtual ~__enum_type_info();
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *,
-                                           void *&) const;
 };
 
 enum
@@ -129,10 +119,6 @@ public:
                                                   int, bool) const;
   _LIBCXXABI_HIDDEN virtual void
   search_below_dst(__dynamic_cast_info *, const void *, int, bool) const;
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *,
-                                           void *&) const;
-  _LIBCXXABI_HIDDEN virtual void
-  has_unambiguous_public_base(__dynamic_cast_info *, void *, int) const;
 };
 
 // Has one non-virtual public base class at offset zero
@@ -147,8 +133,6 @@ public:
                                                   int, bool) const;
   _LIBCXXABI_HIDDEN virtual void
   search_below_dst(__dynamic_cast_info *, const void *, int, bool) const;
-  _LIBCXXABI_HIDDEN virtual void
-  has_unambiguous_public_base(__dynamic_cast_info *, void *, int) const;
 };
 
 struct _LIBCXXABI_HIDDEN __base_class_type_info
@@ -166,7 +150,6 @@ public:
 
     void search_above_dst(__dynamic_cast_info*, const void*, const void*, int, bool) const;
     void search_below_dst(__dynamic_cast_info*, const void*, int, bool) const;
-    void has_unambiguous_public_base(__dynamic_cast_info*, void*, int) const;
 };
 
 // Has one or more base classes
@@ -190,8 +173,6 @@ public:
                                                   int, bool) const;
   _LIBCXXABI_HIDDEN virtual void
   search_below_dst(__dynamic_cast_info *, const void *, int, bool) const;
-  _LIBCXXABI_HIDDEN virtual void
-  has_unambiguous_public_base(__dynamic_cast_info *, void *, int) const;
 };
 
 class _LIBCXXABI_TYPE_VIS __pbase_type_info : public __shim_type_info {
@@ -223,16 +204,11 @@ public:
   };
 
   _LIBCXXABI_HIDDEN virtual ~__pbase_type_info();
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *,
-                                           void *&) const;
 };
 
 class _LIBCXXABI_TYPE_VIS __pointer_type_info : public __pbase_type_info {
 public:
   _LIBCXXABI_HIDDEN virtual ~__pointer_type_info();
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *,
-                                           void *&) const;
-  _LIBCXXABI_HIDDEN bool can_catch_nested(const __shim_type_info *) const;
 };
 
 class _LIBCXXABI_TYPE_VIS __pointer_to_member_type_info
@@ -241,9 +217,6 @@ public:
   const __class_type_info *__context;
 
   _LIBCXXABI_HIDDEN virtual ~__pointer_to_member_type_info();
-  _LIBCXXABI_HIDDEN virtual bool can_catch(const __shim_type_info *,
-                                           void *&) const;
-  _LIBCXXABI_HIDDEN bool can_catch_nested(const __shim_type_info *) const;
 };
 
 }  // __cxxabiv1

@@ -16,6 +16,9 @@ private:
   type_info() = delete;
   type_info &operator=(const type_info &rhs) = delete;
 
+protected:
+  type_info(const char * type_name);
+
   const char *const __type_name;
 };
 

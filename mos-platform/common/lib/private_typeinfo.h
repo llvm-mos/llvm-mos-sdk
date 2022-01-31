@@ -44,11 +44,18 @@ public:
   _LIBCXXABI_HIDDEN virtual ~__enum_type_info();
 };
 
-enum
+enum path_accessibility : unsigned char
 {
-    unknown = 0,
+    unknown_path = 0,
     public_path,
     not_public_path,
+};
+
+enum tribool : unsigned char
+{
+    unknown = 0,
+    //public_path,
+    //not_public_path,
     yes,
     no
 };
@@ -73,25 +80,25 @@ struct _LIBCXXABI_HIDDEN __dynamic_cast_info
 
     // The following three paths are either unknown, public_path or not_public_path.
     // access of path from dst_ptr_leading_to_static_ptr to (static_ptr, static_type)
-    int path_dst_ptr_to_static_ptr;
+    path_accessibility path_dst_ptr_to_static_ptr;
     // access of path from (dynamic_ptr, dynamic_type) to (static_ptr, static_type)
     //    when there is no dst_type along the path
-    int path_dynamic_ptr_to_static_ptr;
+    path_accessibility path_dynamic_ptr_to_static_ptr;
     // access of path from (dynamic_ptr, dynamic_type) to dst_type
     //    (not used if there is a (static_ptr, static_type) above a dst_type).
-    int path_dynamic_ptr_to_dst_ptr;
+    path_accessibility path_dynamic_ptr_to_dst_ptr;
 
     // Number of dst_types below (static_ptr, static_type)
-    int number_to_static_ptr;
+    unsigned char number_to_static_ptr;
     // Number of dst_types not below (static_ptr, static_type)
-    int number_to_dst_ptr;
+    unsigned char number_to_dst_ptr;
 
 // Data that helps stop the search before the entire tree is searched:
 
     // is_dst_type_derived_from_static_type is either unknown, yes or no.
-    int is_dst_type_derived_from_static_type;
+    tribool is_dst_type_derived_from_static_type;
     // Number of dst_type in tree.  If 0, then that means unknown.
-    int number_of_dst_type;
+    unsigned char number_of_dst_type;
     // communicates to a dst_type node that (static_ptr, static_type) was found
     //    above it.
     bool found_our_static_ptr;
@@ -109,16 +116,37 @@ public:
 
   _LIBCXXABI_HIDDEN void process_static_type_above_dst(__dynamic_cast_info *,
                                                        const void *,
-                                                       const void *, int) const;
+                                                       const void *, path_accessibility) const;
   _LIBCXXABI_HIDDEN void process_static_type_below_dst(__dynamic_cast_info *,
-                                                       const void *, int) const;
+                                                       const void *, path_accessibility) const;
   _LIBCXXABI_HIDDEN void process_found_base_class(__dynamic_cast_info *, void *,
-                                                  int) const;
-  _LIBCXXABI_HIDDEN virtual void search_above_dst(__dynamic_cast_info *,
-                                                  const void *, const void *,
-                                                  int, bool) const;
-  _LIBCXXABI_HIDDEN virtual void
-  search_below_dst(__dynamic_cast_info *, const void *, int, bool) const;
+                                                  path_accessibility) const;
+  _LIBCXXABI_HIDDEN void devirt_search_above_dst(__dynamic_cast_info *,
+                                                   const void *, const void *,
+                                                   path_accessibility,
+                                                   bool) const;
+  _LIBCXXABI_HIDDEN void devirt_search_below_dst(__dynamic_cast_info *,
+                                                 const void *,
+                                                 path_accessibility,
+                                                 bool) const;
+  template <class type_info_most_derived>
+  _LIBCXXABI_HIDDEN static void
+  invoke_search_above_dst(const __class_type_info *,
+                          __dynamic_cast_info *, const void *,
+                          const void *,
+                          path_accessibility, bool);
+  template <class type_info_most_derived>
+  _LIBCXXABI_HIDDEN static void
+  invoke_search_below_dst(const __class_type_info *, __dynamic_cast_info *,
+                          const void *, path_accessibility, bool);
+
+private:
+  _LIBCXXABI_HIDDEN
+  void search_above_dst(__dynamic_cast_info *, const void *, const void *,
+                        path_accessibility, bool) const;
+
+  _LIBCXXABI_HIDDEN void search_below_dst(__dynamic_cast_info *, const void *,
+                                          path_accessibility, bool) const;
 };
 
 // Has one non-virtual public base class at offset zero
@@ -128,11 +156,11 @@ public:
 
   _LIBCXXABI_HIDDEN virtual ~__si_class_type_info();
 
-  _LIBCXXABI_HIDDEN virtual void search_above_dst(__dynamic_cast_info *,
-                                                  const void *, const void *,
-                                                  int, bool) const;
-  _LIBCXXABI_HIDDEN virtual void
-  search_below_dst(__dynamic_cast_info *, const void *, int, bool) const;
+  _LIBCXXABI_HIDDEN void search_above_dst(__dynamic_cast_info *,
+                                          const void *, const void *,
+                                          path_accessibility, bool) const;
+  _LIBCXXABI_HIDDEN void
+  search_below_dst(__dynamic_cast_info *, const void *, path_accessibility, bool) const;
 };
 
 struct _LIBCXXABI_HIDDEN __base_class_type_info
@@ -148,8 +176,8 @@ public:
         __offset_shift = 8
     };
 
-    void search_above_dst(__dynamic_cast_info*, const void*, const void*, int, bool) const;
-    void search_below_dst(__dynamic_cast_info*, const void*, int, bool) const;
+    void search_above_dst(__dynamic_cast_info*, const void*, const void*, path_accessibility, bool) const;
+    void search_below_dst(__dynamic_cast_info*, const void*, path_accessibility, bool) const;
 };
 
 // Has one or more base classes
@@ -168,11 +196,11 @@ public:
 
   _LIBCXXABI_HIDDEN virtual ~__vmi_class_type_info();
 
-  _LIBCXXABI_HIDDEN virtual void search_above_dst(__dynamic_cast_info *,
+  _LIBCXXABI_HIDDEN void search_above_dst(__dynamic_cast_info *,
                                                   const void *, const void *,
-                                                  int, bool) const;
-  _LIBCXXABI_HIDDEN virtual void
-  search_below_dst(__dynamic_cast_info *, const void *, int, bool) const;
+                                                  path_accessibility, bool) const;
+  _LIBCXXABI_HIDDEN void
+  search_below_dst(__dynamic_cast_info *, const void *, path_accessibility, bool) const;
 };
 
 class _LIBCXXABI_TYPE_VIS __pbase_type_info : public __shim_type_info {

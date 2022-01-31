@@ -152,7 +152,7 @@ __pointer_to_member_type_info::~__pointer_to_member_type_info()
 void
 __class_type_info::process_found_base_class(__dynamic_cast_info* info,
                                                void* adjustedPtr,
-                                               int path_below) const
+                                               path_accessibility path_below) const
 {
     if (info->dst_ptr_leading_to_static_ptr == 0)
     {
@@ -290,7 +290,7 @@ __dynamic_cast(const void *static_ptr, const __class_type_info *static_type,
     //    be returned.
     const void* dst_ptr = 0;
     // Initialize info struct for this search.
-    __dynamic_cast_info info = {dst_type, static_ptr, static_type, src2dst_offset, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,};
+    __dynamic_cast_info info = {dst_type, static_ptr, static_type, src2dst_offset, 0, 0, unknown_path, unknown_path, unknown_path, 0, 0, unknown, 0, 0, 0, 0,};
 
     // Find out if we can use a giant short cut in the search
     if (is_equal(dynamic_type, dst_type, false))
@@ -298,7 +298,7 @@ __dynamic_cast(const void *static_ptr, const __class_type_info *static_type,
         // Using giant short cut.  Add that information to info.
         info.number_of_dst_type = 1;
         // Do the  search
-        dynamic_type->search_above_dst(&info, dynamic_ptr, dynamic_ptr, public_path, false);
+        dynamic_type->devirt_search_above_dst(&info, dynamic_ptr, dynamic_ptr, public_path, false);
 #ifdef _LIBCXXABI_FORGIVING_DYNAMIC_CAST
         // The following if should always be false because we should definitely
         //   find (static_ptr, static_type), either on a public or private path
@@ -326,7 +326,7 @@ __dynamic_cast(const void *static_ptr, const __class_type_info *static_type,
     else
     {
         // Not using giant short cut.  Do the search
-        dynamic_type->search_below_dst(&info, dynamic_ptr, public_path, false);
+        dynamic_type->devirt_search_below_dst(&info, dynamic_ptr, public_path, false);
  #ifdef _LIBCXXABI_FORGIVING_DYNAMIC_CAST
         // The following if should always be false because we should definitely
         //   find (static_ptr, static_type), either on a public or private path
@@ -388,7 +388,7 @@ void
 __class_type_info::process_static_type_above_dst(__dynamic_cast_info* info,
                                                  const void* dst_ptr,
                                                  const void* current_ptr,
-                                                 int path_below) const
+                                                 path_accessibility path_below) const
 {
     // Record that we found a static_type
     info->found_any_static_type = true;
@@ -434,7 +434,7 @@ __class_type_info::process_static_type_above_dst(__dynamic_cast_info* info,
 void
 __class_type_info::process_static_type_below_dst(__dynamic_cast_info* info,
                                                  const void* current_ptr,
-                                                 int path_below) const
+                                                 path_accessibility path_below) const
 {
     if (current_ptr == info->static_ptr)
     {
@@ -501,7 +501,7 @@ __class_type_info::process_static_type_below_dst(__dynamic_cast_info* info,
 void
 __vmi_class_type_info::search_below_dst(__dynamic_cast_info* info,
                                         const void* current_ptr,
-                                        int path_below,
+                                        path_accessibility path_below,
                                         bool use_strcmp) const
 {
     typedef const __base_class_type_info* Iter;
@@ -674,7 +674,7 @@ __vmi_class_type_info::search_below_dst(__dynamic_cast_info* info,
 void
 __si_class_type_info::search_below_dst(__dynamic_cast_info* info,
                                        const void* current_ptr,
-                                       int path_below,
+                                       path_accessibility path_below,
                                        bool use_strcmp) const
 {
     if (is_equal(this, info->static_type, use_strcmp))
@@ -707,7 +707,7 @@ __si_class_type_info::search_below_dst(__dynamic_cast_info* info,
                 // Zero out found flags
                 info->found_our_static_ptr = false;
                 info->found_any_static_type = false;
-                __base_type->search_above_dst(info, current_ptr, current_ptr, public_path, use_strcmp);
+                __base_type->devirt_search_above_dst(info, current_ptr, current_ptr, public_path, use_strcmp);
                 if (info->found_any_static_type)
                 {
                     is_dst_type_derived_from_static_type = true;
@@ -742,8 +742,18 @@ __si_class_type_info::search_below_dst(__dynamic_cast_info* info,
     else
     {
         // This is not a static_type and not a dst_type
-        __base_type->search_below_dst(info, current_ptr, path_below, use_strcmp);
+        __base_type->devirt_search_below_dst(info, current_ptr, path_below, use_strcmp);
     }
+}
+
+template <class type_info_most_derived>
+void
+__class_type_info::invoke_search_below_dst(const __class_type_info *self,
+                        __dynamic_cast_info *info, const void *current_ptr,
+                        path_accessibility path_below, bool use_strcmp) 
+{
+  static_cast<const type_info_most_derived *>(self)->search_below_dst(
+      info, current_ptr, path_below, use_strcmp);
 }
 
 // This is the same algorithm as __vmi_class_type_info::search_below_dst but
@@ -751,7 +761,7 @@ __si_class_type_info::search_below_dst(__dynamic_cast_info* info,
 void
 __class_type_info::search_below_dst(__dynamic_cast_info* info,
                                     const void* current_ptr,
-                                    int path_below,
+                                    path_accessibility path_below,
                                     bool use_strcmp) const
 {
     if (is_equal(this, info->static_type, use_strcmp))
@@ -821,7 +831,7 @@ void
 __vmi_class_type_info::search_above_dst(__dynamic_cast_info* info,
                                         const void* dst_ptr,
                                         const void* current_ptr,
-                                        int path_below,
+                                        path_accessibility path_below,
                                         bool use_strcmp) const
 {
     if (is_equal(this, info->static_type, use_strcmp))
@@ -895,13 +905,25 @@ void
 __si_class_type_info::search_above_dst(__dynamic_cast_info* info,
                                        const void* dst_ptr,
                                        const void* current_ptr,
-                                       int path_below,
+                                       path_accessibility path_below,
                                        bool use_strcmp) const
 {
     if (is_equal(this, info->static_type, use_strcmp))
         process_static_type_above_dst(info, dst_ptr, current_ptr, path_below);
     else
-        __base_type->search_above_dst(info, dst_ptr, current_ptr, path_below, use_strcmp);
+        __base_type->devirt_search_above_dst(info, dst_ptr, current_ptr, path_below, use_strcmp);
+}
+
+template <class type_info_most_derived>
+void __class_type_info::invoke_search_above_dst(const __class_type_info *self,
+                                                __dynamic_cast_info *info,
+                                                const void *dst_ptr,
+                                                const void *current_ptr,
+                                                path_accessibility path_below,
+                                                bool use_strcmp) 
+{
+  static_cast<const type_info_most_derived *>(self)->search_above_dst(
+      info, dst_ptr, current_ptr, path_below, use_strcmp);
 }
 
 // This is the same algorithm as __vmi_class_type_info::search_above_dst but
@@ -910,11 +932,62 @@ void
 __class_type_info::search_above_dst(__dynamic_cast_info* info,
                                     const void* dst_ptr,
                                     const void* current_ptr,
-                                    int path_below,
+                                    path_accessibility path_below,
                                     bool use_strcmp) const
 {
     if (is_equal(this, info->static_type, use_strcmp))
         process_static_type_above_dst(info, dst_ptr, current_ptr, path_below);
+}
+
+struct search_funcs {
+  void (*search_above_dst)(const __class_type_info *, __dynamic_cast_info *,
+                           const void *, const void *, path_accessibility,
+                           bool);
+  void (*search_below_dst)(const __class_type_info *, __dynamic_cast_info *,
+                           const void *, path_accessibility, bool);
+};
+
+enum class dyn_class_type : unsigned char {
+  class_type = 0,
+  si_class_type = 1,
+  vmi_class_type = 2
+};
+
+constexpr search_funcs search_jump_table[3] = {
+    {__class_type_info::invoke_search_above_dst<__class_type_info>,
+     __class_type_info::invoke_search_below_dst<__class_type_info>},
+    {__class_type_info::invoke_search_above_dst<__si_class_type_info>,
+     __class_type_info::invoke_search_below_dst<__si_class_type_info>},
+    {__class_type_info::invoke_search_above_dst<__vmi_class_type_info>,
+     __class_type_info::invoke_search_below_dst<__vmi_class_type_info>}};
+
+dyn_class_type dyn_type_info_to_tag(const std::type_info &type_info_info) {
+  if (type_info_info == typeid(__si_class_type_info))
+    return dyn_class_type::si_class_type;
+  if (type_info_info == typeid(__vmi_class_type_info))
+    return dyn_class_type::vmi_class_type;
+
+  return dyn_class_type::class_type;
+}
+
+void __class_type_info::devirt_search_above_dst(__dynamic_cast_info *info,
+                                                const void *dst_ptr,
+                                                const void *current_ptr,
+                                                path_accessibility path_below,
+                                                bool use_strcmp) const {
+  search_jump_table[static_cast<unsigned char>(
+                        dyn_type_info_to_tag(typeid(*this)))]
+      .search_above_dst(this, info, dst_ptr, current_ptr, path_below,
+                        use_strcmp);
+}
+
+void __class_type_info::devirt_search_below_dst(__dynamic_cast_info *info,
+                                                const void *current_ptr,
+                                                path_accessibility path_below,
+                                                bool use_strcmp) const {
+  search_jump_table[static_cast<unsigned char>(
+                        dyn_type_info_to_tag(typeid(*this)))]
+      .search_below_dst(this, info, current_ptr, path_below, use_strcmp);
 }
 
 // The search functions for __base_class_type_info are simply convenience
@@ -925,7 +998,7 @@ void
 __base_class_type_info::search_above_dst(__dynamic_cast_info* info,
                                          const void* dst_ptr,
                                          const void* current_ptr,
-                                         int path_below,
+                                         path_accessibility path_below,
                                          bool use_strcmp) const
 {
     ptrdiff_t offset_to_base = __offset_flags >> __offset_shift;
@@ -934,7 +1007,7 @@ __base_class_type_info::search_above_dst(__dynamic_cast_info* info,
         const char* vtable = *static_cast<const char*const*>(current_ptr);
         offset_to_base = update_offset_to_base(vtable, offset_to_base);
     }
-    __base_type->search_above_dst(info, dst_ptr,
+    __base_type->devirt_search_above_dst(info, dst_ptr,
                                   static_cast<const char*>(current_ptr) + offset_to_base,
                                   (__offset_flags & __public_mask) ?
                                       path_below :
@@ -945,7 +1018,7 @@ __base_class_type_info::search_above_dst(__dynamic_cast_info* info,
 void
 __base_class_type_info::search_below_dst(__dynamic_cast_info* info,
                                          const void* current_ptr,
-                                         int path_below,
+                                         path_accessibility path_below,
                                          bool use_strcmp) const
 {
     ptrdiff_t offset_to_base = __offset_flags >> __offset_shift;
@@ -954,7 +1027,7 @@ __base_class_type_info::search_below_dst(__dynamic_cast_info* info,
         const char* vtable = *static_cast<const char*const*>(current_ptr);
         offset_to_base = update_offset_to_base(vtable, offset_to_base);
     }
-    __base_type->search_below_dst(info,
+    __base_type->devirt_search_below_dst(info,
                                   static_cast<const char*>(current_ptr) + offset_to_base,
                                   (__offset_flags & __public_mask) ?
                                       path_below :

@@ -74,19 +74,3 @@ const char *type_info::name() const noexcept { return __type_name; }
 
 } // namespace std
 
-namespace __cxxabiv1 {
-class __class_type_info : public std::type_info {
-protected:
-  ~__class_type_info() noexcept;
-};
-
-__class_type_info::~__class_type_info() noexcept = default;
-
-class __si_class_type_info final : public __class_type_info {
-  ~__si_class_type_info() noexcept;
-  const __class_type_info *__base_type;
-};
-
-__si_class_type_info::~__si_class_type_info() noexcept = default;
-
-} // namespace __cxxabiv1

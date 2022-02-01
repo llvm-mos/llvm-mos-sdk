@@ -1,9 +1,9 @@
 .global __do_init_stack
 
-; Initialze soft stack pointer from __stack symbol.
+; Initialize soft stack pointer to MEMTOP
 .section .init.10,"axR",@progbits
 __do_init_stack:
-  lda #mos16lo(__stack)
+  lda $2e5
   sta mos8(__rc0)
-  lda #mos16hi(__stack)
+  lda $2e6
   sta mos8(__rc1)

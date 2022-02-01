@@ -1,7 +1,5 @@
 #include <start.S>
 
-#include <init_stack.S>
-
 .global __do_zero_bss
 
 .section .init_last,"axR",@progbits

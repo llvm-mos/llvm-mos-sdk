@@ -23,15 +23,14 @@ SECTIONS {
     INCLUDE c_sections.ld
 }
 
-/* Provide 128 imaginary (zero page) registers located in 0x80 - 0xff range.
-   Atari OS uses first 128 bytes (0x00 - 0x7f) of zero page itself.
-   Remaining locations are intended for use by user program, but remember that
-   Basic and Floating Point routines also use this part of zero page.
-*/
+/* Provide 16 imaginary (zero page) registers located in 0xcb - 0xea range.
+ * This region is only used by BASIC's floating point routines, so it should be
+ * reasonably safe to use these.
+ */
 
 ASSERT(__load_start == 0x2000, "text at incorrect address.")
 
-PROVIDE(__rc0 = 0x80);
+PROVIDE(__rc0 = 0xcb);
 INCLUDE imag_regs.ld
-ASSERT(__rc0 == 0x0080, "Inconsistent zero page map.")
-ASSERT(__rc31 == 0x009f, "Inconsistent zero page map.")
+ASSERT(__rc0 == 0xcb, "Inconsistent zero page map.")
+ASSERT(__rc31 == 0xea, "Inconsistent zero page map.")

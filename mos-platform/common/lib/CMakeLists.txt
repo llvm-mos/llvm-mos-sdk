@@ -73,6 +73,7 @@ function(llvm_mos_sdk_add_crt)
       call_indir.S
 
       divmod.cc
+      divmod_large.cc
       mul.cc
       shift.cc
 
@@ -83,6 +84,13 @@ function(llvm_mos_sdk_add_crt)
   # TODO: When CMake 3.17 is more widespread, this hard-coded path can be
   # replaced with CMAKE_CURRENT_FUNCTION_LIST_DIR.
   set(source_dir ${CMAKE_SOURCE_DIR}/mos-platform/common/lib)
+
+  # Don't pull in stack pointer init unnecessarily.
+  set_property(
+    SOURCE
+      ${source_dir}/divmod_large.cc
+    PROPERTY COMPILE_FLAGS -fno-lto
+  )
 endfunction()
 
 # Specializes c target for the current platform named <platform>-c.

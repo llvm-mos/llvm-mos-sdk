@@ -32,12 +32,7 @@ is_equal(const std::type_info* x, const std::type_info* y, bool use_strcmp)
 
 static inline ptrdiff_t update_offset_to_base(const char* vtable,
                                               ptrdiff_t offset_to_base) {
-#if __has_feature(cxx_abi_relative_vtable)
-  // VTable components are 32 bits in the relative vtables ABI.
-  return *reinterpret_cast<const int32_t*>(vtable + offset_to_base);
-#else
   return *reinterpret_cast<const ptrdiff_t*>(vtable + offset_to_base);
-#endif
 }
 
 namespace __cxxabiv1
@@ -231,26 +226,10 @@ __dynamic_cast(const void *static_ptr, const __class_type_info *static_type,
     // Possible future optimization:  Take advantage of src2dst_offset
 
     // Get (dynamic_ptr, dynamic_type) from static_ptr
-#if __has_feature(cxx_abi_relative_vtable)
-    // The vtable address will point to the first virtual function, which is 8
-    // bytes after the start of the vtable (4 for the offset from top + 4 for the typeinfo component).
-    const int32_t* vtable =
-        *reinterpret_cast<const int32_t* const*>(static_ptr);
-    int32_t offset_to_derived = vtable[-2];
-    const void* dynamic_ptr = static_cast<const char*>(static_ptr) + offset_to_derived;
-
-    // The typeinfo component is now a relative offset to a proxy.
-    int32_t offset_to_ti_proxy = vtable[-1];
-    const uint8_t* ptr_to_ti_proxy =
-        reinterpret_cast<const uint8_t*>(vtable) + offset_to_ti_proxy;
-    const __class_type_info* dynamic_type =
-        *(reinterpret_cast<const __class_type_info* const*>(ptr_to_ti_proxy));
-#else
     void **vtable = *static_cast<void ** const *>(static_ptr);
     ptrdiff_t offset_to_derived = reinterpret_cast<ptrdiff_t>(vtable[-2]);
     const void* dynamic_ptr = static_cast<const char*>(static_ptr) + offset_to_derived;
     const __class_type_info* dynamic_type = static_cast<const __class_type_info*>(vtable[-1]);
-#endif
 
     // Initialize answer to nullptr.  This will be changed from the search
     //    results if a non-null answer is found.  Regardless, this is what will

@@ -16,4 +16,5 @@ llvm_mos_sdk_install(FILES
   string.h
   type_traits
   typeinfo
+  zero_bss.S
   )

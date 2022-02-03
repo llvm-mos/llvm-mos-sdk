@@ -47,19 +47,7 @@ function(llvm_mos_sdk_add_start)
   # replaced with CMAKE_CURRENT_FUNCTION_LIST_DIR.
   set(source_dir ${CMAKE_SOURCE_DIR}/mos-platform/common/lib)
 
-  # __do_init_array and __do_fini_array use weak linking and an assembler trick
-  # to only get pulled in to the binary if the .init_array and .fini_array
-  # sections are actually used. This means that LTO bitcode wouldn't obviously
-  # reference them until after code generation, which causes a subtle ordering
-  # problem in the linker.  Usually, symbols like this are added to a list of
-  # libcalls to preemptively add to the LTO module, but that's precisely what
-  # we're trying to avoid. Hence, disable LTO.
-  set_property(
-    SOURCE
-      ${source_dir}/init_array.c
-      ${source_dir}/fini_array.c
-    PROPERTY COMPILE_FLAGS -fno-lto
-  )
+  target_compile_options(${LLVM_MOS_CURRENT_PLATFORM}-start PRIVATE -fno-lto)
 endfunction()
 
 # Specializes crt target for the current platform named <platform>-crt.

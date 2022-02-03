@@ -846,6 +846,22 @@ __class_type_info::search_above_dst(__dynamic_cast_info* info,
         process_static_type_above_dst(info, dst_ptr, current_ptr, path_below);
 }
 
+// These two functions, search_above_dst and search_below_dst, are used to traverse the 
+// tree of type_info objects when executing the dynamic_cast function. In a "normal"
+// cxxabi implementation, these would be virtual member functions on the types
+// derived from __class_type_info. However, this has the side effect of making these functions 
+// defined in any program that generates RTTI instances and their associated vtables.
+// This makes the resulting program larger even if the dynamic_cast functionality is not used:
+// it's about 8K of text.
+
+// Thus, a table of function pointers is used to provide a non-virtual call mechanism 
+// for these functions. Since these become normal function calls; the linker can easily
+// find that they are not reachable from anywhere but the dynamic_cast function above, and
+// therefore will completely optimize them out of the binary if they aren't reached. 
+// Note that the ABI definition requires the __class_type_info and derived classes to have
+// a specific data member layout. We cannot modify any members of any of the classes, so 
+// instead we rely on RTTI type_info comparisons to locate the correct entries in the 
+// jump table for each of the __class_type_info descendants.
 struct search_funcs {
   void (*search_above_dst)(const __class_type_info *, __dynamic_cast_info *,
                            const void *, const void *, path_accessibility,

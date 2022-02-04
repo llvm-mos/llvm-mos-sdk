@@ -5,7 +5,7 @@ void abort(void) {
   (*(volatile char *)0xFFF7) = 1;
 
   // Prevent the compiler from considering this entire basic block unreachable.
-  asm volatile ("");
+  __attribute__((leaf)) asm volatile ("");
 
   __builtin_unreachable();
 }
@@ -15,7 +15,7 @@ void _exit(int status) {
   (*(volatile char *)0xFFF8) = (char)status;
 
   // Prevent the compiler from considering this entire basic block unreachable.
-  asm volatile ("");
+  __attribute__((leaf)) asm volatile ("");
 
   __builtin_unreachable();
 }

@@ -1,5 +1,5 @@
 
-void _fini(void);
+__attribute__((leaf)) void _fini(void);
 
 // Runs finalizers, then returns to the calleer. Jumping to here after main has
 // the effect of returning from _start with the given status. When applicable,

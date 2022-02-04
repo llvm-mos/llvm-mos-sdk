@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-void _fini(void);
+__attribute__((leaf)) void _fini(void);
 
 void exit(int status) {
   _fini();

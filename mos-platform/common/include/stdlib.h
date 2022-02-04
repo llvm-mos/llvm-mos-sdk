@@ -11,18 +11,16 @@
 extern "C" {
 #endif
 
-void abort(void);
 void exit(int status);
-void _exit(int status);
-void _Exit(int status);
+__attribute__((leaf)) void abort(void);
+__attribute__((leaf)) void _exit(int status);
+__attribute__((leaf)) void _Exit(int status);
+
+int atexit(void (*function)(void));
 
 int abs(int i);
 long labs(long i);
 long long llabs(long long i);
-
-void abort(void);
-
-int atexit(void (*function)(void));
 
 /**
 Simple malloc/free implementation.

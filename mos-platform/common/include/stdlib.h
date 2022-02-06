@@ -11,6 +11,9 @@
 extern "C" {
 #endif
 
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
+
 void exit(int status);
 __attribute__((leaf)) void abort(void);
 __attribute__((leaf)) void _exit(int status);

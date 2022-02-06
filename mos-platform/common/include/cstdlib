@@ -1,0 +1,27 @@
+#ifndef __CSTDLIB__
+#define __CSTDLIB__
+
+#include <stdlib.h>
+
+namespace std {
+
+using ::size_t;
+
+using ::exit;
+using ::abort;
+using ::_Exit;
+
+using ::atexit;
+
+using ::malloc;
+using ::free;
+using ::calloc;
+using ::realloc;
+
+using ::abs;
+using ::labs;
+using ::llabs;
+
+} // namespace std
+
+#endif // __CSTDLIB__

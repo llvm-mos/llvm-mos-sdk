@@ -1,8 +1,12 @@
 llvm_mos_sdk_install(FILES
   _exit.S
   alloca.h
+  climits
+  cstdarg
   cstddef
   cstdint
+  cstdio
+  cstdlib
   ctype.h
   exception
   init_stack.S

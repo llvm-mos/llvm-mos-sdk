@@ -82,8 +82,11 @@ int vprintf(const char* format, va_list va);
 int putchar(int c);
 int puts(const char *s);
 
+int getchar(void);
+
 // To be defined by platform.
 void __putchar(char c);
+char __getchar();
 
 #ifdef __cplusplus
 }

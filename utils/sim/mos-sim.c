@@ -50,6 +50,10 @@ int8_t read6502(uint16_t address) {
   if (address == 0xfff0) {
     *((uint32_t *)(memory + address)) = clockticks6502 - clock_start;
   }
+  else if (address == 0xfff6)
+  {
+    return getchar();
+  }
   return memory[address];
 }
 

@@ -11,3 +11,7 @@ int puts(const char *s) {
   __putchar('\n');
   return 0;
 }
+
+int getchar() {
+  return __getchar();
+}

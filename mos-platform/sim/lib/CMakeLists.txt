@@ -5,5 +5,6 @@ llvm_mos_sdk_add_c(
   assert.c
   putchar.c
   stdlib.c
+  sim_io.c
 )
 llvm_mos_sdk_add_m()

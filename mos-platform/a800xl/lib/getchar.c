@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-char __getchar() {
-  /* implement me */
-  return '\n';
+int getchar() {
+  puts("getchar() not yet implemented");
+  abort();
 }

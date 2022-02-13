@@ -8,17 +8,23 @@ int main(void) {
 
   static const char * EXIT_TOKEN = "SOME INPUT";
   const unsigned char EXIT_TOKEN_LEN = strlen(EXIT_TOKEN);
+  char eof = 0;
 
-  for (;;) {
+  while (!eof) {
     puts("ENTER SOME INPUT:");
     putchar('>'); putchar(' ');
     in_end = 0;
 
     for (;;) {
-      const char input = getchar();
+      const int input = getchar();
+      if (input == EOF) {
+        eof = 1;
+        break;
+      }
+
       putchar(input);
 
-      if (input == '\n') {
+      if (input == '\n' ) {
         break;
       }
       last_input_line[in_end++] = input;

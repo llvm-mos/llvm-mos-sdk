@@ -1,5 +1,17 @@
 #include <sim_io.h>
+#include <stdio.h>
 
-volatile sim_reg_t *const sim_reg_iface = ((volatile sim_reg_t *)0xFFF0);
+volatile struct _sim_reg *const sim_reg_iface =
+    ((volatile struct _sim_reg *)0xFFF0);
 
-char __getchar() { return sim_reg_iface->getchar; }
+int getchar() {
+  // fetch char (may block)
+  const char c = sim_reg_iface->getchar;
+
+  // check eof status of last fetch
+  if (sim_reg_iface->input_eof) {
+    return EOF;
+  }
+
+  return c;
+}

@@ -7,7 +7,7 @@ static char input_buffer[80];
 static uint8_t buf_begin = 0;
 static uint8_t buf_end = 0;
 
-// defined in linker script.  Calling convention of Kernal CHRIN matches 
+// Defined in kernal.S.  Calling convention of Kernal CHRIN matches 
 // C calling convention.
 char __CHRIN();
 

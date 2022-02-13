@@ -27,7 +27,5 @@ INCLUDE imag_regs.ld
 ASSERT(__rc0 == 0x0002, "Inconsistent zero page map.")
 ASSERT(__rc31 == 0x0021, "Inconsistent zero page map.")
 
-INCLUDE kernal.ld
-
 /* Set initial soft stack address to end of BASIC area. (It grows down.) */
 __stack = 0x9FFF;

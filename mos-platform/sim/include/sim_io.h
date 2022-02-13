@@ -5,15 +5,14 @@
 
 struct _sim_reg {
   uint8_t clock[4];     // 0
-  uint8_t unclaimed[2]; // 4
-  char getchar;         // 6
+  uint8_t unclaimed;    // 4
+  char getchar;         // 5
+  char input_eof;       // 6
   uint8_t abort;        // 7
   int8_t exit;          // 8
   uint8_t putchar;      // 9
 };
 
-typedef struct _sim_reg sim_reg_t;
-
-extern volatile sim_reg_t *const sim_reg_iface;
+extern volatile struct _sim_reg *const sim_reg_iface;
 
 #endif // _SIM_IO_H_

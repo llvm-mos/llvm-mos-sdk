@@ -45,14 +45,17 @@ uint32_t clock_start = 0;
 bool shouldPrintCycles = false;
 bool shouldTrace = false;
 bool cmos = false;
+bool input_eof = false;
 
 int8_t read6502(uint16_t address) {
   if (address == 0xfff0) {
     *((uint32_t *)(memory + address)) = clockticks6502 - clock_start;
-  }
-  else if (address == 0xfff6)
-  {
-    return getchar();
+  } else if (address == 0xfff5) {
+    const int c = getchar();
+    input_eof = (c == EOF);
+    return (int8_t)c;
+  } else if (address == 0xfff6) {
+    return (int8_t)input_eof;
   }
   return memory[address];
 }

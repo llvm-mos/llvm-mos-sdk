@@ -9,13 +9,13 @@ static uint8_t buf_end = 0;
 
 // defined in linker script.  Calling convention of Kernal CHRIN matches 
 // C calling convention.
-char CHRIN();
+char __CHRIN();
 
 // Default input from the keyboard device has 80 char edit buffer.
 // When you call CHRIN, it waits for the user to input something and does not
 // return until RETURN is pressed.  When return is pressed, the contents of the 
-// line the user entered is available.  CHRIN returns, it appears you
-// must keep calling to fetch the rest of the kernal line buffer, by repeated 
+// line the user entered is available. When CHRIN returns, it appears you
+// must keep fetch the rest of the kernal line buffer by repeatedly
 // calling CHRIN until you retrieve the carraige return.  Based on examples
 // I found online, and through my own testing, it's not safe to do other I/O
 // until the input is fully retrieved-- for example calling CHROUT after
@@ -23,21 +23,16 @@ char CHRIN();
 // buffer to drop.  Thus, the entire line is held in our own input buffer.  
 // Theoretically this maps neatly to the buffer required for the stdin stream.
 
-char __getchar() {
-
-  // While the input buffer is not empty, return characters from it.
-  if (buf_begin != buf_end) {
-    return input_buffer[buf_begin++];
-  }
-
-  // if the input buffer is empty, call the CHRIN routine until in returns
-  // a CR.  The first time through CHRIN may block while waiting for the 
+static void __fill_buffer() {
+  // Precondition: the input buffer is empty.
+  // Call the CHRIN routine until in returns a CR. 
+  // The first time through the loop, CHRIN may block while waiting for the
   // user to finish entering data.
   buf_begin = 0;
   buf_end = 0;
 
   for (;;) {
-    const char currentchar = CHRIN();
+    const char currentchar = __CHRIN();
 
     if (currentchar == '\r') {
       /* echo carriage return */
@@ -47,6 +42,14 @@ char __getchar() {
     }
 
     input_buffer[buf_end++] = currentchar;
+  }
+}
+
+int getchar() {
+
+  // While the input buffer is not empty, return characters from it.
+  if (buf_begin == buf_end) {
+    __fill_buffer();
   }
 
   return input_buffer[buf_begin++];

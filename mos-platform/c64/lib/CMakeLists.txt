@@ -8,6 +8,7 @@ llvm_mos_sdk_add_c(
   chrout.c
   putchar.c
   getchar.c
+  kernal.S
 )
 # abort is preemptively included if LTO is used, which pulls in _exit support
 # unneccessarily.

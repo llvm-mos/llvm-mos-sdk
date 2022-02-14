@@ -24,17 +24,15 @@ private:
     ExitFunctionStorage m_funcs[BLOCK_SZ];
     std::uint8_t m_sz;
 
+    bool empty() const { return !m_sz; }
     bool full() const { return m_sz == BLOCK_SZ; }
 
     void push_front(const ExitFunctionStorage &newfn) {
       m_funcs[m_sz++] = newfn;
     }
 
-    void run_all() {
-      for (std::uint8_t i = m_sz; i > 0; --i) {
-        m_funcs[i - 1]();
-      }
-    }
+    const ExitFunctionStorage &back() const { return m_funcs[m_sz - 1]; }
+    void pop_back() { m_sz--; }
   };
 
   struct FnNode : public FnBlock {
@@ -67,16 +65,19 @@ public:
   }
 
   static void run_all_exits() {
-    while (m_list != &m_tail) {
-      m_list->run_all();
-
-      const auto current_node_ptr = static_cast<FnNode *>(m_list);
-      const auto next_block = current_node_ptr->m_next;
-      // current_node_ptr is leaked here. We are shutting down.
-      m_list = next_block;
+    while (m_list != &m_tail || !m_list->empty()) {
+      if (!m_list->empty()) {
+        // Note: fn may itself call atexit, so pop first.
+        ExitFunctionStorage fn = m_list->back();
+        m_list->pop_back();
+        fn();
+      } else {
+        const auto current_node_ptr = static_cast<FnNode *>(m_list);
+        const auto next_block = current_node_ptr->m_next;
+        // current_node_ptr is leaked here. We are shutting down.
+        m_list = next_block;
+      }
     }
-
-    m_tail.run_all();
   }
 
 private:
@@ -95,10 +96,8 @@ RegistrationList::FnBlock *RegistrationList::m_list = &m_tail;
 
 extern "C" {
 
-asm (
-  ".section .fini.10,\"axR\",@progbits\n"
-  "jsr __do_atexit\n"
-);
+asm(".section .fini.10,\"axR\",@progbits\n"
+    "jsr __do_atexit\n");
 
 void __do_atexit() { RegistrationList::run_all_exits(); }
 
@@ -106,8 +105,8 @@ void __do_atexit() { RegistrationList::run_all_exits(); }
 // single loaded binary, with no dynamic loading.  Therefore; the mechanism for
 // holding a DSO handle (the third parameter to _cxa_atexit), is ignored.
 int __cxa_atexit(void (*f)(void *), void *p, void * /* dso_handle */) {
-  // Return values equal to C/C++ at_exit() return value.
-  return RegistrationList::push_front(ExitFunctionStorage{f, p}) ? 0 : -1;
+  // Return values equal to C/C++ atexit() return value.
+  return !RegistrationList::push_front(ExitFunctionStorage{f, p});
 }
 
 } // extern "C"

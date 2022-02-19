@@ -26,6 +26,6 @@ _Exit:
   ; forwarded back to the OS.
   rts
 
-.section .noinit,"aw"
+.section .noinit,"aw",@nobits
 __save_s:
   .fill 1

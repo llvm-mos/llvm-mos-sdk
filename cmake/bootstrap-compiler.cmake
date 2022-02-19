@@ -7,10 +7,15 @@ if(LLVM_MOS_BOOTSTRAP_COMPILER)
     set(LLVM_MOS_PRECOMPILED_TOOLS llvm-mos-${_cmake_host_system_name_lowercase}-main
             CACHE STRING "The name of the llvm-mos release to download for precompiled tools")
   endif()
+  if (WIN32)
+    set(extension zip)
+  else()
+    set(extension tar.xz)
+  endif()
   include(FetchContent)
   FetchContent_Declare(
           llvm-mos
-          URL https://github.com/llvm-mos/llvm-mos/releases/download/${LLVM_MOS_PRECOMPILED_TOOLS}/${LLVM_MOS_PRECOMPILED_TOOLS}.zip
+          URL https://github.com/llvm-mos/llvm-mos/releases/download/${LLVM_MOS_PRECOMPILED_TOOLS}/${LLVM_MOS_PRECOMPILED_TOOLS}.${extension}
   )
   message("-- Downloading LLVM-MOS compiler, please wait...")
   FetchContent_MakeAvailable(llvm-mos)

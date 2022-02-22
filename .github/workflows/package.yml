@@ -32,8 +32,8 @@ jobs:
       - name: Fetch the latest Mac llvm-mos release.
         if: startsWith(matrix.os, 'macos')
         run: |
-          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-linux-main/llvm-mos-macos-main.tar.xz
-          tar -xvf llvm-mos-macos-main.tar.xz
+          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-linux-main/llvm-mos-darwin-main.tar.xz
+          tar -xvf llvm-mos-darwin-main.tar.xz
 
       - name: Check out the SDK.
         uses: actions/checkout@v2

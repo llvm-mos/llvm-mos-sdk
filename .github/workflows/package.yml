@@ -59,7 +59,8 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         uses: softprops/action-gh-release@v1
         with:
-          name: Prerelease LLVM-MOS Linux SDK
+          name: Prerelease Linux SDK
+          tag_name: linux-prerelease
           files: llvm-mos-linux.tar.xz
           prerelease: true
           generate_release_notes: true
@@ -67,7 +68,8 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         uses: softprops/action-gh-release@v1
         with:
-          name: Prerelease LLVM-MOS Windows SDK
+          name: Prerelease Windows SDK
+          tag_name: windows-prerelease
           files: llvm-mos-windows.zip
           prerelease: true
           generate_release_notes: true
@@ -75,7 +77,8 @@ jobs:
         if: startsWith(matrix.os, 'macos')
         uses: softprops/action-gh-release@v1
         with:
-          name: Prerelease LLVM-MOS Mac OS SDK
+          name: Prerelease Mac OS SDK
+          tag_name: macos-prerelease
           files: llvm-mos-macos.zip
           prerelease: true
           generate_release_notes: true

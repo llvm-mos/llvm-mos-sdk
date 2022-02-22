@@ -19,6 +19,9 @@ jobs:
         if: startsWith(matrix.os, 'macos')
         run: brew update && brew install ninja
 
+      - name: Check out the SDK.
+        uses: actions/checkout@v2
+
       - name: Fetch the latest Ubuntu llvm-mos release.
         if: startsWith(matrix.os, 'ubuntu')
         run: |
@@ -35,9 +38,6 @@ jobs:
           curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-darwin-main/llvm-mos-darwin-main.tar.xz
           tar -xvf llvm-mos-darwin-main.tar.xz
 
-      - name: Check out the SDK.
-        uses: actions/checkout@v2
-
       - name: Build the SDK.
         run: |
           mkdir build
@@ -47,17 +47,13 @@ jobs:
 
       - name: Archive the Linux SDK.
         if: startsWith(matrix.os, 'ubuntu')
-        run: |
-          tar -cJvf llvm-mos-linux.tar.xz llvm-mos
+        run: tar -cJvf llvm-mos-linux.tar.xz llvm-mos
       - name: Archive the Windows SDK.
         if: startsWith(matrix.os, 'windows')
-        run: |
-          dir
-          zip -FSr -9 -v llvm-mos-windows.zip llvm-mos
+        run: zip -FSr -9 -v llvm-mos-windows.zip llvm-mos
       - name: Archive the Mac SDK.
         if: startsWith(matrix.os, 'macos')
-        run: |
-          tar -cJvf llvm-mos-macos.tar.xz llvm-mos
+        run: tar -cJvf llvm-mos-macos.tar.xz llvm-mos
 
       - name: Dispatch Test Suite
         if: startsWith(matrix.os, 'ubuntu')

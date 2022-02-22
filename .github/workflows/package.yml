@@ -1,0 +1,20 @@
+name: Package
+on:
+  push:
+    branches: [ main ]
+jobs:
+  package:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+  steps:
+    - name: Install Ubuntu build dependencies.
+      if: startsWith(matrix.os, 'ubuntu')
+      run: sudo apt-get -y install ninja-build
+    - name: Install Windows build dependencies.
+      if: startsWith(matrix.os, 'windows')
+      run: choco install ninja zip microsoft-build-tools
+    - name: Install MacOS tools
+      if: startsWith(matrix.os, 'macos')
+      run: brew update && brew install ninja

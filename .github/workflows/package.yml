@@ -40,7 +40,6 @@ jobs:
 
       - name: Build the SDK.
         run: |
-          cd llvm-mos-sdk
           mkdir build
           cd build
           cmake -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/llvm-mos -G "Ninja" ..

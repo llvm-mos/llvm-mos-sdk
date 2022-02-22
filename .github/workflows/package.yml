@@ -14,10 +14,26 @@ jobs:
         run: sudo apt-get -y install ninja-build
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
-        run: choco install ninja zip microsoft-build-tools
+        run: choco install curl ninja zip microsoft-build-tools
       - name: Install MacOS tools
         if: startsWith(matrix.os, 'macos')
         run: brew update && brew install ninja
+
+      - name: Fetch the latest Ubuntu llvm-mos release.
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-linux-main/llvm-mos-linux-main.tar.xz
+          tar -xvf llvm-mos-linux-main.tar.xz
+      - name: Fetch the latest Windows llvm-mos release.
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-linux-main/llvm-mos-windows-main.zip
+          unzip llvm-mos-windows-main.zip
+      - name: Fetch the latest Mac llvm-mos release.
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-linux-main/llvm-mos-macos-main.tar.xz
+          tar -xvf llvm-mos-macos-main.tar.xz
       - name: Dispatch Test Suite
         if: startsWith(matrix.os, 'ubuntu')
         uses: llvm-mos/repository-dispatch@v1

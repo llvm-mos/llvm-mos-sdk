@@ -55,6 +55,31 @@ jobs:
         if: startsWith(matrix.os, 'macos')
         run: tar -cJvf llvm-mos-macos.tar.xz llvm-mos
 
+      - name: Upload the Linux SDK.
+        if: startsWith(matrix.os, 'ubuntu')
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Prerelease LLVM-MOS Linux SDK
+          files: llvm-mos-linux.tar.xz
+          prerelease: true
+          generate_release_notes: true
+      - name: Upload the Windows SDK.
+        if: startsWith(matrix.os, 'windows')
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Prerelease LLVM-MOS Windows SDK
+          files: llvm-mos-windows.zip
+          prerelease: true
+          generate_release_notes: true
+      - name: Upload the Mac SDK.
+        if: startsWith(matrix.os, 'macos')
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Prerelease LLVM-MOS Mac OS SDK
+          files: llvm-mos-macos.zip
+          prerelease: true
+          generate_release_notes: true
+
       - name: Dispatch Test Suite
         if: startsWith(matrix.os, 'ubuntu')
         uses: llvm-mos/repository-dispatch@v1

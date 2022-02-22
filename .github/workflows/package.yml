@@ -14,7 +14,7 @@ jobs:
         run: sudo apt-get -y install ninja-build
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
-        run: choco install curl ninja zip microsoft-build-tools
+        run: choco install curl ninja zip
       - name: Install MacOS tools
         if: startsWith(matrix.os, 'macos')
         run: brew update && brew install ninja
@@ -52,6 +52,7 @@ jobs:
       - name: Archive the Windows SDK.
         if: startsWith(matrix.os, 'windows')
         run: |
+          dir
           zip -FSr -9 -v llvm-mos-windows.zip llvm-mos
       - name: Archive the Mac SDK.
         if: startsWith(matrix.os, 'macos')

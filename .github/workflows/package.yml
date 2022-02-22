@@ -46,14 +46,18 @@ jobs:
           cmake -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/llvm-mos -G "Ninja" ..
           ninja install
 
-      - name: Archive the SDK.
-        if: ${{!startsWith(matrix.os, 'windows')}}
+      - name: Archive the Linux SDK.
+        if: startsWith(matrix.os, 'ubuntu')
         run: |
           tar -cJvf llvm-mos-linux.tar.xz llvm-mos
-      - name: Archive the windows llvm-mos release.
+      - name: Archive the Windows SDK.
         if: startsWith(matrix.os, 'windows')
         run: |
           zip -FSr -9 -v llvm-mos-windows.zip llvm-mos
+      - name: Archive the Mac SDK.
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          tar -cJvf llvm-mos-macos.tar.xz llvm-mos
 
       - name: Dispatch Test Suite
         if: startsWith(matrix.os, 'ubuntu')

@@ -46,7 +46,7 @@ jobs:
           ninja install
 
       - name: Archive the POSIX SDKs.
-        if: ${{!startsWith(matrix.os, 'ubuntu')}}
+        if: ${{!startsWith(matrix.os, 'windows')}}
         run: tar -cJvf llvm-mos.tar.xz llvm-mos
       - name: Archive the Windows SDK.
         if: startsWith(matrix.os, 'windows')

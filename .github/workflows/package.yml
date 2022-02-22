@@ -42,7 +42,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_INSTALL_PREFIX=${{env.GITHUB_WORKSPACE}}/llvm-mos -G "Ninja" ..
+          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -G "Ninja" ..
           ninja install
 
       - name: Archive the Linux SDK.

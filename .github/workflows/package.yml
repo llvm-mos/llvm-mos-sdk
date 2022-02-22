@@ -27,13 +27,13 @@ jobs:
       - name: Fetch the latest Windows llvm-mos release.
         if: startsWith(matrix.os, 'windows')
         run: |
-          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-linux-main/llvm-mos-windows-main.zip
+          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-windows-main/llvm-mos-windows-main.zip
           unzip llvm-mos-windows-main.zip
       - name: Fetch the latest Mac llvm-mos release.
         if: startsWith(matrix.os, 'macos')
         run: |
-          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-linux-main/llvm-mos-darwin-main.tar.xz
-          tar -xJvf llvm-mos-darwin-main.tar.xz
+          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-darwin-main/llvm-mos-darwin-main.tar.xz
+          tar -xvf llvm-mos-darwin-main.tar.xz
 
       - name: Check out the SDK.
         uses: actions/checkout@v2

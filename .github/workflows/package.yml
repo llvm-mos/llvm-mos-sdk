@@ -18,7 +18,8 @@ jobs:
       - name: Install MacOS tools
         if: startsWith(matrix.os, 'macos')
         run: brew update && brew install ninja
-      - name: Repository Dispatch
+      - name: Dispatch Test Suite
+        if: startsWith(matrix.os, 'ubuntu')
         uses: llvm-mos/repository-dispatch@v1
         with:
           token: ${{ secrets.TEST_SUITE_ACCESS_TOKEN }}

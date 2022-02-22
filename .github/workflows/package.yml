@@ -34,6 +34,27 @@ jobs:
         run: |
           curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-linux-main/llvm-mos-macos-main.tar.xz
           tar -xvf llvm-mos-macos-main.tar.xz
+
+      - name: Check out the SDK.
+        uses: actions/checkout@v2
+
+      - name: Build the SDK.
+        run: |
+          cd llvm-mos-sdk
+          mkdir build
+          cd build
+          cmake -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/llvm-mos -G "Ninja" ..
+          ninja install
+
+      - name: Archive the SDK.
+        if: !startsWith(matrix.os, 'windows')
+        run: |
+          tar -cJvf llvm-mos-linux.tar.xz llvm-mos
+      - name: Archive the windows llvm-mos release.
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          zip -FSr -9 -v llvm-mos-windows.zip llvm-mos
+
       - name: Dispatch Test Suite
         if: startsWith(matrix.os, 'ubuntu')
         uses: llvm-mos/repository-dispatch@v1

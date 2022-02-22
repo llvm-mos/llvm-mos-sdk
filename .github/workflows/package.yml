@@ -47,7 +47,7 @@ jobs:
           ninja install
 
       - name: Archive the SDK.
-        if: !startsWith(matrix.os, 'windows')
+        if: ${{!startsWith(matrix.os, 'windows')}}
         run: |
           tar -cJvf llvm-mos-linux.tar.xz llvm-mos
       - name: Archive the windows llvm-mos release.

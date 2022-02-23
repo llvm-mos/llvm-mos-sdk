@@ -16,7 +16,7 @@ jobs:
         run: sudo apt-get -y install ninja-build
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
-        run: choco install curl ninja zip
+        run: choco install curl ninja
       - name: Install MacOS tools
         if: startsWith(matrix.os, 'macos')
         run: brew update && brew install ninja
@@ -32,8 +32,8 @@ jobs:
       - name: Fetch the latest Windows llvm-mos release.
         if: startsWith(matrix.os, 'windows')
         run: |
-          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-windows-main/llvm-mos-windows-main.zip
-          unzip llvm-mos-windows-main.zip
+          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-windows-main/llvm-mos-windows-main.7z
+          7z e llvm-mos-windows-main.7z
       - name: Fetch the latest Mac llvm-mos release.
         if: startsWith(matrix.os, 'macos')
         run: |
@@ -52,7 +52,7 @@ jobs:
         run: tar -cJvf llvm-mos.tar.xz llvm-mos
       - name: Archive the Windows SDK.
         if: startsWith(matrix.os, 'windows')
-        run: zip -FSr -9 -v llvm-mos.zip llvm-mos
+        run: 7z a llvm-mos.7z llvm-mos
 
       - name: Upload the Linux SDK.
         if: startsWith(matrix.os, 'ubuntu')
@@ -70,7 +70,7 @@ jobs:
           name: Prerelease Windows SDK
           body: Prerelease llvm-mos SDK for Windows.
           tag_name: windows-prerelease
-          files: llvm-mos.zip
+          files: llvm-mos.7z
           prerelease: true
       - name: Upload the Mac SDK.
         if: startsWith(matrix.os, 'macos')

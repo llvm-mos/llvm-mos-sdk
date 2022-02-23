@@ -1,4 +1,5 @@
 name: Package
+concurrency: sdk-package
 on:
   push:
     branches: [ main ]

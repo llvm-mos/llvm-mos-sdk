@@ -2,6 +2,7 @@ name: Package
 on:
   push:
     branches: [ main ]
+  repository_dispatch:
 jobs:
   package:
     runs-on: ${{ matrix.os }}

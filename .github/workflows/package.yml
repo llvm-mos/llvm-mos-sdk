@@ -82,8 +82,11 @@ jobs:
           files: llvm-mos.tar.xz
           prerelease: true
 
+  dispatch-test:
+    runs-on: ubuntu-latest
+    needs: package
+    steps:
       - name: Dispatch Test Suite
-        if: startsWith(matrix.os, 'ubuntu')
         uses: llvm-mos/repository-dispatch@v1
         with:
           token: ${{ secrets.TEST_SUITE_ACCESS_TOKEN }}

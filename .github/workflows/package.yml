@@ -3,6 +3,7 @@ concurrency: sdk-package
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
   repository_dispatch:
 jobs:
   package:

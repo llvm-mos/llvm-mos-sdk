@@ -34,7 +34,7 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         run: |
           curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-windows-main/llvm-mos-windows-main.7z
-          7z e llvm-mos-windows-main.7z
+          7z x llvm-mos-windows-main.7z
       - name: Fetch the latest Mac llvm-mos release.
         if: startsWith(matrix.os, 'macos')
         run: |

@@ -73,7 +73,7 @@ jobs:
       - name: Download the SDK.
         uses: actions/download-artifact@v2
         with:
-          path: .
+          name: artifact
 
       - name: Prerelease the SDK.
         uses: softprops/action-gh-release@v1

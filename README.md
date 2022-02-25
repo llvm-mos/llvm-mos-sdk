@@ -1,6 +1,6 @@
 # LLVM-MOS SDK
 
-The SDK for developing with the LLVM-MOS compiler.
+The LLVM-MOS compiler toolchain and platform libraries.
 
 ## Supported Platforms
 

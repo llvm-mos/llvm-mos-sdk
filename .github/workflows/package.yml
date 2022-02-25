@@ -58,11 +58,21 @@ jobs:
         if: startsWith(matrix.os, 'macos')
         run: tar -cJvf llvm-mos-macos.tar.xz llvm-mos
 
-  upload:
+      - name: Upload the SDK.
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            *.tar.xz
+            *.7z
+
+  prerelease:
     runs-on: ubuntu-latest
     needs: package
     steps:
-      - name: Upload the Linux SDK.
+      - name: Download the SDK.
+        uses: actions/download-artifact@v2
+
+      - name: Prerelease the SDK.
         uses: softprops/action-gh-release@v1
         with:
           name: Prerelease SDK

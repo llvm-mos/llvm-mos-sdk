@@ -48,39 +48,26 @@ jobs:
           cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -G "Ninja" ..
           ninja install
 
-      - name: Archive the POSIX SDKs.
-        if: ${{!startsWith(matrix.os, 'windows')}}
-        run: tar -cJvf llvm-mos.tar.xz llvm-mos
+      - name: Archive the Linux SDK.
+        if: startsWith(matrix.os, 'ubuntu')
+        run: tar -cJvf llvm-mos-linux.tar.xz llvm-mos
       - name: Archive the Windows SDK.
         if: startsWith(matrix.os, 'windows')
-        run: 7z a llvm-mos.7z llvm-mos
+        run: 7z a llvm-mos-windows.7z llvm-mos
+      - name: Archive the Mac OS SDK.
+        if: startsWith(matrix.os, 'macos')
+        run: tar -cJvf llvm-mos-macos.tar.xz llvm-mos
 
       - name: Upload the Linux SDK.
-        if: startsWith(matrix.os, 'ubuntu')
         uses: softprops/action-gh-release@v1
         with:
-          name: Prerelease Linux SDK
-          body: Prerelease llvm-mos SDK for Linux.
-          tag_name: linux-prerelease
-          files: llvm-mos.tar.xz
-          prerelease: true
-      - name: Upload the Windows SDK.
-        if: startsWith(matrix.os, 'windows')
-        uses: softprops/action-gh-release@v1
-        with:
-          name: Prerelease Windows SDK
-          body: Prerelease llvm-mos SDK for Windows.
-          tag_name: windows-prerelease
-          files: llvm-mos.7z
-          prerelease: true
-      - name: Upload the Mac SDK.
-        if: startsWith(matrix.os, 'macos')
-        uses: softprops/action-gh-release@v1
-        with:
-          name: Prerelease Mac OS SDK
-          body: Prerelease llvm-mos SDK for Mac OS.
-          tag_name: macos-prerelease
-          files: llvm-mos.tar.xz
+          name: Prerelease SDK
+          body: Prerelease llvm-mos SDK.
+          tag_name: prerelease
+          files: |
+            llvm-mos-linux.tar.xz
+            llvm-mos-windows.7z
+            llvm-mos-macos.tar.xz
           prerelease: true
 
   dispatch-test:

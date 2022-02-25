@@ -2,20 +2,58 @@
 
 The LLVM-MOS compiler toolchain and platform libraries.
 
-## Supported Platforms
+## Supported platforms
 
 - Atari 8-bit
 - Commodore 64
 - 6502 simulator (included)
 
-## Supported functionality
+## Notable features
 
-- C/C++ freestanding runtimes
-- `_Exit`, `exit`, and `atexit`
-- Simple `malloc`/`free`
-- Simple `printf`
-- `setjmp`/`longjmp`
-- A smattering of other C library functions
+- Broad C99 and C++11 freestanding standards compatibility
+  - Interrupt handling
+  - C++ templates
+  - C++ virtual functions
+  - C++ new/delete
+  - C++ Run-Time Type Information (dynamic_cast,  typeid)
+  - C++ static constructors/destructors (run before and after main)
+  - C++ "magic" function local static constructors/destructors
+- The high and low-level optimizations expected of a young-ish LLVM backend 
+  - Sophisticated register allocation over A, X, Y, and a field of 16 2-byte zero-page (imaginary) registers
+  - The imaginary registers can be placed anywhere and need not be contiguous.
+  - The calling convention passes through registers whenever possible. 
+  - Loop optimizations to select 6502 addressing modes
+  - Whole program "static stack" optimization
+    - Automatically identifies non-reentrant functions and allocates their frames as static globals
+    - Programs without recursion or complex function pointers may not need a soft stack at all.
+    - No manual annotations required
+  - Link time inlining and optimization across the whole program
+    - Includes SDK libraries. Library calls can be often optimized away completely!
+- Excellent compiler usability
+  - Clang's world-class error messages
+  - IDE integration through the included custom clangd's Language Server Protocol
+  - Straigtforward invocations to compile for various targets: `mos-c64-clang++ -Os -o game.prg game.cc` 
+- A small standard library sufficient to provide the above and a few extras
+  - Simple printf
+  - Simple malloc/free
+  - exit, _Exit, and atexit
+- An ELF file format implementation
+  - All the usual POSIX tools for working with object files: readelf, nm, etc.
+  - A GAS-compatible assembler for the 6502 with a complete macro system
+- A lld linker implementation for the 6502
+  - All the usual trimmings of an ELF lld backend
+    - Link-time garbage collection
+    - Symbol map exports
+    - Linker scripts
+    - GCC ld compatibility
+
+## Notably missing features
+
+- C99 requires supporting 64KiB locals, sorry, no can do.
+- A hosted C with all the standard library bells and whistles.
+- Float/double
+- C++ Exceptions
+
 
 ## Getting started
 

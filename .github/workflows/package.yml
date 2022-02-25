@@ -62,8 +62,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: |
-            *.tar.xz
-            *.7z
+            llvm-mos-linux.tar.xz
+            llvm-mos-windows.7z
+            llvm-mos-macos.tar.xz
 
   prerelease:
     runs-on: ubuntu-latest

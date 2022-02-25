@@ -60,6 +60,7 @@ jobs:
 
   upload:
     runs-on: ubuntu-latest
+    needs: package
     steps:
       - name: Upload the Linux SDK.
         uses: softprops/action-gh-release@v1

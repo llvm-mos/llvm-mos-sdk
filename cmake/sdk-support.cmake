@@ -200,5 +200,8 @@ function(llvm_mos_sdk_add_example_executable name)
       USES_TERMINAL
     )
     set_target_properties(run-${name} PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD ON)
+
+    # Install the source files.
+    llvm_mos_sdk_install(FILES ${ARGN})
   endif()
 endfunction()

@@ -1,7 +1,7 @@
 #ifndef _CSTDDEF_
 #define _CSTDDEF_
 #include <stddef.h>
-#include <type_traits>
+#include <__type_traits_impl.h>
 
 namespace std {
 using size_t = ::size_t;

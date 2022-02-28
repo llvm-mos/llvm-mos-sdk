@@ -1,13 +1,12 @@
-#ifndef __TYPE_TRAITS_BASE_H__
-#define __TYPE_TRAITS_BASE_H__
+#ifndef __TYPE_TRAITS_IMPL_H__
+#define __TYPE_TRAITS_IMPL_H__
 
 // This implementation header factors out common type traits
 // needed in multiple headers.
-// Some portions of type_traits depend on cstddef, and 
+// Some portions of type_traits depend on cstddef, and
 // Some portions of cstddef depend on type_traits.
 
-namespace std
-{
+namespace std {
 
 template <class T, T v> struct integral_constant {
   static constexpr T value = v;
@@ -38,4 +37,4 @@ template <class _Tp> decltype(__declval<_Tp>(0)) declval() noexcept;
 
 } // namespace std
 
-#endif //__TYPE_TRAITS_BASE_H__
+#endif //__TYPE_TRAITS_IMPL_H__

@@ -1,4 +1,4 @@
-/* Atari800XL XEX file linker script.
+/* Atari 8-bit XEX file linker script.
  */
 
 OUTPUT_FORMAT(binary)

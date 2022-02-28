@@ -1,4 +1,4 @@
 llvm_mos_sdk_add_platform(common)
-llvm_mos_sdk_add_platform(a800xl BUILD_EXAMPLES)
+llvm_mos_sdk_add_platform(atari8 BUILD_EXAMPLES)
 llvm_mos_sdk_add_platform(c64 BUILD_EXAMPLES)
 llvm_mos_sdk_add_platform(sim BUILD_EXAMPLES)

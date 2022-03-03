@@ -143,18 +143,18 @@ limitations under the License.
 
 
 //flag modifier macros
-#define setcarry() status |= FLAG_CARRY
-#define clearcarry() status &= (~FLAG_CARRY)
-#define setzero() status |= FLAG_ZERO
-#define clearzero() status &= (~FLAG_ZERO)
-#define setinterrupt() status |= FLAG_INTERRUPT
-#define clearinterrupt() status &= (~FLAG_INTERRUPT)
-#define setdecimal() status |= FLAG_DECIMAL
-#define cleardecimal() status &= (~FLAG_DECIMAL)
-#define setoverflow() status |= FLAG_OVERFLOW
-#define clearoverflow() status &= (~FLAG_OVERFLOW)
-#define setsign() status |= FLAG_SIGN
-#define clearsign() status &= (~FLAG_SIGN)
+#define setcarry() (status |= FLAG_CARRY)
+#define clearcarry() (status &= ~FLAG_CARRY)
+#define setzero() (status |= FLAG_ZERO)
+#define clearzero() (status &= ~FLAG_ZERO)
+#define setinterrupt() (status |= FLAG_INTERRUPT)
+#define clearinterrupt() (status &= ~FLAG_INTERRUPT)
+#define setdecimal() (status |= FLAG_DECIMAL)
+#define cleardecimal() (status &= ~FLAG_DECIMAL)
+#define setoverflow() (status |= FLAG_OVERFLOW)
+#define clearoverflow() (status &= ~FLAG_OVERFLOW)
+#define setsign() (status |= FLAG_SIGN)
+#define clearsign() (status &= ~FLAG_SIGN)
 
 
 //flag calculation macros

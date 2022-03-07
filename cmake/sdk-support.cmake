@@ -63,6 +63,36 @@ function(llvm_mos_sdk_add_object_file name src)
     -P ${CMAKE_SOURCE_DIR}/cmake/create-symlink.cmake DEPENDS $<TARGET_OBJECTS:${target_name}>)
 endfunction()
 
+# Adds a SDK static library of the given name containing the given list of
+# sources. If the list of sources is empty, a stub library is created. If the
+# SDK is defined to be based on another, and the basis SDK has a library of the
+# same name, the two libraries are merged together. Care should be taken to
+# ensure that the semantics of this are sensible; common libraries should not
+# contain functionality that will need to be replaced by their dependencies.
+function(llvm_mos_sdk_add_library name)
+  if(NOT LLVM_MOS_CURRENT_PLATFORM)
+    message(FATAL_ERROR "llvm_mos_sdk_add_library() can only be used in "
+            "llvm_mos_sdk_add_platform() scope")
+  endif()
+
+  set(sources ${ARGN})
+  if (NOT sources)
+    set(sources ${CMAKE_SOURCE_DIR}/mos-platform/common/lib/stub.c)
+  endif()
+
+  set(target ${LLVM_MOS_CURRENT_PLATFORM}-${name})
+  add_library(${target} STATIC ${sources})
+  llvm_mos_sdk_track_platform_target(${target})
+  set(based_on_target ${LLVM_MOS_BASED_ON_PLATFORM}-${name})
+  set_target_properties(${target} PROPERTIES OUTPUT_NAME ${name})
+  if (TARGET ${based_on_target})
+    add_custom_command(TARGET ${target} POST_BUILD
+      COMMAND ${CMAKE_AR} qL $<TARGET_FILE:${target}> $<TARGET_FILE:${based_on_target}>
+    )
+  endif()
+  llvm_mos_sdk_install(TARGETS ${target})
+endfunction()
+
 # Creates (or copies) a target file as a symlink during install.
 function(llvm_mos_sdk_install_symlink name dest)
   set(full_name ${name}${CMAKE_EXECUTABLE_SUFFIX})
@@ -88,7 +118,7 @@ endfunction()
 # host's CMAKE_EXECUTABLE_SUFFIX (so Windows symlinks end in .exe) and
 # so examples create run-<name> simulator targets.
 function(llvm_mos_sdk_add_platform name)
-  cmake_parse_arguments(ARG BUILD_EXAMPLES "" "" ${ARGN})
+  cmake_parse_arguments(ARG BUILD_EXAMPLES BASED_ON "" ${ARGN})
   set(cfg_file mos-${name}.cfg)
 
   _get_relative_install_path(rel_path)
@@ -102,6 +132,7 @@ function(llvm_mos_sdk_add_platform name)
 
   # Everything from this scope down can identify which platform is active.
   set(LLVM_MOS_CURRENT_PLATFORM ${name})
+  set(LLVM_MOS_BASED_ON_PLATFORM ${ARG_BASED_ON})
 
   if(NOT MOS)
     # Clang searches for config files next to itself as a last resort.

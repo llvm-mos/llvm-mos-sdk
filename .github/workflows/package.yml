@@ -3,6 +3,8 @@ concurrency: sdk-package
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'README.md'
   workflow_dispatch:
   repository_dispatch:
 jobs:

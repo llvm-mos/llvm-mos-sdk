@@ -104,7 +104,7 @@ executables and libraries for that target.
 
 | Platform       | Command            |
 | -------------- | ------------------ |
-| Atari 8-bit    | `mos-a800xl-clang` |
+| Atari 8-bit    | `mos-atari8-clang` |
 | Commodore 64   | `mos-c64-clang`    |
 | 6502 simulator | `mos-sim-clang`    |
 

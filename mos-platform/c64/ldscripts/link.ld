@@ -5,13 +5,15 @@
  * Produces a PRG file with a SYS command to start the program.
  */
 
-OUTPUT_FORMAT(binary)
+MEMORY {
+  ram (rw) : ORIGIN = 0x0801, LENGTH = 0x97ff
+}
 
 INPUT(basic_header.o)
 
 SECTIONS {
     /* Tells the C64 LOAD command where to place the file's contents. */
-    .prg_header 0x0801 - 2 : { SHORT(0x0801) }
+    .prg_header (INFO) : { SHORT(0x0801) }
 
     /* BASIC program that jumps to _start. */
     .basic_header : { *(.basic_header) }

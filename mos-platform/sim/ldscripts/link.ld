@@ -3,27 +3,32 @@
  * Produces a 64KiB memory image file usable with the provided simulator.
  */
 
-MEMORY {
-  ram (rw) : ORIGIN = 0x0200, LENGTH = 0xfdf0
-  vectors  : ORIGIN = 0xfffa, LENGTH = 6
-}
+OUTPUT_FORMAT(binary)
 
 SECTIONS {
-    .load_block_header (INFO) : {
-        SHORT(0x200)
-        SHORT(__load_end - 0x200)
+    .load_block_header 0x200 - 4 : {
+        SHORT(__load_start)
+        SHORT(__load_end - __load_start)
     }
-    INCLUDE c_sections.ld
 
-    .vectors_header (INFO) : {
-        SHORT(0xfffa)
+    __load_start = .;
+    INCLUDE ro_sections.ld
+    INCLUDE rw_sections.ld
+    __load_end = .;
+
+    .vector_block_header : {
+        SHORT(0xFFFA)
         SHORT(6)
     }
-    .vectors : {
+
+    .vector_block : {
         SHORT(0)
         SHORT(_start)
         SHORT(0)
-    } >vectors
+    }
+
+    INCLUDE noalloc_sections.ld
+    __heap_start = .;
 }
 
 /* Provide imaginary (zero page) registers. */

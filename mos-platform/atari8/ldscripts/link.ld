@@ -1,12 +1,10 @@
 /* Atari 8-bit XEX file linker script.
  */
 
-MEMORY {
-  ram (rw) : ORIGIN = 0x2000, LENGTH = 0xa000
-}
+OUTPUT_FORMAT(binary)
 
 SECTIONS {
-    .xex_header (INFO) : {
+    .xex_header 0x2000 - 12 : {
       /* XEX magic number. */
       SHORT(0xffff),
       /* First byte of Run vector. */
@@ -16,7 +14,7 @@ SECTIONS {
       /* Segment to be loaded to Run vector. */
       SHORT(_start),
       /* Address where first byte of main segment should be loaded. */
-      SHORT(0x2000),
+      SHORT(__load_start),
       /* Address of last byte of main segment. */
       SHORT(__load_end - 1),
       /* The main segment follows. */
@@ -29,6 +27,8 @@ SECTIONS {
  * This region is only used by BASIC's floating point routines, so it should be
  * reasonably safe to use these.
  */
+
+ASSERT(__load_start == 0x2000, "text at incorrect address.")
 
 PROVIDE(__rc0 = 0xcb);
 INCLUDE imag_regs.ld

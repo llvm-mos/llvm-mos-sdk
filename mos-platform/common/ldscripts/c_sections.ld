@@ -1,7 +1,6 @@
 /* Section definitions required by C. */
 
-/DISCARD/ : { *(.comment) }
-
+__load_start = .;
 INCLUDE ro_sections.ld
 INCLUDE rw_sections.ld
 __load_end = .;

@@ -1,25 +1,11 @@
 /* Atari 8-bit XEX file linker script.
  */
 
-OUTPUT_FORMAT(binary)
+MEMORY {
+    ram (rw) : ORIGIN = 0x2000, LENGTH = 0xa000
+}
 
 SECTIONS {
-    .xex_header 0x2000 - 12 : {
-      /* XEX magic number. */
-      SHORT(0xffff),
-      /* First byte of Run vector. */
-      SHORT(0x02e0),
-      /* Last byte of Run vector. */
-      SHORT(0x02e1),
-      /* Segment to be loaded to Run vector. */
-      SHORT(_start),
-      /* Address where first byte of main segment should be loaded. */
-      SHORT(__load_start),
-      /* Address of last byte of main segment. */
-      SHORT(__load_end - 1),
-      /* The main segment follows. */
-    }
-
     INCLUDE c_sections.ld
 }
 
@@ -28,9 +14,24 @@ SECTIONS {
  * reasonably safe to use these.
  */
 
-ASSERT(__load_start == 0x2000, "text at incorrect address.")
-
 PROVIDE(__rc0 = 0xcb);
 INCLUDE imag_regs.ld
 ASSERT(__rc0 == 0xcb, "Inconsistent zero page map.")
 ASSERT(__rc31 == 0xea, "Inconsistent zero page map.")
+
+OUTPUT_FORMAT {
+    /* XEX magic number. */
+    SHORT(0xffff)
+    /* First byte of Run vector. */
+    SHORT(0x02e0)
+    /* Last byte of Run vector. */
+    SHORT(0x02e1)
+    /* Segment to be loaded to Run vector. */
+    SHORT(_start)
+    /* Address where first byte of main segment should be loaded. */
+    SHORT(0x2000)
+    /* Address of last byte of main segment. */
+    SHORT(__data_end - 1)
+
+    TRIM(ram)
+}

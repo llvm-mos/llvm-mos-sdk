@@ -5,21 +5,18 @@
  * Produces a PRG file with a SYS command to start the program.
  */
 
-OUTPUT_FORMAT(binary)
+MEMORY {
+    ram (rw) : ORIGIN = 0x0801, LENGTH = 0x97ff
+}
 
 INPUT(basic_header.o)
 
 SECTIONS {
-    /* Tells the C64 LOAD command where to place the file's contents. */
-    .prg_header 0x0801 - 2 : { SHORT(0x0801) }
-
     /* BASIC program that jumps to _start. */
     .basic_header : { *(.basic_header) }
 
     INCLUDE c_sections.ld
 }
-
-ASSERT(ADDR(.basic_header) == 0x0801, "BASIC header at incorrect address.")
 
 /* Provide imaginary (zero page) registers in the BASIC area. */
 PROVIDE(__rc0 = 0x0002);
@@ -29,3 +26,9 @@ ASSERT(__rc31 == 0x0021, "Inconsistent zero page map.")
 
 /* Set initial soft stack address to end of BASIC area. (It grows down.) */
 __stack = 0x9FFF;
+
+OUTPUT_FORMAT {
+    /* Tells the C64 LOAD command where to place the file's contents. */
+    SHORT(0x0801)
+    TRIM(ram)
+}

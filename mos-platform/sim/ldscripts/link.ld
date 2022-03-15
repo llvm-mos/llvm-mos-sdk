@@ -3,32 +3,12 @@
  * Produces a 64KiB memory image file usable with the provided simulator.
  */
 
-OUTPUT_FORMAT(binary)
+MEMORY {
+    ram (rw) : ORIGIN = 0x0200, LENGTH = 0xfdf0
+}
 
 SECTIONS {
-    .load_block_header 0x200 - 4 : {
-        SHORT(__load_start)
-        SHORT(__load_end - __load_start)
-    }
-
-    __load_start = .;
-    INCLUDE ro_sections.ld
-    INCLUDE rw_sections.ld
-    __load_end = .;
-
-    .vector_block_header : {
-        SHORT(0xFFFA)
-        SHORT(6)
-    }
-
-    .vector_block : {
-        SHORT(0)
-        SHORT(_start)
-        SHORT(0)
-    }
-
-    INCLUDE noalloc_sections.ld
-    __heap_start = .;
+    INCLUDE c_sections.ld
 }
 
 /* Provide imaginary (zero page) registers. */
@@ -39,3 +19,15 @@ ASSERT(__rc31 == 0x001f, "Inconsistent zero page map.")
 
 /* Set initial soft stack address to just above last memory address. (It grows down.) */
 __stack = 0xFFF0;
+
+OUTPUT_FORMAT {
+    SHORT(0x0200)
+    SHORT(__data_end - 0x0200)
+    TRIM(ram)
+
+    SHORT(0xFFFA)
+    SHORT(6)
+    SHORT(0)
+    SHORT(_start)
+    SHORT(0)
+}

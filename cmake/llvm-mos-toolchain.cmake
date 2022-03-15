@@ -29,7 +29,7 @@ endif()
 
 cmake_path(GET CMAKE_C_COMPILER PARENT_PATH compiler_dir)
 find_program(CMAKE_AR llvm-ar HINTS ${compiler_dir} REQUIRED)
-find_program(CMAKE_RANLIB llvm-raanlib HINTS ${compiler_dir} REQUIRED)
+find_program(CMAKE_RANLIB llvm-ranlib HINTS ${compiler_dir} REQUIRED)
 
 # Main way to determine if MOS is targeted via user CMake lists.
 set(MOS On)

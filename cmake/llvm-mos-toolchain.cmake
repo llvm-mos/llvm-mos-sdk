@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.18)
 
 # CMake should consider MOS as an embedded platform with no OS assumptions.
 set(CMAKE_SYSTEM_NAME Generic)
@@ -26,6 +26,10 @@ find_mos_compiler(CMAKE_ASM_COMPILER ${compiler_prefix}-clang)
 if(NOT CMAKE_C_COMPILER OR NOT CMAKE_CXX_COMPILER OR NOT CMAKE_ASM_COMPILER)
   message(FATAL_ERROR "Did not find LLVM-MOS compiler.")
 endif()
+
+cmake_path(GET CMAKE_C_COMPILER PARENT_PATH compiler_dir)
+find_program(CMAKE_AR llvm-ar HINTS ${compiler_dir} REQUIRED)
+find_program(CMAKE_RANLIB llvm-raanlib HINTS ${compiler_dir} REQUIRED)
 
 # Main way to determine if MOS is targeted via user CMake lists.
 set(MOS On)

@@ -29,10 +29,11 @@
 }
 
 .data : {
-    __data_begin = .;
+    __data_start = .;
     *(.data .data.*)
     __data_end = .;
 }
+__data_load_start = LOADADDR(.data);
 
 .bss (NOLOAD) : {
     __bss_start = .;

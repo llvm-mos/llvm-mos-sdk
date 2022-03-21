@@ -2,6 +2,7 @@ llvm_mos_sdk_install(FILES
   _exit.S
   alloca.h
   climits
+  copy_data.S
   cstdarg
   cstddef
   cstdint

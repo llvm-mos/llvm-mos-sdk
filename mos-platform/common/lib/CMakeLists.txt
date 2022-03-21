@@ -2,6 +2,7 @@
 # or may not be needed by a given program. These are basically the optional
 # portions of crt0.o.
 llvm_mos_sdk_add_library(start
+  copy_data.c
   zero_bss.c
 
   init_array.c

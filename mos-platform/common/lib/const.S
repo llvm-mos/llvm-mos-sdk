@@ -1,7 +1,7 @@
 ; Fixed constants used by the compiler in ways that preclude immediate
 ; addressing.
 
-.data
+.section .rodata,"a",@progbits
 
 ; Location that when used with BIT will set V. Compensates for the lack of a SEV
 ; instruction.

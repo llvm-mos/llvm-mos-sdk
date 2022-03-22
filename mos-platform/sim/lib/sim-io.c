@@ -1,4 +1,4 @@
-#include <sim_io.h>
+#include <sim-io.h>
 #include <stdio.h>
 
 volatile struct _sim_reg *const sim_reg_iface =

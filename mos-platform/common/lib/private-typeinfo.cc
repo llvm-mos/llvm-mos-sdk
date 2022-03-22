@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include "private_typeinfo.h"
+#include "private-typeinfo.h"
 
 #include <cstddef>
 

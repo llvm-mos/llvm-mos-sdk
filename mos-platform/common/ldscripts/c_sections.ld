@@ -1,15 +1,15 @@
 .text : {
     /* A mechanism for dynamically building an _init script. */
-    PROVIDE(_init = .);
-    *(.init_first)
+    _init = .;
+    _start = .;
     *(SORT_BY_INIT_PRIORITY(.init.* .init))
-    *(.init_last)
+    *(.call_main)
+    *(.after_main)
 
     /* A mechanism for dynamically building a _fini script. */
-    PROVIDE(_fini = .);
-    *(.fini_first)
+    _fini = .;
     *(SORT_BY_INIT_PRIORITY(.fini.* .fini))
-    *(.fini_last)
+    *(.fini_rts)
 
     *(.text .text.*)
 
@@ -24,7 +24,9 @@
     __fini_array_start = .;
     KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.* .fini_array)))
     __fini_array_end = .;
+}
 
+.rodata : {
     *(.rodata .rodata.*)
 }
 

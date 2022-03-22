@@ -10,7 +10,7 @@
 #define _TYPE_TRAITS_
 
 #include <cstddef>
-#include <__type_traits_impl.h>
+#include <__type-traits-impl.h>
 
 namespace std {
 

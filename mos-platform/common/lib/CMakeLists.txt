@@ -1,26 +1,52 @@
+llvm_mos_sdk_add_object_file(crt0 crt0.S)
+
 # libstart is a collection of initialization and finalization routines that may
 # or may not be needed by a given program. These are basically the optional
 # portions of crt0.o.
 llvm_mos_sdk_add_library(start
-  copy_data.c
-  zero_bss.c
-
-  init_array.c
-  fini_array.c
-
-  exit_return.c
+  init-array.c
+  fini-array.c
 )
 target_compile_options(common-start PRIVATE -fno-lto)
+
+llvm_mos_sdk_add_library(exit-return
+  _exit.S
+  exit.c
+  exit-return.c
+)
+target_compile_options(common-exit-return PRIVATE -fno-lto)
+
+llvm_mos_sdk_add_library(exit-custom
+  exit-custom.S
+  exit.c
+)
+target_compile_options(common-exit-custom PRIVATE -fno-lto)
+
+llvm_mos_sdk_add_library(zero-bss
+  zero-bss.S
+  zero-bss.c
+)
+target_compile_options(common-zero-bss PRIVATE -fno-lto)
+
+llvm_mos_sdk_add_library(copy-data
+  copy-data.S
+  copy-data.c
+)
+target_compile_options(common-copy-data PRIVATE -fno-lto)
+
+llvm_mos_sdk_add_library(init-stack
+  init-stack.S
+)
 
 # libcrt is the libcalls needed by the compiler. All libcalls emitted by the
 # compiler (except C standard library functions) should be here.
 llvm_mos_sdk_add_library(crt
   const.S
 
-  call_indir.S
+  call-indir.S
 
   divmod.cc
-  divmod_large.cc
+  divmod-large.cc
   mul.cc
   shift.cc
 )
@@ -44,7 +70,6 @@ llvm_mos_sdk_add_library(c
 
   # stdlib.h
   abs.cc
-  exit.c
   stdlib.cc
   new.cc
 
@@ -56,9 +81,9 @@ llvm_mos_sdk_add_library(c
   exception.cc
 
   # Itanium ABI implementation
-  cxa_abi.cc
-  cxa_atexit.cc
-  private_typeinfo.cpp
+  cxa-abi.cc
+  cxa-atexit.cc
+  private-typeinfo.cc
 )
 # Prevent the implementation of libcalls from being reduced to a call of those libcalls.
 set_property(

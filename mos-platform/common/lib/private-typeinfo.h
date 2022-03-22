@@ -9,7 +9,7 @@
 #ifndef __PRIVATE_TYPEINFO_H_
 #define __PRIVATE_TYPEINFO_H_
 
-#include "__cxxabi_config.h"
+#include "cxxabi-config.h"
 
 #include <typeinfo>
 #include <stddef.h>

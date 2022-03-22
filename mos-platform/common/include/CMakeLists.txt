@@ -1,8 +1,6 @@
 llvm_mos_sdk_install(FILES
-  _exit.S
   alloca.h
   climits
-  copy_data.S
   cstdarg
   cstddef
   cstdint
@@ -10,17 +8,14 @@ llvm_mos_sdk_install(FILES
   cstdlib
   ctype.h
   exception
-  init_stack.S
   initializer_list
   inttypes.h
   new
   setjmp.h
-  start.S
   stdio.h
   stdlib.h
   string.h
   type_traits
-  __type_traits_impl.h
+  __type-traits-impl.h
   typeinfo
-  zero_bss.S
   )

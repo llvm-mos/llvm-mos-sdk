@@ -4,7 +4,6 @@ llvm_mos_sdk_merge_libraries(sim-start
   common-start
   common-exit-custom
   common-init-stack
-  common-zero-bss
 )
 
 llvm_mos_sdk_add_library(c

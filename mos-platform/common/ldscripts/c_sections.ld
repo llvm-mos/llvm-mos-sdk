@@ -36,12 +36,14 @@
     __data_end = .;
 }
 __data_load_start = LOADADDR(.data);
+__data_size = SIZEOF(.data);
 
 .bss (NOLOAD) : {
     __bss_start = .;
     *(.bss .bss.* COMMON)
     __bss_end = .;
 }
+__bss_size = SIZEOF(.bss);
 
 .noinit (NOLOAD) : {
     *(.noinit .noinit.*)

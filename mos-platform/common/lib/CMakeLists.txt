@@ -23,13 +23,11 @@ llvm_mos_sdk_add_library(exit-custom
 target_compile_options(common-exit-custom PRIVATE -fno-lto)
 
 llvm_mos_sdk_add_library(zero-bss
-  zero-bss.S
   zero-bss.c
 )
 target_compile_options(common-zero-bss PRIVATE -fno-lto)
 
 llvm_mos_sdk_add_library(copy-data
-  copy-data.S
   copy-data.c
 )
 target_compile_options(common-copy-data PRIVATE -fno-lto)

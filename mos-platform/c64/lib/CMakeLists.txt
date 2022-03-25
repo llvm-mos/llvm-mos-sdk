@@ -1,9 +1,9 @@
 llvm_mos_sdk_add_object_file(basic_header basic-header.S)
 
-llvm_mos_sdk_add_library(start)
-target_compile_options(c64-start PRIVATE -fno-lto)
-llvm_mos_sdk_merge_libraries(c64-start
-  common-start
+llvm_mos_sdk_add_library(crt0)
+target_compile_options(c64-crt0 PRIVATE -fno-lto)
+llvm_mos_sdk_merge_libraries(c64-crt0
+  common-crt0
   common-init-stack
   common-zero-bss
   common-exit-return

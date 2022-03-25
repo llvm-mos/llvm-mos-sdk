@@ -50,7 +50,7 @@ llvm_mos_sdk_add_library(crt
 )
 # Don't pull in stack pointer init unnecessarily.
 set_property(
-  SOURCE divmod_large.cc
+  SOURCE divmod-large.cc
   PROPERTY COMPILE_FLAGS -fno-lto
 )
 

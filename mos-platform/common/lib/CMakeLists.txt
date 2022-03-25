@@ -14,8 +14,8 @@ target_compile_options(common-crt0 PRIVATE -fno-lto)
 # Exit by returning from _start.
 llvm_mos_sdk_add_library(exit-return
   _exit.S
-  exit.c
   exit-return.c
+  exit.c
 )
 target_compile_options(common-exit-return PRIVATE -fno-lto)
 
@@ -25,6 +25,13 @@ llvm_mos_sdk_add_library(exit-custom
   exit.c
 )
 target_compile_options(common-exit-custom PRIVATE -fno-lto)
+
+# Exit by entering an infinite loop.
+llvm_mos_sdk_add_library(exit-loop
+  exit-custom.S
+  exit-loop.c
+  exit.c
+)
 
 # Zero out the BSS segment.
 llvm_mos_sdk_add_library(zero-bss

@@ -1,14 +1,17 @@
-llvm_mos_sdk_add_object_file(crt0 crt0.S)
+# crt0.o is the minimal startup functionality that must be included in any C
+# binary. Anything that could be provided more than one wah should be in the
+# derived platform's libcrt0.
+llvm_mos_sdk_add_object_file(crt0o crt0.S crt0.o)
 
-# libstart is a collection of initialization and finalization routines that may
-# or may not be needed by a given program. These are basically the optional
-# portions of crt0.o.
-llvm_mos_sdk_add_library(start
+# libcrt0 is a collection of initialization and finalization routines that may
+# or may not be needed by a given program.
+llvm_mos_sdk_add_library(crt0
   init-array.c
   fini-array.c
 )
-target_compile_options(common-start PRIVATE -fno-lto)
+target_compile_options(common-crt0 PRIVATE -fno-lto)
 
+# Exit by returning from _start.
 llvm_mos_sdk_add_library(exit-return
   _exit.S
   exit.c
@@ -16,22 +19,27 @@ llvm_mos_sdk_add_library(exit-return
 )
 target_compile_options(common-exit-return PRIVATE -fno-lto)
 
+# Exit by calling a platform-provided _exit.
 llvm_mos_sdk_add_library(exit-custom
   exit-custom.S
   exit.c
 )
 target_compile_options(common-exit-custom PRIVATE -fno-lto)
 
+# Zero out the BSS segment.
 llvm_mos_sdk_add_library(zero-bss
   zero-bss.c
 )
 target_compile_options(common-zero-bss PRIVATE -fno-lto)
 
+# Copy the data segment from its load address (LMA) to it's runtime address
+# (VMA).
 llvm_mos_sdk_add_library(copy-data
   copy-data.c
 )
 target_compile_options(common-copy-data PRIVATE -fno-lto)
 
+# Initialize the soft stack pointer to __stack.
 llvm_mos_sdk_add_library(init-stack
   init-stack.S
 )

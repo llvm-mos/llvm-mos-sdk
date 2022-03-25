@@ -1,7 +1,7 @@
-llvm_mos_sdk_add_library(start init-stack.S)
-target_compile_options(atari8-start PRIVATE -fno-lto)
-llvm_mos_sdk_merge_libraries(atari8-start
-  common-start
+llvm_mos_sdk_add_library(crt0 init-stack.S)
+target_compile_options(atari8-crt0 PRIVATE -fno-lto)
+llvm_mos_sdk_merge_libraries(atari8-crt0
+  common-crt0
   common-zero-bss
   common-exit-return
 )

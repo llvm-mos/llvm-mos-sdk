@@ -1,4 +1,11 @@
 llvm_mos_sdk_install(FILES
   imag_regs.ld
-  c_sections.ld
+
+  c.ld
+
+  bss.ld
+  data.ld
+  noinit.ld
+  rodata.ld
+  text.ld
 )

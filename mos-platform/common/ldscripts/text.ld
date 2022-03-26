@@ -25,27 +25,3 @@
     KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.* .fini_array)))
     __fini_array_end = .;
 }
-
-.rodata : {
-    *(.rodata .rodata.*)
-}
-
-.data : {
-    __data_start = .;
-    *(.data .data.*)
-    __data_end = .;
-}
-__data_load_start = LOADADDR(.data);
-__data_size = SIZEOF(.data);
-
-.bss (NOLOAD) : {
-    __bss_start = .;
-    *(.bss .bss.* COMMON)
-    __bss_end = .;
-}
-__bss_size = SIZEOF(.bss);
-
-.noinit (NOLOAD) : {
-    *(.noinit .noinit.*)
-    __heap_start = .;
-}

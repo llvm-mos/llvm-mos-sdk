@@ -6,7 +6,7 @@ MEMORY {
 }
 
 SECTIONS {
-    INCLUDE c_sections.ld
+    INCLUDE c.ld
 }
 
 /* Provide 16 imaginary (zero page) registers located in 0xcb - 0xea range.

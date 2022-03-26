@@ -8,7 +8,7 @@ MEMORY {
 }
 
 SECTIONS {
-    INCLUDE c_sections.ld
+    INCLUDE c.ld
 }
 
 /* Provide imaginary (zero page) registers. */

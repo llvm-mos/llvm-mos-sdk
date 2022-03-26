@@ -15,7 +15,7 @@ SECTIONS {
     /* BASIC program that jumps to _start. */
     .basic_header : { *(.basic_header) }
 
-    INCLUDE c_sections.ld
+    INCLUDE c.ld
 }
 
 /* Provide imaginary (zero page) registers in the BASIC area. */

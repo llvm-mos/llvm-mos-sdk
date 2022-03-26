@@ -1,0 +1,3 @@
+.rodata : {
+    *(.rodata .rodata.*)
+}

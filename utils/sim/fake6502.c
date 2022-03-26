@@ -345,27 +345,16 @@ static void adc() {
     value = getvalue();
     result = (uint16_t)a + value + (uint16_t)(status & FLAG_CARRY);
 
-    carrycalc(result);
     zerocalc(result);
     overflowcalc(result, a, value);
     signcalc(result);
 
     #ifndef NES_CPU
-    if (status & FLAG_DECIMAL) {
-        clearcarry();
-
-        if ((a & 0x0F) > 0x09) {
-            a += 0x06;
-        }
-        if ((a & 0xF0) > 0x90) {
-            a += 0x60;
-            setcarry();
-        }
-
-        clockticks6502++;
-    }
+    if (status & FLAG_DECIMAL)       /* detect and apply BCD nybble carries */
+        result += ((((result + 0x66) ^ (uint16_t)a ^ value) >> 3) & 0x22) * 3;
     #endif
 
+    carrycalc(result);
     saveaccum(result);
 }
 
@@ -742,33 +731,27 @@ static void rts() {
 }
 
 static void sbc() {
-    penaltyop = 1;
-    value = getvalue() ^ 0x00FF;
-    result = (uint16_t)a + value + (uint16_t)(status & FLAG_CARRY);
+  penaltyop = 1;
+  value = getvalue() ^ 0x00FF; /* ones complement */
 
-    carrycalc(result);
-    zerocalc(result);
-    overflowcalc(result, a, value);
-    signcalc(result);
+#ifndef NES_CPU
+  if (status & FLAG_DECIMAL) /* use nines complement for BCD */
+    value -= 0x0066;
+#endif
 
-    #ifndef NES_CPU
-    if (status & FLAG_DECIMAL) {
-        clearcarry();
+  result = (uint16_t)a + value + (uint16_t)(status & FLAG_CARRY);
 
-        a -= 0x66;
-        if ((a & 0x0F) > 0x09) {
-            a += 0x06;
-        }
-        if ((a & 0xF0) > 0x90) {
-            a += 0x60;
-            setcarry();
-        }
+  zerocalc(result);
+  overflowcalc(result, a, value);
+  signcalc(result);
 
-        clockticks6502++;
-    }
-    #endif
+#ifndef NES_CPU
+  if (status & FLAG_DECIMAL) /* detect and apply BCD nybble carries */
+    result += ((((result + 0x66) ^ (uint16_t)a ^ value) >> 3) & 0x22) * 3;
+#endif
 
-    saveaccum(result);
+  carrycalc(result);
+  saveaccum(result);
 }
 
 static void sec() {

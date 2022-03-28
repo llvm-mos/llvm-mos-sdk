@@ -151,7 +151,7 @@ endfunction()
 # host's CMAKE_EXECUTABLE_SUFFIX (so Windows symlinks end in .exe) and
 # so examples create run-<name> simulator targets.
 function(llvm_mos_sdk_add_platform name)
-  cmake_parse_arguments(ARG BUILD_EXAMPLES "" "" ${ARGN})
+  cmake_parse_arguments(ARG "BUILD_EXAMPLES;NO_COMMON_EXAMPLES" "" "" ${ARGN})
   set(cfg_file mos-${name}.cfg)
 
   _get_relative_install_path(rel_path)
@@ -223,7 +223,9 @@ function(llvm_mos_sdk_add_platform name)
     set(LLVM_MOS_EXAMPLES_SCOPE On)
 
     # Common examples directory.
-    add_subdirectory(${CMAKE_SOURCE_DIR}/examples ${CMAKE_BINARY_DIR}/examples/${name})
+    if (NOT ARG_NO_COMMON_EXAMPLES)
+      add_subdirectory(${CMAKE_SOURCE_DIR}/examples ${CMAKE_BINARY_DIR}/examples/${name})
+    endif()
 
     # Add optional per-platform examples directory.
     if(EXISTS ${CMAKE_SOURCE_DIR}/examples/${name}/)

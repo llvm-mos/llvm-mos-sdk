@@ -1,3 +1,5 @@
+include(merge-targets)
+
 # Sets `var` to a relative path based on the current CMakeLists.txt directory.
 # Helps to make an install structure that reflects the repository structure.
 function(_get_relative_install_path var)
@@ -33,9 +35,9 @@ function(llvm_mos_sdk_track_platform_target name)
   _target_depend_config_files(${name})
 endfunction()
 
-define_property(TARGET PROPERTY LLVM_MOS_MERGED_OBJECTS
-  BRIEF_DOCS "Generator expressions for objects to merge into the resulting object."
-  FULL_DOCS "Generator expressions for objects to merge into the resulting object.")
+define_property(TARGET PROPERTY LLVM_MOS_OBJECT_FILE
+  BRIEF_DOCS "Whether the target is a plain object file."
+  FULL_DOCS "Whether the target is a plain object file.")
 
 # Creates a single-source platform target that is installed as a .o file.
 function(llvm_mos_sdk_add_object_file name src)
@@ -54,39 +56,20 @@ function(llvm_mos_sdk_add_object_file name src)
   # Even though we just need the object file, build a full static library
   # so POST_BUILD hook works (just ignore the .a, it won't be installed).
   add_library(${target_name} STATIC ${src})
+  set_property(TARGET ${target_name} PROPERTY LLVM_MOS_OBJECT_FILE YES)
   _get_relative_install_path(lib_path)
   install(FILES $<TARGET_OBJECTS:${target_name}> DESTINATION ${lib_path} RENAME ${outname})
   llvm_mos_sdk_track_platform_target(${target_name})
 
   add_custom_command(TARGET ${target_name} POST_BUILD
-    # Merge in other object files to produce the final version.
-    COMMAND ${CMAKE_LINKER} -r -o $<TARGET_OBJECTS:${target_name}>
-            $<TARGET_OBJECTS:${target_name}>
-            $<GENEX_EVAL:$<TARGET_PROPERTY:LLVM_MOS_MERGED_OBJECTS>>
-
     # Create symlink (or copy) to the object file on each build. Since CMake
     # does not allow us to customize the output location of our one-and-only
     # object file, this is necessary to place the object in the normal library
     # search path for examples to link with.
     COMMAND ${CMAKE_COMMAND} ARGS
-     -DNAME=${outname} -DTARGET=$<TARGET_OBJECTS:${target_name}> -DOUTDIR=${CMAKE_CURRENT_BINARY_DIR}
-     -P ${CMAKE_SOURCE_DIR}/cmake/create-symlink.cmake DEPENDS $<TARGET_OBJECTS:${target_name}>
-
-    COMMAND_EXPAND_LISTS
-  )
+      -DNAME=${outname} -DTARGET=$<TARGET_OBJECTS:${target_name}> -DOUTDIR=${CMAKE_CURRENT_BINARY_DIR}
+      -P ${CMAKE_SOURCE_DIR}/cmake/create-symlink.cmake DEPENDS $<TARGET_OBJECTS:${target_name}>)
 endfunction()
-
-function(llvm_mos_sdk_merge_objects target)
-  foreach(obj ${ARGN})
-    set_property(TARGET ${target}
-      APPEND PROPERTY LLVM_MOS_MERGED_OBJECTS $<TARGET_OBJECTS:${obj}>)
-  endforeach()
-  add_dependencies(${target} ${ARGN})
-endfunction()
-
-define_property(TARGET PROPERTY LLVM_MOS_MERGED_LIBRARIES
-  BRIEF_DOCS "Generator expressions for libraries to merge into the resulting library."
-  FULL_DOCS "Generator expressions for libraries to merge into the resulting library.")
 
 # Adds a SDK static library of the given name containing the given list of
 # sources. If the list of sources is empty, a stub library is created. If the
@@ -108,22 +91,9 @@ function(llvm_mos_sdk_add_library name)
   set(target ${LLVM_MOS_CURRENT_PLATFORM}-${name})
   add_library(${target} STATIC ${sources})
 
-  add_custom_command(TARGET ${target} POST_BUILD
-    COMMAND ${CMAKE_AR} qL $<TARGET_FILE:${target}>
-            $<GENEX_EVAL:$<TARGET_PROPERTY:LLVM_MOS_MERGED_LIBRARIES>>
-    COMMAND_EXPAND_LISTS)
-
   llvm_mos_sdk_track_platform_target(${target})
   set_target_properties(${target} PROPERTIES OUTPUT_NAME ${name})
   llvm_mos_sdk_install(TARGETS ${target})
-endfunction()
-
-function(llvm_mos_sdk_merge_libraries target)
-  foreach(lib ${ARGN})
-    set_property(TARGET ${target}
-      APPEND PROPERTY LLVM_MOS_MERGED_LIBRARIES $<TARGET_FILE:${lib}>)
-  endforeach()
-  add_dependencies(${target} ${ARGN})
 endfunction()
 
 # Creates (or copies) a target file as a symlink during install.

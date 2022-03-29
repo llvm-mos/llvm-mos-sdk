@@ -1,0 +1,27 @@
+name: Draft Release
+concurrency: draft-release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number"
+        required: true
+        type: string
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch the latest llvm-mos-sdk prerelease.
+        run: |
+          curl -LO https://github.com/llvm-mos/llvm-mos-sdk/releases/download/prerelease/{llvm-mos-linux.tar.xz,llvm-mos-macos.tar.xz,llvm-mos-windows.7z}
+      - name: Draft the SDK release.
+        uses: softprops/action-gh-release@v1
+        with:
+          name: SDK v${{github.event.inputs.version}}
+          body: "TODO: Write description."
+          tag_name: v${{github.event.inputs.version}}
+          files: |
+            llvm-mos-linux.tar.xz
+            llvm-mos-windows.7z
+            llvm-mos-macos.tar.xz
+          draft: true

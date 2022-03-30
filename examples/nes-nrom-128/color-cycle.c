@@ -1,4 +1,4 @@
-#include "ppu.h"
+#include <ppu.h>
 
 int main(void) {
   // Enable BG rendering.

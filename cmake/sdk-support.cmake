@@ -199,6 +199,7 @@ function(llvm_mos_sdk_add_platform name)
 
     # Add optional per-platform examples directory.
     if(EXISTS ${CMAKE_SOURCE_DIR}/examples/${name}/)
+      set(LLVM_MOS_INSTALL_EXAMPLE On)
       add_subdirectory(${CMAKE_SOURCE_DIR}/examples/${name}
                        ${CMAKE_BINARY_DIR}/examples/${name}/platform)
     endif()
@@ -226,7 +227,7 @@ function(llvm_mos_sdk_add_example_executable name)
     set_target_properties(${target_name} PROPERTIES LINK_DEPENDS
       "${dependencies};${LLVM_MOS_CURRENT_PLATFORM_LDSCRIPT_FILES}")
     _target_depend_config_files(${target_name})
-  elseif(LLVM_MOS_CURRENT_PLATFORM STREQUAL sim)
+  elseif(LLVM_MOS_CURRENT_PLATFORM STREQUAL sim OR LLVM_MOS_INSTALL_EXAMPLE)
     # Create simulator "run" target.
     file(RELATIVE_PATH bin_rel_path ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/${target_name})
     add_custom_target(run-${name}

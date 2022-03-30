@@ -27,12 +27,13 @@ if(NOT CMAKE_C_COMPILER OR NOT CMAKE_CXX_COMPILER OR NOT CMAKE_ASM_COMPILER)
   message(FATAL_ERROR "Did not find LLVM-MOS compiler.")
 endif()
 
-cmake_path(GET CMAKE_C_COMPILER PARENT_PATH compiler_dir)
+get_filename_component(compiler_dir ${CMAKE_C_COMPILER} DIRECTORY)
 find_program(CMAKE_AR llvm-ar HINTS ${compiler_dir} REQUIRED)
 find_program(CMAKE_RANLIB llvm-ranlib HINTS ${compiler_dir} REQUIRED)
-
-# Main way to determine if MOS is targeted via user CMake lists.
-set(MOS On)
+set(CMAKE_C_COMPILER_AR ${CMAKE_AR} CACHE FILEPATH "")
+set(CMAKE_CXX_COMPILER_AR ${CMAKE_AR} CACHE FILEPATH "")
+set(CMAKE_C_COMPILER_RANLIB ${CMAKE_RANLIB} CACHE FILEPATH "")
+set(CMAKE_CXX_COMPILER_RANLIB ${CMAKE_RANLIB} CACHE FILEPATH "")
 
 # MinSizeRel is the preferred default for MOS.
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)

@@ -1,3 +1,30 @@
-add_subdirectory(include)
-add_subdirectory(ldscripts)
-add_subdirectory(lib)
+platform(atari8 PARENT common)
+
+if(NOT CMAKE_CROSSCOMPILING)
+  add_platform_examples(atari8-examples HOSTED)
+  return()
+endif()
+
+install(FILES chrout.h TYPE INCLUDE)
+install(FILES link.ld TYPE LIB)
+
+add_platform_library(atari8-crt0 init-stack.S)
+merge_libraries(atari8-crt0
+  common-crt0
+  common-zero-bss
+  common-exit-return
+)
+target_compile_options(atari8-crt0 PRIVATE -fno-lto)
+
+add_platform_library(atari8-c
+  abort.c
+  chrout.c
+  putchar.c
+  getchar.c
+)
+merge_libraries(atari8-c common-c)
+target_include_directories(atari8-c SYSTEM BEFORE PUBLIC .)
+
+# abort is preemptively included if LTO is used, which pulls in _exit support
+# unneccessarily.
+set_property(SOURCE abort.c PROPERTY COMPILE_FLAGS -fno-lto)

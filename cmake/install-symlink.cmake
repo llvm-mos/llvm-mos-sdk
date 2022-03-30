@@ -1,17 +1,8 @@
-# Based on LLVMInstallSymlink.cmake
+# Creates (or copies) a target file as a symlink during install.
+function(install_symlink name dest)
+  set(full_name ${name}${CMAKE_EXECUTABLE_SUFFIX})
+  set(full_dest ${dest}${CMAKE_EXECUTABLE_SUFFIX})
 
-function(install_symlink name target outdir)
-  set(DESTDIR $ENV{DESTDIR})
-  set(bindir "${DESTDIR}${CMAKE_INSTALL_PREFIX}/${outdir}/")
-
-  message(STATUS "Creating ${name}")
-
-  execute_process(
-          COMMAND "${CMAKE_COMMAND}" -E create_symlink "${target}" "${name}"
-          WORKING_DIRECTORY "${bindir}" ERROR_VARIABLE has_err)
-  if(CMAKE_HOST_WIN32 AND has_err)
-    execute_process(
-            COMMAND "${CMAKE_COMMAND}" -E copy "${target}" "${name}"
-            WORKING_DIRECTORY "${bindir}")
-  endif()
+  install(SCRIPT ${CMAKE_SOURCE_DIR}/cmake/install-symlink-impl.cmake
+          CODE "install_symlink_impl(${full_name} ${full_dest} bin)")
 endfunction()

@@ -8,16 +8,13 @@ endif()
 
 project(llvm-mos-sdk LANGUAGES C CXX ASM)
 
+include(ExternalProject)
+
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 option(LLVM_MOS_BUILD_EXAMPLES "Build examples for all supported platforms." On)
 
-include(sdk-support)
-add_subdirectory(mos-platform)
-
-if(NOT MOS)
-  add_subdirectory(utils)
-
+if(NOT CMAKE_CROSSCOMPILING)
   # Fetch LLVM-MOS for the host and install it into the prefix.
   include(find-mos-compiler)
   find_mos_compiler(LLVM_MOS_C_COMPILER mos-clang)
@@ -51,38 +48,6 @@ if(NOT MOS)
     endif()
   endif()
 
-  # Make nested build directory targeting MOS (which will have MOS=On)
-  include(ExternalProject)
-  ExternalProject_Add(mos-build
-    SOURCE_DIR
-      ${CMAKE_SOURCE_DIR}
-    BINARY_DIR
-      ${CMAKE_BINARY_DIR}/mos-build
-    CMAKE_ARGS
-      -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-      -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-      -DCMAKE_TOOLCHAIN_FILE=${CMAKE_SOURCE_DIR}/cmake/llvm-mos-toolchain.cmake
-      -DLLVM_MOS_BUILD_EXAMPLES=${LLVM_MOS_BUILD_EXAMPLES}
-      -DCMAKE_C_COMPILER=${LLVM_MOS_C_COMPILER}
-      -DCMAKE_CXX_COMPILER=${LLVM_MOS_CXX_COMPILER}
-      -DCMAKE_ASM_COMPILER=${LLVM_MOS_ASM_COMPILER}
-      -DCMAKE_C_FLAGS=${LLVM_MOS_ARCH_FLAGS}
-      -DCMAKE_CXX_FLAGS=${LLVM_MOS_ARCH_FLAGS}
-      -DCMAKE_ASM_FLAGS=${LLVM_MOS_ARCH_FLAGS}
-      -DCMAKE_MAXIMUM_RECURSION_DEPTH=400
-    INSTALL_COMMAND ""
-    BUILD_ALWAYS On
-    USES_TERMINAL_BUILD On)
-
-  # Clean the mos-build directory with the host project.
-  set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY
-    ADDITIONAL_CLEAN_FILES "${CMAKE_BINARY_DIR}/mos-build")
-
-  # Have the host project trigger the mos installation.
-  # ExternalProject wants to install even if we're just building.
-  install(CODE "execute_process(COMMAND \"${CMAKE_COMMAND}\" --build . --target install
-                                WORKING_DIRECTORY \"${CMAKE_BINARY_DIR}/mos-build\")")
-
   # Install toolchain and config file for users of find_package(llvm-mos-sdk).
   # CMake's find_package logic will discover
   # `$PATH/../lib/cmake/llvm-mos-sdk/llvm-mos-sdk-config.cmake` which in turn
@@ -93,4 +58,11 @@ if(NOT MOS)
           cmake/llvm-mos-sdk-config.cmake
           cmake/find-mos-compiler.cmake
           DESTINATION lib/cmake/${CMAKE_PROJECT_NAME})
+
+  # Install example files.
+  install(DIRECTORY ${CMAKE_SOURCE_DIR}/examples DESTINATION .)
+
+  add_subdirectory(utils)
 endif()
+
+add_subdirectory(mos-platform)

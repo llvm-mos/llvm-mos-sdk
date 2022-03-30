@@ -1,11 +1,13 @@
-llvm_mos_sdk_install(FILES
-  imag_regs.ld
+install(
+  FILES
+    imag_regs.ld
 
-  c.ld
+    c.ld
 
-  bss.ld
-  data.ld
-  noinit.ld
-  rodata.ld
-  text.ld
+    bss.ld
+    data.ld
+    noinit.ld
+    rodata.ld
+    text.ld
+  TYPE LIB
 )

@@ -1,1 +1,2 @@
-llvm_mos_sdk_add_example_executable(color-cycle color-cycle.c)
+add_executable(color-cycle color-cycle.c)
+install_example(color-cycle)

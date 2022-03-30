@@ -1,5 +1,6 @@
 #include <stdlib.h>
-#include <sim-io.h>
+
+#include "sim-io.h"
 
 void abort(void) {
   // Writing to this IO register causes the simulator to abort.

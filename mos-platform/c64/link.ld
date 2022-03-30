@@ -9,7 +9,7 @@ MEMORY {
     ram (rw) : ORIGIN = 0x0801, LENGTH = 0x97ff
 }
 
-INPUT(basic_header.o)
+INPUT(basic-header.o)
 
 SECTIONS {
     /* BASIC program that jumps to _start. */

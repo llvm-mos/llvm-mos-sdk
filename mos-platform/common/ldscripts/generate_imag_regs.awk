@@ -1,7 +1,7 @@
 # AWK script to generate the contents of this directory.
 
 BEGIN {
-  file = "imag_regs.ld"
+  file = "imag-regs.ld"
   print "/* GENERATED FILE -- DO NOT MANUALLY EDIT. */" > file;
   print "/* Note: The odd regs must immediately follow the even regs" > file;
   print " * for even/odd pairs to work as pointers, but the even regs" > file;

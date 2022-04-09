@@ -1,6 +1,6 @@
 install(
   FILES
-    imag_regs.ld
+    imag-regs.ld
 
     c.ld
 

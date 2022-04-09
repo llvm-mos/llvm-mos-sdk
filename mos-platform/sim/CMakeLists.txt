@@ -1,14 +1,12 @@
-platform(sim PARENT common)
+platform(sim COMPLETE HOSTED PARENT common)
 
 if(NOT CMAKE_CROSSCOMPILING)
-  add_platform_examples(sim-examples HOSTED)
   return()
 endif()
 
 include_directories(BEFORE SYSTEM .)
 
 install(FILES assert.h stdlib.h TYPE INCLUDE)
-install(FILES link.ld TYPE LIB)
 
 add_platform_library(sim-crt0)
 merge_libraries(sim-crt0

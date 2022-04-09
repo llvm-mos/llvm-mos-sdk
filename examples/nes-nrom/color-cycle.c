@@ -13,6 +13,6 @@ int main(void) {
 
     // Increment the palette color 0.
     ppu_write_addr(0x3f00);
-    PPUDATA = color++;
+    PPUDATA = ++color;
   }
 }

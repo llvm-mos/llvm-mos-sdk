@@ -12,7 +12,10 @@ install(FILES
   ines-flags.ld
 TYPE LIB)
 
-add_platform_object_file(nes-nrom-crt0-o crt0.o crt0.c)
+add_platform_object_file(nes-nrom-crt0-o crt0.o
+  crt0.c
+  ines.s
+)
 merge_libraries(nes-nrom-crt0-o common-crt0-o)
 
 add_platform_library(nes-nrom-crt0)

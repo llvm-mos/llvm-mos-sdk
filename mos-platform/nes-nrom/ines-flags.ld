@@ -3,9 +3,8 @@
  *   No hard-wired four-screen mode.
  *   No trainer.
  *   No battery.
- *   Horizontal hard-wired nametable mirroring type.
  */
-BYTE(0)
+BYTE(__hard_wired_mirroring)
 
 /* Flags 7:
  *   Mapper 0.
@@ -38,10 +37,8 @@ BYTE(0)
  */
 BYTE(0)
 
-/* CPU/PPU Timing
- *   NTSC NES
- */
-BYTE(0)
+/* CPU/PPU Timing */
+BYTE(__timing)
 
 /* VS system type/Extended Console Type: N/A */
 BYTE(0)

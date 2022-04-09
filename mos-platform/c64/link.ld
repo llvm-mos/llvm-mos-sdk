@@ -20,7 +20,7 @@ SECTIONS {
 
 /* Provide imaginary (zero page) registers in the BASIC area. */
 PROVIDE(__rc0 = 0x0002);
-INCLUDE imag_regs.ld
+INCLUDE imag-regs.ld
 ASSERT(__rc0 == 0x0002, "Inconsistent zero page map.")
 ASSERT(__rc31 == 0x0021, "Inconsistent zero page map.")
 

@@ -1,12 +1,10 @@
-platform(atari8 PARENT common)
+platform(atari8 COMPLETE HOSTED PARENT common)
 
 if(NOT CMAKE_CROSSCOMPILING)
-  add_platform_examples(atari8-examples HOSTED)
   return()
 endif()
 
 install(FILES chrout.h TYPE INCLUDE)
-install(FILES link.ld TYPE LIB)
 
 add_platform_library(atari8-crt0 init-stack.S)
 merge_libraries(atari8-crt0

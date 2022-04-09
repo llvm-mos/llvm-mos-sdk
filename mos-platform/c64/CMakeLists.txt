@@ -1,7 +1,6 @@
-platform(c64 PARENT common)
+platform(c64 COMPLETE HOSTED PARENT common)
 
 if(NOT CMAKE_CROSSCOMPILING)
-  add_platform_examples(c64-examples HOSTED)
   return()
 endif()
 

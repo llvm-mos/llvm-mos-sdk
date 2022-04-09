@@ -27,6 +27,6 @@ if(HOSTED)
   install_example(init-functions)
 endif()
 
-if(PLATFORM STREQUAL nes-nrom-128)
-  add_subdirectory(nes-nrom-128)
+if(PLATFORM MATCHES ^nes-nrom)
+  add_subdirectory(nes-nrom)
 endif()

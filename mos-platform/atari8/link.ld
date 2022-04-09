@@ -15,7 +15,7 @@ SECTIONS {
  */
 
 PROVIDE(__rc0 = 0xcb);
-INCLUDE imag_regs.ld
+INCLUDE imag-regs.ld
 ASSERT(__rc0 == 0xcb, "Inconsistent zero page map.")
 ASSERT(__rc31 == 0xea, "Inconsistent zero page map.")
 

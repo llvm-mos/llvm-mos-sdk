@@ -1,4 +1,1 @@
-.noinit (NOLOAD) : {
-    *(.noinit .noinit.*)
-    __heap_start = .;
-}
+.noinit (NOLOAD) : { INCLUDE noinit-sections.ld }

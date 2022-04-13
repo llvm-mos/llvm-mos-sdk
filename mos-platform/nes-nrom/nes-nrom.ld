@@ -1,12 +1,8 @@
 /* NES-NROM iNES file linker script. */
 
+INCLUDE nes.ld
+
 MEMORY {
-  /* CPU address space. */
-  ram (w)      : ORIGIN = 0x0200, LENGTH = 0x0600
-
-  /* CHR-ROM VMA. */
-  ppu_chr_rom : ORIGIN = 0x0000, LENGTH = 0x2000
-
   /**
    * CHR-ROM LMA. Doesn't correspond to anything at runtime; this is beyond
    * 0xffff to make sure that all LMAs are unique.
@@ -23,9 +19,9 @@ SECTIONS {
   INCLUDE bss.ld
   INCLUDE noinit.ld
 
-  .chr_rom : { *(.chr_rom) } >ppu_chr_rom AT>chr_rom
+  .chr_rom : { *(.chr_rom) } >chr_rom
 
   .vector 0xfffa : { SHORT(nmi) SHORT(_start) SHORT(irq) } >prg_rom
 }
 
-INCLUDE nes-imag-regs.ld
+INCLUDE ines.ld

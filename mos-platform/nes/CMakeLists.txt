@@ -7,13 +7,15 @@ endif()
 install(FILES ppu.h TYPE INCLUDE)
 install(FILES
   ppu.h
+  nes.ld
+  ines.ld
   ines-header.ld
+  ines-roms.ld
   nes-imag-regs.ld
+  nes-ram.ld
 TYPE LIB)
 
-add_platform_object_file(nes-crt0-o crt0.o
-  crt0.c
-)
+add_platform_object_file(nes-crt0-o crt0.o crt0.c ines.s)
 merge_libraries(nes-crt0-o common-crt0-o)
 
 add_platform_library(nes-crt0)

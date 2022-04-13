@@ -18,13 +18,8 @@ SECTIONS {
   INCLUDE text.ld
   INCLUDE rodata.ld
   /* The data segment is loaded from PRG-ROM, but used in RAM. */
-  .data : {
-      __data_start = .;
-      *(.data .data.*)
-      __data_end = .;
-  } AT>prg_rom
-  __data_load_start = LOADADDR(.data);
-  __data_size = SIZEOF(.data);
+  .data : { INCLUDE data-sections.ld } AT>prg_rom
+  INCLUDE data-symbols.ld
   INCLUDE bss.ld
   INCLUDE noinit.ld
 

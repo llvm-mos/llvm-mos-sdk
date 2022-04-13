@@ -27,6 +27,6 @@ if(HOSTED)
   install_example(init-functions)
 endif()
 
-if(PLATFORM MATCHES ^nes-nrom)
-  add_subdirectory(nes-nrom)
+if(PLATFORM MATCHES ^nes-)
+  add_subdirectory(nes)
 endif()

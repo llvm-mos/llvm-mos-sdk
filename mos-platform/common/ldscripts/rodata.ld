@@ -1,3 +1,1 @@
-.rodata : {
-    *(.rodata .rodata.*)
-}
+.rodata : { INCLUDE rodata-sections.ld }

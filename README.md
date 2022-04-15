@@ -6,6 +6,10 @@ The LLVM-MOS compiler toolchain and platform libraries.
 
 - Atari 8-bit
 - Commodore 64
+- NES
+  - NES-NROM-128
+  - NES-NROM-256
+  - NES-SLROM
 - 6502 simulator (included)
 
 ## Notable features
@@ -102,11 +106,14 @@ need to prefix `clang` (or `clang++`) with a specific MOS platform provided by
 the SDK. This will ensure clang loads the correct configuration to generate
 executables and libraries for that target.
 
-| Platform       | Command            |
-| -------------- | ------------------ |
-| Atari 8-bit    | `mos-atari8-clang` |
-| Commodore 64   | `mos-c64-clang`    |
-| 6502 simulator | `mos-sim-clang`    |
+| Platform       | Command              |
+| -------------- | ------------------   |
+| Atari 8-bit    | `mos-atari8-clang`   |
+| Commodore 64   | `mos-c64-clang`      |
+| NES-NROM-128   | `mos-nrom-128-clang` |
+| NES-NROM-256   | `mos-nrom-256-clang` |
+| NES-SLROM      | `mos-slrom-clang`    |
+| 6502 simulator | `mos-sim-clang`      |
 
 ```console
 $ cat <install_dir>/examples/hello-putchar.c

@@ -6,6 +6,9 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE "MinSizeRel" CACHE STRING "Build type (default MinSizeRel)" FORCE)
 endif()
 
+set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -g)
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -g)
+
 project(llvm-mos-sdk LANGUAGES C CXX ASM)
 
 include(ExternalProject)

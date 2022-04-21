@@ -10,7 +10,7 @@ MEMORY {
   /* PRG-ROM LMA. 256 Kib. */
   prg_rom : ORIGIN = 0x10000, LENGTH = 0x40000
 
-  /* PRG-ROM Bank 15 LMA; accessible at startup. */
+  /* PRG-ROM Bank 15 LMA; accessible at startup at VMA prg_rom_hi. */
   prg_rom_15 (rx) : ORIGIN = 0x4c000, LENGTH = 0x4000
 
   /* CHR-ROM LMA. 128 Kib. */
@@ -24,7 +24,8 @@ SECTIONS {
   .rodata : { INCLUDE rodata-sections.ld } >prg_rom_hi AT>prg_rom_15
   /* The data segment is loaded from PRG-ROM page 15, but used in RAM. */
   .data : { INCLUDE data-sections.ld } AT>prg_rom_15
-  INCLUDE data-symbols.ld
+  __data_load_start = LOADADDR(.data) - ORIGIN(prg_rom_15) + ORIGIN(prg_rom_hi);
+  __data_size = SIZEOF(.data);
   INCLUDE bss.ld
   INCLUDE noinit.ld
 

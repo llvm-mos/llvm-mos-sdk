@@ -32,6 +32,7 @@ static const char usage[] =
     "OPTIONS:\n"
     "\t--cycles: Print cycle count to stderr.\n"
     "\t--trace: Print each instruction address to stderr.\n"
+    "\t--profile: Print number of cycles executed at each PC address.\n"
     "\t--cmos: Enable 65C02 emulation.\n";
 
 void reset6502(uint8_t cmos);
@@ -44,8 +45,11 @@ uint8_t memory[65536];
 uint32_t clock_start = 0;
 bool shouldPrintCycles = false;
 bool shouldTrace = false;
+bool shouldProfile = false;
 bool cmos = false;
 bool input_eof = false;
+
+uint32_t clockTicksAtAddress[65536];
 
 int8_t read6502(uint16_t address) {
   if (address == 0xfff0) {
@@ -60,8 +64,13 @@ int8_t read6502(uint16_t address) {
   return memory[address];
 }
 
-void printCycles(void) {
-  fprintf(stderr, "%d cycles\n", clockticks6502);
+void finish(void) {
+  if (shouldPrintCycles)
+    fprintf(stderr, "%d cycles\n", clockticks6502);
+  if (shouldProfile)
+    for (int addr = 0; addr < 65536; ++addr)
+      if (clockTicksAtAddress[addr])
+        fprintf(stderr, "%04x %d\n", addr, clockTicksAtAddress[addr]);
 }
 
 void write6502(uint16_t address, uint8_t value) {
@@ -73,12 +82,10 @@ void write6502(uint16_t address, uint8_t value) {
     clock_start = clockticks6502;
     break;
   case 0xFFF7:
-    if (shouldPrintCycles)
-      printCycles();
+    finish();
     abort();
   case 0xFFF8:
-    if (shouldPrintCycles)
-      printCycles();
+    finish();
     exit(value);
   case 0xFFF9:
     putchar(value);
@@ -94,6 +101,8 @@ bool parseFlag(int *argc, const char ***argv) {
     shouldPrintCycles = true;
   } else if (!strcmp(flag, "--trace")) {
     shouldTrace = true;
+  } else if (!strcmp(flag, "--profile")) {
+    shouldProfile = true;
   } else if (!strcmp(flag, "--cmos")) {
     cmos = true;
   } else
@@ -171,7 +180,11 @@ int main(int argc, const char *argv[]) {
   for (;;) {
     if (shouldTrace)
       fprintf(stderr, "%04x a:%02x x:%02x y:%02x s: %02x st:%02x\n", pc, a, x, y, sp, status);
+    uint32_t clockTicksBefore = clockticks6502;
+    uint16_t addr = pc;
     step6502();
+    clockTicksAtAddress[addr] += clockticks6502 - clockTicksBefore;
   }
+  finish();
   return 0;
 }

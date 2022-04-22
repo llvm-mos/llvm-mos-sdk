@@ -62,9 +62,6 @@ function(platform name)
 
   # Add Clang configuration file.
   set(clang_config ${CMAKE_CURRENT_BINARY_DIR}/mos-${PLATFORM}.cfg)
-  if(COMPLETE)
-    set(LINKER_SCRIPT "# Use platform linker script.\n-T<CFGDIR>/../mos-platform/${PLATFORM}/lib/link.ld")
-  endif()
   if(PARENT)
     configure_file(${CMAKE_SOURCE_DIR}/mos-platform/derived.cfg ${clang_config})
   else()

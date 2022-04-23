@@ -211,16 +211,6 @@ To modify the SDK, you'll need to be able to build it yourself. This requires a
 working LLVM-MOS compiler, which can be found in the current SDK release.
 Accordingly, make sure to install the SDK first using the instructions above.
 
-### Note for Windows users
-
-It is recommended to [enable Developer Mode in Settings](ms-settings:developers)
-so that symlinks work correctly during the installation process.
-
-Microsoft officially deploys CMake and Ninja as part of Visual Studio if
-"C++ CMake tools for Windows" enabled in the Visual Studio Installer.
-If this is installed, the following steps may be performed from an
-"x64 Native Tools Command Prompt" in the Start Menu.
-
 ### Install ninja
 
 For the steps below to work as-is, you'll need to install Ninja, the fast,

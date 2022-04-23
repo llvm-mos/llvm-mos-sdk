@@ -1,5 +1,3 @@
-include(install-symlink)
-
 function(_check_platform)
   if(NOT PLATFORM)
     message(FATAL_ERROR "platform() was not called in the current scope.")
@@ -40,13 +38,26 @@ function(platform name)
   set(HOSTED ${ARGS_HOSTED})
   set(HOSTED ${ARGS_HOSTED} PARENT_SCOPE)
 
+  set(CMAKE_INSTALL_LIBDIR mos-platform/${PLATFORM}/lib)
+  set(CMAKE_INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR} PARENT_SCOPE)
+  set(CMAKE_INSTALL_INCLUDEDIR mos-platform/${PLATFORM}/include)
+  set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR} PARENT_SCOPE)
+
+  include(GNUInstallDirs)
+
   if(NOT CMAKE_CROSSCOMPILING)
     # Clang searches for config files next to itself as a last resort.  If the
     # --config flag is not set, argv0 of the form <config>-clang sets the implicit
     # config file as <config>.cfg. We leverage this convention using a set of
     # symlinks for each MOS platform.
     foreach(suffix clang clang++ clang-cpp)
-      install_symlink(mos-${PLATFORM}-${suffix} mos-${suffix})
+      if(WIN32)
+        install(SCRIPT ${CMAKE_SOURCE_DIR}/cmake/install-clang-batch-file.cmake
+                CODE "install_clang_batch_file(${CMAKE_INSTALL_FULL_BINDIR} ${PLATFORM} ${suffix})")
+      else()
+        install(SCRIPT ${CMAKE_SOURCE_DIR}/cmake/install-clang-symlink.cmake
+                CODE "install_clang_symlink(${CMAKE_INSTALL_FULL_BINDIR} ${PLATFORM} ${suffix})")
+      endif()
     endforeach()
 
     if(COMPLETE)
@@ -54,11 +65,6 @@ function(platform name)
     endif()
     return()
   endif()
-
-  set(CMAKE_INSTALL_LIBDIR mos-platform/${PLATFORM}/lib)
-  set(CMAKE_INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR} PARENT_SCOPE)
-  set(CMAKE_INSTALL_INCLUDEDIR mos-platform/${PLATFORM}/include)
-  set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR} PARENT_SCOPE)
 
   # Add Clang configuration file.
   set(clang_config ${CMAKE_CURRENT_BINARY_DIR}/mos-${PLATFORM}.cfg)

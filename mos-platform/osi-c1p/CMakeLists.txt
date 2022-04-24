@@ -4,11 +4,11 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-# install(FILES chrout.h TYPE INCLUDE)
-
 add_platform_library(osi-c1p-crt0 custom-exit.S)
 merge_libraries(osi-c1p-crt0
   common-crt0
+  common-copy-data
+  common-init-stack
   common-zero-bss
   common-exit-custom
 )
@@ -16,7 +16,7 @@ target_compile_options(osi-c1p-crt0 PRIVATE -fno-lto)
 
 add_platform_library(osi-c1p-c
   abort.c
-  putchar.c
+  putchar.cc
   getchar.c
 )
 merge_libraries(osi-c1p-c common-c)

@@ -908,7 +908,7 @@ static int _vsnprintf(out_fct_type out, char *buffer, const size_t maxlen,
       width = sizeof(void *) * 2U;
       flags |= FLAGS_ZEROPAD | FLAGS_UPPERCASE;
       uintptr_t value = (uintptr_t)va_arg(va, void *);
-      idx = _ntoa(out, buffer, idx, maxlen, (char *)value, sizeof value, false,
+      idx = _ntoa(out, buffer, idx, maxlen, (char *)&value, sizeof value, false,
                   16U, precision, width, flags);
       format++;
       break;

@@ -25,5 +25,14 @@ function(merge_libraries target)
   foreach(merged ${ARGN})
     set_property(TARGET ${target}
       APPEND PROPERTY MERGED_TARGETS $<TARGET_FILE:${merged}>)
+
+    # Generate a dummy file from the merged librar and include it in the build
+    # of the target library. That way, when the dependency changes, the
+    # dependent library will be rebuilt.
+    set(dummy_file ${target}-${merged}-dummy.c)
+    add_custom_command(OUTPUT ${dummy_file}
+                       COMMAND ${CMAKE_COMMAND} -E touch ${dummy_file}
+                       DEPENDS ${merged})
+    target_sources(${target} PRIVATE ${dummy_file})
   endforeach()
 endfunction()

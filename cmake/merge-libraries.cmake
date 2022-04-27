@@ -17,7 +17,7 @@ function(merge_libraries target)
   if(NOT merged_set)
     add_custom_command(TARGET ${target} POST_BUILD
       COMMAND ${CMAKE_AR} qL $<TARGET_FILE:${target}>
-              $<GENEX_EVAL:$<TARGET_PROPERTY:MERGED_TARGETS>>
+              $<GENEX_EVAL:$<TARGET_PROPERTY:${target},MERGED_TARGETS>>
       COMMAND_EXPAND_LISTS)
   endif()
 

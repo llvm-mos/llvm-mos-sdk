@@ -193,7 +193,7 @@ Create a new source directory with a `CMakeLists.txt` like the following where
 `LLVM_MOS_PLATFORM` is set to any platform supported by the SDK:
 
 ```cmake
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.18)
 set(LLVM_MOS_PLATFORM c64)
 find_package(llvm-mos-sdk REQUIRED)
 project(llvm-mos-sdk-foo)

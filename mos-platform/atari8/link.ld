@@ -14,7 +14,7 @@ SECTIONS {
  * reasonably safe to use these.
  */
 
-PROVIDE(__rc0 = 0xcb);
+__rc0 = 0xcb;
 INCLUDE imag-regs.ld
 ASSERT(__rc0 == 0xcb, "Inconsistent zero page map.")
 ASSERT(__rc31 == 0xea, "Inconsistent zero page map.")

@@ -1,6 +1,5 @@
 #include "osi_screen.h"
 
-// static c1p_screen screen_impl;
 template<unsigned int scr_base_int, unsigned int video_ram_size,
     unsigned int screen_width, unsigned int screen_height,
     unsigned int screen_firstchar, unsigned int scroll_dist>

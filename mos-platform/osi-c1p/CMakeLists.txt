@@ -4,13 +4,13 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-add_platform_library(osi-c1p-crt0 custom-exit.S)
+add_platform_library(osi-c1p-crt0)
 merge_libraries(osi-c1p-crt0
   common-crt0
   common-copy-data
   common-init-stack
   common-zero-bss
-  common-exit-custom
+  common-exit-loop
 )
 target_compile_options(osi-c1p-crt0 PRIVATE -fno-lto)
 

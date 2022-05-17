@@ -26,5 +26,16 @@ using c1p_screen = osi_screen<>;
 extern "C"
 void __putchar(char c)
 {
+    /*
+     * The low-level character output function implements LF as line feed
+     * without CR, e.g. the active position stays in the same column. Here we
+     * implement the C standard semantics where \n moves the active position
+     * to the initial position of the next line.
+     */ 
+    if (c == '\n')
+    {
+        c1p_screen::cputc('\r');
+    }
+
     c1p_screen::cputc(c);
 }

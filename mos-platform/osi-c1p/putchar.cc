@@ -39,3 +39,12 @@ void __putchar(char c)
 
     c1p_screen::cputc(c);
 }
+
+/**
+ * @brief __clrscr clear the screen
+ */
+extern "C"
+void __clrscr(void)
+{
+    c1p_screen::clrscr();
+}

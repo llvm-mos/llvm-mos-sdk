@@ -58,7 +58,7 @@ private:
 public:
     static void clrscr(void)
     {
-        memset((void *) scr_base, ' ', video_ram_size);
+        memset((void *) scr_base(), ' ', video_ram_size);
         cursor_x = cursor_y = 0;
     }
 

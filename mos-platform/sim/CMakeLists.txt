@@ -10,7 +10,6 @@ install(FILES assert.h stdlib.h TYPE INCLUDE)
 
 add_platform_library(sim-crt0)
 merge_libraries(sim-crt0
-  common-crt0
   common-exit-custom
   common-init-stack
 )
@@ -22,5 +21,4 @@ add_platform_library(sim-c
   stdlib.c
   sim-io.c
 )
-merge_libraries(sim-c common-c)
 target_include_directories(sim-c SYSTEM BEFORE PUBLIC .)

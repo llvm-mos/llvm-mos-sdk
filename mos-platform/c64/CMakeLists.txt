@@ -11,7 +11,6 @@ add_platform_object_file(c64-basic-header basic-header.o basic-header.S)
 
 add_platform_library(c64-crt0)
 merge_libraries(c64-crt0
-  common-crt0
   common-init-stack
   common-zero-bss
   common-exit-return
@@ -25,7 +24,6 @@ add_platform_library(c64-c
   getchar.c
   kernal.S
 )
-merge_libraries(c64-c common-c)
 # abort is preemptively included if LTO is used, which pulls in _exit support
 # unneccessarily.
 set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto)

@@ -1,4 +1,3 @@
-include(merge-libraries)
 include(platform)
 
 if (CMAKE_CROSSCOMPILING)

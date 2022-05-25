@@ -1,3 +1,5 @@
+include(merge-libraries)
+
 function(_check_platform)
   if(NOT PLATFORM)
     message(FATAL_ERROR "platform() was not called in the current scope.")
@@ -97,6 +99,8 @@ function(add_platform_library target)
   string(REGEX REPLACE ^${PLATFORM}- "" output_name ${target})
   set_property(TARGET ${target} PROPERTY OUTPUT_NAME ${output_name})
   install(TARGETS ${target})
+
+  _merge_parent_library(${target})
 endfunction()
 
 # Add an object file to the current platform. The target is nominally a static
@@ -118,6 +122,8 @@ function(add_platform_object_file target output)
             $<TARGET_FILE:${target}>)
   add_custom_target(${target}-o ALL DEPENDS ${output})
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${output} TYPE LIB)
+
+  _merge_parent_library(${target})
 endfunction()
 
 # Build the example project against the current platform.
@@ -156,4 +162,16 @@ function(_add_platform_examples target)
     BUILD_ALWAYS On
     EXCLUDE_FROM_ALL ${exclude_from_all}
     DEPENDS mos-platform)
+endfunction()
+
+# Merge the library of the same name (sans the platform prefix) in the parent
+# platform into the given target. If there is no parent or corresponding
+# library, does nothing.
+function(_merge_parent_library target)
+  if(PARENT)
+    string(REGEX REPLACE ^${PLATFORM} ${PARENT} parent_target ${target})
+    if(TARGET ${parent_target})
+      merge_libraries(${target} ${parent_target})
+    endif()
+  endif()
 endfunction()

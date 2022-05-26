@@ -4,17 +4,17 @@ template<unsigned int scr_base_int, unsigned int video_ram_size,
     unsigned int screen_width, unsigned int screen_height,
     unsigned int screen_firstchar, unsigned int scroll_dist>
     unsigned char
-    osi_screen<scr_base_int, video_ram_size, screen_width, screen_height,
+    __osi_screen<scr_base_int, video_ram_size, screen_width, screen_height,
          screen_firstchar, scroll_dist>::cursor_x;
 
 template<unsigned int scr_base_int, unsigned int video_ram_size,
     unsigned int screen_width, unsigned int screen_height,
     unsigned int screen_firstchar, unsigned int scroll_dist>
     unsigned char
-    osi_screen<scr_base_int, video_ram_size, screen_width, screen_height,
+    __osi_screen<scr_base_int, video_ram_size, screen_width, screen_height,
          screen_firstchar, scroll_dist>::cursor_y;
 
-using c1p_screen = osi_screen<>;
+using __osic1p_screen = __osi_screen<>;
 
 /**
  * @brief __putchar implementation for Challenger 1P
@@ -34,10 +34,10 @@ void __putchar(char c)
      */ 
     if (c == '\n')
     {
-        c1p_screen::cputc('\r');
+        __osic1p_screen::cputc('\r');
     }
 
-    c1p_screen::cputc(c);
+    __osic1p_screen::cputc(c);
 }
 
 /**
@@ -46,5 +46,5 @@ void __putchar(char c)
 extern "C"
 void __clrscr(void)
 {
-    c1p_screen::clrscr();
+    __osic1p_screen::clrscr();
 }

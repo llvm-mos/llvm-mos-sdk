@@ -4,7 +4,7 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-add_platform_object_file(osi-c1p-crt0-o crt0.o crt0.c)
+add_platform_object_file(osi-c1p-crt0-o crt0.o crt0.s)
 
 add_platform_library(osi-c1p-crt0)
 merge_libraries(osi-c1p-crt0

@@ -11,7 +11,7 @@ template <
     unsigned int screen_firstchar = 0x85, // offset of cursor position (0, 0) from base of video RAM
     unsigned int scroll_dist = 0x20 // memory distance for scrolling by one line
 >
-class osi_screen
+class __osi_screen
 {
 private:
     static unsigned char cursor_x;
@@ -58,7 +58,7 @@ private:
 public:
     static void clrscr(void)
     {
-        memset((void *) scr_base, ' ', video_ram_size);
+        memset((void *) scr_base(), ' ', video_ram_size);
         cursor_x = cursor_y = 0;
     }
 

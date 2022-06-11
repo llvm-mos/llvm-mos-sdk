@@ -17,7 +17,7 @@ MEMORY {
 }
 
 SECTIONS {
-    .zpkbd : { *(.lowmemkbd); } > zpstorage
+    .zp : { *(.zp) *(.zp.*)  } > zpstorage
     INCLUDE c.ld
 }
 

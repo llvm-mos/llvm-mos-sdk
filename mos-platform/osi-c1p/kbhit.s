@@ -52,7 +52,7 @@
 ; "za" attribute means:
 ;       "z": allocate in page zero
 ;       "a": section is "allocatable", must be allocated a runtime address
-.section .lowmemkbd,"za",@nobits
+.section .zp.kbd,"za",@nobits
 
 ; Internal state that needs to be preserved across calls.
 ; The getchar() function uses __CHARBUF to retrieve

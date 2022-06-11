@@ -37,7 +37,8 @@
 ; be misrepresented as being the original software.
 ; 
 ; 3. This notice may not be removed or altered from any source distribution. 
-;
+
+
 ; The method to detect a pressed key is based on the documentation in
 ; "Section 3 Programmed Key Functions" in "The Challenger Character Graphics
 ; Reference Manual"
@@ -46,13 +47,16 @@
 ; needed for the first row. This is implemented by a bit mask that is stored
 ; in KBDTMP and that is set to zero after the first round.
 
-; Put keyboard state in zero-page storage.
+; Put keyboard state into dedicated zero-page storage.
+;
 ; "za" attribute means:
 ;       "z": allocate in page zero
 ;       "a": section is "allocatable", must be allocated a runtime address
-.section .lowmemory,"za",@nobits
+.section .lowmemkbd,"za",@nobits
 
 ; Internal state that needs to be preserved across calls.
+; The getchar() function uses __CHARBUF to retrieve
+; the return value.
 .global __CHARBUF
 __CHARBUF:      .ds.b    1       ; Character buffer
 LASTSCAN:       .ds.b    1       ; Result of previous keyboard scan

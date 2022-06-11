@@ -19,6 +19,7 @@ add_platform_library(osi-c1p-c
   abort.c
   putchar.cc
   getchar.c
+  kbhit.s
 )
 target_include_directories(osi-c1p-c SYSTEM BEFORE PUBLIC .)
 

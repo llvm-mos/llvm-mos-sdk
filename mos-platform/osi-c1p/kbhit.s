@@ -89,7 +89,6 @@ __initkbhit:
 __kbhit:
         lda     __CHARBUF       ; Check for previously saved character
         beq     LFD05
-        ldx     #$00            ; High byte of return is always zero
         rts                     ; A contains non-zero character code meaning true
 LFD05:  lda     #$80            ; Bit mask for initial keyboard row
 LFD06:  jsr     LFCBE           ; Write keyboard row
@@ -124,8 +123,8 @@ LFD3A:  sta     CTRLSHIFT       ; Save state of <CTRL> and shift keys
 LFD3D:  sta     LASTSCAN
         lda     #$02            ; Count used for key debouncing
         sta     DBNCCNT
-        ldx     #$00            ; High byte of return is always zero
         lda     #$00            ; Return false
+        sta     __CHARBUF
         rts
 LFD47:  clc
         tya                     ; Get bit number of pressed key
@@ -188,7 +187,7 @@ LFDC3:  clc
         bit     KBDTMP
         bpl     LFDD0
         ora     #$80
-LFDD0:  sta     KBDTMP          ; Save pressed key and return in A
+LFDD0:  sta     KBDTMP          ; Save pressed key and return in __CHARBUF
         sta     __CHARBUF
         rts
 

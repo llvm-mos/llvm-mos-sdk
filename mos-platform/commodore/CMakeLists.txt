@@ -1,13 +1,10 @@
-platform(commodore COMPLETE HOSTED PARENT common)
+platform(commodore PARENT common)
 
 if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
 install(FILES chrout.h TYPE INCLUDE)
-install(FILES link.ld TYPE LIB)
-
-add_platform_object_file(commodore-basic-header basic-header.o basic-header.S)
 
 add_platform_library(commodore-crt0)
 merge_libraries(commodore-crt0

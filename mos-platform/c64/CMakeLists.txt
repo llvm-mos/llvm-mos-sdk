@@ -1,4 +1,4 @@
-platform(c64 COMPLETE PARENT commodore)
+platform(c64 COMPLETE HOSTED PARENT commodore)
 
 if(NOT CMAKE_CROSSCOMPILING)
   return()

@@ -4,8 +4,11 @@
  */
 
 MEMORY {
-    /* allocate in $2001 - $A000 range */
-    ram (rw) : ORIGIN = 0x2001, LENGTH = 0x7fff
+    /*
+     * Allocate in $2001 - $bfff (bank 0)
+     * (see SYS command in MEGA65 manual for memory layout)
+     */
+    ram (rw) : ORIGIN = 0x2001, LENGTH = 0x9ffe
 }
 
 INPUT(basic-header.o)
@@ -24,7 +27,7 @@ ASSERT(__rc0 == 0x0002, "Inconsistent zero page map.")
 ASSERT(__rc31 == 0x0021, "Inconsistent zero page map.")
 
 /* Set initial soft stack address to end of BASIC area. (It grows down.) */
-__stack = 0x7FFF;
+__stack = 0xbffe;
 
 OUTPUT_FORMAT {
     /* Tells the LOAD command where to place the file's contents. */

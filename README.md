@@ -6,6 +6,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
 
 - Atari 8-bit
 - Commodore 64
+- MEGA65
 - NES
   - NES-NROM-128
   - NES-NROM-256
@@ -111,6 +112,7 @@ executables and libraries for that target.
 | ----------------------------- | -------------------- |
 | Atari 8-bit                   | `mos-atari8-clang`   |
 | Commodore 64                  | `mos-c64-clang`      |
+| MEGA65                        | `mos-mega65-clang`   |
 | NES-NROM-128                  | `mos-nrom-128-clang` |
 | NES-NROM-256                  | `mos-nrom-256-clang` |
 | NES-SLROM                     | `mos-slrom-clang`    |

@@ -18,8 +18,7 @@ SECTIONS {
   INCLUDE data-symbols.ld
   INCLUDE bss.ld
   INCLUDE noinit.ld
-
-  .chr_rom : { *(.chr_rom) } >chr_rom
+  INCLUDE chr-rom.ld
 
   .vector 0xfffa : { SHORT(nmi) SHORT(_start) SHORT(irq) } >prg_rom
 }

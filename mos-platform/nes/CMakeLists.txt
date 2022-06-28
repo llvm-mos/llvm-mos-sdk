@@ -6,6 +6,7 @@ endif()
 
 install(FILES ppu.h TYPE INCLUDE)
 install(FILES
+  chr-rom.ld
   ppu.h
   nes.ld
   ines.ld

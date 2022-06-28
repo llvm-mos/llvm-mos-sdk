@@ -28,6 +28,7 @@ SECTIONS {
   __data_size = SIZEOF(.data);
   INCLUDE bss.ld
   INCLUDE noinit.ld
+  INCLUDE chr-rom.ld
 
   .vector 0xfffa - ORIGIN(prg_rom_hi) + ORIGIN(prg_rom_15) : {
     SHORT(nmi) SHORT(_start) SHORT(irq)

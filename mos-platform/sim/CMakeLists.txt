@@ -13,7 +13,6 @@ merge_libraries(sim-crt0
   common-exit-custom
   common-init-stack
 )
-target_compile_options(sim-crt0 PRIVATE -fno-lto)
 
 add_platform_library(sim-c
   assert.c

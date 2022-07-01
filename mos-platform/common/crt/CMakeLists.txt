@@ -11,4 +11,5 @@ add_platform_library(common-crt
   shift.cc
 )
 # Don't pull in stack pointer init unnecessarily.
-set_property(SOURCE divmod-large.cc PROPERTY COMPILE_OPTIONS -fno-lto)
+# This can be called in an interrupt.
+set_property(SOURCE divmod-large.cc PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)

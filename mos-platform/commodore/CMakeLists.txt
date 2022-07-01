@@ -12,7 +12,6 @@ merge_libraries(commodore-crt0
   common-zero-bss
   common-exit-return
 )
-target_compile_options(commodore-crt0 PRIVATE -fno-lto)
 
 add_platform_library(commodore-c
   abort.c
@@ -22,6 +21,6 @@ add_platform_library(commodore-c
   kernal.S
 )
 # abort is preemptively included if LTO is used, which pulls in _exit support
-# unneccessarily.
-set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto)
+# unneccessarily. It can also be called in an interrupt.
+set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)
 target_include_directories(commodore-c SYSTEM BEFORE PUBLIC .)

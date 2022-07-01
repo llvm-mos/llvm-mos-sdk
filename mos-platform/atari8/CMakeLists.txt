@@ -11,7 +11,6 @@ merge_libraries(atari8-crt0
   common-zero-bss
   common-exit-return
 )
-target_compile_options(atari8-crt0 PRIVATE -fno-lto)
 
 add_platform_library(atari8-c
   abort.c
@@ -22,5 +21,5 @@ add_platform_library(atari8-c
 target_include_directories(atari8-c SYSTEM BEFORE PUBLIC .)
 
 # abort is preemptively included if LTO is used, which pulls in _exit support
-# unneccessarily.
-set_property(SOURCE abort.c PROPERTY COMPILE_FLAGS -fno-lto)
+# unneccessarily. It can be called in an interrupt.
+set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)

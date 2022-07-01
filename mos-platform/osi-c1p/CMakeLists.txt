@@ -13,7 +13,6 @@ merge_libraries(osi-c1p-crt0
   common-zero-bss
   common-exit-loop
 )
-target_compile_options(osi-c1p-crt0 PRIVATE -fno-lto)
 
 add_platform_library(osi-c1p-c
   abort.c

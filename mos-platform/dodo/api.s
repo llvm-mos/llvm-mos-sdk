@@ -319,9 +319,37 @@ GET_PIXEL:                              ; @GET_PIXEL
 .Lfunc_end20:
 	.size	GET_PIXEL, .Lfunc_end20-GET_PIXEL
                                         ; -- End function
-	.section	.text.LOAD_PERSISTENT,"ax",@progbits
+	.section	.text.GET_VERSION,"ax",@progbits
+	.globl	GET_VERSION                 ; -- Begin function GET_VERSION
+	.type	GET_VERSION,@function
+GET_VERSION:                        ; @GET_VERSION
+; %bb.0:
+	lda	mos8(__rc2)
+	ldx	mos8(__rc3)
+	jsr pushax
+	lda #20
+	jmp ($FFF8)
+.Lfunc_end21:
+	.size	GET_VERSION, .Lfunc_end21-GET_VERSION
+                                        ; -- End function
+
 	.globl	LOAD_PERSISTENT                 ; -- Begin function LOAD_PERSISTENT
 	.type	LOAD_PERSISTENT,@function
+	.section	.text.CHECK_VERSION,"ax",@progbits
+	.globl	CHECK_VERSION                       ; -- Begin function CHECK_VERSION
+	.type	CHECK_VERSION,@function
+CHECK_VERSION:                              ; @CHECK_VERSION
+; %bb.0:
+	jsr pusha
+	txa
+	jsr pusha
+	lda	mos8(__rc2)
+	jsr pusha
+	lda #21
+	jmp ($FFF8)
+.Lfunc_end22:
+	.size	CHECK_VERSION, .Lfunc_end22-CHECK_VERSION
+                                        ; -- End function
 LOAD_PERSISTENT:                        ; @LOAD_PERSISTENT
 ; %bb.0:
 	lda	mos8(__rc2)
@@ -329,8 +357,8 @@ LOAD_PERSISTENT:                        ; @LOAD_PERSISTENT
 	jsr pushax
 	lda #22
 	jmp ($FFF8)
-.Lfunc_end21:
-	.size	LOAD_PERSISTENT, .Lfunc_end21-LOAD_PERSISTENT
+.Lfunc_end23:
+	.size	LOAD_PERSISTENT, .Lfunc_end23-LOAD_PERSISTENT
                                         ; -- End function
 	.section	.text.SAVE_PERSISTENT,"ax",@progbits
 	.globl	SAVE_PERSISTENT                 ; -- Begin function SAVE_PERSISTENT
@@ -342,6 +370,6 @@ SAVE_PERSISTENT:                        ; @SAVE_PERSISTENT
 	jsr pushax
 	lda #23
 	jmp ($FFF8)
-.Lfunc_end22:
-	.size	SAVE_PERSISTENT, .Lfunc_end22-SAVE_PERSISTENT
+.Lfunc_end24:
+	.size	SAVE_PERSISTENT, .Lfunc_end24-SAVE_PERSISTENT
                                         ; -- End function

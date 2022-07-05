@@ -124,16 +124,14 @@ byte READ_BUTTONS();
 
 void GET_PIXEL(byte x, byte y);
 
-// TODO
-/*
-#define GET_VERSION(version);
-#define CHECK_VERSION(major, minor, revision);
-*/
+void GET_VERSION(byte *p);
+void CHECK_VERSION(byte major, byte minor, byte revision);
 
 void LOAD_PERSISTENT(byte *buffer);
 void SAVE_PERSISTENT(byte *buffer);
 
-#define api_init()
+// This will spin forever if there is a version mismatch
+#define api_init() CHECK_VERSION(MAJOR, MINOR, REVISION)
 
 #ifdef __cplusplus
 } // extern "C"

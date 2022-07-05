@@ -39,9 +39,13 @@ void DISPLAY();
 
 /*
 Erases the rectangular portiion of the screen defined by the parameters. Note
-that background graphics will be erased as well. Parameter	Type
-Description x	byte	x coordinate y	byte	y coordinate w	byte	width h
-byte	height, must be multiple of 8
+that background graphics will be erased as well.
+
+Parameter	Type	Description
+x	byte	x coordinate
+y	byte	y coordinate
+w	byte	width
+h	byte	height, must be multiple of 8
 */
 void CLEAR_SPRITE(byte x, byte y, byte w, byte h);
 

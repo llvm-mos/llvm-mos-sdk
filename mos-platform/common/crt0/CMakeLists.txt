@@ -12,13 +12,19 @@ add_platform_library(common-crt0
 target_compile_options(common-crt0 PRIVATE -fno-lto)
 
 # Zero out the BSS segment.
-add_platform_library(common-zero-bss zero-bss.c)
+add_platform_library(common-zero-bss
+  zero-bss.c
+  zero-zp-bss.c
+  )
 target_compile_options(common-zero-bss PRIVATE -fno-lto)
 target_include_directories(common-zero-bss SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
 
 # Copy the data segment from its load address (LMA) to it's runtime address
 # (VMA).
-add_platform_library(common-copy-data copy-data.c)
+add_platform_library(common-copy-data
+  copy-data.c
+  copy-zp-data.c
+  )
 target_compile_options(common-copy-data PRIVATE -fno-lto)
 target_include_directories(common-copy-data SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
 

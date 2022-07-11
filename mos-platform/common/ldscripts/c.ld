@@ -1,3 +1,4 @@
+INCLUDE zp.ld
 INCLUDE text.ld
 INCLUDE rodata.ld
 INCLUDE data.ld

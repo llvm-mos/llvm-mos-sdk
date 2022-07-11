@@ -9,7 +9,7 @@ install(FILES chrout.h TYPE INCLUDE)
 add_platform_library(atari8-crt0 init-stack.S)
 merge_libraries(atari8-crt0
   common-zero-bss
-  common-exit-return
+  common-exit-loop
 )
 
 add_platform_library(atari8-c

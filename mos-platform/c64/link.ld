@@ -9,20 +9,7 @@ MEMORY {
     ram (rw) : ORIGIN = 0x0801, LENGTH = 0x97ff
 }
 
-INPUT(basic-header.o)
-
-SECTIONS {
-    /* BASIC program that jumps to _start. */
-    .basic_header : { *(.basic_header) }
-
-    INCLUDE c.ld
-}
-
-/* Provide imaginary (zero page) registers in the BASIC area. */
-__rc0 = 0x0002;
-INCLUDE imag-regs.ld
-ASSERT(__rc0 == 0x0002, "Inconsistent zero page map.")
-ASSERT(__rc31 == 0x0021, "Inconsistent zero page map.")
+INCLUDE commodore.ld
 
 /* Set initial soft stack address to end of BASIC area. (It grows down.) */
 __stack = 0x9FFF;

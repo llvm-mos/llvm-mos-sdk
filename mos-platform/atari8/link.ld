@@ -1,23 +1,17 @@
 /* Atari 8-bit XEX file linker script.
  */
 
+/* Provide 16 imaginary (zero page) registers located in 0xcb - 0xea range. */
+__rc0 = 0x80;
+INCLUDE imag-regs.ld
+ASSERT(__rc31 == 0x9f, "Inconsistent zero page map.")
+
 MEMORY {
+    zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
     ram (rw) : ORIGIN = 0x2000, LENGTH = 0xa000
 }
 
-SECTIONS {
-    INCLUDE c.ld
-}
-
-/* Provide 16 imaginary (zero page) registers located in 0xcb - 0xea range.
- * This region is only used by BASIC's floating point routines, so it should be
- * reasonably safe to use these.
- */
-
-__rc0 = 0xcb;
-INCLUDE imag-regs.ld
-ASSERT(__rc0 == 0xcb, "Inconsistent zero page map.")
-ASSERT(__rc31 == 0xea, "Inconsistent zero page map.")
+SECTIONS { INCLUDE c.ld }
 
 OUTPUT_FORMAT {
     /* XEX magic number. */

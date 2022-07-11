@@ -16,4 +16,5 @@ install(
     rodata-sections.ld
     text.ld
     text-sections.ld
+    zp.ld
   TYPE LIB)

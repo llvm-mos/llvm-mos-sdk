@@ -12,8 +12,6 @@ install(FILES
   ines.ld
   ines-header.ld
   ines-roms.ld
-  nes-imag-regs.ld
-  nes-ram.ld
 TYPE LIB)
 
 add_platform_object_file(nes-crt0-o crt0.o crt0.c ines.s)

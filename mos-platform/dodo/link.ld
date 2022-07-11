@@ -1,4 +1,9 @@
+__rc0 = 0x2a;
+INCLUDE imag-regs.ld
+ASSERT(__rc31 == 0x49, "Inconsistent zero page map.")
+
 MEMORY {
+    zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
     ram  (rw) : ORIGIN = 0x200, LENGTH = 0x5600
     fram (rw) : ORIGIN = 0x5800, LENGTH = 0x2000
 }
@@ -18,14 +23,7 @@ SECTIONS {
     INCLUDE noinit.ld
 }
 
-__rc0 = 0x2a;
-INCLUDE imag-regs.ld
-ASSERT(__rc0 == 0x2a, "Inconsistent zero page map.")
-ASSERT(__rc31 == 0x49, "Inconsistent zero page map.")
-
 /* Set initial soft stack address to just above last ram address. (It grows down.) */
 __stack = ORIGIN(ram) + LENGTH(ram);
 
-OUTPUT_FORMAT {
-    FULL(fram)
-}
+OUTPUT_FORMAT { FULL(fram) }

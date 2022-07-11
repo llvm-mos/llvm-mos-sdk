@@ -8,7 +8,6 @@ asm(
 );
 
 extern char __data_start[];
-extern char __data_end[];
 extern char __data_size[];
 
 extern char __data_load_start[];

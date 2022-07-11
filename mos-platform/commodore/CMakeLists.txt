@@ -5,6 +5,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES chrout.h TYPE INCLUDE)
+install(FILES commodore.ld TYPE LIB)
 
 add_platform_library(commodore-crt0)
 merge_libraries(commodore-crt0

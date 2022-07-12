@@ -52,7 +52,7 @@
 ; "za" attribute means:
 ;       "z": allocate in page zero
 ;       "a": section is "allocatable", must be allocated a runtime address
-.section .zp.kbd,"za",@nobits
+.section .zp.bss.kbd,"za",@nobits
 
 ; Internal state that needs to be preserved across calls.
 ; The getchar() function uses __CHARBUF to retrieve
@@ -65,20 +65,6 @@ KBDTMP:         .ds.b    1       ; Temporary values
 CTRLSHIFT:      .ds.b    1       ; State of CTRL and SHIFT keys
 
 KBD             = $DF00          ; Polled keyboard register
-
-; Initialize one-character buffer that is filled by kbhit().
-; Must be called before main().
-.section .text.initkbhit
-.global __initkbhit
-__initkbhit:
-        lda     #$00
-        sta     __CHARBUF       ; No character in buffer initially
-        sta     LASTSCAN        ; Initialize keyboard state
-        sta     DBNCCNT
-        sta     KBDTMP
-        sta     CTRLSHIFT
-
-        rts
 
 ; Routine to get character from keyboard and return it in A.
 ; Based on the OSI ROM routine at $FD00 but uses different

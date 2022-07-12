@@ -3,6 +3,5 @@
 ; code.
 
 .section .init.40,"axR",@progbits
-  jsr __initkbhit
   jsr __clrscr
 

@@ -10,6 +10,7 @@ add_platform_object_file(dodo-crt0-o crt0.o crt0.s)
 
 add_platform_library(dodo-crt0) 
 merge_libraries(dodo-crt0
+  common-copy-zp-data
   common-zero-bss
   common-init-stack
   common-exit-loop

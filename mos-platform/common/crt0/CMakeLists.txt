@@ -19,14 +19,19 @@ add_platform_library(common-zero-bss
 target_compile_options(common-zero-bss PRIVATE -fno-lto)
 target_include_directories(common-zero-bss SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
 
-# Copy the data segment from its load address (LMA) to it's runtime address
+# Copy the zero-page data segment from its load address (LMA) to it's runtime
+# address (VMA). Note that targets may have the ability to load program data
+# into main memory before _start, but not into the zero page.
+add_platform_library(common-copy-zp-data copy-zp-data.c)
+target_compile_options(common-copy-zp-data PRIVATE -fno-lto)
+target_include_directories(common-copy-zp-data SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
+
+# Copy the data segments from their load addresses (LMA) to their runtime address
 # (VMA).
-add_platform_library(common-copy-data
-  copy-data.c
-  copy-zp-data.c
-  )
+add_platform_library(common-copy-data copy-data.c)
 target_compile_options(common-copy-data PRIVATE -fno-lto)
 target_include_directories(common-copy-data SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
+merge_libraries(common-copy-data common-copy-zp-data)
 
 # Initialize the soft stack pointer to __stack.
 add_platform_library(common-init-stack init-stack.S)

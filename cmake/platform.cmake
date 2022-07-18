@@ -68,6 +68,10 @@ function(platform name)
     return()
   endif()
 
+  if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/clang.cfg)
+    file(READ ${CMAKE_CURRENT_SOURCE_DIR}/clang.cfg CONFIG)
+  endif()
+
   # Add Clang configuration file.
   set(clang_config ${CMAKE_CURRENT_BINARY_DIR}/mos-${PLATFORM}.cfg)
   if(PARENT)

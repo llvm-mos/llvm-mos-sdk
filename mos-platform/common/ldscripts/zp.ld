@@ -1,6 +1,6 @@
 .zp.data : {
   __zp_data_start = .;
-  *(.zp.data .zp.data.*)
+  *(.zp.data .zp.data.* .zp.rodata .zp.rodata.*)
 } >zp AT>ram
 __zp_data_load_start = LOADADDR(.zp.data);
 __zp_data_size = SIZEOF(.zp.data);

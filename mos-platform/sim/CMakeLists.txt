@@ -10,6 +10,7 @@ install(FILES assert.h stdlib.h TYPE INCLUDE)
 
 add_platform_library(sim-crt0)
 merge_libraries(sim-crt0
+  common-copy-zp-data
   common-exit-custom
   common-init-stack
 )

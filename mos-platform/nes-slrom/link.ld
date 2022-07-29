@@ -18,6 +18,7 @@ MEMORY {
 }
 
 SECTIONS {
+  INCLUDE zp.ld
   /* Code must be loadable at startup, which means PRG-ROM page 15. Code may be
    * placed in other pages, but this must be done manually. */
   .text : { INCLUDE text-sections.ld } >prg_rom_hi AT>prg_rom_15

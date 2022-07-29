@@ -9,6 +9,7 @@ MEMORY {
 }
 
 SECTIONS {
+    INCLUDE zp.ld
     /* dodo jumps to $5900 to start the game */
     .text 0x5900 : {
         INCLUDE text-sections.ld

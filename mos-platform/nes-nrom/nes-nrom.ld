@@ -11,6 +11,7 @@ MEMORY {
 }
 
 SECTIONS {
+  INCLUDE zp.ld
   INCLUDE text.ld
   INCLUDE rodata.ld
   /* The data segment is loaded from PRG-ROM, but used in RAM. */

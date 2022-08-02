@@ -2,6 +2,8 @@
 
 The LLVM-MOS compiler toolchain and platform libraries.
 
+[API Reference](https://llvm-mos.github.io/llvm-mos-sdk/files.html)
+
 ## Supported platforms
 
 - Atari 8-bit
@@ -55,7 +57,6 @@ The LLVM-MOS compiler toolchain and platform libraries.
 
 ## Notably missing features
 
-- C99 requires supporting 64KiB locals, sorry, no can do.
 - A hosted C with all the standard library bells and whistles.
 - Float/double
 - C++ Exceptions

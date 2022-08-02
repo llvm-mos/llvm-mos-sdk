@@ -52,7 +52,9 @@ jobs:
 
       - name: Build the docs.
         if: startsWith(matrix.os, 'ubuntu')
-        run: ninja doxygen
+        run: |
+          cd build
+          ninja doxygen
       - name: Upload the docs to github pages.
         uses: JamesIves/github-pages-deploy-action@v4
         with:

@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
-        run: sudo apt-get -y install ninja-build
+        run: sudo apt-get -y install ninja-build doxygen dot
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
         run: choco install curl ninja
@@ -49,6 +49,10 @@ jobs:
           cd build
           cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -G "Ninja" ..
           ninja install
+
+      - name: Build the docs.
+        if: startsWith(matrix.os, 'ubuntu')
+        run: ninja doxygen
 
       - name: Archive the Linux SDK.
         if: startsWith(matrix.os, 'ubuntu')

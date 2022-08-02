@@ -9,7 +9,6 @@ MEMORY {
 }
 
 SECTIONS {
-    INCLUDE zp.ld
     /* dodo jumps to $5900 to start the game */
     .text 0x5900 : {
         INCLUDE text-sections.ld
@@ -20,6 +19,20 @@ SECTIONS {
     .data : {
         INCLUDE data-sections.ld
     } >fram
+    .zp.data : {
+        __zp_data_start = .;
+        *(.zp.data .zp.data.* .zp.rodata .zp.rodata.*)
+    } >zp AT>fram
+    __zp_data_load_start = LOADADDR(.zp.data);
+    __zp_data_size = SIZEOF(.zp.data);
+    .zp.bss (NOLOAD) : {
+        __zp_bss_start = .;
+        *(.zp.bss .zp.bss.*)
+    } >zp
+    __zp_bss_size = SIZEOF(.zp.bss);
+    .zp (NOLOAD) : {
+        *(.zp .zp.*)
+    } >zp
     INCLUDE bss.ld
     INCLUDE noinit.ld
 }

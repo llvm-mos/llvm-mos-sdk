@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
-        run: sudo apt-get -y install ninja-build doxygen dot
+        run: sudo apt-get -y install doxygen graphviz ninja-build
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
         run: choco install curl ninja

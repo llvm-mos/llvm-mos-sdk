@@ -32,6 +32,16 @@ else()
   # Clean the build directories with the host project.
   set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY
     ADDITIONAL_CLEAN_FILES build ../examples)
+
+  find_package(Doxygen OPTIONAL_COMPONENTS dot)
+  if (Doxygen_FOUND)
+    set(DOXYGEN_FILE_PATTERNS *)
+    set(DOXYGEN_EXTENSION_MAPPING no_extension=C++)
+    set(DOXYGEN_EXTRACT_ALL YES)
+    set(DOXYGEN_EXCLUDE_SYMBOLS __*)
+    set(DOXYGEN_EXCLUDE_PATTERNS *.c *.cc *.s *.S *.cfg *.ld *.awk __*)
+    doxygen_add_docs(doxygen .)
+  endif()
 endif()
 
 add_subdirectory(common)

@@ -33,14 +33,15 @@ else()
   set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY
     ADDITIONAL_CLEAN_FILES build ../examples)
 
-  find_package(Doxygen OPTIONAL_COMPONENTS dot)
-  if (Doxygen_FOUND)
+  if (BUILD_DOCS)
+    find_package(Doxygen REQUIRED COMPONENTS dot)
     set(DOXYGEN_FILE_PATTERNS *)
     set(DOXYGEN_EXTENSION_MAPPING no_extension=C++)
     set(DOXYGEN_EXTRACT_ALL YES)
     set(DOXYGEN_EXCLUDE_SYMBOLS __*)
     set(DOXYGEN_EXCLUDE_PATTERNS *.c *.cc *.s *.S *.cfg *.ld *.awk __*)
-    doxygen_add_docs(doxygen .)
+    doxygen_add_docs(doxygen ALL .)
+    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION mos-platform)
   endif()
 endif()
 

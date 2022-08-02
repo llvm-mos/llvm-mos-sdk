@@ -53,6 +53,10 @@ jobs:
       - name: Build the docs.
         if: startsWith(matrix.os, 'ubuntu')
         run: ninja doxygen
+      - name: Upload the docs to github pages.
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/mos-platform/html
 
       - name: Archive the Linux SDK.
         if: startsWith(matrix.os, 'ubuntu')

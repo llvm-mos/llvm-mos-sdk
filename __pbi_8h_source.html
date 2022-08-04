@@ -119,31 +119,31 @@ $(function() {
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#define __PBI_H</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/* parallel bus interface area */</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="__pbi_8h.html#add8981f1028de5514749fb21754e8360">   51</a></span>&#160;<span class="preprocessor">#define PBI             ((unsigned char*)0xD100)</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="__pbi_8h.html#add8981f1028de5514749fb21754e8360">   51</a></span>&#160;<span class="preprocessor">#define PBI             ((volatile unsigned char*)0xD100)</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/* parallel device IRQ status */</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a7e6b12539999b1540393e8612d9e15c3">   54</a></span>&#160;<span class="preprocessor">#define PDVI            ((unsigned char*)0xD1FF)</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a7e6b12539999b1540393e8612d9e15c3">   54</a></span>&#160;<span class="preprocessor">#define PDVI            ((volatile unsigned char*)0xD1FF)</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/* parallel device select */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a6cacd8b2c824b1f7e05b48ae4791e553">   57</a></span>&#160;<span class="preprocessor">#define PDVS            ((unsigned char*)0xD1FF)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a6cacd8b2c824b1f7e05b48ae4791e553">   57</a></span>&#160;<span class="preprocessor">#define PDVS            ((volatile unsigned char*)0xD1FF)</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/* parallel bus interface RAM area */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="__pbi_8h.html#ad1cbac091815e4ae9db8a3f683c907b3">   60</a></span>&#160;<span class="preprocessor">#define PBIRAM          ((unsigned char*)0xD600)</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="__pbi_8h.html#ad1cbac091815e4ae9db8a3f683c907b3">   60</a></span>&#160;<span class="preprocessor">#define PBIRAM          ((volatile unsigned char*)0xD600)</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/* parallel device ID 1 */</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a013547b1c6a6f49615d304ddb9ce0f3c">   63</a></span>&#160;<span class="preprocessor">#define PDID1           ((unsigned char*)0xD803)</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a013547b1c6a6f49615d304ddb9ce0f3c">   63</a></span>&#160;<span class="preprocessor">#define PDID1           ((volatile unsigned char*)0xD803)</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/* parallel device I/O vector */</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="__pbi_8h.html#aac920a29bc4e7c18971fa643f429f148">   66</a></span>&#160;<span class="preprocessor">#define PDIDV           ((unsigned char*)0xD805)</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="__pbi_8h.html#aac920a29bc4e7c18971fa643f429f148">   66</a></span>&#160;<span class="preprocessor">#define PDIDV           ((volatile unsigned char*)0xD805)</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/* parallel device IRQ vector */</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a0e109b0372dce192d38538cf9fd1ffb4">   69</a></span>&#160;<span class="preprocessor">#define PDIRQV          ((unsigned char*)0xD808)</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a0e109b0372dce192d38538cf9fd1ffb4">   69</a></span>&#160;<span class="preprocessor">#define PDIRQV          ((volatile unsigned char*)0xD808)</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/* parallel device ID 2 */</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a663478e3eea541f15c6ffe5dcae7bb6c">   72</a></span>&#160;<span class="preprocessor">#define PDID2           ((unsigned char*)0xD80B)</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="__pbi_8h.html#a663478e3eea541f15c6ffe5dcae7bb6c">   72</a></span>&#160;<span class="preprocessor">#define PDID2           ((volatile unsigned char*)0xD80B)</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/* parallel device vector table */</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="__pbi_8h.html#aa1b8077bafcbebe6c847cb70fac258a7">   75</a></span>&#160;<span class="preprocessor">#define PDVV            ((unsigned char*)0xD80D)</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="__pbi_8h.html#aa1b8077bafcbebe6c847cb70fac258a7">   75</a></span>&#160;<span class="preprocessor">#define PDVV            ((volatile unsigned char*)0xD80D)</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">/* End of _pbi.h */</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* #ifndef __PBI_H */</span><span class="preprocessor"></span></div>

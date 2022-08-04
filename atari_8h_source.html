@@ -386,24 +386,24 @@ $(function() {
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="__atarios_8h.html">_atarios.h</a>&gt;</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno"><a class="line" href="atari_8h.html#a3324dbb5e25daac23e988901bb085447">  318</a></span>&#160;<span class="preprocessor">#define OS (*(struct __os*)0x0000)</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno"><a class="line" href="atari_8h.html#a07b76b679f20134d56e04819f746fad6">  319</a></span>&#160;<span class="preprocessor">#define BASIC (*(struct __basic*)0x0080)</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno"><a class="line" href="atari_8h.html#a3324dbb5e25daac23e988901bb085447">  318</a></span>&#160;<span class="preprocessor">#define OS (*(volatile struct __os*)0x0000)</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno"><a class="line" href="atari_8h.html#a07b76b679f20134d56e04819f746fad6">  319</a></span>&#160;<span class="preprocessor">#define BASIC (*(volatile struct __basic*)0x0080)</span></div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="__gtia_8h.html">_gtia.h</a>&gt;</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="atari_8h.html#aa7bc47e1ff61b8bbee131795440d0974">  322</a></span>&#160;<span class="preprocessor">#define GTIA_READ  (*(struct __gtia_read*)0xD000)</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="atari_8h.html#ae1c3172d667b4ee6b9a6b88c46e058eb">  323</a></span>&#160;<span class="preprocessor">#define GTIA_WRITE (*(struct __gtia_write*)0xD000)</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="atari_8h.html#aa7bc47e1ff61b8bbee131795440d0974">  322</a></span>&#160;<span class="preprocessor">#define GTIA_READ  (*(volatile struct __gtia_read*)0xD000)</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="atari_8h.html#ae1c3172d667b4ee6b9a6b88c46e058eb">  323</a></span>&#160;<span class="preprocessor">#define GTIA_WRITE (*(volatile struct __gtia_write*)0xD000)</span></div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="__pbi_8h.html">_pbi.h</a>&gt;</span></div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="__pokey_8h.html">_pokey.h</a>&gt;</span></div>
-<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="atari_8h.html#a77de8ce010ce4ef3ba1bf2e35dfa971c">  328</a></span>&#160;<span class="preprocessor">#define POKEY_READ  (*(struct __pokey_read*)0xD200)</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="atari_8h.html#a9cf410b868835055fba98db0caf00d08">  329</a></span>&#160;<span class="preprocessor">#define POKEY_WRITE (*(struct __pokey_write*)0xD200)</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="atari_8h.html#a77de8ce010ce4ef3ba1bf2e35dfa971c">  328</a></span>&#160;<span class="preprocessor">#define POKEY_READ  (*(volatile struct __pokey_read*)0xD200)</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="atari_8h.html#a9cf410b868835055fba98db0caf00d08">  329</a></span>&#160;<span class="preprocessor">#define POKEY_WRITE (*(volatile struct __pokey_write*)0xD200)</span></div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="__pia_8h.html">_pia.h</a>&gt;</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno"><a class="line" href="atari_8h.html#a89313714c05926f73c297ef61a3967bf">  332</a></span>&#160;<span class="preprocessor">#define PIA (*(struct __pia*)0xD300)</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno"><a class="line" href="atari_8h.html#a89313714c05926f73c297ef61a3967bf">  332</a></span>&#160;<span class="preprocessor">#define PIA (*(volatile struct __pia*)0xD300)</span></div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="__antic_8h.html">_antic.h</a>&gt;</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="atari_8h.html#a3fad2508ffa0b1b5eb86bf6539e2ddd9">  335</a></span>&#160;<span class="preprocessor">#define ANTIC (*(struct __antic*)0xD400)</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="atari_8h.html#a3fad2508ffa0b1b5eb86bf6539e2ddd9">  335</a></span>&#160;<span class="preprocessor">#define ANTIC (*(volatile struct __antic*)0xD400)</span></div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">/*****************************************************************************/</span></div>

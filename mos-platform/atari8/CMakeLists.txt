@@ -15,6 +15,13 @@ install(FILES
   chrout.h
 TYPE INCLUDE)
 
+install(FILES
+  atari.inc
+  atari_antic.inc
+  atari_gtia.inc
+  atari_pokey.inc
+DESTINATION ${ASMINCDIR})
+
 add_platform_library(atari8-crt0 init-stack.S)
 merge_libraries(atari8-crt0
   common-copy-zp-data

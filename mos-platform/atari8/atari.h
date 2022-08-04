@@ -315,24 +315,24 @@ extern unsigned char _is_cmdline_dos(void);  /* does DOS support command lines *
 /*****************************************************************************/
 
 #include <_atarios.h>
-#define OS (*(struct __os*)0x0000)
-#define BASIC (*(struct __basic*)0x0080)
+#define OS (*(volatile struct __os*)0x0000)
+#define BASIC (*(volatile struct __basic*)0x0080)
 
 #include <_gtia.h>
-#define GTIA_READ  (*(struct __gtia_read*)0xD000)
-#define GTIA_WRITE (*(struct __gtia_write*)0xD000)
+#define GTIA_READ  (*(volatile struct __gtia_read*)0xD000)
+#define GTIA_WRITE (*(volatile struct __gtia_write*)0xD000)
 
 #include <_pbi.h>
 
 #include <_pokey.h>
-#define POKEY_READ  (*(struct __pokey_read*)0xD200)
-#define POKEY_WRITE (*(struct __pokey_write*)0xD200)
+#define POKEY_READ  (*(volatile struct __pokey_read*)0xD200)
+#define POKEY_WRITE (*(volatile struct __pokey_write*)0xD200)
 
 #include <_pia.h>
-#define PIA (*(struct __pia*)0xD300)
+#define PIA (*(volatile struct __pia*)0xD300)
 
 #include <_antic.h>
-#define ANTIC (*(struct __antic*)0xD400)
+#define ANTIC (*(volatile struct __antic*)0xD400)
 
 
 /*****************************************************************************/

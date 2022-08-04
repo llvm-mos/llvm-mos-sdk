@@ -4,7 +4,16 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-install(FILES chrout.h TYPE INCLUDE)
+install(FILES
+  _antic.h
+  _atarios.h
+  _gtia.h
+  _pbi.h
+  _pia.h
+  _pokey.h
+  atari.h
+  chrout.h
+TYPE INCLUDE)
 
 add_platform_library(atari8-crt0 init-stack.S)
 merge_libraries(atari8-crt0

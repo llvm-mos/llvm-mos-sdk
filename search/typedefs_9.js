@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ptrdiff_5ft_835',['ptrdiff_t',['../namespacestd.html#a93dbc6d47dc8b32a051053cf9323ff24',1,'std']]]
+  ['new_5fhandler_1237',['new_handler',['../namespacestd.html#abacda397e52027e3aac448f94b157208',1,'std']]],
+  ['nullptr_5ft_1238',['nullptr_t',['../namespacestd.html#a3b77ddce6fb5d2c9de08f0d112a8337e',1,'std']]]
 ];

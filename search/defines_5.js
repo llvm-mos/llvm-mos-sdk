@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['major_883',['MAJOR',['../api_8h.html#a877cce34f3e58fd7f9194fab90724cb8',1,'api.h']]],
-  ['minor_884',['MINOR',['../api_8h.html#a4e10915d93013542d442d78de0e02e9a',1,'api.h']]]
+  ['eof_1422',['EOF',['../stdio_8h.html#a59adc4c82490d23754cd39c2fb99b0da',1,'stdio.h']]],
+  ['exit_5ffailure_1423',['EXIT_FAILURE',['../common_2include_2stdlib_8h.html#a73efe787c131b385070f25d18b7c9aa4',1,'stdlib.h']]],
+  ['exit_5fsuccess_1424',['EXIT_SUCCESS',['../common_2include_2stdlib_8h.html#a687984f47d8cce148d1b914d2b79612a',1,'stdlib.h']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['new_5fhandler_833',['new_handler',['../namespacestd.html#abacda397e52027e3aac448f94b157208',1,'std']]],
-  ['nullptr_5ft_834',['nullptr_t',['../namespacestd.html#a3b77ddce6fb5d2c9de08f0d112a8337e',1,'std']]]
+  ['max_5falign_5ft_1236',['max_align_t',['../namespacestd.html#a9c68b4c88e491887d1aea95906039f5d',1,'std']]]
 ];

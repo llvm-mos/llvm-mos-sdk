@@ -44,6 +44,7 @@ function(platform name)
   set(CMAKE_INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR} PARENT_SCOPE)
   set(CMAKE_INSTALL_INCLUDEDIR mos-platform/${PLATFORM}/include)
   set(CMAKE_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR} PARENT_SCOPE)
+  set(ASMINCDIR mos-platform/${PLATFORM}/asminc PARENT_SCOPE)
 
   include(GNUInstallDirs)
 

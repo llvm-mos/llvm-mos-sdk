@@ -5,6 +5,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES chrout.h TYPE INCLUDE)
+install(FILES kernal.inc DESTINATION ${ASMINCDIR})
 install(FILES commodore.ld TYPE LIB)
 
 add_platform_library(commodore-crt0)
@@ -18,11 +19,11 @@ merge_libraries(commodore-crt0
 add_platform_library(commodore-c
   abort.c
   chrout.c
-  putchar.c
   getchar.c
-  kernal.S
+  kernal.s
+  putchar.c
 )
 # abort is preemptively included if LTO is used, which pulls in _exit support
 # unneccessarily. It can also be called in an interrupt.
 set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)
-target_include_directories(commodore-c SYSTEM BEFORE PUBLIC .)
+target_include_directories(commodore-c BEFORE PUBLIC .)

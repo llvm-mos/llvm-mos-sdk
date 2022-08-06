@@ -12,15 +12,8 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-; Originally from cc65. Modified from original version.
-
-;
-; Ullrich von Bassewitz, 19.11.2002
-;
-; C64 Kernal functions
-;
-
-.include "kernal.inc"
+#define __MEGA65__ 1
+#include <cbm_kernal.inc>
 
 .macro weakdef name:req
   .weak \name
@@ -28,13 +21,30 @@
   .global __\name
 .endm
 
+weakdef CHKIN
+weakdef CKOUT
+weakdef CHKOUT
+weakdef CLRCH
+weakdef CLRCHN
+weakdef BASIN
+weakdef CHRIN
+weakdef BSOUT
+weakdef CHROUT
+weakdef STOP
+weakdef GETIN
+weakdef CLALL
+weakdef UDTIM
+
+weakdef CLRSCR
+weakdef KBDREAD
+weakdef UPDCRAMPTR
+weakdef NMIEXIT
+
 weakdef CINT
 weakdef IOINIT
 weakdef RAMTAS
-
 weakdef RESTOR
 weakdef VECTOR
-
 weakdef SETMSG
 weakdef SECOND
 weakdef TKSA
@@ -53,17 +63,20 @@ weakdef SETLFS
 weakdef SETNAM
 weakdef OPEN
 weakdef CLOSE
-
+weakdef CHKIN
+weakdef CKOUT
+weakdef CLRCH
+weakdef BASIN
+weakdef CHRIN
+weakdef BSOUT
+weakdef CHROUT
 weakdef LOAD
 weakdef SAVE
 weakdef SETTIM
 weakdef RDTIM
-
+weakdef STOP
+weakdef GETIN
+weakdef CLALL
+weakdef UDTIM
 weakdef SCREEN
-weakdef PLOT
 weakdef IOBASE
-
-weakdef CLRSCR
-weakdef KBDREAD
-weakdef NMIEXIT
-weakdef UPDCRAMPTR

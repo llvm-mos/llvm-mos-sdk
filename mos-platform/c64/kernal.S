@@ -20,7 +20,8 @@
 ; C64 Kernal functions
 ;
 
-.include "kernal.inc"
+#define __C64__ 1
+#include <cbm_kernal.inc>
 
 .macro weakdef name:req
   .weak \name
@@ -41,3 +42,49 @@ weakdef STOP
 weakdef GETIN
 weakdef CLALL
 weakdef UDTIM
+
+weakdef CLRSCR
+weakdef KBDREAD
+weakdef UPDCRAMPTR
+weakdef NMIEXIT
+
+weakdef CINT
+weakdef IOINIT
+weakdef RAMTAS
+weakdef RESTOR
+weakdef VECTOR
+weakdef SETMSG
+weakdef SECOND
+weakdef TKSA
+weakdef MEMTOP
+weakdef MEMBOT
+weakdef SCNKEY
+weakdef SETTMO
+weakdef ACPTR
+weakdef CIOUT
+weakdef UNTLK
+weakdef UNLSN
+weakdef LISTEN
+weakdef TALK
+weakdef READST
+weakdef SETLFS
+weakdef SETNAM
+weakdef OPEN
+weakdef CLOSE
+weakdef CHKIN
+weakdef CKOUT
+weakdef CLRCH
+weakdef BASIN
+weakdef CHRIN
+weakdef BSOUT
+weakdef CHROUT
+weakdef LOAD
+weakdef SAVE
+weakdef SETTIM
+weakdef RDTIM
+weakdef STOP
+weakdef GETIN
+weakdef CLALL
+weakdef UDTIM
+weakdef SCREEN
+weakdef IOBASE

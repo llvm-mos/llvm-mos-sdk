@@ -4,7 +4,10 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-install(FILES chrout.h TYPE INCLUDE)
+install(FILES
+  cbm.h
+  chrout.h
+TYPE INCLUDE)
 install(FILES cbm_kernal.inc DESTINATION ${ASMINCDIR})
 install(FILES commodore.ld TYPE LIB)
 

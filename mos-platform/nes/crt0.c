@@ -1,6 +1,7 @@
-extern volatile char _PPUCTRL;
-extern volatile char _PPUMASK;
-extern volatile char _PPUSTATUS;
+#define __NES__
+#include "nes.h"
+#include "ppu.h"
+
 void __ppu_wait_vblank();
 
 // Set up the hardware stack and launch early initialization.
@@ -13,14 +14,14 @@ asm(
 
 void __early_init(void) {
   // Disable NMI generation.
-  _PPUCTRL = 0;
+  PPU.control = 0;
   // Disable rendering.
-  _PPUMASK = 0;
+  PPU.mask = 0;
   // Disable DMC IRQs.
-  *(volatile char*)0x4010 = 0;
+  APU.delta_mod.control = 0;
 
   // The vblank flag is in an unknown state after reset, so clear it.
-  (void)_PPUSTATUS;
+  (void)PPU.status;
 
   // Advance to cycle 27384 (at the earliest).
   __ppu_wait_vblank();

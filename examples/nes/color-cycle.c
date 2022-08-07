@@ -1,9 +1,10 @@
+#include <nes.h>
 #include <ppu.h>
 
 int main(void) {
   // Enable BG rendering.
   ppu_wait_vblank();
-  PPUMASK = 0b00001000;
+  PPU.mask = 0b00001000;
 
   char color = 0;
   for (;;) {
@@ -13,6 +14,6 @@ int main(void) {
 
     // Increment the palette color 0.
     ppu_write_addr(0x3f00);
-    PPUDATA = ++color;
+    PPU.vram.data = ++color;
   }
 }

@@ -12,9 +12,7 @@ install(FILES
 TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)
 
-install(FILES
-  c64.inc
-DESTINATION ${ASMINCDIR})
+install(FILES c64.inc DESTINATION ${ASMINCDIR})
 
 add_platform_object_file(c64-basic-header basic-header.o basic-header.S)
 

@@ -105,7 +105,7 @@
 struct __ppu {
     unsigned char control;
     unsigned char mask;                 /* color; show sprites, background */
-      signed char volatile const status;
+    char const status;
     struct {
         unsigned char address;
         unsigned char data;
@@ -148,7 +148,7 @@ struct __apu {
     struct {
         unsigned char dma;
     } sprite;
-      signed char volatile status;
+    char status;
     unsigned char unused;
     unsigned char fcontrol;
 };

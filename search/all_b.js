@@ -85,5 +85,5 @@ var searchData=
   ['key_5fx_670',['KEY_X',['../atari_8h.html#a832280ef5a7afeda19f32939951e8b10',1,'atari.h']]],
   ['key_5fy_671',['KEY_Y',['../atari_8h.html#ad9db04899df9fe71bb221c02721e28ac',1,'atari.h']]],
   ['key_5fz_672',['KEY_Z',['../atari_8h.html#a7c655f9f55336c6db42503e356028f4d',1,'atari.h']]],
-  ['kind_673',['KIND',['../mega65_2LICENSE.html#aa00504fa42933d47d305596973b56921',1,'KIND():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#aa00504fa42933d47d305596973b56921',1,'KIND():&#160;LICENSE']]]
+  ['kind_673',['KIND',['../LICENSE.html#aa00504fa42933d47d305596973b56921',1,'LICENSE']]]
 ];

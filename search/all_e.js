@@ -1,7 +1,7 @@
 var searchData=
 [
   ['name_704',['name',['../structcbm__dirent.html#a98c5c84318c6a7738197153c85304a65',1,'cbm_dirent::name()'],['../classstd_1_1type__info.html#afe60508ee089cebbd056bd50dfc7c3d7',1,'std::type_info::name()']]],
-  ['names_705',['names',['../mega65_2LICENSE.html#a30594132172b3373a0a76459eed4796e',1,'names():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a30594132172b3373a0a76459eed4796e',1,'names():&#160;LICENSE']]],
+  ['names_705',['names',['../LICENSE.html#a30594132172b3373a0a76459eed4796e',1,'LICENSE']]],
   ['nes_2eh_706',['nes.h',['../nes_8h.html',1,'']]],
   ['nes_2einc_707',['nes.inc',['../nes_8inc.html',1,'']]],
   ['new_708',['new',['../new.html',1,'']]],

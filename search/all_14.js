@@ -15,5 +15,5 @@ var searchData=
   ['uintmax_5ft_995',['uintmax_t',['../namespacestd.html#a525190b45afaf4bfb46a82965a182488',1,'std']]],
   ['uintptr_5ft_996',['uintptr_t',['../namespacestd.html#aaf043140c8126b986960273ff02e1220',1,'std']]],
   ['unclaimed_997',['unclaimed',['../struct__sim__reg.html#ab3a5e278b65999beb7b26b1e46494c19',1,'_sim_reg']]],
-  ['use_998',['use',['../mega65_2LICENSE.html#a6617cfb55e132d069e64bdfdbea31e1c',1,'use():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a6617cfb55e132d069e64bdfdbea31e1c',1,'use():&#160;LICENSE']]]
+  ['use_998',['use',['../LICENSE.html#a6617cfb55e132d069e64bdfdbea31e1c',1,'LICENSE']]]
 ];

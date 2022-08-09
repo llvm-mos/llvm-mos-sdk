@@ -6,7 +6,7 @@ var searchData=
   ['has_5fvirtual_5fdestructor_334',['has_virtual_destructor',['../structstd_1_1has__virtual__destructor.html',1,'std']]],
   ['has_5fvirtual_5fdestructor_5fv_335',['has_virtual_destructor_v',['../namespacestd.html#a0b719c0040d2245ce28a5dcf8eadb364',1,'std']]],
   ['hatabs_5ft_336',['hatabs_t',['../__atarios_8h.html#a8eeea2d266ff75cbfbf226433890d59d',1,'_atarios.h']]],
-  ['http_337',['http',['../mega65_2LICENSE.html#a94615be87ac36e4d954e52531ff7c50b',1,'http():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a94615be87ac36e4d954e52531ff7c50b',1,'http():&#160;LICENSE']]],
+  ['http_337',['http',['../LICENSE.html#a94615be87ac36e4d954e52531ff7c50b',1,'LICENSE']]],
   ['hue_5fblue_338',['HUE_BLUE',['../__gtia_8h.html#a2e7e3cc70eb0ea9d730aa0036ec55e8b',1,'_gtia.h']]],
   ['hue_5fblue2_339',['HUE_BLUE2',['../__gtia_8h.html#a4bc9f1eadfd5e643e4076f9a79bfcfce',1,'_gtia.h']]],
   ['hue_5fbluegreen_340',['HUE_BLUEGREEN',['../__gtia_8h.html#a4e9918ca33eca084a0704d556b3b6918',1,'_gtia.h']]],

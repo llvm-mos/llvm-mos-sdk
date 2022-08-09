@@ -1,7 +1,7 @@
 var searchData=
 [
   ['pactl_5fmotor_5fcontrol_737',['PACTL_MOTOR_CONTROL',['../atari_8h.html#a419672137d9736fbe001b96f7e184914',1,'atari.h']]],
-  ['patent_738',['patent',['../mega65_2LICENSE.html#aac547da4cfdc3ee8fe6cdb9993cb5cdd',1,'patent():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#aac547da4cfdc3ee8fe6cdb9993cb5cdd',1,'patent():&#160;LICENSE']]],
+  ['patent_738',['patent',['../LICENSE.html#aac547da4cfdc3ee8fe6cdb9993cb5cdd',1,'LICENSE']]],
   ['pbctl_5fperiph_5fcmd_5fident_739',['PBCTL_PERIPH_CMD_IDENT',['../atari_8h.html#a09bce349c3d231c7d20a762f6e4ba0d9',1,'atari.h']]],
   ['pbi_740',['PBI',['../__pbi_8h.html#add8981f1028de5514749fb21754e8360',1,'_pbi.h']]],
   ['pbiram_741',['PBIRAM',['../__pbi_8h.html#ad1cbac091815e4ae9db8a3f683c907b3',1,'_pbi.h']]],
@@ -15,10 +15,10 @@ var searchData=
   ['peek_749',['PEEK',['../peekpoke_8h.html#af7c55efc63dab4dcbffbd88299b65e24',1,'peekpoke.h']]],
   ['peekpoke_2eh_750',['peekpoke.h',['../peekpoke_8h.html',1,'']]],
   ['peekw_751',['PEEKW',['../peekpoke_8h.html#afc523bf44ebe782c971b85cd104a7e40',1,'peekpoke.h']]],
-  ['perform_752',['perform',['../mega65_2LICENSE.html#aeb03e37589410b04d3a0571a0813edc2',1,'perform():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#aeb03e37589410b04d3a0571a0813edc2',1,'perform():&#160;LICENSE']]],
-  ['perpetual_753',['perpetual',['../mega65_2LICENSE.html#a8964b49f96f39386792f6f793422bd3a',1,'perpetual():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a8964b49f96f39386792f6f793422bd3a',1,'perpetual():&#160;LICENSE']]],
+  ['perform_752',['perform',['../LICENSE.html#aeb03e37589410b04d3a0571a0813edc2',1,'LICENSE']]],
+  ['perpetual_753',['perpetual',['../LICENSE.html#a8964b49f96f39386792f6f793422bd3a',1,'LICENSE']]],
   ['pia_754',['PIA',['../atari_8h.html#a89313714c05926f73c297ef61a3967bf',1,'atari.h']]],
-  ['places_755',['places',['../mega65_2LICENSE.html#aff840fc6454e367506e8c8c8e9c1bd8b',1,'places():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#aff840fc6454e367506e8c8c8e9c1bd8b',1,'places():&#160;LICENSE']]],
+  ['places_755',['places',['../LICENSE.html#aff840fc6454e367506e8c8c8e9c1bd8b',1,'LICENSE']]],
   ['pmg_5fsize_5fdouble_756',['PMG_SIZE_DOUBLE',['../__gtia_8h.html#a2d049df297883b47986778880cf4e9b7',1,'_gtia.h']]],
   ['pmg_5fsize_5fnormal_757',['PMG_SIZE_NORMAL',['../__gtia_8h.html#a226f5c41deea90adeca50fd1dfe6b3bb',1,'_gtia.h']]],
   ['pmg_5fsize_5fquad_758',['PMG_SIZE_QUAD',['../__gtia_8h.html#a74f796a0668dde8e27da282493946d12',1,'_gtia.h']]],

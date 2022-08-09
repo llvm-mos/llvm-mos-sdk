@@ -1,7 +1,7 @@
 var searchData=
 [
   ['abort_22',['abort',['../struct__sim__reg.html#acb5ba6272904f4e4c69580eef37bc375',1,'_sim_reg']]],
-  ['above_23',['above',['../mega65_2LICENSE.html#a1bb24a9c82f9dcb1a1c1ea892a0f0914',1,'above():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a1bb24a9c82f9dcb1a1c1ea892a0f0914',1,'above():&#160;LICENSE']]],
+  ['above_23',['above',['../LICENSE.html#a1bb24a9c82f9dcb1a1c1ea892a0f0914',1,'LICENSE']]],
   ['abs_24',['abs',['../common_2include_2stdlib_8h.html#af15d7205d8d10c4820f997ce5c526279',1,'stdlib.h']]],
   ['access_25',['access',['../structcbm__dirent.html#a94cc4b7ec11936a774b70ffa197d2aa3',1,'cbm_dirent']]],
   ['add_5fconst_26',['add_const',['../structstd_1_1add__const.html',1,'std']]],
@@ -20,8 +20,8 @@ var searchData=
   ['alignment_5fof_5fv_39',['alignment_of_v',['../namespacestd.html#a64ccbcea1c02ee9d2a563751eb9cc60a',1,'std']]],
   ['alloca_40',['alloca',['../alloca_8h.html#a467fdb207fabdbb103dbc08d3f5ca58e',1,'alloca.h']]],
   ['alloca_2eh_41',['alloca.h',['../alloca_8h.html',1,'']]],
-  ['and_42',['and',['../mega65_2LICENSE.html#a44310e8a4338596c818c9c8cc6af8d1e',1,'and(b) You must cause any modified files to carry prominent notices stating that You changed the files:&#160;LICENSE'],['../mega65_2LICENSE.html#a3930d0bb2d795ee4676dee3ba75484f3',1,'and(c) You must retain:&#160;LICENSE'],['../mega65_2LICENSE.html#ae3ec991135e02a3ea6a42c7f48702857',1,'and(d) If the Work includes a &quot;NOTICE&quot; text file as part of its distribution:&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a44310e8a4338596c818c9c8cc6af8d1e',1,'and(b) You must cause any modified files to carry prominent notices stating that You changed the files:&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a3930d0bb2d795ee4676dee3ba75484f3',1,'and(c) You must retain:&#160;LICENSE'],['../osi-c1p_2LICENSE.html#ae3ec991135e02a3ea6a42c7f48702857',1,'and(d) If the Work includes a &quot;NOTICE&quot; text file as part of its distribution:&#160;LICENSE']]],
-  ['annotations_43',['annotations',['../mega65_2LICENSE.html#a9353d6a448b50ebe1ab9ed78891f326a',1,'annotations():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a9353d6a448b50ebe1ab9ed78891f326a',1,'annotations():&#160;LICENSE']]],
+  ['and_42',['and',['../LICENSE.html#a44310e8a4338596c818c9c8cc6af8d1e',1,'and(b) You must cause any modified files to carry prominent notices stating that You changed the files:&#160;LICENSE'],['../LICENSE.html#a3930d0bb2d795ee4676dee3ba75484f3',1,'and(c) You must retain:&#160;LICENSE'],['../LICENSE.html#ae3ec991135e02a3ea6a42c7f48702857',1,'and(d) If the Work includes a &quot;NOTICE&quot; text file as part of its distribution:&#160;LICENSE']]],
+  ['annotations_43',['annotations',['../LICENSE.html#a9353d6a448b50ebe1ab9ed78891f326a',1,'LICENSE']]],
   ['antic_44',['ANTIC',['../atari_8h.html#a3fad2508ffa0b1b5eb86bf6539e2ddd9',1,'atari.h']]],
   ['api_2eh_45',['api.h',['../api_8h.html',1,'']]],
   ['api_5finit_46',['api_init',['../api_8h.html#ad45e41e1d6934ccc9ba68162e0e1755f',1,'api.h']]],
@@ -49,5 +49,5 @@ var searchData=
   ['audctl_5fhighpass_5fchan2_68',['AUDCTL_HIGHPASS_CHAN2',['../__pokey_8h.html#ad3b88a445515b8d9b1d7f7644a14a5af',1,'_pokey.h']]],
   ['audctl_5fjoin_5fchan12_69',['AUDCTL_JOIN_CHAN12',['../__pokey_8h.html#ae6aeb297c9d1815ca07341f5dbbcec6a',1,'_pokey.h']]],
   ['audctl_5fjoin_5fchan34_70',['AUDCTL_JOIN_CHAN34',['../__pokey_8h.html#a6eacd7948f9ba9094961e8ecd08782ae',1,'_pokey.h']]],
-  ['authorship_71',['authorship',['../mega65_2LICENSE.html#a01482e4c790aa80c326201cd7e068a30',1,'authorship():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a01482e4c790aa80c326201cd7e068a30',1,'authorship():&#160;LICENSE']]]
+  ['authorship_71',['authorship',['../LICENSE.html#a01482e4c790aa80c326201cd7e068a30',1,'LICENSE']]]
 ];

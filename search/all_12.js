@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sell_911',['sell',['../mega65_2LICENSE.html#a67c429701b1c89b199d427a731bf8d93',1,'sell():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a67c429701b1c89b199d427a731bf8d93',1,'sell():&#160;LICENSE']]],
+  ['sell_911',['sell',['../LICENSE.html#a67c429701b1c89b199d427a731bf8d93',1,'LICENSE']]],
   ['set_5fnew_5fhandler_912',['set_new_handler',['../namespacestd.html#acc4c93b6a3c809973817af6a168fe126',1,'std']]],
   ['set_5fterminate_913',['set_terminate',['../namespacestd.html#a1058583dd3e6fc0300fd4cd0f65d242a',1,'std']]],
   ['setjmp_2eh_914',['setjmp.h',['../setjmp_8h.html',1,'']]],
@@ -29,7 +29,7 @@ var searchData=
   ['skstat_5fserin_5fshiftreg_5fbusy_937',['SKSTAT_SERIN_SHIFTREG_BUSY',['../__pokey_8h.html#a682d1fc056ee9cec68ae0790c7689501',1,'_pokey.h']]],
   ['skstat_5fshiftkey_5fpressed_938',['SKSTAT_SHIFTKEY_PRESSED',['../__pokey_8h.html#aa591826cd10d265f55e181953195989e',1,'_pokey.h']]],
   ['snprintf_939',['snprintf',['../stdio_8h.html#a212e2f1c2162f8a24b156191be16b6cd',1,'stdio.h']]],
-  ['source_940',['source',['../mega65_2LICENSE.html#a40e859b9aaa2d8657227ee008c8a6c7b',1,'source():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a40e859b9aaa2d8657227ee008c8a6c7b',1,'source():&#160;LICENSE']]],
+  ['source_940',['source',['../LICENSE.html#a40e859b9aaa2d8657227ee008c8a6c7b',1,'LICENSE']]],
   ['sprintf_941',['sprintf',['../stdio_8h.html#a07bb8b97d4180b8f8b67de90890bafdf',1,'stdio.h']]],
   ['sprite_5fdma_942',['SPRITE_DMA',['../nes_8h.html#acb7c8c50552db20506d6c5b46c1ad5dc',1,'nes.h']]],
   ['std_943',['std',['../namespacestd.html',1,'']]],
@@ -43,7 +43,7 @@ var searchData=
   ['strncmp_951',['strncmp',['../string_8h.html#a07f4a84c11c106e95c32b6ab509346ef',1,'string.h']]],
   ['strncpy_952',['strncpy',['../string_8h.html#a854de59116f1640e5c264eb81bd4b445',1,'string.h']]],
   ['strrchr_953',['strrchr',['../string_8h.html#a0c05a458deff028ef4d4e64059098db4',1,'string.h']]],
-  ['sublicense_954',['sublicense',['../mega65_2LICENSE.html#a9f8ca17a3ff525d6831ebb4ef1060caf',1,'sublicense():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a9f8ca17a3ff525d6831ebb4ef1060caf',1,'sublicense():&#160;LICENSE']]],
+  ['sublicense_954',['sublicense',['../LICENSE.html#a9f8ca17a3ff525d6831ebb4ef1060caf',1,'LICENSE']]],
   ['swap_955',['swap',['../namespacestd.html#a5bdcb46f130511c5ba89188aa4ef36d5',1,'std::swap(_Tp &amp;__x, _Tp &amp;__y) noexcept(is_nothrow_move_constructible_v&lt; _Tp &gt; &amp;&amp;is_nothrow_move_assignable_v&lt; _Tp &gt;)'],['../namespacestd.html#ab3ce06a49a4ed51063d226663a2d7d70',1,'std::swap(_Tp(&amp;__a)[_Np], _Tp(&amp;__b)[_Np]) noexcept(__is_nothrow_swappable&lt; _Tp &gt;::value)']]],
-  ['systems_956',['systems',['../mega65_2LICENSE.html#a800c1b40fbb8f98b30b92c86c4d68814',1,'systems():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a800c1b40fbb8f98b30b92c86c4d68814',1,'systems():&#160;LICENSE']]]
+  ['systems_956',['systems',['../LICENSE.html#a800c1b40fbb8f98b30b92c86c4d68814',1,'LICENSE']]]
 ];

@@ -115,10 +115,10 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="peekpoke_8h.html#ae532ed87bc1ee0756bcfcc1663e3816e">   47</a></span>&#160;<span class="preprocessor">#define POKE(addr,val)     (*(unsigned char*) (addr) = (val))</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="peekpoke_8h.html#afe42ec2dca566074e7b8d9cb9ffd9c43">   48</a></span>&#160;<span class="preprocessor">#define POKEW(addr,val)    (*(unsigned*) (addr) = (val))</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="peekpoke_8h.html#af7c55efc63dab4dcbffbd88299b65e24">   49</a></span>&#160;<span class="preprocessor">#define PEEK(addr)         (*(unsigned char*) (addr))</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="peekpoke_8h.html#afc523bf44ebe782c971b85cd104a7e40">   50</a></span>&#160;<span class="preprocessor">#define PEEKW(addr)        (*(unsigned*) (addr))</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="peekpoke_8h.html#ae532ed87bc1ee0756bcfcc1663e3816e">   47</a></span>&#160;<span class="preprocessor">#define POKE(addr,val)     (*(volatile unsigned char*) (addr) = (val))</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="peekpoke_8h.html#afe42ec2dca566074e7b8d9cb9ffd9c43">   48</a></span>&#160;<span class="preprocessor">#define POKEW(addr,val)    (*(volatile unsigned*) (addr) = (val))</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="peekpoke_8h.html#af7c55efc63dab4dcbffbd88299b65e24">   49</a></span>&#160;<span class="preprocessor">#define PEEK(addr)         (*(volatile unsigned char*) (addr))</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="peekpoke_8h.html#afc523bf44ebe782c971b85cd104a7e40">   50</a></span>&#160;<span class="preprocessor">#define PEEKW(addr)        (*(volatile unsigned*) (addr))</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>

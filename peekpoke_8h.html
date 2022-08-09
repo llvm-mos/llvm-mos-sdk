@@ -76,13 +76,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ae532ed87bc1ee0756bcfcc1663e3816e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="peekpoke_8h.html#ae532ed87bc1ee0756bcfcc1663e3816e">POKE</a>(addr,  val)&#160;&#160;&#160;(*(unsigned char*) (addr) = (val))</td></tr>
+<tr class="memitem:ae532ed87bc1ee0756bcfcc1663e3816e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="peekpoke_8h.html#ae532ed87bc1ee0756bcfcc1663e3816e">POKE</a>(addr,  val)&#160;&#160;&#160;(*(volatile unsigned char*) (addr) = (val))</td></tr>
 <tr class="separator:ae532ed87bc1ee0756bcfcc1663e3816e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe42ec2dca566074e7b8d9cb9ffd9c43"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="peekpoke_8h.html#afe42ec2dca566074e7b8d9cb9ffd9c43">POKEW</a>(addr,  val)&#160;&#160;&#160;(*(unsigned*) (addr) = (val))</td></tr>
+<tr class="memitem:afe42ec2dca566074e7b8d9cb9ffd9c43"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="peekpoke_8h.html#afe42ec2dca566074e7b8d9cb9ffd9c43">POKEW</a>(addr,  val)&#160;&#160;&#160;(*(volatile unsigned*) (addr) = (val))</td></tr>
 <tr class="separator:afe42ec2dca566074e7b8d9cb9ffd9c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7c55efc63dab4dcbffbd88299b65e24"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="peekpoke_8h.html#af7c55efc63dab4dcbffbd88299b65e24">PEEK</a>(addr)&#160;&#160;&#160;(*(unsigned char*) (addr))</td></tr>
+<tr class="memitem:af7c55efc63dab4dcbffbd88299b65e24"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="peekpoke_8h.html#af7c55efc63dab4dcbffbd88299b65e24">PEEK</a>(addr)&#160;&#160;&#160;(*(volatile unsigned char*) (addr))</td></tr>
 <tr class="separator:af7c55efc63dab4dcbffbd88299b65e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc523bf44ebe782c971b85cd104a7e40"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="peekpoke_8h.html#afc523bf44ebe782c971b85cd104a7e40">PEEKW</a>(addr)&#160;&#160;&#160;(*(unsigned*) (addr))</td></tr>
+<tr class="memitem:afc523bf44ebe782c971b85cd104a7e40"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="peekpoke_8h.html#afc523bf44ebe782c971b85cd104a7e40">PEEKW</a>(addr)&#160;&#160;&#160;(*(volatile unsigned*) (addr))</td></tr>
 <tr class="separator:afc523bf44ebe782c971b85cd104a7e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -97,7 +97,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">addr</td><td>)</td>
-          <td>&#160;&#160;&#160;(*(unsigned char*) (addr))</td>
+          <td>&#160;&#160;&#160;(*(volatile unsigned char*) (addr))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -115,7 +115,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">addr</td><td>)</td>
-          <td>&#160;&#160;&#160;(*(unsigned*) (addr))</td>
+          <td>&#160;&#160;&#160;(*(volatile unsigned*) (addr))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -143,7 +143,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(*(unsigned char*) (addr) = (val))</td>
+          <td></td><td>&#160;&#160;&#160;(*(volatile unsigned char*) (addr) = (val))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -171,7 +171,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(*(unsigned*) (addr) = (val))</td>
+          <td></td><td>&#160;&#160;&#160;(*(volatile unsigned*) (addr) = (val))</td>
         </tr>
       </table>
 </div><div class="memdoc">

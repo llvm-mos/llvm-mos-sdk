@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['kind_1444',['KIND',['../LICENSE.html#aa00504fa42933d47d305596973b56921',1,'LICENSE']]]
+  ['name_1342',['name',['../structcbm__dirent.html#a98c5c84318c6a7738197153c85304a65',1,'cbm_dirent']]],
+  ['nothrow_1343',['nothrow',['../namespacestd.html#ae4b7b14b5246bacb54f2a4ae366ccd44',1,'std']]]
 ];

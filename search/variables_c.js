@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['name_1456',['name',['../structcbm__dirent.html#a98c5c84318c6a7738197153c85304a65',1,'cbm_dirent']]],
-  ['names_1457',['names',['../LICENSE.html#a30594132172b3373a0a76459eed4796e',1,'LICENSE']]],
-  ['nothrow_1458',['nothrow',['../namespacestd.html#ae4b7b14b5246bacb54f2a4ae366ccd44',1,'std']]]
+  ['sim_5freg_5fiface_1347',['sim_reg_iface',['../sim-io_8h.html#a6582d9e0d8ca73a606dc4bed7542d7dd',1,'sim-io.h']]],
+  ['size_1348',['size',['../structcbm__dirent.html#a014b8b3de80d2e673486d922d5c9bc15',1,'cbm_dirent']]]
 ];

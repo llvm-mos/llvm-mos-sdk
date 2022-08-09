@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['f_1165',['f',['../api_8h.html#a6dba71b3b29cb78ab78b9606219b3beb',1,'api.h']]]
+  ['elaborations_1253',['elaborations',['../mega65_2LICENSE.html#ac5b86c53128b95ac626ce1b2fafef3d2',1,'elaborations():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#ac5b86c53128b95ac626ce1b2fafef3d2',1,'elaborations():&#160;LICENSE']]],
+  ['electronic_1254',['electronic',['../mega65_2LICENSE.html#a5c25ab295f80b6c6806053cd8c85fa03',1,'electronic():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a5c25ab295f80b6c6806053cd8c85fa03',1,'electronic():&#160;LICENSE']]],
+  ['entity_1255',['entity',['../mega65_2LICENSE.html#aa1b09deb55aa1a0b7f14f7e3eb1004ec',1,'entity():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#aa1b09deb55aa1a0b7f14f7e3eb1004ec',1,'entity():&#160;LICENSE']]],
+  ['exclusive_1256',['exclusive',['../mega65_2LICENSE.html#a47c1a856bca08b55feed5025d21b5655',1,'exclusive():&#160;LICENSE'],['../osi-c1p_2LICENSE.html#a47c1a856bca08b55feed5025d21b5655',1,'exclusive():&#160;LICENSE']]],
+  ['exit_1257',['exit',['../struct__sim__reg.html#a9fb4a196f7ad0ea72a1a4ef87969ea89',1,'_sim_reg']]],
+  ['extent_5fv_1258',['extent_v',['../namespacestd.html#a1551fcaec9587f92d148675508a42267',1,'std']]]
 ];

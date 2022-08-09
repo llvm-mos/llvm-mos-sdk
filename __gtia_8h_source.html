@@ -70,302 +70,293 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="__gtia_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2022 LLVM-MOS Project</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//     http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// limitations under the License.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// Modified from original version.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/*                                 _gtia.h                                   */</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 with LLVM Exceptions.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// information.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Originally from cc65. Modified from original version.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/*                                 _gtia.h                                   */</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*                  Internal include file, do not use directly               */</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/* &quot;GTIA, Graphic Television Interface Adaptor, is a custom chip used in the */</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">/* Atari 8-bit family of computers and in the Atari 5200 console. In these   */</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/* systems, GTIA chip works together with ANTIC to produce video display.    */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/* ANTIC generates the playfield graphics (text and bitmap) while GTIA       */</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/* provides the color for the playfield and adds overlay objects known as    */</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/* player/missile graphics (sprites)&quot; - Wikipedia article on &quot;GTIA&quot;          */</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/*                  Internal include file, do not use directly               */</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/* &quot;GTIA, Graphic Television Interface Adaptor, is a custom chip used in the */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/* Atari 8-bit family of computers and in the Atari 5200 console. In these   */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/* systems, GTIA chip works together with ANTIC to produce video display.    */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/* ANTIC generates the playfield graphics (text and bitmap) while GTIA       */</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/* provides the color for the playfield and adds overlay objects known as    */</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/* player/missile graphics (sprites)&quot; - Wikipedia article on &quot;GTIA&quot;          */</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/* (C) 2000 Freddy Offenga &lt;taf_offenga@yahoo.com&gt;                           */</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/* 2019-01-16: Bill Kendrick &lt;nbs@sonic.net&gt;: More defines for registers     */</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/* This software is provided &#39;as-is&#39;, without any expressed or implied       */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/* warranty.  In no event will the authors be held liable for any damages    */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/* arising from the use of this software.                                    */</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/* (C) 2000 Freddy Offenga &lt;taf_offenga@yahoo.com&gt;                           */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/* 2019-01-16: Bill Kendrick &lt;nbs@sonic.net&gt;: More defines for registers     */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/* Permission is granted to anyone to use this software for any purpose,     */</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/* including commercial applications, and to alter it and redistribute it    */</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/* freely, subject to the following restrictions:                            */</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/* This software is provided &#39;as-is&#39;, without any expressed or implied       */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/* warranty.  In no event will the authors be held liable for any damages    */</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/* arising from the use of this software.                                    */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/* Permission is granted to anyone to use this software for any purpose,     */</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/* including commercial applications, and to alter it and redistribute it    */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/* freely, subject to the following restrictions:                            */</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/* 1. The origin of this software must not be misrepresented; you must not   */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/*    claim that you wrote the original software. If you use this software   */</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/*    in a product, an acknowledgment in the product documentation would be  */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/*    appreciated but is not required.                                       */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/* 2. Altered source versions must be plainly marked as such, and must not   */</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/*    be misrepresented as being the original software.                      */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/* 3. This notice may not be removed or altered from any source              */</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/*    distribution.                                                          */</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/* 1. The origin of this software must not be misrepresented; you must not   */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">/*    claim that you wrote the original software. If you use this software   */</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/*    in a product, an acknowledgment in the product documentation would be  */</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/*    appreciated but is not required.                                       */</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/* 2. Altered source versions must be plainly marked as such, and must not   */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/*    be misrepresented as being the original software.                      */</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/* 3. This notice may not be removed or altered from any source              */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/*    distribution.                                                          */</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#ifndef __GTIA_H</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#define __GTIA_H</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/* Define a structure with the GTIA register offsets for write (W)           */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">struct </span>__gtia_write {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposp0; <span class="comment">/* 0x00: horizontal position of player 0 */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposp1; <span class="comment">/* 0x01: horizontal position of player 1 */</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposp2; <span class="comment">/* 0x02: horizontal position of player 2 */</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposp3; <span class="comment">/* 0x03: horizontal position of player 3 */</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposm0; <span class="comment">/* 0x04: horizontal position of missile 0 */</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposm1; <span class="comment">/* 0x05: horizontal position of missile 1 */</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposm2; <span class="comment">/* 0x06: horizontal position of missile 2 */</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposm3; <span class="comment">/* 0x07: horizontal position of missile 3 */</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizep0; <span class="comment">/* 0x08: size of player 0 */</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizep1; <span class="comment">/* 0x09: size of player 1 */</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizep2; <span class="comment">/* 0x0A: size of player 2 */</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizep3; <span class="comment">/* 0x0B: size of player 3 */</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizem;  <span class="comment">/* 0x0C: size of missiles */</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafp0; <span class="comment">/* 0x0D: graphics shape player 0 (used when ANTIC is not instructed to use DMA; see DMACTL) */</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafp1; <span class="comment">/* 0x0E: graphics shape player 1 */</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafp2; <span class="comment">/* 0x0F: graphics shape player 2 */</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafp3; <span class="comment">/* 0x10: graphics shape player 3 */</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafm;  <span class="comment">/* 0x11: graphics shape missiles */</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpm0; <span class="comment">/* 0x12: color player and missile 0 */</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpm1; <span class="comment">/* 0x13: color player and missile 1 */</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpm2; <span class="comment">/* 0x14: color player and missile 2 */</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpm3; <span class="comment">/* 0x15: color player and missile 3 */</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpf0; <span class="comment">/* 0x16: color playfield 0 */</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpf1; <span class="comment">/* 0x17: color playfield 1 */</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpf2; <span class="comment">/* 0x18: color playfield 2 */</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpf3; <span class="comment">/* 0x19: color playfield 3 */</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colbk;  <span class="comment">/* 0x1A: color background */</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifndef __GTIA_H</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define __GTIA_H</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/* Define a structure with the GTIA register offsets for write (W)           */</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">struct </span>__gtia_write {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposp0; <span class="comment">/* 0x00: horizontal position of player 0 */</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposp1; <span class="comment">/* 0x01: horizontal position of player 1 */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposp2; <span class="comment">/* 0x02: horizontal position of player 2 */</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposp3; <span class="comment">/* 0x03: horizontal position of player 3 */</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposm0; <span class="comment">/* 0x04: horizontal position of missile 0 */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposm1; <span class="comment">/* 0x05: horizontal position of missile 1 */</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposm2; <span class="comment">/* 0x06: horizontal position of missile 2 */</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hposm3; <span class="comment">/* 0x07: horizontal position of missile 3 */</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizep0; <span class="comment">/* 0x08: size of player 0 */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizep1; <span class="comment">/* 0x09: size of player 1 */</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizep2; <span class="comment">/* 0x0A: size of player 2 */</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizep3; <span class="comment">/* 0x0B: size of player 3 */</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   sizem;  <span class="comment">/* 0x0C: size of missiles */</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafp0; <span class="comment">/* 0x0D: graphics shape player 0 (used when ANTIC is not instructed to use DMA; see DMACTL) */</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafp1; <span class="comment">/* 0x0E: graphics shape player 1 */</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafp2; <span class="comment">/* 0x0F: graphics shape player 2 */</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafp3; <span class="comment">/* 0x10: graphics shape player 3 */</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   grafm;  <span class="comment">/* 0x11: graphics shape missiles */</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpm0; <span class="comment">/* 0x12: color player and missile 0 */</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpm1; <span class="comment">/* 0x13: color player and missile 1 */</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpm2; <span class="comment">/* 0x14: color player and missile 2 */</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpm3; <span class="comment">/* 0x15: color player and missile 3 */</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpf0; <span class="comment">/* 0x16: color playfield 0 */</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpf1; <span class="comment">/* 0x17: color playfield 1 */</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpf2; <span class="comment">/* 0x18: color playfield 2 */</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colpf3; <span class="comment">/* 0x19: color playfield 3 */</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   colbk;  <span class="comment">/* 0x1A: color background */</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   prior;  <span class="comment">/* 0x1B: priority selection */</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   vdelay;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">/* 0x1C: vertical delay -- one-line resolution movement of</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">    ** vertical position of an object when two line resolution display is enabled</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   gractl; <span class="comment">/* 0x1D: stick/paddle latch, p/m control */</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   prior;  <span class="comment">/* 0x1B: priority selection */</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   vdelay;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">/* 0x1C: vertical delay -- one-line resolution movement of</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    ** vertical position of an object when two line resolution display is enabled</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   gractl; <span class="comment">/* 0x1D: stick/paddle latch, p/m control */</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hitclr; <span class="comment">/* 0x1E: clear p/m collision */</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   consol; <span class="comment">/* 0x1F: builtin speaker */</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">/* (W) Values for SIZEP0-SIZEP3 and SIZEM registers:                         */</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   hitclr; <span class="comment">/* 0x1E: clear p/m collision */</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   consol; <span class="comment">/* 0x1F: builtin speaker */</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;};</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a226f5c41deea90adeca50fd1dfe6b3bb">  103</a></span>&#160;<span class="preprocessor">#define PMG_SIZE_NORMAL 0x0 </span><span class="comment">/* one color clock per pixel */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a2d049df297883b47986778880cf4e9b7">  104</a></span>&#160;<span class="preprocessor">#define PMG_SIZE_DOUBLE 0x1 </span><span class="comment">/* two color clocks per pixel */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a74f796a0668dde8e27da282493946d12">  105</a></span>&#160;<span class="preprocessor">#define PMG_SIZE_QUAD   0x3 </span><span class="comment">/* four color clocks per pixel */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">/* (W) Values for SIZEP0-SIZEP3 and SIZEM registers:                         */</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">/* COLPM0-COLPM3, COLPF0-COLPF3, COLBK color registers */</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a226f5c41deea90adeca50fd1dfe6b3bb">  112</a></span>&#160;<span class="preprocessor">#define PMG_SIZE_NORMAL 0x0 </span><span class="comment">/* one color clock per pixel */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a2d049df297883b47986778880cf4e9b7">  113</a></span>&#160;<span class="preprocessor">#define PMG_SIZE_DOUBLE 0x1 </span><span class="comment">/* two color clocks per pixel */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a74f796a0668dde8e27da282493946d12">  114</a></span>&#160;<span class="preprocessor">#define PMG_SIZE_QUAD   0x3 </span><span class="comment">/* four color clocks per pixel */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">/* Color definitions                                                         */</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">/* Make a GTIA color value */</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5a19b676c253b56362f6e033e59b0f3b">  115</a></span>&#160;<span class="preprocessor">#define _gtia_mkcolor(hue,lum) (((hue) &lt;&lt; 4) | ((lum) &lt;&lt; 1))</span></div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">/* COLPM0-COLPM3, COLPF0-COLPF3, COLBK color registers */</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">/* Luminance values go from 0 (black) to 7 (white) */</span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">/* Color definitions                                                         */</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">/* Make a GTIA color value */</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5a19b676c253b56362f6e033e59b0f3b">  124</a></span>&#160;<span class="preprocessor">#define _gtia_mkcolor(hue,lum) (((hue) &lt;&lt; 4) | ((lum) &lt;&lt; 1))</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">/* Luminance values go from 0 (black) to 7 (white) */</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">/* Hue values */</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">/* (These can vary depending on TV standard (NTSC vs PAL),</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">** tint potentiometer settings, TV tint settings, emulator palette, etc.)</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a86fa77236cbab77f22b15a3e4b62d8db">  132</a></span>&#160;<span class="preprocessor">#define HUE_GREY        0</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a8fb980946afcb50637083e0428230845">  133</a></span>&#160;<span class="preprocessor">#define HUE_GOLD        1</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a41da1871b3e3a4c38823876b2d2a4b68">  134</a></span>&#160;<span class="preprocessor">#define HUE_GOLDORANGE  2</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="__gtia_8h.html#acc74853b09d8b54d4ed6207f3aabf992">  135</a></span>&#160;<span class="preprocessor">#define HUE_REDORANGE   3</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ace865534ac4931137add0306295c53df">  136</a></span>&#160;<span class="preprocessor">#define HUE_ORANGE      4</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a948781457b62a2ebc30a59bcd2edcaab">  137</a></span>&#160;<span class="preprocessor">#define HUE_MAGENTA     5</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a50d007a5ac39acdc4ffc2061a10b1763">  138</a></span>&#160;<span class="preprocessor">#define HUE_PURPLE      6</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a2e7e3cc70eb0ea9d730aa0036ec55e8b">  139</a></span>&#160;<span class="preprocessor">#define HUE_BLUE        7</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a4bc9f1eadfd5e643e4076f9a79bfcfce">  140</a></span>&#160;<span class="preprocessor">#define HUE_BLUE2       8</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a26f5f894a0ee83c4605e34c6ad7d9de1">  141</a></span>&#160;<span class="preprocessor">#define HUE_CYAN        9</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a4e9918ca33eca084a0704d556b3b6918">  142</a></span>&#160;<span class="preprocessor">#define HUE_BLUEGREEN   10</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3e2611bf92bba899a3b7c4f823604e72">  143</a></span>&#160;<span class="preprocessor">#define HUE_BLUEGREEN2  11</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a500f656bd6caa4e661f5758f705e8549">  144</a></span>&#160;<span class="preprocessor">#define HUE_GREEN       12</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a130079693581d6ff2374dad740de35f9">  145</a></span>&#160;<span class="preprocessor">#define HUE_YELLOWGREEN 13</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a2988adc8acb77bca679ad087d79a16f5">  146</a></span>&#160;<span class="preprocessor">#define HUE_YELLOW      14</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a153e5df09e4f89d799f15a5ea1f8dc98">  147</a></span>&#160;<span class="preprocessor">#define HUE_YELLOWRED   15</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">/* Color defines, similar to c64 colors (untested) */</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">/* Hardware palette values (for GTIA colxxx registers) */</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a69d212585ed3d1beb532725c2205cce2">  151</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_BLACK             _gtia_mkcolor(HUE_GREY,0)</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3cb99efadfdddc0bbe74a2106e159410">  152</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_WHITE             _gtia_mkcolor(HUE_GREY,7)</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ad00d5ff4d1b9950615e315eebb401725">  153</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_RED               _gtia_mkcolor(HUE_REDORANGE,1)</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac2ca7862a718d14588483993bee22d31">  154</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_CYAN              _gtia_mkcolor(HUE_CYAN,3)</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a4b201143bb8f38fc14869499eee5c220">  155</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_VIOLET            _gtia_mkcolor(HUE_PURPLE,4)</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac1ec78549d14cb252eb6bf46c8f5f8ff">  156</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_GREEN             _gtia_mkcolor(HUE_GREEN,2)</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3c601320fca0489ad4dd121a87246890">  157</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_BLUE              _gtia_mkcolor(HUE_BLUE,2)</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5d8ffcc2f2cca7f05ae1b5639c22186b">  158</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_YELLOW            _gtia_mkcolor(HUE_YELLOW,7)</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5a7683eb46aa46ed24b224ef7053b478">  159</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_ORANGE            _gtia_mkcolor(HUE_ORANGE,5)</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a74bd563c74c60f191d482e63d5ebc931">  160</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_BROWN             _gtia_mkcolor(HUE_YELLOW,2)</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac0d52c8a2d46b3eafda510911c3239d1">  161</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_LIGHTRED          _gtia_mkcolor(HUE_REDORANGE,6)</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a580fb3a4f81512108ca0972d40ac8419">  162</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_GRAY1             _gtia_mkcolor(HUE_GREY,2)</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a301bf98fbfcc65a8ee66d9c2e0b30472">  163</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_GRAY2             _gtia_mkcolor(HUE_GREY,3)</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a358c3fad93ac1ad7dd6f6a813c5f68ba">  164</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_LIGHTGREEN        _gtia_mkcolor(HUE_GREEN,6)</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a705efaf8e0ea49042d7357af57617d99">  165</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_LIGHTBLUE         _gtia_mkcolor(HUE_BLUE,6)</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3043a69e2b361376e54b42950b2d1315">  166</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_GRAY3             _gtia_mkcolor(HUE_GREY,5)</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">/* Hue values */</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">/* (These can vary depending on TV standard (NTSC vs PAL),</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">** tint potentiometer settings, TV tint settings, emulator palette, etc.)</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a86fa77236cbab77f22b15a3e4b62d8db">  123</a></span>&#160;<span class="preprocessor">#define HUE_GREY        0</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a8fb980946afcb50637083e0428230845">  124</a></span>&#160;<span class="preprocessor">#define HUE_GOLD        1</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a41da1871b3e3a4c38823876b2d2a4b68">  125</a></span>&#160;<span class="preprocessor">#define HUE_GOLDORANGE  2</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="__gtia_8h.html#acc74853b09d8b54d4ed6207f3aabf992">  126</a></span>&#160;<span class="preprocessor">#define HUE_REDORANGE   3</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ace865534ac4931137add0306295c53df">  127</a></span>&#160;<span class="preprocessor">#define HUE_ORANGE      4</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a948781457b62a2ebc30a59bcd2edcaab">  128</a></span>&#160;<span class="preprocessor">#define HUE_MAGENTA     5</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a50d007a5ac39acdc4ffc2061a10b1763">  129</a></span>&#160;<span class="preprocessor">#define HUE_PURPLE      6</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a2e7e3cc70eb0ea9d730aa0036ec55e8b">  130</a></span>&#160;<span class="preprocessor">#define HUE_BLUE        7</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a4bc9f1eadfd5e643e4076f9a79bfcfce">  131</a></span>&#160;<span class="preprocessor">#define HUE_BLUE2       8</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a26f5f894a0ee83c4605e34c6ad7d9de1">  132</a></span>&#160;<span class="preprocessor">#define HUE_CYAN        9</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a4e9918ca33eca084a0704d556b3b6918">  133</a></span>&#160;<span class="preprocessor">#define HUE_BLUEGREEN   10</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3e2611bf92bba899a3b7c4f823604e72">  134</a></span>&#160;<span class="preprocessor">#define HUE_BLUEGREEN2  11</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a500f656bd6caa4e661f5758f705e8549">  135</a></span>&#160;<span class="preprocessor">#define HUE_GREEN       12</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a130079693581d6ff2374dad740de35f9">  136</a></span>&#160;<span class="preprocessor">#define HUE_YELLOWGREEN 13</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a2988adc8acb77bca679ad087d79a16f5">  137</a></span>&#160;<span class="preprocessor">#define HUE_YELLOW      14</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a153e5df09e4f89d799f15a5ea1f8dc98">  138</a></span>&#160;<span class="preprocessor">#define HUE_YELLOWRED   15</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">/* Color defines, similar to c64 colors (untested) */</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">/* Hardware palette values (for GTIA colxxx registers) */</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a69d212585ed3d1beb532725c2205cce2">  142</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_BLACK             _gtia_mkcolor(HUE_GREY,0)</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3cb99efadfdddc0bbe74a2106e159410">  143</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_WHITE             _gtia_mkcolor(HUE_GREY,7)</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ad00d5ff4d1b9950615e315eebb401725">  144</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_RED               _gtia_mkcolor(HUE_REDORANGE,1)</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac2ca7862a718d14588483993bee22d31">  145</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_CYAN              _gtia_mkcolor(HUE_CYAN,3)</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a4b201143bb8f38fc14869499eee5c220">  146</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_VIOLET            _gtia_mkcolor(HUE_PURPLE,4)</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac1ec78549d14cb252eb6bf46c8f5f8ff">  147</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_GREEN             _gtia_mkcolor(HUE_GREEN,2)</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3c601320fca0489ad4dd121a87246890">  148</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_BLUE              _gtia_mkcolor(HUE_BLUE,2)</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5d8ffcc2f2cca7f05ae1b5639c22186b">  149</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_YELLOW            _gtia_mkcolor(HUE_YELLOW,7)</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5a7683eb46aa46ed24b224ef7053b478">  150</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_ORANGE            _gtia_mkcolor(HUE_ORANGE,5)</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a74bd563c74c60f191d482e63d5ebc931">  151</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_BROWN             _gtia_mkcolor(HUE_YELLOW,2)</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac0d52c8a2d46b3eafda510911c3239d1">  152</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_LIGHTRED          _gtia_mkcolor(HUE_REDORANGE,6)</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a580fb3a4f81512108ca0972d40ac8419">  153</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_GRAY1             _gtia_mkcolor(HUE_GREY,2)</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a301bf98fbfcc65a8ee66d9c2e0b30472">  154</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_GRAY2             _gtia_mkcolor(HUE_GREY,3)</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a358c3fad93ac1ad7dd6f6a813c5f68ba">  155</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_LIGHTGREEN        _gtia_mkcolor(HUE_GREEN,6)</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a705efaf8e0ea49042d7357af57617d99">  156</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_LIGHTBLUE         _gtia_mkcolor(HUE_BLUE,6)</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3043a69e2b361376e54b42950b2d1315">  157</a></span>&#160;<span class="preprocessor">#define GTIA_COLOR_GRAY3             _gtia_mkcolor(HUE_GREY,5)</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">/* (W) PRIOR register values                                                 */</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a36fddae5ecae63652110645d08526d92">  164</a></span>&#160;<span class="preprocessor">#define PRIOR_P03_PF03          0x01 </span><span class="comment">/* Players 0-3, then Playfields 0-3, then background */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ad265f749e2d1336cf41657d5e0ba1f88">  165</a></span>&#160;<span class="preprocessor">#define PRIOR_P01_PF03_P23      0x02 </span><span class="comment">/* Players 0-1, then Playfields 0-3, then Players 2-3, then background */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac40cb18ff4b01a2f5e5ed51e9bdffc90">  166</a></span>&#160;<span class="preprocessor">#define PRIOR_PF03_P03          0x04 </span><span class="comment">/* Playfields 0-3, then Players 0-3, then background */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a2dc94e78fa1749fb2e692f6f2f943b9b">  167</a></span>&#160;<span class="preprocessor">#define PRIOR_PF01_P03_PF23     0x08 </span><span class="comment">/* Playfields 0-1, then Players 0-3, then Playfields 2-3, then background */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">/* (W) PRIOR register values                                                 */</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a36fddae5ecae63652110645d08526d92">  173</a></span>&#160;<span class="preprocessor">#define PRIOR_P03_PF03          0x01 </span><span class="comment">/* Players 0-3, then Playfields 0-3, then background */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ad265f749e2d1336cf41657d5e0ba1f88">  174</a></span>&#160;<span class="preprocessor">#define PRIOR_P01_PF03_P23      0x02 </span><span class="comment">/* Players 0-1, then Playfields 0-3, then Players 2-3, then background */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac40cb18ff4b01a2f5e5ed51e9bdffc90">  175</a></span>&#160;<span class="preprocessor">#define PRIOR_PF03_P03          0x04 </span><span class="comment">/* Playfields 0-3, then Players 0-3, then background */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a2dc94e78fa1749fb2e692f6f2f943b9b">  176</a></span>&#160;<span class="preprocessor">#define PRIOR_PF01_P03_PF23     0x08 </span><span class="comment">/* Playfields 0-1, then Players 0-3, then Playfields 2-3, then background */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a1eb3d40b8264ba64e077c88be52ce300">  169</a></span>&#160;<span class="preprocessor">#define PRIOR_5TH_PLAYER        0x10 </span><span class="comment">/* Four missiles combine to be a 5th player (uses COLPF3) */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">/* Causes overlap of players 0 &amp; 1 and of players 2 &amp; 3 to result in a third color,</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">** the logical OR of the two players&#39; colors, and other overlaps (e.g., players 0 and 2)</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">** to result in black (0x00).</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ad51bd1ad57b9fc9fe5db81ae42e4488a">  175</a></span>&#160;<span class="preprocessor">#define PRIOR_OVERLAP_3RD_COLOR 0x20</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a1eb3d40b8264ba64e077c88be52ce300">  178</a></span>&#160;<span class="preprocessor">#define PRIOR_5TH_PLAYER        0x10 </span><span class="comment">/* Four missiles combine to be a 5th player (uses COLPF3) */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">/* Causes overlap of players 0 &amp; 1 and of players 2 &amp; 3 to result in a third color,</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">** the logical OR of the two players&#39; colors, and other overlaps (e.g., players 0 and 2)</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">** to result in black (0x00).</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ad51bd1ad57b9fc9fe5db81ae42e4488a">  184</a></span>&#160;<span class="preprocessor">#define PRIOR_OVERLAP_3RD_COLOR 0x20</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">/* (W) GTIA special graphics mode options for GPRIOR                         */</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment">/* Pixels are 2 color clocks wide, and one scanline tall</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment">** (so 80x192 in normal playfield width).</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="comment">** May be used with both bitmap and character modelines.</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">/* (W) GTIA special graphics mode options for GPRIOR                         */</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">/* Pixels are 2 color clocks wide, and one scanline tall</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">** (so 80x192 in normal playfield width).</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">** May be used with both bitmap and character modelines.</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">/* 16 shade shades of the background (COLBK) hue;</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">** Note: brightnesses other than 0 (darkest) in COLBK cause additional effects</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac0a000cd9f30948e0f160576a8143e9d">  190</a></span>&#160;<span class="preprocessor">#define PRIOR_GFX_MODE_9        0x40</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">/* 9 color palette mode;</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">** COLPM0 (acts as background) thru COLPM3, followed by COLPF0 thru COLPF3, and COLBK</span></div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">/* 16 shade shades of the background (COLBK) hue;</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">** Note: brightnesses other than 0 (darkest) in COLBK cause additional effects</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac0a000cd9f30948e0f160576a8143e9d">  199</a></span>&#160;<span class="preprocessor">#define PRIOR_GFX_MODE_9        0x40</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">/* 9 color palette mode;</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">** COLPM0 (acts as background) thru COLPM3, followed by COLPF0 thru COLPF3, and COLBK</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac92fcc29145ccb0fce733e203486f4ef">  204</a></span>&#160;<span class="preprocessor">#define PRIOR_GFX_MODE_10       0x80</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment">/* 16 hues of the background (COLBK) brightness;</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment">** Note: hues other than 0 (greys) in COLBK caus additional effects</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a514d7d796cfcf1fb58b2156c3c35bca7">  209</a></span>&#160;<span class="preprocessor">#define PRIOR_GFX_MODE_11       0xC0</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">/* (W) VDELAY register values                                                */</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ac92fcc29145ccb0fce733e203486f4ef">  195</a></span>&#160;<span class="preprocessor">#define PRIOR_GFX_MODE_10       0x80</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">/* 16 hues of the background (COLBK) brightness;</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">** Note: hues other than 0 (greys) in COLBK caus additional effects</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a514d7d796cfcf1fb58b2156c3c35bca7">  200</a></span>&#160;<span class="preprocessor">#define PRIOR_GFX_MODE_11       0xC0</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">/* (W) VDELAY register values                                                */</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a9755fe3ee2a59c5170a18fd5e01977f8">  207</a></span>&#160;<span class="preprocessor">#define VDELAY_MISSILE0 0x01</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3f63f28533b2143d797b6da57e8d630b">  208</a></span>&#160;<span class="preprocessor">#define VDELAY_MISSILE1 0x02</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="__gtia_8h.html#acf49c52fcc7b8c66c37c920c23556baa">  209</a></span>&#160;<span class="preprocessor">#define VDELAY_MISSILE2 0x04</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a894b2aa22629d92aeabd52111d170245">  210</a></span>&#160;<span class="preprocessor">#define VDELAY_MISSILE3 0x08</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a45025a7874bac60c440344b8cc41d963">  211</a></span>&#160;<span class="preprocessor">#define VDELAY_PLAYER0  0x10</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5d3b0d9493895bcd242befe9894aa783">  212</a></span>&#160;<span class="preprocessor">#define VDELAY_PLAYER1  0x20</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ab3c6624846714b6934363a3ac2e9ac81">  213</a></span>&#160;<span class="preprocessor">#define VDELAY_PLAYER2  0x40</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="__gtia_8h.html#afa8c1866f1fc08cd6cea3308d817c1bd">  214</a></span>&#160;<span class="preprocessor">#define VDELAY_PLAYER3  0x80</span></div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a9755fe3ee2a59c5170a18fd5e01977f8">  216</a></span>&#160;<span class="preprocessor">#define VDELAY_MISSILE0 0x01</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3f63f28533b2143d797b6da57e8d630b">  217</a></span>&#160;<span class="preprocessor">#define VDELAY_MISSILE1 0x02</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="__gtia_8h.html#acf49c52fcc7b8c66c37c920c23556baa">  218</a></span>&#160;<span class="preprocessor">#define VDELAY_MISSILE2 0x04</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a894b2aa22629d92aeabd52111d170245">  219</a></span>&#160;<span class="preprocessor">#define VDELAY_MISSILE3 0x08</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a45025a7874bac60c440344b8cc41d963">  220</a></span>&#160;<span class="preprocessor">#define VDELAY_PLAYER0  0x10</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5d3b0d9493895bcd242befe9894aa783">  221</a></span>&#160;<span class="preprocessor">#define VDELAY_PLAYER1  0x20</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="__gtia_8h.html#ab3c6624846714b6934363a3ac2e9ac81">  222</a></span>&#160;<span class="preprocessor">#define VDELAY_PLAYER2  0x40</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="__gtia_8h.html#afa8c1866f1fc08cd6cea3308d817c1bd">  223</a></span>&#160;<span class="preprocessor">#define VDELAY_PLAYER3  0x80</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">/* (W) GRACTL register values                                                */</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">/* (W) GRACTL register values                                                */</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5ff29bd7384812d9b098df86232a4ce6">  221</a></span>&#160;<span class="preprocessor">#define GRACTL_MISSLES              0x01 </span><span class="comment">/* enable missiles */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a801812a8b84674f3aaf227b6d5f5afc1">  222</a></span>&#160;<span class="preprocessor">#define GRACTL_PLAYERS              0x02 </span><span class="comment">/* enable players */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">/* &quot;Latch&quot; triggers; once pressed, will give a continuous</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">** pressed input until this bit is cleared</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="__gtia_8h.html#add8f772ec2740d0ac0bdce3f46521290">  227</a></span>&#160;<span class="preprocessor">#define GRACTL_LATCH_TRIGGER_INPUTS 0x04</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5ff29bd7384812d9b098df86232a4ce6">  230</a></span>&#160;<span class="preprocessor">#define GRACTL_MISSLES              0x01 </span><span class="comment">/* enable missiles */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00231"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a801812a8b84674f3aaf227b6d5f5afc1">  231</a></span>&#160;<span class="preprocessor">#define GRACTL_PLAYERS              0x02 </span><span class="comment">/* enable players */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">/* &quot;Latch&quot; triggers; once pressed, will give a continuous</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">** pressed input until this bit is cleared</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="__gtia_8h.html#add8f772ec2740d0ac0bdce3f46521290">  236</a></span>&#160;<span class="preprocessor">#define GRACTL_LATCH_TRIGGER_INPUTS 0x04</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">/* Define a structure with the GTIA register offsets for read (R)            */</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="keyword">struct </span>__gtia_read {</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m0pf;       <span class="comment">/* 0x00: missile 0 to playfield collision */</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m1pf;       <span class="comment">/* 0x01: missile 1 to playfield collision */</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m2pf;       <span class="comment">/* 0x02: missile 2 to playfield collision */</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m3pf;       <span class="comment">/* 0x03: missile 3 to playfield collision */</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p0pf;       <span class="comment">/* 0x04: player 0 to playfield collision */</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p1pf;       <span class="comment">/* 0x05: player 1 to playfield collision */</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p2pf;       <span class="comment">/* 0x06: player 2 to playfield collision */</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p3pf;       <span class="comment">/* 0x07: player 3 to playfield collision */</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m0pl;       <span class="comment">/* 0x08: missile 0 to player collision */</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m1pl;       <span class="comment">/* 0x09: missile 1 to player collision */</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m2pl;       <span class="comment">/* 0x0A: missile 2 to player collision */</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m3pl;       <span class="comment">/* 0x0B: missile 3 to player collision */</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p0pl;       <span class="comment">/* 0x0C: player 0 to player collision */</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p1pl;       <span class="comment">/* 0x0D: player 1 to player collision */</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p2pl;       <span class="comment">/* 0x0E: player 2 to player collision */</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p3pl;       <span class="comment">/* 0x0F: player 3 to player collision */</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">/* Define a structure with the GTIA register offsets for read (R)            */</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="keyword">struct </span>__gtia_read {</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m0pf;       <span class="comment">/* 0x00: missile 0 to playfield collision */</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m1pf;       <span class="comment">/* 0x01: missile 1 to playfield collision */</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m2pf;       <span class="comment">/* 0x02: missile 2 to playfield collision */</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m3pf;       <span class="comment">/* 0x03: missile 3 to playfield collision */</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p0pf;       <span class="comment">/* 0x04: player 0 to playfield collision */</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p1pf;       <span class="comment">/* 0x05: player 1 to playfield collision */</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p2pf;       <span class="comment">/* 0x06: player 2 to playfield collision */</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p3pf;       <span class="comment">/* 0x07: player 3 to playfield collision */</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m0pl;       <span class="comment">/* 0x08: missile 0 to player collision */</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m1pl;       <span class="comment">/* 0x09: missile 1 to player collision */</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m2pl;       <span class="comment">/* 0x0A: missile 2 to player collision */</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   m3pl;       <span class="comment">/* 0x0B: missile 3 to player collision */</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p0pl;       <span class="comment">/* 0x0C: player 0 to player collision */</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p1pl;       <span class="comment">/* 0x0D: player 1 to player collision */</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p2pl;       <span class="comment">/* 0x0E: player 2 to player collision */</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   p3pl;       <span class="comment">/* 0x0F: player 3 to player collision */</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   trig0;      <span class="comment">/* 0x10: joystick trigger 0 (0=pressed, 1=released) */</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   trig1;      <span class="comment">/* 0x11: joystick trigger 1 */</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   trig2;      <span class="comment">/* 0x12: joystick trigger 2 */</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   trig3;      <span class="comment">/* 0x13: joystick trigger 3 */</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   pal;        <span class="comment">/* 0x14: pal/ntsc flag */</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   unused[10];</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   trig0;      <span class="comment">/* 0x10: joystick trigger 0 (0=pressed, 1=released) */</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   trig1;      <span class="comment">/* 0x11: joystick trigger 1 */</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   trig2;      <span class="comment">/* 0x12: joystick trigger 2 */</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   trig3;      <span class="comment">/* 0x13: joystick trigger 3 */</span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   pal;        <span class="comment">/* 0x14: pal/ntsc flag */</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   unused[10];</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   consol;     <span class="comment">/* 0x1F: console buttons */</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;};</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   consol;     <span class="comment">/* 0x1F: console buttons */</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;};</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">/* (R) PAL register possible values                                          */</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">/* Note: This only tells you whether the GTIA is PAL or NTSC; some NTSC</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">** systems are modded with PAL ANTIC chips; testing VCOUNT limits can be</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">** done to check for that.  Seems like it&#39;s not possible to test for SECAM</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">/* (R) PAL register possible values                                          */</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3ce330e5113db588b14f5297824c74e5">  274</a></span>&#160;<span class="preprocessor">#define TV_STD_PAL  0x1</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a04188efe829d67b3b826c16351ae072c">  275</a></span>&#160;<span class="preprocessor">#define TV_STD_NTSC 0xE</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">/* Note: This only tells you whether the GTIA is PAL or NTSC; some NTSC</span></div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">** systems are modded with PAL ANTIC chips; testing VCOUNT limits can be</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">** done to check for that.  Seems like it&#39;s not possible to test for SECAM</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a3ce330e5113db588b14f5297824c74e5">  283</a></span>&#160;<span class="preprocessor">#define TV_STD_PAL  0x1</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a04188efe829d67b3b826c16351ae072c">  284</a></span>&#160;<span class="preprocessor">#define TV_STD_NTSC 0xE</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">/* Macros for reading console keys (Start/Select/Option) via CONSOL register */</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a4f0c62d31db1ea47b8658186fc1b1c4c">  282</a></span>&#160;<span class="preprocessor">#define CONSOL_START(x)     !((unsigned char)((x) &amp; 1)) </span><span class="comment">/* true if Start pressed */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a1501338068f0c12c4f929dae87d2c06a">  283</a></span>&#160;<span class="preprocessor">#define CONSOL_SELECT(x)    !((unsigned char)((x) &amp; 2)) </span><span class="comment">/* true if Select pressed */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5d70e2d971014ae71f83cced27f43b07">  284</a></span>&#160;<span class="preprocessor">#define CONSOL_OPTION(x)    !((unsigned char)((x) &amp; 4)) </span><span class="comment">/* true if Option pressed */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="comment">/* Macros for reading console keys (Start/Select/Option) via CONSOL register */</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a4f0c62d31db1ea47b8658186fc1b1c4c">  291</a></span>&#160;<span class="preprocessor">#define CONSOL_START(x)     !((unsigned char)((x) &amp; 1)) </span><span class="comment">/* true if Start pressed */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a1501338068f0c12c4f929dae87d2c06a">  292</a></span>&#160;<span class="preprocessor">#define CONSOL_SELECT(x)    !((unsigned char)((x) &amp; 2)) </span><span class="comment">/* true if Select pressed */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00293"></a><span class="lineno"><a class="line" href="__gtia_8h.html#a5d70e2d971014ae71f83cced27f43b07">  293</a></span>&#160;<span class="preprocessor">#define CONSOL_OPTION(x)    !((unsigned char)((x) &amp; 4)) </span><span class="comment">/* true if Option pressed */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">/* End of _gtia.h */</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* #ifndef __GTIA_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">/* End of _gtia.h */</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* #ifndef __GTIA_H */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['nes_2eh_1076',['nes.h',['../nes_8h.html',1,'']]],
-  ['nes_2einc_1077',['nes.inc',['../nes_8inc.html',1,'']]],
-  ['new_1078',['new',['../new.html',1,'']]]
+  ['license_1145',['LICENSE',['../mega65_2LICENSE.html',1,'(Global Namespace)'],['../osi-c1p_2LICENSE.html',1,'(Global Namespace)']]]
 ];

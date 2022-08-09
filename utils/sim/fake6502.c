@@ -139,46 +139,6 @@ limitations under the License.
 
 #define BASE_STACK     0x100
 
-#define saveaccum(n) a = (uint8_t)((n) & 0x00FF)
-
-
-//flag modifier macros
-#define setcarry() (status |= FLAG_CARRY)
-#define clearcarry() (status &= ~FLAG_CARRY)
-#define setzero() (status |= FLAG_ZERO)
-#define clearzero() (status &= ~FLAG_ZERO)
-#define setinterrupt() (status |= FLAG_INTERRUPT)
-#define clearinterrupt() (status &= ~FLAG_INTERRUPT)
-#define setdecimal() (status |= FLAG_DECIMAL)
-#define cleardecimal() (status &= ~FLAG_DECIMAL)
-#define setoverflow() (status |= FLAG_OVERFLOW)
-#define clearoverflow() (status &= ~FLAG_OVERFLOW)
-#define setsign() (status |= FLAG_SIGN)
-#define clearsign() (status &= ~FLAG_SIGN)
-
-
-//flag calculation macros
-#define zerocalc(n) {\
-    if ((n) & 0x00FF) clearzero();\
-        else setzero();\
-}
-
-#define signcalc(n) {\
-    if ((n) & 0x0080) setsign();\
-        else clearsign();\
-}
-
-#define carrycalc(n) {\
-    if ((n) & 0xFF00) setcarry();\
-        else clearcarry();\
-}
-
-#define overflowcalc(n, m, o) { /* n = result, m = accumulator, o = memory */ \
-    if (((n) ^ (uint16_t)(m)) & ((n) ^ (o)) & 0x0080) setoverflow();\
-        else clearoverflow();\
-}
-
-
 //6502 CPU registers
 uint16_t pc;
 uint8_t sp, a, x, y, status;
@@ -189,6 +149,53 @@ uint32_t instructions = 0; //keep track of total instructions executed
 uint32_t clockticks6502 = 0, clockgoal6502 = 0;
 uint16_t oldpc, ea, reladdr, value, result;
 uint8_t opcode, oldstatus;
+
+static inline void saveaccum(uint16_t result) {
+  a = (uint8_t)(result & 0x00FF);
+}
+
+//flag modifier functions
+static inline void setcarry(void) { status |= FLAG_CARRY; }
+static inline void clearcarry(void) { status &= ~FLAG_CARRY; }
+static inline void setzero(void) { status |= FLAG_ZERO; }
+static inline void clearzero(void) { status &= ~FLAG_ZERO; }
+static inline void setinterrupt(void) { status |= FLAG_INTERRUPT; }
+static inline void clearinterrupt(void) { status &= ~FLAG_INTERRUPT; }
+static inline void setdecimal(void) { status |= FLAG_DECIMAL; }
+static inline void cleardecimal(void) { status &= ~FLAG_DECIMAL; }
+static inline void setoverflow(void) { status |= FLAG_OVERFLOW; }
+static inline void clearoverflow(void) { status &= ~FLAG_OVERFLOW; }
+static inline void setsign(void) { status |= FLAG_SIGN; }
+static inline void clearsign(void) { status &= ~FLAG_SIGN; }
+
+//flag calculation functions
+static inline void zerocalc(uint16_t result) {
+  if (result & 0x00FF)
+    clearzero();
+  else
+    setzero();
+}
+
+static inline void signcalc(uint16_t result) {
+  if (result & 0x0080)
+    setsign();
+  else
+    clearsign();
+}
+
+static inline void carrycalc(uint16_t result) {
+  if (result & 0xFF00)
+    setcarry();
+  else
+    clearcarry();
+}
+
+static inline void overflowcalc(uint16_t result, uint16_t memory) {
+  if ((result ^ (uint16_t)a) & (result ^ memory) & 0x0080)
+    setoverflow();
+  else
+    clearoverflow();
+}
 
 //externally supplied functions
 extern uint8_t read6502(uint16_t address);
@@ -346,7 +353,7 @@ static void adc() {
     result = (uint16_t)a + value + (uint16_t)(status & FLAG_CARRY);
 
     zerocalc(result);
-    overflowcalc(result, a, value);
+    overflowcalc(result, value);
     signcalc(result);
 
     #ifndef NES_CPU
@@ -742,7 +749,7 @@ static void sbc() {
   result = (uint16_t)a + value + (uint16_t)(status & FLAG_CARRY);
 
   zerocalc(result);
-  overflowcalc(result, a, value);
+  overflowcalc(result, value);
   signcalc(result);
 
 #ifndef NES_CPU

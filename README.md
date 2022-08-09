@@ -7,6 +7,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
 ## Supported platforms
 
 - Atari 8-bit
+- Commander X16
 - Commodore 64
 - MEGA65
 - NES
@@ -112,6 +113,7 @@ executables and libraries for that target.
 | Platform                      | Command              |
 | ----------------------------- | -------------------- |
 | Atari 8-bit                   | `mos-atari8-clang`   |
+| Commander X16                 | `mos-cx16-clang`     |
 | Commodore 64                  | `mos-c64-clang`      |
 | MEGA65                        | `mos-mega65-clang`   |
 | NES-NROM-128                  | `mos-nrom-128-clang` |

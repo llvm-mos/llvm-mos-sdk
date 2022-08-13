@@ -7,7 +7,7 @@ __prg_ram_size = 0
 .weak __prg_nvram_size
 __prg_nvram_size = 0
 .weak __chr_ram_size
-__chr_ram_size  = 0
+__chr_ram_size = 0
 .weak __chr_nvram_size
 __chr_nvram_size = 0
 

@@ -11,6 +11,8 @@ ASSERT(__prg_rom_size <= 256 || __chr_rom_size <= 64,
        "MMC1 cannot support both >256 KiB of PRG-RAM and >64KiB of CHR-ROM")
 ASSERT(__prg_ram_size + __prg_nvram_size <= 32,
        "At most 32 KiB of PRG-(NV)RAM is supported.")
+ASSERT((__prg_ram_size + __prg_nvram_size) % 8 == 0,
+       "PRG-(NV)RAM size must be divisible by 8KiB")
 
 MEMORY {
   /* PRG-RAM VMA. */

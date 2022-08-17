@@ -36,16 +36,16 @@ BYTE(
 
 BYTE(
   ((__prg_ram_size_raw ? __prg_ram_size_raw :
-                         LOG2CEIL(__prg_ram_size)-6) & 0xf) << 0 |
+                         LOG2CEIL(__prg_ram_size*1024)-6) & 0xf) << 0 |
   ((__prg_nvram_size_raw ? __prg_nvram_size_raw :
-                           LOG2CEIL(__prg_nvram_size)-6) & 0xf) << 4
+                           LOG2CEIL(__prg_nvram_size*1024)-6) & 0xf) << 4
 )
 
 BYTE(
   ((__chr_ram_size ? __chr_ram_size_raw :
-                       LOG2CEIL(__chr_ram_size)-6) & 0xf) << 0 |
+                       LOG2CEIL(__chr_ram_size*1024)-6) & 0xf) << 0 |
   ((__chr_nvram_size ? __chr_nvram_size_raw :
-                       LOG2CEIL(__chr_nvram_size)-6) & 0xf) << 4
+                       LOG2CEIL(__chr_nvram_size*1024)-6) & 0xf) << 4
 )
 
 BYTE(__timing & 3)

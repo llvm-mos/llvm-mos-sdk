@@ -14,6 +14,7 @@ function(add_test_target target)
       -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
       -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
       -DLLVM_MOS=${llvm_mos}
+      -DMESEN_COMMAND=${MESEN_COMMAND}
       -DCMAKE_C_FLAGS=${config_flag}
       -DCMAKE_CXX_FLAGS=${config_flag}
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_SOURCE_DIR}/cmake/llvm-mos-toolchain.cmake

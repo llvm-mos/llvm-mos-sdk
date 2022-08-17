@@ -2,21 +2,27 @@
 
 INCLUDE nes.ld
 
-ASSERT(__chr_rom_size <= 16, "MMC1 only supports up to 128 KiB of CHR-ROM.")
-ASSERT(__prg_rom_size >= 2, "MMC1 requires at least 32KiB of PRG-ROM.")
-ASSERT(__prg_rom_size <= 32, "MMC1 only supports up to 512KiB PRG-ROM.")
-ASSERT(__prg_rom_size <= 16 || __chr_rom_size <= 8,
+ASSERT(__prg_ram_size == 0 || __prg_nvram_size == 0,
+       "Simulatenously using PRG-RAM and PRG-NVRAM is not supported.")
+ASSERT(__chr_rom_size <= 128, "MMC1 only supports up to 128 KiB of CHR-ROM.")
+ASSERT(__prg_rom_size >= 32, "MMC1 requires at least 32KiB of PRG-ROM.")
+ASSERT(__prg_rom_size <= 512, "MMC1 only supports up to 512KiB PRG-ROM.")
+ASSERT(__prg_rom_size <= 256 || __chr_rom_size <= 64,
        "MMC1 cannot support both >256 KiB of PRG-RAM and >64KiB of CHR-ROM")
-ASSERT(__prg_ram_size + __prg_nvram_size <= 9,
+ASSERT(__prg_ram_size + __prg_nvram_size <= 32,
        "At most 32 KiB of PRG-(NV)RAM is supported.")
 
 MEMORY {
+  /* PRG-RAM VMA. */
+  prg_ram : ORIGIN = 0x6000,
+            LENGTH = MAX(0x2000, (__prg_ram_size + __prg_nvram_size) * 1024)
+
   /* PRG-ROM VMAs. */
   prg_rom_lo : ORIGIN = 0x8000, LENGTH = 0x4000
   prg_rom_hi : ORIGIN = 0xc000, LENGTH = 0x4000
 
   /* PRG-ROM LMA. */
-  prg_rom : ORIGIN = 0x10000, LENGTH = __prg_rom_size * 0x4000
+  prg_rom : ORIGIN = 0x10000, LENGTH = __prg_rom_size * 1024
 
   /* 16 KiB banks. */
   prg_rom_0  : ORIGIN = 0x10000, LENGTH = 0x4000
@@ -71,7 +77,7 @@ MEMORY {
   prg_rom_30_31 : ORIGIN = 0x88000, LENGTH = 0x8000
 
   /* CHR-ROM LMA. */
-  chr_rom : ORIGIN = 0x90000, LENGTH = __chr_rom_size * 0x2000
+  chr_rom : ORIGIN = 0x90000, LENGTH = __chr_rom_size * 1024
 
   /* 4 KiB Banks */
   chr_rom_0  : ORIGIN = 0x90000, LENGTH = 0x2000
@@ -127,23 +133,7 @@ MEMORY {
 }
 
 SECTIONS {
-  /* Init code must be loadable at startup, which means bank 15 @ 0xc000. */
-  .init : { INCLUDE init-sections.ld } >prg_rom_hi AT>prg_rom_15
-  .text : {
-    INCLUDE fini-sections.ld
-    INCLUDE text-sections-proper.ld
-  } >c_rom_vma AT>c_rom
-  .rodata : { INCLUDE rodata-sections.ld } >c_rom_vma AT>c_rom
-  .data : { INCLUDE data-sections.ld } >c_ram AT>c_rom
-  /* Don't reference c_rom in this expression, as it isn't defined yet. */
-  __data_load_start = LOADADDR(.data) - LOADADDR(.rodata) + ADDR(.rodata);
-  __data_size = SIZEOF(.data);
-  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram
-  INCLUDE bss-symbols.ld
-  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram
-  .vector 0xfffa - ORIGIN(prg_rom_hi) + ORIGIN(prg_rom_15) : {
-    SHORT(nmi) SHORT(_start) SHORT(irq)
-  } >prg_rom_15
+  .prg_ram (NOLOAD) : { *(.prg_ram .prg_ram.*) } >prg_ram
 
   .prg_rom_0 : { *(.prg_rom_0 .prg_rom_0.*) } >prg_rom_0_vma AT>prg_rom_0
   .prg_rom_1 : { *(.prg_rom_1 .prg_rom_1.*) } >prg_rom_1_vma AT>prg_rom_1
@@ -246,6 +236,24 @@ SECTIONS {
   .chr_rom_26_27 : { KEEP(*(.chr_rom_26_27 .chr_rom_26_27.*)) } >chr_rom_26_27
   .chr_rom_28_29 : { KEEP(*(.chr_rom_28_29 .chr_rom_28_29.*)) } >chr_rom_28_29
   .chr_rom_30_31 : { KEEP(*(.chr_rom_30_31 .chr_rom_30_31.*)) } >chr_rom_30_31
+
+  /* Init code must be loadable at startup, which means bank 15 @ 0xc000. */
+  .init : { INCLUDE init-sections.ld } >prg_rom_hi AT>prg_rom_15
+  .text : {
+    INCLUDE fini-sections.ld
+    INCLUDE text-sections-proper.ld
+  } >c_rom_vma AT>c_rom
+  .rodata : { INCLUDE rodata-sections.ld } >c_rom_vma AT>c_rom
+  .data : { INCLUDE data-sections.ld } >c_ram AT>c_rom
+  /* Don't reference c_rom in this expression, as it isn't defined yet. */
+  __data_load_start = LOADADDR(.data) - LOADADDR(.rodata) + ADDR(.rodata);
+  __data_size = SIZEOF(.data);
+  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram
+  INCLUDE bss-symbols.ld
+  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram
+  .vector 0xfffa - ORIGIN(prg_rom_hi) + ORIGIN(prg_rom_15) : {
+    SHORT(nmi) SHORT(_start) SHORT(irq)
+  } >prg_rom_15
 }
 
 INCLUDE ines.ld

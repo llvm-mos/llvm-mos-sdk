@@ -3,19 +3,32 @@ __rc0 = 0x00;
 INCLUDE imag-regs.ld
 ASSERT(__rc31 == 0x1f, "Inconsistent zero page map.")
 
-ASSERT(__prg_ram_size == 0 || __prg_nvram_size == 0,
-       "Simulatenously using PRG-RAM and PRG-NVRAM is not supported.")
+ASSERT(__prg_ram_size == 0 || __prg_ram_size >= 64,
+       "Nonempty PRG-RAM must have at least 64 bytes.")
+ASSERT(__prg_nvram_size == 0 || __prg_nvram_size >= 64,
+       "Nonempty PRG-NVRAM must have at least 64 bytes.")
+ASSERT(__chr_ram_size == 0 || __chr_ram_size >= 64,
+       "Nonempty CHR-RAM must have at least 64 bytes.")
+ASSERT(__chr_nvram_size == 0 || __chr_nvram_size >= 64,
+       "Nonempty CHR-NVRAM must have at least 64 bytes.")
+ASSERT(__prg_ram_size == 0 ||
+       __prg_ram_size == 1 << LOG2CEIL(__prg_ram_size),
+       "Nonempty PRG-RAM must be a power of 2.")
+ASSERT(__prg_nvram_size == 0 ||
+       __prg_nvram_size == 1 << LOG2CEIL(__prg_nvram_size),
+       "Nonempty PRG-NVRAM must be a power of 2.")
+ASSERT(__chr_ram_size == 0 ||
+       __chr_ram_size == 1 << LOG2CEIL(__chr_ram_size),
+       "Nonempty CHR-RAM must be a power of 2.")
+ASSERT(__chr_nvram_size == 0 ||
+       __chr_nvram_size == 1 << LOG2CEIL(__chr_nvram_size),
+       "Nonempty CHR-NVRAM must be a power of 2.")
 
 MEMORY {
   zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
 
   /* CPU address space. */
   ram : ORIGIN = 0x0200, LENGTH = 0x0600
-
-  /* PRG-RAM VMA. */
-  prg_ram : ORIGIN = 0x6000,
-            LENGTH = MAX(0x2000, (__prg_ram_size + __prg_nvram_size) ?
-                                 64 << (__prg_ram_size + __prg_nvram_size) : 0)
 }
 
 SECTIONS {

@@ -66,3 +66,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 add_subdirectory(mos-platform)
+
+if(NOT CMAKE_CROSSCOMPILING)
+  add_subdirectory(test)
+endif()

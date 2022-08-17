@@ -5,8 +5,6 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
-  c-in-prg-ram.ld
-  c-in-ram.ld
   common.ld
   prg-rom-mode-0.ld
   prg-rom-mode-2.ld

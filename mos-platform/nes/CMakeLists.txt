@@ -9,7 +9,8 @@ install(FILES
   ppu.h
 TYPE INCLUDE)
 install(FILES
-  chr-rom.ld
+  c-in-prg-ram.ld
+  c-in-ram.ld
   ines-header.ld
   ines-roms.ld
   ines.ld

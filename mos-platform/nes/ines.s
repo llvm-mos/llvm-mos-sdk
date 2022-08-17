@@ -1,7 +1,6 @@
 ; Defaults for settings in the iNES 2.0 header.
 
-/* Note that the "size" fields all have wildly different interpretations; see the
- * reference above for details. */
+/* All non-raw size fields are given in units of KiB (1024 bytes) */
 .weak __prg_ram_size
 __prg_ram_size = 0
 .weak __prg_nvram_size
@@ -10,6 +9,27 @@ __prg_nvram_size = 0
 __chr_ram_size = 0
 .weak __chr_nvram_size
 __chr_nvram_size = 0
+
+/* Raw setting for RAM size header fields. */
+.weak __prg_ram_size_raw
+__prg_ram_size_raw = 0
+.weak __prg_nvram_size_raw
+__prg_nvram_size_raw = 0
+.weak __chr_ram_size_raw
+__chr_ram_size_raw = 0
+.weak __chr_nvram_size_raw
+__chr_nvram_size_raw = 0
+
+/**
+ * Raw setting for ROM size header fields. The least significant byte is placed
+ * at offset 4 or 5, and the most significant nibble at offset 9. This also
+ * allows using the exponent/multiplier mode. Only the lowest 24 bits are
+ * significant.
+ */
+.weak __prg_rom_size_raw
+__prg_rom_size_raw = 0
+.weak __chr_rom_size_raw
+__chr_rom_size_raw = 0
 
 .weak __mirroring
 __mirroring = 0

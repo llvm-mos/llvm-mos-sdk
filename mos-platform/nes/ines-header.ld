@@ -1,13 +1,12 @@
 /* iNES 2.0 header: https://www.nesdev.org/wiki/NES_2.0 */
 
-/* Note that the "size" fields all have wildly different interpretations; see the
- * reference above for details. */
+/* Note that the "size" fields are all specified in KiB (1024 bytes). */
 
 BYTE(0x4e) BYTE(0x45) BYTE(0x53) BYTE(0x1a)
 
-BYTE(__prg_rom_size & 0xff)
+BYTE((__prg_rom_size_raw ? __prg_rom_size_raw : __prg_rom_size / 16) & 0xff)
 
-BYTE(__chr_rom_size & 0xff)
+BYTE((__chr_rom_size_raw ? __chr_rom_size_raw : __chr_rom_size / 8) & 0xff)
 
 BYTE(
   (__mirroring   & 1  ) << 0 |
@@ -29,18 +28,24 @@ BYTE(
 )
 
 BYTE(
-  (__prg_rom_size >> 8 & 0xf) << 0 |
-  (__chr_rom_size >> 8 & 0xf) << 4
+  ((__prg_rom_size_raw ? __prg_rom_size_raw :
+                         __prg_rom_size / 16) >> 8 & 0xf) << 0 |
+  ((__chr_rom_size_raw ? __chr_rom_size_raw :
+                         __chr_rom_size / 8) >> 8 & 0xf)  << 4
 )
 
 BYTE(
-  (__prg_ram_size   & 0xf) << 0 |
-  (__prg_nvram_size & 0xf) << 4
+  ((__prg_ram_size_raw ? __prg_ram_size_raw :
+                         LOG2CEIL(__prg_ram_size)-6) & 0xf) << 0 |
+  ((__prg_nvram_size_raw ? __prg_nvram_size_raw :
+                           LOG2CEIL(__prg_nvram_size)-6) & 0xf) << 4
 )
 
 BYTE(
-  (__chr_ram_size   & 0xf) << 0 |
-  (__chr_nvram_size & 0xf) << 4
+  ((__chr_ram_size ? __chr_ram_size_raw :
+                       LOG2CEIL(__chr_ram_size)-6) & 0xf) << 0 |
+  ((__chr_nvram_size ? __chr_nvram_size_raw :
+                       LOG2CEIL(__chr_nvram_size)-6) & 0xf) << 4
 )
 
 BYTE(__timing & 3)

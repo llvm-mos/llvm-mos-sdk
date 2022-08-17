@@ -16,7 +16,17 @@ jobs:
     steps:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
-        run: sudo apt-get -y install doxygen graphviz ninja-build
+        run: |
+          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard
+          T=$(mktemp -d)
+          pushd $T
+          curl -Lo mesen.zip https://www.mesen.ca/download.php
+          unzip mesen.zip
+          popd
+          mkdir bin
+          cp $T/Mesen.exe bin/
+          echo "$(pwd)/bin" >> $GITHUB_PATH
+
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
         run: choco install curl ninja
@@ -47,8 +57,12 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -G "Ninja" ..
+          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DMESEN_COMMAND="mono Mesen.exe" -G "Ninja" ..
           ninja install
+
+      - name: Test the SDK.
+          cd build
+          ninja test
 
       - name: Build the docs.
         if: startsWith(matrix.os, 'ubuntu')

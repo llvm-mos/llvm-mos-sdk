@@ -48,6 +48,9 @@ if(NOT CMAKE_CROSSCOMPILING)
     endif()
   endif()
 
+  find_program(MESEN_COMMAND NAMES mesen Mesen.exe)
+  message(STATUS "Mesen NES emulator: ${MESEN_COMMAND}")
+
   # Install toolchain and config file for users of find_package(llvm-mos-sdk).
   # CMake's find_package logic will discover
   # `$PATH/../lib/cmake/llvm-mos-sdk/llvm-mos-sdk-config.cmake` which in turn

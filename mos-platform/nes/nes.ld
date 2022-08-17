@@ -3,6 +3,10 @@ __rc0 = 0x00;
 INCLUDE imag-regs.ld
 ASSERT(__rc31 == 0x1f, "Inconsistent zero page map.")
 
+ASSERT(__prg_rom_size % 16 == 0,
+       "PRG-ROM size must be evenly divisible by 16 KiB.")
+ASSERT(__chr_rom_size % 8 == 0,
+       "CHR-ROM size must be evenly divisible by 8 KiB.")
 ASSERT(__prg_ram_size == 0 || __prg_ram_size >= 64,
        "Nonempty PRG-RAM must have at least 64 bytes.")
 ASSERT(__prg_nvram_size == 0 || __prg_nvram_size >= 64,

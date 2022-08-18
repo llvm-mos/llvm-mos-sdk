@@ -17,14 +17,14 @@ jobs:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
         run: |
-          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard
+          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard xvfb
           MESEN_DIR=$(mktemp -d)
           echo "MESEN_DIR=$MESEN_DIR" >> $GITHUB_ENV
           cd $MESEN_DIR
           curl -Lo mesen.zip https://www.mesen.ca/download.php
           unzip mesen.zip
           chmod +x Mesen.exe
-          echo -e "#!/bin/sh\n/usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" > mesen
+          echo -e "#!/bin/sh\nxvfb-run /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" > mesen
           chmod +x mesen
 
       - name: Install Windows build dependencies.

@@ -27,7 +27,9 @@ jobs:
           cp $T/Mesen.exe bin/
           echo -e "#!/bin/sh\n/usr/bin/mono $(pwd)/bin/Mesen.exe \"$@\"" > bin/mesen
           chmod +x bin/mesen
-          echo "$(pwd)/bin" >> $GITHUB_PATH
+          pwd
+          ls -lh bin/
+          cat bin/mesen
 
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')

@@ -12,7 +12,7 @@ add_executable(minimal minimal.c)
 add_mesen_test(minimal)
 
 function(add_no_compile_test target)
-  add_test(NAME {target}-no-compile COMMAND ${CMAKE_CTEST_COMMAND}
+  add_test(NAME ${target}-no-compile COMMAND ${CMAKE_CTEST_COMMAND}
     --build-and-test ${CMAKE_CURRENT_SOURCE_DIR}/no-compile
                     ${CMAKE_CURRENT_BINARY_DIR}/no-compile
     --build-generator ${CMAKE_GENERATOR}
@@ -24,6 +24,7 @@ function(add_no_compile_test target)
       -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
     )
+  set_property(TEST ${target}-no-compile PROPERTY WILL_FAIL YES)
 endfunction()
 
-add_no_compile_test(minimal)
+add_no_compile_test(chr-rom-too-big)

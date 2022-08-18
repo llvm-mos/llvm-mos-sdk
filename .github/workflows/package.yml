@@ -61,6 +61,7 @@ jobs:
           ninja install
 
       - name: Test the SDK.
+        run: |
           cd build
           ninja test
 

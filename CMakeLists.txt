@@ -48,9 +48,7 @@ if(NOT CMAKE_CROSSCOMPILING)
     endif()
   endif()
 
-  if(NOT MESEN_COMMAND)
-    find_program(MESEN_COMMAND NAMES mesen Mesen.exe)
-  endif()
+  find_program(MESEN_COMMAND NAMES mesen Mesen.exe)
   message(STATUS "Mesen NES emulator: ${MESEN_COMMAND}")
 
   # Install toolchain and config file for users of find_package(llvm-mos-sdk).

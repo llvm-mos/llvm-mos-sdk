@@ -64,7 +64,7 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           cd build
-          ninja test
+          CTEST_OUTPUT_ON_FAILURE=1 ninja test
 
       - name: Build the docs.
         if: startsWith(matrix.os, 'ubuntu')

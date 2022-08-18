@@ -18,17 +18,7 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard libgtk2.0-0 xvfb
-          MESEN_DIR=$(mktemp -d)
-          echo "MESEN_DIR=$MESEN_DIR" >> $GITHUB_ENV
-          cd $MESEN_DIR
-          curl -Lo mesen.zip https://github.com/NovaSquirrel/Mesen-X/releases/download/1.0.1/Mesen-Linux.2022-05-14.zip
-          unzip mesen.zip
-          chmod +x Mesen.exe
-          echo '#!/bin/sh' > mesen
-          echo "xvfb-run /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
-          chmod +x mesen
-
+          sudo apt-get -y install doxygen graphviz ninja-build
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
         run: choco install curl ninja
@@ -61,12 +51,6 @@ jobs:
           cd build
           cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DMESEN_COMMAND=${{ env.MESEN_DIR }}/mesen -G "Ninja" ..
           ninja install
-
-      - name: Test the SDK.
-        if: startsWith(matrix.os, 'ubuntu')
-        run: |
-          cd build
-          CTEST_OUTPUT_ON_FAILURE=1 ninja test
 
       - name: Build the docs.
         if: startsWith(matrix.os, 'ubuntu')

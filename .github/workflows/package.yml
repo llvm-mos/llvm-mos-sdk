@@ -17,6 +17,7 @@ jobs:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
         run: |
+          sudo apt-get update
           sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard xvfb
           MESEN_DIR=$(mktemp -d)
           echo "MESEN_DIR=$MESEN_DIR" >> $GITHUB_ENV

@@ -27,8 +27,6 @@ jobs:
           chmod +x Mesen.exe
           echo '#!/bin/sh' > mesen
           echo "xvfb-run /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
-          # Prevent Mesen from showing a configuration wizard.
-          touch settings.xml
           chmod +x mesen
 
       - name: Install Windows build dependencies.
@@ -40,6 +38,10 @@ jobs:
 
       - name: Check out the SDK.
         uses: actions/checkout@v2
+
+      - name: Copy Mesen settings file.
+        if: startsWith(matrix.os, 'ubuntu')
+        run: cp test/mesen_settings.xml ${{ env.MESEN_DIR }}/settings.xml
 
       - name: Fetch the latest Ubuntu llvm-mos release.
         if: startsWith(matrix.os, 'ubuntu')

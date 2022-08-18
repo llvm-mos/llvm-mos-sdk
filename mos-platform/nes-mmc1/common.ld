@@ -2,8 +2,6 @@
 
 INCLUDE nes.ld
 
-ASSERT(__prg_ram_size == 0 || __prg_nvram_size == 0,
-       "Simulatenously using PRG-RAM and PRG-NVRAM is not supported.")
 ASSERT(__chr_rom_size <= 128, "MMC1 only supports up to 128 KiB of CHR-ROM.")
 ASSERT(__prg_rom_size >= 32, "MMC1 requires at least 32KiB of PRG-ROM.")
 ASSERT(__prg_rom_size <= 512, "MMC1 only supports up to 512KiB PRG-ROM.")

@@ -7,6 +7,7 @@ void __ppu_wait_vblank();
 // Set up the hardware stack and launch early initialization.
 asm(
   ".section .init.5,\"axR\",@progbits\n"
+  "  sei\n"
   "  ldx #$ff\n"
   "  txs\n"
   "  jsr __early_init\n"

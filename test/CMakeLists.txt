@@ -24,7 +24,10 @@ function(add_test_target target)
     EXCLUDE_FROM_ALL YES
     DEPENDS mos-platform)
   add_dependencies(test test-${target})
+  set_property(TARGET test-${target} PROPERTY
+    ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/test/${target})
 endfunction()
 
 add_custom_target(test)
 add_test_target(nes-mmc1)
+add_test_target(nes-nrom)

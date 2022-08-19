@@ -4,11 +4,7 @@ project(test-nes-mmc1-nocompile LANGUAGES C)
 
 add_executable(chr-rom-too-big chr-rom-too-big.c)
 add_executable(chr-rom-non-pow2 chr-rom-non-pow2.c)
-
 add_executable(chr-ram-too-big chr-ram-too-big.c)
-add_executable(chr-ram-uneven-banks chr-ram-uneven-banks.c)
-add_executable(chr-nvram-uneven-banks chr-nvram-uneven-banks.c)
 
+add_executable(prg-rom-too-big prg-rom-too-big.c)
 add_executable(prg-ram-too-big prg-ram-too-big.c)
-add_executable(prg-ram-uneven-banks prg-ram-uneven-banks.c)
-add_executable(prg-nvram-uneven-banks prg-nvram-uneven-banks.c)

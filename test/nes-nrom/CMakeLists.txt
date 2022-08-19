@@ -18,26 +18,11 @@ add_mesen_test(chr-ram)
 add_mesen_test(chr-rom)
 
 add_mesen_test(prg-rom-16)
-target_link_options(prg-rom-16 PRIVATE -Tcommon.ld -Tprg-rom-16.ld -Tc-in-ram.ld)
-
 add_mesen_test(prg-rom-32)
-target_link_options(prg-rom-32 PRIVATE -Tcommon.ld -Tprg-rom-32.ld -Tc-in-ram.ld)
-
-add_mesen_test(prg-rom-32-banked)
-target_link_options(prg-rom-32-banked PRIVATE -Tcommon.ld -Tprg-rom-32-banked.ld -Tc-in-ram.ld)
-
-add_mesen_test(prg-rom-64)
-target_link_options(prg-rom-64 PRIVATE -Tcommon.ld -Tprg-rom-64.ld -Tc-in-ram.ld)
-
-add_mesen_test(prg-rom-128)
-target_link_options(prg-rom-128 PRIVATE -Tcommon.ld -Tprg-rom-128.ld -Tc-in-ram.ld)
-
-add_mesen_test(prg-rom-256)
 
 add_mesen_test(prg-ram)
-
 add_mesen_test(prg-ram-c)
-target_link_options(prg-ram-c PRIVATE -Tcommon.ld -Tprg-rom-128.ld -Tc-in-prg-ram-0.ld)
+target_link_options(prg-ram-c PRIVATE -Tcommon.ld -Tc-in-prg-ram.ld)
 
 function(add_no_compile_test target)
   add_test(NAME ${target}-no-compile COMMAND ${CMAKE_CTEST_COMMAND}
@@ -58,8 +43,6 @@ endfunction()
 add_no_compile_test(chr-rom-too-big)
 add_no_compile_test(chr-rom-non-pow2)
 add_no_compile_test(chr-ram-too-big)
-add_no_compile_test(chr-ram-uneven-banks)
-add_no_compile_test(chr-nvram-uneven-banks)
+
+add_no_compile_test(prg-rom-too-big)
 add_no_compile_test(prg-ram-too-big)
-add_no_compile_test(prg-ram-uneven-banks)
-add_no_compile_test(prg-nvram-uneven-banks)

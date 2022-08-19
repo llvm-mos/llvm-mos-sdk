@@ -7,14 +7,6 @@ ASSERT(__prg_rom_size % 16 == 0,
        "PRG-ROM size must be evenly divisible by 16 KiB.")
 ASSERT(__chr_rom_size % 8 == 0,
        "CHR-ROM size must be evenly divisible by 8 KiB.")
-ASSERT(__prg_ram_size == 0 || __prg_ram_size >= 64,
-       "Nonempty PRG-RAM must have at least 64 bytes.")
-ASSERT(__prg_nvram_size == 0 || __prg_nvram_size >= 64,
-       "Nonempty PRG-NVRAM must have at least 64 bytes.")
-ASSERT(__chr_ram_size == 0 || __chr_ram_size >= 64,
-       "Nonempty CHR-RAM must have at least 64 bytes.")
-ASSERT(__chr_nvram_size == 0 || __chr_nvram_size >= 64,
-       "Nonempty CHR-NVRAM must have at least 64 bytes.")
 ASSERT(__prg_ram_size == 0 ||
        __prg_ram_size == 1 << LOG2CEIL(__prg_ram_size),
        "Nonempty PRG-RAM must be a power of 2.")
@@ -33,8 +25,27 @@ MEMORY {
 
   /* CPU address space. */
   ram : ORIGIN = 0x0200, LENGTH = 0x0600
+
+  /* The below LMAs were chosen such that they have a 3 bytes of addressing
+   * available. The highest byte of the 32-bit LMA controls whether the address
+   * is a real address (0x00), PRG-ROM LMA (0x01), CHR-ROM LMA (0x02), or PRG-RAM
+   * LMA (0x03). */
+
+  /* PRG-ROM LMA. */
+  prg_rom : ORIGIN = 0x01000000, LENGTH = __prg_rom_size * 1024
+
+  /* CHR-ROM LMA. */
+  chr_rom : ORIGIN = 0x02000000, LENGTH = __chr_rom_size * 1024
 }
 
 SECTIONS {
   INCLUDE zp.ld
+  .text : { INCLUDE text-sections.ld } >c_rom_vma AT>c_rom_lma
+  .rodata : { INCLUDE rodata-sections.ld } >c_rom_vma AT>c_rom_lma
+  .data : { INCLUDE data-sections.ld } >c_ram_vma AT>c_rom_lma
+  __data_load_start = LOADADDR(.data) - LOADADDR(.rodata) + ADDR(.rodata);
+  __data_size = SIZEOF(.data);
+  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma AT>c_ram_lma
+  INCLUDE bss-symbols.ld
+  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram_vma AT>c_ram_lma
 }

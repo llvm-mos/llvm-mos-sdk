@@ -16,8 +16,5 @@ install(
     rodata-sections.ld
     text.ld
     text-sections.ld
-    init-sections.ld
-    fini-sections.ld
-    text-sections-proper.ld
     zp.ld
   TYPE LIB)

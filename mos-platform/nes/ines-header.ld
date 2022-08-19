@@ -42,10 +42,10 @@ BYTE(
 )
 
 BYTE(
-  ((__chr_ram_size ? __chr_ram_size_raw :
-                       LOG2CEIL(__chr_ram_size*1024)-6) & 0xf) << 0 |
-  ((__chr_nvram_size ? __chr_nvram_size_raw :
-                       LOG2CEIL(__chr_nvram_size*1024)-6) & 0xf) << 4
+  ((__chr_ram_size_raw ? __chr_ram_size_raw :
+                         LOG2CEIL(__chr_ram_size*1024)-6) & 0xf) << 0 |
+  ((__chr_nvram_size_raw ? __chr_nvram_size_raw :
+                           LOG2CEIL(__chr_nvram_size*1024)-6) & 0xf) << 4
 )
 
 BYTE(__timing & 3)

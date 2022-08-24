@@ -26,7 +26,7 @@ jobs:
           unzip mesen.zip
           chmod +x Mesen.exe
           echo '#!/bin/sh' > mesen
-          echo "xvfb-run /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
+          echo "xvfb-run -d /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
           chmod +x mesen
 
       - name: Install Windows build dependencies.

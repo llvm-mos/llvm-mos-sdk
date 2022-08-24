@@ -16,5 +16,14 @@ install(
     rodata-sections.ld
     text.ld
     text-sections.ld
+
     zp.ld
+    zp-data.ld
+    zp-data-sections.ld
+    zp-data-symbols.ld
+    zp-bss.ld
+    zp-bss-sections.ld
+    zp-bss-symbols.ld
+    zp-noinit.ld
+    zp-noinit-sections.ld
   TYPE LIB)

@@ -39,12 +39,16 @@ MEMORY {
 }
 
 SECTIONS {
-  INCLUDE zp.ld
   .text : { INCLUDE text-sections.ld } >c_rom_vma AT>c_rom_lma
   .rodata : { INCLUDE rodata-sections.ld } >c_rom_vma AT>c_rom_lma
   .data : { INCLUDE data-sections.ld } >c_ram_vma AT>c_rom_lma
   __data_load_start = LOADADDR(.data) - LOADADDR(.rodata) + ADDR(.rodata);
   __data_size = SIZEOF(.data);
+  .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>c_rom_lma
+  __zp_data_load_start = LOADADDR(.zp.data) - LOADADDR(.rodata) + ADDR(.rodata);
+  __zp_data_size = SIZEOF(.zp.data);
+  INCLUDE zp-bss.ld
+  INCLUDE zp-noinit.ld
   .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma AT>c_ram_lma
   INCLUDE bss-symbols.ld
   .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram_vma AT>c_ram_lma

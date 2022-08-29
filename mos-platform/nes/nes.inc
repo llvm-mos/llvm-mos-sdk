@@ -11,14 +11,14 @@
 
 ;; PPU defines
 
-PPU_CTRL1       = $2000
-PPU_CTRL2       = $2001
-PPU_STATUS      = $2002
-PPU_SPR_ADDR    = $2003
-PPU_SPR_IO      = $2004
-PPU_VRAM_ADDR1  = $2005
-PPU_VRAM_ADDR2  = $2006
-PPU_VRAM_IO     = $2007
+PPUCTRL   = $2000
+PPUMASK   = $2001
+PPUSTATUS = $2002
+OAMADDR   = $2003
+OAMDATA   = $2004
+PPUSCROLL = $2005
+PPUADDR   = $2006
+PPUDATA   = $2007
 
 ;; APU defines
 
@@ -42,7 +42,7 @@ APU_MODCTRL     = $4010         ; Delta Modulation Control Register (W)
 APU_MODDA       = $4011         ; Delta Modulation D/A Register (W)
 APU_MODADDR     = $4012         ; Delta Modulation Address Register (W)
 APU_MODLEN      = $4013         ; Delta Modulation Data Length Register (W)
-APU_SPR_DMA     = $4014         ; Sprite DMA Register (W)
+OAMDMA          = $4014         ; Sprite DMA Register (W)
 APU_CHANCTRL    = $4015         ; Sound/Vertical Clock Signal Register (R)
 APU_PAD1        = $4016         ; Joypad #1 (RW)
 APU_PAD2        = $4017         ; Joypad #2/SOFTCLK (RW)

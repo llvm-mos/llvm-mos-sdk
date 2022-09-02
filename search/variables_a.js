@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['putchar_1344',['putchar',['../struct__sim__reg.html#ab7d530c65509116f5c15a442344f4c95',1,'_sim_reg']]]
+  ['name_1387',['name',['../structcbm__dirent.html#a98c5c84318c6a7738197153c85304a65',1,'cbm_dirent']]],
+  ['nothrow_1388',['nothrow',['../namespacestd.html#ae4b7b14b5246bacb54f2a4ae366ccd44',1,'std']]]
 ];

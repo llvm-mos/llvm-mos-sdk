@@ -123,9 +123,9 @@ Macros</h2></td></tr>
 <tr class="separator:ad8d0b854644c3a1129e7bd5f980a255b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a264969865d6d4ff7df92932e8254b8fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#a264969865d6d4ff7df92932e8254b8fb">IRQEN_SERIAL_TRANS_FINISHED</a>&#160;&#160;&#160;0x08 /* The serial out transmission finished interrupt is enabled */</td></tr>
 <tr class="separator:a264969865d6d4ff7df92932e8254b8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a638ee3ed3b42b55f07b49d2c97f02c72"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#a638ee3ed3b42b55f07b49d2c97f02c72">IRQEN_SERIAL_OUT_DATA_REQUIRED</a>&#160;&#160;&#160;0x10 /* The serial output data required interrupt is enabled */</td></tr>
+<tr class="memitem:a638ee3ed3b42b55f07b49d2c97f02c72"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#a638ee3ed3b42b55f07b49d2c97f02c72">IRQEN_SERIAL_OUT_DATA_REQUIRED</a>&#160;&#160;&#160;0x10 /* The serial output <a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a> required interrupt is enabled */</td></tr>
 <tr class="separator:a638ee3ed3b42b55f07b49d2c97f02c72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa46a164be401076dcab821a416b3480d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#aa46a164be401076dcab821a416b3480d">IRQEN_SERIAL_IN_DATA_READY</a>&#160;&#160;&#160;0x20 /* The serial input data ready interrupt is enabled. */</td></tr>
+<tr class="memitem:aa46a164be401076dcab821a416b3480d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#aa46a164be401076dcab821a416b3480d">IRQEN_SERIAL_IN_DATA_READY</a>&#160;&#160;&#160;0x20 /* The serial input <a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a> ready interrupt is enabled. */</td></tr>
 <tr class="separator:aa46a164be401076dcab821a416b3480d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29bb932454de4ebc5024bda76a56a7d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#a29bb932454de4ebc5024bda76a56a7d4">IRQEN_OTHER_KEY</a>&#160;&#160;&#160;0x40 /* The &quot;other key&quot; interrupt is enabled */</td></tr>
 <tr class="separator:a29bb932454de4ebc5024bda76a56a7d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,9 +163,9 @@ Macros</h2></td></tr>
 <tr class="separator:a7a817f36c07cbcf8c1611d20f80bb214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d5a18917d38507c881284c3708295bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#a1d5a18917d38507c881284c3708295bd">SKSTAT_KEYBOARD_OVERRUN</a>&#160;&#160;&#160;0x20 /* Keyboard over-run; Reset BITs 7, 6 and 5 (latches) to 1, using SKREST */</td></tr>
 <tr class="separator:a1d5a18917d38507c881284c3708295bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf831e067adcef7441ee6e7228b102f1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#aaf831e067adcef7441ee6e7228b102f1">SKSTAT_INPUT_OVERRUN</a>&#160;&#160;&#160;0x40 /* Serial data input over-run. Reset latches as above. */</td></tr>
+<tr class="memitem:aaf831e067adcef7441ee6e7228b102f1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#aaf831e067adcef7441ee6e7228b102f1">SKSTAT_INPUT_OVERRUN</a>&#160;&#160;&#160;0x40 /* Serial <a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a> input over-run. Reset latches as above. */</td></tr>
 <tr class="separator:aaf831e067adcef7441ee6e7228b102f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a603e9248d0c489b746c1eb73f96d5249"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#a603e9248d0c489b746c1eb73f96d5249">SKSTAT_INPUT_FRAMEERROR</a>&#160;&#160;&#160;0x80 /* Serial data input frame error caused by missing or extra bits. Reset latches as above. */</td></tr>
+<tr class="memitem:a603e9248d0c489b746c1eb73f96d5249"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__pokey_8h.html#a603e9248d0c489b746c1eb73f96d5249">SKSTAT_INPUT_FRAMEERROR</a>&#160;&#160;&#160;0x80 /* Serial <a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a> input frame error caused by missing or extra bits. Reset latches as above. */</td></tr>
 <tr class="separator:a603e9248d0c489b746c1eb73f96d5249"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -414,7 +414,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define IRQEN_SERIAL_IN_DATA_READY&#160;&#160;&#160;0x20 /* The serial input data ready interrupt is enabled. */</td>
+          <td class="memname">#define IRQEN_SERIAL_IN_DATA_READY&#160;&#160;&#160;0x20 /* The serial input <a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a> ready interrupt is enabled. */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -428,7 +428,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define IRQEN_SERIAL_OUT_DATA_REQUIRED&#160;&#160;&#160;0x10 /* The serial output data required interrupt is enabled */</td>
+          <td class="memname">#define IRQEN_SERIAL_OUT_DATA_REQUIRED&#160;&#160;&#160;0x10 /* The serial output <a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a> required interrupt is enabled */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -666,7 +666,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SKSTAT_INPUT_FRAMEERROR&#160;&#160;&#160;0x80 /* Serial data input frame error caused by missing or extra bits. Reset latches as above. */</td>
+          <td class="memname">#define SKSTAT_INPUT_FRAMEERROR&#160;&#160;&#160;0x80 /* Serial <a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a> input frame error caused by missing or extra bits. Reset latches as above. */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -680,7 +680,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SKSTAT_INPUT_OVERRUN&#160;&#160;&#160;0x40 /* Serial data input over-run. Reset latches as above. */</td>
+          <td class="memname">#define SKSTAT_INPUT_OVERRUN&#160;&#160;&#160;0x40 /* Serial <a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a> input over-run. Reset latches as above. */</td>
         </tr>
       </table>
 </div><div class="memdoc">

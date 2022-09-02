@@ -172,12 +172,12 @@ $(function() {
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">char</span> <span class="keyword">const</span> status;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">struct </span>{</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> address;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> data;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a>;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    } sprite;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> scroll;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">struct </span>{</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> address;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> data;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a>;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    } vram;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
 <div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="nes_8h.html#aa9720ef12852cf4e0293b5a0a8b19bdc">  112</a></span>&#160;<span class="preprocessor">#define PPU             (*(volatile struct __ppu*)0x2000)</span></div>
@@ -201,7 +201,7 @@ $(function() {
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;          <span class="comment">/* counter halt, volume/envelope */</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> unused;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> period;           <span class="comment">/* loop, timing */</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> len;              <span class="comment">/* length */</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#a77124bd5f7e31e6fffc19f335da0c23f">len</a>;              <span class="comment">/* length */</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    } noise;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">struct </span>{</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;          <span class="comment">/* IRQ, loop, rate */</span></div>
@@ -234,6 +234,8 @@ $(function() {
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">/* End of nes.h */</span></div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aneslib_8h_html_a77124bd5f7e31e6fffc19f335da0c23f"><div class="ttname"><a href="neslib_8h.html#a77124bd5f7e31e6fffc19f335da0c23f">len</a></div><div class="ttdeci">unsigned int len</div><div class="ttdef"><b>Definition:</b> neslib.h:223</div></div>
+<div class="ttc" id="aneslib_8h_html_a8a7286ca88ce596c9179297ee731fe9c"><div class="ttname"><a href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a></div><div class="ttdeci">unsigned char const unsigned char * data</div><div class="ttdef"><b>Definition:</b> neslib.h:117</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['rank_5fv_1345',['rank_v',['../namespacestd.html#a2ac62d91ec2fb1c0556fb38c0d704762',1,'std']]],
-  ['revision_1346',['revision',['../api_8h.html#a21bd7001aad1a8ada9cf0c17c1f5d5ee',1,'api.h']]]
+  ['putchar_1389',['putchar',['../struct__sim__reg.html#ab7d530c65509116f5c15a442344f4c95',1,'_sim_reg']]]
 ];

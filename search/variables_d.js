@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['type_1349',['type',['../structstd_1_1add__cv.html#a35f2c722c6e6295de4a209b4fb69530c',1,'std::add_cv::type()'],['../structstd_1_1add__const.html#a116f4a48d6e1b033dc8653d62788a31e',1,'std::add_const::type()'],['../structcbm__dirent.html#a8d70df007df4a9d4cfcef29cb93afd60',1,'cbm_dirent::type()']]]
+  ['sim_5freg_5fiface_1392',['sim_reg_iface',['../sim-io_8h.html#a6582d9e0d8ca73a606dc4bed7542d7dd',1,'sim-io.h']]],
+  ['size_1393',['size',['../structcbm__dirent.html#a014b8b3de80d2e673486d922d5c9bc15',1,'cbm_dirent::size()'],['../neslib_8h.html#aac913b3a1f6ef005d66bf7a84428773e',1,'size():&#160;neslib.h']]]
 ];

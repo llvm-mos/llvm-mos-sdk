@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['ram_5fbank_1972',['RAM_BANK',['../cx16_8h.html#a41dd444f8d09aac928fc8275b9184653',1,'cx16.h']]],
-  ['revision_1973',['REVISION',['../api_8h.html#ad526597ab378f3faff87123d7742c79a',1,'api.h']]],
-  ['rom_5fbank_1974',['ROM_BANK',['../cx16_8h.html#ae141bc55fdba451ac2f06a8cc6b71710',1,'cx16.h']]]
+  ['oam_5fbehind_1914',['OAM_BEHIND',['../neslib_8h.html#a868f23b40d49901f1aea1b9b1fac610d',1,'neslib.h']]],
+  ['oam_5fflip_5fh_1915',['OAM_FLIP_H',['../neslib_8h.html#a6028ababdbf2c60ed24c16cb7a934aeb',1,'neslib.h']]],
+  ['oam_5fflip_5fv_1916',['OAM_FLIP_V',['../neslib_8h.html#aa368525a9913fbbdd4473d26bfea6ebd',1,'neslib.h']]],
+  ['os_1917',['OS',['../atari_8h.html#a3324dbb5e25daac23e988901bb085447',1,'atari.h']]]
 ];

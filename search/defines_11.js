@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['tv_5fntsc_1995',['TV_NTSC',['../nes_8h.html#ace941c3fd02b99aa2a805899337b7734',1,'nes.h']]],
-  ['tv_5fother_1996',['TV_OTHER',['../nes_8h.html#a0abe73b04b5c7c55bb4cf11520b6a31d',1,'nes.h']]],
-  ['tv_5fpal_1997',['TV_PAL',['../nes_8h.html#ad501c95c6165cc2637bd792f1de3d4e1',1,'nes.h']]],
-  ['tv_5fstd_5fntsc_1998',['TV_STD_NTSC',['../__gtia_8h.html#a04188efe829d67b3b826c16351ae072c',1,'_gtia.h']]],
-  ['tv_5fstd_5fpal_1999',['TV_STD_PAL',['../__gtia_8h.html#a3ce330e5113db588b14f5297824c74e5',1,'_gtia.h']]]
+  ['ram_5fbank_2049',['RAM_BANK',['../cx16_8h.html#a41dd444f8d09aac928fc8275b9184653',1,'cx16.h']]],
+  ['revision_2050',['REVISION',['../api_8h.html#ad526597ab378f3faff87123d7742c79a',1,'api.h']]],
+  ['rom_5fbank_2051',['ROM_BANK',['../cx16_8h.html#ae141bc55fdba451ac2f06a8cc6b71710',1,'cx16.h']]]
 ];

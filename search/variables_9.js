@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['name_1342',['name',['../structcbm__dirent.html#a98c5c84318c6a7738197153c85304a65',1,'cbm_dirent']]],
-  ['nothrow_1343',['nothrow',['../namespacestd.html#ae4b7b14b5246bacb54f2a4ae366ccd44',1,'std']]]
+  ['m_1385',['m',['../api_8h.html#aa42a14a55408612ca8e84710f4947bd8',1,'api.h']]],
+  ['minor_1386',['minor',['../api_8h.html#a9048027ea488be2a2e7e68fa0fbf330f',1,'api.h']]]
 ];

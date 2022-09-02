@@ -1,15 +1,12 @@
-#include <stdlib.h>
 #include <peekpoke.h>
+#include <stdlib.h>
 
 asm(".global __prg_ram_size\n__prg_ram_size=32\n");
 
-__attribute__((section(".prg_ram_0")))
-volatile char c[8192];
+__attribute__((section(".prg_ram_0.noinit"))) volatile char c[8192];
 
-__attribute__((section(".prg_ram_3")))
-volatile char d[4097];
-__attribute__((section(".prg_ram_3")))
-volatile char e[4095];
+__attribute__((section(".prg_ram_3.noinit"))) volatile char d[4097];
+__attribute__((section("_3.noinit"))) volatile char e[4095];
 
 void set_prg_ram_bank(char b) {
   b <<= 2;

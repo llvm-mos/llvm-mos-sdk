@@ -231,8 +231,8 @@ pal_fade_to:
 	pha
 	lda mos8(__rc21)
 	pha
-	sty mos8(__rc20) ;to
-	stx mos8(__rc21) ;from
+	stx mos8(__rc20) ;to
+	sty mos8(__rc21) ;from
 	jmp .Lcheck_equal
 
 .Lfade_loop:

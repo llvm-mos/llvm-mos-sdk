@@ -1,7 +1,5 @@
-// Copyright 2022 LLVM-MOS Project
-// Licensed under the Apache License, Version 2.0 with LLVM Exceptions.
-// See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
-// information.
+#ifndef _NESLIB_H_
+#define _NESLIB_H_
 
 // NES hardware-dependent functions by Shiru (shiru@mail.ru)
 // Feel free to do anything you want with this code, consider it Public Domain
@@ -273,3 +271,5 @@ __attribute__((leaf)) void delay(char frames);
 
 #define MSB(x) (((x) >> 8))
 #define LSB(x) (((x)&0xff))
+
+#endif // _NESLIB_H_

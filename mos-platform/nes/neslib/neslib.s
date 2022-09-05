@@ -510,10 +510,11 @@ oam_meta_spr:
 	sta mos8(__rc4)
 	stx mos8(__rc5)
 	ldx mos8(SPRID)
-0:
+	ldy #0
+1:
 	lda (__rc2),y		;x offset
 	cmp #$80
-	beq 1f
+	beq 2f
 	iny
 	clc
 	adc mos8(__rc4)
@@ -533,8 +534,8 @@ oam_meta_spr:
 	inx
 	inx
 	inx
-	jmp 0b
-1:
+	jmp 1b
+2:
 	stx mos8(SPRID)
 	rts
 

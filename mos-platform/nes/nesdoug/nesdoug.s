@@ -1,7 +1,7 @@
 ;written by Doug Fraker
 ;version 1.2, 1/1/2022
 
-.section .bss.vram_buf,"aw",@nobits
+.section .noinit.vram_buf,"aw",@nobits
 .globl VRAM_BUF
 .balign 128
 VRAM_BUF:

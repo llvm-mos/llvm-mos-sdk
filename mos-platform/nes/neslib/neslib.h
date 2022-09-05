@@ -1,6 +1,10 @@
 #ifndef _NESLIB_H_
 #define _NESLIB_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // NES hardware-dependent functions by Shiru (shiru@mail.ru)
 // Feel free to do anything you want with this code, consider it Public Domain
 
@@ -271,5 +275,9 @@ __attribute__((leaf)) void delay(char frames);
 
 #define MSB(x) (((x) >> 8))
 #define LSB(x) (((x)&0xff))
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _NESLIB_H_

@@ -99,9 +99,9 @@ Macros</h2></td></tr>
 <tr class="separator:a6028ababdbf2c60ed24c16cb7a934aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868f23b40d49901f1aea1b9b1fac610d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a868f23b40d49901f1aea1b9b1fac610d">OAM_BEHIND</a>&#160;&#160;&#160;0x20</td></tr>
 <tr class="separator:a868f23b40d49901f1aea1b9b1fac610d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a555ef4d6248609dd62d8b042a4f87581"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a555ef4d6248609dd62d8b042a4f87581">MAX</a>(<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>,  x2)&#160;&#160;&#160;((<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>)&lt;(x2)?(x2):(<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>))</td></tr>
+<tr class="memitem:a555ef4d6248609dd62d8b042a4f87581"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a555ef4d6248609dd62d8b042a4f87581">MAX</a>(<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>,  x2)&#160;&#160;&#160;((<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>) &lt; (x2) ? (x2) : (<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>))</td></tr>
 <tr class="separator:a555ef4d6248609dd62d8b042a4f87581"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae91b68324b23275c2e6c535d455f616b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#ae91b68324b23275c2e6c535d455f616b">MIN</a>(<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>,  x2)&#160;&#160;&#160;((<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>)&lt;(x2)?(<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>):(x2))</td></tr>
+<tr class="memitem:ae91b68324b23275c2e6c535d455f616b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#ae91b68324b23275c2e6c535d455f616b">MIN</a>(<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>,  x2)&#160;&#160;&#160;((<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>) &lt; (x2) ? (<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>) : (x2))</td></tr>
 <tr class="separator:ae91b68324b23275c2e6c535d455f616b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61e19c8e001a2f730345f8b82ba8f1b6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a61e19c8e001a2f730345f8b82ba8f1b6">MASK_SPR</a>&#160;&#160;&#160;0x10</td></tr>
 <tr class="separator:a61e19c8e001a2f730345f8b82ba8f1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,35 +131,35 @@ Macros</h2></td></tr>
 <tr class="separator:a3043d0764490aa63032e2e2df9ffcbe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a2c91ad89067cb61ee56bd09e517e0e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a9a2c91ad89067cb61ee56bd09e517e0e">NT_UPD_EOF</a>&#160;&#160;&#160;0xff</td></tr>
 <tr class="separator:a9a2c91ad89067cb61ee56bd09e517e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a9fc71b2e8c3dcb859d2315e6a11469"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a2a9fc71b2e8c3dcb859d2315e6a11469">NTADR_A</a>(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>,  <a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#a81c1d6fe8919a09f4a355c251a332715">NAMETABLE_A</a>|(((<a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&lt;&lt;5)|(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)))</td></tr>
+<tr class="memitem:a2a9fc71b2e8c3dcb859d2315e6a11469"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a2a9fc71b2e8c3dcb859d2315e6a11469">NTADR_A</a>(<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>,  <a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>)&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#a81c1d6fe8919a09f4a355c251a332715">NAMETABLE_A</a> | (((<a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>) &lt;&lt; 5) | (<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)))</td></tr>
 <tr class="separator:a2a9fc71b2e8c3dcb859d2315e6a11469"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fcf185330f7c2e572818a1e5febad75"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a8fcf185330f7c2e572818a1e5febad75">NTADR_B</a>(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>,  <a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#ac71d4d5fc6a07304ac2a64747a9f3d73">NAMETABLE_B</a>|(((<a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&lt;&lt;5)|(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)))</td></tr>
+<tr class="memitem:a8fcf185330f7c2e572818a1e5febad75"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a8fcf185330f7c2e572818a1e5febad75">NTADR_B</a>(<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>,  <a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>)&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#ac71d4d5fc6a07304ac2a64747a9f3d73">NAMETABLE_B</a> | (((<a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>) &lt;&lt; 5) | (<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)))</td></tr>
 <tr class="separator:a8fcf185330f7c2e572818a1e5febad75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7ba5198a6e7c4f205cf16030b019a6a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#aa7ba5198a6e7c4f205cf16030b019a6a">NTADR_C</a>(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>,  <a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#a3ed449e63c8d69dab9a0481721b21e9d">NAMETABLE_C</a>|(((<a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&lt;&lt;5)|(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)))</td></tr>
+<tr class="memitem:aa7ba5198a6e7c4f205cf16030b019a6a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#aa7ba5198a6e7c4f205cf16030b019a6a">NTADR_C</a>(<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>,  <a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>)&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#a3ed449e63c8d69dab9a0481721b21e9d">NAMETABLE_C</a> | (((<a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>) &lt;&lt; 5) | (<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)))</td></tr>
 <tr class="separator:aa7ba5198a6e7c4f205cf16030b019a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae32427629efc63c0b169f558df8a44b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#ae32427629efc63c0b169f558df8a44b3">NTADR_D</a>(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>,  <a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#ae5877646ac9641de6c42017eab0607a4">NAMETABLE_D</a>|(((<a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&lt;&lt;5)|(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)))</td></tr>
+<tr class="memitem:ae32427629efc63c0b169f558df8a44b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#ae32427629efc63c0b169f558df8a44b3">NTADR_D</a>(<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>,  <a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>)&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#ae5877646ac9641de6c42017eab0607a4">NAMETABLE_D</a> | (((<a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>) &lt;&lt; 5) | (<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)))</td></tr>
 <tr class="separator:ae32427629efc63c0b169f558df8a44b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb61a4e8fff2f4624a632a3189cbd3a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#aeb61a4e8fff2f4624a632a3189cbd3a0">MSB</a>(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)&#160;&#160;&#160;(((<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)&gt;&gt;8))</td></tr>
+<tr class="memitem:aeb61a4e8fff2f4624a632a3189cbd3a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#aeb61a4e8fff2f4624a632a3189cbd3a0">MSB</a>(<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)&#160;&#160;&#160;(((<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>) &gt;&gt; 8))</td></tr>
 <tr class="separator:aeb61a4e8fff2f4624a632a3189cbd3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34a3aa6cbadec6a80ab1eae8efd0083d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a34a3aa6cbadec6a80ab1eae8efd0083d">LSB</a>(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)&#160;&#160;&#160;(((<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)&amp;0xff))</td></tr>
+<tr class="memitem:a34a3aa6cbadec6a80ab1eae8efd0083d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a34a3aa6cbadec6a80ab1eae8efd0083d">LSB</a>(<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)&#160;&#160;&#160;(((<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)&amp;0xff))</td></tr>
 <tr class="separator:a34a3aa6cbadec6a80ab1eae8efd0083d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:af61b66b2d9004f4975ae5f51c2177f3d"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#af61b66b2d9004f4975ae5f51c2177f3d">color</a></td></tr>
-<tr class="separator:af61b66b2d9004f4975ae5f51c2177f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac30de26db5f6d1c18c63913729adca7d"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a></td></tr>
-<tr class="separator:ac30de26db5f6d1c18c63913729adca7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96fb13f4be064ebf88d9c945d015e453"><td class="memItemLeft" align="right" valign="top">unsigned char unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a96fb13f4be064ebf88d9c945d015e453">chrnum</a></td></tr>
-<tr class="separator:a96fb13f4be064ebf88d9c945d015e453"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a986731b46dad0192006327557ba22899"><td class="memItemLeft" align="right" valign="top">unsigned char unsigned char unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a986731b46dad0192006327557ba22899">attr</a></td></tr>
-<tr class="separator:a986731b46dad0192006327557ba22899"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a7286ca88ce596c9179297ee731fe9c"><td class="memItemLeft" align="right" valign="top">unsigned char const unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a></td></tr>
-<tr class="separator:a8a7286ca88ce596c9179297ee731fe9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77124bd5f7e31e6fffc19f335da0c23f"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a77124bd5f7e31e6fffc19f335da0c23f">len</a></td></tr>
-<tr class="separator:a77124bd5f7e31e6fffc19f335da0c23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac913b3a1f6ef005d66bf7a84428773e"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#aac913b3a1f6ef005d66bf7a84428773e">size</a></td></tr>
-<tr class="separator:aac913b3a1f6ef005d66bf7a84428773e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2d77c102b2d2d3f0881c0e2bcdbe777"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a></td></tr>
+<tr class="separator:ae2d77c102b2d2d3f0881c0e2bcdbe777"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac38a342729250f8b4b5dd7239e4930f1"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a></td></tr>
+<tr class="separator:ac38a342729250f8b4b5dd7239e4930f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af967a7c1ec19a7673dc6b0e5e6762068"><td class="memItemLeft" align="right" valign="top">char char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#af967a7c1ec19a7673dc6b0e5e6762068">chrnum</a></td></tr>
+<tr class="separator:af967a7c1ec19a7673dc6b0e5e6762068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a206b3d754a8d0963d0f74ef00a6e41d5"><td class="memItemLeft" align="right" valign="top">char char char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a206b3d754a8d0963d0f74ef00a6e41d5">attr</a></td></tr>
+<tr class="separator:a206b3d754a8d0963d0f74ef00a6e41d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac68389240a6f659c888e1dc7ed82fb6"><td class="memItemLeft" align="right" valign="top">char const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a></td></tr>
+<tr class="separator:aac68389240a6f659c888e1dc7ed82fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4960e0db764d064fd8e2ed33fe9bdbe9"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a4960e0db764d064fd8e2ed33fe9bdbe9">len</a></td></tr>
+<tr class="separator:a4960e0db764d064fd8e2ed33fe9bdbe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a245260f6f74972558f61b85227df5aae"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a></td></tr>
+<tr class="separator:a245260f6f74972558f61b85227df5aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="aa93f0eb578d23995850d61f7d61c55c1"></a>
@@ -186,8 +186,8 @@ Variables</h2></td></tr>
           <td class="memname">#define LSB</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a></td><td>)</td>
-          <td>&#160;&#160;&#160;(((<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)&amp;0xff))</td>
+          <td class="paramname"><a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a></td><td>)</td>
+          <td>&#160;&#160;&#160;(((<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)&amp;0xff))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -271,7 +271,7 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;((<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>)&lt;(x2)?(x2):(<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>))</td>
+          <td></td><td>&#160;&#160;&#160;((<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>) &lt; (x2) ? (x2) : (<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -299,7 +299,7 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;((<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>)&lt;(x2)?(<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>):(x2))</td>
+          <td></td><td>&#160;&#160;&#160;((<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>) &lt; (x2) ? (<a class="el" href="api_8h.html#a4b42eab59214a45e66d15cb15ae6571a">x1</a>) : (x2))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -316,8 +316,8 @@ Variables</h2></td></tr>
           <td class="memname">#define MSB</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a></td><td>)</td>
-          <td>&#160;&#160;&#160;(((<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)&gt;&gt;8))</td>
+          <td class="paramname"><a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a></td><td>)</td>
+          <td>&#160;&#160;&#160;(((<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>) &gt;&gt; 8))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -432,18 +432,18 @@ Variables</h2></td></tr>
           <td class="memname">#define NTADR_A</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>, </td>
+          <td class="paramname"><a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>&#160;</td>
+          <td class="paramname"><a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#a81c1d6fe8919a09f4a355c251a332715">NAMETABLE_A</a>|(((<a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&lt;&lt;5)|(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)))</td>
+          <td></td><td>&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#a81c1d6fe8919a09f4a355c251a332715">NAMETABLE_A</a> | (((<a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>) &lt;&lt; 5) | (<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -460,18 +460,18 @@ Variables</h2></td></tr>
           <td class="memname">#define NTADR_B</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>, </td>
+          <td class="paramname"><a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>&#160;</td>
+          <td class="paramname"><a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#ac71d4d5fc6a07304ac2a64747a9f3d73">NAMETABLE_B</a>|(((<a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&lt;&lt;5)|(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)))</td>
+          <td></td><td>&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#ac71d4d5fc6a07304ac2a64747a9f3d73">NAMETABLE_B</a> | (((<a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>) &lt;&lt; 5) | (<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -488,18 +488,18 @@ Variables</h2></td></tr>
           <td class="memname">#define NTADR_C</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>, </td>
+          <td class="paramname"><a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>&#160;</td>
+          <td class="paramname"><a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#a3ed449e63c8d69dab9a0481721b21e9d">NAMETABLE_C</a>|(((<a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&lt;&lt;5)|(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)))</td>
+          <td></td><td>&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#a3ed449e63c8d69dab9a0481721b21e9d">NAMETABLE_C</a> | (((<a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>) &lt;&lt; 5) | (<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -516,18 +516,18 @@ Variables</h2></td></tr>
           <td class="memname">#define NTADR_D</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>, </td>
+          <td class="paramname"><a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>&#160;</td>
+          <td class="paramname"><a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#ae5877646ac9641de6c42017eab0607a4">NAMETABLE_D</a>|(((<a class="el" href="neslib_8h.html#ac30de26db5f6d1c18c63913729adca7d">y</a>)&lt;&lt;5)|(<a class="el" href="api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195">x</a>)))</td>
+          <td></td><td>&#160;&#160;&#160;(<a class="el" href="neslib_8h.html#ae5877646ac9641de6c42017eab0607a4">NAMETABLE_D</a> | (((<a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>) &lt;&lt; 5) | (<a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -717,98 +717,98 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a986731b46dad0192006327557ba22899"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a986731b46dad0192006327557ba22899">&#9670;&nbsp;</a></span>attr</h2>
+<a id="a206b3d754a8d0963d0f74ef00a6e41d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a206b3d754a8d0963d0f74ef00a6e41d5">&#9670;&nbsp;</a></span>attr</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char unsigned char unsigned char attr</td>
+          <td class="memname">char char char attr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a96fb13f4be064ebf88d9c945d015e453"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96fb13f4be064ebf88d9c945d015e453">&#9670;&nbsp;</a></span>chrnum</h2>
+<a id="af967a7c1ec19a7673dc6b0e5e6762068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af967a7c1ec19a7673dc6b0e5e6762068">&#9670;&nbsp;</a></span>chrnum</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char unsigned char chrnum</td>
+          <td class="memname">char char chrnum</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="af61b66b2d9004f4975ae5f51c2177f3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af61b66b2d9004f4975ae5f51c2177f3d">&#9670;&nbsp;</a></span>color</h2>
+<a id="ae2d77c102b2d2d3f0881c0e2bcdbe777"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2d77c102b2d2d3f0881c0e2bcdbe777">&#9670;&nbsp;</a></span>color</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char color</td>
+          <td class="memname">char color</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a8a7286ca88ce596c9179297ee731fe9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a7286ca88ce596c9179297ee731fe9c">&#9670;&nbsp;</a></span>data</h2>
+<a id="aac68389240a6f659c888e1dc7ed82fb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac68389240a6f659c888e1dc7ed82fb6">&#9670;&nbsp;</a></span>data</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char const unsigned char* data</td>
+          <td class="memname">char const void* data</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a77124bd5f7e31e6fffc19f335da0c23f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77124bd5f7e31e6fffc19f335da0c23f">&#9670;&nbsp;</a></span>len</h2>
+<a id="a4960e0db764d064fd8e2ed33fe9bdbe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4960e0db764d064fd8e2ed33fe9bdbe9">&#9670;&nbsp;</a></span>len</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int len</td>
+          <td class="memname">unsigned len</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aac913b3a1f6ef005d66bf7a84428773e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac913b3a1f6ef005d66bf7a84428773e">&#9670;&nbsp;</a></span>size</h2>
+<a id="a245260f6f74972558f61b85227df5aae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a245260f6f74972558f61b85227df5aae">&#9670;&nbsp;</a></span>size</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int size</td>
+          <td class="memname">unsigned size</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ac30de26db5f6d1c18c63913729adca7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac30de26db5f6d1c18c63913729adca7d">&#9670;&nbsp;</a></span>y</h2>
+<a id="ac38a342729250f8b4b5dd7239e4930f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac38a342729250f8b4b5dd7239e4930f1">&#9670;&nbsp;</a></span>y</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int y</td>
+          <td class="memname">unsigned y</td>
         </tr>
       </table>
 </div><div class="memdoc">

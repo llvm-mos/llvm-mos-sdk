@@ -335,7 +335,7 @@ $(function() {
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">// TODO</span></div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="preprocessor">#if 0</span></div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> __fastcall__ cbm_load (<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> device, <span class="keywordtype">void</span>* <a class="code" href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a>);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> __fastcall__ cbm_load (<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> device, <span class="keywordtype">void</span>* <a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>);</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">/* Loads file &quot;name&quot;, from given device, to given address -- or, to the load</span></div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">** address of the file if &quot;data&quot; is the null pointer (like load&quot;name&quot;,8,1</span></div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">** in BASIC).</span></div>
@@ -344,7 +344,7 @@ $(function() {
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> __fastcall__ cbm_save (<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> device,</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                                     <span class="keyword">const</span> <span class="keywordtype">void</span>* addr, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="neslib_8h.html#aac913b3a1f6ef005d66bf7a84428773e">size</a>);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                                     <span class="keyword">const</span> <span class="keywordtype">void</span>* addr, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>);</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">/* Saves &quot;size&quot; bytes, starting at &quot;addr&quot;, to a file.</span></div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment">** Returns 0 if saving was successful, otherwise an error-code (see table</span></div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="comment">** above).</span></div>
@@ -360,7 +360,7 @@ $(function() {
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keywordtype">void</span> __fastcall__ cbm_close (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> lfn);</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">/* Closes a file */</span></div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="keywordtype">int</span> __fastcall__ cbm_read (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> lfn, <span class="keywordtype">void</span>* buffer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="neslib_8h.html#aac913b3a1f6ef005d66bf7a84428773e">size</a>);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="keywordtype">int</span> __fastcall__ cbm_read (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> lfn, <span class="keywordtype">void</span>* buffer, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>);</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">/* Reads up to &quot;size&quot; bytes from a file into &quot;buffer&quot;.</span></div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">** Returns the number of actually-read bytes, 0 if there are no bytes left.</span></div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">** -1 in case of an error; then, _oserror contains an error-code (see table</span></div>
@@ -368,7 +368,7 @@ $(function() {
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="keywordtype">int</span> __fastcall__ cbm_write (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> lfn, <span class="keyword">const</span> <span class="keywordtype">void</span>* buffer,</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="neslib_8h.html#aac913b3a1f6ef005d66bf7a84428773e">size</a>);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>);</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">/* Writes up to &quot;size&quot; bytes from &quot;buffer&quot; to a file.</span></div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment">** Returns the number of actually-written bytes, or -1 in case of an error;</span></div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="comment">** _oserror contains an error-code, then (see above table).</span></div>
@@ -406,14 +406,14 @@ $(function() {
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructcbm__dirent_html_a8d70df007df4a9d4cfcef29cb93afd60"><div class="ttname"><a href="structcbm__dirent.html#a8d70df007df4a9d4cfcef29cb93afd60">cbm_dirent::type</a></div><div class="ttdeci">unsigned char type</div><div class="ttdef"><b>Definition:</b> cbm.h:154</div></div>
-<div class="ttc" id="aneslib_8h_html_aac913b3a1f6ef005d66bf7a84428773e"><div class="ttname"><a href="neslib_8h.html#aac913b3a1f6ef005d66bf7a84428773e">size</a></div><div class="ttdeci">unsigned int size</div><div class="ttdef"><b>Definition:</b> neslib.h:231</div></div>
 <div class="ttc" id="astructcbm__dirent_html_a014b8b3de80d2e673486d922d5c9bc15"><div class="ttname"><a href="structcbm__dirent.html#a014b8b3de80d2e673486d922d5c9bc15">cbm_dirent::size</a></div><div class="ttdeci">unsigned int size</div><div class="ttdef"><b>Definition:</b> cbm.h:153</div></div>
+<div class="ttc" id="aneslib_8h_html_aac68389240a6f659c888e1dc7ed82fb6"><div class="ttname"><a href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a></div><div class="ttdeci">char const void * data</div><div class="ttdef"><b>Definition:</b> neslib.h:109</div></div>
 <div class="ttc" id="ac64_8h_html"><div class="ttname"><a href="c64_8h.html">c64.h</a></div></div>
 <div class="ttc" id="astructcbm__dirent_html"><div class="ttname"><a href="structcbm__dirent.html">cbm_dirent</a></div><div class="ttdef"><b>Definition:</b> cbm.h:151</div></div>
 <div class="ttc" id="anamespacestd_html_a32e349e93114238d72333a08f7ac044d"><div class="ttname"><a href="namespacestd.html#a32e349e93114238d72333a08f7ac044d">std::end</a></div><div class="ttdeci">constexpr const E * end(initializer_list&lt; E &gt; il) noexcept</div><div class="ttdef"><b>Definition:</b> initializer_list:42</div></div>
+<div class="ttc" id="aneslib_8h_html_a245260f6f74972558f61b85227df5aae"><div class="ttname"><a href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a></div><div class="ttdeci">unsigned size</div><div class="ttdef"><b>Definition:</b> neslib.h:218</div></div>
 <div class="ttc" id="acx16_8h_html"><div class="ttname"><a href="cx16_8h.html">cx16.h</a></div></div>
 <div class="ttc" id="astructcbm__dirent_html_a94cc4b7ec11936a774b70ffa197d2aa3"><div class="ttname"><a href="structcbm__dirent.html#a94cc4b7ec11936a774b70ffa197d2aa3">cbm_dirent::access</a></div><div class="ttdeci">unsigned char access</div><div class="ttdef"><b>Definition:</b> cbm.h:155</div></div>
-<div class="ttc" id="aneslib_8h_html_a8a7286ca88ce596c9179297ee731fe9c"><div class="ttname"><a href="neslib_8h.html#a8a7286ca88ce596c9179297ee731fe9c">data</a></div><div class="ttdeci">unsigned char const unsigned char * data</div><div class="ttdef"><b>Definition:</b> neslib.h:117</div></div>
 <div class="ttc" id="astructcbm__dirent_html_a98c5c84318c6a7738197153c85304a65"><div class="ttname"><a href="structcbm__dirent.html#a98c5c84318c6a7738197153c85304a65">cbm_dirent::name</a></div><div class="ttdeci">char name[17]</div><div class="ttdef"><b>Definition:</b> cbm.h:152</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

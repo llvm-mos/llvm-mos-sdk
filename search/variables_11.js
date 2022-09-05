@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['x_1397',['x',['../api_8h.html#ac8eed5648fb8a5f8f8c3c424a4590195',1,'api.h']]],
-  ['x1_1398',['x1',['../api_8h.html#a4b42eab59214a45e66d15cb15ae6571a',1,'api.h']]]
+  ['unclaimed_1491',['unclaimed',['../struct__sim__reg.html#ab3a5e278b65999beb7b26b1e46494c19',1,'_sim_reg']]],
+  ['use_1492',['use',['../nesdoug_2LICENSE.html#a37d51c2d1e9296bc4cd1ad1eb80d3096',1,'use():&#160;LICENSE'],['../neslib_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE']]]
 ];

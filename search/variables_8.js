@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['len_1384',['len',['../neslib_8h.html#a77124bd5f7e31e6fffc19f335da0c23f',1,'neslib.h']]]
+  ['kind_1457',['KIND',['../nesdoug_2LICENSE.html#aa69de1afbed02be0e8d3c350f484f779',1,'KIND():&#160;LICENSE'],['../neslib_2LICENSE.html#aea55cf080df0f1abe36e525467a23344',1,'KIND():&#160;LICENSE']]]
 ];

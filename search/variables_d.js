@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['sim_5freg_5fiface_1392',['sim_reg_iface',['../sim-io_8h.html#a6582d9e0d8ca73a606dc4bed7542d7dd',1,'sim-io.h']]],
-  ['size_1393',['size',['../structcbm__dirent.html#a014b8b3de80d2e673486d922d5c9bc15',1,'cbm_dirent::size()'],['../neslib_8h.html#aac913b3a1f6ef005d66bf7a84428773e',1,'size():&#160;neslib.h']]]
+  ['ppu_5faddress_1473',['ppu_address',['../nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1',1,'nesdoug.h']]],
+  ['project_1474',['Project',['../neslib_2LICENSE.html#abd395ffefac6eeefe0afc96b11cc2a4a',1,'LICENSE']]],
+  ['publish_1475',['publish',['../nesdoug_2LICENSE.html#a1fa1a6567d41fe738adb2c8ead4d9da4',1,'publish():&#160;LICENSE'],['../neslib_2LICENSE.html#a5a51f55a6f42a006ce57f5f015db0854',1,'publish():&#160;LICENSE']]],
+  ['putchar_1476',['putchar',['../struct__sim__reg.html#ab7d530c65509116f5c15a442344f4c95',1,'_sim_reg']]]
 ];

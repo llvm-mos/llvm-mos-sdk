@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['getchar_1312',['getchar',['../struct__sim__reg.html#af446a916162095ebd71ec3ce06b15525',1,'_sim_reg']]]
+  ['getchar_1379',['getchar',['../struct__sim__reg.html#af446a916162095ebd71ec3ce06b15525',1,'_sim_reg']]],
+  ['granted_1380',['granted',['../neslib_2LICENSE.html#a1efe51cbf8b23366b11023f370f3a6ed',1,'LICENSE']]]
 ];

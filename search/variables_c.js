@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['rank_5fv_1390',['rank_v',['../namespacestd.html#a2ac62d91ec2fb1c0556fb38c0d704762',1,'std']]],
-  ['revision_1391',['revision',['../api_8h.html#a21bd7001aad1a8ada9cf0c17c1f5d5ee',1,'api.h']]]
+  ['object2_1469',['object2',['../nesdoug_8h.html#af939bde22909fa3ebb725009989cdaec',1,'nesdoug.h']]],
+  ['or_1470',['OR',['../neslib_2LICENSE.html#a033cb8ab1b59cab858cc16088d7a3250',1,'LICENSE']]],
+  ['other_1471',['OTHER',['../neslib_2LICENSE.html#aa0d5cdea3225ca714eec3a6d277b27bf',1,'LICENSE']]],
+  ['otherwise_1472',['OTHERWISE',['../nesdoug_2LICENSE.html#a22fe198fe971fed282341c73635874d3',1,'OTHERWISE():&#160;LICENSE'],['../neslib_2LICENSE.html#a70e98742c77a2ae067b6ecea8537e100',1,'OTHERWISE():&#160;LICENSE']]]
 ];

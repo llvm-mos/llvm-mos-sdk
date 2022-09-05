@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['lsb_1888',['LSB',['../neslib_8h.html#a34a3aa6cbadec6a80ab1eae8efd0083d',1,'neslib.h']]]
+  ['low_5fbyte_1991',['low_byte',['../nesdoug_8h.html#ae28ebb1a4aea886daadc5bca0efb1a52',1,'nesdoug.h']]],
+  ['lsb_1992',['LSB',['../neslib_8h.html#a34a3aa6cbadec6a80ab1eae8efd0083d',1,'neslib.h']]]
 ];

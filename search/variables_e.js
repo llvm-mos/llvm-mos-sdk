@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['type_1394',['type',['../structstd_1_1add__cv.html#a35f2c722c6e6295de4a209b4fb69530c',1,'std::add_cv::type()'],['../structstd_1_1add__const.html#a116f4a48d6e1b033dc8653d62788a31e',1,'std::add_const::type()'],['../structcbm__dirent.html#a8d70df007df4a9d4cfcef29cb93afd60',1,'cbm_dirent::type()']]]
+  ['rank_5fv_1477',['rank_v',['../namespacestd.html#a2ac62d91ec2fb1c0556fb38c0d704762',1,'std']]],
+  ['restriction_1478',['restriction',['../nesdoug_2LICENSE.html#ad5f959ac4e93d224d9a9541f3b1e2321',1,'restriction():&#160;LICENSE'],['../neslib_2LICENSE.html#a58aca9081b0d67005433fe1652556625',1,'restriction():&#160;LICENSE']]],
+  ['revision_1479',['revision',['../api_8h.html#a21bd7001aad1a8ada9cf0c17c1f5d5ee',1,'api.h']]],
+  ['rights_1480',['rights',['../neslib_2LICENSE.html#aca38431b9d429760b25688437f759aa7',1,'LICENSE']]]
 ];

@@ -1,6 +1,10 @@
 #ifndef _NESDOUG_H_
 #define _NESDOUG_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Written by Doug Fraker
 // version 1.2, 1/1/2022
 
@@ -134,5 +138,9 @@ __attribute__((leaf)) void gray_line(void);
 __attribute__((leaf)) void seed_rng(void);
 // get from the frame count. You can use a button (start on title screen) to
 // trigger
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _NESDOUG_H_

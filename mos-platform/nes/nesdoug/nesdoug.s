@@ -8,7 +8,7 @@ VRAM_BUF:
   .zero 128
 
 ;void set_vram_buffer(void)
-.section .text.set_vram_buffer,"a",@progbits
+.section .text.set_vram_buffer,"ax",@progbits
 .globl set_vram_buffer
 set_vram_buffer:
 	ldx #$ff
@@ -25,7 +25,7 @@ set_vram_buffer:
 
 
 ;void multi_vram_buffer_horz(char * data, char len, int ppu_address);
-.section .text.multi_vram_buffer_horz,"a",@progbits
+.section .text.multi_vram_buffer_horz,"ax",@progbits
 .globl multi_vram_buffer_horz
 multi_vram_buffer_horz:
 
@@ -63,7 +63,7 @@ multi_vram_buffer_common:
 
 
 ;void multi_vram_buffer_vert(char * data, char len, int ppu_address);
-.section .text.multi_vram_buffer_vert,"a",@progbits
+.section .text.multi_vram_buffer_vert,"ax",@progbits
 .globl multi_vram_buffer_vert
 multi_vram_buffer_vert:
 	ldy mos8(VRAM_INDEX)
@@ -81,7 +81,7 @@ multi_vram_buffer_vert:
 
 
 ;void one_vram_buffer(char data, int ppu_address);
-.section .text.one_vram_buffer,"a",@progbits
+.section .text.one_vram_buffer,"ax",@progbits
 .globl one_vram_buffer
 one_vram_buffer:
 	sta mos8(__rc3)
@@ -115,7 +115,7 @@ one_vram_buffer:
 
 
 ;char get_pad_new(char pad);
-.section .text.get_pad_new,"a",@progbits
+.section .text.get_pad_new,"ax",@progbits
 .globl get_pad_new
 get_pad_new:
 	tay
@@ -126,7 +126,7 @@ get_pad_new:
 
 
 ;char get_frame_count(void);
-.section .text.get_frame_count,"a",@progbits
+.section .text.get_frame_count,"ax",@progbits
 .globl get_frame_count
 get_frame_count:
 	lda mos8(FRAME_CNT1)
@@ -140,7 +140,7 @@ get_frame_count:
 
 
 ;char check_collision(void * object1, void * object2);
-.section .text.check_collision,"a",@progbits
+.section .text.check_collision,"ax",@progbits
 .globl check_collision
 check_collision:
 	; sprite object collision code
@@ -223,7 +223,7 @@ check_collision:
 
 
 ;void pal_fade_to(char from, char to);
-.section .text.pal_fade_to,"a",@progbits
+.section .text.pal_fade_to,"ax",@progbits
 .globl pal_fade_to
 pal_fade_to:
         tay
@@ -273,7 +273,7 @@ pal_fade_to:
 
 
 ;void set_scroll_x(unsigned x);
-.section .text.set_scroll_x,"a",@progbits
+.section .text.set_scroll_x,"ax",@progbits
 .globl set_scroll_x
 set_scroll_x:
 	sta mos8(SCROLL_X)
@@ -290,7 +290,7 @@ set_scroll_x:
 
 
 ;void set_scroll_y(unsigned y);
-.section .text.set_scroll_y,"a",@progbits
+.section .text.set_scroll_y,"ax",@progbits
 .globl set_scroll_y
 set_scroll_y:
 	sta mos8(SCROLL_Y)
@@ -308,7 +308,7 @@ set_scroll_y:
 
 
 ;int add_scroll_y(char add, unsigned scroll);
-.section .text.add_scroll_y,"a",@progbits
+.section .text.add_scroll_y,"ax",@progbits
 .globl add_scroll_y
 add_scroll_y:
         stx mos8(__rc3)
@@ -329,7 +329,7 @@ add_scroll_y:
 
 
 ;int sub_scroll_y(char sub, unsigned int scroll);
-.section .text.sub_scroll_y,"a",@progbits
+.section .text.sub_scroll_y,"ax",@progbits
 .globl sub_scroll_y
 sub_scroll_y:
 	;is low byte in range?
@@ -354,7 +354,7 @@ sub_scroll_y:
 
 
 ;int get_ppu_addr(char nt, char x, char y);
-.section .text.get_ppu_addr,"a",@progbits
+.section .text.get_ppu_addr,"ax",@progbits
 .globl get_ppu_addr
 get_ppu_addr:
 	sta mos8(__rc3)
@@ -389,7 +389,7 @@ get_ppu_addr:
 
 
 ;int get_at_addr(char nt, char x, char y);
-.section .text.get_at_addr,"a",@progbits
+.section .text.get_at_addr,"ax",@progbits
 .globl get_at_addr
 get_at_addr:
 	sta mos8(__rc3)
@@ -421,7 +421,7 @@ get_at_addr:
 
 
 ;void set_data_pointer(const void * data);
-.section .text.set_data_pointer,"a",@progbits
+.section .text.set_data_pointer,"ax",@progbits
 .globl set_data_pointer
 set_data_pointer:
 	lda mos8(__rc2)
@@ -434,7 +434,7 @@ set_data_pointer:
 
 
 ;void set_mt_pointer(const void * metatiles);
-.section .text.set_mt_pointer,"a",@progbits
+.section .text.set_mt_pointer,"ax",@progbits
 .globl set_mt_pointer
 set_mt_pointer:
 	lda mos8(__rc2)
@@ -447,7 +447,7 @@ set_mt_pointer:
 
 
 ;void buffer_4_mt(int ppu_address, char index);
-.section .text.buffer_4_mt,"a",@progbits
+.section .text.buffer_4_mt,"ax",@progbits
 .globl buffer_4_mt
 buffer_4_mt:
 	sta mos8(__rc3)
@@ -656,7 +656,7 @@ buffer_4_mt:
 
 
 ;void buffer_1_mt(int ppu_address, char metatile);
-.section .text.buffer_1_mt,"a",@progbits
+.section .text.buffer_1_mt,"ax",@progbits
 .globl buffer_1_mt
 buffer_1_mt:
 	and #$de ;sanitize, should be even x and y
@@ -711,7 +711,7 @@ buffer_1_mt:
 
 
 ;void color_emphasis(char color);
-.section .text.color_emphasis,"a",@progbits
+.section .text.color_emphasis,"ax",@progbits
 .globl color_emphasis
 color_emphasis:
 	;a = bits 1110 0000
@@ -727,7 +727,7 @@ color_emphasis:
 
 
 ;void xy_split(unsigned x, unsigned y);
-.section .text.xy_split,"a",@progbits
+.section .text.xy_split,"ax",@progbits
 .globl xy_split
 xy_split:
 	;Nametable number << 2 (that is: $00, $04, $08, or $0C) to $2006
@@ -792,7 +792,7 @@ xy_split:
 
 
 ;void gray_line(void);
-.section .text.gray_line,"a",@progbits
+.section .text.gray_line,"ax",@progbits
 .globl gray_line
 gray_line:
 	lda mos8(PPUMASK_VAR)
@@ -823,7 +823,7 @@ gray_line:
 
 
 ;void seed_rng(void);
-.section .text.seed_rng,"a",@progbits
+.section .text.seed_rng,"ax",@progbits
 .globl seed_rng
 seed_rng:
 	lda mos8(FRAME_CNT1)

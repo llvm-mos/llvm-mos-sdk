@@ -607,7 +607,7 @@ ppu_wait_nmi:
 
 
 
-;void vram_unrle(const unsigned char *data);
+;void vram_unrle(const void *data);
 .section .text.vram_unrle,"ax",@progbits
 .globl vram_unrle
 vram_unrle:

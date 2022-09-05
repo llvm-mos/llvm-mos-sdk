@@ -518,15 +518,15 @@ oam_meta_spr:
 	clc
 	adc mos8(__rc4)
 	sta OAM_BUF+3,x
-	lda (PTR),y		;y offset
+	lda (__rc2),y		;y offset
 	iny
 	clc
 	adc mos8(__rc5)
 	sta OAM_BUF+0,x
-	lda (PTR),y		;tile
+	lda (__rc2),y		;tile
 	iny
 	sta OAM_BUF+1,x
-	lda (PTR),y		;attribute
+	lda (__rc2),y		;attribute
 	iny
 	sta OAM_BUF+2,x
 	inx

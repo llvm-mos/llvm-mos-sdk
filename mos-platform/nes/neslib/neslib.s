@@ -866,8 +866,6 @@ pad_poll:
 	sta mos8(__rc2),x
 	lda #0
 	sta CTRL_PORT1
-	lda #8
-	sta <TEMP
 
 .LpadPollLoop:
 

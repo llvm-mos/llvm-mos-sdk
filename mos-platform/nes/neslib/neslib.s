@@ -23,7 +23,24 @@ OAM_BUF:
 .globl PAL_BUF
 PAL_BUF = 0x0100
 
-.section .init.50,"axR",@progbits
+.section .init.10,"axR",@progbits
+clearRAM:
+    lda #0
+    tax
+1:
+    sta $000,x
+    sta $100,x
+    sta $200,x
+    sta $300,x
+    sta $400,x
+    sta $500,x
+    sta $600,x
+    sta $700,x
+    inx
+    bne 1b
+
+
+.section .init.27,"axR",@progbits
 clearPalette:
 	lda #$3f
 	sta PPUADDR
@@ -47,20 +64,6 @@ clearVRAM:
 	bne 1b
 	dey
 	bne 1b
-
-clearRAM:
-    txa
-1:
-    sta $000,x
-    sta $100,x
-    sta $200,x
-    sta $300,x
-    sta $400,x
-    sta $500,x
-    sta $600,x
-    sta $700,x
-    inx
-    bne 1b
 
 	lda #4
 	jsr pal_bright

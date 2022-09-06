@@ -862,14 +862,14 @@ pad_poll:
 .LpadPollPort:
 
 	lda #1
-	sta CTRL_PORT1
+	sta APU_PAD1
 	sta mos8(__rc2),x
 	lda #0
-	sta CTRL_PORT1
+	sta APU_PAD1
 
 .LpadPollLoop:
 
-	lda CTRL_PORT1,y
+	lda APU_PAD1,y
 	lsr a
 	rol mos8(__rc2),x
 	bcc .LpadPollLoop

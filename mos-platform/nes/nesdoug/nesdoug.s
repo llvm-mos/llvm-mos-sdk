@@ -585,7 +585,7 @@ buffer_4_mt:
 	lda mos8(__rc5) ;high byte
 	sta VRAM_BUF,x
 	inx
-	lda TEMP ;low byte
+	lda mos8(__rc4) ;low byte
 	sta VRAM_BUF,x
 	inx
 	lda mos8(__rc14)

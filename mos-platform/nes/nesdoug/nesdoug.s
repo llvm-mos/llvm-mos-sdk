@@ -151,11 +151,11 @@ check_collision:
 	lda (__rc2),y
 	sta mos8(__rc6)  	;X 1
 	lda (__rc4), y
-	sta mos8(__rc7)		;X 2
+	sta mos8(__rc8)		;X 2
 	iny
 	iny
 	lda (__rc2),y
-	sta mos8(__rc8) 		;width1
+	sta mos8(__rc7) 		;width1
 	lda (__rc4), y
 	sta mos8(__rc9)		;width2
 
@@ -166,13 +166,13 @@ check_collision:
 
 	lda mos8(__rc6) ;X 1
 	clc
-	adc mos8(__rc8) ;width 1
-	cmp mos8(__rc7) ;X 2
+	adc mos8(__rc7) ;width 1
+	cmp mos8(__rc8) ;X 2
 	bcc .Lno
 
 ;now check if obj1 L > obj2 R (obj2 x + width)
 
-	lda mos8(__rc7) ;X 2
+	lda mos8(__rc8) ;X 2
 	clc
 	adc mos8(__rc9) ;width 2
 	cmp mos8(__rc6) ;X 1
@@ -184,11 +184,11 @@ check_collision:
 	lda (__rc2),y
 	sta mos8(__rc6)  	;Y 1
 	lda (__rc4), y
-	sta mos8(__rc7)		;Y 2
+	sta mos8(__rc8)		;Y 2
 	iny
 	iny
 	lda (__rc2),y
-	sta mos8(__rc8) 		;height1
+	sta mos8(__rc7)		;height1
 	lda (__rc4), y
 	sta mos8(__rc9)		;height2
 
@@ -198,13 +198,13 @@ check_collision:
 
 	lda mos8(__rc6) ;Y 1
 	clc
-	adc mos8(__rc8) ;height 1
-	cmp mos8(__rc7) ;Y 2
+	adc mos8(__rc7) ;height 1
+	cmp mos8(__rc8) ;Y 2
 	bcc .Lno
 
 ;now check if obj1 Top > obj2 Bottom (obj2 y + height)
 
-	lda mos8(__rc7) ;Y 2
+	lda mos8(__rc8) ;Y 2
 	clc
 	adc mos8(__rc9) ;height 2
 	cmp mos8(__rc6) ;Y 1

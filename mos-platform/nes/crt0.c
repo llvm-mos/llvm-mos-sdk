@@ -34,7 +34,7 @@ void __early_init(void) {
 }
 
 asm(
-  ".section .init.40,\"axR\",@progbits\n"
+  ".section .init.25,\"axR\",@progbits\n"
   "  jsr __late_init\n"
 );
 

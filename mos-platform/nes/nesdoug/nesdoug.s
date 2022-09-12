@@ -311,8 +311,9 @@ set_scroll_y:
 .section .text.add_scroll_y,"ax",@progbits
 .globl add_scroll_y
 add_scroll_y:
-        stx mos8(__rc3)
-        clc
+	stx mos8(__rc3)
+	ldx mos8(__rc2)
+	clc
 	adc mos8(__rc3)
 	bcs .Ladd_scroll_y_adjust
 	cmp #$f0
@@ -321,7 +322,6 @@ add_scroll_y:
 
 .Ladd_scroll_y_adjust:
 	adc #15 ;carry is set, same as clc/adc #16
-	ldx mos8(__rc2) ;high
 	inx
 	rts
 
@@ -339,6 +339,7 @@ sub_scroll_y:
 .Lok:
 	sta mos8(__rc3)
 	txa
+	ldx mos8(__rc2)
 	sec
 	sbc mos8(__rc3)
 	bcc .Lsub_scroll_y_adjust
@@ -346,7 +347,6 @@ sub_scroll_y:
 
 .Lsub_scroll_y_adjust:
 	sbc #15 ;carry is clear, same as sec/sbc #16
-	ldx mos8(__rc2) ;x = high
 	dex
 	rts
 

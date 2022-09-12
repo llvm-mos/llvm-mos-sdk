@@ -119,31 +119,31 @@ nmi:
 	tya
 	pha
 
-	lda <PPUMASK_VAR	;if rendering is disabled, do not access the VRAM at all
+	lda mos8(PPUMASK_VAR)	;if rendering is disabled, do not access the VRAM at all
 	and #0b00011000
 	bne .LrenderingOn
 	jmp	.LskipAll
 
 .LrenderingOn:
-	lda <VRAM_UPDATE ;is the frame complete?
+	lda mos8(VRAM_UPDATE) ;is the frame complete?
 	bne .LdoUpdate
 	jmp .LskipAll ;skipUpd
 
 .LdoUpdate:
 	lda #0
-	sta <VRAM_UPDATE
+	sta mos8(VRAM_UPDATE)
 
 	lda #>OAM_BUF		;update OAM
 	sta OAMDMA
 
-	lda <PAL_UPDATE		;update palette if needed
+	lda mos8(PAL_UPDATE)		;update palette if needed
 	bne .LupdPal
 	jmp .LupdVRAM
 
 .LupdPal:
 
 	ldx #0
-	stx <PAL_UPDATE
+	stx mos8(PAL_UPDATE)
 
 	lda #$3f
 	sta PPUADDR
@@ -180,7 +180,7 @@ nmi:
 
 .LupdVRAM:
 
-	lda <NAME_UPD_ENABLE
+	lda mos8(NAME_UPD_ENABLE)
 	beq .LskipUpd
 
 	jsr _flush_vram_update2
@@ -191,26 +191,26 @@ nmi:
 	sta PPUADDR
 	sta PPUADDR
 
-	lda <SCROLL_X
+	lda mos8(SCROLL_X)
 	sta PPUSCROLL
-	lda <SCROLL_Y
+	lda mos8(SCROLL_Y)
 	sta PPUSCROLL
 
-	lda <PPUCTRL_VAR
+	lda mos8(PPUCTRL_VAR)
 	sta PPUCTRL
 
 .LskipAll:
 
-	lda <PPUMASK_VAR
+	lda mos8(PPUMASK_VAR)
 	sta PPUMASK
 
-	inc <FRAME_CNT1
-	inc <FRAME_CNT2
-	lda <FRAME_CNT2
+	inc mos8(FRAME_CNT1)
+	inc mos8(FRAME_CNT2)
+	lda mos8(FRAME_CNT2)
 	cmp #6
 	bne .LskipNtsc
 	lda #0
-	sta <FRAME_CNT2
+	sta mos8(FRAME_CNT2)
 
 .LskipNtsc:
 
@@ -718,7 +718,7 @@ split:
 	txa
 	and #$01
 	sta mos8(__rc2)
-	lda <PPUCTRL_VAR
+	lda mos8(PPUCTRL_VAR)
 	and #$fc
 	ora mos8(__rc2)
 	sta mos8(__rc2)
@@ -1071,7 +1071,7 @@ _flush_vram_update2: ;minor changes %
 	dex
 	bne .LupdNameLoop
 
-	lda <PPUCTRL_VAR
+	lda mos8(PPUCTRL_VAR)
 	sta PPUCTRL
 
 	jmp .LupdName

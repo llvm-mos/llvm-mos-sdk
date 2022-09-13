@@ -183,7 +183,7 @@ nmi:
 	lda mos8(NAME_UPD_ENABLE)
 	beq .LskipUpd
 
-	jsr _flush_vram_update2
+	jsr flush_vram_update2
 
 .LskipUpd:
 
@@ -1012,7 +1012,8 @@ flush_vram_update:
 	lda mos8(__rc3)
 	sta mos8(NAME_UPD_ADR+1)
 
-_flush_vram_update2: ;minor changes %
+.globl flush_vram_update2
+flush_vram_update2: ;minor changes %
 
 	ldy #0
 
@@ -1077,6 +1078,11 @@ _flush_vram_update2: ;minor changes %
 	jmp .LupdName
 
 .LupdDone:
+	jsr __post_vram_update
+	rts
+
+.weak __post_vram_update
+__post_vram_update:
 	rts
 
 

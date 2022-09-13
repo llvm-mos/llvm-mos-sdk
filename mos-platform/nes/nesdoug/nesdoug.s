@@ -7,6 +7,15 @@
 VRAM_BUF:
   .zero 128
 
+.text
+.global __post_vram_update
+__post_vram_update:
+	ldx #$ff
+	stx VRAM_BUF
+	inx ;x=0
+	stx mos8(VRAM_INDEX)
+	rts
+
 ;void set_vram_buffer(void)
 .section .text.set_vram_buffer,"ax",@progbits
 .globl set_vram_buffer

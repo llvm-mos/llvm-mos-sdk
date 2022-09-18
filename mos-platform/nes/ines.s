@@ -31,8 +31,9 @@ __prg_rom_size_raw = 0
 .weak __chr_rom_size_raw
 __chr_rom_size_raw = 0
 
+; Default to vertical mirroring (horizontal scrolling).
 .weak __mirroring
-__mirroring = 0
+__mirroring = 1
 .weak __battery
 __battery = 0
 .weak __trainer

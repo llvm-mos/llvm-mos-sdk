@@ -30,5 +30,6 @@ merge_libraries(nes-crt0
 add_platform_library(nes-c ppu.c)
 target_include_directories(nes-c SYSTEM BEFORE PUBLIC .)
 
+add_subdirectory(famitone2)
 add_subdirectory(nesdoug)
 add_subdirectory(neslib)

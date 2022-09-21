@@ -214,6 +214,8 @@ nmi:
 
 .LskipNtsc:
 
+	jsr __update_sound
+
 	pla
 	tay
 	pla
@@ -221,7 +223,10 @@ nmi:
 	pla
 	rti
 
-
+.section .text.neslib_update_sound,"ax",@progbits
+.weak __update_sound
+__update_sound:
+	rts
 
 ;void pal_all(const char *data);
 .section .text.pal_all,"ax",@progbits

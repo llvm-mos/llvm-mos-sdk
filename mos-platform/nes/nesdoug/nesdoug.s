@@ -144,6 +144,12 @@ get_frame_count:
 
 
 
+;void set_music_speed(char tempo);
+.section .text.set_music_speed,"ax",@progbits
+.globl set_music_speed
+set_music_speed:
+	sta __FT_SONG_SPEED
+	rts
 
 
 

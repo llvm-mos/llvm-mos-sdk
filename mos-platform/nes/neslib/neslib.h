@@ -123,6 +123,26 @@ __attribute__((leaf)) void oam_set(char index);
 
 __attribute__((leaf)) char oam_get(void);
 
+// play a music in FamiTone format
+
+__attribute__((leaf)) void music_play(unsigned char song);
+
+// stop music
+
+__attribute__((leaf)) void music_stop(void);
+
+// pause and unpause music
+
+__attribute__((leaf)) void music_pause(char pause);
+
+// play FamiTone sound effect on channel 0..3
+
+__attribute__((leaf)) void sfx_play(char sound, char channel);
+
+// play a DPCM sample, 1..63
+
+__attribute__((leaf)) void sample_play(char sample);
+
 // poll controller and return flags like PAD_LEFT etc, input is pad number (0 or
 // 1)
 

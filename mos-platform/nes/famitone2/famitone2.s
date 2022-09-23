@@ -1280,14 +1280,16 @@ _FT2SfxUpdate:
 
 ;void sfx_play(char sound, char channel);
 .section .text.neslib_sfx_play,"axG",@progbits,sfx_play
+.globl sfx_play
 sfx_play:
 .if(FT_SFX_ENABLE)
-
+	tay
+	txa
 	and #$03
 	tax
 	lda .LsfxPriority,x
 	tax
-	jsr popa
+	tya
 	jmp FamiToneSfxPlay
 .else
 	rts

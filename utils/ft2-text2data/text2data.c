@@ -1915,7 +1915,7 @@ int output_instruments(void)
 	{
 		for (i = 0; i < 63; ++i)
 		{
-			fprintf(outfile, "\t%s $%2.2x+%s(FT_DPCM_PTR),$%2.2x,$%2.2x\t;%i\n", DB, sample_list[i].off, LOW, sample_list[i].size, sample_list[i].pitch | ((sample_list[i].loop & 1) << 6), i + 1);
+			fprintf(outfile, "\t%s $%2.2x+__dpcm_offset,$%2.2x,$%2.2x\t;%i\n", DB, sample_list[i].off, sample_list[i].size, sample_list[i].pitch | ((sample_list[i].loop & 1) << 6), i + 1);
 			size += 3;
 		}
 

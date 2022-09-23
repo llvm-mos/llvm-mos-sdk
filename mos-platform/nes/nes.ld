@@ -52,4 +52,11 @@ SECTIONS {
   .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma AT>c_ram_lma
   INCLUDE bss-symbols.ld
   .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram_vma AT>c_ram_lma
+
+  .dpcm ALIGN(64) : {
+       . = ABSOLUTE(.) < 0xc000 ? 0xc000 : .;
+       __dpcm_data = .;
+       KEEP(*(.dpcm .dpcm.*))
+  } >c_rom_vma AT>c_rom_lma
+  __dpcm_offset = (__dpcm_data - 0xc000) >> 6;
 }

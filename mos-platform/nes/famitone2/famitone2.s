@@ -5,8 +5,7 @@
 ; features. If this is a problem, just make a copy of this .s file, change the
 ; settings, and use it in lieu of the one that comes with the SDK.
 
-FT_DPCM_OFF		= $fc00	;$c000..$ffc0, 64-byte steps
-FT_SFX_STREAMS	= 1		;number of sound effects played at once, 1..4
+FT_SFX_STREAMS	= 4		;number of sound effects played at once, 1..4
 
 FT_DPCM_ENABLE = 1		;undefine to exclude all DMC code
 FT_SFX_ENABLE = 1		;undefine to exclude all sound effects code
@@ -23,9 +22,6 @@ FT_PITCH_FIX = 1			;add PAL/NTSC pitch correction code only when both modes are 
 	.else
 FT_PITCH_FIX = 0
 	.endif
-
-FT_DPCM_PTR		= (FT_DPCM_OFF&$3fff)>>6
-
 
 ;zero page variables
 
@@ -1012,11 +1008,9 @@ FamiToneSampleStop:
 ; in: A is number of a sample, 1..63
 ;------------------------------------------------------------------------------
 
-.section .text.famitone_sample_play_m,"ax",@progbits
+.section .text.famitone_sample_play,"ax",@progbits
 .globl FamitoneSamplePlayM
-.globl sample_play	; neslib integration
 FamiToneSamplePlayM:		;for music (low priority)
-sample_play:
 
 	ldx FT_DPCM_EFFECT
 	beq _FT2SamplePlay
@@ -1036,8 +1030,9 @@ sample_play:
 ; in: A is number of a sample, 1..63
 ;------------------------------------------------------------------------------
 
-.section .text.famitone_sample_play,"ax",@progbits
 .globl FamitoneSamplePlay
+.globl sample_play	; neslib integration
+sample_play:
 FamiToneSamplePlay:
 
 	ldx #1

@@ -14,7 +14,7 @@ char LL[8];
 unsigned char memory[65536];
 bool log;
 bool change;
-int wait;
+int wait_;
 int duration;
 
 int volume[4];
@@ -53,15 +53,15 @@ void effect_add(unsigned char n) {
 }
 
 void effect_flush_wait(void) {
-  while (wait >= 126) {
+  while (wait_ >= 126) {
     effect_add(126 + 1);
-    wait -= 126;
+    wait_ -= 126;
   }
 
-  if (wait >= 0)
-    effect_add(wait + 1);
+  if (wait_ >= 0)
+    effect_add(wait_ + 1);
 
-  wait = 0;
+  wait_ = 0;
 }
 
 static inline unsigned char mem_rd(int adr) {
@@ -212,7 +212,7 @@ void convert_effects(void) {
 
       log = true;
       cnt = 0;
-      wait = -1;
+      wait_ = -1;
       duration = 0;
       effect_stop = false;
 
@@ -230,7 +230,7 @@ void convert_effects(void) {
         }
 
         if (!change)
-          ++wait;
+          ++wait_;
 
         ++duration;
 
@@ -244,7 +244,7 @@ void convert_effects(void) {
 
       if (!volume_all_zero) // if a channel is still active, record its duration
       {
-        if (wait > 0)
+        if (wait_ > 0)
           effect_flush_wait();
       } else // if there is no active channels, trim effect to the point just
              // before last volume has been set to zero

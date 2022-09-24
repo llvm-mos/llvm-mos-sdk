@@ -22,40 +22,31 @@ extern "C" {
 //  previous versions were created since mid-2011, there were many updates
 
 // set bg and spr palettes, data is 32 bytes array
-
 __attribute__((leaf)) void pal_all(const void *data);
 
 // set bg palette only, data is 16 bytes array
-
 __attribute__((leaf)) void pal_bg(const void *data);
 
 // set spr palette only, data is 16 bytes array
-
 __attribute__((leaf)) void pal_spr(const void *data);
 
 // set a palette entry, index is 0..31
-
 __attribute__((leaf)) void pal_col(char index, char color);
 
 // reset palette to $0f
-
 __attribute__((leaf)) void pal_clear(void);
 
 // set virtual bright both for sprites and background, 0 is black, 4 is normal,
 // 8 is white
-
 __attribute__((leaf)) void pal_bright(char bright);
 
 // set virtual bright for sprites only
-
 __attribute__((leaf)) void pal_spr_bright(char bright);
 
 // set virtual bright for sprites background only
-
 __attribute__((leaf)) void pal_bg_bright(char bright);
 
 // wait actual TV frame, 50hz for PAL, 60hz for NTSC
-
 __attribute__((leaf)) void ppu_wait_nmi(void);
 
 // wait virtual frame, it is always 50hz, frame-to-frame in PAL, frameskip in
@@ -63,41 +54,32 @@ __attribute__((leaf)) void ppu_wait_nmi(void);
 __attribute__((leaf)) void ppu_wait_frame(void);
 
 // turn off rendering, nmi still enabled when rendering is disabled
-
 __attribute__((leaf)) void ppu_off(void);
 
 // turn on bg, spr
-
 __attribute__((leaf)) void ppu_on_all(void);
 
 // turn on bg only
-
 __attribute__((leaf)) void ppu_on_bg(void);
 
 // turn on spr only
-
 __attribute__((leaf)) void ppu_on_spr(void);
 
 // set PPU_MASK directly
-
 __attribute__((leaf)) void ppu_mask(char mask);
 
 // get current video system, 0 for PAL, not 0 for NTSC
-
 __attribute__((leaf)) char ppu_system(void);
 
 // clear OAM buffer, all the sprites are hidden
 //  Note: changed. Now also changes sprid (index to buffer) to zero
-
 __attribute__((leaf)) void oam_clear(void);
 
 // set sprite display mode, 0 for 8x8 sprites, 1 for 8x16 sprites
-
 __attribute__((leaf)) void oam_size(char size);
 
 // set sprite in OAM buffer, chrnum is tile, attr is attribute
 //  Note: sprid removed for speed
-
 __attribute__((leaf)) void oam_spr(char x, char y, char chrnum, char attr);
 
 // set metasprite in OAM buffer
@@ -105,7 +87,6 @@ __attribute__((leaf)) void oam_spr(char x, char y, char chrnum, char attr);
 // in order x offset, y offset, tile, attribute
 // x=128 is end of a meta sprite
 //  Note: sprid removed for speed
-
 __attribute__((leaf)) void oam_meta_spr(char x, char y, const void *data);
 
 // hide all remaining sprites from given offset
@@ -116,51 +97,40 @@ __attribute__((leaf)) void oam_hide_rest(void);
 // to manually change the sprid (index to sprite buffer)
 // perhaps as part of a sprite shuffling algorithm
 // Note: this should be a multiple of 4 (0,4,8,12,etc.)
-
 __attribute__((leaf)) void oam_set(char index);
 
 // returns the sprid (index to the sprite buffer)
-
 __attribute__((leaf)) char oam_get(void);
 
 // play a music in FamiTone format
-
 __attribute__((leaf)) void music_play(unsigned char song);
 
 // stop music
-
 __attribute__((leaf)) void music_stop(void);
 
 // pause and unpause music
-
 __attribute__((leaf)) void music_pause(char pause);
 
 // play FamiTone sound effect on channel 0..3
-
 __attribute__((leaf)) void sfx_play(char sound, char channel);
 
 // play a DPCM sample, 1..63
-
 __attribute__((leaf)) void sample_play(char sample);
 
 // poll controller and return flags like PAD_LEFT etc, input is pad number (0 or
 // 1)
-
 __attribute__((leaf)) char pad_poll(char pad);
 
 // poll controller in trigger mode, a flag is set only on button down, not hold
 // if you need to poll the pad in both normal and trigger mode, poll it in the
 // trigger mode for first, then use pad_state
-
 __attribute__((leaf)) char pad_trigger(char pad);
 
 // get previous pad state without polling ports
-
 __attribute__((leaf)) char pad_state(char pad);
 
 // set scroll, including the top bits
 // it is always applied at beginning of a TV frame, not at the function call
-
 __attribute__((leaf)) void scroll(unsigned x, unsigned y);
 
 // set scroll after screen split invoked by the sprite 0 hit
@@ -170,24 +140,21 @@ __attribute__((leaf)) void scroll(unsigned x, unsigned y);
 //          otherwise empty frames without split will be inserted, resulting in
 //          jumpy screen
 // warning: only X scroll could be changed in this version
-
 __attribute__((leaf)) void split(unsigned x); // removed y, not used %%
 
 // select current chr bank for sprites, 0..1
-
 __attribute__((leaf)) void bank_spr(char n);
 
 // select current chr bank for background, 0..1
-
 __attribute__((leaf)) void bank_bg(char n);
 
-// get random number 0..255 or 0..65535
-
+// get random number 0..255
 __attribute__((leaf)) char rand8(void);
+
+// get random number 0..65535
 __attribute__((leaf)) unsigned rand16(void);
 
 // set random seed
-
 __attribute__((leaf)) void set_rand(unsigned seed);
 
 // when display is enabled, vram access could only be done with this vram update
@@ -197,57 +164,47 @@ __attribute__((leaf)) void set_rand(unsigned seed);
 // be changed during rendering, but it only takes effect on a new frame number
 // of transferred bytes is limited by vblank time to disable updates, call this
 // function with NULL pointer
-
+//
 // the update data format:
 //  MSB, LSB, byte for a non-sequential write
 //  MSB|NT_UPD_HORZ, LSB, LEN, [bytes] for a horizontal sequence
 //  MSB|NT_UPD_VERT, LSB, LEN, [bytes] for a vertical sequence
 //  NT_UPD_EOF to mark end of the buffer
-
+//
 // length of this data should be under 256 bytes
-
 __attribute__((leaf)) void set_vram_update(const void *buf);
 
 // all following vram functions only work when display is disabled
 
 // do a series of VRAM writes, the same format as for set_vram_update, but
 // writes done right away
-
 __attribute__((leaf)) void flush_vram_update(const void *buf);
 
 // set vram pointer to write operations if you need to write some data to vram
-
 __attribute__((leaf)) void vram_adr(unsigned adr);
 
 // put a byte at current vram address, works only when rendering is turned off
-
 __attribute__((leaf)) void vram_put(char n);
 
 // fill a block with a byte at current vram address, works only when rendering
 // is turned off
-
 __attribute__((leaf)) void vram_fill(char n, unsigned len);
 
 // set vram autoincrement, 0 for +1 and not 0 for +32
-
 __attribute__((leaf)) void vram_inc(char n);
 
 // read a block from current address of vram, works only when rendering is
 // turned off
-
 __attribute__((leaf)) void vram_read(void *dst, unsigned size);
 
 // write a block to current address of vram, works only when rendering is turned
 // off
-
 __attribute__((leaf)) void vram_write(const void *src, unsigned size);
 
 // unpack RLE data to current address of vram, mostly used for nametables
-
 __attribute__((leaf)) void vram_unrle(const void *data);
 
 // delay for N frames
-
 __attribute__((leaf)) void delay(char frames);
 
 #define PAD_A 0x80
@@ -285,15 +242,21 @@ __attribute__((leaf)) void delay(char frames);
 #define NT_UPD_EOF 0xff
 
 // macro to calculate nametable address from X,Y in compile time
-
 #define NTADR_A(x, y) (NAMETABLE_A | (((y) << 5) | (x)))
+
+// macro to calculate nametable address from X,Y in compile time
 #define NTADR_B(x, y) (NAMETABLE_B | (((y) << 5) | (x)))
+
+// macro to calculate nametable address from X,Y in compile time
 #define NTADR_C(x, y) (NAMETABLE_C | (((y) << 5) | (x)))
+
+// macro to calculate nametable address from X,Y in compile time
 #define NTADR_D(x, y) (NAMETABLE_D | (((y) << 5) | (x)))
 
-// macro to get MSB and LSB
-
+// macro to get MSB
 #define MSB(x) (((x) >> 8))
+
+// macro to get LSB
 #define LSB(x) (((x)&0xff))
 
 #ifdef __cplusplus

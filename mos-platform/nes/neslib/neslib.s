@@ -284,9 +284,9 @@ pal_spr:
 .globl pal_col
 pal_col:
 
+	and #$1f
 	tay
 	txa
-	and #$1f
 	sta PAL_BUF,y
 	inc mos8(PAL_UPDATE)
 	rts

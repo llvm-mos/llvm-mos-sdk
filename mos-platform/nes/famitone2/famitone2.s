@@ -24,15 +24,10 @@ FT_PITCH_FIX = 0
 	.endif
 
 ;zero page variables
-
-.section .zp.ft_temp,"a",@nobits
-FT_TEMP:
-FT_TEMP_PTR:
-	.fill 2
+FT_TEMP_PTR = FT_TEMP
 FT_TEMP_PTR_L		= FT_TEMP_PTR+0
 FT_TEMP_PTR_H		= FT_TEMP_PTR+1
-FT_TEMP_VAR1:
-	.fill 1
+FT_TEMP_VAR1 = FT_TEMP+2
 
 ; static variables
 .section .noinit.ft_vars,"a",@nobits

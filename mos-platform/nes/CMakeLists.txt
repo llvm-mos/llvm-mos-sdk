@@ -10,10 +10,13 @@ install(FILES
 TYPE INCLUDE)
 install(FILES
   c-in-ram.ld
+  c-in-prg-ram-fixed.ld
   ines-header.ld
   ines-roms.ld
   ines.ld
   nes.ld
+  prg-ram-fixed.ld
+  prg-rom-fixed.ld
 TYPE LIB)
 install(FILES nes.inc DESTINATION ${ASMINCDIR})
 

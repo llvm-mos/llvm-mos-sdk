@@ -1,4 +1,4 @@
-.section .init.20, "axR", @progbits
+.section .init.20, "ax", @progbits
 __do_setup_bios:
 	ldy #38
 	jsr BDOS

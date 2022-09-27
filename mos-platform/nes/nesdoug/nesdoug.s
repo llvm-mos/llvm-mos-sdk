@@ -833,7 +833,7 @@ gray_line:
 	bne .Lloop2
 
 	lda mos8(PPUMASK_VAR) ;normal
-	sta PPU_MASK
+	sta PPUMASK
 	rts
 
 

@@ -14,7 +14,7 @@ typedef struct __attribute__((packed))
     uint8_t al[16];
     uint8_t cr;
     uint16_t r;
-	uint8_t r2;
+    uint8_t r2;
 }
 FCB;
 
@@ -64,6 +64,18 @@ typedef struct __attribute__((packed))
 }
 DPH;
 
+enum
+{
+    CPME_OK        = 0x00, /* success (usually) */
+    CPME_NOBLOCK   = 0x01, /* or EOF */
+    CPME_DISKFULL  = 0x02, /* no free blocks on disk */
+    CPME_CANTCLOSE = 0x03, /* can't write extent back to disk */
+    CPME_NOEXTENT  = 0x04, /* only on random access reads */
+    CPME_DIRFULL   = 0x05, /* no free dirents on disk */
+    CPME_BADFCB    = 0x09, /* FCB couldn't be parsed */
+    CPME_FAILED    = 0xff, /* general purpose failure code */
+};
+
 extern FCB cpm_fcb; /* primary FCB */
 extern FCB cpm_fcb2; /* secondary FCB (special purpose, overlaps cpm_fcb) */
 
@@ -72,46 +84,47 @@ extern uint8_t cpm_ram[];
 extern uint8_t* cpm_ramtop;
 extern uint8_t cpm_cmdlinelen;
 extern char cpm_cmdline[0x7f];
+extern uint8_t cpm_errno;
 
 /*  0 */ extern void _Noreturn cpm_warmboot(void);
-/*  1 */ extern int cpm_conin(void);
+/*  1 */ extern uint8_t cpm_conin(void);
 /*  2 */ extern void cpm_conout(uint8_t b);
-/*  3 */ extern int cpm_auxin(void);
+/*  3 */ extern uint8_t cpm_auxin(void);
 /*  4 */ extern void cpm_auxout(uint8_t b);
 /*  5 */ extern void cpm_lstout(uint8_t b);
-/*  6 */ extern int cpm_conio(uint8_t b);
-/*  7 */ extern int cpm_get_iobyte(void);
+/*  6 */ extern uint8_t cpm_conio(uint8_t b);
+/*  7 */ extern uint8_t cpm_get_iobyte(void);
 /*  8 */ extern void cpm_set_iobyte(uint8_t iob);
 /*  9 */ extern void cpm_printstring(const char* s); /* $-terminated */
-/* 10 */ extern int cpm_readline(uint8_t* buffer);
-/* 11 */ extern int cpm_const(void);
+/* 10 */ extern uint8_t cpm_readline(uint8_t* buffer);
+/* 11 */ extern uint8_t cpm_const(void);
 /* 12 */ extern uint16_t cpm_get_version(void);
 /* 13 */ extern void cpm_reset_disk_system(void);
 /* 14 */ extern void cpm_select_drive(uint8_t disk);
-/* 15 */ extern int cpm_open_file(FCB* fcb);
-/* 16 */ extern int cpm_close_file(FCB* fcb);
-/* 17 */ extern int cpm_findfirst(FCB* fcb);
-/* 18 */ extern int cpm_findnext(FCB* fcb);
-/* 19 */ extern int cpm_delete_file(FCB* fcb);
-/* 20 */ extern int cpm_read_sequential(FCB* fcb);
-/* 21 */ extern int cpm_write_sequential(FCB* fcb);
-/* 22 */ extern int cpm_make_file(FCB* fcb);
-/* 23 */ extern int cpm_rename_file(RCB* rcb);
+/* 15 */ extern uint8_t cpm_open_file(FCB* fcb);
+/* 16 */ extern uint8_t cpm_close_file(FCB* fcb);
+/* 17 */ extern uint8_t cpm_findfirst(FCB* fcb);
+/* 18 */ extern uint8_t cpm_findnext(FCB* fcb);
+/* 19 */ extern uint8_t cpm_delete_file(FCB* fcb);
+/* 20 */ extern uint8_t cpm_read_sequential(FCB* fcb);
+/* 21 */ extern uint8_t cpm_write_sequential(FCB* fcb);
+/* 22 */ extern uint8_t cpm_make_file(FCB* fcb);
+/* 23 */ extern uint8_t cpm_rename_file(RCB* rcb);
 /* 24 */ extern uint16_t cpm_get_login_vector(void);
-/* 25 */ extern int cpm_get_current_drive(void);
+/* 25 */ extern uint8_t cpm_get_current_drive(void);
 /* 26 */ extern void cpm_set_dma(void* ptr);
 /* 27 */ extern uint8_t* cpm_get_allocation_vector(void);
 /* 28 */ extern void cpm_write_protect_drive(void);
 /* 29 */ extern uint16_t cpm_get_readonly_vector(void);
-/* 30 */ extern int cpm_set_file_attributes(FCB* fcb);
+/* 30 */ extern uint8_t cpm_set_file_attributes(FCB* fcb);
 /* 31 */ extern DPB* cpm_get_dpb(void);
-/* 32 */ extern int cpm_get_set_user(uint8_t user);
-/* 33 */ extern int cpm_read_random(FCB* fcb);
-/* 34 */ extern int cpm_write_random(FCB* fcb);
+/* 32 */ extern uint8_t cpm_get_set_user(uint8_t user);
+/* 33 */ extern uint8_t cpm_read_random(FCB* fcb);
+/* 34 */ extern uint8_t cpm_write_random(FCB* fcb);
 /* 35 */ extern void cpm_seek_to_end(FCB* fcb);
 /* 36 */ extern void cpm_seek_to_seq_pos(FCB* fcb);
-/* 37 */ extern int cpm_reset_drives(uint16_t drive_bitmap);
-/* 40 */ extern int cpm_write_random_filled(FCB* fcb);
+/* 37 */ extern uint8_t cpm_reset_drives(uint16_t drive_bitmap);
+/* 40 */ extern uint8_t cpm_write_random_filled(FCB* fcb);
 
 #define cpm_get_user() cpm_get_set_user(0xff)
 #define cpm_set_user(u) cpm_get_set_user(u)
@@ -127,3 +140,6 @@ extern int cpm_bios_write(uint8_t deblock);
 extern int cpm_bios_listst(void);
 
 #endif
+
+// vim: ts=4 sw=4 et
+

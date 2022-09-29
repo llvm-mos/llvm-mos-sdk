@@ -11,7 +11,7 @@ typedef struct __attribute__((packed))
     uint8_t s1;
     uint8_t s2;
     uint8_t rc;
-    uint8_t d[16];
+    uint8_t al[16];
     uint8_t cr;
     uint16_t r;
 	uint8_t r2;
@@ -32,7 +32,8 @@ typedef struct __attribute__((packed))
     uint8_t us;
     uint8_t f[11];
     uint8_t ex;
-    uint8_t s[2];
+    uint8_t s1;
+    uint8_t s2;
     uint8_t rc;
     uint8_t al[16];
 }
@@ -71,15 +72,6 @@ extern uint8_t cpm_ram[];
 extern uint8_t* cpm_ramtop;
 extern uint8_t cpm_cmdlinelen;
 extern char cpm_cmdline[0x7f];
-
-/* Special: parses a filename into an FCB. Returns the user code (if any).
- * Warning: cannot fail (because CP/M filespecs are incredibly lax). */
-
-extern uint8_t cpm_parse_filename(FCB* fcb, const char* filename);
-
-/* Special: equivalent to cpm_read_random() except if you read unwritten data
- * 0 is returned (and the buffer contains garbage). */
-extern uint8_t cpm_read_random_safe(FCB* fcb);
 
 /*  0 */ extern void _Noreturn cpm_warmboot(void);
 /*  1 */ extern int cpm_conin(void);

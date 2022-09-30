@@ -6,7 +6,7 @@
 
 .section .pblock, "wa", @nobits
 cpm_fcb:	     .fill 37
-cpm_fcb2 = cpm_fcb + 33
+cpm_fcb2 = cpm_fcb + 16
 cpm_default_dma:
 cpm_cmdlinelen:  .fill 1
 cpm_cmdline:	 .fill 127

@@ -1,6 +1,10 @@
 #ifndef _ZAPLIB_H_
 #define _ZAPLIB_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // written by Doug Fraker 2019-2020
 // NES zapper gun code
 
@@ -24,5 +28,9 @@ __attribute__((leaf)) char zap_read(char pad);
 
 // returns 0 or 1 if detects light this frame
 __attribute__((leaf)) char zap_read2(char pad);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _ZAPLIB_H_

@@ -1,6 +1,10 @@
 #ifndef _PADLIB_H
 #define _PADLIB_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // written by Doug Fraker 2019
 // NES powerpad code
 
@@ -34,5 +38,9 @@ __attribute((leaf)) unsigned read_powerpad(char pad);
 #define POWERPAD_10 0x0010
 #define POWERPAD_11 0x0004
 #define POWERPAD_7 0x0001
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _PADLIB_H

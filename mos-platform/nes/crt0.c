@@ -1,8 +1,10 @@
 #define __NES__
 #include "nes.h"
-#include "ppu.h"
 
-void __ppu_wait_vblank();
+static void ppu_wait_vblank(void) {
+  while (!(PPU.status & 0x80))
+    ;
+}
 
 // Set up the hardware stack and launch early initialization.
 asm(
@@ -25,7 +27,7 @@ void __early_init(void) {
   (void)PPU.status;
 
   // Advance to cycle 27384 (at the earliest).
-  __ppu_wait_vblank();
+  ppu_wait_vblank();
 
   // We now have about 30,000 cycles to burn before the PPU stabilizes. The
   // remainder of C initialization can occur within this period. Other things
@@ -41,7 +43,7 @@ asm(
 void __late_init(void) {
   // Wait for cycle 57165 at the earliest. This is late enough for the PPU to be
   // fully functional and for the main program to begin.
-  __ppu_wait_vblank();
+  ppu_wait_vblank();
 }
 
 // Establish trivial nmi and irq handlers.

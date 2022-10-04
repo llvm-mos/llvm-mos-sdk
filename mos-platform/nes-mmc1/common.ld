@@ -109,4 +109,9 @@ SECTIONS {
   .chr_rom_31 : { KEEP(*(.chr_rom_31 .chr_rom_31.*)) } >chr_rom_31
 }
 
+/* Provide a mask selecting the significant bits of a CHR bank number. */
+_CHR_BANK_MASK =
+    (1 << LOG2CEIL(( __chr_rom_size + __chr_ram_size + __chr_nvram_size) / 4))
+     - 1;
+
 INCLUDE ines.ld

@@ -37,6 +37,9 @@ extern __attribute__((weak, alias("_CHR_BANK1"))) char CHR_BANK1;
 char _MIRROR;
 extern __attribute__((weak, alias("_MIRROR"))) char MIRROR;
 
+char _CHR_BANK0_CUR;
+char _CHR_BANK1_CUR;
+
 #define MMC1_CTRL 0x8000
 #define MMC1_CHR0 0xa000
 #define MMC1_CHR1 0xc000
@@ -93,38 +96,39 @@ mmc1_register_write_retry(unsigned addr, char val) {
   IN_PROGRESS = 0;
 }
 
-// Switch to another bank and call this function.
-// Note: Using banked_call to call a second function from within
-// another banked_call is safe. This will break if you nest more
-// than 10 calls deep.
 __attribute__((weak)) void banked_call(char bankId, void (*method)(void)) {
   char old_id = get_prg_bank();
   method();
   set_prg_bank(old_id);
 }
 
-// sets the bank at $8000-bfff
 __attribute__((weak)) void set_prg_bank(char bank_id) {
   _PRG_BANK = bank_id;
   mmc1_register_write_retry(MMC1_PRG, bank_id);
 }
 
-// Get the current PRG bank at $8000-bfff.
-// returns: The current bank.
 __attribute__((weak)) char get_prg_bank(void) { return _PRG_BANK; }
 
-// Set the current 1st 4k chr bank to the bank with this id.
-// this will take effect at the next frame
-// and automatically rewrite at the top of every frame
 __attribute__((weak)) void set_chr_bank_0(char bank_id) {
   _CHR_BANK0 = bank_id;
 }
 
-// Set the current 2nd 4k chr bank to the bank with this id.
-// this will take effect at the next frame
-// and automatically rewrite at the top of every frame
 __attribute__((weak)) void set_chr_bank_1(char bank_id) {
   _CHR_BANK1 = bank_id;
+}
+
+// Set by linker script. Mask where set bits indicate those bytes of the CHR
+// bank register affect the actual CHR bank, rather than PRG.
+extern char _CHR_BANK_MASK;
+static char chr_mask(void) { return (char)(unsigned)&_CHR_BANK_MASK; }
+
+static char apply_chr_mask(char cur, char new) {
+  char mask = chr_mask();
+  return cur & ~mask | new &mask;
+}
+static char apply_chr_mask_hi(char cur, char new) {
+  char mask = chr_mask();
+  return cur & mask | new & ~mask;
 }
 
 // Set the current 1st 4k chr bank to the bank with this id.
@@ -132,7 +136,8 @@ __attribute__((weak)) void set_chr_bank_1(char bank_id) {
 // but then will be overwritten by the set_chr_bank_0() value
 // in the next frame.
 __attribute__((weak)) void split_chr_bank_0(char bank_id) {
-  mmc1_register_write(MMC1_CHR0, bank_id);
+  _CHR_BANK0_CUR = apply_chr_mask(_CHR_BANK0_CUR, bank_id);
+  mmc1_register_write(MMC1_CHR0, _CHR_BANK0_CUR);
 }
 
 // Set the current 2nd 4k chr bank to the bank with this id.
@@ -140,7 +145,22 @@ __attribute__((weak)) void split_chr_bank_0(char bank_id) {
 // but then will be overwritten by the set_chr_bank_1() value
 // in the next frame.
 __attribute__((weak)) void split_chr_bank_1(char bank_id) {
-  mmc1_register_write(MMC1_CHR1, bank_id);
+  _CHR_BANK1_CUR = apply_chr_mask(_CHR_BANK1_CUR, bank_id);
+  mmc1_register_write(MMC1_CHR1, _CHR_BANK1_CUR);
+}
+
+// Immediately set the high bytes of CHR-ROM bank 0, those that don't affect
+// CHR-ROM. Settings here are guaranteed to occur and to persist across NMIs.
+__attribute__((weak)) void set_chr_bank_0_hi(char bank_id) {
+  _CHR_BANK0_CUR = apply_chr_mask_hi(_CHR_BANK0_CUR, bank_id);
+  mmc1_register_write_retry(MMC1_CHR0, _CHR_BANK0_CUR);
+}
+
+// Immediately set the high bytes of CHR-ROM bank 0, those that don't affect
+// CHR-ROM. Settings here are guaranteed to occur and to persist across NMIs.
+__attribute__((weak)) void set_chr_bank_1_hi(char bank_id) {
+  _CHR_BANK0_CUR = apply_chr_mask_hi(_CHR_BANK1_CUR, bank_id);
+  mmc1_register_write_retry(MMC1_CHR0, _CHR_BANK0_CUR);
 }
 
 // if you need to swap CHR banks mid screen, perhaps you need more
@@ -175,8 +195,8 @@ __attribute__((weak)) void set_mmc1_ctrl(char value) {
 // some things deleted
 
 void __nmi_bank_handler(void) {
-  mmc1_register_write(MMC1_CHR0, _CHR_BANK0);
-  mmc1_register_write(MMC1_CHR1, _CHR_BANK1);
+  mmc1_register_write(MMC1_CHR0, apply_chr_mask(_CHR_BANK0_CUR, _CHR_BANK0));
+  mmc1_register_write(MMC1_CHR1, apply_chr_mask(_CHR_BANK1_CUR, _CHR_BANK1));
   mmc1_register_write(MMC1_CTRL, _MIRROR);
 }
 __attribute__((weak, alias("__nmi_bank_handler"))) void nmi_bank_handler(void);

@@ -36,13 +36,6 @@ extern "C" {
 // Maximum level of recursion to allow with banked_call and similar functions.
 #define MAX_BANK_DEPTH 10
 
-// Current PRG_BANK.
-extern char PRG_BANK;
-// These will be applied on NMI by JSR to nmi_bank_handler.
-extern char CHR_BANK0;
-extern char CHR_BANK1;
-extern char MIRROR;
-
 // Switch to another bank and call this function.
 // Note: Using banked_call to call a second function from within
 // another banked_call is safe. This will break if you nest more

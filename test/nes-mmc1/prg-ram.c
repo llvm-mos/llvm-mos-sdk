@@ -8,18 +8,7 @@ __attribute__((section(".prg_ram_0.noinit"))) volatile char c[8192];
 __attribute__((section(".prg_ram_3.noinit"))) volatile char d[4097];
 __attribute__((section("_3.noinit"))) volatile char e[4095];
 
-void set_prg_ram_bank(char b) {
-  b <<= 2;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-}
+void set_prg_ram_bank(char b) { set_chr_bank_0(b << 2); }
 
 int main(void) {
   set_prg_ram_bank(0);

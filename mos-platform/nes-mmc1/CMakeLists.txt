@@ -15,9 +15,8 @@ install(FILES
   prg-rom-64.ld
   prg-rom-128.ld
   prg-rom-256.ld
-
-  bank.h
 TYPE LIB)
+install(FILES bank.h TYPE INCLUDE)
 
 add_platform_object_file(nes-mmc1-crt0-o crt0.o ines.s)
 add_platform_object_file(nes-mmc1-reset-o reset.o reset.s)

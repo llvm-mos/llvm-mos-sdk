@@ -213,6 +213,7 @@ nmi:
 	sta mos8(FRAME_CNT2)
 
 .LskipNtsc:
+	jsr __nmi_bank_handler
 
 	jsr __update_sound
 
@@ -222,6 +223,11 @@ nmi:
 	tax
 	pla
 	rti
+
+.section .text.neslib_nmi_bank_handler,"ax",@progbits
+.weak __nmi_bank_handler
+__nmi_bank_handler:
+	rts
 
 .section .text.neslib_update_sound,"ax",@progbits
 .weak __update_sound

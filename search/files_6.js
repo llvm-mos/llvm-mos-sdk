@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['license_1283',['LICENSE',['../famitone2_2LICENSE.html',1,'(Global Namespace)'],['../nesdoug_2LICENSE.html',1,'(Global Namespace)'],['../neslib_2LICENSE.html',1,'(Global Namespace)']]]
+  ['initializer_5flist_1297',['initializer_list',['../initializer__list.html',1,'']]],
+  ['inttypes_2eh_1298',['inttypes.h',['../inttypes_8h.html',1,'']]]
 ];

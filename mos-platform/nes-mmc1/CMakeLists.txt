@@ -15,6 +15,8 @@ install(FILES
   prg-rom-64.ld
   prg-rom-128.ld
   prg-rom-256.ld
+
+  bank.h
 TYPE LIB)
 
 add_platform_object_file(nes-mmc1-crt0-o crt0.o ines.s)
@@ -24,3 +26,6 @@ add_platform_object_file(nes-mmc1-init-prg-rom-32-banked-o
   init-prg-rom-32-banked.s)
 add_platform_object_file(nes-mmc1-init-prg-ram-0-o
   init-prg-ram-0.o init-prg-ram-0.s)
+
+add_platform_library(nes-mmc1-c bank.c)
+merge_libraries(nes-mmc1-c common-c)

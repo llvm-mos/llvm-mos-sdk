@@ -7,14 +7,3 @@ __attribute__((noreturn)) void _exit(int status) {
   __builtin_unreachable();
 }
 
-void prg_rom_bank(char b) {
-  POKE(0xe000, b);
-  b >>= 1;
-  POKE(0xe000, b);
-  b >>= 1;
-  POKE(0xe000, b);
-  b >>= 1;
-  POKE(0xe000, b);
-  b >>= 1;
-  POKE(0xe000, b);
-}

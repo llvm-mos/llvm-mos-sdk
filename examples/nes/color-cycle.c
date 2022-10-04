@@ -5,7 +5,7 @@ static void ppu_wait_vblank(void) {
     ;
 }
 
-static void __ppu_write_addr(unsigned short addr) {
+static void ppu_write_addr(unsigned short addr) {
   (void)PPU.status;
   PPU.vram.address = addr >> 8;
   PPU.vram.address = addr & 0xff;

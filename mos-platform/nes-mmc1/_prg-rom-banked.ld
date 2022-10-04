@@ -20,25 +20,22 @@ MEMORY {
   prg_rom_15_lma : ORIGIN = 0x0103c000, LENGTH = __prg_rom_size >= 256 ? 0x4000 - 12 : 0
 
   /* PRG-ROM VMAs. */
-  prg_rom_0_vma  : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_1_vma  : ORIGIN = __prg_rom_size == 32 ? 0xc000 : 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_2_vma  : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_3_vma  : ORIGIN = __prg_rom_size == 64 ? 0xc000 : 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_4_vma  : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_5_vma  : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_6_vma  : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_7_vma  : ORIGIN = __prg_rom_size == 128 ? 0xc000 : 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_8_vma  : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_9_vma  : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_10_vma : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_11_vma : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_12_vma : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_13_vma : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_14_vma : ORIGIN = 0x8000, LENGTH = 0x4000 - 12
-  prg_rom_15_vma : ORIGIN = __prg_rom_size == 256 ? 0xc000 : 0x8000, LENGTH = 0x4000 - 12
-
-  /* Reset stub VMA. */
-  reset_vma : ORIGIN = 0x10000 - 12, LENGTH = 12
+  prg_rom_0_vma  : ORIGIN = 0x008000, LENGTH = 0x4000 - 12
+  prg_rom_1_vma  : ORIGIN = __prg_rom_size == 32 ? 0x01c000 : 0x018000, LENGTH = 0x4000 - 12
+  prg_rom_2_vma  : ORIGIN = 0x028000, LENGTH = 0x4000 - 12
+  prg_rom_3_vma  : ORIGIN = __prg_rom_size == 64 ? 0x03c000 : 0x038000, LENGTH = 0x4000 - 12
+  prg_rom_4_vma  : ORIGIN = 0x048000, LENGTH = 0x4000 - 12
+  prg_rom_5_vma  : ORIGIN = 0x058000, LENGTH = 0x4000 - 12
+  prg_rom_6_vma  : ORIGIN = 0x068000, LENGTH = 0x4000 - 12
+  prg_rom_7_vma  : ORIGIN = __prg_rom_size == 128 ? 0x07c000 : 0x078000, LENGTH = 0x4000 - 12
+  prg_rom_8_vma  : ORIGIN = 0x088000, LENGTH = 0x4000 - 12
+  prg_rom_9_vma  : ORIGIN = 0x098000, LENGTH = 0x4000 - 12
+  prg_rom_10_vma : ORIGIN = 0x0a8000, LENGTH = 0x4000 - 12
+  prg_rom_11_vma : ORIGIN = 0x0b8000, LENGTH = 0x4000 - 12
+  prg_rom_12_vma : ORIGIN = 0x0c8000, LENGTH = 0x4000 - 12
+  prg_rom_13_vma : ORIGIN = 0x0d8000, LENGTH = 0x4000 - 12
+  prg_rom_14_vma : ORIGIN = 0x0e8000, LENGTH = 0x4000 - 12
+  prg_rom_15_vma : ORIGIN = __prg_rom_size == 256 ? 0x0fc000 : 0x0f8000, LENGTH = 0x4000 - 12
 
   /* Reset stub addresses. */
   reset_0  : ORIGIN = ORIGIN(prg_rom_0_lma)  + LENGTH(prg_rom_0_lma),  LENGTH = 12

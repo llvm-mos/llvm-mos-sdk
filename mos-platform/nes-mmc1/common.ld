@@ -22,10 +22,10 @@ ASSERT(__prg_ram_size + __prg_nvram_size <= 32,
 
 MEMORY {
   /* PRG-ROM VMAs. */
-  prg_ram_0_vma : ORIGIN = 0x6000, LENGTH = 0x2000
-  prg_ram_1_vma : ORIGIN = 0x6000, LENGTH = 0x2000
-  prg_ram_2_vma : ORIGIN = 0x6000, LENGTH = 0x2000
-  prg_ram_3_vma : ORIGIN = 0x6000, LENGTH = 0x2000
+  prg_ram_0_vma : ORIGIN = 0x006000, LENGTH = 0x2000
+  prg_ram_1_vma : ORIGIN = 0x016000, LENGTH = 0x2000
+  prg_ram_2_vma : ORIGIN = 0x026000, LENGTH = 0x2000
+  prg_ram_3_vma : ORIGIN = 0x036000, LENGTH = 0x2000
 
   /* PRG-ROM LMAs. Just performs a size check on the contents and appeases the
    * linker. */

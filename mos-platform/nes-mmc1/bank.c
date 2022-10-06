@@ -34,11 +34,14 @@ static char CHR_BANK1;
 static char MMC1_CTRL_NMI;
 
 char _CHR_BANK0_CUR;
-extern __attribute__((weak, alias("_CHR_BANK0_CUR"))) volatile const char CHR_BANK0_CUR;
+extern __attribute__((
+    weak, alias("_CHR_BANK0_CUR"))) volatile const char CHR_BANK0_CUR;
 char _CHR_BANK1_CUR;
-extern __attribute__((weak, alias("_CHR_BANK1_CUR"))) volatile const char CHR_BANK1_CUR;
+extern __attribute__((
+    weak, alias("_CHR_BANK1_CUR"))) volatile const char CHR_BANK1_CUR;
 char _MMC1_CTRL_CUR;
-extern __attribute__((weak, alias("_MMC1_CTRL_CUR"))) volatile const char MMC1_CTRL_CUR;
+extern __attribute__((
+    weak, alias("_MMC1_CTRL_CUR"))) volatile const char MMC1_CTRL_CUR;
 
 #define MMC1_CTRL 0x8000
 #define MMC1_CHR0 0xa000
@@ -91,13 +94,9 @@ __attribute__((weak)) void set_prg_bank(char bank_id) {
 
 __attribute__((weak)) char get_prg_bank(void) { return PRG_BANK; }
 
-__attribute__((weak)) void set_chr_bank_0(char bank_id) {
-  CHR_BANK0 = bank_id;
-}
+__attribute__((weak)) void set_chr_bank_0(char bank_id) { CHR_BANK0 = bank_id; }
 
-__attribute__((weak)) void set_chr_bank_1(char bank_id) {
-  CHR_BANK1 = bank_id;
-}
+__attribute__((weak)) void set_chr_bank_1(char bank_id) { CHR_BANK1 = bank_id; }
 
 __attribute__((weak)) void split_chr_bank_0(char bank_id) {
   asm volatile("inc reset_mmc1_byte");

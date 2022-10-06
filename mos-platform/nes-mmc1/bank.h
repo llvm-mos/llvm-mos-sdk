@@ -43,8 +43,7 @@ extern volatile const char MMC1_CTRL_CUR;
 
 // Switch to another bank and call this function.
 // Note: Using banked_call to call a second function from within
-// another banked_call is safe. This will break if you nest more
-// than 10 calls deep.
+// another banked_call is safe.
 void banked_call(char bankId, void (*method)(void));
 
 // Internal function used by banked_call(), don't call this directly.

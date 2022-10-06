@@ -1,23 +1,35 @@
 #include <fcntl.h>
-#include <unistd.h>
 #include <fmt/format.h>
-#include <libelf.h>
-#include <string>
 #include <fstream>
-#include <vector>
 #include <set>
+#include <string>
+#include <unistd.h>
+#include <vector>
+#include <elf.h>
 
 /* MOS relocations (at least, the ones we care about). */
 
-#define R_MOS_ADDR8	    2
-#define R_MOS_ADDR16    3
+#define R_MOS_ADDR8 2
+#define R_MOS_ADDR16 3
 #define R_MOS_ADDR16_LO 4
 #define R_MOS_ADDR16_HI 5
 
+/* ELF structure definitions. */
+
+#define ELF32_PHDR_OFFSET offsetof(Elf32_Phdr, p_offset)
+#define ELF32_PHDR_FILESZ offsetof(Elf32_Phdr, p_filesz)
+#define ELF32_PHDR__SIZE sizeof(Elf32_Phdr)
+
+#define ELF32_SYM_VALUE offsetof(Elf32_Sym, st_value)
+#define ELF32_SYM__SIZE sizeof(Elf32_Sym)
+
+#define ELF32_RELA_OFFSET offsetof(Elf32_Rela, r_offset)
+#define ELF32_RELA_INFO offsetof(Elf32_Rela, r_info)
+#define ELF32_RELA__SIZE sizeof(Elf32_Rela)
+
+
 static std::string outputFilename;
 static std::string inputFilename;
-static Elf* elf;
-static Elf32_Ehdr* elfhdr;
 static std::fstream outputFile;
 
 template <typename... T>
@@ -61,46 +73,65 @@ static void parseArguments(int argc, char* const* argv)
     }
 }
 
-template <class T>
-static std::vector<T*> getElfTable(uint32_t sh_type, Elf_Type d_type)
+class Elf
 {
-    std::vector<T*> results;
-
-    Elf_Scn* section = nullptr;
-    for (;;)
+public:
+    Elf(const std::string& filename)
     {
-        section = elf_nextscn(elf, section);
-        if (!section)
-            break;
+        std::ifstream is(
+            filename.c_str(), std::fstream::out | std::fstream::binary);
 
-        auto* shdr = elf32_getshdr(section);
-        if (shdr->sh_type == sh_type)
-        {
-            Elf_Data* data = nullptr;
-            for (;;)
-            {
-                data = elf_getdata(section, data);
-                if (!data)
-                    break;
+        if (!is)
+            error("cannot open input file: {}", strerror(errno));
 
-                if (data->d_type != d_type)
-                    error("bad ELF data type; got {:x}, wanted {:x}",
-                        data->d_type, d_type);
+        _bytes = std::vector<char>((std::istreambuf_iterator<char>(is)),
+            std::istreambuf_iterator<char>());
 
-                T* items = (T*) data->d_buf;
-                int count = shdr->sh_size / shdr->sh_entsize;
+        auto ident = arrayAt(0, 16);
+        if ((ident[EI_MAG0] != ELFMAG0) || (ident[EI_MAG1] != ELFMAG1) ||
+            (ident[EI_MAG2] != ELFMAG2) || (ident[EI_MAG3] != ELFMAG3) ||
+            (ident[EI_CLASS] != ELFCLASS32) || (ident[EI_DATA] != ELFDATA2LSB))
+            error("not a little-endian ELF32 file");
 
-                for (int i=0; i<count; i++)
-                {
-                    T* item = items + i;
-                    results.push_back(item);
-                }
-            }
-        }
+        if (wordAt(0x2c) != 4)
+            error("file must have exactly three PHDRs");
+        if (wordAt(0x2a) != 32)
+            error("unsupported PHDR size");
+        _phoff = longAt(0x1c);
     }
 
-    return results;
-}
+    uint8_t byteAt(uint32_t offset)
+    {
+        return _bytes.at(offset);
+    }
+
+    uint16_t wordAt(uint32_t offset)
+    {
+        return byteAt(offset) | (byteAt(offset + 1) << 8);
+    }
+
+    uint32_t longAt(uint32_t offset)
+    {
+        return wordAt(offset) | (wordAt(offset + 2) << 16);
+    }
+
+    std::vector<uint8_t> arrayAt(uint32_t offset, uint32_t length)
+    {
+        std::vector<uint8_t> result(length);
+        for (unsigned i = 0; i < length; i++)
+            result[i] = byteAt(offset + i);
+        return result;
+    }
+
+    uint32_t findPhdr(int index)
+    {
+        return _phoff + index * 32;
+    }
+
+private:
+    std::vector<char> _bytes;
+    uint32_t _phoff;
+};
 
 std::vector<uint8_t> toBytestream(const std::set<uint16_t>& differences)
 {
@@ -139,31 +170,7 @@ int main(int argc, char* const* argv)
 
     /* Open the input ELF file. */
 
-    int fd = open(inputFilename.c_str(), O_RDONLY);
-    if (!fd)
-        error("cannot open input file: {}", strerror(errno));
-
-    elf_version(EV_NONE);
-    if (elf_version(EV_CURRENT) == EV_NONE)
-        error("libelf version mismatch");
-
-    elf = elf_begin(fd, ELF_C_READ, nullptr);
-
-    /* Validate the ELF file. */
-
-    {
-        char *ehdr_ident = NULL;
-         ehdr_ident = elf_getident(elf, NULL);
-         if (ehdr_ident[0] != '\x7f' ||
-             ehdr_ident[1] != '\x45' ||  // 'E'
-             ehdr_ident[2] != '\x4C' ||  // 'L'
-             ehdr_ident[3] != '\x46')    // 'F'
-            error("not a valid ELF file");
-    }
-
-    elfhdr = elf32_getehdr(elf);
-    if (!elfhdr)
-        error("not a 32-bit ELF file");
+    Elf elf(inputFilename);
 
     /* Open the output file. */
 
@@ -177,34 +184,13 @@ int main(int argc, char* const* argv)
 
     std::vector<uint8_t> bytes;
     {
-        Elf_Scn* section = nullptr;
-        for (;;)
-        {
-            section = elf_nextscn(elf, section);
-            if (!section)
-                break;
+        uint32_t textPhdr = elf.findPhdr(1);
+        uint32_t codeOffset = elf.longAt(textPhdr + ELF32_PHDR_OFFSET);
+        uint32_t codeLen = elf.longAt(textPhdr + ELF32_PHDR_FILESZ);
 
-            auto* shdr = elf32_getshdr(section);
-            if ((shdr->sh_type == SHT_PROGBITS) && (shdr->sh_size != 0))
-            {
-                /* TODO: there should be a better way to detect comments. */
-                std::string name = elf_strptr(elf, elfhdr->e_shstrndx, shdr->sh_name);
-                if (name != ".comment")
-                {
-                    auto* data = elf_rawdata(section, nullptr);
-                    const char* ptr = (const char*) data->d_buf;
-                    uint32_t addr = shdr->sh_addr - 0x0200;
-                    if (addr > 0x10000)
-                        error("bad section address 0x{:x}", shdr->sh_addr);
-                    size_t requiredSize = addr + data->d_size;
-
-                    if (bytes.size() < requiredSize)
-                        bytes.resize(requiredSize);
-
-                    std::copy(ptr, ptr+data->d_size, bytes.begin() + addr);
-                }
-            }
-        }
+        bytes.resize(codeLen);
+        for (int i = 0; i < codeLen; i++)
+            bytes[i] = elf.byteAt(codeOffset + i);
     }
 
     /* Accumulate relocations. */
@@ -212,51 +198,60 @@ int main(int argc, char* const* argv)
     std::set<uint16_t> zpRelocations;
     std::set<uint16_t> memRelocations;
     memRelocations.insert(3); /* work around linker weirdness */
-    auto symbols = getElfTable<Elf32_Sym>(SHT_SYMTAB, ELF_T_SYM);
-    auto relocations = getElfTable<Elf32_Rela>(SHT_RELA, ELF_T_RELA);
-    for (auto* rela : relocations)
+    uint32_t relaPhdr = elf.findPhdr(2);
+    uint32_t relaCount = elf.longAt(relaPhdr + ELF32_PHDR_FILESZ) / ELF32_RELA__SIZE;
+    uint32_t relaOffset = elf.longAt(relaPhdr + ELF32_PHDR_OFFSET);
+    uint32_t symbolPhdr = elf.findPhdr(3);
+    uint32_t symbolCount = elf.longAt(symbolPhdr + ELF32_PHDR_FILESZ) / ELF32_SYM__SIZE;
+    uint32_t symbolOffset = elf.longAt(symbolPhdr + ELF32_PHDR_OFFSET);
+    for (unsigned i = 0; i < relaCount; i++)
     {
-        Elf32_Sym* symbol = symbols.at(ELF32_R_SYM(rela->r_info));
-        unsigned offset = rela->r_offset - 0x0200;
-        if (symbol->st_shndx)
+        uint32_t rela = relaOffset + i * ELF32_RELA__SIZE;
+        uint32_t offset = elf.longAt(rela + ELF32_RELA_OFFSET) - 0x0200;
+        unsigned symbolIndex = ELF32_R_SYM(elf.longAt(rela + ELF32_RELA_INFO));
+        uint32_t symbol = symbolOffset + symbolIndex * ELF32_SYM__SIZE;
+        uint32_t value = elf.longAt(symbol + ELF32_SYM_VALUE);
+
+        if (value < 0x100)
         {
-            if (symbol->st_value < 0x100)
+            /* Zero page address. */
+
+            switch (ELF32_R_TYPE(elf.longAt(rela + ELF32_RELA_INFO)))
             {
-                /* Zero page address. */
+                case R_MOS_ADDR8:
+                case R_MOS_ADDR16:
+                case R_MOS_ADDR16_LO:
+                    zpRelocations.insert(offset + 0);
+                    break;
 
-                switch (ELF32_R_TYPE(rela->r_info))
-                {
-                    case R_MOS_ADDR8:
-                    case R_MOS_ADDR16:
-                    case R_MOS_ADDR16_LO:
-                        zpRelocations.insert(offset+0);
-                        break;
-
-                    case R_MOS_ADDR16_HI:
-                        break;
-                }
+                case R_MOS_ADDR16_HI:
+                    break;
             }
-            else
+        }
+        else
+        {
+            /* Normal address. */
+
+            switch (ELF32_R_TYPE(elf.longAt(rela + ELF32_RELA_INFO)))
             {
-                /* Normal address. */
+                case R_MOS_ADDR8:
+                    error(
+                        "8-bit reference to 16-bit address at relo {}, address "
+                        "0x{:x}?",
+                        i,
+                        offset);
+                    break;
 
-                switch (ELF32_R_TYPE(rela->r_info))
-                {
-                    case R_MOS_ADDR8:
-                        error("8-bit reference to 16-bit address?");
-                        break;
+                case R_MOS_ADDR16:
+                    memRelocations.insert(offset + 1);
+                    break;
 
-                    case R_MOS_ADDR16:
-                        memRelocations.insert(offset+1);
-                        break;
+                case R_MOS_ADDR16_HI:
+                    memRelocations.insert(offset + 0);
+                    break;
 
-                    case R_MOS_ADDR16_HI:
-                        memRelocations.insert(offset+0);
-                        break;
-
-                    case R_MOS_ADDR16_LO:
-                        break;
-                }
+                case R_MOS_ADDR16_LO:
+                    break;
             }
         }
     }
@@ -273,10 +268,18 @@ int main(int argc, char* const* argv)
     for (uint8_t b : toBytestream(memRelocations))
         bytes.push_back(b);
 
-    outputFile.write((const char*) &bytes[0], bytes.size());
+    /* Adjust the memory requirements to ensure the relocations can be loaded. */
+
+    bytes[1] = std::max<unsigned>(
+        bytes[1],
+        (bytes.size() + 255) / 256);
+
+    /* Write the output file. */
+
+    outputFile.write((const char*)&bytes[0], bytes.size());
     outputFile.close();
+
     return 0;
 }
 
 // vim: ts=4 sw=4 et
-

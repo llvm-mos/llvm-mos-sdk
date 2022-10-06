@@ -1,3 +1,4 @@
+#include <bank.h>
 #include <nes.h>
 #include <peekpoke.h>
 #include <stdlib.h>
@@ -14,42 +15,14 @@ char read_ppu(unsigned ppu_addr) {
 }
 
 void set_4k_banks(void) {
-  POKE(0x8000, 0);
-  POKE(0x8000, 0);
-  POKE(0x8000, 1);
-  POKE(0x8000, 1);
-  POKE(0x8000, 1);
-}
-
-void set_bank_0(char b) {
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-}
-
-void set_bank_1(char b) {
-  POKE(0xc000, b);
-  b >>= 1;
-  POKE(0xc000, b);
-  b >>= 1;
-  POKE(0xc000, b);
-  b >>= 1;
-  POKE(0xc000, b);
-  b >>= 1;
-  POKE(0xc000, b);
+  set_mmc1_ctrl(0b11100);
 }
 
 int main(void) {
   set_4k_banks();
 
-  set_bank_0(0);
-  set_bank_1(31);
+  set_chr_bank_0_retry(0);
+  set_chr_bank_1_retry(31);
   if (read_ppu(0) != 1)
     return EXIT_FAILURE;
   if (read_ppu(4095) != 2)
@@ -59,7 +32,7 @@ int main(void) {
   if (read_ppu(8191) != 4)
     return EXIT_FAILURE;
 
-  set_bank_1(0);
+  set_chr_bank_1_retry(0);
   if (read_ppu(4096) != 1)
     return EXIT_FAILURE;
   if (read_ppu(8191) != 2)

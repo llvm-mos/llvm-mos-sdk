@@ -1,3 +1,4 @@
+#include <bank.h>
 #include <nes.h>
 #include <peekpoke.h>
 #include <stdlib.h>
@@ -8,11 +9,7 @@ asm(".globl __chr_rom_size\n"
     "__chr_ram_size = 8\n");
 
 void set_8k_banks(void) {
-  POKE(0x8000, 0);
-  POKE(0x8000, 0);
-  POKE(0x8000, 1);
-  POKE(0x8000, 1);
-  POKE(0x8000, 0);
+  set_mmc1_ctrl(0b01100);
 }
 
 void poke_ppu(unsigned addr, char val) {

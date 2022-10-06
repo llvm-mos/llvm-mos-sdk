@@ -9,7 +9,9 @@ __attribute__((section(".prg_ram_0.noinit"))) volatile char c[8192];
 __attribute__((section(".prg_ram_3.noinit"))) volatile char d[4097];
 __attribute__((section("_3.noinit"))) volatile char e[4095];
 
-void set_prg_ram_bank(char b) { split_chr_bank_0(b << 2); }
+void set_prg_ram_bank(char b) {
+  set_chr_bank_0_retry(CHR_BANK0_CUR & 0b10011 | (b << 2) & 0b1100);
+}
 
 int main(void) {
   set_prg_ram_bank(0);

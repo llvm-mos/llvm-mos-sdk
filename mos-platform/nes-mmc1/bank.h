@@ -33,6 +33,11 @@ extern "C" {
 
 // Contains functions to help with working with multiple PRG/CHR banks
 
+// Access the current settings of MMC1 registers.
+extern volatile const char CHR_BANK0_CUR;
+extern volatile const char CHR_BANK1_CUR;
+extern volatile const char MMC1_CTRL_CUR;
+
 // Maximum level of recursion to allow with banked_call and similar functions.
 #define MAX_BANK_DEPTH 10
 
@@ -82,6 +87,14 @@ void split_chr_bank_0(char bank_id);
 // in the next frame.
 void split_chr_bank_1(char bank_id);
 
+// Sets the CHR bank 0 register to the given value and retries if interrupted.
+// Persists across NMIs.
+void set_chr_bank_0_retry(char bank_id);
+
+// Reliably sets the CHR bank 0 register to the given value and retries if
+// interrupted. Persists across NMIs.
+void set_chr_bank_1_retry(char bank_id);
+
 // if you need to swap CHR banks mid screen, perhaps you need more
 // than 256 unique tiles, first write (one time only) the CHR bank
 // for the top of the screen with set_chr_bank_0().
@@ -100,10 +113,11 @@ void split_chr_bank_1(char bank_id);
 
 // Set the current mirroring mode. Your options are MIRROR_LOWER_BANK,
 // MIRROR_UPPER_BANK, MIRROR_HORIZONTAL, and MIRROR_VERTICAL.
-// LOWER and UPPER are single screen modes
+// LOWER and UPPER are single screen modes.
 void set_mirroring(char mirroring);
 
-// Set all 5 bits of the $8000 MMC1 Control register (not recommended)
+// Set all 5 bits of the $8000 MMC1 Control register. Overwrites mirroring
+// setting.
 void set_mmc1_ctrl(char value);
 
 // some things deleted

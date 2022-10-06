@@ -1,0 +1,24 @@
+.macro register n, m
+	.section .zp.reg_\n_\m, "za", @nobits
+		.global __rc\n, __rc\m
+		__rc\n: .fill 1
+		__rc\m: .fill 1
+.endm
+
+register 0, 1
+register 2, 3
+register 4, 5
+register 6, 7
+register 8, 9
+register 10, 11
+register 12, 13
+register 14, 15
+register 16, 17
+register 18, 19
+register 20, 21
+register 22, 23
+register 24, 25
+register 26, 27
+register 28, 29
+register 30, 31
+

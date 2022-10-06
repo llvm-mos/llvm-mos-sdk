@@ -25,10 +25,7 @@ add_platform_library(cpm65-c
   pblock.S
   putchar.c
   stack.S
-#  abort.c
-#  chrout.c
-#  getchar.c
-#  putchar.c
+  registers.S
 )
 merge_libraries(cpm65-c
 	common-c

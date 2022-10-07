@@ -86,83 +86,64 @@ extern uint8_t cpm_cmdlinelen;
 extern char cpm_cmdline[0x7f];
 extern uint8_t cpm_errno;
 
-/*  0 */ extern void _Noreturn cpm_warmboot(void);
-/*  1 */ extern uint8_t cpm_conin(void);
-/*  2 */ extern void cpm_conout(uint8_t b);
-/*  3 */ extern uint8_t cpm_auxin(void);
-/*  4 */ extern void cpm_auxout(uint8_t b);
-/*  5 */ extern void cpm_lstout(uint8_t b);
-/*  6 */ extern uint8_t cpm_conio(uint8_t b);
-/*  7 */ extern uint8_t cpm_get_iobyte(void);
-/*  8 */ extern void cpm_set_iobyte(uint8_t iob);
-/*  9 */ extern void cpm_printstring_i(uint16_t s);
-         static void cpm_printstring(const char* s) /* $-terminated */
-            { cpm_printstring_i((uint16_t) s); }
-/* 10 */ extern uint8_t cpm_readline(uint8_t* buffer);
-/* 11 */ extern uint8_t cpm_const(void);
-/* 12 */ extern uint16_t cpm_get_version(void);
-/* 13 */ extern void cpm_reset_disk_system(void);
-/* 14 */ extern void cpm_select_drive(uint8_t disk);
-/* 15 */ extern uint8_t cpm_open_file_i(uint16_t fcb);
-         static uint8_t cpm_open_file(FCB* fcb)
-            { return cpm_open_file_i((uint16_t) fcb); }
-/* 16 */ extern uint8_t cpm_close_file_i(uint16_t fcb);
-         static uint8_t cpm_close_file(FCB* fcb)
-            { return cpm_close_file_i((uint16_t) fcb); }
-/* 17 */ extern uint8_t cpm_findfirst_i(uint16_t fcb);
-         static uint8_t cpm_findfirst(FCB* fcb)
-            { return cpm_findfirst_i((uint16_t) fcb); }
-/* 18 */ extern uint8_t cpm_findnext_i(uint16_t fcb);
-         static uint8_t cpm_findnext(FCB* fcb)
-            { return cpm_findnext_i((uint16_t) fcb); }
-/* 19 */ extern uint8_t cpm_delete_file_i(uint16_t fcb);
-         static uint8_t cpm_delete_file(FCB* fcb)
-            { return cpm_delete_file_i((uint16_t) fcb); }
-/* 20 */ extern uint8_t cpm_read_sequential_i(uint16_t fcb);
-         static uint8_t cpm_read_sequential(FCB* fcb)
-            { return cpm_read_sequential_i((uint16_t) fcb); }
-/* 21 */ extern uint8_t cpm_write_sequential_i(uint16_t fcb);
-         static uint8_t cpm_write_sequential(FCB* fcb)
-            { return cpm_write_sequential_i((uint16_t) fcb); }
-/* 22 */ extern uint8_t cpm_make_file_i(uint16_t fcb);
-         static uint8_t cpm_make_file(FCB* fcb)
-            { return cpm_make_file_i((uint16_t) fcb); }
-/* 23 */ extern uint8_t cpm_rename_file_i(uint16_t rcb);
-         static uint8_t cpm_rename_file(RCB* rcb)
-            { return cpm_rename_file_i((uint16_t) rcb); }
-/* 24 */ extern uint16_t cpm_get_login_vector(void);
-/* 25 */ extern uint8_t cpm_get_current_drive(void);
-/* 26 */ extern void cpm_set_dma_i(uint16_t ptr);
-         static void cpm_set_dma(void* ptr)
-            { cpm_set_dma_i((uint16_t) ptr); }
-/* 27 */ extern uint16_t cpm_get_allocation_vector_i(void);
-         static uint8_t* cpm_get_allocation_vector(void)
-            { return (uint8_t*) cpm_get_allocation_vector_i(); }
-/* 28 */ extern void cpm_write_protect_drive(void);
-/* 29 */ extern uint16_t cpm_get_readonly_vector(void);
-/* 30 */ extern uint8_t cpm_set_file_attributes_i(uint16_t fcb);
-         static uint8_t cpm_set_file_attributes(FCB* fcb)
-            { return cpm_set_file_attributes_i((uint16_t) fcb); }
-/* 31 */ extern uint16_t cpm_get_dpb_i(void);
-         static DPB* cpm_get_dpb(void)
-            { return (DPB*) cpm_get_dpb_i(); }
-/* 32 */ extern uint8_t cpm_get_set_user(uint8_t user);
-/* 33 */ extern uint8_t cpm_read_random_i(uint16_t fcb);
-/* 33 */ static uint8_t cpm_read_random(FCB* fcb)
-            { return cpm_read_random_i((uint16_t) fcb); }
-/* 34 */ extern uint8_t cpm_write_random_i(uint16_t fcb);
-/* 34 */ static uint8_t cpm_write_random(FCB* fcb)
-            { return cpm_write_random_i((uint16_t) fcb); }
-/* 35 */ extern void cpm_seek_to_end_i(uint16_t fcb);
-/* 35 */ static void cpm_seek_to_end(FCB* fcb)
-            { return cpm_seek_to_end_i((uint16_t) fcb); }
-/* 36 */ extern void cpm_seek_to_seq_pos_i(uint16_t fcb);
-/* 36 */ static void cpm_seek_to_seq_pos(FCB* fcb)
-            { return cpm_seek_to_seq_pos_i((uint16_t) fcb); }
-/* 37 */ extern uint8_t cpm_reset_drives(uint16_t drive_bitmap);
-/* 40 */ extern uint8_t cpm_write_random_filled_i(uint16_t fcb);
-         static uint8_t cpm_write_random_filled(FCB* fcb)
-            { return cpm_write_random_filled_i((uint16_t) fcb); }
+/*  0 */ extern __attribute__((leaf)) void _Noreturn cpm_warmboot(void);
+/*  1 */ extern __attribute__((leaf)) uint8_t cpm_conin(void);
+/*  2 */ extern __attribute__((leaf)) void cpm_conout(uint8_t b);
+/*  3 */ extern __attribute__((leaf)) uint8_t cpm_auxin(void);
+/*  4 */ extern __attribute__((leaf)) void cpm_auxout(uint8_t b);
+/*  5 */ extern __attribute__((leaf)) void cpm_lstout(uint8_t b);
+/*  6 */ extern __attribute__((leaf)) uint8_t cpm_conio(uint8_t b);
+/*  7 */ extern __attribute__((leaf)) uint8_t cpm_get_iobyte(void);
+/*  8 */ extern __attribute__((leaf)) void cpm_set_iobyte(uint8_t iob);
+/*  9 */ extern __attribute__((leaf)) void cpm_printstring_i(uint16_t s);
+         extern                       void cpm_printstring(const char* s); /* $-terminated */
+/* 10 */ extern __attribute__((leaf)) uint8_t cpm_readline(uint8_t* buffer);
+/* 11 */ extern __attribute__((leaf)) uint8_t cpm_const(void);
+/* 12 */ extern __attribute__((leaf)) uint16_t cpm_get_version(void);
+/* 13 */ extern __attribute__((leaf)) void cpm_reset_disk_system(void);
+/* 14 */ extern __attribute__((leaf)) void cpm_select_drive(uint8_t disk);
+/* 15 */ extern __attribute__((leaf)) uint8_t cpm_open_file_i(uint16_t fcb);
+         extern                       uint8_t cpm_open_file(FCB* fcb);
+/* 16 */ extern __attribute__((leaf)) uint8_t cpm_close_file_i(uint16_t fcb);
+         extern                       uint8_t cpm_close_file(FCB* fcb);
+/* 17 */ extern __attribute__((leaf)) uint8_t cpm_findfirst_i(uint16_t fcb);
+         extern                       uint8_t cpm_findfirst(FCB* fcb);
+/* 18 */ extern __attribute__((leaf)) uint8_t cpm_findnext_i(uint16_t fcb);
+         extern                       uint8_t cpm_findnext(FCB* fcb);
+/* 19 */ extern __attribute__((leaf)) uint8_t cpm_delete_file_i(uint16_t fcb);
+         extern                       uint8_t cpm_delete_file(FCB* fcb);
+/* 20 */ extern __attribute__((leaf)) uint8_t cpm_read_sequential_i(uint16_t fcb);
+         extern                       uint8_t cpm_read_sequential(FCB* fcb);
+/* 21 */ extern __attribute__((leaf)) uint8_t cpm_write_sequential_i(uint16_t fcb);
+         extern                       uint8_t cpm_write_sequential(FCB* fcb);
+/* 22 */ extern __attribute__((leaf)) uint8_t cpm_make_file_i(uint16_t fcb);
+         extern                       uint8_t cpm_make_file(FCB* fcb);
+/* 23 */ extern __attribute__((leaf)) uint8_t cpm_rename_file_i(uint16_t rcb);
+         extern                       uint8_t cpm_rename_file(RCB* rcb);
+/* 24 */ extern __attribute__((leaf)) uint16_t cpm_get_login_vector(void);
+/* 25 */ extern __attribute__((leaf)) uint8_t cpm_get_current_drive(void);
+/* 26 */ extern __attribute__((leaf)) void cpm_set_dma_i(uint16_t ptr);
+         extern                       void cpm_set_dma(void* ptr);
+/* 27 */ extern __attribute__((leaf)) uint16_t cpm_get_allocation_vector_i(void);
+         extern                       uint8_t* cpm_get_allocation_vector(void);
+/* 28 */ extern __attribute__((leaf)) void cpm_write_protect_drive(void);
+/* 29 */ extern __attribute__((leaf)) uint16_t cpm_get_readonly_vector(void);
+/* 30 */ extern __attribute__((leaf)) uint8_t cpm_set_file_attributes_i(uint16_t fcb);
+         extern                       uint8_t cpm_set_file_attributes(FCB* fcb);
+/* 31 */ extern __attribute__((leaf)) uint16_t cpm_get_dpb_i(void);
+         extern                       DPB* cpm_get_dpb(void);
+/* 32 */ extern __attribute__((leaf)) uint8_t cpm_get_set_user(uint8_t user);
+/* 33 */ extern __attribute__((leaf)) uint8_t cpm_read_random_i(uint16_t fcb);
+         extern                       uint8_t cpm_read_random(FCB* fcb);
+/* 34 */ extern __attribute__((leaf)) uint8_t cpm_write_random_i(uint16_t fcb);
+         extern                       uint8_t cpm_write_random(FCB* fcb);
+/* 35 */ extern __attribute__((leaf)) void cpm_seek_to_end_i(uint16_t fcb);
+         extern                       void cpm_seek_to_end(FCB* fcb);
+/* 36 */ extern __attribute__((leaf)) void cpm_seek_to_seq_pos_i(uint16_t fcb);
+         extern                       void cpm_seek_to_seq_pos(FCB* fcb);
+/* 37 */ extern __attribute__((leaf)) uint8_t cpm_reset_drives(uint16_t drive_bitmap);
+/* 40 */ extern __attribute__((leaf)) uint8_t cpm_write_random_filled_i(uint16_t fcb);
+         extern                       uint8_t cpm_write_random_filled(FCB* fcb);
 
 #define cpm_get_user() cpm_get_set_user(0xff)
 #define cpm_set_user(u) cpm_get_set_user(u)

@@ -229,10 +229,10 @@ FT_MR_NOISE_F		= FT_OUT_BUF+10
 	.endif
 
 .section .init.28,"axR",@progbits
-	jsr get_prg_bank
+	jsr __get_prg_bank
 	pha
 	lda #mos24bank(music_data)
-	jsr set_prg_bank
+	jsr __set_prg_bank
 	ldx #<music_data
 	ldy #>music_data
 	lda <NTSC_MODE
@@ -240,13 +240,13 @@ FT_MR_NOISE_F		= FT_OUT_BUF+10
 
 	.if(FT_SFX_ENABLE)
 	lda #mos24bank(sounds_data)
-	jsr set_prg_bank
+	jsr __set_prg_bank
 	ldx #<sounds_data
 	ldy #>sounds_data
 	jsr FamiToneSfxInit
 	.endif
 	pla
-	jsr set_prg_bank
+	jsr __set_prg_bank
 
 ;------------------------------------------------------------------------------
 ; reset APU, initialize FamiTone
@@ -255,13 +255,13 @@ FT_MR_NOISE_F		= FT_OUT_BUF+10
 ;------------------------------------------------------------------------------
 
 .section .text.ft_get_prg_bank,"ax",@progbits
-.weak get_prg_bank
-get_prg_bank:
+.weak __get_prg_bank
+__get_prg_bank:
 	rts
 
 .section .text.ft_set_prg_bank,"ax",@progbits
-.weak set_prg_bank
-set_prg_bank:
+.weak __set_prg_bank
+__set_prg_bank:
 	rts
 
 .section .text.famitone_init,"ax",@progbits
@@ -386,10 +386,10 @@ music_stop:
 FamiToneMusicPlay:
 music_play:
 	sta mos8(FT_TEMP_VAR1)
-	jsr get_prg_bank
+	jsr __get_prg_bank
 	pha
 	lda #mos24bank(music_data)
-	jsr set_prg_bank
+	jsr __set_prg_bank
 	lda mos8(FT_TEMP_VAR1)
 
 	ldx FT_SONG_LIST_L
@@ -463,7 +463,7 @@ music_play:
 
 .Lskip:
 	pla
-	jmp set_prg_bank
+	jmp __set_prg_bank
 
 
 ;------------------------------------------------------------------------------
@@ -519,7 +519,7 @@ __update_sound:
 	pha
 	.endif
 
-	jsr get_prg_bank
+	jsr __get_prg_bank
 	pha
 
 	lda FT_SONG_SPEED		;speed 0 means that no music is playing currently
@@ -530,7 +530,7 @@ __update_sound:
 
 .Lupdate:
 	lda #mos24bank(music_data)
-	jsr set_prg_bank
+	jsr __set_prg_bank
 
 	clc						;update frame counter that considers speed, tempo, and PAL/NTSC
 	lda FT_TEMPO_ACC_L
@@ -773,7 +773,7 @@ __update_sound:
 
 	;process all sound effect streams
 	lda #mos24bank(sounds_data)
-	jsr set_prg_bank
+	jsr __set_prg_bank
 
 
 	.if FT_SFX_STREAMS>0
@@ -833,7 +833,7 @@ __update_sound:
 	.endif
 
 	pla
-	jsr set_prg_bank
+	jsr __set_prg_bank
 
 	.if(FT_THREAD)
 	pla
@@ -1066,10 +1066,10 @@ FamiToneSamplePlayM:		;for music (low priority)
 sample_play:
 FamiToneSamplePlay:
 	sta mos8(FT_TEMP_VAR1)
-	jsr get_prg_bank
+	jsr __get_prg_bank
 	pha
 	lda #mos24bank(sounds_data)
-	jsr set_prg_bank
+	jsr __set_prg_bank
 	lda mos8(FT_TEMP_VAR1)
 
 	ldx #1
@@ -1077,7 +1077,7 @@ FamiToneSamplePlay:
 	jsr _FT2SamplePlay
 
 	pla
-	jmp set_prg_bank
+	jmp __set_prg_bank
 
 _FT2SamplePlay:
 
@@ -1321,10 +1321,10 @@ sfx_play:
 .if(FT_SFX_ENABLE)
 	sta <FT_TEMP_PTR_L
 	stx <FT_TEMP_PTR_H
-	jsr get_prg_bank
+	jsr __get_prg_bank
 	pha
 	lda #mos24bank(sounds_data)
-	jsr set_prg_bank
+	jsr __set_prg_bank
 	lda <FT_TEMP_PTR_L
 	ldx <FT_TEMP_PTR_H
 
@@ -1337,7 +1337,7 @@ sfx_play:
 	tya
 	jsr FamiToneSfxPlay
 	pla
-	jmp set_prg_bank
+	jmp __set_prg_bank
 .else
 	rts
 .endif

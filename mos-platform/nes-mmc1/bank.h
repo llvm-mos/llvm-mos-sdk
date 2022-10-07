@@ -44,25 +44,16 @@ extern volatile const char MMC1_CTRL_CUR;
 // Switch to another bank and call this function.
 // Note: Using banked_call to call a second function from within
 // another banked_call is safe.
-void banked_call(char bankId, void (*method)(void));
-
-// Internal function used by banked_call(), don't call this directly.
-// Switch to the given bank, and keep track of the current bank, so
-// that we may jump back to it as needed.
-void bank_push(char bankId);
-
-// Internal function used by banked_call(), don't call this directly.
-// Go back to the last bank pushed on using bank_push.
-void bank_pop(void);
+void banked_call(char bank_id, void (*method)(void));
 
 // Switch to the given bank (to $8000-bfff). Your prior bank is not saved.
 // Can be used for reading data with a function in the fixed bank.
 // bank_id: The bank to switch to.
-void set_prg_bank(char bank_id);
+__attribute__((leaf)) void set_prg_bank(char bank_id);
 
 // Get the current PRG bank at $8000-bfff.
 // returns: The current bank.
-char get_prg_bank(void);
+__attribute__((leaf)) char get_prg_bank(void);
 
 // Set the current 1st 4k chr bank to the bank with this id.
 // this will take effect at the next frame
@@ -120,9 +111,6 @@ void set_mirroring(char mirroring);
 void set_mmc1_ctrl(char value);
 
 // some things deleted
-
-// To be called on NMI to set graphics-affecting banks.
-void nmi_bank_handler(void);
 
 #ifdef __cplusplus
 }

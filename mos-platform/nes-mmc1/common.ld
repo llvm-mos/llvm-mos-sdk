@@ -67,6 +67,23 @@ MEMORY {
   chr_rom_29 : ORIGIN = 0x0201d000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
   chr_rom_30 : ORIGIN = 0x0201e000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
   chr_rom_31 : ORIGIN = 0x0201f000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+
+  chr_rom_0_1   : ORIGIN = 0x02000000, LENGTH = __chr_rom_size >= 8   ? 0x2000 : 0
+  chr_rom_2_3   : ORIGIN = 0x02002000, LENGTH = __chr_rom_size >= 16  ? 0x2000 : 0
+  chr_rom_4_5   : ORIGIN = 0x02004000, LENGTH = __chr_rom_size >= 32  ? 0x2000 : 0
+  chr_rom_6_7   : ORIGIN = 0x02006000, LENGTH = __chr_rom_size >= 32  ? 0x2000 : 0
+  chr_rom_8_9   : ORIGIN = 0x02008000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
+  chr_rom_10_11 : ORIGIN = 0x0200a000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
+  chr_rom_12_13 : ORIGIN = 0x0200c000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
+  chr_rom_14_15 : ORIGIN = 0x0200e000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
+  chr_rom_16_17 : ORIGIN = 0x02010000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_18_19 : ORIGIN = 0x02012000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_20_21 : ORIGIN = 0x02014000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_22_23 : ORIGIN = 0x02016000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_24_25 : ORIGIN = 0x02018000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_26_27 : ORIGIN = 0x0201a000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_28_29 : ORIGIN = 0x0201c000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_30_31 : ORIGIN = 0x0201e000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
 }
 
 SECTIONS {
@@ -107,6 +124,23 @@ SECTIONS {
   .chr_rom_29 : { KEEP(*(.chr_rom_29 .chr_rom_29.*)) } >chr_rom_29
   .chr_rom_30 : { KEEP(*(.chr_rom_30 .chr_rom_30.*)) } >chr_rom_30
   .chr_rom_31 : { KEEP(*(.chr_rom_31 .chr_rom_31.*)) } >chr_rom_31
+
+  .chr_rom_0_1   : { KEEP(*(.chr_rom_0_1   .chr_rom_0_1.*)) }   >chr_rom_0_1
+  .chr_rom_2_3   : { KEEP(*(.chr_rom_2_3   .chr_rom_2_3.*)) }   >chr_rom_2_3
+  .chr_rom_4_5   : { KEEP(*(.chr_rom_4_5   .chr_rom_4_5.*)) }   >chr_rom_4_5
+  .chr_rom_6_7   : { KEEP(*(.chr_rom_6_7   .chr_rom_6_7.*)) }   >chr_rom_6_7
+  .chr_rom_8_9   : { KEEP(*(.chr_rom_8_9   .chr_rom_8_9.*)) }   >chr_rom_8_9
+  .chr_rom_10_11 : { KEEP(*(.chr_rom_10_11 .chr_rom_10_11.*)) } >chr_rom_10_11
+  .chr_rom_12_13 : { KEEP(*(.chr_rom_12_13 .chr_rom_12_13.*)) } >chr_rom_12_13
+  .chr_rom_14_15 : { KEEP(*(.chr_rom_14_15 .chr_rom_14_15.*)) } >chr_rom_14_15
+  .chr_rom_16_17 : { KEEP(*(.chr_rom_16_17 .chr_rom_16_17.*)) } >chr_rom_16_17
+  .chr_rom_18_19 : { KEEP(*(.chr_rom_18_19 .chr_rom_18_19.*)) } >chr_rom_18_19
+  .chr_rom_20_21 : { KEEP(*(.chr_rom_20_21 .chr_rom_20_21.*)) } >chr_rom_20_21
+  .chr_rom_22_23 : { KEEP(*(.chr_rom_22_23 .chr_rom_22_23.*)) } >chr_rom_22_23
+  .chr_rom_24_25 : { KEEP(*(.chr_rom_24_25 .chr_rom_24_25.*)) } >chr_rom_24_25
+  .chr_rom_26_27 : { KEEP(*(.chr_rom_26_27 .chr_rom_26_27.*)) } >chr_rom_26_27
+  .chr_rom_28_29 : { KEEP(*(.chr_rom_28_29 .chr_rom_28_29.*)) } >chr_rom_28_29
+  .chr_rom_30_31 : { KEEP(*(.chr_rom_30_31 .chr_rom_30_31.*)) } >chr_rom_30_31
 }
 
 /* Provide a mask selecting the significant bits of a CHR bank number. */

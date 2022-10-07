@@ -26,5 +26,5 @@ add_platform_object_file(nes-mmc1-init-prg-rom-32-banked-o
 add_platform_object_file(nes-mmc1-init-prg-ram-0-o
   init-prg-ram-0.o init-prg-ram-0.s)
 
-add_platform_library(nes-mmc1-c bank.c)
+add_platform_library(nes-mmc1-c bank.c bank.s)
 merge_libraries(nes-mmc1-c common-c)

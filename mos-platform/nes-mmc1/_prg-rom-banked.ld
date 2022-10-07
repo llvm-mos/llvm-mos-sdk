@@ -60,6 +60,7 @@ SECTIONS {
   .prg_rom_0 :  OVERLAY { *(.prg_rom_0  .prg_rom_0.*)  } >prg_rom_0_vma  AT>prg_rom_0_lma
   .prg_rom_1 :  OVERLAY { *(.prg_rom_1  .prg_rom_1.*)  } >prg_rom_1_vma  AT>prg_rom_1_lma
   .prg_rom_2 :  OVERLAY { *(.prg_rom_2  .prg_rom_2.*)  } >prg_rom_2_vma  AT>prg_rom_2_lma
+  .prg_rom_3 :  OVERLAY { *(.prg_rom_3  .prg_rom_3.*)  } >prg_rom_3_vma  AT>prg_rom_3_lma
   .prg_rom_4 :  OVERLAY { *(.prg_rom_4  .prg_rom_4.*)  } >prg_rom_4_vma  AT>prg_rom_4_lma
   .prg_rom_5 :  OVERLAY { *(.prg_rom_5  .prg_rom_5.*)  } >prg_rom_5_vma  AT>prg_rom_5_lma
   .prg_rom_6 :  OVERLAY { *(.prg_rom_6  .prg_rom_6.*)  } >prg_rom_6_vma  AT>prg_rom_6_lma
@@ -71,4 +72,5 @@ SECTIONS {
   .prg_rom_12 : OVERLAY { *(.prg_rom_12 .prg_rom_12.*) } >prg_rom_12_vma AT>prg_rom_12_lma
   .prg_rom_13 : OVERLAY { *(.prg_rom_13 .prg_rom_13.*) } >prg_rom_13_vma AT>prg_rom_13_lma
   .prg_rom_14 : OVERLAY { *(.prg_rom_14 .prg_rom_14.*) } >prg_rom_14_vma AT>prg_rom_14_lma
+  .prg_rom_15 : OVERLAY { *(.prg_rom_15 .prg_rom_15.*) } >prg_rom_15_vma AT>prg_rom_15_lma
 }

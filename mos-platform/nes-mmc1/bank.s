@@ -86,3 +86,21 @@ set_prg_bank:
 	tya
 	jmp .Lset
 
+
+
+.section .text.banked_call,"ax",@progbits
+.weak banked_call
+banked_call:
+	tay
+	lda _PRG_BANK
+	pha
+	tya
+	jsr __set_prg_bank
+	lda mos8(__rc2)
+	sta mos8(__rc18)
+	lda mos8(__rc3)
+	sta mos8(__rc19)
+	jsr __call_indir
+	pla
+	jsr __set_prg_bank
+	rts

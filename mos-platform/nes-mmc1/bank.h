@@ -44,7 +44,7 @@ extern volatile const char MMC1_CTRL_CUR;
 // Switch to another bank and call this function.
 // Note: Using banked_call to call a second function from within
 // another banked_call is safe.
-void banked_call(char bank_id, void (*method)(void));
+__attribute__((leaf, callback(2))) void banked_call(char bank_id, void (*method)(void));
 
 // Switch to the given bank (to $8000-bfff). Your prior bank is not saved.
 // Can be used for reading data with a function in the fixed bank.

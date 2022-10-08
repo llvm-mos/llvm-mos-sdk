@@ -79,14 +79,6 @@ mmc1_register_write_retry(unsigned addr, char val) {
   _IN_PROGRESS = 0;
 }
 
-__attribute__((noinline, weak)) void banked_call(char bank_id,
-                                                 void (*method)(void)) {
-  char old_id = get_prg_bank();
-  set_prg_bank(bank_id);
-  method();
-  set_prg_bank(old_id);
-}
-
 __attribute__((weak)) void set_chr_bank_0(char bank_id) {
   _CHR_BANK0 = bank_id;
 }

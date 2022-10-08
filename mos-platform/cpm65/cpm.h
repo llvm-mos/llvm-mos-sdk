@@ -1,6 +1,10 @@
 #ifndef CPM_H
 #define CPM_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 
 typedef struct __attribute__((packed))
@@ -164,6 +168,10 @@ extern __attribute__((leaf)) uint16_t cpm_bios_gettpa(void);
 extern __attribute__((leaf)) void cpm_bios_settpa(uint8_t start, uint8_t end);
 extern __attribute__((leaf)) uint16_t cpm_bios_getzp(void);
 extern __attribute__((leaf)) void cpm_bios_setzp(uint8_t start, uint8_t end);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

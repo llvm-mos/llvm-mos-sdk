@@ -148,15 +148,22 @@ extern uint8_t cpm_errno;
 #define cpm_get_user() cpm_get_set_user(0xff)
 #define cpm_set_user(u) cpm_get_set_user(u)
 
-extern int cpm_bios_const(void);
-extern int cpm_bios_conin(void);
-extern void cpm_bios_conout(uint8_t c);
-extern DPH* cpm_bios_seldsk(uint8_t disk);
-extern void cpm_bios_setsec(uint32_t* sector); /* actually only 24 bits */
-extern void cpm_bios_setdma(void* dma);
-extern int cpm_bios_read(void);
-extern int cpm_bios_write(uint8_t deblock);
-extern int cpm_bios_listst(void);
+extern __attribute__((leaf)) uint8_t cpm_bios_const(void);
+extern __attribute__((leaf)) uint8_t cpm_bios_conin(void);
+extern __attribute__((leaf)) void cpm_bios_conout(uint8_t c);
+extern                       uint16_t cpm_bios_seldsk_i(uint8_t disk);
+extern                       DPH* cpm_bios_seldsk(uint8_t disk);
+extern __attribute__((leaf)) void cpm_bios_setsec_i(uint16_t sector); /* actually only 24 bits */
+extern                       void cpm_bios_setsec(uint32_t* sector); /* actually only 24 bits */
+extern __attribute__((leaf)) void cpm_bios_setdma_i(uint16_t dma);
+extern                       void cpm_bios_setdma(void* dma);
+extern __attribute__((leaf)) uint8_t cpm_bios_read(void);
+extern __attribute__((leaf)) uint8_t cpm_bios_write(uint8_t deblock);
+extern __attribute__((leaf)) void cpm_bios_relocate(uint8_t zp, uint8_t mem);
+extern __attribute__((leaf)) uint16_t cpm_bios_gettpa(void);
+extern __attribute__((leaf)) void cpm_bios_settpa(uint8_t start, uint8_t end);
+extern __attribute__((leaf)) uint16_t cpm_bios_getzp(void);
+extern __attribute__((leaf)) void cpm_bios_setzp(uint8_t start, uint8_t end);
 
 #endif
 

@@ -1,14 +1,27 @@
 .macro cpmentry sym:req, num:req, exiter
-	.section .text.\sym, "ax", @progbits
-	.global \sym
+    .section .text.\sym, "ax", @progbits
+    .global \sym
 \sym:
-	ldy #\num
-	.ifb \exiter
-		jmp BDOS
-	.else
-		jsr BDOS
-		jmp \exiter
-	.endif
+    ldy #\num
+    .ifb \exiter
+        jmp BDOS
+    .else
+        jsr BDOS
+        jmp \exiter
+    .endif
+.endm
+
+.macro biosentry sym:req, num:req, exiter
+    .section .text.\sym, "ax", @progbits
+    .global \sym
+\sym:
+    ldy #\num
+    .ifb \exiter
+        jmp BIOS
+    .else
+        jsr BDOS
+        jmp \exiter
+    .endif
 .endm
 
 cpmentry cpm_warmboot,                 0
@@ -51,27 +64,43 @@ cpmentry cpm_seek_to_seq_pos_i,       36
 cpmentry cpm_reset_drives,            37, __cpmexiter_errno
 cpmentry cpm_write_random_filled_i,   40, __cpmexiter_errno
 
+biosentry cpm_bios_const,             0
+biosentry cpm_bios_conin,             1
+biosentry cpm_bios_conout,            2
+biosentry cpm_bios_seldsk_i,          3
+biosentry cpm_bios_setsec_i,          4
+biosentry cpm_bios_setdma_i,          5
+biosentry cpm_bios_read,              6, __cpmexiter_errno
+biosentry cpm_bios_write,             7, __cpmexiter_errno
+biosentry cpm_bios_relocate,          8
+biosentry cpm_bios_gettpa,            9
+biosentry cpm_bios_settpa,            10
+biosentry cpm_bios_getzp,             11
+biosentry cpm_bios_setzp,             12
+
 ; On exit from the BDOS (or BIOS), the return value is in A
 ; and carry is set on error.
 
 .section .text.cpmexiter_errno, "ax", @progbits
 __cpmexiter_errno:
-	sta cpm_errno
-	lda #0
-	bcc 1f
-	lda #$ff
+    sta cpm_errno
+    lda #0
+    bcc 1f
+    lda #$ff
 1:
-	rts
-	
+    rts
+    
 .section .text.cpmexiter_aorerrno, "ax", @progbits
 __cpmexiter_aorerrno:
-	sta cpm_errno
-	bcc 1f
-	lda #$ff
+    sta cpm_errno
+    bcc 1f
+    lda #$ff
 1:
-	rts
+    rts
 
 .section .bss.cpm_errno
 .global cpm_errno
 cpm_errno: .fill 1
+
+; vim: ts=4 sw=4 et ft=asm
 

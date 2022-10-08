@@ -95,3 +95,18 @@ uint8_t cpm_write_random_filled(FCB* fcb)
     return cpm_write_random_filled_i((uint16_t)fcb);
 }
 
+DPH* cpm_bios_seldsk(uint8_t drive)
+{
+	return (DPH*) cpm_bios_seldsk_i(drive);
+}
+
+void cpm_bios_setdma(void* dma)
+{
+	cpm_bios_setdma_i((uint16_t) dma);
+}
+
+void cpm_bios_setsec(uint32_t* sector)
+{
+	cpm_bios_setsec_i((uint16_t) sector);
+}
+

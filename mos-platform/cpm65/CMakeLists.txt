@@ -6,8 +6,6 @@ endif()
 
 install(FILES
   cpm.h
-#  cbm.h
-#  chrout.h
 TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)
 
@@ -29,7 +27,7 @@ add_platform_library(cpm65-c
   registers.S
 )
 merge_libraries(cpm65-c
-	common-c
+  common-c
 )
 
 # abort is preemptively included if LTO is used, which pulls in _exit support

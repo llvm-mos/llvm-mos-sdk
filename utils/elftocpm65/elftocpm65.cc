@@ -1,11 +1,11 @@
-#include <fcntl.h>
-#include <fmt/format.h>
 #include <fstream>
 #include <set>
 #include <string>
-#include <unistd.h>
+#include <stdarg.h>
 #include <vector>
+#include <string.h>
 #include <elf.h>
+#include <regex>
 
 /* MOS relocations (at least, the ones we care about). */
 
@@ -18,6 +18,8 @@
 
 #define ELF32_PHDR_OFFSET offsetof(Elf32_Phdr, p_offset)
 #define ELF32_PHDR_FILESZ offsetof(Elf32_Phdr, p_filesz)
+#define ELF32_PHDR_VADDR offsetof(Elf32_Phdr, p_vaddr)
+#define ELF32_PHDR_PADDR offsetof(Elf32_Phdr, p_paddr)
 #define ELF32_PHDR__SIZE sizeof(Elf32_Phdr)
 
 #define ELF32_SYM_VALUE offsetof(Elf32_Sym, st_value)
@@ -27,49 +29,37 @@
 #define ELF32_RELA_INFO offsetof(Elf32_Rela, r_info)
 #define ELF32_RELA__SIZE sizeof(Elf32_Rela)
 
-
 static std::string outputFilename;
 static std::string inputFilename;
 static std::fstream outputFile;
 
-template <typename... T>
-void error(fmt::format_string<T...> fmt, T&&... args)
+static void error(const char* msg, ...)
 {
-    fmt::print(stderr, "error: ");
-    fmt::print(stderr, fmt, args...);
+    va_list ap;
+    va_start(ap, msg);
+    fprintf(stderr, "error: ");
+    vfprintf(stderr, msg, ap);
     fputc('\n', stderr);
     exit(1);
 }
 
 static void syntaxError()
 {
-    error("syntax: elftocpm65 <inputfile> -o <outputfile>");
+    error("syntax: elftocpm65 <elffile> [<binaryfile>]");
 }
 
 static void parseArguments(int argc, char* const* argv)
 {
-    for (;;)
+    if (argc == 2)
     {
-        switch (getopt(argc, argv, "-o:"))
-        {
-            case -1:
-                return;
-
-            case 1:
-                if (!inputFilename.empty())
-                    error("you've already specified an input file");
-                inputFilename = optarg;
-                break;
-
-            case 'o':
-                if (!outputFilename.empty())
-                    error("you've already specified an output file");
-                outputFilename = optarg;
-                break;
-
-            default:
-                syntaxError();
-        }
+        inputFilename = argv[1];
+        outputFilename =
+            std::regex_replace(inputFilename, std::regex("\\.elf$"), "");
+    }
+    else
+    {
+        inputFilename = argv[1];
+        outputFilename = argv[2];
     }
 }
 
@@ -82,7 +72,7 @@ public:
             filename.c_str(), std::fstream::out | std::fstream::binary);
 
         if (!is)
-            error("cannot open input file: {}", strerror(errno));
+            error("cannot open input file: %s", strerror(errno));
 
         _bytes = std::vector<char>((std::istreambuf_iterator<char>(is)),
             std::istreambuf_iterator<char>());
@@ -94,7 +84,7 @@ public:
             error("not a little-endian ELF32 file");
 
         if (wordAt(0x2c) != 4)
-            error("file must have exactly three PHDRs");
+            error("file must have exactly four PHDRs");
         if (wordAt(0x2a) != 32)
             error("unsupported PHDR size");
         _phoff = longAt(0x1c);
@@ -178,19 +168,28 @@ int main(int argc, char* const* argv)
         std::fstream::in | std::fstream::out | std::fstream::trunc |
             std::fstream::binary);
     if (!outputFile)
-        error("cannot open output file: {}", strerror(errno));
+        error("cannot open output file: %s", strerror(errno));
 
     /* Fetch the actual bytes. */
 
     std::vector<uint8_t> bytes;
     {
-        uint32_t textPhdr = elf.findPhdr(1);
-        uint32_t codeOffset = elf.longAt(textPhdr + ELF32_PHDR_OFFSET);
-        uint32_t codeLen = elf.longAt(textPhdr + ELF32_PHDR_FILESZ);
+        auto append_phdr = [&](int index)
+        {
+            uint32_t textPhdr = elf.findPhdr(index);
+            uint32_t codeOffset = elf.longAt(textPhdr + ELF32_PHDR_OFFSET);
+            uint32_t targetAddress = elf.longAt(textPhdr + ELF32_PHDR_PADDR);
+            uint32_t codeLen = elf.longAt(textPhdr + ELF32_PHDR_FILESZ);
+            uint32_t currentLen = bytes.size();
 
-        bytes.resize(codeLen);
-        for (int i = 0; i < codeLen; i++)
-            bytes[i] = elf.byteAt(codeOffset + i);
+            bytes.resize(std::max<uint32_t>(
+                bytes.size(), targetAddress + codeLen - 0x200));
+            for (int i = 0; i < codeLen; i++)
+                bytes[targetAddress - 0x200 + i] = elf.byteAt(codeOffset + i);
+        };
+
+        append_phdr(0);
+        append_phdr(1);
     }
 
     /* Accumulate relocations. */
@@ -199,10 +198,12 @@ int main(int argc, char* const* argv)
     std::set<uint16_t> memRelocations;
     memRelocations.insert(3); /* work around linker weirdness */
     uint32_t relaPhdr = elf.findPhdr(2);
-    uint32_t relaCount = elf.longAt(relaPhdr + ELF32_PHDR_FILESZ) / ELF32_RELA__SIZE;
+    uint32_t relaCount =
+        elf.longAt(relaPhdr + ELF32_PHDR_FILESZ) / ELF32_RELA__SIZE;
     uint32_t relaOffset = elf.longAt(relaPhdr + ELF32_PHDR_OFFSET);
     uint32_t symbolPhdr = elf.findPhdr(3);
-    uint32_t symbolCount = elf.longAt(symbolPhdr + ELF32_PHDR_FILESZ) / ELF32_SYM__SIZE;
+    uint32_t symbolCount =
+        elf.longAt(symbolPhdr + ELF32_PHDR_FILESZ) / ELF32_SYM__SIZE;
     uint32_t symbolOffset = elf.longAt(symbolPhdr + ELF32_PHDR_OFFSET);
     for (unsigned i = 0; i < relaCount; i++)
     {
@@ -236,8 +237,9 @@ int main(int argc, char* const* argv)
             {
                 case R_MOS_ADDR8:
                     error(
-                        "8-bit reference to 16-bit address at relo {}, address "
-                        "0x{:x}?",
+                        "8-bit reference to 16-bit address 0x%x at relo %d, address "
+                        "0x%x?",
+                        value,
                         i,
                         offset);
                     break;
@@ -268,11 +270,10 @@ int main(int argc, char* const* argv)
     for (uint8_t b : toBytestream(memRelocations))
         bytes.push_back(b);
 
-    /* Adjust the memory requirements to ensure the relocations can be loaded. */
+    /* Adjust the memory requirements to ensure the relocations can be loaded.
+     */
 
-    bytes[1] = std::max<unsigned>(
-        bytes[1],
-        (bytes.size() + 255) / 256);
+    bytes[1] = std::max<unsigned>(bytes[1], (bytes.size() + 255) / 256);
 
     /* Write the output file. */
 

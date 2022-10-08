@@ -1,5 +1,10 @@
+/* We define registers as variables each in their own section, rather than
+ * statically in the linker script, to allow the linker to discard them if
+ * they're not in use. The compiler doesn't always use them all and
+ * hand-written machine code only rarely uses any. */
+
 .macro register n, m
-	.section .zp.reg_\n_\m, "za", @nobits
+	.section .zp.reg_\n\()_\m, "za", @nobits
 		.global __rc\n, __rc\m
 		__rc\n: .fill 1
 		__rc\m: .fill 1

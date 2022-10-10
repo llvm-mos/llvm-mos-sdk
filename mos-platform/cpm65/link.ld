@@ -17,6 +17,7 @@ SECTIONS {
 	.zp (NOLOAD) : { INCLUDE zp-noinit-sections.ld } >zp
 
 	.text : {
+		cpm_header = .;
 		BYTE (SIZEOF(.zp)) /* ZP size */
 		BYTE ((__heap_start + 255) / 256) /* total memory size (pages) */
 		SHORT (_pblock) /* address of pblock / relocation data */
@@ -33,7 +34,9 @@ SECTIONS {
 	INCLUDE data.ld
 
 	.zp.data : {
-		INCLUDE zp-data-sections.ld
+		__zp_data_start = .;
+		*(.zp.data .zp.data.*)
+		*(.zp.rodata .zp.rodata.*)
 		BYTE(0)
 	} >zp AT>ram :init
 	INCLUDE zp-data-symbols.ld

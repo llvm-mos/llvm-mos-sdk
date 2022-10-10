@@ -20,7 +20,6 @@ add_platform_library(cpm65-c
   cpm.S
   cpm-wrappers.c
   bios.S
-  comhdr.S
   pblock.S
   putchar.c
   stack.S

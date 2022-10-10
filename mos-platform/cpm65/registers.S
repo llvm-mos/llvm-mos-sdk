@@ -4,7 +4,7 @@
  * hand-written machine code only rarely uses any. */
 
 .macro register n, m
-	.section .zp.reg_\n\()_\m, "za", @nobits
+	.section .zp.reg_\n\()_\m, "zaw", @nobits
 		.global __rc\n, __rc\m
 		__rc\n: .fill 1
 		__rc\m: .fill 1

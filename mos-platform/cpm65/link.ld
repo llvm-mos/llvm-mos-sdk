@@ -14,8 +14,6 @@ SECTIONS {
 	.zp.bss (NOLOAD) : { INCLUDE zp-bss-sections.ld } >zp :NONE
 	INCLUDE zp-bss-symbols.ld
 
-	.zp (NOLOAD) : { INCLUDE zp-noinit-sections.ld } >zp
-
 	.text : {
 		cpm_header = .;
 		BYTE (SIZEOF(.zp)) /* ZP size */
@@ -48,6 +46,8 @@ SECTIONS {
 
 	INCLUDE bss.ld
 	INCLUDE noinit.ld
+
+	INCLUDE zp-noinit.ld
 
 	.rela.text : {
 	} :relo

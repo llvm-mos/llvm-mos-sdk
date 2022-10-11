@@ -1,5 +1,15 @@
 #include <nes.h>
-#include <ppu.h>
+
+static void ppu_wait_vblank(void) {
+  while (!(PPU.status & 0x80))
+    ;
+}
+
+static void ppu_write_addr(unsigned short addr) {
+  (void)PPU.status;
+  PPU.vram.address = addr >> 8;
+  PPU.vram.address = addr & 0xff;
+}
 
 int main(void) {
   // Enable BG rendering.

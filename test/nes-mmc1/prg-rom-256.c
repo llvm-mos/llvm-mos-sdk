@@ -1,3 +1,4 @@
+#include <bank.h>
 #include <stdlib.h>
 #include <peekpoke.h>
 
@@ -8,8 +9,6 @@ volatile const char d[15000] = {3, [14999] = 4};
 
 __attribute__((section(".prg_rom_14.rodata")))
 volatile const char e[15000] = {5, [14999] = 6};
-
-void prg_rom_bank(char b);
 
 __attribute__((noinline, section(".prg_rom_0.text"))) char bank_0_fn(void) {
   asm volatile ("");
@@ -31,23 +30,23 @@ int main(void) {
   if (c[0] != 1 || c[14999] != 2)
     return EXIT_FAILURE;
 
-  prg_rom_bank(0);
+  set_prg_bank(0);
   if (c[0] != 1 || c[14999] != 2)
     return EXIT_FAILURE;
   if (d[0] != 3 || d[14999] != 4)
     return EXIT_FAILURE;
 
-  prg_rom_bank(14);
+  set_prg_bank(14);
   if (c[0] != 1 || c[14999] != 2)
     return EXIT_FAILURE;
   if (e[0] != 5 || e[14999] != 6)
     return EXIT_FAILURE;
 
-  prg_rom_bank(0);
+  set_prg_bank(0);
   if ((unsigned)bank_0_fn >= 0xc000 || bank_0_fn() != 7)
     return EXIT_FAILURE;
 
-  prg_rom_bank(14);
+  set_prg_bank(14);
   if ((unsigned)bank_14_fn >= 0xc000 || bank_14_fn() != 8)
     return EXIT_FAILURE;
 

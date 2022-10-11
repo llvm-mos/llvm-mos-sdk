@@ -6,14 +6,16 @@ endif()
 
 install(FILES
   nes.h
-  ppu.h
 TYPE INCLUDE)
 install(FILES
   c-in-ram.ld
+  c-in-prg-ram-fixed.ld
   ines-header.ld
   ines-roms.ld
   ines.ld
   nes.ld
+  prg-ram-fixed.ld
+  prg-rom-fixed.ld
 TYPE LIB)
 install(FILES nes.inc DESTINATION ${ASMINCDIR})
 
@@ -26,9 +28,6 @@ merge_libraries(nes-crt0
   common-zero-bss
   common-exit-loop
 )
-
-add_platform_library(nes-c ppu.c)
-target_include_directories(nes-c SYSTEM BEFORE PUBLIC .)
 
 add_subdirectory(famitone2)
 add_subdirectory(nesdoug)

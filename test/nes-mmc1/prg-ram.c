@@ -1,3 +1,4 @@
+#include <bank.h>
 #include <peekpoke.h>
 #include <stdlib.h>
 
@@ -9,16 +10,7 @@ __attribute__((section(".prg_ram_3.noinit"))) volatile char d[4097];
 __attribute__((section("_3.noinit"))) volatile char e[4095];
 
 void set_prg_ram_bank(char b) {
-  b <<= 2;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
-  b >>= 1;
-  POKE(0xa000, b);
+  set_chr_bank_0_retry(CHR_BANK0_CUR & 0b10011 | (b << 2) & 0b1100);
 }
 
 int main(void) {

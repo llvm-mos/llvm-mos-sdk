@@ -6,4 +6,3 @@ __attribute__((noreturn)) void _exit(int status) {
   POKE(0x4018, status);
   __builtin_unreachable();
 }
-

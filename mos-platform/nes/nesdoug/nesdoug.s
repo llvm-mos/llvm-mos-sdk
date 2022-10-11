@@ -1,6 +1,8 @@
 ;written by Doug Fraker
 ;version 1.2, 1/1/2022
 
+.include "nes.inc"
+
 .section .noinit.vram_buf,"aw",@nobits
 .globl VRAM_BUF
 .balign 128
@@ -831,7 +833,7 @@ gray_line:
 	bne .Lloop2
 
 	lda mos8(PPUMASK_VAR) ;normal
-	sta PPU_MASK
+	sta PPUMASK
 	rts
 
 

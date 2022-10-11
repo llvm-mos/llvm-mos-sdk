@@ -4,7 +4,7 @@
 #include <stdarg.h>
 #include <vector>
 #include <string.h>
-#include <elf.h>
+#include "elf.h"
 #include <regex>
 
 /* MOS relocations (at least, the ones we care about). */

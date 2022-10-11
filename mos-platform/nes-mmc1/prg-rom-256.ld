@@ -2,9 +2,6 @@ INCLUDE _prg-rom-banked.ld
 
 __prg_rom_size = 256;
 
-REGION_ALIAS("c_rom_vma", prg_rom_15_vma)
-REGION_ALIAS("c_rom_lma", prg_rom_15_lma)
-
 SECTIONS {
   .reset_0  : OVERLAY { KEEP(*(.reset_0))  } >reset_0
   .reset_1  : OVERLAY { KEEP(*(.reset_1))  } >reset_1
@@ -21,5 +18,4 @@ SECTIONS {
   .reset_12 : OVERLAY { KEEP(*(.reset_12)) } >reset_12
   .reset_13 : OVERLAY { KEEP(*(.reset_13)) } >reset_13
   .reset_14 : OVERLAY { KEEP(*(.reset_14)) } >reset_14
-  .reset_15 : OVERLAY { KEEP(*(.reset_last)) } >reset_15
 }

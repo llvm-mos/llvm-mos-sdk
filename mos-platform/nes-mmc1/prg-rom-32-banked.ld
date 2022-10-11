@@ -9,10 +9,6 @@ __prg_rom_size = 32;
 
 INPUT(init-prg-rom-32-banked.o)
 
-REGION_ALIAS("c_rom_vma", prg_rom_1_vma)
-REGION_ALIAS("c_rom_lma", prg_rom_1_lma)
-
 SECTIONS {
   .reset_0 : OVERLAY { KEEP(*(.reset_0)) } >reset_0
-  .reset_1 : OVERLAY { KEEP(*(.reset_last)) } >reset_1
 }

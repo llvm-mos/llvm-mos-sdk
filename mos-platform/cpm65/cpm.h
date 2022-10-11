@@ -7,39 +7,45 @@ extern "C" {
 
 #include <stdint.h>
 
+/* Standard FCB used for file access. */
+
 typedef struct __attribute__((packed))
 {
-    uint8_t dr;
-    uint8_t f[11];
-    uint8_t ex;
-    uint8_t s1;
-    uint8_t s2;
-    uint8_t rc;
-    uint8_t al[16];
-    uint8_t cr;
-    uint16_t r;
-    uint8_t r2;
+    uint8_t dr;     /* drive number (1-based, or 0 for default) */
+    uint8_t f[11];  /* filename, space padded */
+    uint8_t ex;     /* extent low: set to zero on open and otherwise ignore */
+    uint8_t s1;     /* spare: ignore */
+    uint8_t s2;     /* extent high: ignore */
+    uint8_t rc;     /* number of records in this extent: ignore */
+    uint8_t al[16]; /* allocation map: ignore */
+    uint8_t cr;     /* current record: ignore */
+    uint16_t r;     /* random-access pointer: set when doing random-access calls */
+    uint8_t r2;     /* random-access overflow: used only by cpm_seek_to_end */
 }
 FCB;
 
-typedef struct __attribute__((packed))
-{
-    uint8_t dr;
-    uint8_t src[11];
-    uint8_t _padding[5];
-    uint8_t dest[11];
-}
-RCB;
+/* Rename control block, used only by cpm_rename_file. */
 
 typedef struct __attribute__((packed))
 {
-    uint8_t us;
-    uint8_t f[11];
-    uint8_t ex;
-    uint8_t s1;
-    uint8_t s2;
-    uint8_t rc;
-    uint8_t al[16];
+    uint8_t dr;          /* drive number (1-based, or 0 for default) */
+    uint8_t src[11];     /* source filename */
+    uint8_t _padding[5]; /* unused; ignore */
+    uint8_t dest[11];    /* destination filename */
+}
+RCB;
+
+/* Directory entry on disk */
+
+typedef struct __attribute__((packed))
+{
+    uint8_t us;     /* user number */
+    uint8_t f[11];  /* filename, space padded */
+    uint8_t ex;     /* extent low */
+    uint8_t s1;     /* unused */
+    uint8_t s2;     /* extent high */
+    uint8_t rc;     /* number of records in the last extent in this dirent */
+    uint8_t al[16]; /* allocation map */
 }
 DIRE;
 
@@ -85,7 +91,6 @@ extern FCB cpm_fcb2; /* secondary FCB (special purpose, overlaps cpm_fcb) */
 
 extern uint8_t cpm_default_dma[128]; /* also contains the parsed command line */
 extern uint8_t cpm_ram[];
-extern uint8_t* cpm_ramtop;
 extern uint8_t cpm_cmdlinelen;
 extern char cpm_cmdline[0x7f];
 extern uint8_t cpm_errno;

@@ -6,8 +6,8 @@ MEMORY {
 PHDRS {
 	load PT_LOAD;
 	init PT_LOAD;
-	relo PT_NOTE;
-	symtab PT_NOTE;
+	relo PT_NULL;
+	symtab PT_NULL;
 }
 
 SECTIONS {
@@ -35,7 +35,6 @@ SECTIONS {
 		__zp_data_start = .;
 		*(.zp.data .zp.data.*)
 		*(.zp.rodata .zp.rodata.*)
-		BYTE(0)
 	} >zp AT>ram :init
 	INCLUDE zp-data-symbols.ld
 

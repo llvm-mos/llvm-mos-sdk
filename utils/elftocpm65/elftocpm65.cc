@@ -16,17 +16,23 @@
 
 /* ELF structure definitions. */
 
-#define ELF32_PHDR_OFFSET offsetof(Elf32_Phdr, p_offset)
+#define ELF32_EHDR_IDENT offsetof(Elf32_Ehdr, e_ident)
+#define ELF32_EHDR_PHENTSIZE offsetof(Elf32_Ehdr, e_phentsize)
+#define ELF32_EHDR_PHNUM offsetof(Elf32_Ehdr, e_phnum)
+#define ELF32_EHDR_PHOFF offsetof(Elf32_Ehdr, e_phoff)
+
+#define ELF32_PHDR_TYPE offsetof(Elf32_Phdr, p_type)
 #define ELF32_PHDR_FILESZ offsetof(Elf32_Phdr, p_filesz)
-#define ELF32_PHDR_VADDR offsetof(Elf32_Phdr, p_vaddr)
+#define ELF32_PHDR_OFFSET offsetof(Elf32_Phdr, p_offset)
 #define ELF32_PHDR_PADDR offsetof(Elf32_Phdr, p_paddr)
+#define ELF32_PHDR_VADDR offsetof(Elf32_Phdr, p_vaddr)
 #define ELF32_PHDR__SIZE sizeof(Elf32_Phdr)
 
 #define ELF32_SYM_VALUE offsetof(Elf32_Sym, st_value)
 #define ELF32_SYM__SIZE sizeof(Elf32_Sym)
 
-#define ELF32_RELA_OFFSET offsetof(Elf32_Rela, r_offset)
 #define ELF32_RELA_INFO offsetof(Elf32_Rela, r_info)
+#define ELF32_RELA_OFFSET offsetof(Elf32_Rela, r_offset)
 #define ELF32_RELA__SIZE sizeof(Elf32_Rela)
 
 static std::string outputFilename;
@@ -69,17 +75,16 @@ public:
     _bytes = std::vector<char>((std::istreambuf_iterator<char>(is)),
                                std::istreambuf_iterator<char>());
 
-    auto ident = arrayAt(0, 16);
+    auto ident = arrayAt(ELF32_EHDR_IDENT, 16);
     if ((ident[EI_MAG0] != ELFMAG0) || (ident[EI_MAG1] != ELFMAG1) ||
         (ident[EI_MAG2] != ELFMAG2) || (ident[EI_MAG3] != ELFMAG3) ||
         (ident[EI_CLASS] != ELFCLASS32) || (ident[EI_DATA] != ELFDATA2LSB))
       error("not a little-endian ELF32 file");
 
-    if (wordAt(0x2c) != 4)
-      error("file must have exactly four PHDRs");
-    if (wordAt(0x2a) != 32)
+    if (wordAt(ELF32_EHDR_PHENTSIZE) != 32)
       error("unsupported PHDR size");
-    _phoff = longAt(0x1c);
+    _phoff = longAt(ELF32_EHDR_PHOFF);
+    _phnum = wordAt(ELF32_EHDR_PHNUM);
   }
 
   uint8_t byteAt(uint32_t offset) { return _bytes.at(offset); }
@@ -99,11 +104,14 @@ public:
     return result;
   }
 
-  uint32_t findPhdr(int index) { return _phoff + index * 32; }
+  uint32_t findPhdr(int index) const { return _phoff + index * 32; }
+
+  int phdrCount() const { return _phnum; }
 
 private:
   std::vector<char> _bytes;
   uint32_t _phoff;
+  int _phnum;
 };
 
 std::vector<uint8_t> toBytestream(const std::set<uint16_t> &differences) {
@@ -152,11 +160,10 @@ int main(int argc, char *const *argv) {
 
   std::vector<uint8_t> bytes;
   {
-    auto append_phdr = [&](int index) {
-      uint32_t textPhdr = elf.findPhdr(index);
-      uint32_t codeOffset = elf.longAt(textPhdr + ELF32_PHDR_OFFSET);
-      uint32_t targetAddress = elf.longAt(textPhdr + ELF32_PHDR_PADDR);
-      uint32_t codeLen = elf.longAt(textPhdr + ELF32_PHDR_FILESZ);
+    auto append_phdr = [&](uint32_t off) {
+      uint32_t codeOffset = elf.longAt(off + ELF32_PHDR_OFFSET);
+      uint32_t targetAddress = elf.longAt(off + ELF32_PHDR_PADDR);
+      uint32_t codeLen = elf.longAt(off + ELF32_PHDR_FILESZ);
       uint32_t currentLen = bytes.size();
 
       bytes.resize(
@@ -165,8 +172,12 @@ int main(int argc, char *const *argv) {
         bytes[targetAddress - 0x200 + i] = elf.byteAt(codeOffset + i);
     };
 
-    append_phdr(0);
-    append_phdr(1);
+    for (int phdr = 0; phdr < elf.phdrCount(); phdr++)
+    {
+      uint32_t off = elf.findPhdr(phdr);
+      if (elf.longAt(off + ELF32_PHDR_TYPE) == PT_LOAD)
+        append_phdr(off);
+    }
   }
 
   /* Accumulate relocations. */
@@ -174,14 +185,21 @@ int main(int argc, char *const *argv) {
   std::set<uint16_t> zpRelocations;
   std::set<uint16_t> memRelocations;
   memRelocations.insert(3); /* work around linker weirdness */
-  uint32_t relaPhdr = elf.findPhdr(2);
+
+  /* Second-last phdr must contain the relocations. */
+
+  uint32_t relaPhdr = elf.findPhdr(elf.phdrCount()-2);
   uint32_t relaCount =
       elf.longAt(relaPhdr + ELF32_PHDR_FILESZ) / ELF32_RELA__SIZE;
   uint32_t relaOffset = elf.longAt(relaPhdr + ELF32_PHDR_OFFSET);
-  uint32_t symbolPhdr = elf.findPhdr(3);
+
+  /* Last phdr must contain the symbol table. */
+
+  uint32_t symbolPhdr = elf.findPhdr(elf.phdrCount()-1);
   uint32_t symbolCount =
       elf.longAt(symbolPhdr + ELF32_PHDR_FILESZ) / ELF32_SYM__SIZE;
   uint32_t symbolOffset = elf.longAt(symbolPhdr + ELF32_PHDR_OFFSET);
+
   for (unsigned i = 0; i < relaCount; i++) {
     uint32_t rela = relaOffset + i * ELF32_RELA__SIZE;
     uint32_t offset = elf.longAt(rela + ELF32_RELA_OFFSET) - 0x0200;
@@ -251,4 +269,4 @@ int main(int argc, char *const *argv) {
   return 0;
 }
 
-// vim: ts=4 sw=4 et
+// vim: ts=2 sw=2 et

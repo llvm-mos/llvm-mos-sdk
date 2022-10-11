@@ -5,7 +5,10 @@
 extern "C" {
 #endif
 
-int isprint(int c);
+extern int isprint(int c);
+extern int isdigit(int c);
+extern int isalpha(int c);
+extern int toupper(int c);
 
 #ifdef __cplusplus
 }

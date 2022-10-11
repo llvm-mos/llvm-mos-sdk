@@ -3,5 +3,6 @@
 # in the project root for the full text.
 
 add_executable(elftocpm65 elftocpm65.cc)
+set_property(TARGET elftocpm65 PROPERTY CXX_STANDARD 11)
 install(TARGETS elftocpm65)
 

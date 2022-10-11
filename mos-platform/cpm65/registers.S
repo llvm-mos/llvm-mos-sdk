@@ -1,9 +1,9 @@
 ; Imaginary register definitions.
 ;
 ; © 2022 David Given
-; This file is part of the llvm-mos-sdk project and is redistributable under
-; the terms of the Apache 2.0 license. See the LICENSE file in the project root
-; for the full text.
+; This file is part of the llvm-mos-sdk project and is redistributable under the
+; terms of the Apache 2.0 license with the LLVM exceptions. See the LICENSE file
+; in the project root for the full text.
 
 ; We define registers as variables each in their own section, rather than
 ; statically in the linker script, to allow the linker to discard them if

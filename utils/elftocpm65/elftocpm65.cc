@@ -1,3 +1,12 @@
+/* Converts ELF files produced by llvm-mos into CP/M-65 relocatable
+ * executables.  Note that you _have_ to use the .ld file provided; it won't
+ * work on arbitrary ELF files.
+ *
+ * This file is part of the llvm-mos-sdk project and is redistributable under
+ * the terms of the Apache 2.0 license. See the LICENSE file in the project
+ * root for the full text.
+ */
+
 #include "elf.h"
 #include <fstream>
 #include <regex>

@@ -1,7 +1,13 @@
-/* We define registers as variables each in their own section, rather than
- * statically in the linker script, to allow the linker to discard them if
- * they're not in use. The compiler doesn't always use them all and
- * hand-written machine code only rarely uses any. */
+; Imaginary register definitions.
+;
+; This file is part of the llvm-mos-sdk project and is redistributable under
+; the terms of the Apache 2.0 license. See the LICENSE file in the project root
+; for the full text.
+
+; We define registers as variables each in their own section, rather than
+; statically in the linker script, to allow the linker to discard them if
+; they're not in use. The compiler doesn't always use them all and
+; hand-written machine code only rarely uses any.
 
 .macro register n, m
 	.section .zp.reg_\n\()_\m, "zaw", @nobits

@@ -1,3 +1,12 @@
+/* Linker script to produce CP/M-65 relocatable binaries. This uses elftocpm65
+ * to convert the resulting absolute binary ELF files into relocatable
+ * binaries.
+ *
+ * This file is part of the llvm-mos-sdk project and is redistributable under
+ * the terms of the Apache 2.0 license. See the LICENSE file in the project
+ * root for the full text.
+ */
+
 MEMORY {
     zp : ORIGIN = 0, LENGTH = 0x70
     ram (rw) : ORIGIN = 0x200, LENGTH = 0xfe00

@@ -1,3 +1,9 @@
+; CP/M entrypoints for C; the assembler parts.
+;
+; This file is part of the llvm-mos-sdk project and is redistributable under
+; the terms of the Apache 2.0 license. See the LICENSE file in the project root
+; for the full text.
+
 .macro cpmentry sym:req, num:req, exiter
     .section .text.\sym, "ax", @progbits
     .global \sym

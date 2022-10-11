@@ -1,3 +1,12 @@
+/* C calling-convention converts around the CP/M and BIOS entrypoints. This is
+ * mostly concerned about moving pointers to and from XA, which is where CP/M
+ * expects to find them. These will all get inlined and compile into no code.
+ *
+ * This file is part of the llvm-mos-sdk project and is redistributable under
+ * the terms of the Apache 2.0 license. See the LICENSE file in the project
+ * root for the full text.
+ */
+
 #include "cpm.h"
 
 void cpm_printstring(const char* s) /* $-terminated */

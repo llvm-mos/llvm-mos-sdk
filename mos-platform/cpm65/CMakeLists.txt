@@ -1,3 +1,7 @@
+# This file is part of the llvm-mos-sdk project and is redistributable under
+# the terms of the Apache 2.0 license. See the LICENSE file in the project root
+# for the full text.
+
 platform(cpm65 HOSTED PARENT common)
 
 if(NOT CMAKE_CROSSCOMPILING)

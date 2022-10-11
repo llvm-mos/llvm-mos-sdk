@@ -2,6 +2,7 @@
  * executables.  Note that you _have_ to use the .ld file provided; it won't
  * work on arbitrary ELF files.
  *
+ * © 2022 David Given
  * This file is part of the llvm-mos-sdk project and is redistributable under
  * the terms of the Apache 2.0 license. See the LICENSE file in the project
  * root for the full text.

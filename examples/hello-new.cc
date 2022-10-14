@@ -23,8 +23,6 @@ constexpr size_t static_size(const T (&)[N])
 
 } // namespace
 
-extern std::byte __heap_start;
-
 int main() {
   printf("DEFAULT HEAP IS %d BYTES\n", heap_limit());
 

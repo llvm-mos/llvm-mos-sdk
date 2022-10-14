@@ -8,10 +8,10 @@ asm(
 );
 
 extern char __data_start[];
-extern char __data_size[];
+extern void __data_size;
 
 extern char __data_load_start[];
 
 void __copy_data(void) {
-  memcpy(__data_start, __data_load_start, (unsigned short)__data_size);
+  memcpy(__data_start, __data_load_start, (unsigned short)&__data_size);
 }

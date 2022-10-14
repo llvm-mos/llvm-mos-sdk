@@ -9,6 +9,7 @@ add_platform_library(common-crt
   divmod-large.cc
   mul.cc
   shift.cc
+  rotate.cc
 )
 # Don't pull in stack pointer init unnecessarily.
 # This can be called in an interrupt.

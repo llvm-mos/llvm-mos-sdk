@@ -37,19 +37,19 @@ static const char usage[] =
 
 void reset6502(uint8_t cmos);
 void step6502();
-extern uint32_t clockticks6502;
+extern uint64_t clockticks6502;
 extern uint16_t pc;
 extern uint8_t a, x, y, sp, status;
 
 uint8_t memory[65536];
-uint32_t clock_start = 0;
+uint64_t clock_start = 0;
 bool shouldPrintCycles = false;
 bool shouldTrace = false;
 bool shouldProfile = false;
 bool cmos = false;
 bool input_eof = false;
 
-uint32_t clockTicksAtAddress[65536];
+uint64_t clockTicksAtAddress[65536];
 
 int8_t read6502(uint16_t address) {
   if (address == 0xfff0) {
@@ -66,11 +66,12 @@ int8_t read6502(uint16_t address) {
 
 void finish(void) {
   if (shouldPrintCycles)
-    fprintf(stderr, "%d cycles\n", clockticks6502);
+    fprintf(stderr, "%ld cycles\n", clockticks6502);
+
   if (shouldProfile)
     for (int addr = 0; addr < 65536; ++addr)
       if (clockTicksAtAddress[addr])
-        fprintf(stderr, "%04x %d\n", addr, clockTicksAtAddress[addr]);
+        fprintf(stderr, "%04x %ld\n", addr, clockTicksAtAddress[addr]);
 }
 
 void write6502(uint16_t address, uint8_t value) {

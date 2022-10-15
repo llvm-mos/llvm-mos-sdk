@@ -97,7 +97,7 @@ information.
  *****************************************************
  * Useful variables in this emulator:                *
  *                                                   *
- * uint32_t clockticks6502                           *
+ * uint64_t clockticks6502                           *
  *   - A running total of the emulated cycle count.  *
  *                                                   *
  * uint32_t instructions                             *
@@ -137,7 +137,7 @@ uint8_t sp, a, x, y, status;
 
 //helper variables
 uint32_t instructions = 0; //keep track of total instructions executed
-uint32_t clockticks6502 = 0, clockgoal6502 = 0;
+uint64_t clockticks6502 = 0, clockgoal6502 = 0;
 uint16_t oldpc, ea, reladdr, value, result;
 uint8_t opcode, oldstatus;
 

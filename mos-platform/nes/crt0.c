@@ -46,11 +46,32 @@ void __late_init(void) {
   ppu_wait_vblank();
 }
 
-// Establish trivial nmi and irq handlers.
+// Establish trivial irq handler.
 asm(
   ".text\n"
-  ".weak nmi,irq\n"
-  "nmi:\n"
+  ".weak irq\n"
   "irq:\n"
+  "  rti\n"
+);
+
+// Establish default nmi handler prologue and epilogue.
+asm(
+  ".section .nmi_begin,\"axG\",@progbits,nmi\n"
+  ".weak nmi\n"
+  ".globl __default_nmi\n"
+  "nmi:\n"
+  "__default_nmi:\n"
+  "  pha\n"
+  "  txa\n"
+  "  pha\n"
+  "  tya\n"
+  "  pha\n"
+
+  ".section .nmi_end,\"axG\",@progbits,nmi\n"
+  "  pla\n"
+  "  tay\n"
+  "  pla\n"
+  "  tax\n"
+  "  pla\n"
   "  rti\n"
 );

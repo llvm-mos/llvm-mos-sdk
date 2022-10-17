@@ -31,11 +31,6 @@
 extern "C" {
 #endif
 
-///////////////////////////////////////////////////////////////////////////////
-// IMPORTANT: Either nmi_bank_handler or __nmi_bank_handler must be called each
-// NMI for this library to work.
-///////////////////////////////////////////////////////////////////////////////
-
 // Contains functions to help with working with multiple PRG/CHR banks
 
 // Access the current settings of MMC1 registers.

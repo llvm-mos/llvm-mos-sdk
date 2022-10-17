@@ -38,11 +38,12 @@ MMC1_PRG	= $e000
 	sta \addr
 .endmacro
 
-.section .text.nmi_bank_handler,"ax",@progbits
-.globl __nmi_bank_handler
-.weak nmi_bank_handler
-nmi_bank_handler:
-__nmi_bank_handler:
+.section .nmi,"axR",@progbits
+	jsr bank_nmi
+
+.section .text.bank_nmi,"ax",@progbits
+.globl bank_nmi
+bank_nmi:
 	inc __reset_mmc1_byte
 	lda _CHR_BANK0
 	sta _CHR_BANK0_CUR

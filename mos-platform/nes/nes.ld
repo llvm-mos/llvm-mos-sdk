@@ -39,7 +39,12 @@ MEMORY {
 }
 
 SECTIONS {
-  .text : { INCLUDE text-sections.ld } >c_rom_vma AT>c_rom_lma
+  .text : {
+       INCLUDE text-sections.ld
+       *(.nmi_begin)
+       *(SORT_BY_INIT_PRIORITY(.nmi.* .nmi))
+       *(.nmi_end)
+  } >c_rom_vma AT>c_rom_lma
   .rodata : { INCLUDE rodata-sections.ld } >c_rom_vma AT>c_rom_lma
   .data : { INCLUDE data-sections.ld } >c_ram_vma AT>c_rom_lma
   __data_load_start = LOADADDR(.data) - LOADADDR(.rodata) + ADDR(.rodata);

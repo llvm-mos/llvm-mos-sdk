@@ -80,10 +80,12 @@ clearVRAM:
 	sta PPUSCROLL
 	sta PPUSCROLL
 
+.section .nmi,"axR",@progbits
+	jsr neslib_nmi
 
-.section .text.neslib_nmi_handler,"ax",@progbits
-.globl neslib_nmi_handler
-neslib_nmi_handler:
+.section .text.neslib_nmi,"ax",@progbits
+.globl neslib_nmi
+neslib_nmi:
 	lda mos8(PPUMASK_VAR)	;if rendering is disabled, do not access the VRAM at all
 	and #0b00011000
 	bne .LrenderingOn
@@ -176,8 +178,8 @@ neslib_nmi_handler:
 	bne .LskipNtsc
 	lda #0
 	sta mos8(FRAME_CNT2)
-
 .LskipNtsc:
+	rts
 
 ;void pal_all(const char *data);
 .section .text.pal_all,"ax",@progbits

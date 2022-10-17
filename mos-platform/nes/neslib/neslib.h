@@ -23,11 +23,6 @@ extern "C" {
 //  060414 - many fixes and improvements, including sequential VRAM updates
 //  previous versions were created since mid-2011, there were many updates
 
-///////////////////////////////////////////////////////////////////////////////
-// IMPORTANT: neslib_nmi_handler must be called each NMI for this library to
-// work.
-///////////////////////////////////////////////////////////////////////////////
-
 // set bg and spr palettes, data is 32 bytes array
 __attribute__((leaf)) void pal_all(const void *data);
 

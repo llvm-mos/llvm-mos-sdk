@@ -5,6 +5,16 @@
 extern "C" {
 #endif
 
+///////////////////////////////////////////////////////////////////////////////
+// IMPORTANT: FamiToneUpdate must be called each NMI for this library to work.
+///////////////////////////////////////////////////////////////////////////////
+
+// Set up music data in bank always accessible to Famitone2 code.
+__attribute__((leaf)) void music_init(void* music_data);
+
+// Set up music data in bank that must be switched to.
+__attribute__((leaf)) void banked_music_init(char bank, void* music_data);
+
 // play a music in FamiTone format
 __attribute__((leaf)) void music_play(unsigned char song);
 
@@ -13,6 +23,12 @@ __attribute__((leaf)) void music_stop(void);
 
 // pause and unpause music
 __attribute__((leaf)) void music_pause(char pause);
+
+// Set up sounds data in bank always accessible to Famitone2 code.
+__attribute__((leaf)) void sounds_init(void* sounds_data);
+
+// Set up sounds data in bank that must be switched to.
+__attribute__((leaf)) void banked_sounds_init(char bank, void* sounds_data);
 
 // play FamiTone sound effect on channel 0..3
 __attribute__((leaf)) void sfx_play(char sound, char channel);

@@ -81,15 +81,9 @@ clearVRAM:
 	sta PPUSCROLL
 
 
-.text
-.globl nmi
-nmi:
-	pha
-	txa
-	pha
-	tya
-	pha
-
+.section .text.neslib_nmi_handler,"ax",@progbits
+.globl neslib_nmi_handler
+neslib_nmi_handler:
 	lda mos8(PPUMASK_VAR)	;if rendering is disabled, do not access the VRAM at all
 	and #0b00011000
 	bne .LrenderingOn
@@ -184,26 +178,6 @@ nmi:
 	sta mos8(FRAME_CNT2)
 
 .LskipNtsc:
-	jsr __nmi_bank_handler
-
-	jsr __update_sound
-
-	pla
-	tay
-	pla
-	tax
-	pla
-	rti
-
-.section .text.neslib_nmi_bank_handler,"ax",@progbits
-.weak __nmi_bank_handler
-__nmi_bank_handler:
-	rts
-
-.section .text.neslib_update_sound,"ax",@progbits
-.weak __update_sound
-__update_sound:
-	rts
 
 ;void pal_all(const char *data);
 .section .text.pal_all,"ax",@progbits

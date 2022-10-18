@@ -1,6 +1,8 @@
 #ifndef _NESLIB_H_
 #define _NESLIB_H_
 
+#include <famitone2.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -101,21 +103,6 @@ __attribute__((leaf)) void oam_set(char index);
 
 // returns the sprid (index to the sprite buffer)
 __attribute__((leaf)) char oam_get(void);
-
-// play a music in FamiTone format
-__attribute__((leaf)) void music_play(unsigned char song);
-
-// stop music
-__attribute__((leaf)) void music_stop(void);
-
-// pause and unpause music
-__attribute__((leaf)) void music_pause(char pause);
-
-// play FamiTone sound effect on channel 0..3
-__attribute__((leaf)) void sfx_play(char sound, char channel);
-
-// play a DPCM sample, 1..63
-__attribute__((leaf)) void sample_play(char sample);
 
 // poll controller and return flags like PAD_LEFT etc, input is pad number (0 or
 // 1)

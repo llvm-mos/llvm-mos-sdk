@@ -1,4 +1,4 @@
-.section .init.40,"axR",@progbits
+.section .init.400,"axR",@progbits
 	; make sure flags are in a sane state
 	cld
 	cli

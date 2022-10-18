@@ -96,7 +96,7 @@ RegistrationList::FnBlock *RegistrationList::m_list = &m_tail;
 
 extern "C" {
 
-asm(".section .fini.10,\"axR\",@progbits\n"
+asm(".section .fini.100,\"axR\",@progbits\n"
     "jsr __do_atexit\n");
 
 void __do_atexit() { RegistrationList::run_all_exits(); }

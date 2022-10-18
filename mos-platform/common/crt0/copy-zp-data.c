@@ -2,7 +2,7 @@
 
 asm(
   ".global __do_copy_zp_data\n"
-  ".section .init.20,\"axR\",@progbits\n"
+  ".section .init.200,\"axR\",@progbits\n"
   "__do_copy_zp_data:\n"
   "  jsr __copy_zp_data\n"
 );

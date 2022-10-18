@@ -7,7 +7,7 @@
 
 ; On init, save the hardware stack pointer. Since _start is just _init, this
 ; will be its value at entry.
-.section .init.10,"axR",@progbits
+.section .init.100,"axR",@progbits
   tsx
   stx __save_s
 

@@ -9,7 +9,6 @@
 // Keeping these functions in C LTOs them in, which informs LTO code generation
 // that the ZP regions aren't available. This saves users of the library from
 // having to manually reserve ZP space from LTO.
-__attribute__((section(".zp.ntsc_mode"))) char NTSC_MODE;
 __attribute__((section(".zp.frame_cnt1"))) char FRAME_CNT1;
 __attribute__((section(".zp.frame_cnt2"))) char FRAME_CNT2;
 __attribute__((section(".zp.vram_update"))) char VRAM_UPDATE;
@@ -28,5 +27,4 @@ __attribute__((section(".zp.pad_statet"))) char PAD_STATET[2];
 __attribute__((section(".zp.ppu_ctrl_var"))) char PPUCTRL_VAR;
 __attribute__((section(".zp.ppu_ctrl_var1"))) char PPUCTRL_VAR1;
 __attribute__((section(".zp.ppu_mask_var"))) char PPUMASK_VAR;
-__attribute__((section(".zp.rand_seed"))) unsigned RAND_SEED;
 __attribute__((section(".zp.sprid"))) unsigned SPRID;

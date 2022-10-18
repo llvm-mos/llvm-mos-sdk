@@ -1,6 +1,6 @@
 .include "config.s"
 
-.section .init.28,"axR",@progbits
+.section .init.280,"axR",@progbits
 .globl __do_famitone2_init
 __do_famitone2_init:
 	jsr __get_prg_bank

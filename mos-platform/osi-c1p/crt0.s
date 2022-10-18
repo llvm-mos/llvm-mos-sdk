@@ -2,6 +2,6 @@
 ; call to main and to initialize the keyboard reading
 ; code.
 
-.section .init.40,"axR",@progbits
+.section .init.400,"axR",@progbits
   jsr __clrscr
 

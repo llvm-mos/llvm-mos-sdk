@@ -23,7 +23,7 @@ OAM_BUF:
 .globl PAL_BUF
 PAL_BUF = 0x0100
 
-.section .init.10,"axR",@progbits
+.section .init.100,"axR",@progbits
 clearRAM:
     lda #0
     tax
@@ -40,7 +40,7 @@ clearRAM:
     bne 1b
 
 
-.section .init.27,"axR",@progbits
+.section .init.270,"axR",@progbits
 clearPalette:
 	lda #$3f
 	sta PPUADDR

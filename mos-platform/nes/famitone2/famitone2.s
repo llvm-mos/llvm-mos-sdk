@@ -1,27 +1,11 @@
 ;FamiTone2 v1.12
 
-; These settings are hard-coded to the most general version. Unfortunately, this
-; can cause unnecessary code to be included if you don't actually use those
-; features. If this is a problem, just make a copy of this .s file, change the
-; settings, and use it in lieu of the one that comes with the SDK.
+.include "config.s"
 
-FT_SFX_STREAMS	= 4		;number of sound effects played at once, 1..4
-
-FT_DPCM_ENABLE = 1		;undefine to exclude all DMC code
-FT_SFX_ENABLE = 1		;undefine to exclude all sound effects code
-FT_THREAD = 1			;undefine if you are calling sound effects from the same thread as the sound update call
-
-FT_PAL_SUPPORT = 1		;undefine to exclude PAL support
-FT_NTSC_SUPPORT = 1		;undefine to exclude NTSC support
-
-
-;internal defines
-
-	.if(FT_PAL_SUPPORT & FT_NTSC_SUPPORT)
-FT_PITCH_FIX = 1			;add PAL/NTSC pitch correction code only when both modes are enabled
-	.else
-FT_PITCH_FIX = 0
-	.endif
+; For a good out-of-the-box experience, famitone2 is set up on init to load from
+; the music_data and sounds_data symbols. This symbol can be defined in user
+; code to replace this behavior.
+.globl __do_famitone2_init
 
 ;zero page variables
 FT_TEMP_PTR = FT_TEMP
@@ -227,26 +211,6 @@ FT_MR_TRI_H			= FT_OUT_BUF+8
 FT_MR_NOISE_V		= FT_OUT_BUF+9
 FT_MR_NOISE_F		= FT_OUT_BUF+10
 	.endif
-
-.section .init.28,"axR",@progbits
-	jsr __get_prg_bank
-	pha
-	lda #mos24bank(music_data)
-	jsr __set_prg_bank
-	ldx #<music_data
-	ldy #>music_data
-	lda <NTSC_MODE
-	jsr FamiToneInit
-
-	.if(FT_SFX_ENABLE)
-	lda #mos24bank(sounds_data)
-	jsr __set_prg_bank
-	ldx #<sounds_data
-	ldy #>sounds_data
-	jsr FamiToneSfxInit
-	.endif
-	pla
-	jsr __set_prg_bank
 
 ;------------------------------------------------------------------------------
 ; reset APU, initialize FamiTone
@@ -1122,7 +1086,7 @@ _FT2SamplePlay:
 ;------------------------------------------------------------------------------
 
 .section .text.famitone_sfx_init,"ax",@progbits
-.globl FamitoneSfxInit
+.globl FamiToneSfxInit
 FamiToneSfxInit:
 
 	stx <FT_TEMP_PTR_L

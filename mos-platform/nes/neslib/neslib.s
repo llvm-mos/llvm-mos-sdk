@@ -76,39 +76,10 @@ clearVRAM:
 	lda #0b00000110
 	sta mos8(PPUMASK_VAR)
 
-waitSync3:
-	lda mos8(FRAME_CNT1)
-1:
-	cmp mos8(FRAME_CNT1)
-	beq 1b
-
-detectNTSC:
-	ldx #52				;blargg's code
-	ldy #24
-1:
-	dex
-	bne 1b
-	dey
-	bne 1b
-
-	lda PPUSTATUS
-	and #$80
-	sta mos8(NTSC_MODE)
-
-	jsr ppu_off
-
-	lda #0
-	sta mos8(__rc2)
-	sta mos8(__rc3)
-	jsr set_vram_update
-
-	lda #$fd
-	sta mos8(RAND_SEED)
-	sta mos8(RAND_SEED+1)
-
 	lda #0
 	sta PPUSCROLL
 	sta PPUSCROLL
+
 
 .text
 .globl nmi
@@ -932,69 +903,6 @@ pad_state:
 
 	tax
 	lda mos8(PAD_STATE),x
-	rts
-
-
-
-;unsigned char rand8(void);
-.section .text.rand8,"ax",@progbits
-.globl rand8
-;Galois random generator, found somewhere
-;out: A random number 0..255
-
-rand1:
-
-	lda mos8(RAND_SEED)
-	asl a
-	bcc 1f
-	eor #$cf
-
-1:
-
-	sta mos8(RAND_SEED)
-	rts
-
-rand2:
-
-	lda mos8(RAND_SEED+1)
-	asl a
-	bcc 1f
-	eor #$d7
-
-1:
-
-	sta mos8(RAND_SEED+1)
-	rts
-
-rand8:
-
-	jsr rand1
-	jsr rand2
-	adc mos8(RAND_SEED)
-	rts
-
-
-
-;unsigned int rand16(void);
-.section .text.rand16,"ax",@progbits
-.globl rand16
-rand16:
-
-	jsr rand1
-	tax
-	jsr rand2
-
-	rts
-
-
-;void set_rand(unsigned int seed);
-.section .text.set_rand,"ax",@progbits
-.globl set_rand
-set_rand:
-
-	sta mos8(RAND_SEED)
-	stx mos8(RAND_SEED+1)
-
 	rts
 
 

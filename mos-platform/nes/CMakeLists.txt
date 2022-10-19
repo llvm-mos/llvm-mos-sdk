@@ -10,6 +10,7 @@ TYPE INCLUDE)
 install(FILES
   c-in-ram.ld
   c-in-prg-ram-fixed.ld
+  dpcm.ld
   ines-header.ld
   ines-roms.ld
   ines.ld

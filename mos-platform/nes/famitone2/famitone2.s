@@ -301,8 +301,9 @@ FamiToneInit:
 .globl __music_init
 music_init:
 __music_init:
-  ldx mos8(__rc2)
-  ldy mos8(__rc3)
+	jsr __unbank_music
+	ldx mos8(__rc2)
+	ldy mos8(__rc3)
 	lda mos8(NTSC_MODE)
 	jmp FamiToneInit
 
@@ -313,8 +314,10 @@ __music_init:
 
 .section .text.famitone_music_stop,"ax",@progbits
 .globl FamiToneMusicStop
-.globl music_stop
+.globl __music_stop
+.weak music_stop
 FamiToneMusicStop:
+__music_stop:
 music_stop:
 
 	lda #0
@@ -363,8 +366,10 @@ music_stop:
 
 .section .text.famitone_music_play,"ax",@progbits
 .globl FamiToneMusicPlay
-.globl music_play
+.globl __music_play
+.weak music_play
 FamiToneMusicPlay:
+__music_play:
 music_play:
 	pha
 	jsr __push_music_bank
@@ -450,8 +455,10 @@ music_play:
 
 .section .text.famitone_music_pause,"ax",@progbits
 .globl FamiToneMusicPause
-.globl music_pause
+.globl __music_pause
+.weak music_pause
 FamiToneMusicPause:
+__music_pause:
 music_pause:
 
 	tax					;set SZ flags for A
@@ -484,7 +491,9 @@ music_pause:
 ;------------------------------------------------------------------------------
 
 .section .text.famitone_update,"ax",@progbits
-.globl FamiToneUpdate
+.globl __FamiToneUpdate
+.weak FamiToneUpdate
+__FamiToneUpdate:
 FamiToneUpdate:
 
 	.if(FT_THREAD)
@@ -1032,7 +1041,9 @@ FamiToneSamplePlayM:		;for music (low priority)
 ;------------------------------------------------------------------------------
 
 .globl FamitoneSamplePlay
-.globl sample_play	; neslib integration
+.globl __sample_play
+.weak sample_play
+__sample_play:
 sample_play:
 FamiToneSamplePlay:
 	pha
@@ -1093,8 +1104,9 @@ _FT2SamplePlay:
 .globl __sounds_init
 sounds_init:
 __sounds_init:
-  ldx mos8(__rc2)
-  ldy mos8(__rc3)
+	jsr __unbank_sounds
+	ldx mos8(__rc2)
+	ldy mos8(__rc3)
 FamiToneSfxInit:
 
 	stx <FT_TEMP_PTR_L
@@ -1287,7 +1299,9 @@ _FT2SfxUpdate:
 
 ;void sfx_play(char sound, char channel);
 .section .text.neslib_sfx_play,"axG",@progbits,sfx_play
-.globl sfx_play
+.globl __sfx_play
+.weak sfx_play
+__sfx_play:
 sfx_play:
 .if(FT_SFX_ENABLE)
 	sta <FT_TEMP_PTR_L

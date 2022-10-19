@@ -21,7 +21,9 @@ __pop_music_bank:
 	rts
 
 .section .text.ft_banked_music_init,"ax",@progbits
-.globl banked_music_init
+.globl __banked_music_init
+.weak banked_music_init
+__banked_music_init:
 banked_music_init:
   ldx #1
   stx mos8(__is_music_banked)
@@ -32,9 +34,9 @@ banked_music_init:
   jsr music_init
   jmp __pop_music_bank
 
-.section .text.ft_music_init,"ax",@progbits
-.globl music_init
-music_init:
+.section .text.ft_unbank_music,"ax",@progbits
+.globl __unbank_music
+__unbank_music:
   lda #0
   sta mos8(__is_music_banked)
-  jmp __music_init
+  rts

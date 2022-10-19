@@ -12,6 +12,7 @@ REGION_ALIAS("c_rom_vma", prg_rom_vma)
 REGION_ALIAS("c_rom_lma", prg_rom)
 
 SECTIONS {
+  .prg_rom_fixed : { *(.prg_rom_fixed .prg_rom_fixed.*) } >prg_rom
   .vector 0xfffa - ORIGIN(prg_rom_vma) + ORIGIN(prg_rom) : {
     SHORT(nmi) SHORT(_start) SHORT(irq)
   } >prg_rom

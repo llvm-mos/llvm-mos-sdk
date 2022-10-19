@@ -47,7 +47,13 @@ SECTIONS {
   .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>c_rom_lma
   __zp_data_load_start = LOADADDR(.zp.data) - LOADADDR(.rodata) + ADDR(.rodata);
   __zp_data_size = SIZEOF(.zp.data);
-  INCLUDE zp-bss.ld
+  /* The data initializers take up space at the C_ROM_VMA too, not just in RAM. */
+  .data_initializers ADDR(.rodata) + SIZEOF(.rodata) + __data_size +
+                   __zp_data_size : {} >c_rom_vma
+  .zp.bss (NOLOAD) : {
+    INCLUDE zp-bss-sections.ld
+  } >zp
+  INCLUDE zp-bss-symbols.ld
   INCLUDE zp-noinit.ld
   .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma AT>c_ram_lma
   INCLUDE bss-symbols.ld

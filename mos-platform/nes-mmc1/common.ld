@@ -143,5 +143,4 @@ SECTIONS {
   .chr_rom_30_31 : { KEEP(*(.chr_rom_30_31 .chr_rom_30_31.*)) } >chr_rom_30_31
 }
 
-INCLUDE dpcm.ld
 INCLUDE ines.ld

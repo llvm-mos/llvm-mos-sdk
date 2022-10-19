@@ -77,6 +77,10 @@ SECTIONS {
   .prg_rom_13    : { *(.prg_rom_13    .prg_rom_13.*)    } >prg_rom_13_vma    AT>prg_rom_13_lma
   .prg_rom_14    : { *(.prg_rom_14    .prg_rom_14.*)    } >prg_rom_14_vma    AT>prg_rom_14_lma
   .prg_rom_fixed : { *(.prg_rom_fixed .prg_rom_fixed.*) } >prg_rom_fixed_vma AT>prg_rom_fixed_lma
+}
 
+INCLUDE dpcm.ld
+
+SECTIONS {
   .reset_fixed : { KEEP(*(.reset_last)) } >reset_fixed
 }

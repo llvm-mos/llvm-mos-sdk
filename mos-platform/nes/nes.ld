@@ -39,7 +39,12 @@ MEMORY {
 }
 
 SECTIONS {
-  .text : { INCLUDE text-sections.ld } >c_rom_vma AT>c_rom_lma
+  .text : {
+       INCLUDE text-sections.ld
+       *(.nmi_begin)
+       *(SORT_BY_INIT_PRIORITY(.nmi.* .nmi))
+       *(.nmi_end)
+  } >c_rom_vma AT>c_rom_lma
   .rodata : { INCLUDE rodata-sections.ld } >c_rom_vma AT>c_rom_lma
   .data : { INCLUDE data-sections.ld } >c_ram_vma AT>c_rom_lma
   __data_load_start = LOADADDR(.data) - LOADADDR(.rodata) + ADDR(.rodata);
@@ -47,16 +52,15 @@ SECTIONS {
   .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>c_rom_lma
   __zp_data_load_start = LOADADDR(.zp.data) - LOADADDR(.rodata) + ADDR(.rodata);
   __zp_data_size = SIZEOF(.zp.data);
-  INCLUDE zp-bss.ld
+  /* The data initializers take up space at the C_ROM_VMA too, not just in RAM. */
+  .data_initializers ADDR(.rodata) + SIZEOF(.rodata) + __data_size +
+                   __zp_data_size : {} >c_rom_vma
+  .zp.bss (NOLOAD) : {
+    INCLUDE zp-bss-sections.ld
+  } >zp
+  INCLUDE zp-bss-symbols.ld
   INCLUDE zp-noinit.ld
   .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma AT>c_ram_lma
   INCLUDE bss-symbols.ld
   .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram_vma AT>c_ram_lma
-
-  .dpcm ALIGN(64) : {
-       . = ABSOLUTE(.) < 0xc000 ? 0xc000 : .;
-       __dpcm_data = .;
-       KEEP(*(.dpcm .dpcm.*))
-  } >c_rom_vma AT>c_rom_lma
-  __dpcm_offset = (__dpcm_data - 0xc000) >> 6;
 }

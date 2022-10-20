@@ -2,11 +2,6 @@
 
 .include "config.s"
 
-; For a good out-of-the-box experience, famitone2 is set up on init to load from
-; the music_data and sounds_data symbols. This symbol can be defined in user
-; code to replace this behavior.
-.globl __do_famitone2_init
-
 ;zero page variables
 FT_TEMP_PTR = FT_TEMP
 FT_TEMP_PTR_L		= FT_TEMP_PTR+0
@@ -107,6 +102,8 @@ FT_PAL_ADJUST:
 	.fill 1
 FT_SONG_LIST_L:
 	.fill 1
+.globl __FT_SONG_LIST_H
+__FT_SONG_LIST_H:
 FT_SONG_LIST_H:
 	.fill 1
 FT_INSTRUMENT_L:
@@ -218,14 +215,34 @@ FT_MR_NOISE_F		= FT_OUT_BUF+10
 ;     X,Y pointer to music data
 ;------------------------------------------------------------------------------
 
-.section .text.ft_get_prg_bank,"ax",@progbits
-.weak __get_prg_bank
-__get_prg_bank:
+.section .text.ft_push_music_bank,"ax",@progbits
+.weak __push_music_bank
+__push_music_bank:
 	rts
 
-.section .text.ft_set_prg_bank,"ax",@progbits
-.weak __set_prg_bank
-__set_prg_bank:
+.section .text.ft_pop_music_bank,"ax",@progbits
+.weak __pop_music_bank
+__pop_music_bank:
+	rts
+
+.section .text.ft_unbank_music,"ax",@progbits
+.weak __unbank_music
+__unbank_music:
+	rts
+
+.section .text.ft_push_sounds_bank,"ax",@progbits
+.weak __push_sounds_bank
+__push_sounds_bank:
+	rts
+
+.section .text.ft_pop_sounds_bank,"ax",@progbits
+.weak __pop_sounds_bank
+__pop_sounds_bank:
+	rts
+
+.section .text.ft_unbank_sounds,"ax",@progbits
+.weak __unbank_sounds
+__unbank_sounds:
 	rts
 
 .section .text.famitone_init,"ax",@progbits
@@ -289,6 +306,17 @@ FamiToneInit:
 	jmp FamiToneMusicStop
 
 
+.section .text.music_init,"ax",@progbits
+.weak music_init
+.globl __music_init
+music_init:
+__music_init:
+	jsr __unbank_music
+	ldx mos8(__rc2)
+	ldy mos8(__rc3)
+	lda mos8(NTSC_MODE)
+	jmp FamiToneInit
+
 ;------------------------------------------------------------------------------
 ; stop music that is currently playing, if any
 ; in: none
@@ -296,8 +324,10 @@ FamiToneInit:
 
 .section .text.famitone_music_stop,"ax",@progbits
 .globl FamiToneMusicStop
-.globl music_stop
+.globl __music_stop
+.weak music_stop
 FamiToneMusicStop:
+__music_stop:
 music_stop:
 
 	lda #0
@@ -346,15 +376,14 @@ music_stop:
 
 .section .text.famitone_music_play,"ax",@progbits
 .globl FamiToneMusicPlay
-.globl music_play
+.globl __music_play
+.weak music_play
 FamiToneMusicPlay:
+__music_play:
 music_play:
-	sta mos8(FT_TEMP_VAR1)
-	jsr __get_prg_bank
 	pha
-	lda #mos24bank(music_data)
-	jsr __set_prg_bank
-	lda mos8(FT_TEMP_VAR1)
+	jsr __push_music_bank
+	pla
 
 	ldx FT_SONG_LIST_L
 	stx <FT_TEMP_PTR_L
@@ -426,8 +455,7 @@ music_play:
 	sta FT_SONG_SPEED		;apply default speed, this also enables music
 
 .Lskip:
-	pla
-	jmp __set_prg_bank
+	jmp __pop_music_bank
 
 
 ;------------------------------------------------------------------------------
@@ -437,8 +465,10 @@ music_play:
 
 .section .text.famitone_music_pause,"ax",@progbits
 .globl FamiToneMusicPause
-.globl music_pause
+.globl __music_pause
+.weak music_pause
 FamiToneMusicPause:
+__music_pause:
 music_pause:
 
 	tax					;set SZ flags for A
@@ -470,11 +500,14 @@ music_pause:
 ; in: none
 ;------------------------------------------------------------------------------
 
+.section .nmi,"axR",@progbits
+	jsr FamiToneUpdate
+
 .section .text.famitone_update,"ax",@progbits
-.globl FamiToneUpdate
-.globl __update_sound	; neslib nmi integration
+.globl __FamiToneUpdate
+.weak FamiToneUpdate
+__FamiToneUpdate:
 FamiToneUpdate:
-__update_sound:
 
 	.if(FT_THREAD)
 	lda FT_TEMP_PTR_L
@@ -483,9 +516,6 @@ __update_sound:
 	pha
 	.endif
 
-	jsr __get_prg_bank
-	pha
-
 	lda FT_SONG_SPEED		;speed 0 means that no music is playing currently
 	bmi .Lpause				;bit 7 set is the pause flag
 	bne .Lupdate
@@ -493,8 +523,7 @@ __update_sound:
 	jmp .Lupdate_sound
 
 .Lupdate:
-	lda #mos24bank(music_data)
-	jsr __set_prg_bank
+	jsr __push_music_bank
 
 	clc						;update frame counter that considers speed, tempo, and PAL/NTSC
 	lda FT_TEMPO_ACC_L
@@ -736,8 +765,7 @@ __update_sound:
 	.if(FT_SFX_ENABLE)
 
 	;process all sound effect streams
-	lda #mos24bank(sounds_data)
-	jsr __set_prg_bank
+	jsr __push_sounds_bank
 
 
 	.if FT_SFX_STREAMS>0
@@ -756,7 +784,6 @@ __update_sound:
 	ldx #FT_SFX_CH3
 	jsr _FT2SfxUpdate
 	.endif
-
 
 	;send data from the output buffer to the APU
 
@@ -794,10 +821,11 @@ __update_sound:
 	lda FT_OUT_BUF+10	;noise period
 	sta APU_NOISE_LO
 
+	jsr __pop_sounds_bank
+
 	.endif
 
-	pla
-	jsr __set_prg_bank
+	jsr __pop_music_bank
 
 	.if(FT_THREAD)
 	pla
@@ -1026,22 +1054,20 @@ FamiToneSamplePlayM:		;for music (low priority)
 ;------------------------------------------------------------------------------
 
 .globl FamitoneSamplePlay
-.globl sample_play	; neslib integration
+.globl __sample_play
+.weak sample_play
+__sample_play:
 sample_play:
 FamiToneSamplePlay:
-	sta mos8(FT_TEMP_VAR1)
-	jsr __get_prg_bank
 	pha
-	lda #mos24bank(sounds_data)
-	jsr __set_prg_bank
-	lda mos8(FT_TEMP_VAR1)
+	jsr __push_sounds_bank
+	pla
 
 	ldx #1
 	stx FT_DPCM_EFFECT
 	jsr _FT2SamplePlay
 
-	pla
-	jmp __set_prg_bank
+	jmp __pop_sounds_bank
 
 _FT2SamplePlay:
 
@@ -1087,6 +1113,13 @@ _FT2SamplePlay:
 
 .section .text.famitone_sfx_init,"ax",@progbits
 .globl FamiToneSfxInit
+.weak sounds_init
+.globl __sounds_init
+sounds_init:
+__sounds_init:
+	jsr __unbank_sounds
+	ldx mos8(__rc2)
+	ldy mos8(__rc3)
 FamiToneSfxInit:
 
 	stx <FT_TEMP_PTR_L
@@ -1142,7 +1175,6 @@ _FT2SfxClearChannel:
 	sta FT_SFX_BUF+9,x		;mute noise
 
 	rts
-
 
 ;------------------------------------------------------------------------------
 ; play sound effect
@@ -1280,15 +1312,14 @@ _FT2SfxUpdate:
 
 ;void sfx_play(char sound, char channel);
 .section .text.neslib_sfx_play,"axG",@progbits,sfx_play
-.globl sfx_play
+.globl __sfx_play
+.weak sfx_play
+__sfx_play:
 sfx_play:
 .if(FT_SFX_ENABLE)
 	sta <FT_TEMP_PTR_L
 	stx <FT_TEMP_PTR_H
-	jsr __get_prg_bank
-	pha
-	lda #mos24bank(sounds_data)
-	jsr __set_prg_bank
+	jsr __push_sounds_bank
 	lda <FT_TEMP_PTR_L
 	ldx <FT_TEMP_PTR_H
 
@@ -1300,8 +1331,7 @@ sfx_play:
 	tax
 	tya
 	jsr FamiToneSfxPlay
-	pla
-	jmp __set_prg_bank
+	jmp __pop_sounds_bank
 .else
 	rts
 .endif

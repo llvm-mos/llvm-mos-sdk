@@ -29,6 +29,7 @@ function(add_test_target target)
 endfunction()
 
 add_custom_target(test)
-add_test_target(nes-mmc1)
 add_test_target(nes-nrom)
 add_test_target(nes-cnrom)
+add_test_target(nes-mmc1)
+add_test_target(nes-mmc3)

@@ -24,34 +24,35 @@ add_platform_library(commodore-c
   chrout.c
   getchar.c
   putchar.c
-  acptr.s
-  basin.s
-  bsout.s
-  chkin.s
-  chrin.s
-  ciout.s 
-  ckout.s
-  clall.s
-  close.s
-  clrch.s
-  getin.s
-  iobase.s
-  listen.s
-  load.s
-  open.s
-  readst.s
-  save.s
-  scnkey.s
-  second.s
-  setlfs.s
-  setnam.s
-  talk.s
-  tksa.s
-  udtim.s
-  unlsn.s
-  untlk.s
+  cbm_k_acptr.s
+  cbm_k_basin.s
+  cbm_k_bsout.s
+  cbm_k_chkin.s
+  cbm_k_chrin.s
+	cbm_k_chrout.s
+  cbm_k_ciout.s 
+  cbm_k_ckout.s
+  cbm_k_clall.s
+  cbm_k_close.s
+  cbm_k_clrch.s
+  cbm_k_getin.s
+  cbm_k_iobase.s
+  cbm_k_listen.s
+  cbm_k_load.s
+  cbm_k_open.s
+  cbm_k_readst.s
+  cbm_k_save.s
+  cbm_k_scnkey.s
+  cbm_k_second.s
+  cbm_k_setlfs.s
+  cbm_k_setnam.s
+  cbm_k_talk.s
+  cbm_k_tksa.s
+  cbm_k_udtim.s
+  cbm_k_unlsn.s
+  cbm_k_untlk.s
 )
-)
+
 # abort is preemptively included if LTO is used, which pulls in _exit support
 # unneccessarily. It can also be called in an interrupt.
 set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)

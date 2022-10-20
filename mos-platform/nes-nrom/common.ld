@@ -10,8 +10,4 @@ ASSERT(__chr_rom_size == 0 || __chr_rom_size == 1 << LOG2CEIL(__chr_rom_size),
 ASSERT(__chr_ram_size + __chr_nvram_size <= 8,
        "NROM only supports up to 8KiB of CHR-(NV)RAM.")
 
-SECTIONS {
-  .chr_rom : { KEEP(*(.chr_rom .chr_rom.*)) } >chr_rom
-}
-
 INCLUDE ines.ld

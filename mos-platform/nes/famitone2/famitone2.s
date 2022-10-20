@@ -225,6 +225,11 @@ __push_music_bank:
 __pop_music_bank:
 	rts
 
+.section .text.ft_unbank_music,"ax",@progbits
+.weak __unbank_music
+__unbank_music:
+	rts
+
 .section .text.ft_push_sounds_bank,"ax",@progbits
 .weak __push_sounds_bank
 __push_sounds_bank:
@@ -233,6 +238,11 @@ __push_sounds_bank:
 .section .text.ft_pop_sounds_bank,"ax",@progbits
 .weak __pop_sounds_bank
 __pop_sounds_bank:
+	rts
+
+.section .text.ft_unbank_sounds,"ax",@progbits
+.weak __unbank_sounds
+__unbank_sounds:
 	rts
 
 .section .text.famitone_init,"ax",@progbits

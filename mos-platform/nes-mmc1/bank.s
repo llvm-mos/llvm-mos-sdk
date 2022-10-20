@@ -45,17 +45,17 @@ MMC1_PRG	= $e000
 .globl bank_nmi
 bank_nmi:
 	inc __reset_mmc1_byte
-	lda _CHR_BANK0
-	sta _CHR_BANK0_CUR
+	lda mos8(_CHR_BANK0)
+	sta mos8(_CHR_BANK0_CUR)
 	mmc1_register_write MMC1_CHR0
-	lda _CHR_BANK1
-	sta _CHR_BANK1_CUR
+	lda mos8(_CHR_BANK1)
+	sta mos8(_CHR_BANK1_CUR)
 	mmc1_register_write MMC1_CHR1
-	lda _MMC1_CTRL_NMI
-	sta _MMC1_CTRL_CUR
+	lda mos8(_MMC1_CTRL_NMI)
+	sta mos8(_MMC1_CTRL_CUR)
 	mmc1_register_write MMC1_CTRL
 	lda #0
-	sta _IN_PROGRESS
+	sta mos8(_IN_PROGRESS)
 	rts
 
 .section .text.get_prg_bank,"ax",@progbits
@@ -63,7 +63,7 @@ bank_nmi:
 .weak get_prg_bank
 __get_prg_bank:
 get_prg_bank:
-	lda _PRG_BANK
+	lda mos8(_PRG_BANK)
 	rts
 
 .section .text.set_prg_bank,"ax",@progbits
@@ -75,13 +75,13 @@ set_prg_bank:
 .Lset:
 	inc __reset_mmc1_byte
 	ldx #1
-	stx _IN_PROGRESS
+	stx mos8(_IN_PROGRESS)
 	mmc1_register_write MMC1_PRG
-	ldx _IN_PROGRESS
+	ldx mos8(_IN_PROGRESS)
 	beq .Lretry
 	dex
-	stx _IN_PROGRESS
-	sty _PRG_BANK
+	stx mos8(_IN_PROGRESS)
+	sty mos8(_PRG_BANK)
 	rts
 .Lretry:
 	tya
@@ -93,7 +93,7 @@ set_prg_bank:
 .weak banked_call
 banked_call:
 	tay
-	lda _PRG_BANK
+	lda mos8(_PRG_BANK)
 	pha
 	tya
 	jsr __set_prg_bank

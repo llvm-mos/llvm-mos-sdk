@@ -29,7 +29,7 @@ add_platform_library(commodore-c
   cbm_k_bsout.s
   cbm_k_chkin.s
   cbm_k_chrin.s
-	cbm_k_chrout.s
+  cbm_k_chrout.s
   cbm_k_ciout.s 
   cbm_k_ckout.s
   cbm_k_clall.s

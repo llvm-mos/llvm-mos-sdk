@@ -89,7 +89,7 @@ var searchData=
   ['chactl_5finv_5fopaque_163',['CHACTL_INV_OPAQUE',['../__antic_8h.html#a5a5fd610504326c472551bcd9d5f9aa5',1,'_antic.h']]],
   ['chactl_5finv_5fpresent_164',['CHACTL_INV_PRESENT',['../__antic_8h.html#a47071b70bb24bbac58f264da021454d4',1,'_antic.h']]],
   ['chactl_5finv_5ftrans_165',['CHACTL_INV_TRANS',['../__antic_8h.html#a40c1cfdfe884d3738cd8956635ee1213',1,'_antic.h']]],
-  ['channel_166',['channel',['../neslib_8h.html#abd7697134589aaeaa645826770a848dd',1,'neslib.h']]],
+  ['channel_166',['channel',['../famitone2_8h.html#abd7697134589aaeaa645826770a848dd',1,'famitone2.h']]],
   ['charge_167',['charge',['../famitone2_2LICENSE.html#a9a191cb42b7fcb1a722d987afa500247',1,'charge():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a8941f0574e230fb7d86ff7827cbf54c7',1,'charge():&#160;LICENSE'],['../neslib_2LICENSE.html#a9a191cb42b7fcb1a722d987afa500247',1,'charge():&#160;LICENSE']]],
   ['chr_5fbank0_5fcur_168',['CHR_BANK0_CUR',['../bank_8h.html#a749487eef7a21c61d60f592ae3bac5bd',1,'bank.h']]],
   ['chr_5fbank1_5fcur_169',['CHR_BANK1_CUR',['../bank_8h.html#adffb6f0da90eaeec8606e3441ae2bc49',1,'bank.h']]],

@@ -24,6 +24,33 @@ add_platform_library(commodore-c
   chrout.c
   getchar.c
   putchar.c
+  acptr.s
+  basin.s
+  bsout.s
+  chkin.s
+  chrin.s
+  ciout.s 
+  ckout.s
+  clall.s
+  close.s
+  clrch.s
+  getin.s
+  iobase.s
+  listen.s
+  load.s
+  open.s
+  readst.s
+  save.s
+  scnkey.s
+  second.s
+  setlfs.s
+  setnam.s
+  talk.s
+  tksa.s
+  udtim.s
+  unlsn.s
+  untlk.s
+)
 )
 # abort is preemptively included if LTO is used, which pulls in _exit support
 # unneccessarily. It can also be called in an interrupt.

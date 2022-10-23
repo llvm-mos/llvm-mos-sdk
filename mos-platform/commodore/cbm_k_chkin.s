@@ -7,4 +7,3 @@
 cbm_k_chkin:
 	tax
 	jmp __CHKIN
-	

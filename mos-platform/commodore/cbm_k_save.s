@@ -1,7 +1,5 @@
 .text
 
-#include <cbm_kernal.inc>
-
 __rs1 = __rc2
 __rs2 = __rc4 
 
@@ -15,5 +13,5 @@ cbm_k_save:
 	ldx __rc2
 	ldy __rc2 + 1
 	lda #__rs2
-	jmp SAVE
+	jmp __SAVE
 	

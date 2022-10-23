@@ -1,6 +1,5 @@
 .text
 
-#include <cbm_kernal.inc>
 __rs1 = __rc2
 
 ;
@@ -19,4 +18,4 @@ cbm_k_setnam:
 	pla 
 	tax
 	lda __rc2
-	jmp SETNAM
+	jmp __SETNAM

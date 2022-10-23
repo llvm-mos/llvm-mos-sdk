@@ -24,33 +24,33 @@ add_platform_library(commodore-c
   chrout.c
   getchar.c
   putchar.c
-  cbm_k_acptr.s
-  cbm_k_basin.s
-  cbm_k_bsout.s
+  cbm_k_acptr.c
+  cbm_k_basin.c
+  cbm_k_bsout.c
   cbm_k_chkin.s
-  cbm_k_chrin.s
-  cbm_k_chrout.s
-  cbm_k_ciout.s 
-  cbm_k_ckout.s
-  cbm_k_clall.s
-  cbm_k_close.s
-  cbm_k_clrch.s
-  cbm_k_getin.s
+  cbm_k_chrin.c
+  cbm_k_chrout.c
+  cbm_k_ciout.c 
+  cbm_k_ckout.c
+  cbm_k_clall.c
+  cbm_k_close.c
+  cbm_k_clrch.c
+  cbm_k_getin.c
   cbm_k_iobase.s
-  cbm_k_listen.s
+  cbm_k_listen.c
   cbm_k_load.s
-  cbm_k_open.s
-  cbm_k_readst.s
+  cbm_k_open.c
+  cbm_k_readst.c
   cbm_k_save.s
-  cbm_k_scnkey.s
-  cbm_k_second.s
+  cbm_k_scnkey.c
+  cbm_k_second.c
   cbm_k_setlfs.s
   cbm_k_setnam.s
-  cbm_k_talk.s
-  cbm_k_tksa.s
-  cbm_k_udtim.s
-  cbm_k_unlsn.s
-  cbm_k_untlk.s
+  cbm_k_talk.c
+  cbm_k_tksa.c
+  cbm_k_udtim.c
+  cbm_k_unlsn.c
+  cbm_k_untlk.c
 )
 
 # abort is preemptively included if LTO is used, which pulls in _exit support

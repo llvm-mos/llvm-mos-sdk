@@ -67,7 +67,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">cbm.h File Reference</div>  </div>
 </div><!--header-->
@@ -152,6 +153,71 @@ Macros</h2></td></tr>
 <tr class="separator:a153bea644804808b8dba0b56038ab632"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6894a17c0d74c314e841fc5ced2b1882"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a6894a17c0d74c314e841fc5ced2b1882">CBM_A_RW</a>&#160;&#160;&#160;3           /* Read, Write */</td></tr>
 <tr class="separator:a6894a17c0d74c314e841fc5ced2b1882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9462522ec0bf5c50fc82489354dca00d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a9462522ec0bf5c50fc82489354dca00d">CBM_READ</a>&#160;&#160;&#160;0       /* default <a class="el" href="neslib_2LICENSE.html#aebd6826700682fa635f2b624c6366dbe">is</a> &quot;,p&quot; */</td></tr>
+<tr class="separator:a9462522ec0bf5c50fc82489354dca00d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63f88907f3c8d4d3939e2636455bc6ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a63f88907f3c8d4d3939e2636455bc6ea">CBM_WRITE</a>&#160;&#160;&#160;1       /* ditto */</td></tr>
+<tr class="separator:a63f88907f3c8d4d3939e2636455bc6ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa9818f31425456c8e1cad97c6042d77"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#aaa9818f31425456c8e1cad97c6042d77">CBM_SEQ</a>&#160;&#160;&#160;2       /* default <a class="el" href="neslib_2LICENSE.html#aebd6826700682fa635f2b624c6366dbe">is</a> &quot;,r&quot; -- or &quot;,s&quot; when writing */</td></tr>
+<tr class="separator:aaa9818f31425456c8e1cad97c6042d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a27f5dfa71ca4a3101e476d1984469d21"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a27f5dfa71ca4a3101e476d1984469d21">cbm_k_acptr</a> (void)</td></tr>
+<tr class="separator:a27f5dfa71ca4a3101e476d1984469d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d9520062fd9f63c04811774bb8bcb85"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a4d9520062fd9f63c04811774bb8bcb85">cbm_k_basin</a> (void)</td></tr>
+<tr class="separator:a4d9520062fd9f63c04811774bb8bcb85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c69ad890b60a1faf3f6e3cf86973b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a53c69ad890b60a1faf3f6e3cf86973b5">cbm_k_bsout</a> (unsigned char C)</td></tr>
+<tr class="separator:a53c69ad890b60a1faf3f6e3cf86973b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a639edfd94dcab6a10a102e3e9b271d"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a8a639edfd94dcab6a10a102e3e9b271d">cbm_k_chkin</a> (unsigned char FN)</td></tr>
+<tr class="separator:a8a639edfd94dcab6a10a102e3e9b271d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a362424d25d370686f7ca62f278d7f2ca"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a362424d25d370686f7ca62f278d7f2ca">cbm_k_chrin</a> (void)</td></tr>
+<tr class="separator:a362424d25d370686f7ca62f278d7f2ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf0c1880366ba05aba6a3aecb915cf07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#acf0c1880366ba05aba6a3aecb915cf07">cbm_k_chrout</a> (unsigned char C)</td></tr>
+<tr class="separator:acf0c1880366ba05aba6a3aecb915cf07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacf9db814516f9664642398fcb73ca68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#aacf9db814516f9664642398fcb73ca68">cbm_k_ciout</a> (unsigned char C)</td></tr>
+<tr class="separator:aacf9db814516f9664642398fcb73ca68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae11e3600c11510ddd1514273210090b1"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#ae11e3600c11510ddd1514273210090b1">cbm_k_ckout</a> (unsigned char FN)</td></tr>
+<tr class="separator:ae11e3600c11510ddd1514273210090b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a1bbb075a45499803910a9975f157c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a0a1bbb075a45499803910a9975f157c2">cbm_k_clall</a> (void)</td></tr>
+<tr class="separator:a0a1bbb075a45499803910a9975f157c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d62f1d9eab0f989e53689c1e55c8cd9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a6d62f1d9eab0f989e53689c1e55c8cd9">cbm_k_close</a> (unsigned char FN)</td></tr>
+<tr class="separator:a6d62f1d9eab0f989e53689c1e55c8cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebb7828360543f12bb29d6dbb84436c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#aebb7828360543f12bb29d6dbb84436c6">cbm_k_clrch</a> (void)</td></tr>
+<tr class="separator:aebb7828360543f12bb29d6dbb84436c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac850203c7a097aa5e8813b6274b5b4f7"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#ac850203c7a097aa5e8813b6274b5b4f7">cbm_k_getin</a> (void)</td></tr>
+<tr class="separator:ac850203c7a097aa5e8813b6274b5b4f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38652d19a9bb122bb1c2174d231ce346"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a38652d19a9bb122bb1c2174d231ce346">cbm_k_iobase</a> (void)</td></tr>
+<tr class="separator:a38652d19a9bb122bb1c2174d231ce346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac89c038e7393898d2e73b0479486417e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#ac89c038e7393898d2e73b0479486417e">cbm_k_listen</a> (unsigned char dev)</td></tr>
+<tr class="separator:ac89c038e7393898d2e73b0479486417e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af827c495a93d156a70041e11e6ac3e33"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#af827c495a93d156a70041e11e6ac3e33">cbm_k_load</a> (unsigned char flag, unsigned addr)</td></tr>
+<tr class="separator:af827c495a93d156a70041e11e6ac3e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a449137036c297699f84131449badb846"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a449137036c297699f84131449badb846">cbm_k_open</a> (void)</td></tr>
+<tr class="separator:a449137036c297699f84131449badb846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11ca4276b87f487149adbc3b2a63c51d"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a11ca4276b87f487149adbc3b2a63c51d">cbm_k_readst</a> (void)</td></tr>
+<tr class="separator:a11ca4276b87f487149adbc3b2a63c51d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad588a8c678d66cde15c88cc18357bf5"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#aad588a8c678d66cde15c88cc18357bf5">cbm_k_save</a> (unsigned int start, unsigned int <a class="el" href="cpm_8h.html#ad0970d0a1eb91451bab00fc13a27c201">end</a>)</td></tr>
+<tr class="separator:aad588a8c678d66cde15c88cc18357bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5545fdad070627fc4824a829c1ff7386"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a5545fdad070627fc4824a829c1ff7386">cbm_k_scnkey</a> (void)</td></tr>
+<tr class="separator:a5545fdad070627fc4824a829c1ff7386"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26632162f3a8e94f8009f178a20f8b90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a26632162f3a8e94f8009f178a20f8b90">cbm_k_second</a> (unsigned char addr)</td></tr>
+<tr class="separator:a26632162f3a8e94f8009f178a20f8b90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a540601d63d0f317b693b4e162a6650f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a540601d63d0f317b693b4e162a6650f7">cbm_k_setlfs</a> (unsigned char LFN, unsigned char DEV, unsigned char SA)</td></tr>
+<tr class="separator:a540601d63d0f317b693b4e162a6650f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab11975db1f033f0769a474308a288126"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#ab11975db1f033f0769a474308a288126">cbm_k_setnam</a> (const char *Name)</td></tr>
+<tr class="separator:ab11975db1f033f0769a474308a288126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e907f6cd05f50aae2deaf49b1bf1e1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a9e907f6cd05f50aae2deaf49b1bf1e1e">cbm_k_settim</a> (unsigned long timer)</td></tr>
+<tr class="separator:a9e907f6cd05f50aae2deaf49b1bf1e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1d70806eada558ae376bcd16edfc252"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#ab1d70806eada558ae376bcd16edfc252">cbm_k_talk</a> (unsigned char dev)</td></tr>
+<tr class="separator:ab1d70806eada558ae376bcd16edfc252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a773f34cfb6ab81944b2939c0a6c01ca2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a773f34cfb6ab81944b2939c0a6c01ca2">cbm_k_tksa</a> (unsigned char addr)</td></tr>
+<tr class="separator:a773f34cfb6ab81944b2939c0a6c01ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33cd8ba660764bff9f224f6fcb50f1a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a33cd8ba660764bff9f224f6fcb50f1a4">cbm_k_udtim</a> (void)</td></tr>
+<tr class="separator:a33cd8ba660764bff9f224f6fcb50f1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a440f090ed5f69f1f212df0ea4fab8b4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a440f090ed5f69f1f212df0ea4fab8b4f">cbm_k_unlsn</a> (void)</td></tr>
+<tr class="separator:a440f090ed5f69f1f212df0ea4fab8b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d0b496a22c0f9eae67d010480d98eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#ae7d0b496a22c0f9eae67d010480d98eb">cbm_k_untlk</a> (void)</td></tr>
+<tr class="separator:ae7d0b496a22c0f9eae67d010480d98eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a9658313823519125a096ead1d070008c"></a>
@@ -190,6 +256,48 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define CBM_A_WO&#160;&#160;&#160;2           /* Write only  */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9462522ec0bf5c50fc82489354dca00d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9462522ec0bf5c50fc82489354dca00d">&#9670;&nbsp;</a></span>CBM_READ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CBM_READ&#160;&#160;&#160;0       /* default <a class="el" href="neslib_2LICENSE.html#aebd6826700682fa635f2b624c6366dbe">is</a> &quot;,p&quot; */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa9818f31425456c8e1cad97c6042d77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa9818f31425456c8e1cad97c6042d77">&#9670;&nbsp;</a></span>CBM_SEQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CBM_SEQ&#160;&#160;&#160;2       /* default <a class="el" href="neslib_2LICENSE.html#aebd6826700682fa635f2b624c6366dbe">is</a> &quot;,r&quot; -- or &quot;,s&quot; when writing */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63f88907f3c8d4d3939e2636455bc6ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63f88907f3c8d4d3939e2636455bc6ea">&#9670;&nbsp;</a></span>CBM_WRITE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CBM_WRITE&#160;&#160;&#160;1       /* ditto */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -572,6 +680,547 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define JOY_FIRE_MASK&#160;&#160;&#160;<a class="el" href="nes_8h.html#a250ed0dbb7e306e97a2878c0aa075652">JOY_BTN_1_MASK</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a27f5dfa71ca4a3101e476d1984469d21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27f5dfa71ca4a3101e476d1984469d21">&#9670;&nbsp;</a></span>cbm_k_acptr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_acptr </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d9520062fd9f63c04811774bb8bcb85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d9520062fd9f63c04811774bb8bcb85">&#9670;&nbsp;</a></span>cbm_k_basin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_basin </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a53c69ad890b60a1faf3f6e3cf86973b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c69ad890b60a1faf3f6e3cf86973b5">&#9670;&nbsp;</a></span>cbm_k_bsout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_bsout </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>C</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a639edfd94dcab6a10a102e3e9b271d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a639edfd94dcab6a10a102e3e9b271d">&#9670;&nbsp;</a></span>cbm_k_chkin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_chkin </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>FN</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a362424d25d370686f7ca62f278d7f2ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a362424d25d370686f7ca62f278d7f2ca">&#9670;&nbsp;</a></span>cbm_k_chrin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_chrin </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf0c1880366ba05aba6a3aecb915cf07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf0c1880366ba05aba6a3aecb915cf07">&#9670;&nbsp;</a></span>cbm_k_chrout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_chrout </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>C</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aacf9db814516f9664642398fcb73ca68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacf9db814516f9664642398fcb73ca68">&#9670;&nbsp;</a></span>cbm_k_ciout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_ciout </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>C</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae11e3600c11510ddd1514273210090b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae11e3600c11510ddd1514273210090b1">&#9670;&nbsp;</a></span>cbm_k_ckout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_ckout </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>FN</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a1bbb075a45499803910a9975f157c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a1bbb075a45499803910a9975f157c2">&#9670;&nbsp;</a></span>cbm_k_clall()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_clall </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6d62f1d9eab0f989e53689c1e55c8cd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d62f1d9eab0f989e53689c1e55c8cd9">&#9670;&nbsp;</a></span>cbm_k_close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_close </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>FN</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebb7828360543f12bb29d6dbb84436c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebb7828360543f12bb29d6dbb84436c6">&#9670;&nbsp;</a></span>cbm_k_clrch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_clrch </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac850203c7a097aa5e8813b6274b5b4f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac850203c7a097aa5e8813b6274b5b4f7">&#9670;&nbsp;</a></span>cbm_k_getin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_getin </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a38652d19a9bb122bb1c2174d231ce346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38652d19a9bb122bb1c2174d231ce346">&#9670;&nbsp;</a></span>cbm_k_iobase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned cbm_k_iobase </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac89c038e7393898d2e73b0479486417e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac89c038e7393898d2e73b0479486417e">&#9670;&nbsp;</a></span>cbm_k_listen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_listen </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af827c495a93d156a70041e11e6ac3e33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af827c495a93d156a70041e11e6ac3e33">&#9670;&nbsp;</a></span>cbm_k_load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int cbm_k_load </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a449137036c297699f84131449badb846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a449137036c297699f84131449badb846">&#9670;&nbsp;</a></span>cbm_k_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_open </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11ca4276b87f487149adbc3b2a63c51d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11ca4276b87f487149adbc3b2a63c51d">&#9670;&nbsp;</a></span>cbm_k_readst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_readst </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aad588a8c678d66cde15c88cc18357bf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad588a8c678d66cde15c88cc18357bf5">&#9670;&nbsp;</a></span>cbm_k_save()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cbm_k_save </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5545fdad070627fc4824a829c1ff7386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5545fdad070627fc4824a829c1ff7386">&#9670;&nbsp;</a></span>cbm_k_scnkey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_scnkey </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26632162f3a8e94f8009f178a20f8b90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26632162f3a8e94f8009f178a20f8b90">&#9670;&nbsp;</a></span>cbm_k_second()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_second </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>addr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a540601d63d0f317b693b4e162a6650f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a540601d63d0f317b693b4e162a6650f7">&#9670;&nbsp;</a></span>cbm_k_setlfs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_setlfs </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>LFN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>DEV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>SA</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab11975db1f033f0769a474308a288126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab11975db1f033f0769a474308a288126">&#9670;&nbsp;</a></span>cbm_k_setnam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_setnam </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>Name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e907f6cd05f50aae2deaf49b1bf1e1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e907f6cd05f50aae2deaf49b1bf1e1e">&#9670;&nbsp;</a></span>cbm_k_settim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_settim </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>timer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1d70806eada558ae376bcd16edfc252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1d70806eada558ae376bcd16edfc252">&#9670;&nbsp;</a></span>cbm_k_talk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_talk </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>dev</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a773f34cfb6ab81944b2939c0a6c01ca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a773f34cfb6ab81944b2939c0a6c01ca2">&#9670;&nbsp;</a></span>cbm_k_tksa()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_tksa </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>addr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33cd8ba660764bff9f224f6fcb50f1a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33cd8ba660764bff9f224f6fcb50f1a4">&#9670;&nbsp;</a></span>cbm_k_udtim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_udtim </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a440f090ed5f69f1f212df0ea4fab8b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a440f090ed5f69f1f212df0ea4fab8b4f">&#9670;&nbsp;</a></span>cbm_k_unlsn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_unlsn </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae7d0b496a22c0f9eae67d010480d98eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d0b496a22c0f9eae67d010480d98eb">&#9670;&nbsp;</a></span>cbm_k_untlk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cbm_k_untlk </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

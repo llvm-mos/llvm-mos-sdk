@@ -26,28 +26,6 @@ music_init:
 	ldx #mos16hi(__music_init)
 	jmp __set_prg_bank
 
-.section .prg_rom_fixed.famitone_banked_music_init,"ax",@progbits
-.globl banked_music_init
-banked_music_init:
-	tax
-	lda mos8(__rc20)
-	pha
-	stx mos8(__rc20)
-	lda #mos16hi(__banked_music_init)
-	jsr __get_prg_bank
-	pha
-	lda #mos24bank(__banked_music_init)
-	ldx #mos16hi(__banked_music_init)
-	jsr __set_prg_bank
-	lda mos8(__rc20)
-	jsr __banked_music_init
-	pla
-	ldx #mos16hi(__banked_music_init)
-	jsr __set_prg_bank
-	pla
-	sta mos8(__rc20)
-	rts
-
 .section .prg_rom_fixed.famitone_music_play,"ax",@progbits
 .globl music_play
 music_play:
@@ -119,29 +97,6 @@ sounds_init:
 	pla
 	ldx #mos16hi(__sounds_init)
 	jmp __set_prg_bank
-
-
-.section .prg_rom_fixed.famitone_banked_sounds_init,"ax",@progbits
-.globl banked_sounds_init
-banked_sounds_init:
-	tax
-	lda mos8(__rc20)
-	pha
-	stx mos8(__rc20)
-	lda #mos16hi(__banked_sounds_init)
-	jsr __get_prg_bank
-	pha
-	lda #mos24bank(__banked_sounds_init)
-	ldx #mos16hi(__banked_sounds_init)
-	jsr __set_prg_bank
-	lda mos8(__rc20)
-	jsr __banked_sounds_init
-	pla
-	ldx #mos16hi(__banked_sounds_init)
-	jsr __set_prg_bank
-	pla
-	sta mos8(__rc20)
-	rts
 
 .section .prg_rom_fixed.famitone_sfx_play,"ax",@progbits
 .globl sfx_play

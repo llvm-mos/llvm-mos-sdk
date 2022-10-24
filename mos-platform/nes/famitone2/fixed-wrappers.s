@@ -1,10 +1,3 @@
-; Referencing this symbol pulls in this library, which replaces the famitone C
-; interface with wrappers in the fixed bank that switch to the famitone
-; implementation's PRG bank first.
-.section .prg_rom_fixed,"ax",@progbits
-.globl famitone_fixed_wrappers
-famitone_fixed_wrappers:
-
 .section .prg_rom_fixed.famitone_update,"ax",@progbits
 .globl FamiToneUpdate
 FamiToneUpdate:

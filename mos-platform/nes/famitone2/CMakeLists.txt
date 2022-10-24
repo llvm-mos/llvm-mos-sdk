@@ -10,4 +10,8 @@ add_platform_library(nes-famitone2
 )
 target_include_directories(nes-famitone2 PRIVATE .)
 
-add_platform_library(nes-ft2-fixed-wrappers fixed-wrappers.s)
+add_platform_library(nes-ft2-fixed-wrappers
+  fixed-wrappers.s
+  music-bank-wrappers.s
+  sounds-bank-wrappers.s
+)

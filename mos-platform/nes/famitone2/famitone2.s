@@ -140,6 +140,8 @@ FT_SFX_ADR_L:
 	.fill 1
 FT_SFX_ADR_H:
 	.fill 1
+.globl __FT_SFX_ADR_H
+__FT_SFX_ADR_H = FT_SFX_ADR_H
 FT_SFX_BASE_ADR:
 	.fill 60
 

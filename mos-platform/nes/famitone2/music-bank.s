@@ -6,6 +6,9 @@ __push_music_bank:
   lda __FT_SONG_LIST_H
   jsr __get_prg_bank
   sta mos8(__saved_music_bank)
+  lda mos8(__music_bank)
+  ldx __FT_SONG_LIST_H
+  jmp __set_prg_bank
 .Lpush_skip:
   rts
 
@@ -25,13 +28,16 @@ __pop_music_bank:
 .weak banked_music_init
 __banked_music_init:
 banked_music_init:
-  ldx #1
-  stx mos8(__is_music_banked)
-  pha
+  sta mos8(__music_bank)
+  lda #1
+  sta mos8(__is_music_banked)
   lda mos8(__rc3)
   sta __FT_SONG_LIST_H
   jsr __push_music_bank
-  jsr music_init
+	ldx mos8(__rc2)
+	ldy mos8(__rc3)
+	lda mos8(NTSC_MODE)
+	jsr FamiToneInit
   jmp __pop_music_bank
 
 .section .text.ft_unbank_music,"ax",@progbits

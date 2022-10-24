@@ -1,5 +1,5 @@
-extern void __TKSA(unsigned char sa);
+extern void __TKSA(unsigned char addr);
 
-void cbm_k_tksa(unsigned char sa) {
-	__TKSA(sa);
+void cbm_k_tksa(unsigned char addr) {
+	__TKSA(addr);
 }

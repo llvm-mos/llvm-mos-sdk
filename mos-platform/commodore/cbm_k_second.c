@@ -1,5 +1,5 @@
-extern void __SECOND(unsigned char sa);
+extern void __SECOND(unsigned char addr);
 
-void cbm_k_second(unsigned char sa) {
-	__SECOND(sa);
+void cbm_k_second(unsigned char addr) {
+	__SECOND(addr);
 }

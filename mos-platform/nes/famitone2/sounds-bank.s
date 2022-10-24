@@ -22,7 +22,7 @@ __pop_sounds_bank:
 
 .section .text.ft_banked_sounds_init,"ax",@progbits
 .globl __banked_sounds_init
-.weak banked_sounds_iniprg_rom_t
+.weak banked_sounds_init
 __banked_sounds_init:
 banked_sounds_init:
   ldx #1

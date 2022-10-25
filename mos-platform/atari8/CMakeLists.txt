@@ -33,7 +33,7 @@ add_platform_library(atari8-c
   abort.c
   chrout.c
   putchar.c
-  getchar.c
+  getchar.s
 )
 target_include_directories(atari8-c SYSTEM BEFORE PUBLIC .)
 

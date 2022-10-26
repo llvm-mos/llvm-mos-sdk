@@ -1,6 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+set_directory_properties(PROPERTIES EXCLUDE_FROM_ALL ON)
 
-project(test-nes-mmc1-nocompile LANGUAGES C)
-
-add_executable(chr-rom-too-big chr-rom-too-big.c)
-add_executable(chr-rom-non-pow2 chr-rom-non-pow2.c)
+add_no_compile_test(chr-rom-too-big)
+add_no_compile_test(chr-rom-non-pow2)

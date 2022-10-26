@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['f_1572',['f',['../api_8h.html#a6dba71b3b29cb78ab78b9606219b3beb',1,'api.h']]],
-  ['fcb_1573',['FCB',['../cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6',1,'cpm.h']]],
-  ['from_1574',['FROM',['../famitone2_2LICENSE.html#a04b607378cba50550c6d47c105d95ed1',1,'FROM():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a54b4d04e10c91d4910abea0c1596291d',1,'FROM():&#160;LICENSE'],['../neslib_2LICENSE.html#a04b607378cba50550c6d47c105d95ed1',1,'FROM():&#160;LICENSE']]]
+  ['end_1604',['end',['../cpm_8h.html#ad0970d0a1eb91451bab00fc13a27c201',1,'cpm.h']]],
+  ['exceptions_1605',['Exceptions',['../famitone2_2LICENSE.html#a38990b0794d89da6c89372b9c2965223',1,'Exceptions():&#160;LICENSE'],['../neslib_2LICENSE.html#a38990b0794d89da6c89372b9c2965223',1,'Exceptions():&#160;LICENSE']]],
+  ['exit_1606',['exit',['../struct__sim__reg.html#a9fb4a196f7ad0ea72a1a4ef87969ea89',1,'_sim_reg']]],
+  ['extent_5fv_1607',['extent_v',['../namespacestd.html#a1551fcaec9587f92d148675508a42267',1,'std']]]
 ];

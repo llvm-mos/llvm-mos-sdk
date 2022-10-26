@@ -1,25 +1,4 @@
 var searchData=
 [
-  ['_5f6522_2eh_0',['_6522.h',['../__6522_8h.html',1,'']]],
-  ['_5f6526_2eh_1',['_6526.h',['../__6526_8h.html',1,'']]],
-  ['_5fantic_2eh_2',['_antic.h',['../__antic_8h.html',1,'']]],
-  ['_5fassert_5fh_5f_3',['_ASSERT_H_',['../assert_8h.html#a57746d21d4a6af829cea4da476ab76dc',1,'assert.h']]],
-  ['_5fatarios_2eh_4',['_atarios.h',['../__atarios_8h.html',1,'']]],
-  ['_5fcstddef_5f_5',['_CSTDDEF_',['../cstddef.html#ace4892aa42465d78505533137293b4ce',1,'cstddef']]],
-  ['_5fgtia_2eh_6',['_gtia.h',['../__gtia_8h.html',1,'']]],
-  ['_5fgtia_5fmkcolor_7',['_gtia_mkcolor',['../__gtia_8h.html#a5a19b676c253b56362f6e033e59b0f3b',1,'_gtia.h']]],
-  ['_5flibcxxabi_5fdata_5fvis_8',['_LIBCXXABI_DATA_VIS',['../cxxabi-config_8h.html#a2531e38781deacb293c0ee2104b11aaf',1,'cxxabi-config.h']]],
-  ['_5flibcxxabi_5ffunc_5fvis_9',['_LIBCXXABI_FUNC_VIS',['../cxxabi-config_8h.html#a20905ef8611a256fbd9fd6e5c0e6fab1',1,'cxxabi-config.h']]],
-  ['_5flibcxxabi_5fhidden_10',['_LIBCXXABI_HIDDEN',['../cxxabi-config_8h.html#a89dbea87cee796cc7962da3b30d1a103',1,'cxxabi-config.h']]],
-  ['_5flibcxxabi_5fno_5fcfi_11',['_LIBCXXABI_NO_CFI',['../cxxabi-config_8h.html#a3ae4a5275774c0b934982196c8b4df18',1,'cxxabi-config.h']]],
-  ['_5flibcxxabi_5ftype_5fvis_12',['_LIBCXXABI_TYPE_VIS',['../cxxabi-config_8h.html#af24531b4fb1d899b8914232770085f8c',1,'cxxabi-config.h']]],
-  ['_5flibcxxabi_5fweak_13',['_LIBCXXABI_WEAK',['../cxxabi-config_8h.html#aae6af416e15cc44ab053299bc7be6722',1,'cxxabi-config.h']]],
-  ['_5fpbi_2eh_14',['_pbi.h',['../__pbi_8h.html',1,'']]],
-  ['_5fpia_2eh_15',['_pia.h',['../__pia_8h.html',1,'']]],
-  ['_5fpokey_2eh_16',['_pokey.h',['../__pokey_8h.html',1,'']]],
-  ['_5fsid_2eh_17',['_sid.h',['../__sid_8h.html',1,'']]],
-  ['_5fsim_5freg_18',['_sim_reg',['../struct__sim__reg.html',1,'']]],
-  ['_5ftextcolor_19',['_textcolor',['../atari_8h.html#a68c8bbdd79ee6320b7e1dcdf0b34bb83',1,'atari.h']]],
-  ['_5ftype_5ftraits_5f_20',['_TYPE_TRAITS_',['../type__traits.html#a6f3e620ffc12213dc6135bad13769689',1,'type_traits']]],
-  ['_5fvic2_2eh_21',['_vic2.h',['../__vic2_8h.html',1,'']]]
+  ['6502_2eh_0',['6502.h',['../6502_8h.html',1,'']]]
 ];

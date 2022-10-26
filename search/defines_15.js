@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['ym2151_2441',['YM2151',['../cx16_8h.html#ae4f44360b472f790d3760b0f3835d4fc',1,'cx16.h']]]
+  ['wram_5foff_2484',['WRAM_OFF',['../nes-mmc3_2bank_8h.html#a258223195fde096e3f202498a3722c9d',1,'bank.h']]],
+  ['wram_5fon_2485',['WRAM_ON',['../nes-mmc3_2bank_8h.html#a6d471844d2443c9090f919bde76fc4fe',1,'bank.h']]],
+  ['wram_5fread_5fonly_2486',['WRAM_READ_ONLY',['../nes-mmc3_2bank_8h.html#ac06f8206b17296047089d0b8e4de7d87',1,'bank.h']]]
 ];

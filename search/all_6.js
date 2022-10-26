@@ -1,16 +1,13 @@
 var searchData=
 [
-  ['f_377',['f',['../api_8h.html#a6dba71b3b29cb78ab78b9606219b3beb',1,'api.h']]],
-  ['false_378',['FALSE',['../neslib_8h.html#aa93f0eb578d23995850d61f7d61c55c1',1,'neslib.h']]],
-  ['false_5ftype_379',['false_type',['../namespacestd.html#aebe6729ab5488ecc76c762873d226857',1,'std']]],
-  ['famitone2_2eh_380',['famitone2.h',['../famitone2_8h.html',1,'']]],
-  ['fcb_381',['FCB',['../cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6',1,'cpm.h']]],
-  ['files_382',['files',['../famitone2_2LICENSE.html#a17b028437d0e0f2acf1a46abd2f6b56e',1,'files(the &quot;Software&quot;):&#160;LICENSE'],['../nesdoug_2LICENSE.html#a57109d5f02e82589eb08193749d05025',1,'files(the &quot;Software&quot;):&#160;LICENSE'],['../neslib_2LICENSE.html#a17b028437d0e0f2acf1a46abd2f6b56e',1,'files(the &quot;Software&quot;):&#160;LICENSE']]],
-  ['fpidx_5fr0_383',['FPIDX_R0',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5abdadb22b5afc3fe41ccfc3c3cc4ffb6b',1,'_atarios.h']]],
-  ['fpidx_5fr1_384',['FPIDX_R1',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a28d565d6a0e7bdec1b5cf7c616b29268',1,'_atarios.h']]],
-  ['fpidx_5fr2_385',['FPIDX_R2',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a60471fb4c48cf14218faed0f03f879f3',1,'_atarios.h']]],
-  ['fpidx_5fre_386',['FPIDX_RE',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a20b66be4d38b2e253eafcaf7b896b3c4',1,'_atarios.h']]],
-  ['fpreg_5ft_387',['fpreg_t',['../__atarios_8h.html#a91af8aae485ff68bd1fa90d6224c9aa5',1,'_atarios.h']]],
-  ['free_388',['free',['../common_2include_2stdlib_8h.html#afbedc913aa4651b3c3b4b3aecd9b4711',1,'stdlib.h']]],
-  ['from_389',['FROM',['../famitone2_2LICENSE.html#a04b607378cba50550c6d47c105d95ed1',1,'FROM():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a54b4d04e10c91d4910abea0c1596291d',1,'FROM():&#160;LICENSE'],['../neslib_2LICENSE.html#a04b607378cba50550c6d47c105d95ed1',1,'FROM():&#160;LICENSE']]]
+  ['emulator_374',['EMULATOR',['../cx16_8h.html#ab1b9603949cedee7e20b33fba6cff029',1,'cx16.h']]],
+  ['end_375',['end',['../classstd_1_1initializer__list.html#abd1d0fd2c35074ce0b51ba1c39173ee0',1,'std::initializer_list::end()'],['../cpm_8h.html#ad0970d0a1eb91451bab00fc13a27c201',1,'end():&#160;cpm.h'],['../namespacestd.html#a32e349e93114238d72333a08f7ac044d',1,'std::end()']]],
+  ['eof_376',['EOF',['../stdio_8h.html#a59adc4c82490d23754cd39c2fb99b0da',1,'stdio.h']]],
+  ['exception_377',['exception',['../exception.html',1,'']]],
+  ['exceptions_378',['Exceptions',['../famitone2_2LICENSE.html#a38990b0794d89da6c89372b9c2965223',1,'Exceptions():&#160;LICENSE'],['../neslib_2LICENSE.html#a38990b0794d89da6c89372b9c2965223',1,'Exceptions():&#160;LICENSE']]],
+  ['exit_379',['exit',['../struct__sim__reg.html#a9fb4a196f7ad0ea72a1a4ef87969ea89',1,'_sim_reg::exit()'],['../common_2include_2stdlib_8h.html#a55e99c539cf7723ec15e856b7e0a8cee',1,'exit():&#160;stdlib.h']]],
+  ['exit_5ffailure_380',['EXIT_FAILURE',['../common_2include_2stdlib_8h.html#a73efe787c131b385070f25d18b7c9aa4',1,'stdlib.h']]],
+  ['exit_5fsuccess_381',['EXIT_SUCCESS',['../common_2include_2stdlib_8h.html#a687984f47d8cce148d1b914d2b79612a',1,'stdlib.h']]],
+  ['extent_382',['extent',['../structstd_1_1extent.html',1,'std']]],
+  ['extent_5fv_383',['extent_v',['../namespacestd.html#a1551fcaec9587f92d148675508a42267',1,'std']]]
 ];

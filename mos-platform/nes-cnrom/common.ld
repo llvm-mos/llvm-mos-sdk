@@ -6,8 +6,6 @@ INCLUDE prg-rom-fixed.ld
 
 ASSERT(__chr_ram_size + __chr_nvram_size + __chr_rom_size <= 2048,
        "CNROM only supports up to 2048 KiB of CHR.")
-ASSERT(__chr_rom_size == 0 || __chr_rom_size == 1 << LOG2CEIL(__chr_rom_size),
-       "CNROM only supports pow2 CHR-ROM sizes.")
 
 MEMORY {
   chr_rom_0   : ORIGIN = 0x02000000, LENGTH = __chr_rom_size >= 8    ? 0x2000 : 0

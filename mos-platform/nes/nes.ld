@@ -3,10 +3,10 @@ __rc0 = 0x00;
 INCLUDE imag-regs.ld
 ASSERT(__rc31 == 0x1f, "Inconsistent zero page map.")
 
-ASSERT(__prg_rom_size % 16 == 0,
-       "PRG-ROM size must be evenly divisible by 16 KiB.")
-ASSERT(__chr_rom_size % 8 == 0,
-       "CHR-ROM size must be evenly divisible by 8 KiB.")
+ASSERT(__prg_rom_size == 1 << LOG2CEIL(__prg_rom_size),
+       "PRG-ROM size must be a power of 2.")
+ASSERT(__chr_rom_size == 0 || __chr_rom_size == 1 << LOG2CEIL(__chr_rom_size),
+       "CHR-ROM size must be a power of 2.")
 ASSERT(__prg_ram_size == 0 ||
        __prg_ram_size == 1 << LOG2CEIL(__prg_ram_size),
        "Nonempty PRG-RAM must be a power of 2.")

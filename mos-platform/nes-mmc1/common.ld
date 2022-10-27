@@ -3,8 +3,6 @@
 INCLUDE nes.ld
 
 ASSERT(__chr_rom_size <= 128, "MMC1 only supports up to 128 KiB of CHR-ROM.")
-ASSERT(__chr_rom_size == 0 || __chr_rom_size == 1 << LOG2CEIL(__chr_rom_size),
-         "MMC1 only supports CHR-ROM sizes that are powers of two.")
 
 ASSERT(__chr_ram_size + __chr_nvram_size <= 8,
        "MMC1 only supports up to 8KiB of CHR-(NV)RAM.")

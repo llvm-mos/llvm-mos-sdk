@@ -34,6 +34,14 @@ function(find_mos_compiler compiler_var bin_name)
       return_found_bin()
     endif()
 
+    # If we are on windows, try and find the program as a batch script first
+    # By default, cmake doesn't consider `.bat` as an executable extension, but it will find it
+    # if we specify the name of the file exactly
+    if(WIN32)
+      find_program(found_bin ${bin_name}.bat NO_CACHE)
+      return_found_bin()
+    endif()
+
     # Finally attempt finding clang with cmake's default find logic.
     find_program(found_bin ${bin_name} NO_CACHE)
     set(${out_var} ${found_bin} PARENT_SCOPE)

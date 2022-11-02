@@ -1,3 +1,6 @@
+
+PROVIDE(__prg_rom_size = 512);
+
 ASSERT(__prg_rom_size > 32,
        "For less than 32KiB of PRG-ROM, use fixed banking.");
 

@@ -1,10 +1,13 @@
 ASSERT(__prg_rom_size > 32,
        "For less than 32KiB of PRG-ROM, use fixed banking.");
 
+PROVIDE(__prg_rom_size = 512);
+
 /* This bank must be switched to on reset to establish a 24KiB fixed region. */
 __fixed_bank = (__prg_rom_size / 8) - 3;
 
 INPUT(reset-banked-8.o)
+
 
 MEMORY {
   prg_rom_fixed_lma : ORIGIN = 0x01000000 + __prg_rom_size * 1024 - 0x6000,

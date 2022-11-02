@@ -1,6 +1,8 @@
 .section .text.set_prg_bank,"ax",@progbits
 .globl __set_prg_bank
+.weak set_prg_bank
 __set_prg_bank:
+set_prg_bank:
 	tay
 	txa
 	and #$e0	; Zero non-bank bits.
@@ -14,7 +16,9 @@ __set_prg_bank:
 
 .section .text.get_prg_bank,"ax",@progbits
 .globl __get_prg_bank
+.weak get_prg_bank
 __get_prg_bank:
+get_prg_bank:
 	and #$e0	; Zero non-bank bits.
 	cmp #$a0
 	bne .Lget_8000

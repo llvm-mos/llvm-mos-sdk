@@ -5,3 +5,5 @@ project(test-nes-mmc3 LANGUAGES C)
 include(../test.cmake)
 
 add_mesen_test(minimal)
+
+add_subdirectory(no-compile)

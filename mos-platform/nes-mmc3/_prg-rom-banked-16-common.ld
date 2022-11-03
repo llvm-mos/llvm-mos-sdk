@@ -70,4 +70,4 @@ MEMORY {
 }
 
 INCLUDE dpcm.ld
-INCLUDE reset.ld
+INCLUDE _reset.ld

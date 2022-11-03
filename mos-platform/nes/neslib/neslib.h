@@ -33,20 +33,20 @@ __attribute__((leaf)) void pal_bg(const void *data);
 __attribute__((leaf)) void pal_spr(const void *data);
 
 // set a palette entry, index is 0..31
-__attribute__((leaf)) void pal_col(char index, char color);
+void pal_col(char index, char color);
 
 // reset palette to $0f
 __attribute__((leaf)) void pal_clear(void);
 
 // set virtual bright both for sprites and background, 0 is black, 4 is normal,
 // 8 is white
-__attribute__((leaf)) void pal_bright(char bright);
+void pal_bright(char bright);
 
 // set virtual bright for sprites only
-__attribute__((leaf)) void pal_spr_bright(char bright);
+void pal_spr_bright(char bright);
 
 // set virtual bright for sprites background only
-__attribute__((leaf)) void pal_bg_bright(char bright);
+void pal_bg_bright(char bright);
 
 // wait actual TV frame, 50hz for PAL, 60hz for NTSC
 __attribute__((leaf)) void ppu_wait_nmi(void);
@@ -56,22 +56,22 @@ __attribute__((leaf)) void ppu_wait_nmi(void);
 __attribute__((leaf)) void ppu_wait_frame(void);
 
 // turn off rendering, nmi still enabled when rendering is disabled
-__attribute__((leaf)) void ppu_off(void);
+void ppu_off(void);
 
 // turn on bg, spr
-__attribute__((leaf)) void ppu_on_all(void);
+void ppu_on_all(void);
 
 // turn on bg only
-__attribute__((leaf)) void ppu_on_bg(void);
+void ppu_on_bg(void);
 
 // turn on spr only
-__attribute__((leaf)) void ppu_on_spr(void);
+void ppu_on_spr(void);
 
 // set PPU_MASK directly
-__attribute__((leaf)) void ppu_mask(char mask);
+void ppu_mask(char mask);
 
 // get current video system, 0 for PAL, not 0 for NTSC
-__attribute__((leaf)) char ppu_system(void);
+char ppu_system(void);
 
 // clear OAM buffer, all the sprites are hidden
 //  Note: changed. Now also changes sprid (index to buffer) to zero
@@ -99,10 +99,10 @@ __attribute__((leaf)) void oam_hide_rest(void);
 // to manually change the sprid (index to sprite buffer)
 // perhaps as part of a sprite shuffling algorithm
 // Note: this should be a multiple of 4 (0,4,8,12,etc.)
-__attribute__((leaf)) void oam_set(char index);
+void oam_set(char index);
 
 // returns the sprid (index to the sprite buffer)
-__attribute__((leaf)) char oam_get(void);
+char oam_get(void);
 
 // poll controller and return flags like PAD_LEFT etc, input is pad number (0 or
 // 1)
@@ -111,10 +111,10 @@ __attribute__((leaf)) char pad_poll(char pad);
 // poll controller in trigger mode, a flag is set only on button down, not hold
 // if you need to poll the pad in both normal and trigger mode, poll it in the
 // trigger mode for first, then use pad_state
-__attribute__((leaf)) char pad_trigger(char pad);
+char pad_trigger(char pad);
 
 // get previous pad state without polling ports
-__attribute__((leaf)) char pad_state(char pad);
+char pad_state(char pad);
 
 // set scroll, including the top bits
 // it is always applied at beginning of a TV frame, not at the function call
@@ -159,7 +159,7 @@ __attribute__((leaf)) void set_rand(unsigned seed);
 //  NT_UPD_EOF to mark end of the buffer
 //
 // length of this data should be under 256 bytes
-__attribute__((leaf)) void set_vram_update(const void *buf);
+void set_vram_update(const void *buf);
 
 // all following vram functions only work when display is disabled
 
@@ -168,10 +168,10 @@ __attribute__((leaf)) void set_vram_update(const void *buf);
 __attribute__((leaf)) void flush_vram_update(const void *buf);
 
 // set vram pointer to write operations if you need to write some data to vram
-__attribute__((leaf)) void vram_adr(unsigned adr);
+void vram_adr(unsigned adr);
 
 // put a byte at current vram address, works only when rendering is turned off
-__attribute__((leaf)) void vram_put(char n);
+void vram_put(char n);
 
 // fill a block with a byte at current vram address, works only when rendering
 // is turned off
@@ -192,7 +192,7 @@ __attribute__((leaf)) void vram_write(const void *src, unsigned size);
 __attribute__((leaf)) void vram_unrle(const void *data);
 
 // delay for N frames
-__attribute__((leaf)) void delay(char frames);
+void delay(char frames);
 
 #define PAD_A 0x80
 #define PAD_B 0x40

@@ -232,20 +232,6 @@ pal_spr:
 
 
 
-;void pal_col(unsigned char index,unsigned char color);
-.section .text.pal_col,"ax",@progbits
-.globl pal_col
-pal_col:
-
-	and #$1f
-	tay
-	txa
-	sta PAL_BUF,y
-	inc mos8(PAL_UPDATE)
-	rts
-
-
-
 ;void pal_clear(void);
 .section .text.pal_clear,"ax",@progbits
 .globl pal_clear
@@ -261,116 +247,6 @@ pal_clear:
 	cpx #$20
 	bne 0b
 	stx mos8(PAL_UPDATE)
-	rts
-
-
-
-;void pal_spr_bright(unsigned char bright);
-.section .text.pal_spr_bright,"ax",@progbits
-.globl pal_spr_bright
-pal_spr_bright:
-
-	tax
-	lda palBrightTableL,x
-	sta mos8(PAL_SPR_PTR)
-	lda palBrightTableH,x	;MSB is never zero
-	sta mos8(PAL_SPR_PTR+1)
-	sta mos8(PAL_UPDATE)
-	rts
-
-
-
-;void pal_bg_bright(unsigned char bright);
-.section .text.pal_bg_bright,"ax",@progbits
-.globl pal_bg_bright
-pal_bg_bright:
-
-	tax
-	lda palBrightTableL,x
-	sta mos8(PAL_BG_PTR)
-	lda palBrightTableH,x	;MSB is never zero
-	sta mos8(PAL_BG_PTR+1)
-	sta mos8(PAL_UPDATE)
-	rts
-
-
-
-;void pal_bright(unsigned char bright);
-.section .text.pal_bright,"ax",@progbits
-.globl pal_bright
-pal_bright:
-
-	jsr pal_spr_bright
-	txa
-	jmp pal_bg_bright
-
-
-
-;void ppu_off(void);
-.section .text.ppu_off,"ax",@progbits
-.globl ppu_off
-ppu_off:
-
-	lda mos8(PPUMASK_VAR)
-	and #0b11100111
-	sta mos8(PPUMASK_VAR)
-	jmp ppu_wait_nmi
-
-
-
-;void ppu_on_all(void);
-.section .text.ppu_on_all,"ax",@progbits
-.globl ppu_on_all
-ppu_on_all:
-
-	lda mos8(PPUMASK_VAR)
-	ora #0b00011000
-
-ppu_onoff:
-
-	sta mos8(PPUMASK_VAR)
-	jmp ppu_wait_nmi
-
-
-
-;void ppu_on_bg(void);
-.section .text.ppu_on_bg,"ax",@progbits
-.globl ppu_on_bg
-ppu_on_bg:
-
-	lda mos8(PPUMASK_VAR)
-	ora #0b00001000
-	jmp ppu_onoff
-
-
-
-;void ppu_on_spr(void);
-.section .text.ppu_on_spr,"ax",@progbits
-.globl ppu_on_spr
-ppu_on_spr:
-
-	lda mos8(PPUMASK_VAR)
-	ora #0b00010000
-	jmp ppu_onoff
-
-
-
-;void ppu_mask(unsigned char mask);
-.section .text.ppu_mask,"ax",@progbits
-.globl ppu_mask
-ppu_mask:
-
-	sta mos8(PPUMASK_VAR)
-	rts
-
-
-
-;unsigned char ppu_system(void);
-.section .text.ppu_system,"ax",@progbits
-.globl ppu_system
-ppu_system:
-
-	lda mos8(NTSC_MODE)
 	rts
 
 
@@ -391,28 +267,6 @@ oam_clear:
 	inx
 	bne 0b
 	rts
-
-
-;void oam_set(unsigned char index);
-;to manually set the position
-;a = sprid
-.section .text.oam_set,"ax",@progbits
-.globl oam_set
-oam_set:
-	and #$fc ;strip those low 2 bits, just in case
-	sta mos8(SPRID)
-	rts
-
-
-;unsigned char oam_get(void);
-;returns the sprid
-.section .text.oam_get,"ax",@progbits
-.globl oam_get
-oam_get:
-	lda mos8(SPRID)
-	rts
-
-
 
 
 ;void oam_size(unsigned char size);
@@ -858,46 +712,6 @@ pad_poll:
 
 
 
-;unsigned char pad_trigger(unsigned char pad);
-.section .text.pad_trigger,"ax",@progbits
-.globl pad_trigger
-pad_trigger:
-
-	pha
-	jsr pad_poll
-	pla
-	tax
-	lda mos8(PAD_STATET),x
-	rts
-
-
-
-;unsigned char pad_state(unsigned char pad);
-.section .text.pad_state,"ax",@progbits
-.globl pad_state
-pad_state:
-
-	tax
-	lda mos8(PAD_STATE),x
-	rts
-
-
-
-;void set_vram_update(unsigned char *buf);
-.section .text.set_vram_update,"ax",@progbits
-.globl set_vram_update
-set_vram_update:
-	lda mos8(__rc2)
-	sta mos8(NAME_UPD_ADR+0)
-	lda mos8(__rc3)
-	sta mos8(NAME_UPD_ADR+1)
-	ora mos8(NAME_UPD_ADR)
-	sta mos8(NAME_UPD_ENABLE)
-
-	rts
-
-
-
 ;void flush_vram_update(unsigned char *buf);
 .section .text.flush_vram_update,"ax",@progbits
 .globl flush_vram_update
@@ -982,29 +796,6 @@ __post_vram_update:
 
 
 
-;void vram_adr(unsigned int adr);
-.section .text.vram_adr,"ax",@progbits
-.globl vram_adr
-vram_adr:
-
-	stx PPUADDR
-	sta PPUADDR
-
-	rts
-
-
-
-;void vram_put(unsigned char n);
-.section .text.vram_put,"ax",@progbits
-.globl vram_put
-vram_put:
-
-	sta PPUDATA
-
-	rts
-
-
-
 ;void vram_fill(unsigned char n,unsigned int len);
 .section .text.vram_fill,"ax",@progbits
 .globl vram_fill
@@ -1063,32 +854,16 @@ vram_inc:
 
 
 
-;void delay(unsigned char frames);
-.section .text.delay,"ax",@progbits
-.globl delay
-
-delay:
-
-	tax
-
-1:
-
-	jsr ppu_wait_nmi
-	dex
-	bne 1b
-
-	rts
-
-
 .section .rodata.bright_table,"a",@progbits
-
-palBrightTableL:
+.globl __palBrightTableL
+.globl __palBrightTableH
+__palBrightTableL:
 
 	.byte palBrightTable0@mos16lo,palBrightTable1@mos16lo,palBrightTable2@mos16lo
 	.byte palBrightTable3@mos16lo,palBrightTable4@mos16lo,palBrightTable5@mos16lo
 	.byte palBrightTable6@mos16lo,palBrightTable7@mos16lo,palBrightTable8@mos16lo
 
-palBrightTableH:
+__palBrightTableH:
 
 	.byte palBrightTable0@mos16hi,palBrightTable1@mos16hi,palBrightTable2@mos16hi
 	.byte palBrightTable3@mos16hi,palBrightTable4@mos16hi,palBrightTable5@mos16hi

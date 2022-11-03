@@ -73,3 +73,6 @@ MEMORY {
 
 REGION_ALIAS("c_rom_vma", prg_rom_fixed_vma)
 REGION_ALIAS("c_rom_lma", prg_rom_fixed_lma)
+
+INCLUDE dpcm.ld
+INCLUDE _reset.ld

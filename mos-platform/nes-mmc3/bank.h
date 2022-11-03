@@ -120,7 +120,7 @@ __attribute__((leaf)) void disable_irq(void);
 
 // This points an array to the IRQ system
 // Also turns ON the system
-__attribute__((leaf)) void set_irq_ptr(void *address);
+__attribute__((leaf)) void set_irq_ptr(const void *address);
 
 // Check if it's safe to write to the irq array
 // returns 0xff if done, zero if not done

@@ -68,6 +68,3 @@ MEMORY {
   prg_rom_60_vma    : ORIGIN = 0x3c0000 + __prg_rom_60, LENGTH = 0x2000
   prg_rom_61_vma    : ORIGIN = 0x3d0000 + __prg_rom_61, LENGTH = 0x2000
 }
-
-INCLUDE dpcm.ld
-INCLUDE _reset.ld

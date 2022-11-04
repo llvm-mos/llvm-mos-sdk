@@ -12,7 +12,8 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - MEGA65
 - NES
   - NES-NROM
-  - NES-MMC1  
+  - NES-MMC1
+  - NES-MMC3
   - NES-CNROM
 - Ohio Scientific Challenger 1P
 - 6502 simulator (included)

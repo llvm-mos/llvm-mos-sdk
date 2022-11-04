@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['labs_1501',['labs',['../common_2include_2stdlib_8h.html#ac39409d0077cf980e4e6419bc6014d10',1,'stdlib.h']]],
-  ['license_1502',['License',['../famitone2_2LICENSE.html#a406cb974dd0e1ff418e4fa5af04c91b9',1,'License(MIT):&#160;LICENSE'],['../neslib_2LICENSE.html#a406cb974dd0e1ff418e4fa5af04c91b9',1,'License(MIT):&#160;LICENSE']]],
-  ['llabs_1503',['llabs',['../common_2include_2stdlib_8h.html#a7251caa2dd32261e7768d824c0a532c6',1,'stdlib.h']]],
-  ['longjmp_1504',['longjmp',['../setjmp_8h.html#abca8bbfed32ab95dd694dddf12096dc5',1,'setjmp.h']]]
+  ['initializer_5flist_1528',['initializer_list',['../classstd_1_1initializer__list.html#abe1e36129986ffbe5dfb19b34ceebdb6',1,'std::initializer_list']]],
+  ['isalpha_1529',['isalpha',['../ctype_8h.html#a25908ae63aac2df990634e1ae5bd14d9',1,'ctype.h']]],
+  ['isdigit_1530',['isdigit',['../ctype_8h.html#a3fa45b35c8abf67a950b6d3d4063dede',1,'ctype.h']]],
+  ['isprint_1531',['isprint',['../ctype_8h.html#a99355d8f0fb41ec43effb95189db0ed4',1,'ctype.h']]]
 ];

@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['name_1511',['name',['../classstd_1_1type__info.html#afe60508ee089cebbd056bd50dfc7c3d7',1,'std::type_info']]],
-  ['nothrow_5ft_1512',['nothrow_t',['../structstd_1_1nothrow__t.html#a24884422d2727fd07d509fcfd3401b2b',1,'std::nothrow_t']]]
+  ['malloc_1536',['malloc',['../common_2include_2stdlib_8h.html#a7ac38fce3243a7dcf448301ee9ffd392',1,'stdlib.h']]],
+  ['memchr_1537',['memchr',['../string_8h.html#a16d6b0bd660cc3f9910924c6b6f4af8e',1,'string.h']]],
+  ['memcmp_1538',['memcmp',['../string_8h.html#a9e6df54ee04e18a3772335580e2ed872',1,'string.h']]],
+  ['memcpy_1539',['memcpy',['../string_8h.html#a82c26cd350df88414f825bca40183ec2',1,'string.h']]],
+  ['memmove_1540',['memmove',['../string_8h.html#ae8628c986b70205d34a160d2fb740680',1,'string.h']]],
+  ['memset_1541',['memset',['../string_8h.html#a4cb469bec7b722064b97a406346acb61',1,'string.h']]]
 ];

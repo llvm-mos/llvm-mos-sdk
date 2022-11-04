@@ -104,20 +104,20 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> pal_spr(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// set a palette entry, index is 0..31</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">   36</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> pal_col(<span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>, <span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#aa8cf2db69e1b35b12952e4a0e401ec1f">pal_col</a>(<span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>, <span class="keywordtype">char</span> color);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// reset palette to $0f</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> pal_clear(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// set virtual bright both for sprites and background, 0 is black, 4 is normal,</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// 8 is white</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> pal_bright(<span class="keywordtype">char</span> bright);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#a838aed4cc9bf315e54a848b1c6512bb8">pal_bright</a>(<span class="keywordtype">char</span> bright);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// set virtual bright for sprites only</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> pal_spr_bright(<span class="keywordtype">char</span> bright);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#a13d13e2a5be638d9bb6871604ce776c4">pal_spr_bright</a>(<span class="keywordtype">char</span> bright);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// set virtual bright for sprites background only</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> pal_bg_bright(<span class="keywordtype">char</span> bright);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#af38534e6aff957d6b1c39d13a9e83177">pal_bg_bright</a>(<span class="keywordtype">char</span> bright);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">// wait actual TV frame, 50hz for PAL, 60hz for NTSC</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> ppu_wait_nmi(<span class="keywordtype">void</span>);</div>
@@ -127,22 +127,22 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> ppu_wait_frame(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">// turn off rendering, nmi still enabled when rendering is disabled</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> ppu_off(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#aa46977f8acecf69adcd6918c4f51d71d">ppu_off</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">// turn on bg, spr</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> ppu_on_all(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#a26471a115d119b1403b839694e6c083a">ppu_on_all</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">// turn on bg only</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> ppu_on_bg(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#ad08523d064b1edb10aeb746c1df146d0">ppu_on_bg</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">// turn on spr only</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> ppu_on_spr(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#ad96985b0e2e806b528dc1503e4f802e9">ppu_on_spr</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// set PPU_MASK directly</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> ppu_mask(<span class="keywordtype">char</span> mask);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#a4ddbec08ec5b148da2565c5105bda698">ppu_mask</a>(<span class="keywordtype">char</span> mask);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">// get current video system, 0 for PAL, not 0 for NTSC</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;__attribute__((leaf)) <span class="keywordtype">char</span> ppu_system(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#aa54d5b7a0823d901c12ad7b7ade04802">ppu_system</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">// clear OAM buffer, all the sprites are hidden</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">//  Note: changed. Now also changes sprid (index to buffer) to zero</span></div>
@@ -170,10 +170,10 @@ $(function() {
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">// to manually change the sprid (index to sprite buffer)</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">// perhaps as part of a sprite shuffling algorithm</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">// Note: this should be a multiple of 4 (0,4,8,12,etc.)</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> oam_set(<span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#ad887dfeb879c8dce339a9830b23c960c">oam_set</a>(<span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">// returns the sprid (index to the sprite buffer)</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;__attribute__((leaf)) <span class="keywordtype">char</span> oam_get(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#ad452d37f42f97ef7df6c035a83b644b5">oam_get</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">// poll controller and return flags like PAD_LEFT etc, input is pad number (0 or</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">// 1)</span></div>
@@ -182,10 +182,10 @@ $(function() {
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">// poll controller in trigger mode, a flag is set only on button down, not hold</span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">// if you need to poll the pad in both normal and trigger mode, poll it in the</span></div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">// trigger mode for first, then use pad_state</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;__attribute__((leaf)) <span class="keywordtype">char</span> pad_trigger(<span class="keywordtype">char</span> pad);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#a3bb9b44a925a416ced7268b35474a062">pad_trigger</a>(<span class="keywordtype">char</span> pad);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">// get previous pad state without polling ports</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;__attribute__((leaf)) <span class="keywordtype">char</span> pad_state(<span class="keywordtype">char</span> pad);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#a81c02aeee9277974f4dba3994232f146">pad_state</a>(<span class="keywordtype">char</span> pad);</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">// set scroll, including the top bits</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">// it is always applied at beginning of a TV frame, not at the function call</span></div>
@@ -230,7 +230,7 @@ $(function() {
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">//  NT_UPD_EOF to mark end of the buffer</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">// length of this data should be under 256 bytes</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> set_vram_update(<span class="keyword">const</span> <span class="keywordtype">void</span> *buf);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#a30e14306bd9659ce78f5402586445fa9">set_vram_update</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *buf);</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">// all following vram functions only work when display is disabled</span></div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
@@ -239,10 +239,10 @@ $(function() {
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> flush_vram_update(<span class="keyword">const</span> <span class="keywordtype">void</span> *buf);</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">// set vram pointer to write operations if you need to write some data to vram</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> vram_adr(<span class="keywordtype">unsigned</span> adr);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#ab435b344bc9ef4b60f84c1357d171c8a">vram_adr</a>(<span class="keywordtype">unsigned</span> adr);</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">// put a byte at current vram address, works only when rendering is turned off</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> vram_put(<span class="keywordtype">char</span> n);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#a43abedc1019b177c9baeeffd4402ccb2">vram_put</a>(<span class="keywordtype">char</span> n);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment">// fill a block with a byte at current vram address, works only when rendering</span></div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment">// is turned off</span></div>
@@ -263,7 +263,7 @@ $(function() {
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> vram_unrle(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>);</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">// delay for N frames</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> delay(<span class="keywordtype">char</span> frames);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keywordtype">void</span> <a class="code" href="neslib_8h.html#a6b30eed0854f2585dcc60b77c3c2f4f2">delay</a>(<span class="keywordtype">char</span> frames);</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
 <div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="neslib_8h.html#a0189b1aa39b1b7d091f82918202b1be7">  197</a></span>&#160;<span class="preprocessor">#define PAD_A 0x80</span></div>
 <div class="line"><a name="l00198"></a><span class="lineno"><a class="line" href="neslib_8h.html#ac4aa17858ec1e696517821e720d4d28a">  198</a></span>&#160;<span class="preprocessor">#define PAD_B 0x40</span></div>
@@ -323,15 +323,32 @@ $(function() {
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="preprocessor">#endif // _NESLIB_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aneslib_8h_html_a30e14306bd9659ce78f5402586445fa9"><div class="ttname"><a href="neslib_8h.html#a30e14306bd9659ce78f5402586445fa9">set_vram_update</a></div><div class="ttdeci">void set_vram_update(const void *buf)</div></div>
 <div class="ttc" id="aneslib_8h_html_a4960e0db764d064fd8e2ed33fe9bdbe9"><div class="ttname"><a href="neslib_8h.html#a4960e0db764d064fd8e2ed33fe9bdbe9">len</a></div><div class="ttdeci">unsigned len</div><div class="ttdef"><b>Definition:</b> neslib.h:178</div></div>
 <div class="ttc" id="afamitone2_8h_html"><div class="ttname"><a href="famitone2_8h.html">famitone2.h</a></div></div>
 <div class="ttc" id="aneslib_8h_html_aac68389240a6f659c888e1dc7ed82fb6"><div class="ttname"><a href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a></div><div class="ttdeci">char const void * data</div><div class="ttdef"><b>Definition:</b> neslib.h:92</div></div>
+<div class="ttc" id="aneslib_8h_html_a4ddbec08ec5b148da2565c5105bda698"><div class="ttname"><a href="neslib_8h.html#a4ddbec08ec5b148da2565c5105bda698">ppu_mask</a></div><div class="ttdeci">void ppu_mask(char mask)</div></div>
+<div class="ttc" id="aneslib_8h_html_ad96985b0e2e806b528dc1503e4f802e9"><div class="ttname"><a href="neslib_8h.html#ad96985b0e2e806b528dc1503e4f802e9">ppu_on_spr</a></div><div class="ttdeci">void ppu_on_spr(void)</div></div>
+<div class="ttc" id="aneslib_8h_html_ab435b344bc9ef4b60f84c1357d171c8a"><div class="ttname"><a href="neslib_8h.html#ab435b344bc9ef4b60f84c1357d171c8a">vram_adr</a></div><div class="ttdeci">void vram_adr(unsigned adr)</div></div>
+<div class="ttc" id="aneslib_8h_html_a13d13e2a5be638d9bb6871604ce776c4"><div class="ttname"><a href="neslib_8h.html#a13d13e2a5be638d9bb6871604ce776c4">pal_spr_bright</a></div><div class="ttdeci">void pal_spr_bright(char bright)</div></div>
 <div class="ttc" id="aneslib_8h_html_ac38a342729250f8b4b5dd7239e4930f1"><div class="ttname"><a href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a></div><div class="ttdeci">char y</div><div class="ttdef"><b>Definition:</b> neslib.h:85</div></div>
+<div class="ttc" id="aneslib_8h_html_aa46977f8acecf69adcd6918c4f51d71d"><div class="ttname"><a href="neslib_8h.html#aa46977f8acecf69adcd6918c4f51d71d">ppu_off</a></div><div class="ttdeci">void ppu_off(void)</div></div>
+<div class="ttc" id="aneslib_8h_html_aa8cf2db69e1b35b12952e4a0e401ec1f"><div class="ttname"><a href="neslib_8h.html#aa8cf2db69e1b35b12952e4a0e401ec1f">pal_col</a></div><div class="ttdeci">void pal_col(char index, char color)</div></div>
+<div class="ttc" id="aneslib_8h_html_a838aed4cc9bf315e54a848b1c6512bb8"><div class="ttname"><a href="neslib_8h.html#a838aed4cc9bf315e54a848b1c6512bb8">pal_bright</a></div><div class="ttdeci">void pal_bright(char bright)</div></div>
 <div class="ttc" id="aneslib_8h_html_a206b3d754a8d0963d0f74ef00a6e41d5"><div class="ttname"><a href="neslib_8h.html#a206b3d754a8d0963d0f74ef00a6e41d5">attr</a></div><div class="ttdeci">char char char attr</div><div class="ttdef"><b>Definition:</b> neslib.h:85</div></div>
 <div class="ttc" id="anesdoug_8h_html_a8f564a8b3781dfabef60c05915da85f8"><div class="ttname"><a href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a></div><div class="ttdeci">char index</div><div class="ttdef"><b>Definition:</b> nesdoug.h:111</div></div>
+<div class="ttc" id="aneslib_8h_html_aa54d5b7a0823d901c12ad7b7ade04802"><div class="ttname"><a href="neslib_8h.html#aa54d5b7a0823d901c12ad7b7ade04802">ppu_system</a></div><div class="ttdeci">char ppu_system(void)</div></div>
+<div class="ttc" id="aneslib_8h_html_a43abedc1019b177c9baeeffd4402ccb2"><div class="ttname"><a href="neslib_8h.html#a43abedc1019b177c9baeeffd4402ccb2">vram_put</a></div><div class="ttdeci">void vram_put(char n)</div></div>
 <div class="ttc" id="anesdoug_8h_html_a80675ee63d0ab830a427bb355c5996ec"><div class="ttname"><a href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a></div><div class="ttdeci">unsigned scroll</div><div class="ttdef"><b>Definition:</b> nesdoug.h:68</div></div>
+<div class="ttc" id="aneslib_8h_html_ad887dfeb879c8dce339a9830b23c960c"><div class="ttname"><a href="neslib_8h.html#ad887dfeb879c8dce339a9830b23c960c">oam_set</a></div><div class="ttdeci">void oam_set(char index)</div></div>
+<div class="ttc" id="aneslib_8h_html_a26471a115d119b1403b839694e6c083a"><div class="ttname"><a href="neslib_8h.html#a26471a115d119b1403b839694e6c083a">ppu_on_all</a></div><div class="ttdeci">void ppu_on_all(void)</div></div>
 <div class="ttc" id="aneslib_8h_html_a245260f6f74972558f61b85227df5aae"><div class="ttname"><a href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a></div><div class="ttdeci">unsigned size</div><div class="ttdef"><b>Definition:</b> neslib.h:185</div></div>
-<div class="ttc" id="aneslib_8h_html_ae2d77c102b2d2d3f0881c0e2bcdbe777"><div class="ttname"><a href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a></div><div class="ttdeci">char color</div><div class="ttdef"><b>Definition:</b> neslib.h:36</div></div>
+<div class="ttc" id="aneslib_8h_html_a81c02aeee9277974f4dba3994232f146"><div class="ttname"><a href="neslib_8h.html#a81c02aeee9277974f4dba3994232f146">pad_state</a></div><div class="ttdeci">char pad_state(char pad)</div></div>
+<div class="ttc" id="aneslib_8h_html_a6b30eed0854f2585dcc60b77c3c2f4f2"><div class="ttname"><a href="neslib_8h.html#a6b30eed0854f2585dcc60b77c3c2f4f2">delay</a></div><div class="ttdeci">void delay(char frames)</div></div>
+<div class="ttc" id="aneslib_8h_html_ad08523d064b1edb10aeb746c1df146d0"><div class="ttname"><a href="neslib_8h.html#ad08523d064b1edb10aeb746c1df146d0">ppu_on_bg</a></div><div class="ttdeci">void ppu_on_bg(void)</div></div>
+<div class="ttc" id="aneslib_8h_html_ad452d37f42f97ef7df6c035a83b644b5"><div class="ttname"><a href="neslib_8h.html#ad452d37f42f97ef7df6c035a83b644b5">oam_get</a></div><div class="ttdeci">char oam_get(void)</div></div>
+<div class="ttc" id="aneslib_8h_html_af38534e6aff957d6b1c39d13a9e83177"><div class="ttname"><a href="neslib_8h.html#af38534e6aff957d6b1c39d13a9e83177">pal_bg_bright</a></div><div class="ttdeci">void pal_bg_bright(char bright)</div></div>
+<div class="ttc" id="aneslib_8h_html_a3bb9b44a925a416ced7268b35474a062"><div class="ttname"><a href="neslib_8h.html#a3bb9b44a925a416ced7268b35474a062">pad_trigger</a></div><div class="ttdeci">char pad_trigger(char pad)</div></div>
 <div class="ttc" id="aapi_8h_html_ab06e9aa782b61ccfb42f7c48996f6ed4"><div class="ttname"><a href="api_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a></div><div class="ttdeci">byte x</div><div class="ttdef"><b>Definition:</b> api.h:26</div></div>
 <div class="ttc" id="aneslib_8h_html_af967a7c1ec19a7673dc6b0e5e6762068"><div class="ttname"><a href="neslib_8h.html#af967a7c1ec19a7673dc6b0e5e6762068">chrnum</a></div><div class="ttdeci">char char chrnum</div><div class="ttdef"><b>Definition:</b> neslib.h:85</div></div>
 <!-- start footer part -->

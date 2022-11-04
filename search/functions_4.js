@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['files_1490',['files',['../famitone2_2LICENSE.html#a17b028437d0e0f2acf1a46abd2f6b56e',1,'files(the &quot;Software&quot;):&#160;LICENSE'],['../nesdoug_2LICENSE.html#a57109d5f02e82589eb08193749d05025',1,'files(the &quot;Software&quot;):&#160;LICENSE'],['../neslib_2LICENSE.html#a17b028437d0e0f2acf1a46abd2f6b56e',1,'files(the &quot;Software&quot;):&#160;LICENSE']]],
-  ['free_1491',['free',['../common_2include_2stdlib_8h.html#afbedc913aa4651b3c3b4b3aecd9b4711',1,'stdlib.h']]]
+  ['end_1517',['end',['../classstd_1_1initializer__list.html#abd1d0fd2c35074ce0b51ba1c39173ee0',1,'std::initializer_list::end()'],['../namespacestd.html#a32e349e93114238d72333a08f7ac044d',1,'std::end()']]],
+  ['exit_1518',['exit',['../common_2include_2stdlib_8h.html#a55e99c539cf7723ec15e856b7e0a8cee',1,'stdlib.h']]]
 ];

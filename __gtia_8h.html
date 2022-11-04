@@ -85,11 +85,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a226f5c41deea90adeca50fd1dfe6b3bb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__gtia_8h.html#a226f5c41deea90adeca50fd1dfe6b3bb">PMG_SIZE_NORMAL</a>&#160;&#160;&#160;0x0 /* one <a class="el" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a> <a class="el" href="sim_2stdlib_8h.html#a64751aebe7bbfb0a75d1a44df9f5c3d5">clock</a> per pixel */</td></tr>
+<tr class="memitem:a226f5c41deea90adeca50fd1dfe6b3bb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__gtia_8h.html#a226f5c41deea90adeca50fd1dfe6b3bb">PMG_SIZE_NORMAL</a>&#160;&#160;&#160;0x0 /* one color <a class="el" href="sim_2stdlib_8h.html#a64751aebe7bbfb0a75d1a44df9f5c3d5">clock</a> per pixel */</td></tr>
 <tr class="separator:a226f5c41deea90adeca50fd1dfe6b3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d049df297883b47986778880cf4e9b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__gtia_8h.html#a2d049df297883b47986778880cf4e9b7">PMG_SIZE_DOUBLE</a>&#160;&#160;&#160;0x1 /* two <a class="el" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a> clocks per pixel */</td></tr>
+<tr class="memitem:a2d049df297883b47986778880cf4e9b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__gtia_8h.html#a2d049df297883b47986778880cf4e9b7">PMG_SIZE_DOUBLE</a>&#160;&#160;&#160;0x1 /* two color clocks per pixel */</td></tr>
 <tr class="separator:a2d049df297883b47986778880cf4e9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74f796a0668dde8e27da282493946d12"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__gtia_8h.html#a74f796a0668dde8e27da282493946d12">PMG_SIZE_QUAD</a>&#160;&#160;&#160;0x3 /* four <a class="el" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a> clocks per pixel */</td></tr>
+<tr class="memitem:a74f796a0668dde8e27da282493946d12"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__gtia_8h.html#a74f796a0668dde8e27da282493946d12">PMG_SIZE_QUAD</a>&#160;&#160;&#160;0x3 /* four color clocks per pixel */</td></tr>
 <tr class="separator:a74f796a0668dde8e27da282493946d12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a19b676c253b56362f6e033e59b0f3b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__gtia_8h.html#a5a19b676c253b56362f6e033e59b0f3b">_gtia_mkcolor</a>(hue,  lum)&#160;&#160;&#160;(((hue) &lt;&lt; 4) | ((lum) &lt;&lt; 1))</td></tr>
 <tr class="separator:a5a19b676c253b56362f6e033e59b0f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -788,7 +788,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PMG_SIZE_DOUBLE&#160;&#160;&#160;0x1 /* two <a class="el" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a> clocks per pixel */</td>
+          <td class="memname">#define PMG_SIZE_DOUBLE&#160;&#160;&#160;0x1 /* two color clocks per pixel */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -802,7 +802,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PMG_SIZE_NORMAL&#160;&#160;&#160;0x0 /* one <a class="el" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a> <a class="el" href="sim_2stdlib_8h.html#a64751aebe7bbfb0a75d1a44df9f5c3d5">clock</a> per pixel */</td>
+          <td class="memname">#define PMG_SIZE_NORMAL&#160;&#160;&#160;0x0 /* one color <a class="el" href="sim_2stdlib_8h.html#a64751aebe7bbfb0a75d1a44df9f5c3d5">clock</a> per pixel */</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -816,7 +816,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PMG_SIZE_QUAD&#160;&#160;&#160;0x3 /* four <a class="el" href="neslib_8h.html#ae2d77c102b2d2d3f0881c0e2bcdbe777">color</a> clocks per pixel */</td>
+          <td class="memname">#define PMG_SIZE_QUAD&#160;&#160;&#160;0x3 /* four color clocks per pixel */</td>
         </tr>
       </table>
 </div><div class="memdoc">

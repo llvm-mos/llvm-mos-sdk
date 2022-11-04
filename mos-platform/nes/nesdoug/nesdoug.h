@@ -17,7 +17,7 @@ extern "C" {
 
 // sets the vram update to point to the vram_buffer. VRAM_BUF defined in crt0.s
 // this can be undone by set_vram_update(NULL)
-__attribute__((leaf)) void set_vram_buffer(void);
+void set_vram_buffer(void);
 
 // to push a single byte write to the vram_buffer
 __attribute__((leaf)) void one_vram_buffer(char data, int ppu_address);
@@ -30,17 +30,17 @@ __attribute__((leaf)) void multi_vram_buffer_vert(const void *data, char len, in
 
 // pad 0 or 1, use AFTER pad_poll() to get the trigger / new button presses
 // more efficient than pad_trigger, which runs the entire pad_poll code again
-__attribute__((leaf)) char get_pad_new(char pad);
+char get_pad_new(char pad);
 
 // use this internal value to time events, this ticks up every frame
-__attribute__((leaf)) char get_frame_count(void);
+char get_frame_count(void);
 
 // this will alter the tempo of music, range 1-12 are reasonable, low is faster
 // default is 6
 // music_play also sets the tempo, and any Fxx effect in the song will too
 // you will probably have to repeatedly set_music_speed() every frame
 // music_stop() and music_pause() also overwrite this value
-__attribute__((leaf)) void set_music_speed(char tempo);
+void set_music_speed(char tempo);
 
 // expects an object (struct) where the first 4 bytes are X, Y, width, height
 // you will probably have to pass the address of the object like &object
@@ -54,14 +54,14 @@ __attribute__((leaf)) void pal_fade_to(char from, char to);
 
 // x can be in the range 0-0x1ff, but any value would be fine, it discards
 // higher bits
-__attribute__((leaf)) void set_scroll_x(unsigned x);
+void set_scroll_x(unsigned x);
 
 // y can be in the range 0-0x1ff, but any value would be fine, it discards
 // higher bits NOTE - different system than neslib (which needs y in range
 // 0-0x1df) the advantage here, is you can set Y scroll to 0xff (-1) to shift
 // the screen down 1, which aligns it with sprites, which are shifted down 1
 // pixel
-__attribute__((leaf)) void set_scroll_y(unsigned y);
+void set_scroll_y(unsigned y);
 
 // add a value to y scroll, keep the low byte in the 0-0xef range
 // returns y scroll, which will have to be passed to set_scroll_y
@@ -86,14 +86,14 @@ __attribute__((leaf)) int get_at_addr(char nt, char x, char y);
 // for the metatile system, pass it the addresses of the room data
 // room data should be exactly 240 bytes (16x15)
 // each byte represents a 16x16 px block of the screen
-__attribute__((leaf)) void set_data_pointer(const void *data);
+void set_data_pointer(const void *data);
 
 // for the metatile system, pass it the addresses of the metatile data
 // a metatile is a 16x16 px block
 // metatiles is variable length, 5 bytes per metatile...
 // TopL, TopR, BottomL, BottomR, then 1 byte of palette 0-3
 // max metatiles = 51 (because 51 x 5 = 255)
-__attribute__((leaf)) void set_mt_pointer(const void *metatiles);
+void set_mt_pointer(const void *metatiles);
 
 // will push 1 metatile and 0 attribute bytes to the vram_buffer
 // make sure to set_vram_buffer(), and clear_vram_buffer(),
@@ -116,7 +116,7 @@ __attribute__((leaf)) void buffer_4_mt(int ppu_address, char index);
 __attribute__((leaf)) void flush_vram_update2(void);
 
 // change the PPU's color emphasis bits
-__attribute__((leaf)) void color_emphasis(char color);
+void color_emphasis(char color);
 
 #define COL_EMP_BLUE 0x80
 #define COL_EMP_GREEN 0x40
@@ -142,7 +142,7 @@ __attribute__((leaf)) void gray_line(void);
 
 // get from the frame count. You can use a button (start on title screen) to
 // trigger
-__attribute__((leaf)) void seed_rng(void);
+void seed_rng(void);
 
 #ifdef __cplusplus
 }

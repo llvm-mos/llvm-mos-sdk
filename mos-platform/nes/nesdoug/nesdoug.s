@@ -18,23 +18,6 @@ __post_vram_update:
 	stx mos8(VRAM_INDEX)
 	rts
 
-;void set_vram_buffer(void)
-.section .text.set_vram_buffer,"ax",@progbits
-.globl set_vram_buffer
-set_vram_buffer:
-	ldx #$ff
-	stx VRAM_BUF
-	inx ;x=0
-	stx mos8(VRAM_INDEX)
-	lda #<VRAM_BUF
-	sta mos8(__rc2)
-	lda #>VRAM_BUF
-	sta mos8(__rc3)
-	jmp set_vram_update
-
-
-
-
 ;void multi_vram_buffer_horz(char * data, char len, int ppu_address);
 .section .text.multi_vram_buffer_horz,"ax",@progbits
 .globl multi_vram_buffer_horz
@@ -121,37 +104,6 @@ one_vram_buffer:
 ;	lda #$ff
 ;	sta VRAM_BUF
 ;	rts
-
-
-
-
-;char get_pad_new(char pad);
-.section .text.get_pad_new,"ax",@progbits
-.globl get_pad_new
-get_pad_new:
-	tay
-	lda mos8(PAD_STATET),y
-	rts
-
-
-
-
-;char get_frame_count(void);
-.section .text.get_frame_count,"ax",@progbits
-.globl get_frame_count
-get_frame_count:
-	lda mos8(FRAME_CNT1)
-	rts
-
-
-
-
-;void set_music_speed(char tempo);
-.section .text.set_music_speed,"ax",@progbits
-.globl set_music_speed
-set_music_speed:
-	sta __FT_SONG_SPEED
-	rts
 
 
 
@@ -289,41 +241,6 @@ pal_fade_to:
 
 
 
-;void set_scroll_x(unsigned x);
-.section .text.set_scroll_x,"ax",@progbits
-.globl set_scroll_x
-set_scroll_x:
-	sta mos8(SCROLL_X)
-	txa
-	and #$01
-	sta mos8(__rc2)
-	lda mos8(PPUCTRL_VAR)
-	and #$fe
-	ora mos8(__rc2)
-	sta mos8(PPUCTRL_VAR)
-	rts
-
-
-
-
-;void set_scroll_y(unsigned y);
-.section .text.set_scroll_y,"ax",@progbits
-.globl set_scroll_y
-set_scroll_y:
-	sta mos8(SCROLL_Y)
-	txa
-	and #$01
-	asl a
-	sta mos8(__rc2)
-	lda mos8(PPUCTRL_VAR)
-	and #$fd
-	ora mos8(__rc2)
-	sta mos8(PPUCTRL_VAR)
-	rts
-
-
-
-
 ;int add_scroll_y(char add, unsigned scroll);
 .section .text.add_scroll_y,"ax",@progbits
 .globl add_scroll_y
@@ -432,32 +349,6 @@ get_at_addr:
 	ora #$23
 	tax
 	lda mos8(__rc4)
-	rts
-
-
-
-
-;void set_data_pointer(const void * data);
-.section .text.set_data_pointer,"ax",@progbits
-.globl set_data_pointer
-set_data_pointer:
-	lda mos8(__rc2)
-	sta mos8(DATA_PTR)
-	lda mos8(__rc3)
-	sta mos8(DATA_PTR+1)
-	rts
-
-
-
-
-;void set_mt_pointer(const void * metatiles);
-.section .text.set_mt_pointer,"ax",@progbits
-.globl set_mt_pointer
-set_mt_pointer:
-	lda mos8(__rc2)
-	sta mos8(META_PTR)
-	lda mos8(__rc3)
-	sta mos8(META_PTR+1)
 	rts
 
 
@@ -727,22 +618,6 @@ buffer_1_mt:
 
 
 
-;void color_emphasis(char color);
-.section .text.color_emphasis,"ax",@progbits
-.globl color_emphasis
-color_emphasis:
-	;a = bits 1110 0000
-	and #$e0 ;sanitize
-	sta mos8(__rc2)
-	lda mos8(PPUMASK_VAR)
-	and #$1f
-	ora mos8(__rc2)
-	sta mos8(PPUMASK_VAR)
-	rts
-
-
-
-
 ;void xy_split(unsigned x, unsigned y);
 .section .text.xy_split,"ax",@progbits
 .globl xy_split
@@ -835,16 +710,3 @@ gray_line:
 	lda mos8(PPUMASK_VAR) ;normal
 	sta PPUMASK
 	rts
-
-
-
-
-;void seed_rng(void);
-.section .text.seed_rng,"ax",@progbits
-.globl seed_rng
-seed_rng:
-	lda mos8(FRAME_CNT1)
-	sta mos8(RAND_SEED)
-	rts
-
-

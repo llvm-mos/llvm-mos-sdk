@@ -117,10 +117,10 @@ executables and libraries for that target.
 | Commander X16                 | `mos-cx16-clang`     |
 | Commodore 64                  | `mos-c64-clang`      |
 | MEGA65                        | `mos-mega65-clang`   |
-| NES-NROM-128                  | `mos-nrom-128-clang` |
-| NES-NROM-256                  | `mos-nrom-256-clang` |
-| NES-SLROM                     | `mos-slrom-clang`    |
-| NES-SLROM                     | `mos-slrom-clang`    |
+| NES-CNROM                     | `mos-cnrom-clang`    |
+| NES-MMC1                      | `mos-mmc1-clang`     |
+| NES-MMC3                      | `mos-mmc3-clang`     |
+| NES-NROM                      | `mos-nrom-clang`     |
 | Ohio Scientific Challenger 1P | `mos-osi-c1p-clang`  |
 | 6502 simulator                | `mos-sim-clang`      |
 

@@ -56,7 +56,7 @@ __set_reg_retry:
 	sta $8000
 	stx $8001
 	lda mos8(__in_progress)
-	beq __set_reg
+	beq __set_reg_retry
 	lda #0
 	sta mos8(__in_progress)
 	rts

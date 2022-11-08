@@ -124,14 +124,14 @@ jobs:
       - name: Dispatch Test Suite
         uses: llvm-mos/repository-dispatch@v1
         with:
-          token: ${{ secrets.TEST_SUITE_ACCESS_TOKEN }}
+          token: ${{ secrets.ACTION_TOKEN }}
           repository: llvm-mos/llvm-test-suite
           event-type: on-sdk-update
           client-payload: '{"head_commit": ${{ toJSON(github.event.head_commit) }}}'
       - name: Dispatch Smoke Test
         uses: llvm-mos/repository-dispatch@v1
         with:
-          token: ${{ secrets.TEST_SUITE_ACCESS_TOKEN }}
+          token: ${{ secrets.ACTION_TOKEN }}
           repository: llvm-mos/smoke-test
           event-type: on-sdk-update
           client-payload: '{"head_commit": ${{ toJSON(github.event.head_commit) }}}'

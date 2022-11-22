@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ram_5fbank_2481',['RAM_BANK',['../cx16_8h.html#a41dd444f8d09aac928fc8275b9184653',1,'cx16.h']]],
-  ['revision_2482',['REVISION',['../api_8h.html#ad526597ab378f3faff87123d7742c79a',1,'api.h']]],
-  ['rom_5fbank_2483',['ROM_BANK',['../cx16_8h.html#ae141bc55fdba451ac2f06a8cc6b71710',1,'cx16.h']]]
+  ['ram_5fbank_2515',['RAM_BANK',['../cx16_8h.html#a41dd444f8d09aac928fc8275b9184653',1,'cx16.h']]],
+  ['revision_2516',['REVISION',['../api_8h.html#ad526597ab378f3faff87123d7742c79a',1,'api.h']]],
+  ['rom_5fbank_2517',['ROM_BANK',['../cx16_8h.html#ae141bc55fdba451ac2f06a8cc6b71710',1,'cx16.h']]]
 ];

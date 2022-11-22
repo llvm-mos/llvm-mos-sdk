@@ -5,10 +5,10 @@
 asm(".globl __chr_rom_size\n"
     "__chr_rom_size = 0\n"
     ".globl __chr_ram_size\n"
-    "__chr_ram_size = 1024\n");
+    "__chr_ram_size = 512\n");
 
 void set_bank(char b) {
-  static const char rom_bytes[] = {0, [1]=1, [127]=127};
+  static const char rom_bytes[] = {0, [1] = 1, [63] = 63};
   POKE(&rom_bytes[b], b);
 }
 
@@ -46,7 +46,7 @@ int main(void) {
   if (peek_ppu(0) != 42)
     return EXIT_FAILURE;
 
-  set_bank(127);
+  set_bank(63);
   poke_ppu(0, 45);
   if (peek_ppu(0) != 45)
     return EXIT_FAILURE;

@@ -122,8 +122,11 @@ function(add_platform_object_file target output)
     add_library(${target} STATIC ${CMAKE_SOURCE_DIR}/mos-platform/stub.c)
   endif()
 
+  get_filename_component(compiler_dir ${CMAKE_C_COMPILER} DIRECTORY)
+  find_program(LLVM_MOS_LINKER ld.lld HINTS ${compiler_dir} REQUIRED)
+
   add_custom_command(OUTPUT ${output}
-    COMMAND ${CMAKE_LINKER} -r -o ${output} --whole-archive
+    COMMAND ${LLVM_MOS_LINKER} -r -o ${output} --whole-archive
             $<TARGET_FILE:${target}>)
   add_custom_target(${target}-o ALL DEPENDS ${output})
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${output} TYPE LIB)

@@ -482,34 +482,27 @@ vram_unrle:
 .section .text.scroll,"ax",@progbits
 .globl scroll
 scroll:
-
-	tay
-
-	txa
+  sta mos8(SCROLL_X)
+	lda mos8(__rc3)
 	bne 1f
-	tya
+	lda mos8(__rc2)
 	cmp #240
 	bcs 1f
 	sta mos8(SCROLL_Y)
-	ldy #0
+	sta mos8(__rc2)
 	beq 2f	;bra
 
 1:
-
 	sec
-	tya
+	lda mos8(__rc2)
 	sbc #240
 	sta mos8(SCROLL_Y)
 	lda #2
-	tay
+	sta mos8(__rc2)
 
 2:
-
-	lda mos8(__rc2)
-	sta mos8(SCROLL_X)
-	lda mos8(__rc3)
+	txa
 	and #$01
-	sty mos8(__rc2)
 	ora mos8(__rc2)
 	sta mos8(__rc2)
 	lda mos8(PPUCTRL_VAR)

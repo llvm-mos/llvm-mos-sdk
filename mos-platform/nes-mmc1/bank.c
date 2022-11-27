@@ -79,14 +79,6 @@ mmc1_register_write_retry(unsigned addr, char val) {
   _IN_PROGRESS = 0;
 }
 
-__attribute__((weak)) void set_chr_bank_0(char bank_id) {
-  _CHR_BANK0 = bank_id;
-}
-
-__attribute__((weak)) void set_chr_bank_1(char bank_id) {
-  _CHR_BANK1 = bank_id;
-}
-
 __attribute__((weak)) void split_chr_bank_0(char bank_id) {
   reset_shift_register();
   mmc1_register_write(MMC1_CHR0, bank_id);
@@ -109,11 +101,6 @@ __attribute__((weak)) void set_chr_bank_0_retry(char bank_id) {
 __attribute__((weak)) void set_chr_bank_1_retry(char bank_id) {
   _CHR_BANK1 = bank_id;
   mmc1_register_write_retry(MMC1_CHR1, bank_id);
-}
-
-__attribute__((weak)) void set_mirroring(char mirroring) {
-  _MMC1_CTRL_NMI &= 0b11100;
-  _MMC1_CTRL_NMI |= mirroring & 0b11;
 }
 
 __attribute__((weak)) void set_mmc1_ctrl(char value) {

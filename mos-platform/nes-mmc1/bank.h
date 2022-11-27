@@ -58,12 +58,12 @@ __attribute__((leaf)) char get_prg_bank(void);
 // Set the current 1st 4k chr bank to the bank with this id.
 // this will take effect at the next frame
 // and automatically rewrite at the top of every frame
-void set_chr_bank_0(char bank_id);
+__attribute__((leaf)) void set_chr_bank_0(char bank_id);
 
 // Set the current 2nd 4k chr bank to the bank with this id.
 // this will take effect at the next frame
 // and automatically rewrite at the top of every frame
-void set_chr_bank_1(char bank_id);
+__attribute__((leaf)) void set_chr_bank_1(char bank_id);
 
 // Set the current 1st 4k chr bank to the bank with this id.
 // this will take effect immediately, such as for mid screen changes
@@ -104,7 +104,7 @@ void set_chr_bank_1_retry(char bank_id);
 // Set the current mirroring mode. Your options are MIRROR_LOWER_BANK,
 // MIRROR_UPPER_BANK, MIRROR_HORIZONTAL, and MIRROR_VERTICAL.
 // LOWER and UPPER are single screen modes.
-void set_mirroring(char mirroring);
+__attribute__((leaf)) void set_mirroring(char mirroring);
 
 // Set all 5 bits of the $8000 MMC1 Control register. Overwrites mirroring
 // setting.

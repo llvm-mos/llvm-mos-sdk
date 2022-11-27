@@ -58,6 +58,29 @@ bank_nmi:
 	sta mos8(_IN_PROGRESS)
 	rts
 
+.section .text.set_chr_bank_0,"ax",@progbits
+.weak set_chr_bank_0
+set_chr_bank_0:
+	sta mos8(_CHR_BANK0)
+	rts
+
+.section .text.set_chr_bank_1,"ax",@progbits
+.weak set_chr_bank_1
+set_chr_bank_1:
+	sta mos8(_CHR_BANK1)
+	rts
+
+.section .text.set_mirroring,"ax",@progbits
+.weak set_mirroring
+set_mirroring:
+	and #0b11
+	sta mos8(__rc2)
+	lda mos8(_MMC1_CTRL_NMI)
+	and #0b11100
+	ora mos8(__rc2)
+	sta mos8(_MMC1_CTRL_NMI)
+	rts
+
 .section .text.get_prg_bank,"ax",@progbits
 .globl __get_prg_bank
 .weak get_prg_bank

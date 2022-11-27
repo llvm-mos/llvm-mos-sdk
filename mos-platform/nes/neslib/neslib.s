@@ -489,6 +489,7 @@ scroll:
 	cmp #240
 	bcs 1f
 	sta mos8(SCROLL_Y)
+	lda #0
 	sta mos8(__rc2)
 	beq 2f	;bra
 

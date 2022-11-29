@@ -6,7 +6,7 @@ var searchData=
   ['get_5fprg_5f8000_401',['get_prg_8000',['../nes-mmc3_2bank_8h.html#a8188f3c29e6a016f646b45951f1a6dbb',1,'bank.h']]],
   ['get_5fprg_5fa000_402',['get_prg_a000',['../nes-mmc3_2bank_8h.html#ad0bb7615120f68dd4456eff08ac3c1d7',1,'bank.h']]],
   ['get_5fterminate_403',['get_terminate',['../namespacestd.html#a5427b4061db7ec519fbd7ded55c38226',1,'std']]],
-  ['getchar_404',['getchar',['../stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8',1,'getchar():&#160;stdio.h'],['../struct__sim__reg.html#af446a916162095ebd71ec3ce06b15525',1,'_sim_reg::getchar()']]],
+  ['getchar_404',['getchar',['../struct__sim__reg.html#af446a916162095ebd71ec3ce06b15525',1,'_sim_reg::getchar()'],['../stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8',1,'getchar():&#160;stdio.h']]],
   ['gractl_5flatch_5ftrigger_5finputs_405',['GRACTL_LATCH_TRIGGER_INPUTS',['../__gtia_8h.html#add8f772ec2740d0ac0bdce3f46521290',1,'_gtia.h']]],
   ['gractl_5fmissles_406',['GRACTL_MISSLES',['../__gtia_8h.html#a5ff29bd7384812d9b098df86232a4ce6',1,'_gtia.h']]],
   ['gractl_5fplayers_407',['GRACTL_PLAYERS',['../__gtia_8h.html#a801812a8b84674f3aaf227b6d5f5afc1',1,'_gtia.h']]],

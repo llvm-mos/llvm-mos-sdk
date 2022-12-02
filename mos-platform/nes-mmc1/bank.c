@@ -42,6 +42,8 @@ extern __attribute__((
 __attribute__((section(".zp.bss"))) char _MMC1_CTRL_CUR;
 extern __attribute__((
     weak, alias("_MMC1_CTRL_CUR"))) volatile const char MMC1_CTRL_CUR;
+__attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS;
+
 
 #define MMC1_CTRL 0x8000
 #define MMC1_CHR0 0xa000
@@ -53,8 +55,6 @@ __attribute__((used)) const char __reset_mmc1_byte = 0xff;
 static void reset_shift_register(void) {
   __attribute__((leaf)) asm volatile("inc __reset_mmc1_byte");
 }
-
-volatile char _IN_PROGRESS = 0;
 
 __attribute__((always_inline)) static inline void
 mmc1_register_write(unsigned addr, char val) {

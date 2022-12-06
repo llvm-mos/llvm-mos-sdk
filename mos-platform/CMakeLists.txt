@@ -46,6 +46,7 @@ endif()
 
 add_subdirectory(common)
 add_subdirectory(atari8)
+add_subdirectory(atari8-stdcart)
 add_subdirectory(commodore)
 add_subdirectory(c64)
 add_subdirectory(cpm65)

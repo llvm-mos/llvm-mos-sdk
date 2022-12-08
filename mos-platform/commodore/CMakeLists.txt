@@ -57,3 +57,4 @@ add_platform_library(commodore-c
 # unneccessarily. It can also be called in an interrupt.
 set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)
 target_include_directories(commodore-c BEFORE PUBLIC .)
+target_link_libraries(commodore-c PRIVATE common-asminc)

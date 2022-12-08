@@ -1,5 +1,7 @@
 ;FamiTone2 v1.12
 
+.include "imag.inc"
+.include "ntsc.inc"
 .include "config.s"
 
 ;zero page variables
@@ -314,9 +316,9 @@ FamiToneInit:
 music_init:
 __music_init:
 	jsr __unbank_music
-	ldx mos8(__rc2)
-	ldy mos8(__rc3)
-	lda mos8(NTSC_MODE)
+	ldx __rc2
+	ldy __rc3
+	lda NTSC_MODE
 	jmp FamiToneInit
 
 ;------------------------------------------------------------------------------
@@ -1120,8 +1122,8 @@ _FT2SamplePlay:
 sounds_init:
 __sounds_init:
 	jsr __unbank_sounds
-	ldx mos8(__rc2)
-	ldy mos8(__rc3)
+	ldx __rc2
+	ldy __rc3
 FamiToneSfxInit:
 
 	stx <FT_TEMP_PTR_L

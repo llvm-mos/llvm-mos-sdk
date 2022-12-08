@@ -24,6 +24,11 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ; SOFTWARE.
 
+.include "imag.inc"
+
+.zeropage _PRG_BANK, _CHR_BANK0, _CHR_BANK1, _MMC1_CTRL_NMI, _CHR_BANK0_CUR
+.zeropage _CHR_BANK1_CUR, _MMC1_CTRL_CUR, _IN_PROGRESS
+
 MMC1_CTRL	= $8000
 MMC1_CHR0	= $a000
 MMC1_CHR1	= $c000
@@ -45,40 +50,40 @@ MMC1_PRG	= $e000
 .globl bank_nmi
 bank_nmi:
 	inc __reset_mmc1_byte
-	lda mos8(_CHR_BANK0)
-	sta mos8(_CHR_BANK0_CUR)
+	lda _CHR_BANK0
+	sta _CHR_BANK0_CUR
 	mmc1_register_write MMC1_CHR0
-	lda mos8(_CHR_BANK1)
-	sta mos8(_CHR_BANK1_CUR)
+	lda _CHR_BANK1
+	sta _CHR_BANK1_CUR
 	mmc1_register_write MMC1_CHR1
-	lda mos8(_MMC1_CTRL_NMI)
-	sta mos8(_MMC1_CTRL_CUR)
+	lda _MMC1_CTRL_NMI
+	sta _MMC1_CTRL_CUR
 	mmc1_register_write MMC1_CTRL
 	lda #0
-	sta mos8(_IN_PROGRESS)
+	sta _IN_PROGRESS
 	rts
 
 .section .text.set_chr_bank_0,"ax",@progbits
 .weak set_chr_bank_0
 set_chr_bank_0:
-	sta mos8(_CHR_BANK0)
+	sta _CHR_BANK0
 	rts
 
 .section .text.set_chr_bank_1,"ax",@progbits
 .weak set_chr_bank_1
 set_chr_bank_1:
-	sta mos8(_CHR_BANK1)
+	sta _CHR_BANK1
 	rts
 
 .section .text.set_mirroring,"ax",@progbits
 .weak set_mirroring
 set_mirroring:
 	and #0b11
-	sta mos8(__rc2)
-	lda mos8(_MMC1_CTRL_NMI)
+	sta __rc2
+	lda _MMC1_CTRL_NMI
 	and #0b11100
-	ora mos8(__rc2)
-	sta mos8(_MMC1_CTRL_NMI)
+	ora __rc2
+	sta _MMC1_CTRL_NMI
 	rts
 
 .section .text.get_prg_bank,"ax",@progbits
@@ -86,7 +91,7 @@ set_mirroring:
 .weak get_prg_bank
 __get_prg_bank:
 get_prg_bank:
-	lda mos8(_PRG_BANK)
+	lda _PRG_BANK
 	rts
 
 .section .text.set_prg_bank,"ax",@progbits
@@ -98,13 +103,13 @@ set_prg_bank:
 .Lset:
 	inc __reset_mmc1_byte
 	ldx #1
-	stx mos8(_IN_PROGRESS)
+	stx _IN_PROGRESS
 	mmc1_register_write MMC1_PRG
-	ldx mos8(_IN_PROGRESS)
+	ldx _IN_PROGRESS
 	beq .Lretry
 	dex
-	stx mos8(_IN_PROGRESS)
-	sty mos8(_PRG_BANK)
+	stx _IN_PROGRESS
+	sty _PRG_BANK
 	rts
 .Lretry:
 	tya
@@ -116,14 +121,14 @@ set_prg_bank:
 .weak banked_call
 banked_call:
 	tay
-	lda mos8(_PRG_BANK)
+	lda _PRG_BANK
 	pha
 	tya
 	jsr __set_prg_bank
-	lda mos8(__rc2)
-	sta mos8(__rc18)
-	lda mos8(__rc3)
-	sta mos8(__rc19)
+	lda __rc2
+	sta __rc18
+	lda __rc3
+	sta __rc19
 	jsr __call_indir
 	pla
 	jsr __set_prg_bank

@@ -3,6 +3,7 @@
 
 
 .include "nes.inc"
+.include "imag.inc"
 
 
 ;from NESDEV WIKI
@@ -37,34 +38,34 @@ read_powerpad:
 	and #$18
 	asl a
 	asl a
-	sta mos8(__rc2), x ;0110 0000
+	sta __rc2, x ;0110 0000
 
 	lda APU_PAD1,y
 	and #$18
-	ora mos8(__rc2), x
+	ora __rc2, x
 	asl a
-	sta mos8(__rc2), x ;1111 0000
+	sta __rc2, x ;1111 0000
 
 	lda APU_PAD1,y
 	and #$18
 	lsr a
-	ora mos8(__rc2), x
-	sta mos8(__rc2), x ;1111 1100
+	ora __rc2, x
+	sta __rc2, x ;1111 1100
 
 	lda APU_PAD1,y
 	and #$18
 	lsr a
 	lsr a
 	lsr a
-	ora mos8(__rc2), x
-	sta mos8(__rc2), x ;1111 1111
+	ora __rc2, x
+	sta __rc2, x ;1111 1111
 
 	dex
 	beq .Lloop
 
 .Lexit:
-	lda mos8(__rc2)
-	ldx mos8(__rc3)
+	lda __rc2
+	ldx __rc3
 	rts
 
 

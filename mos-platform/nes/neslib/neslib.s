@@ -10,7 +10,11 @@
 ;minor change %%, added ldx #0 to functions returning char
 ;removed sprid from c functions to speed them up
 
+
+.include "imag.inc"
 .include "nes.inc"
+.include "neslib.inc"
+.include "ntsc.inc"
 
 ; Reserve space at beginning of RAM for OAM buffer.
 .section .noinit.oam_buf,"a",@nobits
@@ -71,10 +75,10 @@ clearVRAM:
 	jsr oam_clear
 
 	lda #0b10000000
-	sta mos8(PPUCTRL_VAR)
+	sta PPUCTRL_VAR
 	sta PPUCTRL		;enable NMI
 	lda #0b00000110
-	sta mos8(PPUMASK_VAR)
+	sta PPUMASK_VAR
 
 	lda #0
 	sta PPUSCROLL
@@ -86,31 +90,31 @@ clearVRAM:
 .section .text.neslib_nmi,"ax",@progbits
 .globl neslib_nmi
 neslib_nmi:
-	lda mos8(PPUMASK_VAR)	;if rendering is disabled, do not access the VRAM at all
+	lda PPUMASK_VAR	;if rendering is disabled, do not access the VRAM at all
 	and #0b00011000
 	bne .LrenderingOn
 	jmp	.LskipAll
 
 .LrenderingOn:
-	lda mos8(VRAM_UPDATE) ;is the frame complete?
+	lda VRAM_UPDATE ;is the frame complete?
 	bne .LdoUpdate
 	jmp .LskipAll ;skipUpd
 
 .LdoUpdate:
 	lda #0
-	sta mos8(VRAM_UPDATE)
+	sta VRAM_UPDATE
 
 	lda #>OAM_BUF		;update OAM
 	sta OAMDMA
 
-	lda mos8(PAL_UPDATE)		;update palette if needed
+	lda PAL_UPDATE		;update palette if needed
 	bne .LupdPal
 	jmp .LupdVRAM
 
 .LupdPal:
 
 	ldx #0
-	stx mos8(PAL_UPDATE)
+	stx PAL_UPDATE
 
 	lda #$3f
 	sta PPUADDR
@@ -147,7 +151,7 @@ neslib_nmi:
 
 .LupdVRAM:
 
-	lda mos8(NAME_UPD_ENABLE)
+	lda NAME_UPD_ENABLE
 	beq .LskipUpd
 
 	jsr flush_vram_update2
@@ -158,26 +162,26 @@ neslib_nmi:
 	sta PPUADDR
 	sta PPUADDR
 
-	lda mos8(SCROLL_X)
+	lda SCROLL_X
 	sta PPUSCROLL
-	lda mos8(SCROLL_Y)
+	lda SCROLL_Y
 	sta PPUSCROLL
 
-	lda mos8(PPUCTRL_VAR)
+	lda PPUCTRL_VAR
 	sta PPUCTRL
 
 .LskipAll:
 
-	lda mos8(PPUMASK_VAR)
+	lda PPUMASK_VAR
 	sta PPUMASK
 
-	inc mos8(FRAME_CNT1)
-	inc mos8(FRAME_CNT2)
-	lda mos8(FRAME_CNT2)
+	inc FRAME_CNT1
+	inc FRAME_CNT2
+	lda FRAME_CNT2
 	cmp #6
 	bne .LskipNtsc
 	lda #0
-	sta mos8(FRAME_CNT2)
+	sta FRAME_CNT2
 .LskipNtsc:
 	rts
 
@@ -191,7 +195,7 @@ pal_all:
 
 .Lpal_copy:
 
-	sta mos8(__rc4)
+	sta __rc4
 
 	ldy #$00
 
@@ -201,10 +205,10 @@ pal_all:
 	sta PAL_BUF,x
 	inx
 	iny
-	dec mos8(__rc4)
+	dec __rc4
 	bne 0b
 
-	inc mos8(PAL_UPDATE)
+	inc PAL_UPDATE
 
 	rts
 
@@ -246,7 +250,7 @@ pal_clear:
 	inx
 	cpx #$20
 	bne 0b
-	stx mos8(PAL_UPDATE)
+	stx PAL_UPDATE
 	rts
 
 
@@ -257,7 +261,7 @@ pal_clear:
 oam_clear:
 
 	ldx #0
-	stx mos8(SPRID) ; automatically sets sprid to zero
+	stx SPRID ; automatically sets sprid to zero
 	lda #$ff
 0:
 	sta OAM_BUF,x
@@ -280,11 +284,11 @@ oam_size:
 	asl a
 	asl a
 	and #$20
-	sta mos8(__rc2)
-	lda mos8(PPUCTRL_VAR)
+	sta __rc2
+	lda PPUCTRL_VAR
 	and #$df
-	ora mos8(__rc2)
-	sta mos8(PPUCTRL_VAR)
+	ora __rc2
+	sta PPUCTRL_VAR
 
 	rts
 
@@ -295,23 +299,23 @@ oam_size:
 .section .text.oam_spr,"ax",@progbits
 .globl oam_spr
 oam_spr:
-	ldy mos8(SPRID)
+	ldy SPRID
 	sta OAM_BUF+3,y
 
 	txa
 	sta OAM_BUF+0,y
 
-	lda mos8(__rc2)
+	lda __rc2
 	sta OAM_BUF+1,y
 
-	lda mos8(__rc3)
+	lda __rc3
 	sta OAM_BUF+2,y
 
 	iny
 	iny
 	iny
 	iny
-	sty mos8(SPRID)
+	sty SPRID
 	rts
 
 
@@ -322,9 +326,9 @@ oam_spr:
 .globl oam_meta_spr
 oam_meta_spr:
 
-	sta mos8(__rc4)
-	stx mos8(__rc5)
-	ldx mos8(SPRID)
+	sta __rc4
+	stx __rc5
+	ldx SPRID
 	ldy #0
 1:
 	lda (__rc2),y		;x offset
@@ -332,12 +336,12 @@ oam_meta_spr:
 	beq 2f
 	iny
 	clc
-	adc mos8(__rc4)
+	adc __rc4
 	sta OAM_BUF+3,x
 	lda (__rc2),y		;y offset
 	iny
 	clc
-	adc mos8(__rc5)
+	adc __rc5
 	sta OAM_BUF+0,x
 	lda (__rc2),y		;tile
 	iny
@@ -351,7 +355,7 @@ oam_meta_spr:
 	inx
 	jmp 1b
 2:
-	stx mos8(SPRID)
+	stx SPRID
 	rts
 
 
@@ -374,7 +378,7 @@ oam_hide_rest:
 	inx
 	bne 0b
 	;x is zero
-	stx mos8(SPRID)
+	stx SPRID
 	rts
 
 
@@ -385,19 +389,19 @@ oam_hide_rest:
 ppu_wait_frame:
 
 	lda #1
-	sta mos8(VRAM_UPDATE)
-	lda mos8(FRAME_CNT1)
+	sta VRAM_UPDATE
+	lda FRAME_CNT1
 
 0:
 
-	cmp mos8(FRAME_CNT1)
+	cmp FRAME_CNT1
 	beq 0b
-	lda mos8(NTSC_MODE)
+	lda NTSC_MODE
 	beq 2f
 
 1:
 
-	lda mos8(FRAME_CNT2)
+	lda FRAME_CNT2
 	cmp #5
 	beq 1b
 
@@ -413,11 +417,11 @@ ppu_wait_frame:
 ppu_wait_nmi:
 
 	lda #1
-	sta mos8(VRAM_UPDATE)
-	lda mos8(FRAME_CNT1)
+	sta VRAM_UPDATE
+	lda FRAME_CNT1
 0:
 
-	cmp mos8(FRAME_CNT1)
+	cmp FRAME_CNT1
 	beq 0b
 	rts
 
@@ -427,29 +431,29 @@ ppu_wait_nmi:
 .section .text.vram_unrle,"ax",@progbits
 .globl vram_unrle
 vram_unrle:
-        ldy mos8(__rc2)
+        ldy __rc2
 	lda #0
-	sta mos8(__rc2)
+	sta __rc2
 
 	lda (__rc2),y
-	sta mos8(__rc4)
+	sta __rc4
 	iny
 	bne 1f
-	inc mos8(__rc3)
+	inc __rc3
 
 1:
 
 	lda (__rc2),y
 	iny
 	bne 11f
-	inc mos8(__rc3)
+	inc __rc3
 
 11:
 
-	cmp mos8(__rc4)
+	cmp __rc4
 	beq 2f
 	sta PPUDATA
-	sta mos8(__rc5)
+	sta __rc5
 	bne 1b
 
 2:
@@ -458,12 +462,12 @@ vram_unrle:
 	beq 4f
 	iny
 	bne 21f
-	inc mos8(__rc3)
+	inc __rc3
 
 21:
 
 	tax
-	lda mos8(__rc5)
+	lda __rc5
 
 3:
 
@@ -482,34 +486,34 @@ vram_unrle:
 .section .text.scroll,"ax",@progbits
 .globl scroll
 scroll:
-  sta mos8(SCROLL_X)
-	lda mos8(__rc3)
+  sta SCROLL_X
+	lda __rc3
 	bne 1f
-	lda mos8(__rc2)
+	lda __rc2
 	cmp #240
 	bcs 1f
-	sta mos8(SCROLL_Y)
+	sta SCROLL_Y
 	lda #0
-	sta mos8(__rc2)
+	sta __rc2
 	beq 2f	;bra
 
 1:
 	sec
-	lda mos8(__rc2)
+	lda __rc2
 	sbc #240
-	sta mos8(SCROLL_Y)
+	sta SCROLL_Y
 	lda #2
-	sta mos8(__rc2)
+	sta __rc2
 
 2:
 	txa
 	and #$01
-	ora mos8(__rc2)
-	sta mos8(__rc2)
-	lda mos8(PPUCTRL_VAR)
+	ora __rc2
+	sta __rc2
+	lda PPUCTRL_VAR
 	and #$fc
-	ora mos8(__rc2)
-	sta mos8(PPUCTRL_VAR)
+	ora __rc2
+	sta PPUCTRL_VAR
 	rts
 
 
@@ -523,11 +527,11 @@ split:
 	tay
 	txa
 	and #$01
-	sta mos8(__rc2)
-	lda mos8(PPUCTRL_VAR)
+	sta __rc2
+	lda PPUCTRL_VAR
 	and #$fc
-	ora mos8(__rc2)
-	sta mos8(__rc2)
+	ora __rc2
+	sta __rc2
 
 3:
 
@@ -542,7 +546,7 @@ split:
 	sty PPUSCROLL
 	lda #0
 	sta PPUSCROLL
-	lda mos8(__rc2)
+	lda __rc2
 	sta PPUCTRL
 
 	rts
@@ -558,11 +562,11 @@ bank_spr:
 	asl a
 	asl a
 	asl a
-	sta mos8(__rc2)
-	lda mos8(PPUCTRL_VAR)
+	sta __rc2
+	lda PPUCTRL_VAR
 	and #0b11110111
-	ora mos8(__rc2)
-	sta mos8(PPUCTRL_VAR)
+	ora __rc2
+	sta PPUCTRL_VAR
 
 	rts
 
@@ -578,11 +582,11 @@ bank_bg:
 	asl a
 	asl a
 	asl a
-	sta mos8(__rc2)
-	lda mos8(PPUCTRL_VAR)
+	sta __rc2
+	lda PPUCTRL_VAR
 	and #0b11101111
-	ora mos8(__rc2)
-	sta mos8(PPUCTRL_VAR)
+	ora __rc2
+	sta PPUCTRL_VAR
 
 	rts
 
@@ -593,8 +597,8 @@ bank_bg:
 .globl vram_read
 vram_read:
 
-	sta mos8(__rc4)
-	stx mos8(__rc5)
+	sta __rc4
+	stx __rc5
 
 	lda PPUDATA
 
@@ -604,21 +608,21 @@ vram_read:
 
 	lda PPUDATA
 	sta (__rc2),y
-	inc mos8(__rc2)
+	inc __rc2
 	bne 2f
-	inc mos8(__rc3)
+	inc __rc3
 
 2:
 
-	lda mos8(__rc4)
+	lda __rc4
 	bne 3f
-	dec mos8(__rc5)
+	dec __rc5
 
 3:
 
-	dec mos8(__rc4)
-	lda mos8(__rc4)
-	ora mos8(__rc5)
+	dec __rc4
+	lda __rc4
+	ora __rc5
 	bne 1b
 
 	rts
@@ -630,8 +634,8 @@ vram_read:
 .globl vram_write
 vram_write:
 
-	sta mos8(__rc4)
-	stx mos8(__rc5)
+	sta __rc4
+	stx __rc5
 
 	ldy #0
 
@@ -639,21 +643,21 @@ vram_write:
 
 	lda (__rc2),y
 	sta PPUDATA
-	inc mos8(__rc2)
+	inc __rc2
 	bne 2f
-	inc mos8(__rc3)
+	inc __rc3
 
 2:
 
-	lda mos8(__rc4)
+	lda __rc4
 	bne 3f
-	dec mos8(__rc5)
+	dec __rc5
 
 3:
 
-	dec mos8(__rc4)
-	lda mos8(__rc4)
-	ora mos8(__rc5)
+	dec __rc4
+	lda __rc4
+	ora __rc5
 	bne 1b
 
 	rts
@@ -672,7 +676,7 @@ pad_poll:
 
 	lda #1
 	sta APU_PAD1
-	sta mos8(__rc2),x
+	sta __rc2,x
 	lda #0
 	sta APU_PAD1
 
@@ -680,18 +684,18 @@ pad_poll:
 
 	lda APU_PAD1,y
 	lsr a
-	rol mos8(__rc2),x
+	rol __rc2,x
 	bcc .LpadPollLoop
 
 	dex
 	bne .LpadPollPort
 
-	lda mos8(__rc3)
-	cmp mos8(__rc4)
+	lda __rc3
+	cmp __rc4
 	beq .Ldone
-	cmp mos8(__rc5)
+	cmp __rc5
 	beq .Ldone
-	lda mos8(__rc4)
+	lda __rc4
 
 .Ldone:
 	sta PAD_STATE,y
@@ -710,10 +714,10 @@ pad_poll:
 .section .text.flush_vram_update,"ax",@progbits
 .globl flush_vram_update
 flush_vram_update:
-	lda mos8(__rc2)
-	sta mos8(NAME_UPD_ADR+0)
-	lda mos8(__rc3)
-	sta mos8(NAME_UPD_ADR+1)
+	lda __rc2
+	sta NAME_UPD_ADR+0
+	lda __rc3
+	sta NAME_UPD_ADR+1
 
 .globl flush_vram_update2
 flush_vram_update2: ;minor changes %
@@ -738,7 +742,7 @@ flush_vram_update2: ;minor changes %
 .LupdNotSeq:
 
 	tax
-	lda mos8(PPUCTRL_VAR)
+	lda PPUCTRL_VAR
 	cpx #$80				;is it a horizontal or vertical sequence?
 	bcc .LupdHorzSeq
 	cpx #$ff				;is it end of the update?
@@ -775,7 +779,7 @@ flush_vram_update2: ;minor changes %
 	dex
 	bne .LupdNameLoop
 
-	lda mos8(PPUCTRL_VAR)
+	lda PPUCTRL_VAR
 	sta PPUCTRL
 
 	jmp .LupdName
@@ -795,8 +799,8 @@ __post_vram_update:
 .globl vram_fill
 
 vram_fill:
-	stx mos8(__rc3)
-	ldx mos8(__rc2)
+	stx __rc3
+	ldx __rc2
 	beq 2f
 	ldx #0
 
@@ -805,12 +809,12 @@ vram_fill:
 	sta PPUDATA
 	dex
 	bne 1b
-	dec mos8(__rc2)
+	dec __rc2
 	bne 1b
 
 2:
 
-	ldx mos8(__rc3)
+	ldx __rc3
 	beq 4f
 
 3:
@@ -837,11 +841,11 @@ vram_inc:
 
 1:
 
-	sta mos8(__rc2)
-	lda mos8(PPUCTRL_VAR)
+	sta __rc2
+	lda PPUCTRL_VAR
 	and #$fb
-	ora mos8(__rc3)
-	sta mos8(PPUCTRL_VAR)
+	ora __rc3
+	sta PPUCTRL_VAR
 	sta PPUCTRL
 
 	rts

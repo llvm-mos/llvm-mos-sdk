@@ -34,3 +34,4 @@ set_property(SOURCE printf.c PROPERTY COMPILE_DEFINITIONS
   PRINTF_DISABLE_SUPPORT_EXPONENTIAL
 )
 target_include_directories(common-c SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
+target_link_libraries(common-c PRIVATE common-asminc)

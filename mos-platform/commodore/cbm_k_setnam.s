@@ -1,21 +1,21 @@
-.text
+.include "imag.inc"
 
-__rs1 = __rc2
+.text
 
 ;
 ; void cbm_k_setnam (const char* Name);
-;	
+;
 .global cbm_k_setnam
 cbm_k_setnam:
-	lda __rs1 
+	lda __rc2
 	pha
-	lda __rs1 + 1
+	lda __rc3
 	pha
 	jsr strlen
 	sta __rc2
-	pla 
+	pla
 	tay
-	pla 
+	pla
 	tax
 	lda __rc2
 	jmp __SETNAM

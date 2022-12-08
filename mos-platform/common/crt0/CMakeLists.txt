@@ -35,5 +35,6 @@ merge_libraries(common-copy-data common-copy-zp-data)
 
 # Initialize the soft stack pointer to __stack.
 add_platform_library(common-init-stack init-stack.S)
+target_link_libraries(common-init-stack PRIVATE common-asminc)
 
 add_subdirectory(exit)

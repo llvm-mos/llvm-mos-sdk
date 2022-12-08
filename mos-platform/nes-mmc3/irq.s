@@ -26,6 +26,8 @@
 
 .include "nes.inc"
 
+.zeropage __irq_ptr, __irq_index, __irq_done
+
 .section .init.100,"axR",@progbits
 	lda #$40
 	sta APU_PAD2
@@ -39,8 +41,8 @@
 .globl __bank_nmi
 __bank_nmi:
 	lda #0
-	sta mos8(__irq_index)
-	sta mos8(__irq_done)
+	sta __irq_index
+	sta __irq_done
 	jsr irq_parser
 	rts
 
@@ -94,7 +96,7 @@ irq:
 
 .section .text.irq_parser,"ax",@progbits
 irq_parser:
-	ldy mos8(__irq_index)
+	ldy __irq_index
 ;	ldx #0
 .Lloop:
 	lda (__irq_ptr), y ; get value from array
@@ -169,13 +171,13 @@ irq_parser:
 
 .Lscanline:
 	jsr set_scanline_count ;this terminates the set
-	sty mos8(__irq_index)
+	sty __irq_index
 	rts
 
 .Lexit:
-	sta mos8(__irq_done) ;value 0xff
+	sta __irq_done ;value 0xff
 	dey ; undo the previous iny, keep it pointed to ff
-	sty mos8(__irq_index)
+	sty __irq_index
 	rts
 
 set_scanline_count:

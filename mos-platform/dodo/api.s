@@ -1,35 +1,37 @@
+	.include "imag.inc"
+
 	.text
 
 	.section	.text.pusha,"ax",@progbits
 pusha:
-	ldy mos8(__rc0)
+	ldy __rc0
 	beq .L1
-	dec mos8(__rc0)
+	dec __rc0
 	ldy #0
-	sta (mos8(__rc0)), y
+	sta (__rc0), y
 	rts
 .L1:
-	dec mos8(__rc1)
-	dec mos8(__rc0)
-	sta (mos8(__rc0)), y
+	dec __rc1
+	dec __rc0
+	sta (__rc0), y
 	rts
 
 	.section	.text.pushax,"ax",@progbits
 pushax:
 	pha
-	lda mos8(__rc0)
+	lda __rc0
 	sec
 	sbc #2
-	sta mos8(__rc0)
+	sta __rc0
 	bcs .L2
-	dec mos8(__rc1)
+	dec __rc1
 .L2:
 	ldy #1
 	txa
-	sta (mos8(__rc0)), y
+	sta (__rc0), y
 	pla
 	dey
-	sta (mos8(__rc0)), y
+	sta (__rc0), y
 	rts
 
 	.section	.text.DRAW_SPRITE,"ax",@progbits
@@ -39,20 +41,20 @@ DRAW_SPRITE:                            ; @DRAW_SPRITE
 ; %bb.0:
 	phx
 	pha
-	lda mos8(__rc2)
-	ldx mos8(__rc3)
+	lda __rc2
+	ldx __rc3
 	jsr pushax
 	pla
 	jsr pusha
 	pla
 	jsr pusha
-	lda	mos8(__rc4)
+	lda	__rc4
 	jsr pusha
-	lda	mos8(__rc5)
+	lda	__rc5
 	jsr pusha
-	lda	mos8(__rc6)
+	lda	__rc6
 	jsr pusha
-	lda	mos8(__rc7)
+	lda	__rc7
 	jsr pusha
 	lda #0
 	jmp ($FFF8)
@@ -77,9 +79,9 @@ CLEAR_SPRITE:                           ; @CLEAR_SPRITE
 	jsr pusha
 	txa
 	jsr pusha
-	lda	mos8(__rc2)
+	lda	__rc2
 	jsr pusha
-	lda	mos8(__rc3)
+	lda	__rc3
 	jsr pusha
 	lda #2
 	jmp ($FFF8)
@@ -94,7 +96,7 @@ SET_PIXEL:                              ; @SET_PIXEL
 	jsr pusha
 	txa
 	jsr pusha
-	lda	mos8(__rc2)
+	lda	__rc2
 	jsr pusha
 	lda #3
 	jmp ($FFF8)
@@ -109,11 +111,11 @@ DRAW_LINE:                              ; @DRAW_LINE
 	jsr pusha
 	txa
 	jsr pusha
-	lda	mos8(__rc2)
+	lda	__rc2
 	jsr pusha
-	lda	mos8(__rc3)
+	lda	__rc3
 	jsr pusha
-	lda	mos8(__rc4)
+	lda	__rc4
 	jsr pusha
 	lda #4
 	jmp ($FFF8)
@@ -166,8 +168,8 @@ WAIT:                                   ; @WAIT
 	.type	LOAD_MUSIC,@function
 LOAD_MUSIC:                             ; @LOAD_MUSIC
 ; %bb.0:
-	lda	mos8(__rc2)
-	ldx	mos8(__rc3)
+	lda	__rc2
+	ldx	__rc3
 	jsr pushax
 	lda #9
 	jmp ($FFF8)
@@ -179,8 +181,8 @@ LOAD_MUSIC:                             ; @LOAD_MUSIC
 	.type	PLAY_EFFECT,@function
 PLAY_EFFECT:                            ; @PLAY_EFFECT
 ; %bb.0:
-	lda	mos8(__rc2)
-	ldx	mos8(__rc3)
+	lda	__rc2
+	ldx	__rc3
 	jsr pushax
 	lda #1
 	jsr pusha
@@ -194,8 +196,8 @@ PLAY_EFFECT:                            ; @PLAY_EFFECT
 	.type	PLAY_EFFECT_ONCE,@function
 PLAY_EFFECT_ONCE:                       ; @PLAY_EFFECT_ONCE
 ; %bb.0:
-	lda	mos8(__rc2)
-	ldx	mos8(__rc3)
+	lda	__rc2
+	ldx	__rc3
 	jsr pushax
 	lda #0
 	jsr pusha
@@ -252,18 +254,18 @@ COPY_BACKGROUND:                        ; @COPY_BACKGROUND
 ; %bb.0:
 	phx
 	pha
-	lda mos8(__rc2)
-	ldx mos8(__rc3)
+	lda __rc2
+	ldx __rc3
 	jsr pushax
 	pla
 	jsr pusha
 	pla
 	jsr pusha
-	lda mos8(__rc4)
+	lda __rc4
 	jsr pusha
-	lda mos8(__rc5)
+	lda __rc5
 	jsr pusha
-	lda mos8(__rc6)
+	lda __rc6
 	jsr pusha
 	lda #15
 	jmp ($FFF8)
@@ -275,8 +277,8 @@ COPY_BACKGROUND:                        ; @COPY_BACKGROUND
 	.type	DRAW_STRING,@function
 DRAW_STRING:                            ; @DRAW_STRING
 ; %bb.0:
-	lda	mos8(__rc2)
-	ldx	mos8(__rc3)
+	lda	__rc2
+	ldx	__rc3
 	jsr pushax
 	lda #16
 	jmp ($FFF8)
@@ -324,8 +326,8 @@ GET_PIXEL:                              ; @GET_PIXEL
 	.type	GET_VERSION,@function
 GET_VERSION:                        ; @GET_VERSION
 ; %bb.0:
-	lda	mos8(__rc2)
-	ldx	mos8(__rc3)
+	lda	__rc2
+	ldx	__rc3
 	jsr pushax
 	lda #20
 	jmp ($FFF8)
@@ -343,7 +345,7 @@ CHECK_VERSION:                              ; @CHECK_VERSION
 	jsr pusha
 	txa
 	jsr pusha
-	lda	mos8(__rc2)
+	lda	__rc2
 	jsr pusha
 	lda #21
 	jmp ($FFF8)
@@ -352,8 +354,8 @@ CHECK_VERSION:                              ; @CHECK_VERSION
                                         ; -- End function
 LOAD_PERSISTENT:                        ; @LOAD_PERSISTENT
 ; %bb.0:
-	lda	mos8(__rc2)
-	ldx	mos8(__rc3)
+	lda	__rc2
+	ldx	__rc3
 	jsr pushax
 	lda #22
 	jmp ($FFF8)
@@ -365,8 +367,8 @@ LOAD_PERSISTENT:                        ; @LOAD_PERSISTENT
 	.type	SAVE_PERSISTENT,@function
 SAVE_PERSISTENT:                        ; @SAVE_PERSISTENT
 ; %bb.0:
-	lda	mos8(__rc2)
-	ldx	mos8(__rc3)
+	lda	__rc2
+	ldx	__rc3
 	jsr pushax
 	lda #23
 	jmp ($FFF8)

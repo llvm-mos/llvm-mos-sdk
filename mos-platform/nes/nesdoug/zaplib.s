@@ -2,6 +2,7 @@
 ;NES zapper gun code
 
 .include "nes.inc"
+.include "imag.inc"
 
 ;from NESDEV WIKI
 ;7  bit  0
@@ -87,16 +88,16 @@ zap_read:
 .globl zap_read2
 zap_read2:
 	ldx #0
-	stx mos8(__rc2)
+	stx __rc2
 	asl a
-	rol mos8(__rc2)
+	rol __rc2
 	asl a
-	rol mos8(__rc2)
+	rol __rc2
 
 	tax
 	beq .Lzero
 ;x is not zero, will exit early, add 1
-	inc mos8(__rc2)
+	inc __rc2
 .Lzero:
 	ldy #1
 .Lzap_read2_loop:
@@ -113,7 +114,7 @@ zap_read2:
 	dex
 	bne .Lzap_read2_loop
 
-	dec mos8(__rc2)
+	dec __rc2
 	bmi .Lzap_read2_hit_no ;if started zero, rolled to ff, exit
 	bne .Lzap_read2_loop ;positive, but above zero
 

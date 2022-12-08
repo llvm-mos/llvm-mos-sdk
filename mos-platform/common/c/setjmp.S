@@ -1,3 +1,5 @@
+.include "imag.inc"
+
 .section .text.setjmp
 .global setjmp
 setjmp:
@@ -16,54 +18,54 @@ setjmp:
   sta (__rc2),y
 
   ; Save soft stack pointer
-  lda mos8(__rc0)
+  lda __rc0
   iny
   sta (__rc2),y
-  lda mos8(__rc1)
+  lda __rc1
   iny
   sta (__rc2),y
 
   ; Save CSRs
-  lda mos8(__rc18)
+  lda __rc18
   iny
   sta (__rc2),y
-  lda mos8(__rc19)
+  lda __rc19
   iny
   sta (__rc2),y
-  lda mos8(__rc20)
+  lda __rc20
   iny
   sta (__rc2),y
-  lda mos8(__rc21)
+  lda __rc21
   iny
   sta (__rc2),y
-  lda mos8(__rc22)
+  lda __rc22
   iny
   sta (__rc2),y
-  lda mos8(__rc23)
+  lda __rc23
   iny
   sta (__rc2),y
-  lda mos8(__rc24)
+  lda __rc24
   iny
   sta (__rc2),y
-  lda mos8(__rc25)
+  lda __rc25
   iny
   sta (__rc2),y
-  lda mos8(__rc26)
+  lda __rc26
   iny
   sta (__rc2),y
-  lda mos8(__rc27)
+  lda __rc27
   iny
   sta (__rc2),y
-  lda mos8(__rc28)
+  lda __rc28
   iny
   sta (__rc2),y
-  lda mos8(__rc29)
+  lda __rc29
   iny
   sta (__rc2),y
-  lda mos8(__rc30)
+  lda __rc30
   iny
   sta (__rc2),y
-  lda mos8(__rc31)
+  lda __rc31
   iny
   sta (__rc2),y
 
@@ -76,60 +78,60 @@ setjmp:
 .global longjmp
 longjmp:
   ; Save return value
-  sta mos8(__rc16)
-  stx mos8(__rc17)
+  sta __rc16
+  stx __rc17
 
   ; Restore CSRs
   ldy #18
   lda (__rc2),y
-  sta mos8(__rc31)
+  sta __rc31
   dey
   lda (__rc2),y
-  sta mos8(__rc30)
+  sta __rc30
   dey
   lda (__rc2),y
-  sta mos8(__rc29)
+  sta __rc29
   dey
   lda (__rc2),y
-  sta mos8(__rc28)
+  sta __rc28
   dey
   lda (__rc2),y
-  sta mos8(__rc27)
+  sta __rc27
   dey
   lda (__rc2),y
-  sta mos8(__rc26)
+  sta __rc26
   dey
   lda (__rc2),y
-  sta mos8(__rc25)
+  sta __rc25
   dey
   lda (__rc2),y
-  sta mos8(__rc24)
+  sta __rc24
   dey
   lda (__rc2),y
-  sta mos8(__rc23)
+  sta __rc23
   dey
   lda (__rc2),y
-  sta mos8(__rc22)
+  sta __rc22
   dey
   lda (__rc2),y
-  sta mos8(__rc21)
+  sta __rc21
   dey
   lda (__rc2),y
-  sta mos8(__rc20)
+  sta __rc20
   dey
   lda (__rc2),y
-  sta mos8(__rc19)
+  sta __rc19
   dey
   lda (__rc2),y
-  sta mos8(__rc18)
+  sta __rc18
 
   ; Restore soft stack pointer
   dey
   lda (__rc2),y
-  sta mos8(__rc1)
+  sta __rc1
   dey
   lda (__rc2),y
-  sta mos8(__rc0)
+  sta __rc0
 
   ; Restore hard stack pointer
   dey
@@ -146,7 +148,7 @@ longjmp:
   sta $101,x
 
   ; Restore return value
-  lda mos8(__rc16)
-  ldx mos8(__rc17)
+  lda __rc16
+  ldx __rc17
 
   rts

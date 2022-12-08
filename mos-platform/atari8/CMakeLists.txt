@@ -28,6 +28,7 @@ merge_libraries(atari8-crt0
   common-zero-bss
   common-exit-return
 )
+target_link_libraries(atari8-crt0 PRIVATE common-asminc)
 
 add_platform_library(atari8-c
   abort.c

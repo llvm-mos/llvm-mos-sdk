@@ -10,6 +10,7 @@ install(DIRECTORY ${INCLUDE_DIR}/ TYPE INCLUDE)
 # Math library; just a stub for now.
 add_platform_library(common-m)
 
+add_subdirectory(asminc)
 add_subdirectory(crt0)
 add_subdirectory(crt)
 add_subdirectory(c)

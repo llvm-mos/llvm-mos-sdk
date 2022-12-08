@@ -1,7 +1,9 @@
+ .include "neslib.inc"
+
  .section .init.270,"axR",@progbits
 	lda #$fd
-	sta mos8(RAND_SEED)
-	sta mos8(RAND_SEED+1)
+	sta RAND_SEED
+	sta RAND_SEED+1
 
 ;unsigned char rand8(void);
 .section .text.rand8,"ax",@progbits
@@ -11,33 +13,33 @@
 
 rand1:
 
-	lda mos8(RAND_SEED)
+	lda RAND_SEED
 	asl a
 	bcc 1f
 	eor #$cf
 
 1:
 
-	sta mos8(RAND_SEED)
+	sta RAND_SEED
 	rts
 
 rand2:
 
-	lda mos8(RAND_SEED+1)
+	lda RAND_SEED+1
 	asl a
 	bcc 1f
 	eor #$d7
 
 1:
 
-	sta mos8(RAND_SEED+1)
+	sta RAND_SEED+1
 	rts
 
 rand8:
 
 	jsr rand1
 	jsr rand2
-	adc mos8(RAND_SEED)
+	adc RAND_SEED
 	rts
 
 
@@ -59,8 +61,8 @@ rand16:
 .globl set_rand
 set_rand:
 
-	sta mos8(RAND_SEED)
-	stx mos8(RAND_SEED+1)
+	sta RAND_SEED
+	stx RAND_SEED+1
 
 	rts
 

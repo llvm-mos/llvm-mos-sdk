@@ -1,3 +1,5 @@
+.zeropage __bank_select_hi
+
 .section .reset,"ax",@progbits
 .globl _reset
 _reset:
@@ -8,4 +10,4 @@ _reset:
 
 .section .init.250,"axR",@progbits
   lda #$40
-  sta mos8(__bank_select_hi)
+  sta __bank_select_hi

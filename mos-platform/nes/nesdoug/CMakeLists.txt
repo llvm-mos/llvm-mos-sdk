@@ -11,3 +11,4 @@ add_platform_library(nes-nesdoug
   zaplib.s
 )
 target_include_directories(nes-nesdoug BEFORE PUBLIC ..)
+target_link_libraries(nes-nesdoug PRIVATE common-asminc nes-neslib-asminc)

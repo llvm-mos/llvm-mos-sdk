@@ -1,3 +1,5 @@
+.include "imag.inc"
+
 .text
 
 ;

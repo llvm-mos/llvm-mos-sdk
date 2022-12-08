@@ -7,6 +7,7 @@ endif()
 install(FILES api.h TYPE INCLUDE)
 
 add_platform_object_file(dodo-crt0-o crt0.o crt0.s)
+target_link_libraries(dodo-crt0-o PRIVATE common-asminc)
 
 add_platform_library(dodo-crt0) 
 merge_libraries(dodo-crt0
@@ -20,6 +21,7 @@ add_platform_library(dodo-c api.s)
 merge_libraries(dodo-c
   common-c
 )
+target_link_libraries(dodo-c PRIVATE common-asminc)
 
 target_include_directories(dodo-c SYSTEM BEFORE PUBLIC .)
 target_compile_options(dodo-c PUBLIC -mcpu=mos65c02)

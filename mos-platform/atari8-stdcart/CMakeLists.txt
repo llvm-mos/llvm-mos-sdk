@@ -10,9 +10,9 @@ install(FILES
   stdcart.ld
 TYPE LIB)
 
-# do not create crt0, that will take precedence over common/lib/crt0.o
-# which we depend on
-add_platform_library(atari8-stdcart-c
-  syms.s)
-merge_libraries(atari8-stdcart-c
-  common-c)
+# TODO; refactor out atari8 targets
+add_platform_library(atari8-stdcart-crt0 syms.s)
+merge_libraries(atari8-stdcart-crt0
+  atari8-crt0
+  common-copy-data
+)

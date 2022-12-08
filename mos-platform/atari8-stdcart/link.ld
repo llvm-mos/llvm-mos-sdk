@@ -1,5 +1,8 @@
+/* Atari800 cartridge linker scripts. */
 
-INCLUDE common.ld
+INCLUDE stdcart.ld
+INCLUDE cart-rom-fixed.ld
 
-/* Place C sections in RAM. */
-INCLUDE c-in-ram.ld
+OUTPUT_FORMAT {
+  FULL(cart_rom)
+}

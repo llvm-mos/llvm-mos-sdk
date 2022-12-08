@@ -4,7 +4,7 @@ INCLUDE imag-regs.ld
 ASSERT(__rc31 == 0x9f, "Inconsistent zero page map.")
 
 ASSERT(__cart_rom_size == 1 << LOG2CEIL(__cart_rom_size),
-       "CART-ROM size must be a power of 2.")
+       "ATARI 800 STDCART: ROM size must be a power of 2.")
 
 MEMORY {
   zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
@@ -21,7 +21,7 @@ SECTIONS {
        INCLUDE text-sections.ld
   } >c_rom_vma AT>c_rom_lma
   .rodata : { INCLUDE rodata-sections.ld } >c_rom_vma AT>c_rom_lma
-  .data : { INCLUDE data-sections.ld } >c_ram_vma AT>c_rom_lma
+  .data : { INCLUDE data-sections.ld } >ram AT>c_rom_lma
   __data_load_start = LOADADDR(.data) - LOADADDR(.rodata) + ADDR(.rodata);
   __data_size = SIZEOF(.data);
   .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>c_rom_lma
@@ -35,8 +35,7 @@ SECTIONS {
   } >zp
   INCLUDE zp-bss-symbols.ld
   INCLUDE zp-noinit.ld
-  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma AT>c_ram_lma
+  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >ram AT>ram
   INCLUDE bss-symbols.ld
-  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram_vma AT>c_ram_lma
-
+  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >ram AT>ram
 }

@@ -6,10 +6,13 @@ endif()
 
 install(FILES
   cart-rom-fixed.ld
-  c-in-ram.ld
-  common.ld
   link.ld
   stdcart.ld
 TYPE LIB)
 
-add_platform_object_file(atari8-stdcart-crt0-o crt0.o syms.s)
+# do not create crt0, that will precedence over the common version
+# which we depending on; rather create something specific
+add_platform_library(atari8-stdcart-c
+  syms.s)
+merge_libraries(atari8-stdcart-c
+  common-c)

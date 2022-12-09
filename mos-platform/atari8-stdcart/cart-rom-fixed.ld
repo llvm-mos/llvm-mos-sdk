@@ -12,9 +12,9 @@ REGION_ALIAS("c_rom_lma", cart_rom)
 SECTIONS {
   .cart_rom_fixed : { *(.cart_rom_fixed .cart_rom_fixed.*) } >cart_rom
   .vector 0xbffa - ORIGIN(cart_rom_vma) + ORIGIN(cart_rom) : {
-    SHORT(_start)
-    BYTE(0x0)   /* "Inserted" */
-    BYTE(0x04)  /* Bits, 7=diag, 2=start, 0=Enable_DOS */
-    SHORT(_fini) /* SHORT(_cart_init) */
+    SHORT(_start)      /* START entrypoint (after OS setup)   */
+    BYTE(0x0)          /* "Inserted"                          */
+    BYTE(0x04)         /* Bits: 7=diag, 2=start, 0=Enable_DOS */
+    SHORT(_cart_init)  /* INIT entrpoint (before OS setup)    */
   } >cart_rom
 }

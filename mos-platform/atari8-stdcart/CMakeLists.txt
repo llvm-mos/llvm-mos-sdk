@@ -11,5 +11,6 @@ install(FILES
   stdcart.ld
 TYPE LIB)
 
-add_platform_library(atari8-stdcart-crt0 syms.s copy-data.c)
+# ../common/crt0/copy-data; see above
+add_platform_library(atari8-stdcart-crt0 syms.s ../common/crt0/copy-data.c)
 target_compile_options(atari8-stdcart-crt0 PRIVATE -fno-lto)

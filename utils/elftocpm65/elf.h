@@ -491,7 +491,7 @@ typedef struct {
 	unsigned char	st_other;
 	Elf32_Half	st_shndx;	/* SHN_... */
 #if defined(__arm__) || defined(__arm64__)
-	uint32_t	st_arch_subinfo;
+	Elf32_Word	st_arch_subinfo;
 #endif
 } Elf32_Sym;
 
@@ -504,7 +504,7 @@ typedef struct {
 	Elf64_Addr	st_value;
 	Elf64_Xword	st_size;
 #if defined(__arm__) || defined(__arm64__)
-	uint32_t	st_arch_subinfo;
+	Elf64_Word	st_arch_subinfo;
 #endif
 } Elf64_Sym;
 #endif	/* defined(_LP64) || defined(_LONGLONG_TYPE) */

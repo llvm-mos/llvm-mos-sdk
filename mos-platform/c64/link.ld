@@ -6,13 +6,16 @@
  */
 
 MEMORY {
-    ram (rw) : ORIGIN = 0x0801, LENGTH = 0x97ff
+    ram (rw) : ORIGIN = 0x0801, LENGTH = 0xC7FF
 }
 
 INCLUDE commodore.ld
 
-/* Set initial soft stack address to end of BASIC area. (It grows down.) */
-__stack = 0x9FFF;
+INPUT(unmap-basic.o)
+
+/* With the BASIC ROM unmapped, set initial soft stack address to 
+ * right before the I/O mapped $D000-DFFF area. (It grows down.) */
+__stack = 0xCFFF;
 
 OUTPUT_FORMAT {
     /* Tells the C64 LOAD command where to place the file's contents. */

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __ALGORITHM__
+#define __ALGORITHM__
 
 namespace std {
 
@@ -55,3 +56,5 @@ ForwardIt max_element(ForwardIt first, ForwardIt last, Compare comp)
 }
 
 }
+
+#endif // __ALGORITHM__

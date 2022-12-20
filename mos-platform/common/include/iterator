@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __ITERATOR__
+#define __ITERATOR__
 
 #include <cstddef>
 
@@ -45,3 +46,5 @@ constexpr auto cend(const C &c) noexcept(noexcept(std::end(c))) -> decltype(c.en
 }
 
 }
+
+#endif // __ITERATOR__

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __UTILITY__
+#define __UTILITY__
 
 #include <type_traits>
 
@@ -56,3 +57,5 @@ std::pair<T1, T2> make_pair(T1 x, T2 y) {
 }
 
 }
+
+#endif // __UTILITY__

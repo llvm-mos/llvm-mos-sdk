@@ -1,0 +1,47 @@
+#ifndef __ARRAY__
+#define __ARRAY__
+
+#include <cstddef>
+#include <iterator>
+
+namespace std {
+
+template <class T, size_t _N>
+struct array {
+    using value_type = T;
+    using pointer = T*;
+    using const_pointer = const T*;
+    using reference = T&;
+    using const_reference = const T&;
+    using size_type = size_t;
+    using difference_type = ptrdiff_t;
+    using iterator = T*;
+    using const_iterator = const T*;
+
+    constexpr iterator begin() noexcept { return contents; }
+    constexpr const_iterator begin() const noexcept { return contents; }
+    constexpr iterator end() noexcept { return contents + _N; }
+    constexpr const_iterator end() const noexcept { return contents + _N; }
+
+    constexpr const_iterator cbegin() const noexcept { return contents; }
+    constexpr const_iterator cend() const noexcept { return contents + _N; }
+
+    [[nodiscard]] constexpr bool empty() const noexcept { return _N == 0; }
+    constexpr size_type size() const noexcept { return _N; }
+    constexpr size_type max_size() const noexcept { return _N; }
+
+    constexpr reference operator[](size_type n) { return contents[n]; }
+    constexpr const_reference operator[](size_type n) const { return contents[n]; }
+    constexpr reference front() { return contents[0]; }
+    constexpr const_reference front() const { return contents[0]; }
+    constexpr reference back() { return contents[_N - 1]; }
+    constexpr const_reference back() const { return contents[_N - 1]; }
+    constexpr pointer data() noexcept { return contents; }
+    constexpr const_pointer data() const noexcept { return contents; }
+private:
+    T contents[_N];
+};
+
+}
+
+#endif // __ARRAY__

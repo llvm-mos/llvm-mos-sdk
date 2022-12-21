@@ -1,0 +1,60 @@
+#ifndef __ALGORITHM__
+#define __ALGORITHM__
+
+namespace std {
+
+template <class ForwardIt>
+ForwardIt min_element(ForwardIt first, ForwardIt last)
+{
+    if (first == last)
+        return last;
+    ForwardIt smallest = first;
+    while (++first != last) {
+        if (*first < *smallest)
+            smallest = first;
+    }
+    return smallest;
+}
+
+template <class ForwardIt, class Compare>
+ForwardIt min_element(ForwardIt first, ForwardIt last, Compare comp)
+{
+    if (first == last)
+        return last;
+    ForwardIt smallest = first;
+    while (++first != last) {
+        if (comp(*first, *smallest))
+            smallest = first;
+    }
+    return smallest;
+}
+
+template <class ForwardIt>
+ForwardIt max_element(ForwardIt first, ForwardIt last)
+{
+    if (first == last)
+        return last;
+    ForwardIt largest = first;
+    while (++first != last) {
+        if (*largest < *first)
+            largest = first;
+    }
+    return largest;
+}
+
+template <class ForwardIt, class Compare>
+ForwardIt max_element(ForwardIt first, ForwardIt last, Compare comp)
+{
+    if (first == last)
+        return last;
+    ForwardIt largest = first;
+    while (++first != last) {
+        if (comp(*largest, *first))
+            largest = first;
+    }
+    return largest;
+}
+
+}
+
+#endif // __ALGORITHM__

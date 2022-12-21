@@ -1,0 +1,81 @@
+#ifndef __LIMITS__
+#define __LIMITS__
+
+namespace std {
+
+enum float_round_style {
+    round_indeterminate = -1,
+    round_toward_zero = 0,
+    round_to_nearest = 1,
+    round_toward_infinity = 2,
+    round_toward_neg_infinity = 3
+};
+
+enum float_denorm_style {
+    denorm_indeterminate = -1,
+    denorm_absent = 0,
+    denorm_present = 1
+};
+
+template <class T, bool IsIntegral>
+struct _numeric_limits_helper
+{
+    static constexpr bool is_specialized = false;
+    static constexpr bool is_signed = false;
+    static constexpr bool is_integer = false;
+    static constexpr bool is_exact = false;
+    static constexpr bool is_bounded = false;
+    static constexpr bool is_modulo = false;
+    static constexpr int radix = 0;
+    static constexpr int digits = 0;
+    static constexpr int digits10 = 0;
+    static constexpr T min() noexcept { return T(); }
+    static constexpr T max() noexcept { return T(); }
+    static constexpr T lowest() noexcept { return T(); }
+};
+
+template <class T>
+struct _numeric_limits_helper<T, true>
+{
+    static constexpr bool is_specialized = true;
+    static constexpr bool is_signed = __is_signed(T);
+    static constexpr bool is_integer = true;
+    static constexpr bool is_exact = true;
+    static constexpr bool is_bounded = true;
+    static constexpr bool is_modulo = !is_signed;
+    static constexpr int radix = 2;
+    static constexpr int digits = sizeof(T) * 8 - is_signed;
+    static constexpr int digits10 = digits * 3 / 10; // log10(2) =~ 0.3
+    static constexpr T min() noexcept { return is_signed ? static_cast<T>(1) << digits : 0; }
+    static constexpr T max() noexcept { return ~min(); }
+    static constexpr T lowest() noexcept { return min(); }
+};
+
+template <class T>
+class numeric_limits : public _numeric_limits_helper<T, __is_integral(T)>  {
+public:
+    static constexpr bool is_iec559 = false;
+    static constexpr bool has_infinity = false;
+    static constexpr bool has_quiet_NaN = false;
+    static constexpr bool has_signaling_NaN = false;
+    static constexpr bool has_denorm_loss = false;
+    static constexpr bool tinyness_before = false;
+    static constexpr bool traps = false;
+    static constexpr int max_digits10 = 0;
+    static constexpr int min_exponent = 0;
+    static constexpr int min_exponent10 = 0;
+    static constexpr int max_exponent = 0;
+    static constexpr int max_exponent10 = 0;
+    static constexpr std::float_round_style round_style = std::round_toward_zero;
+    static constexpr std::float_denorm_style has_denorm = std::denorm_absent;
+    static constexpr T epsilon() noexcept { return T(); }
+    static constexpr T round_error() noexcept { return T(); }
+    static constexpr T infinity() noexcept { return T(); }
+    static constexpr T quiet_NaN() noexcept { return T(); }
+    static constexpr T signaling_NaN() noexcept { return T(); }
+    static constexpr T denorm_min() noexcept { return T(); }
+};
+
+}
+
+#endif // __LIMITS__

@@ -14,12 +14,15 @@ var searchData=
   ['_5flibcxxabi_5fno_5fcfi_12',['_LIBCXXABI_NO_CFI',['../cxxabi-config_8h.html#a3ae4a5275774c0b934982196c8b4df18',1,'cxxabi-config.h']]],
   ['_5flibcxxabi_5ftype_5fvis_13',['_LIBCXXABI_TYPE_VIS',['../cxxabi-config_8h.html#af24531b4fb1d899b8914232770085f8c',1,'cxxabi-config.h']]],
   ['_5flibcxxabi_5fweak_14',['_LIBCXXABI_WEAK',['../cxxabi-config_8h.html#aae6af416e15cc44ab053299bc7be6722',1,'cxxabi-config.h']]],
-  ['_5fpbi_2eh_15',['_pbi.h',['../__pbi_8h.html',1,'']]],
-  ['_5fpia_2eh_16',['_pia.h',['../__pia_8h.html',1,'']]],
-  ['_5fpokey_2eh_17',['_pokey.h',['../__pokey_8h.html',1,'']]],
-  ['_5fsid_2eh_18',['_sid.h',['../__sid_8h.html',1,'']]],
-  ['_5fsim_5freg_19',['_sim_reg',['../struct__sim__reg.html',1,'']]],
-  ['_5ftextcolor_20',['_textcolor',['../atari_8h.html#a68c8bbdd79ee6320b7e1dcdf0b34bb83',1,'atari.h']]],
-  ['_5ftype_5ftraits_5f_21',['_TYPE_TRAITS_',['../type__traits.html#a6f3e620ffc12213dc6135bad13769689',1,'type_traits']]],
-  ['_5fvic2_2eh_22',['_vic2.h',['../__vic2_8h.html',1,'']]]
+  ['_5fnumeric_5flimits_5fhelper_15',['_numeric_limits_helper',['../structstd_1_1__numeric__limits__helper.html',1,'std']]],
+  ['_5fnumeric_5flimits_5fhelper_3c_20t_2c_20_5f_5fis_5fintegral_28t_29_3e_16',['_numeric_limits_helper&lt; T, __is_integral(T)&gt;',['../structstd_1_1__numeric__limits__helper.html',1,'std']]],
+  ['_5fnumeric_5flimits_5fhelper_3c_20t_2c_20true_20_3e_17',['_numeric_limits_helper&lt; T, true &gt;',['../structstd_1_1__numeric__limits__helper_3_01T_00_01true_01_4.html',1,'std']]],
+  ['_5fpbi_2eh_18',['_pbi.h',['../__pbi_8h.html',1,'']]],
+  ['_5fpia_2eh_19',['_pia.h',['../__pia_8h.html',1,'']]],
+  ['_5fpokey_2eh_20',['_pokey.h',['../__pokey_8h.html',1,'']]],
+  ['_5fsid_2eh_21',['_sid.h',['../__sid_8h.html',1,'']]],
+  ['_5fsim_5freg_22',['_sim_reg',['../struct__sim__reg.html',1,'']]],
+  ['_5ftextcolor_23',['_textcolor',['../atari_8h.html#a68c8bbdd79ee6320b7e1dcdf0b34bb83',1,'atari.h']]],
+  ['_5ftype_5ftraits_5f_24',['_TYPE_TRAITS_',['../type__traits.html#a6f3e620ffc12213dc6135bad13769689',1,'type_traits']]],
+  ['_5fvic2_2eh_25',['_vic2.h',['../__vic2_8h.html',1,'']]]
 ];

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['fpidx_5fr0_1864',['FPIDX_R0',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5abdadb22b5afc3fe41ccfc3c3cc4ffb6b',1,'_atarios.h']]],
-  ['fpidx_5fr1_1865',['FPIDX_R1',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a28d565d6a0e7bdec1b5cf7c616b29268',1,'_atarios.h']]],
-  ['fpidx_5fr2_1866',['FPIDX_R2',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a60471fb4c48cf14218faed0f03f879f3',1,'_atarios.h']]],
-  ['fpidx_5fre_1867',['FPIDX_RE',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a20b66be4d38b2e253eafcaf7b896b3c4',1,'_atarios.h']]]
+  ['denorm_5fabsent_1947',['denorm_absent',['../namespacestd.html#a5d4e3dd02abab45dde95b5bb4ae7fdbfad91095a64f12657bc911d2cecd4fab0d',1,'std']]],
+  ['denorm_5findeterminate_1948',['denorm_indeterminate',['../namespacestd.html#a5d4e3dd02abab45dde95b5bb4ae7fdbfa33fdcd73e760174c19ab87389eb104ae',1,'std']]],
+  ['denorm_5fpresent_1949',['denorm_present',['../namespacestd.html#a5d4e3dd02abab45dde95b5bb4ae7fdbfa28c4fcc178853e4c66190bc2c5027de5',1,'std']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['realloc_1579',['realloc',['../common_2include_2stdlib_8h.html#a1a6b5e8d2f1c37e5b43e4345586075be',1,'stdlib.h']]],
-  ['reset_5fclock_1580',['reset_clock',['../sim_2stdlib_8h.html#aed6302ce618bfaeb676c37dd9f895a70',1,'stdlib.h']]]
+  ['quiet_5fnan_1634',['quiet_NaN',['../classstd_1_1numeric__limits.html#a41a5dc01731fa7520a566b63d11ad25f',1,'std::numeric_limits']]]
 ];

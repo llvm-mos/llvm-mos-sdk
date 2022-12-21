@@ -1,0 +1,61 @@
+#ifndef __UTILITY__
+#define __UTILITY__
+
+#include <type_traits>
+
+namespace std {
+
+template <class T>
+constexpr T&& forward(std::remove_reference_t<T> &t) noexcept {
+    return static_cast<T &&>(t);
+}
+
+template <class T>
+constexpr T&& forward(std::remove_reference_t<T> &&t) noexcept {
+    return static_cast<T &&>(t);
+}
+
+template <class T1, class T2>
+struct pair {
+    using first_type = T1;
+    using second_type = T2;
+    T1 first;
+    T2 second;
+
+    pair(const pair &p) = default;
+    pair(pair &&p) = default;
+
+    constexpr pair(const T1 &x, const T2 &y) :
+        first(x),
+        second(y) {
+    }
+
+    template <class U1 = T1, class U2 = T2>
+    constexpr pair(U1 &&x, U2 &&y) :
+        first(std::forward<U1>(x)),
+        second(std::forward<U2>(y)) {
+    }
+
+    template <class U1, class U2>
+    constexpr pair& operator=(const pair<U1, U2> &p) {
+        first = p.first;
+        second = p.second;
+        return *this;
+    }
+
+    template <class U1, class U2>
+    constexpr pair& operator=(pair<U1, U2> &&p) {
+        first = std::forward<U1>(p.first);
+        second = std::forward<U2>(p.second);
+        return *this;
+    }
+};
+
+template <class T1, class T2>
+std::pair<T1, T2> make_pair(T1 x, T2 y) {
+    return std::pair<T1, T2>(x, y);
+}
+
+}
+
+#endif // __UTILITY__

@@ -844,7 +844,7 @@ vram_inc:
 	sta __rc2
 	lda PPUCTRL_VAR
 	and #$fb
-	ora __rc3
+	ora __rc2
 	sta PPUCTRL_VAR
 	sta PPUCTRL
 

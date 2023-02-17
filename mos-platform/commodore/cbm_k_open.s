@@ -7,7 +7,7 @@
 ;
 .global cbm_k_open
 cbm_k_open:
-	jsr OPEN
+	jsr __OPEN
 	bcs some_error
 	lda #0 ; open was successful if .C = clear
 some_error:

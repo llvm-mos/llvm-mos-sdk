@@ -8,4 +8,8 @@
 .global cbm_k_load
 cbm_k_load:
 	ldy __rc2
-	jmp __LOAD
+	jsr __LOAD
+	bcs someerror
+	lda #0
+someerror:
+	rts

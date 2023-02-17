@@ -6,4 +6,8 @@
 .global cbm_k_chkin
 cbm_k_chkin:
 	tax
-	jmp __CHKIN
+	jsr __CHKIN
+	bcs some_error
+	lda #0 ; open was successful if .C = clear
+some_error:
+	rts

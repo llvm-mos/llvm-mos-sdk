@@ -11,5 +11,6 @@ cbm_k_load:
 	jsr __LOAD
 	bcs someerror
 	lda #0
+	tax
 someerror:
 	rts

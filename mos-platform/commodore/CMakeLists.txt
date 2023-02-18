@@ -31,7 +31,7 @@ add_platform_library(commodore-c
   cbm_k_chrin.c
   cbm_k_chrout.c
   cbm_k_ciout.c 
-  cbm_k_ckout.c
+  cbm_k_ckout.s
   cbm_k_clall.c
   cbm_k_close.c
   cbm_k_clrch.c
@@ -39,7 +39,7 @@ add_platform_library(commodore-c
   cbm_k_iobase.s
   cbm_k_listen.c
   cbm_k_load.s
-  cbm_k_open.c
+  cbm_k_open.s
   cbm_k_readst.c
   cbm_k_save.s
   cbm_k_scnkey.c

@@ -11,4 +11,8 @@ cbm_k_save:
 	ldx __rc2
 	ldy __rc3
 	lda #__rc4
-	jmp __SAVE
+	jsr __SAVE
+	bcs someerror
+	lda #0
+someerror:
+	rts

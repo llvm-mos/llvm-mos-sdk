@@ -8,4 +8,13 @@
 .global cbm_k_load
 cbm_k_load:
 	ldy __rc2
-	jmp __LOAD
+	jsr __LOAD
+	bcc noerror
+	; error code in a ;
+	ldx #0
+	rts
+noerror:
+	txa
+	sty __rc2
+	ldx __rc2
+	rts

@@ -7,12 +7,14 @@
 ;
 .global cbm_k_load
 cbm_k_load:
-	sta __rc4
-	stx __rc5
 	ldy __rc2
 	jsr __LOAD
 	bcs noerror
 	; error code in a ;
 	ldx #0
+	rts
 noerror:
+	txa
+	sty __rc2
+	ldx __rc2
 	rts

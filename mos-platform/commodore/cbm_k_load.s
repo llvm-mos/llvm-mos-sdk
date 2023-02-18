@@ -9,7 +9,7 @@
 cbm_k_load:
 	ldy __rc2
 	jsr __LOAD
-	bcs noerror
+	bcc noerror
 	; error code in a ;
 	ldx #0
 	rts

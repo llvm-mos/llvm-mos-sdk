@@ -7,8 +7,7 @@ ASSERT(__prg_ram_size + __prg_nvram_size <= 8,
 ASSERT(__prg_rom_size <= 512, "MMC3 only supports up to 512KiB of PRG-ROM.")
 
 MEMORY {
-  prg_ram_vma : ORIGIN = 0x006000, LENGTH = 0x2000
-  prg_ram_lma : ORIGIN = 0x03000000, LENGTH = (__prg_ram_size + __prg_nvram_size) * 1024
+  prg_ram_vma : ORIGIN = 0x006000, LENGTH = (__prg_ram_size + __prg_nvram_size) * 1024
 
   prg_rom_0_lma  : ORIGIN = 0x01000000, LENGTH = MIN(__prg_rom_size * 1024, 0x2000)
   prg_rom_1_lma  : ORIGIN = 0x01002000, LENGTH = __prg_rom_size >= 16  ? 0x2000 : 0
@@ -461,7 +460,7 @@ MEMORY {
 }
 
 SECTIONS {
-  .prg_ram (NOLOAD) : { *(.prg_ram .prg_ram.*) } >prg_ram_vma AT>prg_ram_lma
+  .prg_ram (NOLOAD) : { *(.prg_ram .prg_ram.*) } >prg_ram_vma
 
   .prg_rom_0     : { *(.prg_rom_0     .prg_rom_0.*)     } >prg_rom_0_vma     AT>prg_rom_0_lma
   .prg_rom_1     : { *(.prg_rom_1     .prg_rom_1.*)     } >prg_rom_1_vma     AT>prg_rom_1_lma

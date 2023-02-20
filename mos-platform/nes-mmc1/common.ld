@@ -20,17 +20,10 @@ ASSERT(__prg_ram_size + __prg_nvram_size <= 32,
 
 MEMORY {
   /* PRG-RAM VMAs. */
-  prg_ram_0_vma : ORIGIN = 0x006000, LENGTH = 0x2000
-  prg_ram_1_vma : ORIGIN = 0x016000, LENGTH = 0x2000
-  prg_ram_2_vma : ORIGIN = 0x026000, LENGTH = 0x2000
-  prg_ram_3_vma : ORIGIN = 0x036000, LENGTH = 0x2000
-
-  /* PRG-RAM LMAs. Just performs a size check on the contents and appeases the
-   * linker. */
-  prg_ram_0_lma : ORIGIN = 0x03000000, LENGTH = __prg_ram_size + __prg_nvram_size >= 8  ? 0x2000 : 0
-  prg_ram_1_lma : ORIGIN = 0x03002000, LENGTH = __prg_ram_size + __prg_nvram_size >= 16 ? 0x2000 : 0
-  prg_ram_2_lma : ORIGIN = 0x03004000, LENGTH = __prg_ram_size + __prg_nvram_size >= 32 ? 0x2000 : 0
-  prg_ram_3_lma : ORIGIN = 0x03006000, LENGTH = __prg_ram_size + __prg_nvram_size >= 32 ? 0x2000 : 0
+  prg_ram_0_vma : ORIGIN = 0x006000, LENGTH = __prg_ram_size + __prg_nvram_size >= 8  ? 0x2000 : 0
+  prg_ram_1_vma : ORIGIN = 0x016000, LENGTH = __prg_ram_size + __prg_nvram_size >= 16 ? 0x2000 : 0
+  prg_ram_2_vma : ORIGIN = 0x026000, LENGTH = __prg_ram_size + __prg_nvram_size >= 32 ? 0x2000 : 0
+  prg_ram_3_vma : ORIGIN = 0x036000, LENGTH = __prg_ram_size + __prg_nvram_size >= 32 ? 0x2000 : 0
 
   /* CHR-ROM bank LMAs. */
   chr_rom_0  : ORIGIN = 0x02000000, LENGTH = __chr_rom_size >= 4   ? 0x1000 : 0
@@ -85,10 +78,10 @@ MEMORY {
 }
 
 SECTIONS {
-  .prg_ram_0 (NOLOAD) : OVERLAY { *(.prg_ram_0 .prg_ram_0.*) } >prg_ram_0_vma AT>prg_ram_0_lma
-  .prg_ram_1 (NOLOAD) : OVERLAY { *(.prg_ram_1 .prg_ram_1.*) } >prg_ram_1_vma AT>prg_ram_1_lma
-  .prg_ram_2 (NOLOAD) : OVERLAY { *(.prg_ram_2 .prg_ram_2.*) } >prg_ram_2_vma AT>prg_ram_2_lma
-  .prg_ram_3 (NOLOAD) : OVERLAY { *(.prg_ram_3 .prg_ram_3.*) } >prg_ram_3_vma AT>prg_ram_3_lma
+  .prg_ram_0 (NOLOAD) : OVERLAY { *(.prg_ram_0 .prg_ram_0.*) } >prg_ram_0_vma
+  .prg_ram_1 (NOLOAD) : OVERLAY { *(.prg_ram_1 .prg_ram_1.*) } >prg_ram_1_vma
+  .prg_ram_2 (NOLOAD) : OVERLAY { *(.prg_ram_2 .prg_ram_2.*) } >prg_ram_2_vma
+  .prg_ram_3 (NOLOAD) : OVERLAY { *(.prg_ram_3 .prg_ram_3.*) } >prg_ram_3_vma
 
   .chr_rom_0  : { KEEP(*(.chr_rom_0 .chr_rom_0.*)) } >chr_rom_0
   .chr_rom_1  : { KEEP(*(.chr_rom_1 .chr_rom_1.*)) } >chr_rom_1

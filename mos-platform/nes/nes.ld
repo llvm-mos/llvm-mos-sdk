@@ -60,9 +60,9 @@ SECTIONS {
   } >zp
   INCLUDE zp-bss-symbols.ld
   INCLUDE zp-noinit.ld
-  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma AT>c_ram_lma
+  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma
   INCLUDE bss-symbols.ld
-  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram_vma AT>c_ram_lma
+  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram_vma
 
   .chr_rom  : { KEEP(*(.chr_rom .chr_rom.*)) } >chr_rom
 }

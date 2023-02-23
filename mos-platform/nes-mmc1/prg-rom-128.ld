@@ -2,12 +2,15 @@ INCLUDE _prg-rom-banked.ld
 
 __prg_rom_size = 128;
 
-SECTIONS {
-  .reset_0 : OVERLAY { KEEP(*(.reset_0)) } >reset_0
-  .reset_1 : OVERLAY { KEEP(*(.reset_1)) } >reset_1
-  .reset_2 : OVERLAY { KEEP(*(.reset_2)) } >reset_2
-  .reset_3 : OVERLAY { KEEP(*(.reset_3)) } >reset_3
-  .reset_4 : OVERLAY { KEEP(*(.reset_4)) } >reset_4
-  .reset_5 : OVERLAY { KEEP(*(.reset_5)) } >reset_5
-  .reset_6 : OVERLAY { KEEP(*(.reset_6)) } >reset_6
+OUTPUT_FORMAT {
+  INCLUDE ines-header.ld
+  FULL(prg_rom_0)     FULL(reset)
+  FULL(prg_rom_1)     FULL(reset)
+  FULL(prg_rom_2)     FULL(reset)
+  FULL(prg_rom_3)     FULL(reset)
+  FULL(prg_rom_4)     FULL(reset)
+  FULL(prg_rom_5)     FULL(reset)
+  FULL(prg_rom_6)     FULL(reset)
+  FULL(prg_rom_fixed) FULL(reset_fixed)
+  FULL(chr_rom)
 }

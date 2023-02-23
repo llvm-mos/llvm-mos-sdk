@@ -19,69 +19,67 @@ ASSERT(__prg_ram_size + __prg_nvram_size <= 32,
        "MMC1 only supports up to 32KiB of PRG-(NV)RAM.")
 
 MEMORY {
-  /* PRG-RAM VMAs. */
-  prg_ram_0_vma : ORIGIN = 0x006000, LENGTH = __prg_ram_size + __prg_nvram_size >= 8  ? 0x2000 : 0
-  prg_ram_1_vma : ORIGIN = 0x016000, LENGTH = __prg_ram_size + __prg_nvram_size >= 16 ? 0x2000 : 0
-  prg_ram_2_vma : ORIGIN = 0x026000, LENGTH = __prg_ram_size + __prg_nvram_size >= 32 ? 0x2000 : 0
-  prg_ram_3_vma : ORIGIN = 0x036000, LENGTH = __prg_ram_size + __prg_nvram_size >= 32 ? 0x2000 : 0
+  prg_ram_0 : ORIGIN = 0x006000, LENGTH = __prg_ram_size + __prg_nvram_size >= 8  ? 0x2000 : 0
+  prg_ram_1 : ORIGIN = 0x016000, LENGTH = __prg_ram_size + __prg_nvram_size >= 16 ? 0x2000 : 0
+  prg_ram_2 : ORIGIN = 0x026000, LENGTH = __prg_ram_size + __prg_nvram_size >= 32 ? 0x2000 : 0
+  prg_ram_3 : ORIGIN = 0x036000, LENGTH = __prg_ram_size + __prg_nvram_size >= 32 ? 0x2000 : 0
 
-  /* CHR-ROM bank LMAs. */
-  chr_rom_0  : ORIGIN = 0x02000000, LENGTH = __chr_rom_size >= 4   ? 0x1000 : 0
-  chr_rom_1  : ORIGIN = 0x02001000, LENGTH = __chr_rom_size >= 8   ? 0x1000 : 0
-  chr_rom_2  : ORIGIN = 0x02002000, LENGTH = __chr_rom_size >= 16  ? 0x1000 : 0
-  chr_rom_3  : ORIGIN = 0x02003000, LENGTH = __chr_rom_size >= 16  ? 0x1000 : 0
-  chr_rom_4  : ORIGIN = 0x02004000, LENGTH = __chr_rom_size >= 32  ? 0x1000 : 0
-  chr_rom_5  : ORIGIN = 0x02005000, LENGTH = __chr_rom_size >= 32  ? 0x1000 : 0
-  chr_rom_6  : ORIGIN = 0x02006000, LENGTH = __chr_rom_size >= 32  ? 0x1000 : 0
-  chr_rom_7  : ORIGIN = 0x02007000, LENGTH = __chr_rom_size >= 32  ? 0x1000 : 0
-  chr_rom_8  : ORIGIN = 0x02008000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
-  chr_rom_9  : ORIGIN = 0x02009000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
-  chr_rom_10 : ORIGIN = 0x0200a000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
-  chr_rom_11 : ORIGIN = 0x0200b000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
-  chr_rom_12 : ORIGIN = 0x0200c000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
-  chr_rom_13 : ORIGIN = 0x0200d000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
-  chr_rom_14 : ORIGIN = 0x0200e000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
-  chr_rom_15 : ORIGIN = 0x0200f000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
-  chr_rom_16 : ORIGIN = 0x02010000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_17 : ORIGIN = 0x02011000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_18 : ORIGIN = 0x02012000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_19 : ORIGIN = 0x02013000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_20 : ORIGIN = 0x02014000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_21 : ORIGIN = 0x02015000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_22 : ORIGIN = 0x02016000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_23 : ORIGIN = 0x02017000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_24 : ORIGIN = 0x02018000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_25 : ORIGIN = 0x02019000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_26 : ORIGIN = 0x0201a000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_27 : ORIGIN = 0x0201b000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_28 : ORIGIN = 0x0201c000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_29 : ORIGIN = 0x0201d000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_30 : ORIGIN = 0x0201e000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
-  chr_rom_31 : ORIGIN = 0x0201f000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_0  : ORIGIN = 0x01000000, LENGTH = __chr_rom_size >= 4   ? 0x1000 : 0
+  chr_rom_1  : ORIGIN = 0x01001000, LENGTH = __chr_rom_size >= 8   ? 0x1000 : 0
+  chr_rom_2  : ORIGIN = 0x01002000, LENGTH = __chr_rom_size >= 16  ? 0x1000 : 0
+  chr_rom_3  : ORIGIN = 0x01003000, LENGTH = __chr_rom_size >= 16  ? 0x1000 : 0
+  chr_rom_4  : ORIGIN = 0x01004000, LENGTH = __chr_rom_size >= 32  ? 0x1000 : 0
+  chr_rom_5  : ORIGIN = 0x01005000, LENGTH = __chr_rom_size >= 32  ? 0x1000 : 0
+  chr_rom_6  : ORIGIN = 0x01006000, LENGTH = __chr_rom_size >= 32  ? 0x1000 : 0
+  chr_rom_7  : ORIGIN = 0x01007000, LENGTH = __chr_rom_size >= 32  ? 0x1000 : 0
+  chr_rom_8  : ORIGIN = 0x01008000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
+  chr_rom_9  : ORIGIN = 0x01009000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
+  chr_rom_10 : ORIGIN = 0x0100a000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
+  chr_rom_11 : ORIGIN = 0x0100b000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
+  chr_rom_12 : ORIGIN = 0x0100c000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
+  chr_rom_13 : ORIGIN = 0x0100d000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
+  chr_rom_14 : ORIGIN = 0x0100e000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
+  chr_rom_15 : ORIGIN = 0x0100f000, LENGTH = __chr_rom_size >= 64  ? 0x1000 : 0
+  chr_rom_16 : ORIGIN = 0x01010000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_17 : ORIGIN = 0x01011000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_18 : ORIGIN = 0x01012000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_19 : ORIGIN = 0x01013000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_20 : ORIGIN = 0x01014000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_21 : ORIGIN = 0x01015000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_22 : ORIGIN = 0x01016000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_23 : ORIGIN = 0x01017000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_24 : ORIGIN = 0x01018000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_25 : ORIGIN = 0x01019000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_26 : ORIGIN = 0x0101a000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_27 : ORIGIN = 0x0101b000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_28 : ORIGIN = 0x0101c000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_29 : ORIGIN = 0x0101d000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_30 : ORIGIN = 0x0101e000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
+  chr_rom_31 : ORIGIN = 0x0101f000, LENGTH = __chr_rom_size >= 128 ? 0x1000 : 0
 
-  chr_rom_0_1   : ORIGIN = 0x02000000, LENGTH = __chr_rom_size >= 8   ? 0x2000 : 0
-  chr_rom_2_3   : ORIGIN = 0x02002000, LENGTH = __chr_rom_size >= 16  ? 0x2000 : 0
-  chr_rom_4_5   : ORIGIN = 0x02004000, LENGTH = __chr_rom_size >= 32  ? 0x2000 : 0
-  chr_rom_6_7   : ORIGIN = 0x02006000, LENGTH = __chr_rom_size >= 32  ? 0x2000 : 0
-  chr_rom_8_9   : ORIGIN = 0x02008000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
-  chr_rom_10_11 : ORIGIN = 0x0200a000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
-  chr_rom_12_13 : ORIGIN = 0x0200c000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
-  chr_rom_14_15 : ORIGIN = 0x0200e000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
-  chr_rom_16_17 : ORIGIN = 0x02010000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
-  chr_rom_18_19 : ORIGIN = 0x02012000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
-  chr_rom_20_21 : ORIGIN = 0x02014000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
-  chr_rom_22_23 : ORIGIN = 0x02016000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
-  chr_rom_24_25 : ORIGIN = 0x02018000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
-  chr_rom_26_27 : ORIGIN = 0x0201a000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
-  chr_rom_28_29 : ORIGIN = 0x0201c000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
-  chr_rom_30_31 : ORIGIN = 0x0201e000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_0_1   : ORIGIN = 0x01000000, LENGTH = __chr_rom_size >= 8   ? 0x2000 : 0
+  chr_rom_2_3   : ORIGIN = 0x01002000, LENGTH = __chr_rom_size >= 16  ? 0x2000 : 0
+  chr_rom_4_5   : ORIGIN = 0x01004000, LENGTH = __chr_rom_size >= 32  ? 0x2000 : 0
+  chr_rom_6_7   : ORIGIN = 0x01006000, LENGTH = __chr_rom_size >= 32  ? 0x2000 : 0
+  chr_rom_8_9   : ORIGIN = 0x01008000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
+  chr_rom_10_11 : ORIGIN = 0x0100a000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
+  chr_rom_12_13 : ORIGIN = 0x0100c000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
+  chr_rom_14_15 : ORIGIN = 0x0100e000, LENGTH = __chr_rom_size >= 64  ? 0x2000 : 0
+  chr_rom_16_17 : ORIGIN = 0x01010000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_18_19 : ORIGIN = 0x01012000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_20_21 : ORIGIN = 0x01014000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_22_23 : ORIGIN = 0x01016000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_24_25 : ORIGIN = 0x01018000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_26_27 : ORIGIN = 0x0101a000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_28_29 : ORIGIN = 0x0101c000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
+  chr_rom_30_31 : ORIGIN = 0x0101e000, LENGTH = __chr_rom_size >= 128 ? 0x2000 : 0
 }
 
 SECTIONS {
-  .prg_ram_0 (NOLOAD) : OVERLAY { *(.prg_ram_0 .prg_ram_0.*) } >prg_ram_0_vma
-  .prg_ram_1 (NOLOAD) : OVERLAY { *(.prg_ram_1 .prg_ram_1.*) } >prg_ram_1_vma
-  .prg_ram_2 (NOLOAD) : OVERLAY { *(.prg_ram_2 .prg_ram_2.*) } >prg_ram_2_vma
-  .prg_ram_3 (NOLOAD) : OVERLAY { *(.prg_ram_3 .prg_ram_3.*) } >prg_ram_3_vma
+  .prg_ram_0 (NOLOAD) : OVERLAY { *(.prg_ram_0 .prg_ram_0.*) } >prg_ram_0
+  .prg_ram_1 (NOLOAD) : OVERLAY { *(.prg_ram_1 .prg_ram_1.*) } >prg_ram_1
+  .prg_ram_2 (NOLOAD) : OVERLAY { *(.prg_ram_2 .prg_ram_2.*) } >prg_ram_2
+  .prg_ram_3 (NOLOAD) : OVERLAY { *(.prg_ram_3 .prg_ram_3.*) } >prg_ram_3
 
   .chr_rom_0  : { KEEP(*(.chr_rom_0 .chr_rom_0.*)) } >chr_rom_0
   .chr_rom_1  : { KEEP(*(.chr_rom_1 .chr_rom_1.*)) } >chr_rom_1
@@ -133,5 +131,3 @@ SECTIONS {
   .chr_rom_28_29 : { KEEP(*(.chr_rom_28_29 .chr_rom_28_29.*)) } >chr_rom_28_29
   .chr_rom_30_31 : { KEEP(*(.chr_rom_30_31 .chr_rom_30_31.*)) } >chr_rom_30_31
 }
-
-INCLUDE ines.ld

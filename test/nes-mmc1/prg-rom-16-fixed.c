@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <peekpoke.h>
 
+asm(".globl __prg_rom_size\n"
+    "__prg_rom_size = 16\n");
+
 volatile const char c[15000] = {1, [14999] = 2};
 
 int main(void) {

@@ -6,7 +6,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
-  _prg-rom-banked-16-common.ld
+  _prg-rom-banked.ld
   _reset.ld
   c-in-prg-ram.ld
   common.ld

@@ -2,15 +2,22 @@ INPUT(reset-fixed.o)
 
 PROVIDE(__prg_rom_size = 32);
 
-ASSERT(__prg_rom_size <= 32, "Fixed banking supports at most 32KiB of PRG-ROM.")
+ASSERT(__prg_rom_size == 16 || __prg_rom_size == 32,
+       "Fixed PRG-ROM only supports 16 KiB or 32 KiB")
 
-MEMORY {
-  prg_rom_vma : ORIGIN = 0x10000 - __prg_rom_size * 1024,
-                LENGTH = __prg_rom_size * 1024
-}
+__prg_rom_lma    = __prg_rom_size == 32 ? 0x8000 : 0xC000;
+__prg_rom_offset = 0;
 
-REGION_ALIAS("c_rom_vma", prg_rom_vma)
-REGION_ALIAS("c_rom_lma", prg_rom)
+MEMORY { prg_rom (rx) : ORIGIN = __prg_rom_lma, LENGTH = __prg_rom_size * 1024 }
+REGION_ALIAS("c_rom", prg_rom)
+REGION_ALIAS("prg_rom_fixed", prg_rom)
 
+SECTIONS { .prg_rom_fixed : { *(.prg_rom_fixed .prg_rom_fixed.*) } >prg_rom_fixed }
 INCLUDE dpcm.ld
 INCLUDE _reset.ld
+
+OUTPUT_FORMAT {
+  INCLUDE ines-header.ld
+  FULL(prg_rom)
+  FULL(chr_rom)
+}

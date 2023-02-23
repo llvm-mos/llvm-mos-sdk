@@ -4,5 +4,5 @@ SECTIONS {
     *(.reset .reset.*)
     . = 0xfffa;
     SHORT(nmi) SHORT(_reset) SHORT(irq)
-  } >c_rom_vma AT>c_rom_lma
+  } >prg_rom_fixed
 }

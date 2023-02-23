@@ -8,12 +8,10 @@ install(FILES
   nes.h
 TYPE INCLUDE)
 install(FILES
-  c-in-ram.ld
   c-in-prg-ram-fixed.ld
+  c-in-ram.ld
   dpcm.ld
   ines-header.ld
-  ines-roms.ld
-  ines.ld
   nes.ld
   prg-ram-fixed.ld
   prg-rom-fixed.ld

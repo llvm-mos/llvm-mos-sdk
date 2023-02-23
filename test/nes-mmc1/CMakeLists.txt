@@ -9,14 +9,14 @@ add_mesen_test(minimal)
 add_mesen_test(chr-ram)
 add_mesen_test(chr-rom)
 
-add_mesen_test(prg-rom-16)
-target_link_options(prg-rom-16 PRIVATE -Tcommon.ld -Tprg-rom-16.ld -Tc-in-ram.ld)
+add_mesen_test(prg-rom-16-fixed)
+target_link_options(prg-rom-16-fixed PRIVATE -Tcommon.ld -Tprg-rom-fixed.ld -Tc-in-ram.ld)
+
+add_mesen_test(prg-rom-32-fixed)
+target_link_options(prg-rom-32-fixed PRIVATE -Tcommon.ld -Tprg-rom-fixed.ld -Tc-in-ram.ld)
 
 add_mesen_test(prg-rom-32)
 target_link_options(prg-rom-32 PRIVATE -Tcommon.ld -Tprg-rom-32.ld -Tc-in-ram.ld)
-
-add_mesen_test(prg-rom-32-banked)
-target_link_options(prg-rom-32-banked PRIVATE -Tcommon.ld -Tprg-rom-32-banked.ld -Tc-in-ram.ld)
 
 add_mesen_test(prg-rom-64)
 target_link_options(prg-rom-64 PRIVATE -Tcommon.ld -Tprg-rom-64.ld -Tc-in-ram.ld)

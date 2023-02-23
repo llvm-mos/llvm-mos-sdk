@@ -26,16 +26,7 @@ MEMORY {
   /* CPU address space. */
   ram : ORIGIN = 0x0200, LENGTH = 0x0600
 
-  /* The below LMAs were chosen such that they have a 3 bytes of addressing
-   * available. The highest byte of the 32-bit LMA controls whether the address
-   * is a real address (0x00), PRG-ROM LMA (0x01), CHR-ROM LMA (0x02), or PRG-RAM
-   * LMA (0x03). */
-
-  /* PRG-ROM LMA. */
-  prg_rom : ORIGIN = 0x01000000, LENGTH = __prg_rom_size * 1024
-
-  /* CHR-ROM LMA. */
-  chr_rom : ORIGIN = 0x02000000, LENGTH = __chr_rom_size * 1024
+  chr_rom : ORIGIN = 0x01000000, LENGTH = __chr_rom_size * 1024
 }
 
 SECTIONS {
@@ -44,25 +35,20 @@ SECTIONS {
        *(.nmi_begin)
        *(SORT_BY_INIT_PRIORITY(.nmi.* .nmi))
        *(.nmi_end)
-  } >c_rom_vma AT>c_rom_lma
-  .rodata : { INCLUDE rodata-sections.ld } >c_rom_vma AT>c_rom_lma
-  .data : { INCLUDE data-sections.ld } >c_ram_vma AT>c_rom_lma
-  __data_load_start = LOADADDR(.data) - LOADADDR(.rodata) + ADDR(.rodata);
+  } >c_rom
+  .rodata : { INCLUDE rodata-sections.ld } >c_rom
+  .data : { INCLUDE data-sections.ld } >c_ram AT>c_rom
+  __data_load_start = LOADADDR(.data);
   __data_size = SIZEOF(.data);
-  .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>c_rom_lma
-  __zp_data_load_start = LOADADDR(.zp.data) - LOADADDR(.rodata) + ADDR(.rodata);
+  .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>c_rom
+  __zp_data_load_start = LOADADDR(.zp.data);
   __zp_data_size = SIZEOF(.zp.data);
-  /* The data initializers take up space at the C_ROM_VMA too, not just in RAM. */
-  .data_initializers ADDR(.rodata) + SIZEOF(.rodata) + __data_size +
-                   __zp_data_size : {} >c_rom_vma
-  .zp.bss (NOLOAD) : {
-    INCLUDE zp-bss-sections.ld
-  } >zp
+  .zp.bss (NOLOAD) : { INCLUDE zp-bss-sections.ld } >zp
   INCLUDE zp-bss-symbols.ld
   INCLUDE zp-noinit.ld
-  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram_vma
+  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram
   INCLUDE bss-symbols.ld
-  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram_vma
+  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram
 
-  .chr_rom  : { KEEP(*(.chr_rom .chr_rom.*)) } >chr_rom
+  .chr_rom : { KEEP(*(.chr_rom .chr_rom.*)) } >chr_rom
 }

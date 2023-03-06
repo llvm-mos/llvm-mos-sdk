@@ -76,10 +76,10 @@ MEMORY {
 }
 
 SECTIONS {
-  .prg_ram_0 (NOLOAD) : OVERLAY { *(.prg_ram_0 .prg_ram_0.*) } >prg_ram_0
-  .prg_ram_1 (NOLOAD) : OVERLAY { *(.prg_ram_1 .prg_ram_1.*) } >prg_ram_1
-  .prg_ram_2 (NOLOAD) : OVERLAY { *(.prg_ram_2 .prg_ram_2.*) } >prg_ram_2
-  .prg_ram_3 (NOLOAD) : OVERLAY { *(.prg_ram_3 .prg_ram_3.*) } >prg_ram_3
+  .prg_ram_0 (NOLOAD) : { *(.prg_ram_0 .prg_ram_0.*) } >prg_ram_0
+  .prg_ram_1 (NOLOAD) : { *(.prg_ram_1 .prg_ram_1.*) } >prg_ram_1
+  .prg_ram_2 (NOLOAD) : { *(.prg_ram_2 .prg_ram_2.*) } >prg_ram_2
+  .prg_ram_3 (NOLOAD) : { *(.prg_ram_3 .prg_ram_3.*) } >prg_ram_3
 
   .chr_rom_0  : { KEEP(*(.chr_rom_0 .chr_rom_0.*)) } >chr_rom_0
   .chr_rom_1  : { KEEP(*(.chr_rom_1 .chr_rom_1.*)) } >chr_rom_1

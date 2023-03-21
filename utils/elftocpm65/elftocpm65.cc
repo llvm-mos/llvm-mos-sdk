@@ -39,6 +39,7 @@
 #define ELF32_PHDR__SIZE sizeof(Elf32_Phdr)
 
 #define ELF32_SYM_VALUE offsetof(Elf32_Sym, st_value)
+#define ELF32_SYM_SHNDX offsetof(Elf32_Sym, st_shndx)
 #define ELF32_SYM__SIZE sizeof(Elf32_Sym)
 
 #define ELF32_RELA_INFO offsetof(Elf32_Rela, r_info)
@@ -216,40 +217,43 @@ int main(int argc, char *const *argv) {
     unsigned symbolIndex = ELF32_R_SYM(elf.longAt(rela + ELF32_RELA_INFO));
     uint32_t symbol = symbolOffset + symbolIndex * ELF32_SYM__SIZE;
     uint32_t value = elf.longAt(symbol + ELF32_SYM_VALUE);
+    uint16_t shndx = elf.wordAt(symbol + ELF32_SYM_SHNDX);
 
-    if (value < 0x100) {
-      /* Zero page address. */
+    if (shndx != SHN_ABS) {
+      if (value < 0x100) {
+        /* Zero page address. */
 
-      switch (ELF32_R_TYPE(elf.longAt(rela + ELF32_RELA_INFO))) {
-      case R_MOS_ADDR8:
-      case R_MOS_ADDR16:
-      case R_MOS_ADDR16_LO:
-        zpRelocations.insert(offset + 0);
-        break;
+        switch (ELF32_R_TYPE(elf.longAt(rela + ELF32_RELA_INFO))) {
+        case R_MOS_ADDR8:
+        case R_MOS_ADDR16:
+        case R_MOS_ADDR16_LO:
+          zpRelocations.insert(offset + 0);
+          break;
 
-      case R_MOS_ADDR16_HI:
-        break;
-      }
-    } else {
-      /* Normal address. */
+        case R_MOS_ADDR16_HI:
+          break;
+        }
+      } else {
+        /* Normal address. */
 
-      switch (ELF32_R_TYPE(elf.longAt(rela + ELF32_RELA_INFO))) {
-      case R_MOS_ADDR8:
-        error("8-bit reference to 16-bit address 0x%x at relo %d, address "
-              "0x%x?",
-              value, i, offset);
-        break;
+        switch (ELF32_R_TYPE(elf.longAt(rela + ELF32_RELA_INFO))) {
+        case R_MOS_ADDR8:
+          error("8-bit reference to 16-bit address 0x%x at relo %d, address "
+                "0x%x?",
+                value, i, offset);
+          break;
 
-      case R_MOS_ADDR16:
-        memRelocations.insert(offset + 1);
-        break;
+        case R_MOS_ADDR16:
+          memRelocations.insert(offset + 1);
+          break;
 
-      case R_MOS_ADDR16_HI:
-        memRelocations.insert(offset + 0);
-        break;
+        case R_MOS_ADDR16_HI:
+          memRelocations.insert(offset + 0);
+          break;
 
-      case R_MOS_ADDR16_LO:
-        break;
+        case R_MOS_ADDR16_LO:
+          break;
+        }
       }
     }
   }

@@ -9,6 +9,9 @@ ASSERT(__ram_size <= 32,
 ASSERT(__ram_size >= 8,
        "RAM size must be at least 8")
 
+__basic_zp_start = 0x0002;
+__basic_zp_end = 0x008D;
+
 MEMORY {
     ram (rw) : ORIGIN = 0x0401, LENGTH = (__ram_size * 1024) - 0x0401
 }

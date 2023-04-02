@@ -11,6 +11,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - 8-KiB or 16-KiB standard cartridge
 - Commander X16
 - Commodore 64
+- Commodore PET
 - MEGA65
 - NES
   - NES-NROM
@@ -119,6 +120,7 @@ executables and libraries for that target.
 | Atari 8-bit Standard cartridge | `mos-atari8-stdcart`  |
 | Commander X16                  | `mos-cx16-clang`      |
 | Commodore 64                   | `mos-c64-clang`       | 
+| Commodore PET                  | `mos-pet-clang`       |
 | MEGA65                         | `mos-mega65-clang`    |
 | NES-CNROM                      | `mos-nes-cnrom-clang` |
 | NES-MMC1                       | `mos-nes-mmc1-clang`  |

@@ -3,6 +3,9 @@
  * Produces a PRG file with a SYS command to start the program.
  */
 
+__basic_zp_start = 0x0002;
+__basic_zp_end = 0x0090;
+
 MEMORY {
     /*
      * Allocate in $2001 - $7fff (bank 0)

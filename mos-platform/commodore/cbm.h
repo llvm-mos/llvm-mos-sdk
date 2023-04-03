@@ -214,10 +214,10 @@ void cbm_k_clrch (void);
 unsigned char cbm_k_getin (void);
 unsigned cbm_k_iobase (void);
 void cbm_k_listen (unsigned char dev);
-unsigned int cbm_k_load(unsigned char flag, unsigned addr);
+void *cbm_k_load(unsigned char flag, void *startaddr);
 unsigned char cbm_k_open (void);
 unsigned char cbm_k_readst (void);
-unsigned char cbm_k_save(unsigned int start, unsigned int end);
+unsigned char cbm_k_save(void *startaddr, void *endaddr_plusone);
 void cbm_k_scnkey (void);
 void cbm_k_second (unsigned char addr);
 void cbm_k_setlfs (unsigned char LFN, unsigned char DEV,

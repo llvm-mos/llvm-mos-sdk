@@ -2,15 +2,14 @@
 .text
 
 ;
-; unsigned char cbm_k_save(unsigned int start, unsigned int end);
+; unsigned char cbm_k_save(void *startaddr, void *endaddr_plusone);
+;                                rc2/3            rc4/5
 ;
 .global cbm_k_save
 cbm_k_save:
-	sta __rc4
-	stx __rc5
-	ldx __rc2
-	ldy __rc3
-	lda #__rc4
+	ldx __rc4
+	ldy __rc5
+	lda #__rc2
 	jsr __SAVE
 	bcs someerror
 	lda #0

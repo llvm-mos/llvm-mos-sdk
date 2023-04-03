@@ -296,5 +296,114 @@ struct __emul {
 /* An array window into the half Mebibyte or two Mebibytes of banked RAM */
 #define BANK_RAM        ((volatile unsigned char *)0xA000)
 
+/*****************************************************************************/
+/*                          CX16 kernal functions                            */
+/*****************************************************************************/
+
+/* Kernel function structure type definitions */
+typedef struct
+{
+    unsigned char year, mon, day, hour, min, sec, jif;
+} cx16_date_time_t; /* cx16_k_clock_get_date_time() */
+
+typedef struct
+{
+    unsigned int width, height;
+    unsigned char depth;
+} cx16_fb_info_t; /* cx16_k_fb_get_info_depth() */
+
+typedef struct
+{
+    void *fb_init;
+    void *fb_get_info;
+    void *fb_set_palette;
+    void *fb_cursor_position;
+    void *fb_cursor_next_line;
+    void *fb_get_pixel;
+    void *fb_get_pixels;
+    void *fb_set_pixel;
+    void *fb_set_pixels;
+    void *fb_set_8_pixels;
+    void *fb_set_8_pixels_opaque;
+    void *fb_fill_pixels;
+    void *fb_filter_pixels;
+    void *fb_move_pixels;
+} graph_fb_functions_t; /* cx16_k_graph_init() */
+
+typedef struct
+{
+    int x, y;
+} graph_pos_t;  /* fb_graph_put_char() */
+
+typedef struct
+{
+    int x, y;
+} mouse_pos_t; /* cx16_k_mouse_get() */
+
+typedef struct
+{
+    unsigned char mode, columns, rows;
+} screen_mode_info_t;   /* cx16_k_screen_mode_get() */
+
+/* Kernal-level functions */
+void cx16_k_clock_get_date_time(cx16_date_time_t *datetime_ptr);
+void cx16_k_clock_set_date_time(unsigned char year, unsigned char mon, unsigned char day, unsigned char hour, unsigned char min, unsigned char sec, unsigned char jif);
+unsigned char cx16_k_console_get_char(void);
+void cx16_k_console_init(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
+void cx16_k_console_put_char(unsigned char c, unsigned char wrapwordflag);
+void cx16_k_console_put_image(void *imageaddr, unsigned int width, unsigned int height);
+void cx16_k_console_set_paging_message(void *msgaddr);
+void cx16_k_enter_basic(unsigned char coldstart) __attribute__((noreturn));
+unsigned long cx16_k_entropy_get(void); // returns 24-bit value
+void cx16_k_fb_cursor_next_line(unsigned int x);
+void cx16_k_fb_cursor_position(unsigned int x, unsigned int y);
+void cx16_k_fb_fill_pixels(unsigned int count, unsigned int step, unsigned char color);
+void cx16_k_fb_filter_pixels(void *filterfunc, unsigned int count);
+void cx16_k_fb_get_info(cx16_fb_info_t *info_ptr);
+unsigned char fb_get_pixel(void);
+void fb_get_pixels(void *pixeladdr, unsigned int count);
+void cx16_k_fb_init(void);
+void fb_move_pixels(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int count);
+void fb_set_8_pixels(unsigned char pattern, unsigned char color);
+void fb_set_8_pixels_opaque(unsigned char pattern, unsigned char mask, unsigned char color1, unsigned char color2);
+void fb_set_palette(void *paladdr, unsigned char index, unsigned char count);
+void cx16_k_graph_clear(void);
+void cx16_k_graph_draw_image(unsigned int x, unsigned int y, void *imageaddr, unsigned int width, unsigned int height);
+void cx16_k_graph_draw_line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
+void cx16_k_graph_draw_oval(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned int corner_radius, unsigned char fillflag);
+void cx16_k_graph_draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned int corner_radius, unsigned char fillflag);
+long cx16_k_graph_get_char_size(unsigned char c, unsigned char style); // if printable returns info (0x00bbwwhh), else negative style byte (0xFF0000ss)
+void cx16_k_graph_init(graph_fb_functions_t *fb_funcs_ptr);
+void cx16_k_graph_move_rect(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int width, unsigned int height);
+void fb_graph_put_char(graph_pos_t *pos_ptr, unsigned char c);
+void fb_graph_set_colors(unsigned char stroke, unsigned char fill, unsigned char background);
+void cx16_k_graph_set_font(void *fontaddr);
+void cx16_k_graph_set_window(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
+int cx16_k_i2c_read_byte(unsigned char device, unsigned char offset); // returns negative on error
+int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned char byte); // return negative on error
+long cx16_k_joystick_get(unsigned char sticknum); // returns $YYYYXXAA (see docs, result negative if joystick not present)
+void cx16_k_joystick_scan(void);
+unsigned char cx16_k_kbdbuf_get_modifiers(void);
+int cx16_k_kbdbuf_peek(void); // returns negative if empty
+unsigned char cx16_k_kbdbuf_peek_len(void);
+void cx16_k_kbdbuf_put(unsigned char c);
+const char* cx16_k_keymap_get_id(void);
+unsigned char cx16_k_keymap_set(const char* identifier);	// returns 0 on success
+long cx16_k_macptr(unsigned char count, unsigned char noadvance, void *destaddr); // return negative if not supported
+void cx16_k_memory_copy(void *source, void *target, unsigned int num_bytes);
+void * cx16_k_memory_crc(void *dataaddr, unsigned int num_bytes);
+void cx16_k_memory_decompress(void *inaddr, void *outaddr);
+void cx16_k_memory_fill(void *addr, unsigned int num_bytes, unsigned char value);
+void cx16_k_monitor(void) __attribute__((noreturn));
+void cx16_k_mouse_config(unsigned char showmouse, unsigned char xsize8, unsigned char ysize8);
+unsigned char cx16_k_mouse_get(mouse_pos_t *mouse_pos_ptr);	// returns mouse button byte
+void cx16_k_mouse_scan(void);
+unsigned char cx16_k_savehl(void *startaddr, void *endaddr_plusone); // returns 0 on success
+unsigned char cx16_k_screen_mode_get(screen_mode_info_t *info_ptr); // returns 0 on success
+unsigned char cx16_k_screen_mode_set(unsigned char mode); // returns 0 on success
+void cx16_k_screen_set_charset(unsigned char charset_type, void *charsetaddr);
+unsigned char cx16_k_sprite_set_image(unsigned char num, unsigned char w, unsigned char h, unsigned char maskflag, void *imageaddr, void *maskaddr, unsigned char bpp); // returns 0 on success
+unsigned char cx16_k_sprite_set_position(unsigned char sprnum, unsigned int xpos, unsigned int ypos); // returns 0 on success
+
 /* End of cX16.h */
 #endif

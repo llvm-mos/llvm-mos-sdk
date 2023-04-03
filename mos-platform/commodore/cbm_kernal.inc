@@ -14,13 +14,15 @@
 
 #ifdef __CX16__
   ; CX16 extended jump table
+  SAVEHL                        = $FEBA
   KBDBUF_PEEK                   = $FEBD
   KBDBUF_GET_MODIFIERS          = $FEC0
   KBDBUF_PUT                    = $FEC3
   I2C_READ_BYTE                 = $FEC6
   I2C_WRITE_BYTE                = $FEC9
-  CX_MONITOR                    = $FECC
+  MONITOR                       = $FECC
   ENTROPY_GET                   = $FECF
+  KEYMAP                        = $FED2
   CONSOLE_SET_PAGE_MSG          = $FED5
   CONSOLE_PUT_IMAGE             = $FED8
   CONSOLE_INIT                  = $FEDB
@@ -58,8 +60,8 @@
   GRAPH_SET_FONT                = $FF3B
   GRAPH_GET_CHAR_SIZE           = $FF3E
   GRAPH_PUT_CHAR                = $FF41
-  MULTI_ACPTR                   = $FF44
-  RESTORE_BASIC                 = $FF47
+  MACPTR                        = $FF44
+  ENTER_BASIC                   = $FF47
   CLOCK_SET_DATE_TIME           = $FF4D
   CLOCK_GET_DATE_TIME           = $FF50
   JOYSTICK_SCAN                 = $FF53
@@ -68,6 +70,7 @@
   SCREEN_SET_CHARSET            = $FF62
   MOUSE_CONFIG                  = $FF68
   MOUSE_GET                     = $FF6B
+  MOUSE_SCAN                    = $FF71
 #endif
 
 #ifdef __C128__
@@ -196,4 +199,78 @@ UDTIM          = $FFEA
 #elif defined(__C16__)
   CLRSCR       = $D88B
   KBDREAD      = $D8C1
+#endif
+
+; ---------------------------------------------------------------------------
+; Commodore C64 and compatibles Kernal variables
+;
+; This list is not comprehensive: missing items for particular machines
+; should be added as needed.
+
+#if defined(__C64__) || defined(__C128__) || defined(__C16__) || defined(__CX16__) || defined(__MEGA65__)
+
+  ; unofficial kernal zero-page variables
+  KTEMP2                        = $80
+  FNAM                          = $8A
+  TXTPTR                        = $EE
+
+  ; unofficial kernal variables
+  BASIC_BUF                     = $0200
+  SCREEN_PTR                    = $0262
+  STATUS                        = $0287
+  IN_DEV                        = $028B
+  OUT_DEV                       = $028C
+  FNAM_LEN                      = $028F
+  SECADR                        = $0291
+  DEVADR                        = $0292
+
+  ; documented kernal vectors
+  CINV                          = $0314
+  CBINV                         = $0316
+  NMINV                         = $0318
+  IOPEN                         = $031A
+  ICLOSE                        = $031C
+  ICHKIN                        = $031E
+  ICKOUT                        = $0320
+  ICLRCH                        = $0322
+  IBASIN                        = $0324
+  IBSOUT                        = $0326
+  ISTOP                         = $0328
+  IGETIN                        = $032A
+  ICLALL                        = $032C
+  ILOAD                         = $0330
+  ISAVE                         = $0332
+
+  ; unofficial kernal variables
+  CURS_COLOR                    = $0373
+  CHARCOLOR                     = $0376
+  RVS                           = $0377
+  CURS_FLAG                     = $037B
+  CURS_BLINK                    = $037C
+  CURS_CHAR                     = $037D
+  CURS_STATE                    = $037E
+  CURS_X                        = $0380
+  CURS_Y                        = $0383
+  LLEN                          = $0386
+  NLINES                        = $0387
+  VARTAB                        = $03E1
+  MEMSIZ                        = $03E9
+#endif
+
+#ifdef __CX16__
+  ; CX16 framebuffer vectors
+  I_FB_INIT                     = $02E4
+  I_FB_GET_INFO                 = $02E6
+  I_FB_SET_PALETTE              = $02E8
+  I_FB_CURSOR_POSITION          = $02EA
+  I_FB_CURSOR_NEXT_LINE         = $02EC
+  I_FB_GET_PIXEL                = $02EE
+  I_FB_GET_PIXELS               = $02F0
+  I_FB_SET_PIXEL                = $02F2
+  I_FB_SET_PIXELS               = $02F4
+  I_FB_SET_8_PIXELS             = $02F6
+  I_FB_SET_8_PIXELS_OPAQUE      = $02F8
+  I_FB_FILL_PIXELS              = $02FA
+  I_FB_FILTER_PIXELS            = $02FC
+  I_FB_MOVE_PIXELS              = $02FE
 #endif

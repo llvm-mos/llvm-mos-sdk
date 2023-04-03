@@ -6,11 +6,11 @@
  */
 
 /* Provide imaginary (zero page) registers in the BASIC area. */
-__rc0 = 0x0002;
+__rc0 = __basic_zp_start;
 INCLUDE imag-regs.ld
-ASSERT(__rc31 == 0x0021, "Inconsistent zero page map.")
+ASSERT(__rc31 == (__rc0 + 0x1F), "Inconsistent zero page map.")
 
-MEMORY { zp : ORIGIN = __rc31 + 1, LENGTH = 0x90 - (__rc31 + 1) }
+MEMORY { zp : ORIGIN = __rc31 + 1, LENGTH = __basic_zp_end - (__rc31 + 1) }
 
 INPUT(basic-header.o)
 

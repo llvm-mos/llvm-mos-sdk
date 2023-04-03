@@ -3,7 +3,8 @@
 SECTIONS {
   .dpcm : ALIGN(64) {
        . = ABSOLUTE(.) < 0xc000 ? 0xc000 : .;
+       __dpcm_start = .;
        KEEP(*(.dpcm .dpcm.*))
   } >c_rom
-  PROVIDE(__dpcm_offset = (ADDR(.dpcm) - 0xc000) >> 6);
+  PROVIDE(__dpcm_offset = (__dpcm_start - 0xc000) >> 6);
 }

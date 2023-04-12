@@ -361,12 +361,12 @@ void cx16_k_fb_fill_pixels(unsigned int count, unsigned int step, unsigned char 
 void cx16_k_fb_filter_pixels(void *filterfunc, unsigned int count);
 void cx16_k_fb_get_info(cx16_fb_info_t *info_ptr);
 unsigned char fb_get_pixel(void);
-void fb_get_pixels(void *pixeladdr, unsigned int count);
+void cx16_k_fb_get_pixels(void *pixeladdr, unsigned int count);
 void cx16_k_fb_init(void);
-void fb_move_pixels(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int count);
-void fb_set_8_pixels(unsigned char pattern, unsigned char color);
-void fb_set_8_pixels_opaque(unsigned char pattern, unsigned char mask, unsigned char color1, unsigned char color2);
-void fb_set_palette(void *paladdr, unsigned char index, unsigned char count);
+void cx16_k_fb_move_pixels(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int count);
+void cx16_k_fb_set_8_pixels(unsigned char pattern, unsigned char color);
+void cx16_k_fb_set_8_pixels_opaque(unsigned char pattern, unsigned char mask, unsigned char color1, unsigned char color2);
+void cx16_k_fb_set_palette(void *paladdr, unsigned char index, unsigned char count);
 void cx16_k_graph_clear(void);
 void cx16_k_graph_draw_image(unsigned int x, unsigned int y, void *imageaddr, unsigned int width, unsigned int height);
 void cx16_k_graph_draw_line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2);
@@ -375,8 +375,8 @@ void cx16_k_graph_draw_rect(unsigned int x, unsigned int y, unsigned int width, 
 long cx16_k_graph_get_char_size(unsigned char c, unsigned char style); // if printable returns info (0x00bbwwhh), else negative style byte (0xFF0000ss)
 void cx16_k_graph_init(graph_fb_functions_t *fb_funcs_ptr);
 void cx16_k_graph_move_rect(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int width, unsigned int height);
-void fb_graph_put_char(graph_pos_t *pos_ptr, unsigned char c);
-void fb_graph_set_colors(unsigned char stroke, unsigned char fill, unsigned char background);
+void cx16_k_graph_put_char(graph_pos_t *pos_ptr, unsigned char c);
+void cx16_k_graph_set_colors(unsigned char stroke, unsigned char fill, unsigned char background);
 void cx16_k_graph_set_font(void *fontaddr);
 void cx16_k_graph_set_window(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
 int cx16_k_i2c_read_byte(unsigned char device, unsigned char offset); // returns negative on error

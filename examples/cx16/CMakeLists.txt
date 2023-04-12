@@ -1,0 +1,8 @@
+add_executable(k_console_test.prg k_console_test.c)
+install_example(k_console_test.prg)
+
+add_executable(k_datetime_test.prg k_datetime_test.c)
+install_example(k_datetime_test.prg)
+
+add_executable(k_graph_test.prg k_graph_test.c)
+install_example(k_graph_test.prg)

@@ -1,4 +1,5 @@
 .include "imag.inc"
+.include "cx16.inc"
 .text
 
 ;
@@ -9,14 +10,14 @@
 ;
 .global cx16_k_graph_set_font
 cx16_k_graph_set_font:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 r0)
+	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
 	phy
 	ldy	__rc1
 	phy
-	ldy	__rc2		; r0 = fontaddr
-	sty	r0
+	ldy	__rc2		; __r0 = fontaddr
+	sty	__r0
 	ldy	__rc2+1
-	sty	r0+1
+	sty	__r0+1
 	jsr	__GRAPH_SET_FONT
 	ply			; restore rc0/rc1
 	sty	__rc1

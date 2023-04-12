@@ -1,13 +1,5 @@
 .include "imag.inc"
-
-; cx16 virtual 16 bit registers
-r0	=	$02		; NOTE: overlaps __rc0, __rc1 (must be saved/restored)
-r1	=	$04		; NOTE: overlaps __rc2, __rc3
-r2	=	$06		; NOTE: overlaps __rc4, __rc5
-r3	=	$08		; NOTE: overlaps __rc6, __rc7
-r4	=	$0a		; NOTE: overlaps __rc8, __rc9
-r5	=	$0c		; NOTE: overlaps __rc10, __rc11
-
+.include "cx16.inc"
 .text
 
 ; unsigned char cx16_k_sprite_set_image(unsigned char num, unsigned char w, unsigned char h, unsigned char maskflag, void *imageaddr, void *maskaddr, unsigned char bpp); // returns 0 on success
@@ -17,20 +9,20 @@ r5	=	$0c		; NOTE: overlaps __rc10, __rc11
 ;
 .global cx16_k_sprite_set_image
 cx16_k_sprite_set_image:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 r0)
+	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
 	phy
 	ldy	__rc1
 	phy
-	ldy	__rc4		; r0 = imageaddr
-	sty	r0
+	ldy	__rc4		; __r0 = imageaddr
+	sty	__r0
 	ldy	__rc4+1
-	sty	r0+1
-	ldy	__rc6		; r1 = maskaddr
-	sty	r1
+	sty	__r0+1
+	ldy	__rc6		; __r1 = maskaddr
+	sty	__r1
 	ldy	__rc6+1
-	sty	r1+1
-	ldy	__rc8		; r2 = bpp
-	sty	r2
+	sty	__r1+1
+	ldy	__rc8		; __r2 = bpp
+	sty	__r2
 	ldy	__rc3		; maskflag
 	cpy	#1		; carry = maskflag >= 1
 				; a = num

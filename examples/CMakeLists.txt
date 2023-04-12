@@ -30,3 +30,7 @@ endif()
 if(PLATFORM MATCHES ^nes-)
   add_subdirectory(nes)
 endif()
+
+if(PLATFORM MATCHES ^cx16)
+  add_subdirectory(cx16)
+endif()

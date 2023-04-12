@@ -1,13 +1,6 @@
 .include "imag.inc"
+.include "cx16.inc"
 .text
-
-; cx16 virtual 16 bit registers
-r0	=	$02		; NOTE: overlaps __rc0, __rc1 (must be saved/restored)
-r1	=	$04		; NOTE: overlaps __rc2, __rc3
-r2	=	$06		; NOTE: overlaps __rc4, __rc5
-r3	=	$08		; NOTE: overlaps __rc6, __rc7
-r4	=	$0a		; NOTE: overlaps __rc8, __rc9
-r5	=	$0c		; NOTE: overlaps __rc10, __rc11
 
 ;
 ; long cx16_k_graph_get_char_size(unsigned char c, unsigned char style); // if printable returns info (0x00bbwwhh), else negative style byte (0xFF0000ss)
@@ -17,7 +10,7 @@ r5	=	$0c		; NOTE: overlaps __rc10, __rc11
 ;
 .global cx16_k_graph_get_char_size
 cx16_k_graph_get_char_baseline:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 r0)
+	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
 	phy
 	ldy	__rc1
 	phy

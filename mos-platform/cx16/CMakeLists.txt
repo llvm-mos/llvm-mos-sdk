@@ -4,8 +4,13 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-install(FILES _6522.h cx16.h TYPE INCLUDE)
+install(FILES
+ _6522.h
+ cx16.h
+TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)
+
+install(FILES cx16.inc DESTINATION ${ASMINCDIR})
 
 add_platform_object_file(cx16-basic-header basic-header.o basic-header.S)
 
@@ -73,4 +78,4 @@ add_platform_library(cx16-c
 
 target_include_directories(cx16-c BEFORE PUBLIC .)
 target_compile_options(cx16-c PUBLIC -mcpu=mos65c02)
-target_link_libraries(cx16-c PRIVATE common-asminc)
+target_link_libraries(cx16-c PRIVATE common-asminc cx16)

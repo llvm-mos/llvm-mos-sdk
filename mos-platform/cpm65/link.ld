@@ -46,7 +46,9 @@ SECTIONS {
 		*(.zp.data .zp.data.*)
 		*(.zp.rodata .zp.rodata.*)
 	} >zp AT>ram :init
-	INCLUDE zp-data-symbols.ld
+	__zp_data_load_start = ADDR(.text) + 
+		(LOADADDR(.zp.data) - LOADADDR(.text));
+	__zp_data_size = SIZEOF(.zp.data);
 
 	.pblock (NOLOAD) : {
 		_pblock = .;

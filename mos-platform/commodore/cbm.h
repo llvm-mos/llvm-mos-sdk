@@ -206,6 +206,7 @@ void cbm_k_bsout (unsigned char C);
 unsigned char cbm_k_chkin (unsigned char FN);
 unsigned char cbm_k_chrin (void);
 void cbm_k_chrout (unsigned char C);
+void cbm_k_cint (void);
 void cbm_k_ciout (unsigned char C);
 unsigned char cbm_k_ckout (unsigned char FN);
 void cbm_k_clall (void);

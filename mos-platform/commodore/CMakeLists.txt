@@ -30,7 +30,8 @@ add_platform_library(commodore-c
   cbm_k_chkin.s
   cbm_k_chrin.c
   cbm_k_chrout.c
-  cbm_k_ciout.c 
+  cbm_k_cint.c
+  cbm_k_ciout.c
   cbm_k_ckout.s
   cbm_k_clall.c
   cbm_k_close.c

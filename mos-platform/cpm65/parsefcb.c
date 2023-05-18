@@ -31,8 +31,10 @@ static const char* fill(uint8_t* dest, const char* src, int len)
 
 uint8_t cpm_parse_filename(FCB* fcb, const char* filename)
 {
-    memset(fcb, 0, sizeof(FCB));
-    memset(fcb->f, ' ', sizeof(fcb->f));
+	for (uint8_t i=0; i<sizeof(FCB); i++)
+		((uint8_t*)fcb)[i] = 0;
+	for (uint8_t i=0; i<sizeof(fcb->f); i++)
+		fcb->f[i] = ' ';
 
 	if (filename[0] && (filename[1] == ':'))
     {

@@ -9,11 +9,12 @@
  */
 
 #include "elf.h"
+#include <cstdarg>
+#include <cstdint>
+#include <cstring>
 #include <fstream>
 #include <regex>
 #include <set>
-#include <stdarg.h>
-#include <string.h>
 #include <string>
 #include <vector>
 

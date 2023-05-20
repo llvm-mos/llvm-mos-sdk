@@ -67,8 +67,7 @@ __attribute__((weak)) char *strrchr(const char *s, int c) {
 
 __attribute__((weak)) char *strrev(char *str) {
   size_t len = strlen((const char *)str);
-  size_t i, j;
-  for (i = 0, j = len - 1; i < j; i++, j--) {
+  for (size_t i = 0, j = len - 1; i < j; i++, j--) {
     char a = str[i];
     str[i] = str[j];
     str[j] = a;

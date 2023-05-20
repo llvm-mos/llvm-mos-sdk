@@ -41,7 +41,7 @@ cpmentry cpm_conio,                    6
 cpmentry cpm_get_iobyte,               7
 cpmentry cpm_set_iobyte,               8
 cpmentry cpm_printstring_i,            9
-cpmentry cpm_readline,                10, __cpmexiter_errno
+cpmentry cpm_readline_i,              10, __cpmexiter_errno
 cpmentry cpm_const,                   11
 cpmentry cpm_get_version,             12
 cpmentry cpm_reset_disk_system,       13

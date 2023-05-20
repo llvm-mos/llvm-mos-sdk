@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
@@ -87,6 +88,11 @@ Include dependency graph for cpm.h:</div>
 </div>
 <p><a href="cpm_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDRIVER.html">DRIVER</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a59104902c4a70e76612b56bb6e7e2cce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a59104902c4a70e76612b56bb6e7e2cce">cpm_get_user</a>()&#160;&#160;&#160;cpm_get_set_user(0xff)</td></tr>
@@ -112,8 +118,12 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a8aee5f032b779fedce4e40aed18818df"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a8aee5f032b779fedce4e40aed18818df">cpm_parse_filename</a> (<a class="el" href="cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6">FCB</a> *fcb, const char *filename)</td></tr>
+<tr class="separator:a8aee5f032b779fedce4e40aed18818df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46f483e6e3de648f45eb09c1905fb43b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a46f483e6e3de648f45eb09c1905fb43b">cpm_printstring</a> (const char *s)</td></tr>
 <tr class="separator:a46f483e6e3de648f45eb09c1905fb43b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66bb1bf6b9321c2931191efa07dddeba"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a66bb1bf6b9321c2931191efa07dddeba">cpm_readline</a> (uint8_t *buffer)</td></tr>
+<tr class="separator:a66bb1bf6b9321c2931191efa07dddeba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbd4bc937d9bcf86c8149f0fc587a809"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#adbd4bc937d9bcf86c8149f0fc587a809">cpm_open_file</a> (<a class="el" href="cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6">FCB</a> *fcb)</td></tr>
 <tr class="separator:adbd4bc937d9bcf86c8149f0fc587a809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abff02af3fd29cf3214f0c966a38920d5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#abff02af3fd29cf3214f0c966a38920d5">cpm_close_file</a> (<a class="el" href="cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6">FCB</a> *fcb)</td></tr>
@@ -158,6 +168,10 @@ Functions</h2></td></tr>
 <tr class="separator:aca596580e17b8ecd0c8dc70d32ef9980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14b078bf846b1ca2e2db3a94dafc5a08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a14b078bf846b1ca2e2db3a94dafc5a08">cpm_bios_setdma</a> (void *dma)</td></tr>
 <tr class="separator:a14b078bf846b1ca2e2db3a94dafc5a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1169945cc178b9e6279678f815dc1257"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a1169945cc178b9e6279678f815dc1257">cpm_bios_adddrv</a> (<a class="el" href="structDRIVER.html">DRIVER</a> *driver)</td></tr>
+<tr class="separator:a1169945cc178b9e6279678f815dc1257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09810f14190c1736772817982bdb948a"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a09810f14190c1736772817982bdb948a">cpm_bios_finddrv</a> (uint16_t id)</td></tr>
+<tr class="separator:a09810f14190c1736772817982bdb948a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -252,6 +266,42 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a1169945cc178b9e6279678f815dc1257"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1169945cc178b9e6279678f815dc1257">&#9670;&nbsp;</a></span>cpm_bios_adddrv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cpm_bios_adddrv </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structDRIVER.html">DRIVER</a> *&#160;</td>
+          <td class="paramname"><em>driver</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a09810f14190c1736772817982bdb948a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09810f14190c1736772817982bdb948a">&#9670;&nbsp;</a></span>cpm_bios_finddrv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* cpm_bios_finddrv </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a048e39948ac27190ba32eb52437c963e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a048e39948ac27190ba32eb52437c963e">&#9670;&nbsp;</a></span>cpm_bios_seldsk()</h2>
 
@@ -468,6 +518,34 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a8aee5f032b779fedce4e40aed18818df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aee5f032b779fedce4e40aed18818df">&#9670;&nbsp;</a></span>cpm_parse_filename()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t cpm_parse_filename </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6">FCB</a> *&#160;</td>
+          <td class="paramname"><em>fcb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a46f483e6e3de648f45eb09c1905fb43b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a46f483e6e3de648f45eb09c1905fb43b">&#9670;&nbsp;</a></span>cpm_printstring()</h2>
 
@@ -515,6 +593,24 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6">FCB</a> *&#160;</td>
           <td class="paramname"><em>fcb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66bb1bf6b9321c2931191efa07dddeba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66bb1bf6b9321c2931191efa07dddeba">&#9670;&nbsp;</a></span>cpm_readline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t cpm_readline </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

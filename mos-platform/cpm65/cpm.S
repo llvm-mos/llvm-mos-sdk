@@ -70,6 +70,9 @@ cpmentry cpm_seek_to_end_i,           35
 cpmentry cpm_seek_to_seq_pos_i,       36
 cpmentry cpm_reset_drives,            37, __cpmexiter_errno
 cpmentry cpm_write_random_filled_i,   40, __cpmexiter_errno
+cpmentry cpm_getzp,                   41
+cpmentry cpm_gettpa,                  42
+cpmentry cpm_parse_filename_i,        43, __cpmexiter_ptrornull
 
 biosentry cpm_bios_const,             0
 biosentry cpm_bios_conin,             1
@@ -102,6 +105,14 @@ __cpmexiter_aorerrno:
     sta cpm_errno
     bcc 1f
     lda #$ff
+1:
+    rts
+
+.section .text.cpmexiter_ptrornull, "ax", @progbits
+__cpmexiter_ptrornull:
+    bcc 1f
+    lda #0
+    tax
 1:
     rts
 

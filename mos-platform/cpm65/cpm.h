@@ -109,11 +109,6 @@ extern uint8_t cpm_cmdlinelen;
 extern char cpm_cmdline[0x7f];
 extern uint8_t cpm_errno;
 
-/* Parses a filename into the supplied FCB. Returns false if valid, true if
- * not. */
-
-extern uint8_t cpm_parse_filename(FCB* fcb, const char* filename);
-
 /*  0 */ extern __attribute__((leaf)) void _Noreturn cpm_warmboot(void);
 /*  1 */ extern __attribute__((leaf)) uint8_t cpm_conin(void);
 /*  2 */ extern __attribute__((leaf)) void cpm_conout(uint8_t b);
@@ -173,6 +168,10 @@ extern uint8_t cpm_parse_filename(FCB* fcb, const char* filename);
 /* 37 */ extern __attribute__((leaf)) uint8_t cpm_reset_drives(uint16_t drive_bitmap);
 /* 40 */ extern __attribute__((leaf)) uint8_t cpm_write_random_filled_i(uint16_t fcb);
          extern                       uint8_t cpm_write_random_filled(FCB* fcb);
+/* 41 */ extern __attribute__((leaf)) uint16_t cpm_getzp(void);
+/* 42 */ extern __attribute__((leaf)) uint16_t cpm_gettpa(void);
+/* 43 */ extern __attribute__((leaf)) uint16_t cpm_parse_filename_i(uint16_t buffer);
+         extern                       const char* cpm_parse_filename(const char* buffer);
 
 #define cpm_get_user() cpm_get_set_user(0xff)
 #define cpm_set_user(u) cpm_get_set_user(u)

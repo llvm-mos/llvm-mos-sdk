@@ -135,3 +135,8 @@ void* cpm_bios_finddrv(uint16_t id)
 	return (void*) cpm_bios_finddrv_i(id);
 }
 
+const char* cpm_parse_filename(const char* filename)
+{
+	return (const char*) cpm_parse_filename_i((uint16_t) filename);
+}
+

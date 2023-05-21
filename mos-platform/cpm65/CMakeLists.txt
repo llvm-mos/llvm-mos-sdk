@@ -29,7 +29,6 @@ add_platform_library(cpm65-c
   putchar.c
   stack.S
   registers.S
-  parsefcb.c
 )
 merge_libraries(cpm65-c
   common-c

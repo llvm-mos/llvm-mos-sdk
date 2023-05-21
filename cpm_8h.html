@@ -118,8 +118,6 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8aee5f032b779fedce4e40aed18818df"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a8aee5f032b779fedce4e40aed18818df">cpm_parse_filename</a> (<a class="el" href="cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6">FCB</a> *fcb, const char *filename)</td></tr>
-<tr class="separator:a8aee5f032b779fedce4e40aed18818df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46f483e6e3de648f45eb09c1905fb43b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a46f483e6e3de648f45eb09c1905fb43b">cpm_printstring</a> (const char *s)</td></tr>
 <tr class="separator:a46f483e6e3de648f45eb09c1905fb43b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66bb1bf6b9321c2931191efa07dddeba"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a66bb1bf6b9321c2931191efa07dddeba">cpm_readline</a> (uint8_t *buffer)</td></tr>
@@ -160,6 +158,8 @@ Functions</h2></td></tr>
 <tr class="separator:af0807aabee1977b40787201b82ddf31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06f5ecf0d567baff01398ee17f9ce45b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a06f5ecf0d567baff01398ee17f9ce45b">cpm_write_random_filled</a> (<a class="el" href="cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6">FCB</a> *fcb)</td></tr>
 <tr class="separator:a06f5ecf0d567baff01398ee17f9ce45b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec058cc6b22233b4cd599f084e480d2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#adec058cc6b22233b4cd599f084e480d2">cpm_parse_filename</a> (const char *buffer)</td></tr>
+<tr class="separator:adec058cc6b22233b4cd599f084e480d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7a68b6ddcaf00fa7fa563ad2d56dff4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#aa7a68b6ddcaf00fa7fa563ad2d56dff4">cpm_bios_seldsk_i</a> (uint8_t disk)</td></tr>
 <tr class="separator:aa7a68b6ddcaf00fa7fa563ad2d56dff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048e39948ac27190ba32eb52437c963e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="cpm_8h.html#abb4672a688f04666d9565f87deb7be30">DPH</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cpm_8h.html#a048e39948ac27190ba32eb52437c963e">cpm_bios_seldsk</a> (uint8_t disk)</td></tr>
@@ -518,28 +518,18 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a8aee5f032b779fedce4e40aed18818df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8aee5f032b779fedce4e40aed18818df">&#9670;&nbsp;</a></span>cpm_parse_filename()</h2>
+<a id="adec058cc6b22233b4cd599f084e480d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adec058cc6b22233b4cd599f084e480d2">&#9670;&nbsp;</a></span>cpm_parse_filename()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t cpm_parse_filename </td>
+          <td class="memname">const char* cpm_parse_filename </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="cpm_8h.html#a1e1c360ba9b93936a8a7a3db77f8aed6">FCB</a> *&#160;</td>
-          <td class="paramname"><em>fcb</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>filename</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -25,6 +25,7 @@ int main(void) {
   uint16_t curr_input;
   uint16_t next_input = 0;
 
+  rpc8e_display_clear();
   putstr("IO Expander Demo\n\n");
 
   // Map the I/O expander.

@@ -16,4 +16,10 @@ asm(
 // Enable RedBus by default.
   "  lda #$01\n"
   "  mmu #$02\n"
+// Use the display device by default.
+// Changing the active device takes 1 world tick (0.05 seconds), but only if
+// the device is actually different; for common printf/getchar calls, we'd
+// like to avoid doing so.
+  "  lda $01\n" // boot_display_id
+  "  mmu #$00\n"
 );

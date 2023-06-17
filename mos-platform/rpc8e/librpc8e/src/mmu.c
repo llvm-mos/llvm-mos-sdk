@@ -23,7 +23,13 @@
 #include <stdint.h>
 #include <rpc8e.h>
 
-void rpc8e_redbus_map(uint8_t device_id) {
+uint8_t rpc8e_redbus_map(uint8_t device_id) {
+	uint8_t old_device = rpc8e_redbus_get_map();
+	rpc8e_redbus_set_map(device_id);
+	return old_device;
+}
+
+void rpc8e_redbus_set_map(uint8_t device_id) {
 	__attribute__((leaf)) asm volatile(
 		"mmu #$00"
 		: "+a"(device_id) : : );

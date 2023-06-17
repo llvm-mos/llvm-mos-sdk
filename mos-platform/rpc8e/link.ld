@@ -11,7 +11,15 @@ MEMORY {
     ram (rw) : ORIGIN = 0x0500, LENGTH = RAM_SIZE - 0x0500
 }
 
-SECTIONS { INCLUDE c.ld }
+SECTIONS {
+    /* _start must be first. */
+    INCLUDE text.ld
+    INCLUDE zp.ld
+    INCLUDE rodata.ld
+    INCLUDE data.ld
+    INCLUDE bss.ld
+    INCLUDE noinit.ld
+}
 
 OUTPUT_FORMAT {
     TRIM(ram)

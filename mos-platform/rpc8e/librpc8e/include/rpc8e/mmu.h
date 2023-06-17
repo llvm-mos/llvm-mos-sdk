@@ -34,8 +34,10 @@ extern "C" {
 extern uint8_t boot_drive_id;
 extern uint8_t boot_display_id;
 
-void rpc8e_redbus_map(uint8_t device_id);
+uint8_t rpc8e_redbus_map(uint8_t device_id);
+void rpc8e_redbus_set_map(uint8_t device_id);
 uint8_t rpc8e_redbus_get_map(void);
+
 void rpc8e_redbus_window_set_offset(uint16_t offset);
 uint16_t rpc8e_redbus_window_get_offset(void);
 void rpc8e_redbus_enable(void);

@@ -109,8 +109,7 @@ int rpc8e_display_key_read(void) {
 }
 
 int getchar(void) {
-	uint8_t old_device = rpc8e_redbus_get_map();
-	rpc8e_redbus_map(boot_display_id);
+	uint8_t old_device = rpc8e_redbus_map(boot_display_id);
 
 	while (!rpc8e_display_key_pressed()) {
 		rpc8e_cpu_wait();
@@ -119,7 +118,7 @@ int getchar(void) {
 	uint8_t key = *IO_DISPLAY_KEY_BUFFER_VALUE;
 	*IO_DISPLAY_KEY_BUFFER_START = (*IO_DISPLAY_KEY_BUFFER_START + 1) & 0x0F;
 
-	rpc8e_redbus_map(old_device);
+	rpc8e_redbus_set_map(old_device);
 
 	return key;
 }
@@ -127,8 +126,7 @@ int getchar(void) {
 void __putchar(char c) {
 	uint8_t x, y, i;
 
-	uint8_t old_device = rpc8e_redbus_get_map();
-	rpc8e_redbus_map(boot_display_id);
+	uint8_t old_device = rpc8e_redbus_map(boot_display_id);
 
 	// Set or unset reverse video bit, if needed.
 	if (reverse_video) {
@@ -170,5 +168,5 @@ void __putchar(char c) {
 	// Set the cursor to the new position.
 	*IO_DISPLAY_CURSOR_X = x;
 
-	rpc8e_redbus_map(old_device);
+	rpc8e_redbus_set_map(old_device);
 }

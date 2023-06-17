@@ -64,9 +64,9 @@ typedef enum {
 #else
 typedef enum {
 	DISPLAY_BLIT_MODE_NONE = 0,
-	DISPLAY_BLIT_MODE_NONE = 1,
-	DISPLAY_BLIT_MODE_NONE = 2,
-	DISPLAY_BLIT_MODE_NONE = 3
+	DISPLAY_BLIT_MODE_FILL = 1,
+	DISPLAY_BLIT_MODE_INVERT = 2,
+	DISPLAY_BLIT_MODE_SHIFT = 3
 } display_blit_mode_t;
 #endif
 #define IO_DISPLAY_BLIT_MODE		((volatile uint8_t*) 0x0307)
@@ -91,10 +91,25 @@ typedef enum {
 #else
 typedef enum {
 	DRIVE_COMMAND_IDLE = 0x00,
+	/**
+	 * Read the disk name to the drive's buffer.
+	 */
 	DRIVE_COMMAND_READ_NAME = 0x01,
+	/**
+	 * Write the disk name from the drive's buffer.
+	 */
 	DRIVE_COMMAND_WRITE_NAME = 0x02,
+	/**
+	 * Read the disk serial number to the drive's buffer.
+	 */
 	DRIVE_COMMAND_READ_SERIAL = 0x03,
+	/**
+	 * Read the disk's SECTOR-th sector to the drive's buffer.
+	 */
 	DRIVE_COMMAND_READ_SECTOR = 0x04,
+	/**
+	 * Write the disk's SECTOR-th sector from the drive's buffer.
+	 */
 	DRIVE_COMMAND_WRITE_SECTOR = 0x05
 } drive_command_t;
 #endif
@@ -130,9 +145,26 @@ typedef enum {
 #define SORTRON_COMMAND_MATCH_INPUT	0x04
 #else
 typedef enum {
+	/**
+	 * Read the total slot count of the attached inventory to ITEM_SLOT.
+	 */
 	SORTRON_COMMAND_READ_SLOT_COUNT = 1,
+	/**
+	 * Read the ITEM_SLOT-th slot of the attached inventory.
+	 * Writes to ITEM_COUNT, ITEM_SLOT, ITEM_HASH, ITEM_DAMAGE,
+	 * ITEM_MAX_DAMAGE.
+	 */
 	SORTRON_COMMAND_READ_SLOT = 2,
+	/**
+	 * Extract ITEM_COUNT items from ITEM_SLOT-th slot of the attached
+         * inventory to an attached pipe, optionally coloring with with the
+	 * specified ITEM_OUT_COLOR_TAG.
+	 */
 	SORTRON_COMMAND_EXTRACT_SLOT = 3,
+	/**
+	 * Match for a given ITEM_COUNT, ITEM_HASH and ITEM_IN_COLOR_TAG on
+	 * an attached pipe. Returns success when a match is found.
+	 */
 	SORTRON_COMMAND_MATCH_INPUT = 4
 } sortron_command_t;
 #endif

@@ -18,6 +18,12 @@ SECTIONS {
     INCLUDE data.ld
     INCLUDE bss.ld
     INCLUDE noinit.ld
+
+    /* RedPower 2 only properly loads binaries aligned up to 128 bytes. */
+    .pad : {
+        FILL(0x00);
+	. = ALIGN(0x80);
+    }
 }
 
 OUTPUT_FORMAT {

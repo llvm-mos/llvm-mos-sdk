@@ -32,6 +32,12 @@ extern "C" {
  * Functionality related to the Sortron.
  */
 
+/**
+ * @brief Send a command to the Sortron and wait for it to complete.
+ *
+ * @param id The command ID.
+ * @return bool Whether or not the command was successful.
+ */
 bool rpc8e_sortron_command(uint8_t id);
 
 #ifdef __cplusplus

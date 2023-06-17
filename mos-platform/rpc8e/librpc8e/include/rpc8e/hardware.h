@@ -41,17 +41,34 @@
 #define IO_DISPLAY_ROW_Y		((volatile uint8_t*) 0x0300)
 #define IO_DISPLAY_CURSOR_X		((volatile uint8_t*) 0x0301)
 #define IO_DISPLAY_CURSOR_Y		((volatile uint8_t*) 0x0302)
+#ifdef __ASSEMBLER__
 #define CURSOR_MODE_HIDDEN		0x00
 #define CURSOR_MODE_SOLID		0x01
 #define CURSOR_MODE_BLINK		0x02
+#else
+typedef enum {
+	CURSOR_MODE_HIDDEN = 0,
+	CURSOR_MODE_SOLID = 1,
+	CURSOR_MODE_BLINK = 2
+} cursor_mode_t;
+#endif
 #define IO_DISPLAY_CURSOR_MODE		((volatile uint8_t*) 0x0303)
 #define IO_DISPLAY_KEY_BUFFER_START	((volatile uint8_t*) 0x0304)
 #define IO_DISPLAY_KEY_BUFFER_POS	((volatile uint8_t*) 0x0305)
 #define IO_DISPLAY_KEY_BUFFER_VALUE	((volatile uint8_t*) 0x0306)
+#ifdef __ASSEMBLER__
 #define DISPLAY_BLIT_MODE_NONE		0x00
 #define DISPLAY_BLIT_MODE_FILL		0x01
 #define DISPLAY_BLIT_MODE_INVERT	0x02
 #define DISPLAY_BLIT_MODE_SHIFT		0x03
+#else
+typedef enum {
+	DISPLAY_BLIT_MODE_NONE = 0,
+	DISPLAY_BLIT_MODE_NONE = 1,
+	DISPLAY_BLIT_MODE_NONE = 2,
+	DISPLAY_BLIT_MODE_NONE = 3
+} display_blit_mode_t;
+#endif
 #define IO_DISPLAY_BLIT_MODE		((volatile uint8_t*) 0x0307)
 #define IO_DISPLAY_BLIT_SRC_X		((volatile uint8_t*) 0x0308)
 #define IO_DISPLAY_BLIT_SRC_Y		((volatile uint8_t*) 0x0309)
@@ -64,12 +81,23 @@
 
 #define IO_DRIVE_BUFFER			((volatile uint8_t*) 0x0300)
 #define IO_DRIVE_SECTOR			((volatile uint16_t*) 0x0380)
+#ifdef __ASSEMBLER__
 #define DRIVE_COMMAND_IDLE		0x00
 #define DRIVE_COMMAND_READ_NAME		0x01
 #define DRIVE_COMMAND_WRITE_NAME	0x02
 #define DRIVE_COMMAND_READ_SERIAL	0x03
 #define DRIVE_COMMAND_READ_SECTOR	0x04
 #define DRIVE_COMMAND_WRITE_SECTOR	0x05
+#else
+typedef enum {
+	DRIVE_COMMAND_IDLE = 0x00,
+	DRIVE_COMMAND_READ_NAME = 0x01,
+	DRIVE_COMMAND_WRITE_NAME = 0x02,
+	DRIVE_COMMAND_READ_SERIAL = 0x03,
+	DRIVE_COMMAND_READ_SECTOR = 0x04,
+	DRIVE_COMMAND_WRITE_SECTOR = 0x05
+} drive_command_t;
+#endif
 #define IO_DRIVE_COMMAND		((volatile uint8_t*) 0x0382)
 #define DRIVE_STATUS_SUCCESS		0x00
 #define DRIVE_STATUS_ERROR		0xFF
@@ -95,10 +123,19 @@
 #define IO_IOX_INPUT			((volatile uint16_t*) 0x0300)
 #define IO_IOX_OUTPUT			((volatile uint16_t*) 0x0302)
 
+#ifdef __ASSEMBLER__
 #define SORTRON_COMMAND_READ_SLOT_COUNT	0x01
 #define SORTRON_COMMAND_READ_SLOT	0x02
 #define SORTRON_COMMAND_EXTRACT_SLOT	0x03
 #define SORTRON_COMMAND_MATCH_INPUT	0x04
+#else
+typedef enum {
+	SORTRON_COMMAND_READ_SLOT_COUNT = 1,
+	SORTRON_COMMAND_READ_SLOT = 2,
+	SORTRON_COMMAND_EXTRACT_SLOT = 3,
+	SORTRON_COMMAND_MATCH_INPUT = 4
+} sortron_command_t;
+#endif
 #define IO_SORTRON_COMMAND		((volatile uint8_t*) 0x0300)
 #define SORTRON_STATUS_SUCCESS		0x00
 #define SORTRON_STATUS_ERROR		0xFF

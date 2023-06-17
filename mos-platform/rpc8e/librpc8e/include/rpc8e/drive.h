@@ -35,11 +35,49 @@ extern "C" {
 #define DRIVE_BYTES_PER_SECTOR 128
 #define DRIVE_SECTOR_MAX 2048
 
+/**
+ * @brief Send a command to the drive and wait for it to complete.
+ *
+ * @param id The command ID.
+ * @return bool Whether or not the command was successful.
+ */
 bool rpc8e_drive_command(uint8_t id);
+
+/**
+ * @brief Read the disk name to the drive's buffer.
+ *
+ * @return bool Whether or not the command was successful.
+ */
 bool rpc8e_drive_read_disk_name(void);
+
+/**
+ * @brief Write the disk name from the drive's buffer.
+ *
+ * @return bool Whether or not the command was successful.
+ */
 bool rpc8e_drive_write_disk_name(void);
+
+/**
+ * @brief Read the disk serial number to the drive's buffer.
+ *
+ * @return bool Whether or not the command was successful.
+ */
 bool rpc8e_drive_read_disk_serial(void);
+
+/**
+ * @brief Read a given sector to the drive's buffer.
+ *
+ * @param sector The sector number.
+ * @return bool Whether or not the command was successful.
+ */
 bool rpc8e_drive_read_disk_sector(uint16_t sector);
+
+/**
+ * @brief Write a given sector from the drive's buffer.
+ *
+ * @param sector The sector number.
+ * @return bool Whether or not the command was successful.
+ */
 bool rpc8e_drive_write_disk_sector(uint16_t sector);
 
 #ifdef __cplusplus

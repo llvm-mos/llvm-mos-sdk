@@ -20,7 +20,9 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#pragma once
+#ifndef _RPC8E_CPU_H_
+#define _RPC8E_CPU_H_
+
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -44,3 +46,5 @@ static inline void rpc8e_cpu_wait(void) {
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* _RPC8E_CPU_H_ */

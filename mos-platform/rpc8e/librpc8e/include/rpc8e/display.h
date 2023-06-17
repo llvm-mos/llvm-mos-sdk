@@ -20,7 +20,9 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#pragma once
+#ifndef _RPC8E_DISPLAY_H_
+#define _RPC8E_DISPLAY_H_
+
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -124,3 +126,5 @@ int rpc8e_display_key_read(void);
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* _RPC8E_DISPLAY_H_ */

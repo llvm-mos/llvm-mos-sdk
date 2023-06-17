@@ -20,16 +20,18 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#pragma once
-#include <stdint.h>
+#ifndef _RPC8E_MMU_H_
+#define _RPC8E_MMU_H_
 
-/** \file mmu.h
- * Functionality related to the MMU.
- */
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/** \file mmu.h
+ * Functionality related to the MMU.
+ */
 
 extern uint8_t boot_drive_id;
 extern uint8_t boot_display_id;
@@ -98,3 +100,5 @@ uint16_t rpc8e_mmu_get_por_address(void);
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* _RPC8E_MMU_H_ */

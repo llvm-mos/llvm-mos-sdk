@@ -20,7 +20,8 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#pragma once
+#ifndef _RPC8E_H_
+#define _RPC8E_H_
 
 #include <rpc8e/hardware.h>
 
@@ -31,3 +32,5 @@
 #include <rpc8e/drive.h>
 #include <rpc8e/sortron.h>
 #endif
+
+#endif /* _RPC8E_H_ */

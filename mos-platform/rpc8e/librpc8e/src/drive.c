@@ -34,23 +34,23 @@ bool rpc8e_drive_command(uint8_t id) {
 }
 
 bool rpc8e_drive_read_disk_name(void) {
-	rpc8e_drive_command(DRIVE_COMMAND_READ_NAME);
+	return rpc8e_drive_command(DRIVE_COMMAND_READ_NAME);
 }
 
 bool rpc8e_drive_write_disk_name(void) {
-	rpc8e_drive_command(DRIVE_COMMAND_WRITE_NAME);
+	return rpc8e_drive_command(DRIVE_COMMAND_WRITE_NAME);
 }
 
 bool rpc8e_drive_read_disk_serial(void) {
-	rpc8e_drive_command(DRIVE_COMMAND_READ_SERIAL);
+	return rpc8e_drive_command(DRIVE_COMMAND_READ_SERIAL);
 }
 
 bool rpc8e_drive_read_disk_sector(uint16_t sector) {
 	*IO_DRIVE_SECTOR = sector;
-	rpc8e_drive_command(DRIVE_COMMAND_READ_SECTOR);
+	return rpc8e_drive_command(DRIVE_COMMAND_READ_SECTOR);
 }
 
 bool rpc8e_drive_write_disk_sector(uint16_t sector) {
 	*IO_DRIVE_SECTOR = sector;
-	rpc8e_drive_command(DRIVE_COMMAND_WRITE_SECTOR);
+	return rpc8e_drive_command(DRIVE_COMMAND_WRITE_SECTOR);
 }

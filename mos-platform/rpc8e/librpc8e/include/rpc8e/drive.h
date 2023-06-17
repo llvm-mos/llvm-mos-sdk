@@ -20,7 +20,9 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#pragma once
+#ifndef _RPC8E_DRIVE_H_
+#define _RPC8E_DRIVE_H_
+
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -83,3 +85,5 @@ bool rpc8e_drive_write_disk_sector(uint16_t sector);
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* _RPC8E_DRIVE_H_ */

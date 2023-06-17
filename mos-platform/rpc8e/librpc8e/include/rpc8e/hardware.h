@@ -20,12 +20,14 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
+#ifndef _RPC8E_HARDWARE_H_
+#define _RPC8E_HARDWARE_H_
+
+#include <stdint.h>
+
 /** \file hardware.h
  * Hardware defines.
  */
-
-#pragma once
-#include <stdint.h>
 
 #define MMU_WRITE			0x00
 #define MMU_READ			0x80
@@ -221,3 +223,4 @@ typedef enum {
 #define IO_SORTRON_ITEM_IN_COLOR_TAG	((volatile uint8_t*) 0x030C)
 #define IO_SORTRON_ITEM_OUT_COLOR_TAG	((volatile uint8_t*) 0x030D)
 
+#endif /* _RPC8E_HARDWARE_H_ */

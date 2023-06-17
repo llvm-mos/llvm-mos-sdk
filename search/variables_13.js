@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['w_1937',['w',['../api_8h.html#a84259e58d5ffeb55767613f3341f11e2',1,'api.h']]]
+  ['w_2116',['w',['../api_8h.html#a84259e58d5ffeb55767613f3341f11e2',1,'api.h']]]
 ];

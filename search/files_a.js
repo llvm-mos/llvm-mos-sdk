@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['nes_2eh_1531',['nes.h',['../nes_8h.html',1,'']]],
-  ['nes_2einc_1532',['nes.inc',['../nes_8inc.html',1,'']]],
-  ['nesdoug_2eh_1533',['nesdoug.h',['../nesdoug_8h.html',1,'']]],
-  ['neslib_2eh_1534',['neslib.h',['../neslib_8h.html',1,'']]],
-  ['neslib_2einc_1535',['neslib.inc',['../neslib_8inc.html',1,'']]],
-  ['new_1536',['new',['../new.html',1,'']]],
-  ['ntsc_2einc_1537',['ntsc.inc',['../ntsc_8inc.html',1,'']]]
+  ['license_1669',['LICENSE',['../famitone2_2LICENSE.html',1,'(Global Namespace)'],['../nesdoug_2LICENSE.html',1,'(Global Namespace)'],['../neslib_2LICENSE.html',1,'(Global Namespace)']]],
+  ['limits_1670',['limits',['../limits.html',1,'']]]
 ];

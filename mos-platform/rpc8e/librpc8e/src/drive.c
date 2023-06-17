@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2012 L. Adamson
  * Copyright (c) 2023 Adrian "asie" Siekierka
  *
  * This software is provided 'as-is', without any express or implied

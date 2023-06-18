@@ -65,14 +65,6 @@
 .global pce_bank6_size1_set
 .global pce_bank6_size1i_set
 
-    .section .text.bank2, "ax", @progbits
-pce_bank2_set:
-pce_bank2i_set:
-pce_bank2_size1_set:
-pce_bank2_size1i_set:
-    tam #$04
-    rts
-
     .section .text.bank23, "ax", @progbits
 pce_bank23_set:
 pce_bank2_size2_set:

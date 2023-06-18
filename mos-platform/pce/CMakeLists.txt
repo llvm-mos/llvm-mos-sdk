@@ -30,6 +30,7 @@ target_compile_options(pce-crt0 PUBLIC -mcpu=moshuc6280)
 
 add_platform_library(pce-c
   libpce/src/bank.S
+  libpce/src/bank-c.c
   libpce/src/joypad.c
   libpce/src/system.c
   libpce/src/vdc.c

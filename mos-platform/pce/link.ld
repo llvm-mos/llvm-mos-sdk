@@ -9,7 +9,7 @@ MEMORY {
 }
 
 REGION_ALIAS("c_ram", ram)
-__stack = 0x3FFF;
+__stack = 0x4000;
 
 INCLUDE rom-banked-sections.ld
 REGION_ALIAS("c_rom", rom_0)

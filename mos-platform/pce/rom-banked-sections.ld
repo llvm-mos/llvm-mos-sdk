@@ -385,265 +385,393 @@ PROVIDE(__rom_127_offset = 0xc000);
 PROVIDE(__rom_127_size = 0);
 __rom_127_position = __rom_126_position + __rom_126_size;
 __rom_0_bank = __rom_0_position >> 13;
+__rom_0_lma = 0x01000000 + (__rom_0_bank << 16) + __rom_0_offset;
 __rom_1_bank = __rom_1_position >> 13;
+__rom_1_lma = 0x01000000 + (__rom_1_bank << 16) + __rom_1_offset;
 __rom_2_bank = __rom_2_position >> 13;
+__rom_2_lma = 0x01000000 + (__rom_2_bank << 16) + __rom_2_offset;
 __rom_3_bank = __rom_3_position >> 13;
+__rom_3_lma = 0x01000000 + (__rom_3_bank << 16) + __rom_3_offset;
 __rom_4_bank = __rom_4_position >> 13;
+__rom_4_lma = 0x01000000 + (__rom_4_bank << 16) + __rom_4_offset;
 __rom_5_bank = __rom_5_position >> 13;
+__rom_5_lma = 0x01000000 + (__rom_5_bank << 16) + __rom_5_offset;
 __rom_6_bank = __rom_6_position >> 13;
+__rom_6_lma = 0x01000000 + (__rom_6_bank << 16) + __rom_6_offset;
 __rom_7_bank = __rom_7_position >> 13;
+__rom_7_lma = 0x01000000 + (__rom_7_bank << 16) + __rom_7_offset;
 __rom_8_bank = __rom_8_position >> 13;
+__rom_8_lma = 0x01000000 + (__rom_8_bank << 16) + __rom_8_offset;
 __rom_9_bank = __rom_9_position >> 13;
+__rom_9_lma = 0x01000000 + (__rom_9_bank << 16) + __rom_9_offset;
 __rom_10_bank = __rom_10_position >> 13;
+__rom_10_lma = 0x01000000 + (__rom_10_bank << 16) + __rom_10_offset;
 __rom_11_bank = __rom_11_position >> 13;
+__rom_11_lma = 0x01000000 + (__rom_11_bank << 16) + __rom_11_offset;
 __rom_12_bank = __rom_12_position >> 13;
+__rom_12_lma = 0x01000000 + (__rom_12_bank << 16) + __rom_12_offset;
 __rom_13_bank = __rom_13_position >> 13;
+__rom_13_lma = 0x01000000 + (__rom_13_bank << 16) + __rom_13_offset;
 __rom_14_bank = __rom_14_position >> 13;
+__rom_14_lma = 0x01000000 + (__rom_14_bank << 16) + __rom_14_offset;
 __rom_15_bank = __rom_15_position >> 13;
+__rom_15_lma = 0x01000000 + (__rom_15_bank << 16) + __rom_15_offset;
 __rom_16_bank = __rom_16_position >> 13;
+__rom_16_lma = 0x01000000 + (__rom_16_bank << 16) + __rom_16_offset;
 __rom_17_bank = __rom_17_position >> 13;
+__rom_17_lma = 0x01000000 + (__rom_17_bank << 16) + __rom_17_offset;
 __rom_18_bank = __rom_18_position >> 13;
+__rom_18_lma = 0x01000000 + (__rom_18_bank << 16) + __rom_18_offset;
 __rom_19_bank = __rom_19_position >> 13;
+__rom_19_lma = 0x01000000 + (__rom_19_bank << 16) + __rom_19_offset;
 __rom_20_bank = __rom_20_position >> 13;
+__rom_20_lma = 0x01000000 + (__rom_20_bank << 16) + __rom_20_offset;
 __rom_21_bank = __rom_21_position >> 13;
+__rom_21_lma = 0x01000000 + (__rom_21_bank << 16) + __rom_21_offset;
 __rom_22_bank = __rom_22_position >> 13;
+__rom_22_lma = 0x01000000 + (__rom_22_bank << 16) + __rom_22_offset;
 __rom_23_bank = __rom_23_position >> 13;
+__rom_23_lma = 0x01000000 + (__rom_23_bank << 16) + __rom_23_offset;
 __rom_24_bank = __rom_24_position >> 13;
+__rom_24_lma = 0x01000000 + (__rom_24_bank << 16) + __rom_24_offset;
 __rom_25_bank = __rom_25_position >> 13;
+__rom_25_lma = 0x01000000 + (__rom_25_bank << 16) + __rom_25_offset;
 __rom_26_bank = __rom_26_position >> 13;
+__rom_26_lma = 0x01000000 + (__rom_26_bank << 16) + __rom_26_offset;
 __rom_27_bank = __rom_27_position >> 13;
+__rom_27_lma = 0x01000000 + (__rom_27_bank << 16) + __rom_27_offset;
 __rom_28_bank = __rom_28_position >> 13;
+__rom_28_lma = 0x01000000 + (__rom_28_bank << 16) + __rom_28_offset;
 __rom_29_bank = __rom_29_position >> 13;
+__rom_29_lma = 0x01000000 + (__rom_29_bank << 16) + __rom_29_offset;
 __rom_30_bank = __rom_30_position >> 13;
+__rom_30_lma = 0x01000000 + (__rom_30_bank << 16) + __rom_30_offset;
 __rom_31_bank = __rom_31_position >> 13;
+__rom_31_lma = 0x01000000 + (__rom_31_bank << 16) + __rom_31_offset;
 __rom_32_bank = __rom_32_position >> 13;
+__rom_32_lma = 0x01000000 + (__rom_32_bank << 16) + __rom_32_offset;
 __rom_33_bank = __rom_33_position >> 13;
+__rom_33_lma = 0x01000000 + (__rom_33_bank << 16) + __rom_33_offset;
 __rom_34_bank = __rom_34_position >> 13;
+__rom_34_lma = 0x01000000 + (__rom_34_bank << 16) + __rom_34_offset;
 __rom_35_bank = __rom_35_position >> 13;
+__rom_35_lma = 0x01000000 + (__rom_35_bank << 16) + __rom_35_offset;
 __rom_36_bank = __rom_36_position >> 13;
+__rom_36_lma = 0x01000000 + (__rom_36_bank << 16) + __rom_36_offset;
 __rom_37_bank = __rom_37_position >> 13;
+__rom_37_lma = 0x01000000 + (__rom_37_bank << 16) + __rom_37_offset;
 __rom_38_bank = __rom_38_position >> 13;
+__rom_38_lma = 0x01000000 + (__rom_38_bank << 16) + __rom_38_offset;
 __rom_39_bank = __rom_39_position >> 13;
+__rom_39_lma = 0x01000000 + (__rom_39_bank << 16) + __rom_39_offset;
 __rom_40_bank = __rom_40_position >> 13;
+__rom_40_lma = 0x01000000 + (__rom_40_bank << 16) + __rom_40_offset;
 __rom_41_bank = __rom_41_position >> 13;
+__rom_41_lma = 0x01000000 + (__rom_41_bank << 16) + __rom_41_offset;
 __rom_42_bank = __rom_42_position >> 13;
+__rom_42_lma = 0x01000000 + (__rom_42_bank << 16) + __rom_42_offset;
 __rom_43_bank = __rom_43_position >> 13;
+__rom_43_lma = 0x01000000 + (__rom_43_bank << 16) + __rom_43_offset;
 __rom_44_bank = __rom_44_position >> 13;
+__rom_44_lma = 0x01000000 + (__rom_44_bank << 16) + __rom_44_offset;
 __rom_45_bank = __rom_45_position >> 13;
+__rom_45_lma = 0x01000000 + (__rom_45_bank << 16) + __rom_45_offset;
 __rom_46_bank = __rom_46_position >> 13;
+__rom_46_lma = 0x01000000 + (__rom_46_bank << 16) + __rom_46_offset;
 __rom_47_bank = __rom_47_position >> 13;
+__rom_47_lma = 0x01000000 + (__rom_47_bank << 16) + __rom_47_offset;
 __rom_48_bank = __rom_48_position >> 13;
+__rom_48_lma = 0x01000000 + (__rom_48_bank << 16) + __rom_48_offset;
 __rom_49_bank = __rom_49_position >> 13;
+__rom_49_lma = 0x01000000 + (__rom_49_bank << 16) + __rom_49_offset;
 __rom_50_bank = __rom_50_position >> 13;
+__rom_50_lma = 0x01000000 + (__rom_50_bank << 16) + __rom_50_offset;
 __rom_51_bank = __rom_51_position >> 13;
+__rom_51_lma = 0x01000000 + (__rom_51_bank << 16) + __rom_51_offset;
 __rom_52_bank = __rom_52_position >> 13;
+__rom_52_lma = 0x01000000 + (__rom_52_bank << 16) + __rom_52_offset;
 __rom_53_bank = __rom_53_position >> 13;
+__rom_53_lma = 0x01000000 + (__rom_53_bank << 16) + __rom_53_offset;
 __rom_54_bank = __rom_54_position >> 13;
+__rom_54_lma = 0x01000000 + (__rom_54_bank << 16) + __rom_54_offset;
 __rom_55_bank = __rom_55_position >> 13;
+__rom_55_lma = 0x01000000 + (__rom_55_bank << 16) + __rom_55_offset;
 __rom_56_bank = __rom_56_position >> 13;
+__rom_56_lma = 0x01000000 + (__rom_56_bank << 16) + __rom_56_offset;
 __rom_57_bank = __rom_57_position >> 13;
+__rom_57_lma = 0x01000000 + (__rom_57_bank << 16) + __rom_57_offset;
 __rom_58_bank = __rom_58_position >> 13;
+__rom_58_lma = 0x01000000 + (__rom_58_bank << 16) + __rom_58_offset;
 __rom_59_bank = __rom_59_position >> 13;
+__rom_59_lma = 0x01000000 + (__rom_59_bank << 16) + __rom_59_offset;
 __rom_60_bank = __rom_60_position >> 13;
+__rom_60_lma = 0x01000000 + (__rom_60_bank << 16) + __rom_60_offset;
 __rom_61_bank = __rom_61_position >> 13;
+__rom_61_lma = 0x01000000 + (__rom_61_bank << 16) + __rom_61_offset;
 __rom_62_bank = __rom_62_position >> 13;
+__rom_62_lma = 0x01000000 + (__rom_62_bank << 16) + __rom_62_offset;
 __rom_63_bank = __rom_63_position >> 13;
+__rom_63_lma = 0x01000000 + (__rom_63_bank << 16) + __rom_63_offset;
 __rom_64_bank = __rom_64_position >> 13;
+__rom_64_lma = 0x01000000 + (__rom_64_bank << 16) + __rom_64_offset;
 __rom_65_bank = __rom_65_position >> 13;
+__rom_65_lma = 0x01000000 + (__rom_65_bank << 16) + __rom_65_offset;
 __rom_66_bank = __rom_66_position >> 13;
+__rom_66_lma = 0x01000000 + (__rom_66_bank << 16) + __rom_66_offset;
 __rom_67_bank = __rom_67_position >> 13;
+__rom_67_lma = 0x01000000 + (__rom_67_bank << 16) + __rom_67_offset;
 __rom_68_bank = __rom_68_position >> 13;
+__rom_68_lma = 0x01000000 + (__rom_68_bank << 16) + __rom_68_offset;
 __rom_69_bank = __rom_69_position >> 13;
+__rom_69_lma = 0x01000000 + (__rom_69_bank << 16) + __rom_69_offset;
 __rom_70_bank = __rom_70_position >> 13;
+__rom_70_lma = 0x01000000 + (__rom_70_bank << 16) + __rom_70_offset;
 __rom_71_bank = __rom_71_position >> 13;
+__rom_71_lma = 0x01000000 + (__rom_71_bank << 16) + __rom_71_offset;
 __rom_72_bank = __rom_72_position >> 13;
+__rom_72_lma = 0x01000000 + (__rom_72_bank << 16) + __rom_72_offset;
 __rom_73_bank = __rom_73_position >> 13;
+__rom_73_lma = 0x01000000 + (__rom_73_bank << 16) + __rom_73_offset;
 __rom_74_bank = __rom_74_position >> 13;
+__rom_74_lma = 0x01000000 + (__rom_74_bank << 16) + __rom_74_offset;
 __rom_75_bank = __rom_75_position >> 13;
+__rom_75_lma = 0x01000000 + (__rom_75_bank << 16) + __rom_75_offset;
 __rom_76_bank = __rom_76_position >> 13;
+__rom_76_lma = 0x01000000 + (__rom_76_bank << 16) + __rom_76_offset;
 __rom_77_bank = __rom_77_position >> 13;
+__rom_77_lma = 0x01000000 + (__rom_77_bank << 16) + __rom_77_offset;
 __rom_78_bank = __rom_78_position >> 13;
+__rom_78_lma = 0x01000000 + (__rom_78_bank << 16) + __rom_78_offset;
 __rom_79_bank = __rom_79_position >> 13;
+__rom_79_lma = 0x01000000 + (__rom_79_bank << 16) + __rom_79_offset;
 __rom_80_bank = __rom_80_position >> 13;
+__rom_80_lma = 0x01000000 + (__rom_80_bank << 16) + __rom_80_offset;
 __rom_81_bank = __rom_81_position >> 13;
+__rom_81_lma = 0x01000000 + (__rom_81_bank << 16) + __rom_81_offset;
 __rom_82_bank = __rom_82_position >> 13;
+__rom_82_lma = 0x01000000 + (__rom_82_bank << 16) + __rom_82_offset;
 __rom_83_bank = __rom_83_position >> 13;
+__rom_83_lma = 0x01000000 + (__rom_83_bank << 16) + __rom_83_offset;
 __rom_84_bank = __rom_84_position >> 13;
+__rom_84_lma = 0x01000000 + (__rom_84_bank << 16) + __rom_84_offset;
 __rom_85_bank = __rom_85_position >> 13;
+__rom_85_lma = 0x01000000 + (__rom_85_bank << 16) + __rom_85_offset;
 __rom_86_bank = __rom_86_position >> 13;
+__rom_86_lma = 0x01000000 + (__rom_86_bank << 16) + __rom_86_offset;
 __rom_87_bank = __rom_87_position >> 13;
+__rom_87_lma = 0x01000000 + (__rom_87_bank << 16) + __rom_87_offset;
 __rom_88_bank = __rom_88_position >> 13;
+__rom_88_lma = 0x01000000 + (__rom_88_bank << 16) + __rom_88_offset;
 __rom_89_bank = __rom_89_position >> 13;
+__rom_89_lma = 0x01000000 + (__rom_89_bank << 16) + __rom_89_offset;
 __rom_90_bank = __rom_90_position >> 13;
+__rom_90_lma = 0x01000000 + (__rom_90_bank << 16) + __rom_90_offset;
 __rom_91_bank = __rom_91_position >> 13;
+__rom_91_lma = 0x01000000 + (__rom_91_bank << 16) + __rom_91_offset;
 __rom_92_bank = __rom_92_position >> 13;
+__rom_92_lma = 0x01000000 + (__rom_92_bank << 16) + __rom_92_offset;
 __rom_93_bank = __rom_93_position >> 13;
+__rom_93_lma = 0x01000000 + (__rom_93_bank << 16) + __rom_93_offset;
 __rom_94_bank = __rom_94_position >> 13;
+__rom_94_lma = 0x01000000 + (__rom_94_bank << 16) + __rom_94_offset;
 __rom_95_bank = __rom_95_position >> 13;
+__rom_95_lma = 0x01000000 + (__rom_95_bank << 16) + __rom_95_offset;
 __rom_96_bank = __rom_96_position >> 13;
+__rom_96_lma = 0x01000000 + (__rom_96_bank << 16) + __rom_96_offset;
 __rom_97_bank = __rom_97_position >> 13;
+__rom_97_lma = 0x01000000 + (__rom_97_bank << 16) + __rom_97_offset;
 __rom_98_bank = __rom_98_position >> 13;
+__rom_98_lma = 0x01000000 + (__rom_98_bank << 16) + __rom_98_offset;
 __rom_99_bank = __rom_99_position >> 13;
+__rom_99_lma = 0x01000000 + (__rom_99_bank << 16) + __rom_99_offset;
 __rom_100_bank = __rom_100_position >> 13;
+__rom_100_lma = 0x01000000 + (__rom_100_bank << 16) + __rom_100_offset;
 __rom_101_bank = __rom_101_position >> 13;
+__rom_101_lma = 0x01000000 + (__rom_101_bank << 16) + __rom_101_offset;
 __rom_102_bank = __rom_102_position >> 13;
+__rom_102_lma = 0x01000000 + (__rom_102_bank << 16) + __rom_102_offset;
 __rom_103_bank = __rom_103_position >> 13;
+__rom_103_lma = 0x01000000 + (__rom_103_bank << 16) + __rom_103_offset;
 __rom_104_bank = __rom_104_position >> 13;
+__rom_104_lma = 0x01000000 + (__rom_104_bank << 16) + __rom_104_offset;
 __rom_105_bank = __rom_105_position >> 13;
+__rom_105_lma = 0x01000000 + (__rom_105_bank << 16) + __rom_105_offset;
 __rom_106_bank = __rom_106_position >> 13;
+__rom_106_lma = 0x01000000 + (__rom_106_bank << 16) + __rom_106_offset;
 __rom_107_bank = __rom_107_position >> 13;
+__rom_107_lma = 0x01000000 + (__rom_107_bank << 16) + __rom_107_offset;
 __rom_108_bank = __rom_108_position >> 13;
+__rom_108_lma = 0x01000000 + (__rom_108_bank << 16) + __rom_108_offset;
 __rom_109_bank = __rom_109_position >> 13;
+__rom_109_lma = 0x01000000 + (__rom_109_bank << 16) + __rom_109_offset;
 __rom_110_bank = __rom_110_position >> 13;
+__rom_110_lma = 0x01000000 + (__rom_110_bank << 16) + __rom_110_offset;
 __rom_111_bank = __rom_111_position >> 13;
+__rom_111_lma = 0x01000000 + (__rom_111_bank << 16) + __rom_111_offset;
 __rom_112_bank = __rom_112_position >> 13;
+__rom_112_lma = 0x01000000 + (__rom_112_bank << 16) + __rom_112_offset;
 __rom_113_bank = __rom_113_position >> 13;
+__rom_113_lma = 0x01000000 + (__rom_113_bank << 16) + __rom_113_offset;
 __rom_114_bank = __rom_114_position >> 13;
+__rom_114_lma = 0x01000000 + (__rom_114_bank << 16) + __rom_114_offset;
 __rom_115_bank = __rom_115_position >> 13;
+__rom_115_lma = 0x01000000 + (__rom_115_bank << 16) + __rom_115_offset;
 __rom_116_bank = __rom_116_position >> 13;
+__rom_116_lma = 0x01000000 + (__rom_116_bank << 16) + __rom_116_offset;
 __rom_117_bank = __rom_117_position >> 13;
+__rom_117_lma = 0x01000000 + (__rom_117_bank << 16) + __rom_117_offset;
 __rom_118_bank = __rom_118_position >> 13;
+__rom_118_lma = 0x01000000 + (__rom_118_bank << 16) + __rom_118_offset;
 __rom_119_bank = __rom_119_position >> 13;
+__rom_119_lma = 0x01000000 + (__rom_119_bank << 16) + __rom_119_offset;
 __rom_120_bank = __rom_120_position >> 13;
+__rom_120_lma = 0x01000000 + (__rom_120_bank << 16) + __rom_120_offset;
 __rom_121_bank = __rom_121_position >> 13;
+__rom_121_lma = 0x01000000 + (__rom_121_bank << 16) + __rom_121_offset;
 __rom_122_bank = __rom_122_position >> 13;
+__rom_122_lma = 0x01000000 + (__rom_122_bank << 16) + __rom_122_offset;
 __rom_123_bank = __rom_123_position >> 13;
+__rom_123_lma = 0x01000000 + (__rom_123_bank << 16) + __rom_123_offset;
 __rom_124_bank = __rom_124_position >> 13;
+__rom_124_lma = 0x01000000 + (__rom_124_bank << 16) + __rom_124_offset;
 __rom_125_bank = __rom_125_position >> 13;
+__rom_125_lma = 0x01000000 + (__rom_125_bank << 16) + __rom_125_offset;
 __rom_126_bank = __rom_126_position >> 13;
+__rom_126_lma = 0x01000000 + (__rom_126_bank << 16) + __rom_126_offset;
 __rom_127_bank = __rom_127_position >> 13;
+__rom_127_lma = 0x01000000 + (__rom_127_bank << 16) + __rom_127_offset;
 __rom_end_position = __rom_127_position + __rom_127_size;
 ASSERT(__rom_end_position <= 1048576, "ROM size cannot be larger than 1024 KB.");
 
 MEMORY {
-  rom_0 : ORIGIN = 0x01000000 + (__rom_0_bank << 16) + __rom_0_offset, LENGTH = __rom_0_size
-  rom_1 : ORIGIN = 0x01000000 + (__rom_1_bank << 16) + __rom_1_offset, LENGTH = __rom_1_size
-  rom_2 : ORIGIN = 0x01000000 + (__rom_2_bank << 16) + __rom_2_offset, LENGTH = __rom_2_size
-  rom_3 : ORIGIN = 0x01000000 + (__rom_3_bank << 16) + __rom_3_offset, LENGTH = __rom_3_size
-  rom_4 : ORIGIN = 0x01000000 + (__rom_4_bank << 16) + __rom_4_offset, LENGTH = __rom_4_size
-  rom_5 : ORIGIN = 0x01000000 + (__rom_5_bank << 16) + __rom_5_offset, LENGTH = __rom_5_size
-  rom_6 : ORIGIN = 0x01000000 + (__rom_6_bank << 16) + __rom_6_offset, LENGTH = __rom_6_size
-  rom_7 : ORIGIN = 0x01000000 + (__rom_7_bank << 16) + __rom_7_offset, LENGTH = __rom_7_size
-  rom_8 : ORIGIN = 0x01000000 + (__rom_8_bank << 16) + __rom_8_offset, LENGTH = __rom_8_size
-  rom_9 : ORIGIN = 0x01000000 + (__rom_9_bank << 16) + __rom_9_offset, LENGTH = __rom_9_size
-  rom_10 : ORIGIN = 0x01000000 + (__rom_10_bank << 16) + __rom_10_offset, LENGTH = __rom_10_size
-  rom_11 : ORIGIN = 0x01000000 + (__rom_11_bank << 16) + __rom_11_offset, LENGTH = __rom_11_size
-  rom_12 : ORIGIN = 0x01000000 + (__rom_12_bank << 16) + __rom_12_offset, LENGTH = __rom_12_size
-  rom_13 : ORIGIN = 0x01000000 + (__rom_13_bank << 16) + __rom_13_offset, LENGTH = __rom_13_size
-  rom_14 : ORIGIN = 0x01000000 + (__rom_14_bank << 16) + __rom_14_offset, LENGTH = __rom_14_size
-  rom_15 : ORIGIN = 0x01000000 + (__rom_15_bank << 16) + __rom_15_offset, LENGTH = __rom_15_size
-  rom_16 : ORIGIN = 0x01000000 + (__rom_16_bank << 16) + __rom_16_offset, LENGTH = __rom_16_size
-  rom_17 : ORIGIN = 0x01000000 + (__rom_17_bank << 16) + __rom_17_offset, LENGTH = __rom_17_size
-  rom_18 : ORIGIN = 0x01000000 + (__rom_18_bank << 16) + __rom_18_offset, LENGTH = __rom_18_size
-  rom_19 : ORIGIN = 0x01000000 + (__rom_19_bank << 16) + __rom_19_offset, LENGTH = __rom_19_size
-  rom_20 : ORIGIN = 0x01000000 + (__rom_20_bank << 16) + __rom_20_offset, LENGTH = __rom_20_size
-  rom_21 : ORIGIN = 0x01000000 + (__rom_21_bank << 16) + __rom_21_offset, LENGTH = __rom_21_size
-  rom_22 : ORIGIN = 0x01000000 + (__rom_22_bank << 16) + __rom_22_offset, LENGTH = __rom_22_size
-  rom_23 : ORIGIN = 0x01000000 + (__rom_23_bank << 16) + __rom_23_offset, LENGTH = __rom_23_size
-  rom_24 : ORIGIN = 0x01000000 + (__rom_24_bank << 16) + __rom_24_offset, LENGTH = __rom_24_size
-  rom_25 : ORIGIN = 0x01000000 + (__rom_25_bank << 16) + __rom_25_offset, LENGTH = __rom_25_size
-  rom_26 : ORIGIN = 0x01000000 + (__rom_26_bank << 16) + __rom_26_offset, LENGTH = __rom_26_size
-  rom_27 : ORIGIN = 0x01000000 + (__rom_27_bank << 16) + __rom_27_offset, LENGTH = __rom_27_size
-  rom_28 : ORIGIN = 0x01000000 + (__rom_28_bank << 16) + __rom_28_offset, LENGTH = __rom_28_size
-  rom_29 : ORIGIN = 0x01000000 + (__rom_29_bank << 16) + __rom_29_offset, LENGTH = __rom_29_size
-  rom_30 : ORIGIN = 0x01000000 + (__rom_30_bank << 16) + __rom_30_offset, LENGTH = __rom_30_size
-  rom_31 : ORIGIN = 0x01000000 + (__rom_31_bank << 16) + __rom_31_offset, LENGTH = __rom_31_size
-  rom_32 : ORIGIN = 0x01000000 + (__rom_32_bank << 16) + __rom_32_offset, LENGTH = __rom_32_size
-  rom_33 : ORIGIN = 0x01000000 + (__rom_33_bank << 16) + __rom_33_offset, LENGTH = __rom_33_size
-  rom_34 : ORIGIN = 0x01000000 + (__rom_34_bank << 16) + __rom_34_offset, LENGTH = __rom_34_size
-  rom_35 : ORIGIN = 0x01000000 + (__rom_35_bank << 16) + __rom_35_offset, LENGTH = __rom_35_size
-  rom_36 : ORIGIN = 0x01000000 + (__rom_36_bank << 16) + __rom_36_offset, LENGTH = __rom_36_size
-  rom_37 : ORIGIN = 0x01000000 + (__rom_37_bank << 16) + __rom_37_offset, LENGTH = __rom_37_size
-  rom_38 : ORIGIN = 0x01000000 + (__rom_38_bank << 16) + __rom_38_offset, LENGTH = __rom_38_size
-  rom_39 : ORIGIN = 0x01000000 + (__rom_39_bank << 16) + __rom_39_offset, LENGTH = __rom_39_size
-  rom_40 : ORIGIN = 0x01000000 + (__rom_40_bank << 16) + __rom_40_offset, LENGTH = __rom_40_size
-  rom_41 : ORIGIN = 0x01000000 + (__rom_41_bank << 16) + __rom_41_offset, LENGTH = __rom_41_size
-  rom_42 : ORIGIN = 0x01000000 + (__rom_42_bank << 16) + __rom_42_offset, LENGTH = __rom_42_size
-  rom_43 : ORIGIN = 0x01000000 + (__rom_43_bank << 16) + __rom_43_offset, LENGTH = __rom_43_size
-  rom_44 : ORIGIN = 0x01000000 + (__rom_44_bank << 16) + __rom_44_offset, LENGTH = __rom_44_size
-  rom_45 : ORIGIN = 0x01000000 + (__rom_45_bank << 16) + __rom_45_offset, LENGTH = __rom_45_size
-  rom_46 : ORIGIN = 0x01000000 + (__rom_46_bank << 16) + __rom_46_offset, LENGTH = __rom_46_size
-  rom_47 : ORIGIN = 0x01000000 + (__rom_47_bank << 16) + __rom_47_offset, LENGTH = __rom_47_size
-  rom_48 : ORIGIN = 0x01000000 + (__rom_48_bank << 16) + __rom_48_offset, LENGTH = __rom_48_size
-  rom_49 : ORIGIN = 0x01000000 + (__rom_49_bank << 16) + __rom_49_offset, LENGTH = __rom_49_size
-  rom_50 : ORIGIN = 0x01000000 + (__rom_50_bank << 16) + __rom_50_offset, LENGTH = __rom_50_size
-  rom_51 : ORIGIN = 0x01000000 + (__rom_51_bank << 16) + __rom_51_offset, LENGTH = __rom_51_size
-  rom_52 : ORIGIN = 0x01000000 + (__rom_52_bank << 16) + __rom_52_offset, LENGTH = __rom_52_size
-  rom_53 : ORIGIN = 0x01000000 + (__rom_53_bank << 16) + __rom_53_offset, LENGTH = __rom_53_size
-  rom_54 : ORIGIN = 0x01000000 + (__rom_54_bank << 16) + __rom_54_offset, LENGTH = __rom_54_size
-  rom_55 : ORIGIN = 0x01000000 + (__rom_55_bank << 16) + __rom_55_offset, LENGTH = __rom_55_size
-  rom_56 : ORIGIN = 0x01000000 + (__rom_56_bank << 16) + __rom_56_offset, LENGTH = __rom_56_size
-  rom_57 : ORIGIN = 0x01000000 + (__rom_57_bank << 16) + __rom_57_offset, LENGTH = __rom_57_size
-  rom_58 : ORIGIN = 0x01000000 + (__rom_58_bank << 16) + __rom_58_offset, LENGTH = __rom_58_size
-  rom_59 : ORIGIN = 0x01000000 + (__rom_59_bank << 16) + __rom_59_offset, LENGTH = __rom_59_size
-  rom_60 : ORIGIN = 0x01000000 + (__rom_60_bank << 16) + __rom_60_offset, LENGTH = __rom_60_size
-  rom_61 : ORIGIN = 0x01000000 + (__rom_61_bank << 16) + __rom_61_offset, LENGTH = __rom_61_size
-  rom_62 : ORIGIN = 0x01000000 + (__rom_62_bank << 16) + __rom_62_offset, LENGTH = __rom_62_size
-  rom_63 : ORIGIN = 0x01000000 + (__rom_63_bank << 16) + __rom_63_offset, LENGTH = __rom_63_size
-  rom_64 : ORIGIN = 0x01000000 + (__rom_64_bank << 16) + __rom_64_offset, LENGTH = __rom_64_size
-  rom_65 : ORIGIN = 0x01000000 + (__rom_65_bank << 16) + __rom_65_offset, LENGTH = __rom_65_size
-  rom_66 : ORIGIN = 0x01000000 + (__rom_66_bank << 16) + __rom_66_offset, LENGTH = __rom_66_size
-  rom_67 : ORIGIN = 0x01000000 + (__rom_67_bank << 16) + __rom_67_offset, LENGTH = __rom_67_size
-  rom_68 : ORIGIN = 0x01000000 + (__rom_68_bank << 16) + __rom_68_offset, LENGTH = __rom_68_size
-  rom_69 : ORIGIN = 0x01000000 + (__rom_69_bank << 16) + __rom_69_offset, LENGTH = __rom_69_size
-  rom_70 : ORIGIN = 0x01000000 + (__rom_70_bank << 16) + __rom_70_offset, LENGTH = __rom_70_size
-  rom_71 : ORIGIN = 0x01000000 + (__rom_71_bank << 16) + __rom_71_offset, LENGTH = __rom_71_size
-  rom_72 : ORIGIN = 0x01000000 + (__rom_72_bank << 16) + __rom_72_offset, LENGTH = __rom_72_size
-  rom_73 : ORIGIN = 0x01000000 + (__rom_73_bank << 16) + __rom_73_offset, LENGTH = __rom_73_size
-  rom_74 : ORIGIN = 0x01000000 + (__rom_74_bank << 16) + __rom_74_offset, LENGTH = __rom_74_size
-  rom_75 : ORIGIN = 0x01000000 + (__rom_75_bank << 16) + __rom_75_offset, LENGTH = __rom_75_size
-  rom_76 : ORIGIN = 0x01000000 + (__rom_76_bank << 16) + __rom_76_offset, LENGTH = __rom_76_size
-  rom_77 : ORIGIN = 0x01000000 + (__rom_77_bank << 16) + __rom_77_offset, LENGTH = __rom_77_size
-  rom_78 : ORIGIN = 0x01000000 + (__rom_78_bank << 16) + __rom_78_offset, LENGTH = __rom_78_size
-  rom_79 : ORIGIN = 0x01000000 + (__rom_79_bank << 16) + __rom_79_offset, LENGTH = __rom_79_size
-  rom_80 : ORIGIN = 0x01000000 + (__rom_80_bank << 16) + __rom_80_offset, LENGTH = __rom_80_size
-  rom_81 : ORIGIN = 0x01000000 + (__rom_81_bank << 16) + __rom_81_offset, LENGTH = __rom_81_size
-  rom_82 : ORIGIN = 0x01000000 + (__rom_82_bank << 16) + __rom_82_offset, LENGTH = __rom_82_size
-  rom_83 : ORIGIN = 0x01000000 + (__rom_83_bank << 16) + __rom_83_offset, LENGTH = __rom_83_size
-  rom_84 : ORIGIN = 0x01000000 + (__rom_84_bank << 16) + __rom_84_offset, LENGTH = __rom_84_size
-  rom_85 : ORIGIN = 0x01000000 + (__rom_85_bank << 16) + __rom_85_offset, LENGTH = __rom_85_size
-  rom_86 : ORIGIN = 0x01000000 + (__rom_86_bank << 16) + __rom_86_offset, LENGTH = __rom_86_size
-  rom_87 : ORIGIN = 0x01000000 + (__rom_87_bank << 16) + __rom_87_offset, LENGTH = __rom_87_size
-  rom_88 : ORIGIN = 0x01000000 + (__rom_88_bank << 16) + __rom_88_offset, LENGTH = __rom_88_size
-  rom_89 : ORIGIN = 0x01000000 + (__rom_89_bank << 16) + __rom_89_offset, LENGTH = __rom_89_size
-  rom_90 : ORIGIN = 0x01000000 + (__rom_90_bank << 16) + __rom_90_offset, LENGTH = __rom_90_size
-  rom_91 : ORIGIN = 0x01000000 + (__rom_91_bank << 16) + __rom_91_offset, LENGTH = __rom_91_size
-  rom_92 : ORIGIN = 0x01000000 + (__rom_92_bank << 16) + __rom_92_offset, LENGTH = __rom_92_size
-  rom_93 : ORIGIN = 0x01000000 + (__rom_93_bank << 16) + __rom_93_offset, LENGTH = __rom_93_size
-  rom_94 : ORIGIN = 0x01000000 + (__rom_94_bank << 16) + __rom_94_offset, LENGTH = __rom_94_size
-  rom_95 : ORIGIN = 0x01000000 + (__rom_95_bank << 16) + __rom_95_offset, LENGTH = __rom_95_size
-  rom_96 : ORIGIN = 0x01000000 + (__rom_96_bank << 16) + __rom_96_offset, LENGTH = __rom_96_size
-  rom_97 : ORIGIN = 0x01000000 + (__rom_97_bank << 16) + __rom_97_offset, LENGTH = __rom_97_size
-  rom_98 : ORIGIN = 0x01000000 + (__rom_98_bank << 16) + __rom_98_offset, LENGTH = __rom_98_size
-  rom_99 : ORIGIN = 0x01000000 + (__rom_99_bank << 16) + __rom_99_offset, LENGTH = __rom_99_size
-  rom_100 : ORIGIN = 0x01000000 + (__rom_100_bank << 16) + __rom_100_offset, LENGTH = __rom_100_size
-  rom_101 : ORIGIN = 0x01000000 + (__rom_101_bank << 16) + __rom_101_offset, LENGTH = __rom_101_size
-  rom_102 : ORIGIN = 0x01000000 + (__rom_102_bank << 16) + __rom_102_offset, LENGTH = __rom_102_size
-  rom_103 : ORIGIN = 0x01000000 + (__rom_103_bank << 16) + __rom_103_offset, LENGTH = __rom_103_size
-  rom_104 : ORIGIN = 0x01000000 + (__rom_104_bank << 16) + __rom_104_offset, LENGTH = __rom_104_size
-  rom_105 : ORIGIN = 0x01000000 + (__rom_105_bank << 16) + __rom_105_offset, LENGTH = __rom_105_size
-  rom_106 : ORIGIN = 0x01000000 + (__rom_106_bank << 16) + __rom_106_offset, LENGTH = __rom_106_size
-  rom_107 : ORIGIN = 0x01000000 + (__rom_107_bank << 16) + __rom_107_offset, LENGTH = __rom_107_size
-  rom_108 : ORIGIN = 0x01000000 + (__rom_108_bank << 16) + __rom_108_offset, LENGTH = __rom_108_size
-  rom_109 : ORIGIN = 0x01000000 + (__rom_109_bank << 16) + __rom_109_offset, LENGTH = __rom_109_size
-  rom_110 : ORIGIN = 0x01000000 + (__rom_110_bank << 16) + __rom_110_offset, LENGTH = __rom_110_size
-  rom_111 : ORIGIN = 0x01000000 + (__rom_111_bank << 16) + __rom_111_offset, LENGTH = __rom_111_size
-  rom_112 : ORIGIN = 0x01000000 + (__rom_112_bank << 16) + __rom_112_offset, LENGTH = __rom_112_size
-  rom_113 : ORIGIN = 0x01000000 + (__rom_113_bank << 16) + __rom_113_offset, LENGTH = __rom_113_size
-  rom_114 : ORIGIN = 0x01000000 + (__rom_114_bank << 16) + __rom_114_offset, LENGTH = __rom_114_size
-  rom_115 : ORIGIN = 0x01000000 + (__rom_115_bank << 16) + __rom_115_offset, LENGTH = __rom_115_size
-  rom_116 : ORIGIN = 0x01000000 + (__rom_116_bank << 16) + __rom_116_offset, LENGTH = __rom_116_size
-  rom_117 : ORIGIN = 0x01000000 + (__rom_117_bank << 16) + __rom_117_offset, LENGTH = __rom_117_size
-  rom_118 : ORIGIN = 0x01000000 + (__rom_118_bank << 16) + __rom_118_offset, LENGTH = __rom_118_size
-  rom_119 : ORIGIN = 0x01000000 + (__rom_119_bank << 16) + __rom_119_offset, LENGTH = __rom_119_size
-  rom_120 : ORIGIN = 0x01000000 + (__rom_120_bank << 16) + __rom_120_offset, LENGTH = __rom_120_size
-  rom_121 : ORIGIN = 0x01000000 + (__rom_121_bank << 16) + __rom_121_offset, LENGTH = __rom_121_size
-  rom_122 : ORIGIN = 0x01000000 + (__rom_122_bank << 16) + __rom_122_offset, LENGTH = __rom_122_size
-  rom_123 : ORIGIN = 0x01000000 + (__rom_123_bank << 16) + __rom_123_offset, LENGTH = __rom_123_size
-  rom_124 : ORIGIN = 0x01000000 + (__rom_124_bank << 16) + __rom_124_offset, LENGTH = __rom_124_size
-  rom_125 : ORIGIN = 0x01000000 + (__rom_125_bank << 16) + __rom_125_offset, LENGTH = __rom_125_size
-  rom_126 : ORIGIN = 0x01000000 + (__rom_126_bank << 16) + __rom_126_offset, LENGTH = __rom_126_size
-  rom_127 : ORIGIN = 0x01000000 + (__rom_127_bank << 16) + __rom_127_offset, LENGTH = __rom_127_size
+  rom_0 : ORIGIN = __rom_0_lma, LENGTH = __rom_0_size
+  rom_1 : ORIGIN = __rom_1_lma, LENGTH = __rom_1_size
+  rom_2 : ORIGIN = __rom_2_lma, LENGTH = __rom_2_size
+  rom_3 : ORIGIN = __rom_3_lma, LENGTH = __rom_3_size
+  rom_4 : ORIGIN = __rom_4_lma, LENGTH = __rom_4_size
+  rom_5 : ORIGIN = __rom_5_lma, LENGTH = __rom_5_size
+  rom_6 : ORIGIN = __rom_6_lma, LENGTH = __rom_6_size
+  rom_7 : ORIGIN = __rom_7_lma, LENGTH = __rom_7_size
+  rom_8 : ORIGIN = __rom_8_lma, LENGTH = __rom_8_size
+  rom_9 : ORIGIN = __rom_9_lma, LENGTH = __rom_9_size
+  rom_10 : ORIGIN = __rom_10_lma, LENGTH = __rom_10_size
+  rom_11 : ORIGIN = __rom_11_lma, LENGTH = __rom_11_size
+  rom_12 : ORIGIN = __rom_12_lma, LENGTH = __rom_12_size
+  rom_13 : ORIGIN = __rom_13_lma, LENGTH = __rom_13_size
+  rom_14 : ORIGIN = __rom_14_lma, LENGTH = __rom_14_size
+  rom_15 : ORIGIN = __rom_15_lma, LENGTH = __rom_15_size
+  rom_16 : ORIGIN = __rom_16_lma, LENGTH = __rom_16_size
+  rom_17 : ORIGIN = __rom_17_lma, LENGTH = __rom_17_size
+  rom_18 : ORIGIN = __rom_18_lma, LENGTH = __rom_18_size
+  rom_19 : ORIGIN = __rom_19_lma, LENGTH = __rom_19_size
+  rom_20 : ORIGIN = __rom_20_lma, LENGTH = __rom_20_size
+  rom_21 : ORIGIN = __rom_21_lma, LENGTH = __rom_21_size
+  rom_22 : ORIGIN = __rom_22_lma, LENGTH = __rom_22_size
+  rom_23 : ORIGIN = __rom_23_lma, LENGTH = __rom_23_size
+  rom_24 : ORIGIN = __rom_24_lma, LENGTH = __rom_24_size
+  rom_25 : ORIGIN = __rom_25_lma, LENGTH = __rom_25_size
+  rom_26 : ORIGIN = __rom_26_lma, LENGTH = __rom_26_size
+  rom_27 : ORIGIN = __rom_27_lma, LENGTH = __rom_27_size
+  rom_28 : ORIGIN = __rom_28_lma, LENGTH = __rom_28_size
+  rom_29 : ORIGIN = __rom_29_lma, LENGTH = __rom_29_size
+  rom_30 : ORIGIN = __rom_30_lma, LENGTH = __rom_30_size
+  rom_31 : ORIGIN = __rom_31_lma, LENGTH = __rom_31_size
+  rom_32 : ORIGIN = __rom_32_lma, LENGTH = __rom_32_size
+  rom_33 : ORIGIN = __rom_33_lma, LENGTH = __rom_33_size
+  rom_34 : ORIGIN = __rom_34_lma, LENGTH = __rom_34_size
+  rom_35 : ORIGIN = __rom_35_lma, LENGTH = __rom_35_size
+  rom_36 : ORIGIN = __rom_36_lma, LENGTH = __rom_36_size
+  rom_37 : ORIGIN = __rom_37_lma, LENGTH = __rom_37_size
+  rom_38 : ORIGIN = __rom_38_lma, LENGTH = __rom_38_size
+  rom_39 : ORIGIN = __rom_39_lma, LENGTH = __rom_39_size
+  rom_40 : ORIGIN = __rom_40_lma, LENGTH = __rom_40_size
+  rom_41 : ORIGIN = __rom_41_lma, LENGTH = __rom_41_size
+  rom_42 : ORIGIN = __rom_42_lma, LENGTH = __rom_42_size
+  rom_43 : ORIGIN = __rom_43_lma, LENGTH = __rom_43_size
+  rom_44 : ORIGIN = __rom_44_lma, LENGTH = __rom_44_size
+  rom_45 : ORIGIN = __rom_45_lma, LENGTH = __rom_45_size
+  rom_46 : ORIGIN = __rom_46_lma, LENGTH = __rom_46_size
+  rom_47 : ORIGIN = __rom_47_lma, LENGTH = __rom_47_size
+  rom_48 : ORIGIN = __rom_48_lma, LENGTH = __rom_48_size
+  rom_49 : ORIGIN = __rom_49_lma, LENGTH = __rom_49_size
+  rom_50 : ORIGIN = __rom_50_lma, LENGTH = __rom_50_size
+  rom_51 : ORIGIN = __rom_51_lma, LENGTH = __rom_51_size
+  rom_52 : ORIGIN = __rom_52_lma, LENGTH = __rom_52_size
+  rom_53 : ORIGIN = __rom_53_lma, LENGTH = __rom_53_size
+  rom_54 : ORIGIN = __rom_54_lma, LENGTH = __rom_54_size
+  rom_55 : ORIGIN = __rom_55_lma, LENGTH = __rom_55_size
+  rom_56 : ORIGIN = __rom_56_lma, LENGTH = __rom_56_size
+  rom_57 : ORIGIN = __rom_57_lma, LENGTH = __rom_57_size
+  rom_58 : ORIGIN = __rom_58_lma, LENGTH = __rom_58_size
+  rom_59 : ORIGIN = __rom_59_lma, LENGTH = __rom_59_size
+  rom_60 : ORIGIN = __rom_60_lma, LENGTH = __rom_60_size
+  rom_61 : ORIGIN = __rom_61_lma, LENGTH = __rom_61_size
+  rom_62 : ORIGIN = __rom_62_lma, LENGTH = __rom_62_size
+  rom_63 : ORIGIN = __rom_63_lma, LENGTH = __rom_63_size
+  rom_64 : ORIGIN = __rom_64_lma, LENGTH = __rom_64_size
+  rom_65 : ORIGIN = __rom_65_lma, LENGTH = __rom_65_size
+  rom_66 : ORIGIN = __rom_66_lma, LENGTH = __rom_66_size
+  rom_67 : ORIGIN = __rom_67_lma, LENGTH = __rom_67_size
+  rom_68 : ORIGIN = __rom_68_lma, LENGTH = __rom_68_size
+  rom_69 : ORIGIN = __rom_69_lma, LENGTH = __rom_69_size
+  rom_70 : ORIGIN = __rom_70_lma, LENGTH = __rom_70_size
+  rom_71 : ORIGIN = __rom_71_lma, LENGTH = __rom_71_size
+  rom_72 : ORIGIN = __rom_72_lma, LENGTH = __rom_72_size
+  rom_73 : ORIGIN = __rom_73_lma, LENGTH = __rom_73_size
+  rom_74 : ORIGIN = __rom_74_lma, LENGTH = __rom_74_size
+  rom_75 : ORIGIN = __rom_75_lma, LENGTH = __rom_75_size
+  rom_76 : ORIGIN = __rom_76_lma, LENGTH = __rom_76_size
+  rom_77 : ORIGIN = __rom_77_lma, LENGTH = __rom_77_size
+  rom_78 : ORIGIN = __rom_78_lma, LENGTH = __rom_78_size
+  rom_79 : ORIGIN = __rom_79_lma, LENGTH = __rom_79_size
+  rom_80 : ORIGIN = __rom_80_lma, LENGTH = __rom_80_size
+  rom_81 : ORIGIN = __rom_81_lma, LENGTH = __rom_81_size
+  rom_82 : ORIGIN = __rom_82_lma, LENGTH = __rom_82_size
+  rom_83 : ORIGIN = __rom_83_lma, LENGTH = __rom_83_size
+  rom_84 : ORIGIN = __rom_84_lma, LENGTH = __rom_84_size
+  rom_85 : ORIGIN = __rom_85_lma, LENGTH = __rom_85_size
+  rom_86 : ORIGIN = __rom_86_lma, LENGTH = __rom_86_size
+  rom_87 : ORIGIN = __rom_87_lma, LENGTH = __rom_87_size
+  rom_88 : ORIGIN = __rom_88_lma, LENGTH = __rom_88_size
+  rom_89 : ORIGIN = __rom_89_lma, LENGTH = __rom_89_size
+  rom_90 : ORIGIN = __rom_90_lma, LENGTH = __rom_90_size
+  rom_91 : ORIGIN = __rom_91_lma, LENGTH = __rom_91_size
+  rom_92 : ORIGIN = __rom_92_lma, LENGTH = __rom_92_size
+  rom_93 : ORIGIN = __rom_93_lma, LENGTH = __rom_93_size
+  rom_94 : ORIGIN = __rom_94_lma, LENGTH = __rom_94_size
+  rom_95 : ORIGIN = __rom_95_lma, LENGTH = __rom_95_size
+  rom_96 : ORIGIN = __rom_96_lma, LENGTH = __rom_96_size
+  rom_97 : ORIGIN = __rom_97_lma, LENGTH = __rom_97_size
+  rom_98 : ORIGIN = __rom_98_lma, LENGTH = __rom_98_size
+  rom_99 : ORIGIN = __rom_99_lma, LENGTH = __rom_99_size
+  rom_100 : ORIGIN = __rom_100_lma, LENGTH = __rom_100_size
+  rom_101 : ORIGIN = __rom_101_lma, LENGTH = __rom_101_size
+  rom_102 : ORIGIN = __rom_102_lma, LENGTH = __rom_102_size
+  rom_103 : ORIGIN = __rom_103_lma, LENGTH = __rom_103_size
+  rom_104 : ORIGIN = __rom_104_lma, LENGTH = __rom_104_size
+  rom_105 : ORIGIN = __rom_105_lma, LENGTH = __rom_105_size
+  rom_106 : ORIGIN = __rom_106_lma, LENGTH = __rom_106_size
+  rom_107 : ORIGIN = __rom_107_lma, LENGTH = __rom_107_size
+  rom_108 : ORIGIN = __rom_108_lma, LENGTH = __rom_108_size
+  rom_109 : ORIGIN = __rom_109_lma, LENGTH = __rom_109_size
+  rom_110 : ORIGIN = __rom_110_lma, LENGTH = __rom_110_size
+  rom_111 : ORIGIN = __rom_111_lma, LENGTH = __rom_111_size
+  rom_112 : ORIGIN = __rom_112_lma, LENGTH = __rom_112_size
+  rom_113 : ORIGIN = __rom_113_lma, LENGTH = __rom_113_size
+  rom_114 : ORIGIN = __rom_114_lma, LENGTH = __rom_114_size
+  rom_115 : ORIGIN = __rom_115_lma, LENGTH = __rom_115_size
+  rom_116 : ORIGIN = __rom_116_lma, LENGTH = __rom_116_size
+  rom_117 : ORIGIN = __rom_117_lma, LENGTH = __rom_117_size
+  rom_118 : ORIGIN = __rom_118_lma, LENGTH = __rom_118_size
+  rom_119 : ORIGIN = __rom_119_lma, LENGTH = __rom_119_size
+  rom_120 : ORIGIN = __rom_120_lma, LENGTH = __rom_120_size
+  rom_121 : ORIGIN = __rom_121_lma, LENGTH = __rom_121_size
+  rom_122 : ORIGIN = __rom_122_lma, LENGTH = __rom_122_size
+  rom_123 : ORIGIN = __rom_123_lma, LENGTH = __rom_123_size
+  rom_124 : ORIGIN = __rom_124_lma, LENGTH = __rom_124_size
+  rom_125 : ORIGIN = __rom_125_lma, LENGTH = __rom_125_size
+  rom_126 : ORIGIN = __rom_126_lma, LENGTH = __rom_126_size
+  rom_127 : ORIGIN = __rom_127_lma, LENGTH = __rom_127_size
 }
 
 SECTIONS {

@@ -25,6 +25,7 @@ for i = 1,BANK_MAX-1 do
 end
 for i = 0,BANK_MAX-1 do
 	printf("__rom_%d_bank = __rom_%d_position >> 13;", i, i)
+	printf("__rom_%d_lma = 0x01000000 + (__rom_%d_bank << 16) + __rom_%d_offset;", i, i, i)
 end
 
 printf("__rom_end_position = __rom_%d_position + __rom_%d_size;", BANK_MAX-1, BANK_MAX-1);
@@ -34,7 +35,7 @@ printf("ASSERT(__rom_end_position <= %d, \"ROM size cannot be larger than %d KB.
 printf("")
 printf("MEMORY {")
 for i = 0,BANK_MAX-1 do
-	printf("  rom_%d : ORIGIN = 0x01000000 + (__rom_%d_bank << 16) + __rom_%d_offset, LENGTH = __rom_%d_size", i, i, i, i)
+	printf("  rom_%d : ORIGIN = __rom_%d_lma, LENGTH = __rom_%d_size", i, i, i)
 end
 printf("}")
 

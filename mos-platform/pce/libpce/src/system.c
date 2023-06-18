@@ -10,15 +10,11 @@
 #include "pce/hardware.h"
 
 void pce_irq_enable(uint8_t mask) {
-	*IO_IRQ_CONTROL |= mask;
-}
-
-void pce_irq_disable(uint8_t mask) {
 	*IO_IRQ_CONTROL &= ~mask;
 }
 
-void pce_irq_ack(uint8_t mask) {
-	*IO_IRQ_ACK = mask;
+void pce_irq_disable(uint8_t mask) {
+	*IO_IRQ_CONTROL |= mask;
 }
 
 void pce_timer_init(uint8_t count) {

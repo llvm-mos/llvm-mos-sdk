@@ -67,7 +67,7 @@ static inline void pce_vbank ## id ## _set(void) { \
 #define PCE_VBANK_USE(id, offset, size) PCE_VBANK_USE_ ## size (id, offset)
 
 #define PCE_VBANK_DECLARE(id, offset, size) \
-asm(".global __rom_" #id "_offset\n.global __rom_" #id "_size\n.equ __rom_" #id "_offset, (" #offset " << 13)\n.equ __rom_" #id "_size, (" #size " << 13)\n")
+asm(".global __rom_" #id "\n.global __rom_" #id "_size\n.equ __rom_" #id ", (" #offset " << 13)\n.equ __rom_" #id "_size, (" #size " << 13)\n")
 
 #define PCE_VBANK_CALLBACK_DECLARE(id) \
 __attribute__((leaf, callback(1), noinline, section("text.pce_vbank" #id "_call"))) \

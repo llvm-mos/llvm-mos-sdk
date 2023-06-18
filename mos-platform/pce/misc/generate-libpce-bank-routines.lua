@@ -22,6 +22,8 @@ function generate_shorthand(i, j)
 	return str
 end
 
+-- Generate non-chained bankswitching getters/setters.
+
 local args = {...}
 for i=BANK_MIN,BANK_MAX do
 	if args[1] == "h" then
@@ -49,11 +51,13 @@ for i=BANK_MIN,BANK_MAX do
 		os.exit(1)
 	end
 end
+
 for i=BANK_CHAIN_MIN,BANK_CHAIN_MAX do
 	for j=i+1,BANK_CHAIN_MAX do
 		local str = generate_shorthand(i, j)
 		local bank_offset = i
 		local bank_size = (j - i + 1)
+
 		if args[1] == "h" then
 			-- printf("__attribute__((leaf)) void pce_bank%s_set(uint8_t id);", str)
 			printf("__attribute__((leaf)) void pce_bank%si_set(uint8_t id);", str)
@@ -65,6 +69,8 @@ for i=BANK_CHAIN_MIN,BANK_CHAIN_MAX do
 		end
 	end
 end
+
+-- Generate chained bankswitching setters.
 
 if args[1] == "asm" then
 	if false and GENERATE_ASM_1BANKS then

@@ -17,6 +17,18 @@ REGION_ALIAS("c_rom", rom_0)
 SECTIONS {
 	.text : {
 		INCLUDE text-sections.ld
+
+		KEEP(*(.irq_timer_begin))
+		KEEP(*(SORT_BY_INIT_PRIORITY(.irq_timer.* .irq_timer)))
+		KEEP(*(.irq_timer_end))
+
+		KEEP(*(.irq_vdc_begin))
+		KEEP(*(SORT_BY_INIT_PRIORITY(.irq_vdc.* .irq_vdc)))
+		KEEP(*(.irq_vdc_end))
+
+		KEEP(*(.irq_ext_begin))
+		KEEP(*(SORT_BY_INIT_PRIORITY(.irq_ext.* .irq_ext)))
+		KEEP(*(.irq_ext_end))
 	} >c_rom
 	.rodata : { INCLUDE rodata-sections.ld } >c_rom
 	.data : { INCLUDE data-sections.ld } >c_ram AT>c_rom
@@ -34,6 +46,6 @@ SECTIONS {
 
 	.vector : {
 		. = 0x0100fff6;
-		SHORT(irq_external) SHORT(irq_vdc) SHORT(irq_timer) SHORT(irq_nmi) SHORT(_start)
+		SHORT(irq_ext) SHORT(irq_vdc) SHORT(irq_timer) SHORT(nmi) SHORT(_start)
 	} >c_rom
 }

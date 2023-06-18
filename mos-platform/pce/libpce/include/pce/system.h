@@ -26,7 +26,6 @@ static inline void pce_cpu_irq_disable() {
 
 void pce_irq_enable(uint8_t mask);
 void pce_irq_disable(uint8_t mask);
-void pce_irq_ack(uint8_t mask);
 
 void pce_timer_init(uint8_t count);
 void pce_timer_enable(void);

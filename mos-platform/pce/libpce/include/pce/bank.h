@@ -15,50 +15,32 @@
 /** \file bank.h
  * Functionality related to cartridge banking.
  */
- 
+
 __attribute__((leaf)) uint8_t pce_bank0_get(void);
 __attribute__((leaf)) void pce_bank0_set(uint8_t id);
-__attribute__((leaf)) void pce_bank0i_set(uint8_t id);
 __attribute__((leaf)) uint8_t pce_bank1_get(void);
 __attribute__((leaf)) void pce_bank1_set(uint8_t id);
-__attribute__((leaf)) void pce_bank1i_set(uint8_t id);
 __attribute__((leaf)) uint8_t pce_bank2_get(void);
 __attribute__((leaf)) void pce_bank2_set(uint8_t id);
-__attribute__((leaf)) void pce_bank2i_set(uint8_t id);
 __attribute__((leaf)) uint8_t pce_bank3_get(void);
 __attribute__((leaf)) void pce_bank3_set(uint8_t id);
-__attribute__((leaf)) void pce_bank3i_set(uint8_t id);
 __attribute__((leaf)) uint8_t pce_bank4_get(void);
 __attribute__((leaf)) void pce_bank4_set(uint8_t id);
-__attribute__((leaf)) void pce_bank4i_set(uint8_t id);
 __attribute__((leaf)) uint8_t pce_bank5_get(void);
 __attribute__((leaf)) void pce_bank5_set(uint8_t id);
-__attribute__((leaf)) void pce_bank5i_set(uint8_t id);
 __attribute__((leaf)) uint8_t pce_bank6_get(void);
 __attribute__((leaf)) void pce_bank6_set(uint8_t id);
-__attribute__((leaf)) void pce_bank6i_set(uint8_t id);
 __attribute__((leaf)) uint8_t pce_bank7_get(void);
 __attribute__((leaf)) void pce_bank7_set(uint8_t id);
-__attribute__((leaf)) void pce_bank7i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank23_set(uint8_t id);
 __attribute__((leaf)) void pce_bank23i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank234_set(uint8_t id);
 __attribute__((leaf)) void pce_bank234i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank2345_set(uint8_t id);
 __attribute__((leaf)) void pce_bank2345i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank23456_set(uint8_t id);
 __attribute__((leaf)) void pce_bank23456i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank34_set(uint8_t id);
 __attribute__((leaf)) void pce_bank34i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank345_set(uint8_t id);
 __attribute__((leaf)) void pce_bank345i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank3456_set(uint8_t id);
 __attribute__((leaf)) void pce_bank3456i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank45_set(uint8_t id);
 __attribute__((leaf)) void pce_bank45i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank456_set(uint8_t id);
 __attribute__((leaf)) void pce_bank456i_set(uint8_t id);
-__attribute__((leaf)) void pce_bank56_set(uint8_t id);
 __attribute__((leaf)) void pce_bank56i_set(uint8_t id);
 
 #define PCE_BANK_MASK(n) (1 << (n))

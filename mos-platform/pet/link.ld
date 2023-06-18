@@ -19,7 +19,7 @@ MEMORY {
 INCLUDE commodore.ld
 
 /* Grow stack downwards from end of RAM */
-__stack = (__ram_size * 1024) - 1;
+__stack = (__ram_size * 1024);
 
 OUTPUT_FORMAT {
     /* Tells the PET LOAD command where to place the file's contents. */

@@ -26,17 +26,3 @@
 ; Disable interrupts (MMIO).
 	lda #$07
 	sta $1402
-
-; Default IRQ handlers.
-
-.text
-.weak irq_timer
-.weak irq_vdc
-.weak irq_external
-.weak irq_nmi
-
-irq_timer:
-irq_vdc:
-irq_external:
-irq_nmi:
-	rti

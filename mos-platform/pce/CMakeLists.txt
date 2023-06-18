@@ -14,7 +14,7 @@ TYPE LIB)
 
 add_platform_object_file(pce-crt0-o crt0.o crt0/crt0.S)
 
-add_platform_library(pce-crt0 crt0/copy-data.S crt0/copy-zp-data.S)
+add_platform_library(pce-crt0 crt0/copy-data.S crt0/copy-zp-data.S crt0/irq.S)
 merge_libraries(pce-crt0
   common-init-stack
   common-zero-bss

@@ -61,19 +61,31 @@ __attribute__((leaf)) void pce_bank456i_set(uint8_t id);
 __attribute__((leaf)) void pce_bank56_set(uint8_t id);
 __attribute__((leaf)) void pce_bank56i_set(uint8_t id);
 
+#define PCE_BANK_MASK(n) (1 << (n))
 #define PCE_BANK_OFFSET(n) ((n) << 13)
 #define PCE_BANK_SIZE(n) ((n) << 13)
 
-#define PCE_VBANK_USE(id, offset, size) \
+#define PCE_VBANK_USE_1(id, offset) \
 static inline void pce_vbank ## id ## _set(void) { \
     __attribute__((leaf)) asm volatile ( \
         "lda #mos8(__rom_" #id "_bank)\n" \
-        "jsr pce_bank" #offset "_size" #size "i_set\n" \
-    ); \
+        "tam #(1 << " #offset ")\n" : : : "a", "p" ); \
 }
 
+#define PCE_VBANK_USE_N(id, offset, size) \
+static inline void pce_vbank ## id ## _set(void) { \
+    __attribute__((leaf)) asm volatile ( \
+        "lda #mos8(__rom_" #id "_bank)\n" \
+        "jsr pce_bank" #offset "_size" #size "i_set\n" : : : "a", "p" ); \
+}
+#define PCE_VBANK_USE_2(id, offset) PCE_VBANK_USE_N(id, offset, 2)
+#define PCE_VBANK_USE_3(id, offset) PCE_VBANK_USE_N(id, offset, 3)
+#define PCE_VBANK_USE_4(id, offset) PCE_VBANK_USE_N(id, offset, 4)
+#define PCE_VBANK_USE_5(id, offset) PCE_VBANK_USE_N(id, offset, 5)
+#define PCE_VBANK_USE(id, offset, size) PCE_VBANK_USE_ ## size (id, offset)
+
 #define PCE_VBANK_DECLARE(id, offset, size) \
-asm(".global __rom_" #id "_size\n.equ __rom_" #id "_offset, (" #offset " << 13)\n.equ __rom_" #id "_size, (" #size " << 13)\n")
+asm(".global __rom_" #id "_offset\n.global __rom_" #id "_size\n.equ __rom_" #id "_offset, (" #offset " << 13)\n.equ __rom_" #id "_size, (" #size " << 13)\n")
 
 #ifdef PCE_VBANK_IMPLEMENTATION
 #define PCE_VBANK_DEFINE(id, offset, size) \

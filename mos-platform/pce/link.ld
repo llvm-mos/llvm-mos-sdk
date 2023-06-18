@@ -6,13 +6,13 @@ ASSERT(__rc31 == 0x201f, "Inconsistent zero page map.")
 MEMORY {
 	zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
 	ram (rw) : ORIGIN = 0x2200, LENGTH = 0x1E00
-	rom (rx) : ORIGIN = 0xe000, LENGTH = 0x2000
 }
 
 REGION_ALIAS("c_ram", ram)
-REGION_ALIAS("c_rom", rom)
-
 __stack = 0x3FFF;
+
+INCLUDE rom-banked-sections.ld
+REGION_ALIAS("c_rom", rom_0)
 
 SECTIONS {
 	.text : {
@@ -32,9 +32,8 @@ SECTIONS {
 	INCLUDE bss-symbols.ld
 	.noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram
 
-	.vector 0xfff6 : { SHORT(irq_external) SHORT(irq_vdc) SHORT(irq_timer) SHORT(irq_nmi) SHORT(_start)} >c_rom
-}
-
-OUTPUT_FORMAT {
-	FULL(rom)
+	.vector : {
+		. = 0x0100fff6;
+		SHORT(irq_external) SHORT(irq_vdc) SHORT(irq_timer) SHORT(irq_nmi) SHORT(_start)
+	} >c_rom
 }

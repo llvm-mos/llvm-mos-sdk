@@ -4,8 +4,11 @@
 -- See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license                             
 -- information.
 
-local BANK_MIN = 2
-local BANK_MAX = 6
+local BANK_MIN = 0
+local BANK_MAX = 7
+local BANK_CHAIN_MIN = 2
+local BANK_CHAIN_MAX = 6
+local GENERATE_ASM_1BANKS = false
 
 function printf(...)
 	print(string.format(table.unpack({...})))
@@ -21,11 +24,44 @@ end
 
 local args = {...}
 for i=BANK_MIN,BANK_MAX do
-	for j=i,BANK_MAX do
+	if args[1] == "h" then
+		printf("__attribute__((leaf)) uint8_t pce_bank%d_get(void);", i)
+		printf("__attribute__((leaf)) void pce_bank%d_set(uint8_t id);", i)
+		printf("__attribute__((leaf)) void pce_bank%di_set(uint8_t id);", i)
+	elseif (args[1] == "c") then
+		printf("")
+		printf("__attribute__((leaf)) uint8_t pce_bank%d_get(void) {", i)
+		printf("    uint8_t result;")
+		printf("    __attribute__((leaf)) asm volatile(");
+		printf("        \"tma #%d\" : \"=a\"(result) : : );", (1 << i))
+		printf("    return result;")
+		printf("}")
+		if (i < BANK_CHAIN_MIN) or (i > BANK_CHAIN_MAX) or (i == BANK_CHAIN_MIN and not GENERATE_ASM_1BANKS) then
+			printf("")
+			printf("void pce_bank%d_set(uint8_t id) {", i)
+			printf("    __attribute__((leaf)) asm volatile(");
+			printf("        \"tam #%d\" : \"+a\"(id) : : );", (1 << i))
+			printf("}")
+			printf("void pce_bank%di_set(uint8_t id) __attribute__((alias (\"pce_bank%d_set\")));", i, i)
+			printf("void pce_bank%d_size%d_set(uint8_t id) __attribute__((alias (\"pce_bank%d_set\")));", i, 1, i)
+			printf("void pce_bank%d_size%di_set(uint8_t id) __attribute__((alias (\"pce_bank%d_set\")));", i, 1, i)
+		end
+	elseif args[1] == "asm" then
+		printf(".global pce_bank%d_set", i)
+		printf(".global pce_bank%di_set", i)
+		printf(".global pce_bank%d_size%d_set", i, 1)
+		printf(".global pce_bank%d_size%di_set", i, 1)
+	else
+		printf("Usage: generate-libpce-bank-routines <c|h|asm>")
+		os.exit(1)
+	end
+end
+for i=BANK_CHAIN_MIN,BANK_CHAIN_MAX do
+	for j=i+1,BANK_CHAIN_MAX do
 		local str = generate_shorthand(i, j)
 		local bank_offset = i
 		local bank_size = (j - i + 1)
-		if args[1] == "c" then
+		if args[1] == "h" then
 			printf("__attribute__((leaf)) void pce_bank%s_set(uint8_t id);", str)
 			printf("__attribute__((leaf)) void pce_bank%si_set(uint8_t id);", str)
 		elseif args[1] == "asm" then
@@ -33,32 +69,31 @@ for i=BANK_MIN,BANK_MAX do
 			printf(".global pce_bank%si_set", str)
 			printf(".global pce_bank%d_size%d_set", bank_offset, bank_size)
 			printf(".global pce_bank%d_size%di_set", bank_offset, bank_size)
-		else
-			printf("Usage: generate-libpce-bank-routines <c|asm>")
-			os.exit(1)
 		end
 	end
 end
 
 if args[1] == "asm" then
-	printf("")
-	printf("    .section .text.bank%d, \"ax\", @progbits", BANK_MIN)
-	printf("pce_bank%d_set:", BANK_MIN)
-	printf("pce_bank%di_set:", BANK_MIN)
-	printf("pce_bank%d_size1_set:", BANK_MIN)
-	printf("pce_bank%d_size1i_set:", BANK_MIN)
-	printf("    tam #$%02x", 1 << BANK_MIN)
-	printf("    rts")
+	if GENERATE_ASM_1BANKS then
+		printf("")
+		printf("    .section .text.bank%d, \"ax\", @progbits", BANK_CHAIN_MIN)
+		printf("pce_bank%d_set:", BANK_CHAIN_MIN)
+		printf("pce_bank%di_set:", BANK_CHAIN_MIN)
+		printf("pce_bank%d_size1_set:", BANK_CHAIN_MIN)
+		printf("pce_bank%d_size1i_set:", BANK_CHAIN_MIN)
+		printf("    tam #$%02x", 1 << BANK_CHAIN_MIN)
+		printf("    rts")
+	end
 
-	for i=BANK_MIN+1,BANK_MAX do
+	for i=BANK_CHAIN_MIN+1,BANK_CHAIN_MAX do
 		for k=0,1 do
 			printf("")
 			local incr = (k & 1) ~= 0
 			local suffix = ""
 			if incr then suffix = suffix .. "i" end
-			local str = generate_shorthand(BANK_MIN, i) .. suffix
+			local str = generate_shorthand(BANK_CHAIN_MIN, i) .. suffix
 			printf("    .section .text.bank%s, \"ax\", @progbits", str)
-			for j=BANK_MIN,i do
+			for j=BANK_CHAIN_MIN,i do
 				printf("pce_bank%s_set:", str)
 				printf("pce_bank%d_size%d%s_set:", j, (i - j + 1), suffix)
 				printf("    tam #$%02x", 1 << j)

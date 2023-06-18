@@ -6,6 +6,10 @@ endif()
 
 include_directories(BEFORE SYSTEM .)
 
+install(FILES
+  rom-banked-sections.ld
+TYPE LIB)
+
 # crt0 build code
 
 add_platform_object_file(pce-crt0-o crt0.o crt0/crt0.S)
@@ -25,6 +29,7 @@ target_compile_options(pce-crt0 PUBLIC -mcpu=moshuc6280)
 # libpce build code
 
 add_platform_library(pce-c
+  libpce/src/bank.S
   libpce/src/joypad.c
   libpce/src/system.c
   libpce/src/vdc.c

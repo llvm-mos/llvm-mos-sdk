@@ -16,7 +16,20 @@
  * Functionality related to the VDC.
  */
 
-uint16_t pce_vdc_reg_read(uint8_t index);
-void pce_vdc_reg_write(uint8_t index, uint16_t data);
+/**
+ * @brief Read a value from the VDC port.
+ * 
+ * @param index Register to read.
+ * @return uint16_t Value read.
+ */
+uint16_t pce_vdc_peek(uint8_t index);
+
+/**
+ * @brief Write a value to the VDC port.
+ * 
+ * @param index Register to write.
+ * @param data Value to write.
+ */
+void pce_vdc_poke(uint8_t index, uint16_t data);
 
 #endif /* _PCE_VDC_H_ */

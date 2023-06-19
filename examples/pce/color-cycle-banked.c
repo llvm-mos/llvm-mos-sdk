@@ -21,7 +21,7 @@ PCE_ROM_VBANK_DEFINE(1, 6, 1);
 
 static uint16_t color;
 
-__attribute__((noinline, section(".vbank_1")))
+__attribute__((noinline, section(".rom_vbank_1")))
 void cycle_color(void) {
 	*IO_VCE_COLOR_INDEX = 0x100;
 	*IO_VCE_COLOR_DATA = color++;

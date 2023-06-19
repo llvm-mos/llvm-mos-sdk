@@ -25,8 +25,30 @@
 #define KEY_2		0x02
 #define KEY_1		0x01
 
+/**
+ * @brief Write a value to the joypad I/O port.
+ * 
+ * @param value The value to write.
+ * @return uint8_t The returned value.
+ */
 uint8_t pce_joypad_io(uint8_t value);
-uint8_t pce_joypad_next(void);
+
+/**
+ * @brief Read the first joypad controller's pressed buttons.
+ * 
+ * @return uint8_t Buttons currently pressed.
+ */
 uint8_t pce_joypad_read(void);
+
+/**
+ * @brief Read the next joypad controller's pressed buttons.
+ *
+ * If a multitap is to be used, one should use this function for all
+ * controllers after the first one (which should use @ref pce_joypad_read
+ * instead).
+ * 
+ * @return uint8_t Buttons currently pressed.
+ */
+uint8_t pce_joypad_next(void);
 
 #endif /* _PCE_JOYPAD_H_ */

@@ -38,8 +38,7 @@ __do_init_stack:
 	pla
 	sta $00,x
 	txa
-	; FIXME: Does the soft stack point to the final writable byte,
-	; or one byte after?
+	inc a
 	inc a
 	sta __rc0
 

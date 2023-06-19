@@ -18,7 +18,7 @@ INPUT(unmap-basic.o)
 
 /* With the BASIC ROM unmapped, set initial soft stack address to 
  * right before the I/O mapped $D000-DFFF area. (It grows down.) */
-__stack = 0xCFFF;
+__stack = 0xD000;
 
 OUTPUT_FORMAT {
     /* Tells the C64 LOAD command where to place the file's contents. */

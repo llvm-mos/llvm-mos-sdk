@@ -17,6 +17,6 @@ SECTIONS { INCLUDE c.ld }
 
 /* Set initial soft stack address to end of RAM area. (It grows down.) */
 /* TODO make RAM size configurable */
-__stack = 0x7FFF;
+__stack = 0x8000;
 
 OUTPUT_FORMAT { TRIM(ram) }

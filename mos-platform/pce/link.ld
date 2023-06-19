@@ -26,7 +26,7 @@ MEMORY {
 }
 
 REGION_ALIAS("c_ram", ram)
-__stack = 0x4000;
+__stack = 0x2000 + __ram_bank_size;
 
 SECTIONS {
 	.text : {

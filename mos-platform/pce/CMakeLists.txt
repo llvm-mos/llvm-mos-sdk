@@ -32,11 +32,14 @@ add_platform_library(pce-c
   libpce/src/bank.S
   libpce/src/bank-c.c
   libpce/src/joypad.c
+  libpce/src/memory.S
+  libpce/src/memory-c.c
   libpce/src/system.c
   libpce/src/vdc.c
 )
 target_include_directories(pce-c SYSTEM BEFORE PUBLIC libpce/include)
 target_compile_options(pce-c PUBLIC -mcpu=moshuc6280)
+target_link_libraries(pce-c PRIVATE common-asminc)
 
 install(DIRECTORY libpce/include/pce TYPE INCLUDE)
 install(FILES libpce/include/pce.h TYPE INCLUDE)

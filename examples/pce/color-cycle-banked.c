@@ -17,7 +17,7 @@
 #include <pce.h>
 
 // Define a PCE virtual bank 1, with offset 6 (0xC000) and size 1 (8KB).
-PCE_VBANK_DEFINE(1, 6, 1);
+PCE_ROM_VBANK_DEFINE(1, 6, 1);
 
 static uint16_t color;
 

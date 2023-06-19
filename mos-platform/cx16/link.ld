@@ -15,7 +15,7 @@ MEMORY {
 INCLUDE commodore.ld
 
 /* Set initial soft stack address to end of BASIC area. (It grows down.) */
-__stack = 0x9eff;
+__stack = 0x9f00;
 
 OUTPUT_FORMAT {
     /* Tells the LOAD command where to place the file's contents. */

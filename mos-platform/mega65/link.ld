@@ -28,7 +28,7 @@ INCLUDE commodore.ld
 INPUT(unmap-basic.o)
 
 /* Set initial soft stack address to end of BASIC area. (It grows down.) */
-__stack = 0xcfff;
+__stack = 0xd000;
 
 OUTPUT_FORMAT {
     /* Tells the LOAD command where to place the file's contents. */

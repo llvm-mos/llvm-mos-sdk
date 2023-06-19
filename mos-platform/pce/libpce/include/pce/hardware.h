@@ -212,4 +212,93 @@
 #define PCD_FADER_OFF			0x00
 #define IO_PCD_FADER		((volatile uint8_t*) 0x180F)
 
+// Arcade Card
+
+#define AC_RAM_USE_INCR             0x01
+#define AC_RAM_USE_OFFSET           0x02
+#define AC_RAM_INCR_NEGATIVE        0x04
+#define AC_RAM_INCR_POSITIVE        0x00
+#define AC_RAM_OFFSET_NEGATIVE      0x08
+#define AC_RAM_OFFSET_POSITIVE      0x00
+#define AC_RAM_INCR_BASE            0x10
+#define AC_RAM_INCR_OFFSET          0x00
+#define AC_RAM_ADD_OFFSET_ON_LO     0x20
+#define AC_RAM_ADD_OFFSET_ON_HI     0x40
+#define AC_RAM_ADD_OFFSET_ON_ANY    0x60
+
+#define IO_AC_RAM_PAGES             4
+#define IO_AC_RAM_PORT0(page)       ((volatile uint8_t*) (0x1A00 + (page)))
+#define IO_AC_RAM_PORT1(page)       ((volatile uint8_t*) (0x1A01 + (page)))
+#define IO_AC_RAM_BASE(page)        ((volatile uint16_t*) (0x1A02 + (page)))
+#define IO_AC_RAM_BASE_LO(page)     ((volatile uint8_t*) (0x1A02 + (page)))
+#define IO_AC_RAM_BASE_MED(page)    ((volatile uint8_t*) (0x1A03 + (page)))
+#define IO_AC_RAM_BASE_HI(page)     ((volatile uint8_t*) (0x1A04 + (page)))
+#define IO_AC_RAM_OFFSET(page)      ((volatile uint8_t*) (0x1A05 + (page)))
+#define IO_AC_RAM_INCR(page)        ((volatile uint16_t*) (0x1A07 + (page)))
+#define IO_AC_RAM_CONTROL(page)     ((volatile uint8_t*) (0x1A09 + (page)))
+#define IO_AC_RAM_MANUAL(page)     ((volatile uint8_t*) (0x1A0A + (page)))
+
+#define IO_AC_RAM0_PORT0            IO_AC_RAM_PORT0(0)
+#define IO_AC_RAM0_PORT1            IO_AC_RAM_PORT1(0)
+#define IO_AC_RAM0_BASE             IO_AC_RAM_BASE(0)
+#define IO_AC_RAM0_BASE_LO          IO_AC_RAM_BASE_LO(0)
+#define IO_AC_RAM0_BASE_MED         IO_AC_RAM_BASE_MED(0)
+#define IO_AC_RAM0_BASE_HI          IO_AC_RAM_BASE_HI(0)
+#define IO_AC_RAM0_OFFSET           IO_AC_RAM_OFFSET(0)
+#define IO_AC_RAM0_INCR             IO_AC_RAM_INCR(0)
+#define IO_AC_RAM0_CONTROL          IO_AC_RAM_CONTROL(0)
+#define IO_AC_RAM0_MANUAL           IO_AC_RAM_MANUAL(0)
+
+#define IO_AC_RAM1_PORT0            IO_AC_RAM_PORT0(1)
+#define IO_AC_RAM1_PORT1            IO_AC_RAM_PORT1(1)
+#define IO_AC_RAM1_BASE             IO_AC_RAM_BASE(1)
+#define IO_AC_RAM1_BASE_LO          IO_AC_RAM_BASE_LO(1)
+#define IO_AC_RAM1_BASE_MED         IO_AC_RAM_BASE_MED(1)
+#define IO_AC_RAM1_BASE_HI          IO_AC_RAM_BASE_HI(1)
+#define IO_AC_RAM1_OFFSET           IO_AC_RAM_OFFSET(1)
+#define IO_AC_RAM1_INCR             IO_AC_RAM_INCR(1)
+#define IO_AC_RAM1_CONTROL          IO_AC_RAM_CONTROL(1)
+#define IO_AC_RAM1_MANUAL           IO_AC_RAM_MANUAL(1)
+
+#define IO_AC_RAM2_PORT0            IO_AC_RAM_PORT0(2)
+#define IO_AC_RAM2_PORT1            IO_AC_RAM_PORT1(2)
+#define IO_AC_RAM2_BASE             IO_AC_RAM_BASE(2)
+#define IO_AC_RAM2_BASE_LO          IO_AC_RAM_BASE_LO(2)
+#define IO_AC_RAM2_BASE_MED         IO_AC_RAM_BASE_MED(2)
+#define IO_AC_RAM2_BASE_HI          IO_AC_RAM_BASE_HI(2)
+#define IO_AC_RAM2_OFFSET           IO_AC_RAM_OFFSET(2)
+#define IO_AC_RAM2_INCR             IO_AC_RAM_INCR(2)
+#define IO_AC_RAM2_CONTROL          IO_AC_RAM_CONTROL(2)
+#define IO_AC_RAM2_MANUAL           IO_AC_RAM_MANUAL(2)
+
+#define IO_AC_RAM3_PORT0            IO_AC_RAM_PORT0(3)
+#define IO_AC_RAM3_PORT1            IO_AC_RAM_PORT1(3)
+#define IO_AC_RAM3_BASE             IO_AC_RAM_BASE(3)
+#define IO_AC_RAM3_BASE_LO          IO_AC_RAM_BASE_LO(3)
+#define IO_AC_RAM3_BASE_MED         IO_AC_RAM_BASE_MED(3)
+#define IO_AC_RAM3_BASE_HI          IO_AC_RAM_BASE_HI(3)
+#define IO_AC_RAM3_OFFSET           IO_AC_RAM_OFFSET(3)
+#define IO_AC_RAM3_INCR             IO_AC_RAM_INCR(3)
+#define IO_AC_RAM3_CONTROL          IO_AC_RAM_CONTROL(3)
+#define IO_AC_RAM3_MANUAL           IO_AC_RAM_MANUAL(3)
+
+#define IO_AC_ALU_VALUE     ((volatile uint32_t*) 0x1AE0)
+#define IO_AC_ALU_VALUE0    ((volatile uint8_t*) 0x1AE0)
+#define IO_AC_ALU_VALUE1    ((volatile uint8_t*) 0x1AE1)
+#define IO_AC_ALU_VALUE2    ((volatile uint8_t*) 0x1AE2)
+#define IO_AC_ALU_VALUE3    ((volatile uint8_t*) 0x1AE3)
+#define IO_AC_ALU_SHIFT     ((volatile uint8_t*) 0x1AE4)
+#define IO_AC_ALU_ROTATE    ((volatile uint8_t*) 0x1AE5)
+#define IO_AC_VERSION       ((volatile uint16_t*) 0x1AFD)
+#define IO_AC_VERSION_MINOR ((volatile uint8_t*) 0x1AFD)
+#define IO_AC_VERSION_MAJOR ((volatile uint8_t*) 0x1AFE)
+#define AC_ID_VALUE         0x51
+#define IO_AC_ID            ((volatile uint8_t*) 0x1AFF)
+
+// Super System Card
+
+#define IO_SSC_REGION1      ((volatile uint8_t*) 0x18C5)
+#define IO_SSC_REGION2      ((volatile uint8_t*) 0x18C6)
+#define IO_SSC_RAM_SIZE     ((volatile uint8_t*) 0x18C7)
+
 #endif /* _PCE_HARDWARE_H_ */

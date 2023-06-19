@@ -19,6 +19,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - NES-MMC3
   - NES-CNROM
 - Ohio Scientific Challenger 1P
+- PC Engine
 - 6502 simulator (included)
 
 ## Notable features

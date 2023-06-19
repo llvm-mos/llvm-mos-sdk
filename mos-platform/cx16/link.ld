@@ -5,8 +5,10 @@
  * Produces a PRG file with a SYS command to start the program.
  */
 
+INCLUDE imag-regs-cx16.ld
+
 __basic_zp_start = 0x0002;
-__basic_zp_end = 0x0090;
+__basic_zp_end = 0x0080;
 
 MEMORY {
     ram (rw) : ORIGIN = 0x0801, LENGTH = 0x96ff

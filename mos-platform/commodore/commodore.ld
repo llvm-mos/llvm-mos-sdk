@@ -8,7 +8,7 @@
 /* Provide imaginary (zero page) registers in the BASIC area. */
 __rc0 = __basic_zp_start;
 INCLUDE imag-regs.ld
-ASSERT(__rc31 == (__rc0 + 0x1F), "Inconsistent zero page map.")
+/* No assertion - cx16 uses a non-contiguous imaginary register block larger than 32 bytes. */
 
 MEMORY { zp : ORIGIN = __rc31 + 1, LENGTH = __basic_zp_end - (__rc31 + 1) }
 

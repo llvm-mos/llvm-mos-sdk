@@ -62,3 +62,21 @@ __rc28 = __r15;
 /* Remaining LLVM-MOS imaginary registers (rs0, rs15). */
 __rc0  = 0x0022;
 __rc30 = 0x0024;
+
+/* Odd pairs. */
+__rc1 = __rc0 + 1;
+__rc3 = __rc2 + 1;
+__rc5 = __rc4 + 1;
+__rc7 = __rc6 + 1;
+__rc9 = __rc8 + 1;
+__rc11 = __rc10 + 1;
+__rc13 = __rc12 + 1;
+__rc15 = __rc14 + 1;
+__rc17 = __rc16 + 1;
+__rc19 = __rc18 + 1;
+__rc21 = __rc20 + 1;
+__rc23 = __rc22 + 1;
+__rc25 = __rc24 + 1;
+__rc27 = __rc26 + 1;
+__rc29 = __rc28 + 1;
+__rc31 = __rc30 + 1;

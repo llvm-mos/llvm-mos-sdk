@@ -27,7 +27,15 @@ end
 local args = {...}
 for i=BANK_MIN,BANK_MAX do
 	if args[1] == "h" then
+		printf("/**")
+		printf(" * @brief Get the currently mapped bank at offset %d.", i)
+		printf(" * @return The bank ID.")
+		printf(" */")
 		printf("__attribute__((leaf)) uint8_t pce_bank%d_get(void);", i)
+		printf("/**")
+		printf(" * @brief Map a bank at offset %d.", i)
+		printf(" * @param id The bank ID to map.")
+		printf(" */")
 		printf("__attribute__((leaf)) void pce_bank%d_set(uint8_t id);", i)
 	elseif (args[1] == "c") then
 		printf("")
@@ -60,6 +68,10 @@ for i=BANK_CHAIN_MIN,BANK_CHAIN_MAX do
 
 		if args[1] == "h" then
 			-- printf("__attribute__((leaf)) void pce_bank%s_set(uint8_t id);", str)
+			printf("/**")
+			printf(" * @brief Map consecutive banks at offsets from %d to %d inclusive.", i, j)
+			printf(" * @param id The first bank ID to map.")
+			printf(" */")
 			printf("__attribute__((leaf)) void pce_bank%si_set(uint8_t id);", str)
 		elseif args[1] == "asm" then
 			-- printf(".global pce_bank%s_set", str)

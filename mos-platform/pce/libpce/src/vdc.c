@@ -27,7 +27,7 @@ void pce_vdc_poke(uint8_t index, uint16_t data) {
 static uint8_t hstart_offset_by_clock[] = {36, 48, 72};
 static uint8_t vdc_cycles_by_clock[] = {VDC_CYCLE_8_SLOTS, VDC_CYCLE_4_SLOTS, VDC_CYCLE_4_SLOTS};
 
-void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_control) {
+void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags) {
 	uint8_t clock = (tiles <= 3) ? 0 : ((tiles <= 40) ? 1 : 2);
 	uint8_t hstart = (hstart_offset_by_clock[clock] - tiles) >> 1;
 	
@@ -43,7 +43,7 @@ void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_control) {
 	*IO_VDC_DATA_LO = ((*IO_VDC_DATA_LO) & ~VDC_CYCLE_MASK) | vdc_cycles_by_clock[clock];
 
 	// Set VCE clock to target speed.
-	*IO_VCE_CONTROL = clock | vce_control;
+	*IO_VCE_CONTROL = clock | vce_flags;
 }
 
 void pce_vdc_set_height(uint8_t lines) {

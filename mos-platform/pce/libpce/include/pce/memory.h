@@ -12,13 +12,79 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** \file memory.h
  * Functionality related to memory operations.
  */
 
+/**
+ * @brief Memory operation mode: Increment source, increment destination.
+ */
+#define PCE_MEMOP_INCR_INCR 0x73
+/**
+ * @brief Memory operation mode: Decrement source, decrement destination.
+ */
+#define PCE_MEMOP_DECR_DECR 0xC3
+/**
+ * @brief Memory operation mode: Increment source, no change to destination.
+ */
+#define PCE_MEMOP_INCR_NONE 0xD3
+/**
+ * @brief Memory operation mode: Increment source, alternate between destination and destination + 1.
+ */
+#define PCE_MEMOP_INCR_ALT  0xE3
+/**
+ * @brief Memory operation mode: Alternate between source and source + 1, increment destination.
+ */
+#define PCE_MEMOP_ALT_INCR  0xF3
+
+/**
+ * @brief Perform a memory operation.
+ * 
+ * @param dest The destination address.
+ * @param src The source address.
+ * @param count Number of repetitions (bytes). Note that 0 is equivalent to 65,536 bytes.
+ * @param mode The memory operation mode.
+ */
+__attribute__((leaf)) void *pce_memop(void *dest, const void *src, uint16_t count, uint8_t mode);
+/**
+ * @brief Perform a memory copy.
+ * 
+ * @param dest The destination address.
+ * @param src The source address.
+ * @param count Number of bytes. Note that 0 is equivalent to 65,536 bytes.
+ */
 __attribute__((leaf)) void *pce_memcpy(void *dest, const void *src, uint16_t count);
+/**
+ * @brief Perform a reverse memory copy (from last to first byte).
+ * 
+ * @param dest The destination address.
+ * @param src The source address.
+ * @param count Number of bytes. Note that 0 is equivalent to 65,536 bytes.
+ */
 __attribute__((leaf)) void *pce_rmemcpy(void *dest, const void *src, uint16_t count);
+/**
+ * @brief Perform a memory fill.
+ * 
+ * @param ptr The destination address.
+ * @param value The value to set.
+ * @param num Number of bytes. Note that 0 is equivalent to 65,536 bytes.
+ */
 __attribute__((leaf)) void *pce_memset(void *ptr, uint8_t value, uint16_t num);
-__attribute__((leaf)) void *pce_memmove(void *dest, const void *src, uint16_t num);
+/**
+ * @brief Perform a memory move.
+ * 
+ * @param dest The destination address.
+ * @param src The source address.
+ * @param count Number of bytes. Note that 0 is equivalent to 65,536 bytes.
+ */
+__attribute__((leaf)) void *pce_memmove(void *dest, const void *src, uint16_t count);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _PCE_MEMORY_H_ */

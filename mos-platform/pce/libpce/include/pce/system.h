@@ -12,6 +12,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** \file system.h
  * Functionality related to the system.
  */
@@ -69,5 +73,9 @@ static inline void pce_cpu_irq_enable() {
 static inline void pce_cpu_irq_disable() {
 	__attribute__((leaf)) asm volatile("sei\n");
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _PCE_SYSTEM_H_ */

@@ -16,6 +16,7 @@
 #include <pce/joypad.h>
 #include <pce/memory.h>
 #include <pce/system.h>
+#include <pce/vce.h>
 #include <pce/vdc.h>
 #endif
 

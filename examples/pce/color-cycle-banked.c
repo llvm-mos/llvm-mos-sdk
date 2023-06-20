@@ -13,7 +13,6 @@
 // the pce.h header.
 #define PCE_VBANK_IMPLEMENTATION
 
-#include <stdio.h>
 #include <pce.h>
 
 // Define a PCE virtual bank 1, with offset 6 (0xC000) and size 1 (8KB).

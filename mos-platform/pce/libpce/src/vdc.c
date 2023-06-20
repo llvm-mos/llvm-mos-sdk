@@ -37,11 +37,14 @@ void pce_vdc_copy_from_vram(void *dest, uint16_t source, uint16_t length) {
 	pce_memop(dest, IO_VDC_DATA, length, PCE_MEMOP_ALT_INCR);
 }
 
-static uint8_t hstart_offset_by_clock[] = {36, 48, 72};
-static uint8_t vdc_cycles_by_clock[] = {VDC_CYCLE_8_SLOTS, VDC_CYCLE_4_SLOTS, VDC_CYCLE_4_SLOTS};
+static uint8_t vdc_memory_lo = 0;
+static uint8_t vdc_control_lo = 0;
+static uint8_t vdc_control_hi = 0;
+static const uint8_t hstart_offset_by_clock[] = {36, 51, 86};
+static const uint8_t vdc_cycles_by_clock[] = {VDC_CYCLE_8_SLOTS, VDC_CYCLE_4_SLOTS, VDC_CYCLE_4_SLOTS};
 
 void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags) {
-	uint8_t clock = (tiles <= 3) ? 0 : ((tiles <= 40) ? 1 : 2);
+	uint8_t clock = (tiles <= 32) ? 0 : ((tiles <= 40) ? 1 : 2);
 	uint8_t hstart = (hstart_offset_by_clock[clock] - tiles) >> 1;
 	
 	// Reset VCE clock to 5MHz.
@@ -52,8 +55,9 @@ void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags) {
 	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_HDISP); *IO_VDC_DATA = VDC_TIMING(4, tiles-1);
 
 	// Set VDC cycles.
+	vdc_memory_lo = (vdc_memory_lo & ~VDC_CYCLE_MASK) | vdc_cycles_by_clock[clock];
 	PCE_VDC_INDEX_CONST(VDC_REG_MEMORY);
-	*IO_VDC_DATA_LO = ((*IO_VDC_DATA_LO) & ~VDC_CYCLE_MASK) | vdc_cycles_by_clock[clock];
+	*IO_VDC_DATA_LO = vdc_memory_lo;
 
 	// Set VCE clock to target speed.
 	*IO_VCE_CONTROL = clock | vce_flags;
@@ -67,7 +71,20 @@ void pce_vdc_set_height(uint8_t lines) {
 	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VDISPEND); *IO_VDC_DATA = 12;
 }
 
-void pce_vdc_set_bg_size(uint8_t value) {
+void pce_vdc_bg_set_size(uint8_t value) {
 	PCE_VDC_INDEX_CONST(VDC_REG_MEMORY);
-	*IO_VDC_DATA_LO = ((*IO_VDC_DATA_LO) & ~VDC_BG_SIZE_MASK) | value;
+	vdc_memory_lo = (vdc_memory_lo & ~VDC_BG_SIZE_MASK) | value;
+	*IO_VDC_DATA_LO = vdc_memory_lo;
+}
+
+void pce_vdc_enable(uint8_t value) {
+	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
+	vdc_control_lo = vdc_control_lo | value;
+	*IO_VDC_DATA_LO = vdc_control_lo;
+}
+
+void pce_vdc_disable(uint8_t value) {
+	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
+	vdc_control_lo = vdc_control_lo & ~value;
+	*IO_VDC_DATA_LO = vdc_control_lo;
 }

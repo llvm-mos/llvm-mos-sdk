@@ -32,4 +32,25 @@ uint16_t pce_vdc_peek(uint8_t index);
  */
 void pce_vdc_poke(uint8_t index, uint16_t data);
 
+/**
+ * @brief Set the VDC width, in tiles.
+ * 
+ * @param tiles The number of tiles.
+ * @param vce_control VCE control register configuration:
+ *  - VCE_FIELD_ODD
+ *  - VCE_COLORBURST_OFF
+ */
+void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_control);
+#define pce_vdc_set_width(pixels, vce_control) pce_vdc_set_width_tiles((pixels) >> 3, vce_control)
+
+/**
+ * @brief Set the VDC height, in raster lines.
+ * 
+ * @param lines The number of raster lines.
+ */
+void pce_vdc_set_height(uint8_t lines);
+#define pce_vdc_set_size(width_pixels, height_pixels, vce_control) \
+    pce_vdc_set_width(width_pixels, vce_control); \
+    pce_vdc_set_height(height_pixels)
+
 #endif /* _PCE_VDC_H_ */

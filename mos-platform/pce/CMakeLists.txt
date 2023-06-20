@@ -40,6 +40,7 @@ add_platform_library(pce-c
   libpce/src/memory.S
   libpce/src/memory-c.c
   libpce/src/system.c
+  libpce/src/vce.c
   libpce/src/vdc.c
 )
 target_include_directories(pce-c SYSTEM BEFORE PUBLIC libpce/include)

@@ -213,6 +213,7 @@ asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
  * - the pce_vbankN_set() function, mapping the requested virtual bank,
  * - the pce_vbankN_call(void (*method)(void)) function, allowing a safe
  *   trampoline to a function in another bank,
+ * - the __rom_vbank_N section,
  * - the __rom_vbank_N_bank symbol, allowing referencing the first bank
  *   of the virtual bank in assembly code.
  *

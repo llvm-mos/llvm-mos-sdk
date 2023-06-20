@@ -80,7 +80,21 @@ void pce_vdc_set_height(uint8_t lines);
  * 
  * @param value VDC_BG_SIZE_*
  */
-void pce_vdc_set_bg_size(uint8_t value);
+void pce_vdc_bg_set_size(uint8_t value);
+void pce_vdc_enable(uint8_t value);
+void pce_vdc_disable(uint8_t value);
+#define pce_vdc_bg_enable() pce_vdc_enable(VDC_CONTROL_ENABLE_BG)
+#define pce_vdc_bg_disable() pce_vdc_disable(VDC_CONTROL_ENABLE_BG)
+#define pce_vdc_sprite_enable() pce_vdc_enable(VDC_CONTROL_ENABLE_SPRITE)
+#define pce_vdc_sprite_disable() pce_vdc_disable(VDC_CONTROL_ENABLE_SPRITE)
+#define pce_vdc_irq_scanline_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SCANLINE)
+#define pce_vdc_irq_scanline_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SCANLINE)
+#define pce_vdc_irq_sprite_collide_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SPRITE_COLLIDE)
+#define pce_vdc_irq_sprite_collide_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SPRITE_COLLIDE)
+#define pce_vdc_irq_sprite_overflow_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SPRITE_OVERFLOW)
+#define pce_vdc_irq_sprite_overflow_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SPRITE_OVERFLOW)
+#define pce_vdc_irq_vblank_enable() pce_vdc_enable(VDC_CONTROL_IRQ_VBLANK)
+#define pce_vdc_irq_vblank_disable() pce_vdc_disable(VDC_CONTROL_IRQ_VBLANK)
 
 #ifdef __cplusplus
 }

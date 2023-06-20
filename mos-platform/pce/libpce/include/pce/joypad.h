@@ -12,6 +12,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** \file joypad.h
  * Functionality related to the joypad.
  */
@@ -50,5 +54,9 @@ uint8_t pce_joypad_read(void);
  * @return uint8_t Buttons currently pressed.
  */
 uint8_t pce_joypad_next(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _PCE_JOYPAD_H_ */

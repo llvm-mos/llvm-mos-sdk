@@ -15,6 +15,9 @@ void *memcpy(void *dest, const void *src, size_t count) {
     if (count != 0) return pce_memcpy(dest, src, count);
     else return dest;
 }
+__attribute__((leaf)) void *pce_memcpy(void *dest, const void *src, uint16_t count) {
+    return pce_memop(dest, src, count, PCE_MEMOP_INCR_INCR);
+}
 void *rmemcpy(void *dest, const void *src, size_t count) {
     if (count != 0) return pce_rmemcpy(dest, src, count);
     else return dest;

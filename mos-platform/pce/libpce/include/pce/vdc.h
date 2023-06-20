@@ -12,6 +12,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** \file vdc.h
  * Functionality related to the VDC.
  */
@@ -36,12 +40,12 @@ void pce_vdc_poke(uint8_t index, uint16_t data);
  * @brief Set the VDC width, in tiles.
  * 
  * @param tiles The number of tiles.
- * @param vce_control VCE control register configuration:
+ * @param vce_flags VCE control register configuration:
  *  - VCE_FIELD_ODD
  *  - VCE_COLORBURST_OFF
  */
-void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_control);
-#define pce_vdc_set_width(pixels, vce_control) pce_vdc_set_width_tiles((pixels) >> 3, vce_control)
+void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags);
+#define pce_vdc_set_width(pixels, vce_flags) pce_vdc_set_width_tiles((pixels) >> 3, vce_flags)
 
 /**
  * @brief Set the VDC height, in raster lines.
@@ -49,8 +53,12 @@ void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_control);
  * @param lines The number of raster lines.
  */
 void pce_vdc_set_height(uint8_t lines);
-#define pce_vdc_set_size(width_pixels, height_pixels, vce_control) \
-    pce_vdc_set_width(width_pixels, vce_control); \
+#define pce_vdc_set_size(width_pixels, height_pixels, vce_flags) \
+    pce_vdc_set_width(width_pixels, vce_flags); \
     pce_vdc_set_height(height_pixels)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _PCE_VDC_H_ */

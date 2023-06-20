@@ -18,6 +18,9 @@ _early_start:
 ; Configure default banking layout:
 	lda #$ff ; bank 0 = 0xFF (I/O)
 	tam #$01
+; Initialize stack pointer to 0xFF.
+	tax
+	txs
 	lda #$f8 ; bank 1 = 0xF8 (RAM)
 	tam #$02
 	lda #mos8(__start_bank_2)
@@ -34,9 +37,6 @@ _early_start:
 	jmp _start
 
 .section .init.50,"axR",@progbits
-; Initialize stack pointer to 0xFF.
-	tax
-	txs
 ; Disable interrupts (MMIO).
 	lda #$07
 	sta $1402

@@ -14,6 +14,7 @@
 #ifndef __ASSEMBLER__
 #include <pce/bank.h>
 #include <pce/joypad.h>
+#include <pce/memory.h>
 #include <pce/system.h>
 #include <pce/vdc.h>
 #endif

@@ -11,7 +11,7 @@
 
 .include "imag.inc"
 
-.global pce_memcpy
+.global pce_memop
 .global pce_rmemcpy
 .global pce_memmove
 .global pce_memset
@@ -43,10 +43,8 @@ pce_rmemcpy:
     lda __rc3
     adc __rc7
     sta __rc7
-    ldy __rc3
     lda #$C3 ; TDD
-    sta __rc3
-    bra __pce_memcpy_rts
+    bra __pce_memop_inner
 
     .section .text.pce_memmove, "ax", @progbits
 ; __rc2-__rc3 dest
@@ -61,22 +59,22 @@ pce_memmove:
     bcc pce_rmemcpy
     bra pce_memcpy
 
-    .section .text.pce_memcpy, "ax", @progbits
+    .section .text.pce_memop, "ax", @progbits
 ; __rc2-__rc3 dest
 ; __rc4-__rc5 source
+; __rc6       mode
 ;   X  -  A   length
-pce_memcpy:
+pce_memop:
     sta __rc8
     stx __rc9
-    lda __rc2
-    sta __rc6
-    lda __rc3
-    sta __rc7
-__pce_memcpy_tii:
+    lda __rc6
+    ldx __rc2
+    stx __rc6
+    ldx __rc3
+    stx __rc7
+__pce_memop_inner:
     ldy __rc3
-    lda #$73 ; TII
     sta __rc3
-__pce_memcpy_rts:
     lda #$60 ; RTS
     sta __rc10
     jsr __rc3
@@ -120,6 +118,7 @@ pce_memset:
     adc #0
     sta __rc7
     ; call
-    bra __pce_memcpy_tii
+    lda #$73
+    bra __pce_memop_inner
 .Ldone:
     rts

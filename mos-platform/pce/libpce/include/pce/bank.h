@@ -12,6 +12,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /** \file bank.h
  * Functionality related to cartridge banking.
  */
@@ -241,5 +245,8 @@ PCE_VBANK_CALLBACK_USE(id)
 #define PCE_SGX_RAM(size)
 #endif
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _PCE_BANK_H_ */

@@ -12,13 +12,13 @@ REGION_ALIAS("c_rom", rom_vbank_0)
  * Banks 2 through 4 can contain additional contiguous RAM (__ram_bank_size).
  * This allows for a fixed bank of up to 48KB, or up to 24KB with all of
  * SuperGrafx RAM fixed.
+ * Banks 2 through 6 can also contain more parts of the fixed ROM.
  */
-__start_bank_2 = (__ram_bank_size > 0x2000) ? 0xF9 : ((__rom_vbank_0_size >= (6 << 13)) ? ((__rom_vbank_0_size >> 13) - 6) : 0x00);
-__start_bank_3 = (__ram_bank_size > 0x4000) ? 0xFA : ((__rom_vbank_0_size >= (5 << 13)) ? ((__rom_vbank_0_size >> 13) - 5) : 0x00);
-__start_bank_4 = (__ram_bank_size > 0x6000) ? 0xFB : ((__rom_vbank_0_size >= (4 << 13)) ? ((__rom_vbank_0_size >> 13) - 4) : 0x00);
-__start_bank_5 = ((__rom_vbank_0_size >= (3 << 13)) ? ((__rom_vbank_0_size >> 13) - 3) : 0x00);
-__start_bank_6 = ((__rom_vbank_0_size >= (2 << 13)) ? ((__rom_vbank_0_size >> 13) - 2) : 0x00);
-__start_bank_7 = ((__rom_vbank_0_size >= (1 << 13)) ? ((__rom_vbank_0_size >> 13) - 1) : 0x00);
+__start_bank_2 = (__ram_bank_size > 0x2000) ? 0xF9 : ((__rom_vbank_0_size >= (6 << 13)) ? ((__rom_vbank_0_size >> 13) - 5) : 0x00);
+__start_bank_3 = (__ram_bank_size > 0x4000) ? 0xFA : ((__rom_vbank_0_size >= (5 << 13)) ? ((__rom_vbank_0_size >> 13) - 4) : 0x00);
+__start_bank_4 = (__ram_bank_size > 0x6000) ? 0xFB : ((__rom_vbank_0_size >= (4 << 13)) ? ((__rom_vbank_0_size >> 13) - 3) : 0x00);
+__start_bank_5 = ((__rom_vbank_0_size >= (3 << 13)) ? ((__rom_vbank_0_size >> 13) - 2) : 0x00);
+__start_bank_6 = ((__rom_vbank_0_size >= (2 << 13)) ? ((__rom_vbank_0_size >> 13) - 1) : 0x00);
 
 MEMORY {
 	zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
@@ -59,7 +59,8 @@ SECTIONS {
 	.noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram
 
 	.vector : {
-		. = 0xfff6;
-		SHORT(irq_ext) SHORT(irq_vdc) SHORT(irq_timer) SHORT(nmi) SHORT(_start)
+		. = 0xfff6 - 33;
+		KEEP(*(.early_start))
+		SHORT(irq_ext) SHORT(irq_vdc) SHORT(irq_timer) SHORT(nmi) SHORT(_early_start)
 	} >c_rom
 }

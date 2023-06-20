@@ -9,7 +9,6 @@
  * work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-#include <stdio.h>
 #include <pce.h>
 
 int main(void) {

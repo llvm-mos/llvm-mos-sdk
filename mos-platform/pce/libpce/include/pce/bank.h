@@ -189,6 +189,8 @@ void pce_vbank ## id ## _call(void (*method)(void))
 PCE_VBANK_DECLARE(rom, id, offset, size); \
 PCE_VBANK_USE(rom, id, offset, size) \
 PCE_VBANK_CALLBACK_DECLARE(id)
+#define PCE_ROM_FIXED_BANK_SIZE(size) \
+PCE_VBANK_DECLARE(rom, 0, 8 - size, size)
 #define PCE_SGX_RAM(size) \
 asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
 #else
@@ -217,6 +219,12 @@ asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
 #define PCE_ROM_VBANK_DEFINE(id, offset, size) \
 PCE_VBANK_USE(rom, id, offset, size) \
 PCE_VBANK_CALLBACK_USE(id)
+/**
+ * @brief Define the size of the fixed bank ("virtual bank 0").
+ * 
+ * @param size The size, in 8KB units (1-6).
+ */
+#define PCE_ROM_FIXED_BANK_SIZE(size)
 /**
  * @brief Define the amount of C RAM for SGX targets.
  *

@@ -46,6 +46,8 @@
 #define IO_VDC_STATUS		((volatile uint8_t*) 0x0000)
 #define IO_VDC_INDEX		((volatile uint8_t*) 0x0000)
 #define IO_VDC_DATA		((volatile uint16_t*) 0x0002)
+#define IO_VDC_DATA_LO  ((volatile uint8_t*) 0x0002)
+#define IO_VDC_DATA_HI  ((volatile uint8_t*) 0x0003)
 
 #define VDC_REG_VRAM_WRITE_ADDR		0x00
 #define VDC_REG_VRAM_READ_ADDR		0x01
@@ -73,29 +75,38 @@
 #define VDC_REG_BG_SCROLL_Y		0x08
 
 #define VDC_VRAM_CYCLE_8_SLOTS		0x00
-#define VDC_VRAM_CYCLE_4_SLOTS		0x01
+#define VDC_VRAM_CYCLE_4_SLOTS		0x02
 #define VDC_VRAM_CYCLE_2_SLOTS		0x03
+#define VDC_VRAM_CYCLE_MASK         0x03
 #define VDC_SPRITE_CYCLE_8_SLOTS	0x00 /* 2 sprites in 1 cycle */
 #define VDC_SPRITE_CYCLE_4_SLOTS_I	0x04 /* 2 sprites in 2 cycles */
 #define VDC_SPRITE_CYCLE_4_SLOTS	0x08 /* 1 sprite in 1 cycle */
 #define VDC_SPRITE_CYCLE_2_SLOTS	0x0C /* 1 sprite (2 bitplanes) in 1 cycle */
+#define VDC_SPRITE_CYCLE_MASK       0x0C
+#define VDC_CYCLE_8_SLOTS           (VDC_VRAM_CYCLE_8_SLOTS | VDC_SPRITE_CYCLE_8_SLOTS)
+#define VDC_CYCLE_4_SLOTS           (VDC_VRAM_CYCLE_4_SLOTS | VDC_SPRITE_CYCLE_4_SLOTS)
+#define VDC_CYCLE_MASK              0x0F
 #define VDC_VRAM_PREFER_CG0		0x00 /* for VDC_VRAM_CYCLE_2_SLOTS */
 #define VDC_VRAM_PREFER_CG1		0x80 /* for VDC_VRAM_CYCLE_2_SLOTS */
 #define VDC_BG_WIDTH_32			(0 << 4)
 #define VDC_BG_WIDTH_64			(1 << 4)
 #define VDC_BG_WIDTH_128		(2 << 4)
+#define VDC_BG_WIDTH_MASK       (3 << 4)
 #define VDC_BG_HEIGHT_32		(0 << 6)
 #define VDC_BG_HEIGHT_64		(1 << 6)
+#define VDC_BG_HEIGHT_MASK      (1 << 6)
 #define VDC_BG_SIZE_32_32		(VDC_BG_WIDTH_32  | VDC_BG_HEIGHT_32)
 #define VDC_BG_SIZE_64_32		(VDC_BG_WIDTH_64  | VDC_BG_HEIGHT_32)
 #define VDC_BG_SIZE_128_32		(VDC_BG_WIDTH_128 | VDC_BG_HEIGHT_32)
 #define VDC_BG_SIZE_32_64		(VDC_BG_WIDTH_32  | VDC_BG_HEIGHT_64)
 #define VDC_BG_SIZE_64_64		(VDC_BG_WIDTH_64  | VDC_BG_HEIGHT_64)
 #define VDC_BG_SIZE_128_64		(VDC_BG_WIDTH_128 | VDC_BG_HEIGHT_64)
-#define VDC_REG_SIZE			0x09
+#define VDC_BG_SIZE_MASK        (7 << 4)
+#define VDC_REG_MEMORY  		0x09
 
-#define VDC_TIMING_WIDTH(x)		(x)
+#define VDC_TIMING_WIDTH(x)		    (x)
 #define VDC_TIMING_OFFSET(x)		((x)<<8)
+#define VDC_TIMING(offset, width)	(VDC_TIMING_OFFSET(offset) | VDC_TIMING_WIDTH(width))
 #define VDC_REG_TIMING_HSYNC		0x0A
 #define VDC_REG_TIMING_HDISP		0x0B
 #define VDC_REG_TIMING_VSYNC		0x0C

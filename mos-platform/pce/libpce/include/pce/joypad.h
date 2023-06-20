@@ -26,12 +26,12 @@
 #define KEY_1		0x01
 
 /**
- * @brief Write a value to the joypad I/O port.
+ * @brief Write a value to the joypad I/O port, then read the result.
  * 
  * @param value The value to write.
- * @return uint8_t The returned value.
+ * @return uint8_t The value read.
  */
-uint8_t pce_joypad_io(uint8_t value);
+uint8_t pce_joypad_wr(uint8_t value);
 
 /**
  * @brief Read the first joypad controller's pressed buttons.

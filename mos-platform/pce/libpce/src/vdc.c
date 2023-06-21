@@ -10,9 +10,32 @@
 #include "pce/hardware.h"
 #include "pce/memory.h"
 
+// The compiler should optimize away this value if it is not used.
+// This way, non-SuperGrafx-using code doesn't have to pay the
+// performance penalty for SuperGrafx support.
+static volatile uint16_t *__vdc_base = 0x0000;
+
+#undef IO_VDC_INDEX
+#undef IO_VDC_DATA
+#undef IO_VDC_DATA_LO
+#undef IO_VDC_DATA_HI
+// Using ORs here avoids having to carry a 16-bit add.
+#define IO_VDC_INDEX ((volatile uint16_t*) __vdc_base)
+#define IO_VDC_DATA ((volatile uint16_t*) ((uint16_t) __vdc_base | 2))
+#define IO_VDC_DATA_LO ((volatile uint8_t*) ((uint16_t) __vdc_base | 2))
+#define IO_VDC_DATA_HI ((volatile uint8_t*) ((uint16_t) __vdc_base | 3))
+
 #define PCE_VDC_INDEX_CONST(index) \
 	__attribute__((leaf)) asm volatile( \
 		"st0 #%c0\n" : : "i"(index) \
+	)
+#define PCE_VDC_DATA_LO_CONST(index) \
+	__attribute__((leaf)) asm volatile( \
+		"st1 #%c0\n" : : "i"(index) \
+	)
+#define PCE_VDC_DATA_HI_CONST(index) \
+	__attribute__((leaf)) asm volatile( \
+		"st2 #%c0\n" : : "i"(index) \
 	)
 
 uint16_t pce_vdc_peek(uint8_t index) {
@@ -27,22 +50,22 @@ void pce_vdc_poke(uint8_t index, uint16_t data) {
 
 void pce_vdc_set_copy_word(void) {
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
-	*IO_VDC_DATA_HI = (VDC_CONTROL_VRAM_ADD_1 >> 8);
+	PCE_VDC_DATA_HI_CONST(VDC_CONTROL_VRAM_ADD_1 >> 8);
 }
 
 void pce_vdc_set_copy_32_words(void) {
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
-	*IO_VDC_DATA_HI = (VDC_CONTROL_VRAM_ADD_32 >> 8);
+	PCE_VDC_DATA_HI_CONST(VDC_CONTROL_VRAM_ADD_32 >> 8);
 }
 
 void pce_vdc_set_copy_64_words(void) {
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
-	*IO_VDC_DATA_HI = (VDC_CONTROL_VRAM_ADD_64 >> 8);
+	PCE_VDC_DATA_HI_CONST(VDC_CONTROL_VRAM_ADD_64 >> 8);
 }
 
 void pce_vdc_set_copy_128_words(void) {
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
-	*IO_VDC_DATA_HI = (VDC_CONTROL_VRAM_ADD_128 >> 8);
+	PCE_VDC_DATA_HI_CONST(VDC_CONTROL_VRAM_ADD_128 >> 8);
 }
 
 void pce_vdc_copy_to_vram(uint16_t dest, const void *source, uint16_t length) {
@@ -80,15 +103,17 @@ void __pce_vdc_init(void) {
 
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
 	*IO_VDC_DATA_LO = vdc_control_lo;
-	*IO_VDC_DATA_HI = 0;
+	PCE_VDC_DATA_HI_CONST(0);
 	// *IO_VDC_DATA_HI = vdc_control_hi;
 	PCE_VDC_INDEX_CONST(VDC_REG_BG_SCROLL_X);
-	__attribute__((leaf)) asm volatile("st1 #0\nst2 #0\n");
+	PCE_VDC_DATA_LO_CONST(0);
+	PCE_VDC_DATA_HI_CONST(0);
 	PCE_VDC_INDEX_CONST(VDC_REG_BG_SCROLL_Y);
-	__attribute__((leaf)) asm volatile("st1 #0\nst2 #0\n");
+	PCE_VDC_DATA_LO_CONST(0);
+	PCE_VDC_DATA_HI_CONST(0);
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
 	*IO_VDC_DATA_LO = vdc_memory_lo;
-	__attribute__((leaf)) asm volatile("st2 #0\n");
+	PCE_VDC_DATA_HI_CONST(0);
 
 	*IO_VCE_COLOR_INDEX = 0;
 	for (uint16_t i = 0; i < 0x200; i++) {
@@ -104,8 +129,12 @@ void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags) {
 	*IO_VCE_CONTROL = 0x00;
 
 	// Set HDISP/HSYNC.
-	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_HSYNC); *IO_VDC_DATA = VDC_TIMING(hstart, 2);
-	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_HDISP); *IO_VDC_DATA = VDC_TIMING(4, tiles-1);
+	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_HSYNC);
+	*IO_VDC_DATA_LO = hstart;
+	PCE_VDC_DATA_HI_CONST(2);
+	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_HDISP);
+	PCE_VDC_DATA_LO_CONST(4);
+	*IO_VDC_DATA_HI = tiles-1;
 
 	// Set VDC cycles.
 	vdc_memory_lo = (vdc_memory_lo & ~VDC_CYCLE_MASK) | vdc_cycles_by_clock[clock];
@@ -119,9 +148,15 @@ void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags) {
 void pce_vdc_set_height(uint8_t lines) {
 	uint8_t vstart = ((lines ^ 0xFF) >> 1) + 8;
 	// Set VDISP/VSYNC.
-	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VSYNC); *IO_VDC_DATA = VDC_TIMING(vstart, 2);
-	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VDISP); *IO_VDC_DATA = lines - 1;
-	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VDISPEND); *IO_VDC_DATA = 12;
+	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VSYNC);
+	*IO_VDC_DATA_LO = vstart;
+	PCE_VDC_DATA_HI_CONST(2);
+	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VDISP);
+	*IO_VDC_DATA_LO = lines - 1;
+	PCE_VDC_DATA_HI_CONST(0);
+	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VDISPEND);
+	PCE_VDC_DATA_LO_CONST(12);
+	PCE_VDC_DATA_HI_CONST(0);
 }
 
 void pce_vdc_bg_set_size(uint8_t value) {
@@ -145,4 +180,27 @@ void pce_vdc_disable(uint8_t value) {
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
 	vdc_control_lo = vdc_control_lo & ~value;
 	*IO_VDC_DATA_LO = vdc_control_lo;
+}
+
+void pce_sgx_vdc1_set(void) {
+	__vdc_base = (volatile uint16_t*) 0x0000;
+	*IO_VPC_PORT_CONTROL = VPC_PORT_VDP1;
+}
+
+void pce_sgx_vdc2_set(void) {
+	__vdc_base = (volatile uint16_t*) 0x0010;
+	*IO_VPC_PORT_CONTROL = VPC_PORT_VDP2;
+}
+
+void pce_sgx_vdc_set(uint8_t id) {
+	__vdc_base = (volatile uint16_t*) (id << 4);
+	*IO_VPC_PORT_CONTROL = id;
+}
+
+volatile uint8_t *pce_sgx_vdc_get_index() {
+	return IO_VDC_INDEX;
+}
+
+volatile uint16_t *pce_sgx_vdc_get_data() {
+	return IO_VDC_DATA;
 }

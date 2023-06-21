@@ -149,7 +149,7 @@
 #define PSG_VOLUME_LEFT(x)	((x) << 4)
 #define PSG_VOLUME_RIGHT(x)	(x)
 
-#define IO_PSG_CH_INDEX		((volatile uint8_t*) 0x0800)
+#define IO_PSG_CH_SELECT    ((volatile uint8_t*) 0x0800)
 #define IO_PSG_VOLUME		((volatile uint8_t*) 0x0801)
 #define IO_PSG_CH_FREQ		((volatile uint16_t*) 0x0802)
 #define IO_PSG_CH_FREQ_FINE	((volatile uint8_t*) 0x0802)

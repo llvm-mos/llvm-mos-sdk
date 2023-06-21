@@ -43,6 +43,26 @@ static uint8_t vdc_control_hi = 0;
 static const uint8_t hstart_offset_by_clock[] = {36, 51, 86};
 static const uint8_t vdc_cycles_by_clock[] = {VDC_CYCLE_8_SLOTS, VDC_CYCLE_4_SLOTS, VDC_CYCLE_4_SLOTS};
 
+void __pce_vdc_init(void) {
+	*IO_VCE_CONTROL = 0;
+
+	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
+	*IO_VDC_DATA_LO = vdc_control_lo;
+	*IO_VDC_DATA_HI = vdc_control_hi;
+	PCE_VDC_INDEX_CONST(VDC_REG_BG_SCROLL_X);
+	__attribute__((leaf)) asm volatile("st1 #0\nst2 #0\n");
+	PCE_VDC_INDEX_CONST(VDC_REG_BG_SCROLL_Y);
+	__attribute__((leaf)) asm volatile("st1 #0\nst2 #0\n");
+	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
+	*IO_VDC_DATA_LO = vdc_memory_lo;
+	__attribute__((leaf)) asm volatile("st2 #0\n");
+
+	*IO_VCE_COLOR_INDEX = 0;
+	for (uint16_t i = 0; i < 0x200; i++) {
+		*IO_VCE_COLOR_DATA = 0;
+	}
+}
+
 void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags) {
 	uint8_t clock = (tiles <= 32) ? 0 : ((tiles <= 40) ? 1 : 2);
 	uint8_t hstart = (hstart_offset_by_clock[clock] - tiles) >> 1;

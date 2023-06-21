@@ -114,19 +114,18 @@
 #define VDC_REG_TIMING_VDISPEND		0x0E
 
 #define VDC_DMA_IRQ_SATB_DONE		0x01
-#define VDC_DMA_IRQ_DONE		0x02
-#define VDC_DMA_IRQ_SRC_INC		0x00
-#define VDC_DMA_IRQ_SRC_DEC		0x04
-#define VDC_DMA_IRQ_DEST_INC		0x00
-#define VDC_DMA_IRQ_DEST_DEC		0x08
-#define VDC_DMA_SATB_AUTO_OFF		0x00
-#define VDC_DMA_SATB_AUTO_ON		0x10
-#define VDC_REG_DMA_CONTROL		0x0F
+#define VDC_DMA_IRQ_DONE		    0x02
+#define VDC_DMA_SRC_INC		        0x00
+#define VDC_DMA_SRC_DEC		        0x04
+#define VDC_DMA_DEST_INC		    0x00
+#define VDC_DMA_DEST_DEC		    0x08
+#define VDC_DMA_REPEAT_SATB 		0x10
+#define VDC_REG_DMA_CONTROL		    0x0F
 
 #define VDC_REG_DMA_SRC			0x10
 #define VDC_REG_DMA_DEST		0x11
 #define VDC_REG_DMA_LENGTH		0x12
-#define VDC_REG_DMA_SATB_SRC		0x13
+#define VDC_REG_SATB_START		0x13
 
 // VCE
 

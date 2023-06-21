@@ -40,3 +40,6 @@ _early_start:
 ; Disable interrupts (MMIO).
 	lda #$07
 	sta $1402
+; Reset the VDC, VCE and PSG.
+	jsr __pce_vdc_init
+	jsr __pce_psg_init

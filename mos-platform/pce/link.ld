@@ -65,7 +65,7 @@ SECTIONS {
 	HIDDEN(__zero_zp_bss_size = __zp_bss_size >= 2 ? __zp_bss_size - 1 : 1);
 
 	.vector : {
-		. = 0xfff6 - 33;
+		. = 0xfff6 - 35;
 		KEEP(*(.early_start))
 		SHORT(irq_ext) SHORT(irq_vdc) SHORT(irq_timer) SHORT(nmi) SHORT(_early_start)
 	} >c_rom

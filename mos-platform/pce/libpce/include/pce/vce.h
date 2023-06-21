@@ -29,6 +29,7 @@ extern "C" {
  * @return uint16_t The color value.
  */
 uint16_t pce_vce_get_color(uint16_t index);
+
 /**
  * @brief Set a color to the VCE.
  * 

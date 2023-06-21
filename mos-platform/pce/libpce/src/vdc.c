@@ -98,9 +98,7 @@ static uint8_t vdc_control_lo = 0;
 static const uint8_t hstart_offset_by_clock[] = {36, 51, 86};
 static const uint8_t vdc_cycles_by_clock[] = {VDC_CYCLE_8_SLOTS, VDC_CYCLE_4_SLOTS, VDC_CYCLE_4_SLOTS};
 
-void __pce_vdc_init(void) {
-	*IO_VCE_CONTROL = 0;
-
+static void __pce_vdc_init_vdc(void) {
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
 	*IO_VDC_DATA_LO = vdc_control_lo;
 	PCE_VDC_DATA_HI_CONST(0);
@@ -114,6 +112,12 @@ void __pce_vdc_init(void) {
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
 	*IO_VDC_DATA_LO = vdc_memory_lo;
 	PCE_VDC_DATA_HI_CONST(0);
+}
+
+void __pce_vdc_init(void) {
+	*IO_VCE_CONTROL = 0;
+
+	__pce_vdc_init_vdc();
 
 	*IO_VCE_COLOR_INDEX = 0;
 	for (uint16_t i = 0; i < 0x200; i++) {
@@ -130,11 +134,11 @@ void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags) {
 
 	// Set HDISP/HSYNC.
 	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_HSYNC);
-	*IO_VDC_DATA_LO = hstart;
-	PCE_VDC_DATA_HI_CONST(2);
+	PCE_VDC_DATA_LO_CONST(2);
+	*IO_VDC_DATA_HI = hstart;
 	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_HDISP);
-	PCE_VDC_DATA_LO_CONST(4);
-	*IO_VDC_DATA_HI = tiles-1;
+	*IO_VDC_DATA_LO = tiles-1;
+	PCE_VDC_DATA_HI_CONST(4);
 
 	// Set VDC cycles.
 	vdc_memory_lo = (vdc_memory_lo & ~VDC_CYCLE_MASK) | vdc_cycles_by_clock[clock];
@@ -149,8 +153,8 @@ void pce_vdc_set_height(uint8_t lines) {
 	uint8_t vstart = ((lines ^ 0xFF) >> 1) + 8;
 	// Set VDISP/VSYNC.
 	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VSYNC);
-	*IO_VDC_DATA_LO = vstart;
-	PCE_VDC_DATA_HI_CONST(2);
+	PCE_VDC_DATA_LO_CONST(2);
+	*IO_VDC_DATA_HI = vstart;
 	PCE_VDC_INDEX_CONST(VDC_REG_TIMING_VDISP);
 	*IO_VDC_DATA_LO = lines - 1;
 	PCE_VDC_DATA_HI_CONST(0);
@@ -190,6 +194,12 @@ void pce_sgx_vdc1_set(void) {
 void pce_sgx_vdc2_set(void) {
 	__vdc_base = (volatile uint16_t*) 0x0010;
 	*IO_VPC_PORT_CONTROL = VPC_PORT_VDP2;
+}
+
+void pce_sgx_vdc_init(void) {
+	pce_sgx_vdc2_set();
+	__pce_vdc_init_vdc();
+	pce_sgx_vdc1_set();
 }
 
 void pce_sgx_vdc_set(uint8_t id) {

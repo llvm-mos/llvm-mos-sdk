@@ -245,6 +245,13 @@ void pce_vdc_disable(uint8_t value);
 #define pce_vdc_irq_vblank_disable() pce_vdc_disable(VDC_CONTROL_IRQ_VBLANK)
 
 /**
+ * @brief SuperGrafx: Initialize the second VDC.
+ * 
+ * This function *must* be called if you plan on using pce_sgx_vdc* methods.
+ */
+void pce_sgx_vdc_init(void);
+
+/**
  * @brief SuperGrafx: Set the VDC1 as the current VDC for pce_vdc functions.
  */
 void pce_sgx_vdc1_set(void);

@@ -81,19 +81,79 @@ void pce_vdc_set_height(uint8_t lines);
  * @param value VDC_BG_SIZE_*
  */
 void pce_vdc_bg_set_size(uint8_t value);
+
+/**
+ * @brief Enable VDC control flags.
+ * 
+ * @param value Control flags.
+ */
 void pce_vdc_enable(uint8_t value);
+
+/**
+ * @brief Disable VDC control flags.
+ * 
+ * @param value Control flags.
+ */
 void pce_vdc_disable(uint8_t value);
+
+/**
+ * @brief Enable the background layer.
+ */
 #define pce_vdc_bg_enable() pce_vdc_enable(VDC_CONTROL_ENABLE_BG)
+
+/**
+ * @brief Disable the background layer.
+ */
 #define pce_vdc_bg_disable() pce_vdc_disable(VDC_CONTROL_ENABLE_BG)
+
+/**
+ * @brief Enable the sprite layer.
+ */
 #define pce_vdc_sprite_enable() pce_vdc_enable(VDC_CONTROL_ENABLE_SPRITE)
+
+/**
+ * @brief Disable the sprite layer.
+ */
 #define pce_vdc_sprite_disable() pce_vdc_disable(VDC_CONTROL_ENABLE_SPRITE)
+
+/**
+ * @brief Enable the scanline IRQ.
+ */
 #define pce_vdc_irq_scanline_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SCANLINE)
+
+/**
+ * @brief Disable the scanline IRQ.
+ */
 #define pce_vdc_irq_scanline_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SCANLINE)
+
+/**
+ * @brief Enable the sprite collision IRQ.
+ */
 #define pce_vdc_irq_sprite_collide_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SPRITE_COLLIDE)
+
+/**
+ * @brief Disable the sprite collision IRQ.
+ */
 #define pce_vdc_irq_sprite_collide_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SPRITE_COLLIDE)
+
+/**
+ * @brief Enable the sprite overflow IRQ.
+ */
 #define pce_vdc_irq_sprite_overflow_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SPRITE_OVERFLOW)
+
+/**
+ * @brief Disable the sprite overflow IRQ.
+ */
 #define pce_vdc_irq_sprite_overflow_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SPRITE_OVERFLOW)
+
+/**
+ * @brief Enable the veritcal blank IRQ.
+ */
 #define pce_vdc_irq_vblank_enable() pce_vdc_enable(VDC_CONTROL_IRQ_VBLANK)
+
+/**
+ * @brief Disable the veritcal blank IRQ.
+ */
 #define pce_vdc_irq_vblank_disable() pce_vdc_disable(VDC_CONTROL_IRQ_VBLANK)
 
 #ifdef __cplusplus

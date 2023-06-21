@@ -20,6 +20,27 @@ extern "C" {
  * Functionality related to the VDC.
  */
 
+#define VDC_SPRITE_COLOR(n)     ((n))
+#define VDC_SPRITE_COLOR_MASK   (0xF)
+#define VDC_SPRITE_BG           0
+#define VDC_SPRITE_FG           (0x1 << 7)
+#define VDC_SPRITE_WIDTH_16     0
+#define VDC_SPRITE_WIDTH_32     (0x1 << 8)
+#define VDC_SPRITE_WIDTH_MASK   (0x1 << 8)
+#define VDC_SPRITE_HEIGHT_16    0
+#define VDC_SPRITE_HEIGHT_32    (0x1 << 12)
+#define VDC_SPRITE_HEIGHT_64    (0x3 << 12)
+#define VDC_SPRITE_HEIGHT_MASK  (0x3 << 12)
+#define VDC_SPRITE_FLIP_X       (0x1 << 11)
+#define VDC_SPRITE_FLIP_Y       (0x1 << 15)
+
+typedef struct {
+    uint16_t y;
+    uint16_t x;
+    uint16_t pattern;
+    uint16_t attr;
+} vdc_sprite_t;
+
 /**
  * @brief Read a value from the VDC port.
  * 
@@ -35,6 +56,46 @@ uint16_t pce_vdc_peek(uint8_t index);
  * @param data Value to write.
  */
 void pce_vdc_poke(uint8_t index, uint16_t data);
+
+/**
+ * @brief Set the VDC's copy method to copy every word.
+ */
+void pce_vdc_set_copy_word(void);
+/**
+ * @brief Set the VDC's copy method to copy every row.
+ * Alias for @ref pce_vdc_set_copy_word .
+ */
+#define pce_vdc_set_copy_row() pce_vdc_set_copy_word()
+
+/**
+ * @brief Set the VDC's copy method to copy every 32nd word.
+ */
+void pce_vdc_set_copy_32_words(void);
+/**
+ * @brief Set the VDC's copy method to copy every column for a 32-wide display.
+ * Alias for @ref pce_vdc_set_copy_32_words .
+ */
+#define pce_vdc_set_copy_column_32() pce_vdc_set_copy_32_words()
+
+/**
+ * @brief Set the VDC's copy method to copy every 64th word.
+ */
+void pce_vdc_set_copy_64_words(void);
+/**
+ * @brief Set the VDC's copy method to copy every column for a 64-wide display.
+ * Alias for @ref pce_vdc_set_copy_64_words .
+ */
+#define pce_vdc_set_copy_column_64() pce_vdc_set_copy_64_words()
+
+/**
+ * @brief Set the VDC's copy method to copy every 128th word.
+ */
+void pce_vdc_set_copy_128_words(void);
+/**
+ * @brief Set the VDC's copy method to copy every column for a 128-wide display.
+ * Alias for @ref pce_vdc_set_copy_128_words .
+ */
+#define pce_vdc_set_copy_column_128() pce_vdc_set_copy_128_words()
 
 /**
  * @brief Copy data from RAM to VRAM.
@@ -53,6 +114,26 @@ void pce_vdc_copy_to_vram(uint16_t dest, const void *source, uint16_t length);
  * @param length The length, in bytes.
  */
 void pce_vdc_copy_from_vram(void *dest, uint16_t source, uint16_t length);
+
+/**
+ * @brief Start a DMA operation on the VDC.
+ * 
+ * @param mode The DMA mode.
+ * - @ref VDC_DMA_IRQ_SATB_DONE - IRQ on VRAM->SATB transfer completion
+ * - @ref VDC_DMA_IRQ_DONE - IRQ on VRAM->VRAM transfer completion
+ * - @ref VDC_DMA_SRC_DEC - decrement source pointer (increment by default)
+ * - @ref VDC_DMA_DEST_DEC - decrement destination pointer (increment by default)
+ * - @ref VDC_DMA_REPEAT_SATB - automatically schedule VRAM->SATB transfer
+ * @param source Source address in VRAM.
+ * @param dest Destination address in VRAM.
+ * @param length Length, in bytes.
+ */
+void pce_vdc_dma_start(uint8_t mode, uint16_t source, uint16_t dest, uint16_t length);
+
+/**
+ * @brief Check if the DMA operation has finished.
+ */
+bool pce_vdc_dma_finished(void);
 
 /**
  * @brief Set the VDC width, in tiles.
@@ -81,6 +162,13 @@ void pce_vdc_set_height(uint8_t lines);
  * @param value VDC_BG_SIZE_*
  */
 void pce_vdc_bg_set_size(uint8_t value);
+
+/**
+ * @brief Set the sprite attribute table location.
+ * 
+ * @param loc Location.
+ */
+ void pce_vdc_sprite_set_table_start(uint16_t loc);
 
 /**
  * @brief Enable VDC control flags.

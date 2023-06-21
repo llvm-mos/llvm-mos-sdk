@@ -25,6 +25,26 @@ void pce_vdc_poke(uint8_t index, uint16_t data) {
 	*IO_VDC_DATA = data;
 }
 
+void pce_vdc_set_copy_word(void) {
+	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
+	*IO_VDC_DATA_HI = (VDC_CONTROL_VRAM_ADD_1 >> 8);
+}
+
+void pce_vdc_set_copy_32_words(void) {
+	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
+	*IO_VDC_DATA_HI = (VDC_CONTROL_VRAM_ADD_32 >> 8);
+}
+
+void pce_vdc_set_copy_64_words(void) {
+	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
+	*IO_VDC_DATA_HI = (VDC_CONTROL_VRAM_ADD_64 >> 8);
+}
+
+void pce_vdc_set_copy_128_words(void) {
+	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
+	*IO_VDC_DATA_HI = (VDC_CONTROL_VRAM_ADD_128 >> 8);
+}
+
 void pce_vdc_copy_to_vram(uint16_t dest, const void *source, uint16_t length) {
 	PCE_VDC_INDEX_CONST(VDC_REG_VRAM_WRITE_ADDR); *IO_VDC_DATA = dest;
 	PCE_VDC_INDEX_CONST(VDC_REG_VRAM_DATA);
@@ -37,9 +57,21 @@ void pce_vdc_copy_from_vram(void *dest, uint16_t source, uint16_t length) {
 	pce_memop(dest, IO_VDC_DATA, length, PCE_MEMOP_ALT_INCR);
 }
 
+void pce_vdc_dma_start(uint8_t mode, uint16_t source, uint16_t dest, uint16_t length) {
+	PCE_VDC_INDEX_CONST(VDC_REG_DMA_CONTROL); *IO_VDC_DATA_LO = mode;
+	PCE_VDC_INDEX_CONST(VDC_REG_DMA_SRC); *IO_VDC_DATA = source;
+	PCE_VDC_INDEX_CONST(VDC_REG_DMA_DEST); *IO_VDC_DATA = dest;
+	PCE_VDC_INDEX_CONST(VDC_REG_DMA_LENGTH); *IO_VDC_DATA = length - 1;
+}
+
+bool pce_vdc_dma_finished(void) {
+	PCE_VDC_INDEX_CONST(VDC_REG_DMA_LENGTH);
+	return *IO_VDC_DATA == 0xFFFF;
+}
+
 static uint8_t vdc_memory_lo = 0;
 static uint8_t vdc_control_lo = 0;
-static uint8_t vdc_control_hi = 0;
+// static uint8_t vdc_control_hi = 0;
 static const uint8_t hstart_offset_by_clock[] = {36, 51, 86};
 static const uint8_t vdc_cycles_by_clock[] = {VDC_CYCLE_8_SLOTS, VDC_CYCLE_4_SLOTS, VDC_CYCLE_4_SLOTS};
 
@@ -48,7 +80,8 @@ void __pce_vdc_init(void) {
 
 	PCE_VDC_INDEX_CONST(VDC_REG_CONTROL);
 	*IO_VDC_DATA_LO = vdc_control_lo;
-	*IO_VDC_DATA_HI = vdc_control_hi;
+	*IO_VDC_DATA_HI = 0;
+	// *IO_VDC_DATA_HI = vdc_control_hi;
 	PCE_VDC_INDEX_CONST(VDC_REG_BG_SCROLL_X);
 	__attribute__((leaf)) asm volatile("st1 #0\nst2 #0\n");
 	PCE_VDC_INDEX_CONST(VDC_REG_BG_SCROLL_Y);
@@ -95,6 +128,11 @@ void pce_vdc_bg_set_size(uint8_t value) {
 	PCE_VDC_INDEX_CONST(VDC_REG_MEMORY);
 	vdc_memory_lo = (vdc_memory_lo & ~VDC_BG_SIZE_MASK) | value;
 	*IO_VDC_DATA_LO = vdc_memory_lo;
+}
+
+void pce_vdc_sprite_set_table_start(uint16_t loc) {
+	PCE_VDC_INDEX_CONST(VDC_REG_SATB_START);
+	*IO_VDC_DATA = loc;
 }
 
 void pce_vdc_enable(uint8_t value) {

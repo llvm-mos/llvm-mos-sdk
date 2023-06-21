@@ -244,6 +244,31 @@ void pce_vdc_disable(uint8_t value);
  */
 #define pce_vdc_irq_vblank_disable() pce_vdc_disable(VDC_CONTROL_IRQ_VBLANK)
 
+/**
+ * @brief SuperGrafx: Set the VDC1 as the current VDC for pce_vdc functions.
+ */
+void pce_sgx_vdc1_set(void);
+
+/**
+ * @brief SuperGrafx: Set the VDC2 as the current VDC for pce_vdc functions.
+ */
+void pce_sgx_vdc2_set(void);
+
+/**
+ * @brief SuperGrafx: Set the specified VDC as the current VDC for pce_vdc functions.
+ */
+void pce_sgx_vdc_set(uint8_t id);
+
+/**
+ * @brief SuperGrafx: Get the current VDC's index port location.
+ */
+volatile uint8_t *pce_sgx_vdc_get_index();
+
+/**
+ * @brief SuperGrafx: Get the current VDC's data port location.
+ */
+volatile uint16_t *pce_sgx_vdc_get_data();
+
 #ifdef __cplusplus
 }
 #endif

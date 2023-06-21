@@ -35,7 +35,7 @@
 #define IO_IRQ_STATUS		((volatile uint8_t*) 0x1403)
 #define IO_IRQ_ACK		((volatile uint8_t*) 0x1403)
 
-// VDP
+// VDC
 
 #define VDC_FLAG_SPRITE_COLLIDE		0x01
 #define VDC_FLAG_SPRITE_OVERFLOW	0x02
@@ -310,5 +310,39 @@
 #define IO_SSC_REGION1      ((volatile uint8_t*) 0x18C5)
 #define IO_SSC_REGION2      ((volatile uint8_t*) 0x18C6)
 #define IO_SSC_RAM_SIZE     ((volatile uint8_t*) 0x18C7)
+
+// SuperGrafx
+
+#define IO_VDC1_STATUS      IO_VDC_STATUS
+#define IO_VDC1_INDEX       IO_VDC_INDEX
+#define IO_VDC1_DATA        IO_VDC_DATA
+#define IO_VDC1_DATA_LO     IO_VDC_DATA_LO
+#define IO_VDC1_DATA_HI     IO_VDC_DATA_HI
+#define IO_VDC2_STATUS		((volatile uint8_t*) 0x0010)
+#define IO_VDC2_INDEX		((volatile uint8_t*) 0x0010)
+#define IO_VDC2_DATA		((volatile uint16_t*) 0x0012)
+#define IO_VDC2_DATA_LO  ((volatile uint8_t*) 0x0012)
+#define IO_VDC2_DATA_HI  ((volatile uint8_t*) 0x0013)
+
+#define VPC_WINDOW_OVERLAP   0
+#define VPC_WINDOW_2         4
+#define VPC_WINDOW_1         8
+#define VPC_WINDOW_NONE     12
+#define VPC_VDC1_ENABLE(window)      (0x1 << (window))
+#define VPC_VDC2_ENABLE(window)      (0x2 << (window))
+#define VPC_PRIORITY_DEFAULT(window) (0x0 << (window)) /* -> SP2 BG -> BG2 -> SP2 FG -> SP1 BG -> BG1 -> SP1 FG */
+#define VPC_PRIORITY_SP1_BG2(window) (0x4 << (window)) /* SP1 behind BG2 */
+#define VPC_PRIORITY_BG1_SP2(window) (0x8 << (window)) /* BG1 behind SP2 */
+#define VPC_PRIORITY_MASK(window)    (0xC << (window)) 
+#define VPC_MASK(window)             (0xF << (window))
+#define IO_VPC_CONTROL      ((volatile uint16_t*) 0x0008)
+#define IO_VPC_CONTROL_LO   ((volatile uint8_t*) 0x0008)
+#define IO_VPC_CONTROL_HI   ((volatile uint8_t*) 0x0009)
+#define IO_VPC_WINDOW_1     ((volatile uint16_t*) 0x000A)
+#define IO_VPC_WINDOW_2     ((volatile uint16_t*) 0x000C)
+
+#define VPC_PORT_VDP1       0x00
+#define VPC_PORT_VDP2       0x01
+#define IO_VPC_PORT_CONTROL  ((volatile uint16_t*) 0x000E) /* controls ST0/ST1/ST2 */
 
 #endif /* _PCE_HARDWARE_H_ */

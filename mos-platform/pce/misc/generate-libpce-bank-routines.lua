@@ -118,3 +118,30 @@ if args[1] == "asm" then
 		end
 	end
 end
+
+-- Generate inline push/pop handlers.
+
+if args[1] == "h" then
+	for i=BANK_CHAIN_MIN,BANK_CHAIN_MAX do
+		for j=i,BANK_CHAIN_MAX do
+			printf("")
+			printf("static inline void pce_bank%d_size%d_push(void) {", i, (j - i + 1))
+			printf("    __attribute__((leaf)) asm volatile (")
+			for k=i,j,1 do
+				printf("        \"tma #$%02x\\n\"", 1 << k)
+				printf("        \"pha\\n\"")
+			end
+			printf("        \"\" : : : \"a\");")
+			printf("}")
+			printf("")
+			printf("static inline void pce_bank%d_size%d_pop(void) {", i, (j - i + 1))
+			printf("    __attribute__((leaf)) asm volatile (")
+			for k=j,i,-1 do
+				printf("        \"pla\\n\"")
+				printf("        \"tam #$%02x\\n\"", 1 << k)
+			end
+			printf("        \"\" : : : \"a\");")
+			printf("}")
+		end
+	end
+end

@@ -14,21 +14,21 @@ MEMORY {
      * command in MEGA65 manual for memory layout:
      *
      * $1.0000-$1.1FFF (CBM DOS)
-     * $2000-7FFF (free ram, bank 0)
-     * $C000-$CFFF (kernal)
-     * $E000-$FFFF (kernal)
+     * $2000-9FFF (free ram, bank 0)
+     * $A000-BFFF (basic rom, but we switch to ram with 'unmap-basic.S')
+     * $C000-$CFFF (free ram)
      * $D000-$DFFF (io)
-     *
-     * As of June 2022 the $8000-$BFFF is left unmapped by
-     * the SYS command.
+     * $E000-$FFFF (kernal)
      */
-    ram (rw) : ORIGIN = 0x2001, LENGTH = 0x5fff
+    ram (rw) : ORIGIN = 0x2001, LENGTH = 0xafff
 }
 
 INCLUDE commodore.ld
 
+INPUT(unmap-basic.o)
+
 /* Set initial soft stack address to end of BASIC area. (It grows down.) */
-__stack = 0x7fff;
+__stack = 0xd000;
 
 OUTPUT_FORMAT {
     /* Tells the LOAD command where to place the file's contents. */

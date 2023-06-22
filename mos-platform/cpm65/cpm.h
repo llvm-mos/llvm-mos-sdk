@@ -82,6 +82,12 @@ typedef struct __attribute__((packed))
 }
 DPH;
 
+typedef struct {
+    uint16_t id;
+    const char* name;
+    void* strategy;
+} DRIVER;
+
 enum
 {
     CPME_OK        = 0x00, /* success (usually) */
@@ -114,7 +120,8 @@ extern uint8_t cpm_errno;
 /*  8 */ extern __attribute__((leaf)) void cpm_set_iobyte(uint8_t iob);
 /*  9 */ extern __attribute__((leaf)) void cpm_printstring_i(uint16_t s);
          extern                       void cpm_printstring(const char* s); /* $-terminated */
-/* 10 */ extern __attribute__((leaf)) uint8_t cpm_readline(uint8_t* buffer);
+/* 10 */ extern __attribute__((leaf)) uint8_t cpm_readline_i(uint16_t buffer);
+/*    */ extern                       uint8_t cpm_readline(uint8_t* buffer);
 /* 11 */ extern __attribute__((leaf)) uint8_t cpm_const(void);
 /* 12 */ extern __attribute__((leaf)) uint16_t cpm_get_version(void);
 /* 13 */ extern __attribute__((leaf)) void cpm_reset_disk_system(void);
@@ -161,6 +168,10 @@ extern uint8_t cpm_errno;
 /* 37 */ extern __attribute__((leaf)) uint8_t cpm_reset_drives(uint16_t drive_bitmap);
 /* 40 */ extern __attribute__((leaf)) uint8_t cpm_write_random_filled_i(uint16_t fcb);
          extern                       uint8_t cpm_write_random_filled(FCB* fcb);
+/* 41 */ extern __attribute__((leaf)) uint16_t cpm_getzp(void);
+/* 42 */ extern __attribute__((leaf)) uint16_t cpm_gettpa(void);
+/* 43 */ extern __attribute__((leaf)) uint16_t cpm_parse_filename_i(uint16_t buffer);
+         extern                       const char* cpm_parse_filename(const char* buffer);
 
 #define cpm_get_user() cpm_get_set_user(0xff)
 #define cpm_set_user(u) cpm_get_set_user(u)
@@ -181,6 +192,10 @@ extern __attribute__((leaf)) uint16_t cpm_bios_gettpa(void);
 extern __attribute__((leaf)) void cpm_bios_settpa(uint8_t start, uint8_t end);
 extern __attribute__((leaf)) uint16_t cpm_bios_getzp(void);
 extern __attribute__((leaf)) void cpm_bios_setzp(uint8_t start, uint8_t end);
+extern __attribute__((leaf)) void cpm_bios_adddrv_i(uint16_t driver);
+extern                       void cpm_bios_adddrv(DRIVER* driver);
+extern __attribute__((leaf)) uint16_t cpm_bios_finddrv_i(uint16_t id);
+extern                       void* cpm_bios_finddrv(uint16_t id);
 
 #ifdef __cplusplus
 }

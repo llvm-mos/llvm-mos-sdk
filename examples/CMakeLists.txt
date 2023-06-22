@@ -31,6 +31,10 @@ if(PLATFORM MATCHES ^nes-)
   add_subdirectory(nes)
 endif()
 
+if(PLATFORM MATCHES rpc8e)
+  add_subdirectory(rpc8e)
+endif()
+
 if(PLATFORM MATCHES ^cx16)
   add_subdirectory(cx16)
 endif()

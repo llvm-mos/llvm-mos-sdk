@@ -15,6 +15,11 @@ void cpm_printstring(const char* s) /* $-terminated */
     cpm_printstring_i((uint16_t)s);
 }
 
+uint8_t cpm_readline(uint8_t* buffer)
+{
+	return cpm_readline_i((uint16_t)buffer);
+}
+
 uint8_t cpm_open_file(FCB* fcb)
 {
     return cpm_open_file_i((uint16_t)fcb);
@@ -118,5 +123,20 @@ void cpm_bios_setdma(void* dma)
 void cpm_bios_setsec(uint32_t* sector)
 {
 	cpm_bios_setsec_i((uint16_t) sector);
+}
+
+void cpm_bios_adddrv(DRIVER* driver)
+{
+	cpm_bios_adddrv_i((uint16_t) driver);
+}
+
+void* cpm_bios_finddrv(uint16_t id)
+{
+	return (void*) cpm_bios_finddrv_i(id);
+}
+
+const char* cpm_parse_filename(const char* filename)
+{
+	return (const char*) cpm_parse_filename_i((uint16_t) filename);
 }
 

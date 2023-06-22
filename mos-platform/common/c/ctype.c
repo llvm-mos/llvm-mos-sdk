@@ -23,3 +23,13 @@ int toupper(int c) {
   return ch;
 }
 
+int isalnum(int c) {
+  return isalpha(c) || isdigit(c);
+}
+
+int isspace(int c) {
+  char ch = c;
+  return (ch == ' ') || (ch == '\t') || (ch == '\n') ||
+  	(ch == '\f') || (ch == '\r') || (ch == '\v');
+}
+

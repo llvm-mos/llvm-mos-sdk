@@ -160,6 +160,11 @@ static inline void pce_ ## type ## _vbank ## id ## _set(void) { \
     __attribute__((leaf)) asm volatile ( \
         "lda #mos8(__" #type "_vbank" #id "_bank)\n" \
         "tam #(1 << " #offset ")\n" : : : "a", "p" ); \
+} \
+static inline uint8_t pce_ ## type ## _vbank ## id ## _bank(void) { \
+    uint8_t result; \
+    __attribute__((leaf)) asm ( "ld%0 #mos8(__" #type "_vbank" #id "_bank)\n" : "=R"(result) ); \
+    return result; \
 }
 
 #define PCE_VBANK_USE_N(type, id, offset, size) \
@@ -167,11 +172,17 @@ static inline void pce_ ## type ## _vbank ## id ## _set(void) { \
     __attribute__((leaf)) asm volatile ( \
         "lda #mos8(__" #type "_vbank" #id "_bank)\n" \
         "jsr pce_bank" #offset "_size" #size "i_set\n" : : : "a", "p" ); \
+} \
+static inline uint8_t pce_ ## type ## _vbank ## id ## _bank(void) { \
+    uint8_t result; \
+    __attribute__((leaf)) asm ( "ld%0 #mos8(__" #type "_vbank" #id "_bank)\n" : "=R"(result) ); \
+    return result; \
 }
 #define PCE_VBANK_USE_2(type, id, offset) PCE_VBANK_USE_N(type, id, offset, 2)
 #define PCE_VBANK_USE_3(type, id, offset) PCE_VBANK_USE_N(type, id, offset, 3)
 #define PCE_VBANK_USE_4(type, id, offset) PCE_VBANK_USE_N(type, id, offset, 4)
 #define PCE_VBANK_USE_5(type, id, offset) PCE_VBANK_USE_N(type, id, offset, 5)
+
 #define PCE_VBANK_USE(type, id, offset, size) PCE_VBANK_USE_ ## size (type, id, offset)
 
 #define PCE_VBANK_DECLARE(type, id, offset, size) \
@@ -211,6 +222,8 @@ asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
  *
  * A defined virtual bank N provides:
  * - the pce_vbankN_set() function, mapping the requested virtual bank,
+ * - the pce_vbankN_bank() function, returning the first index of the virtual
+ *   bank,
  * - the pce_vbankN_call(void (*method)(void)) function, allowing a safe
  *   trampoline to a function in another bank,
  * - the __rom_vbankN section,

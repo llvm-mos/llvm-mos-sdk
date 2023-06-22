@@ -313,11 +313,11 @@
 
 // SuperGrafx
 
-#define IO_VDC1_STATUS      IO_VDC_STATUS
-#define IO_VDC1_INDEX       IO_VDC_INDEX
-#define IO_VDC1_DATA        IO_VDC_DATA
-#define IO_VDC1_DATA_LO     IO_VDC_DATA_LO
-#define IO_VDC1_DATA_HI     IO_VDC_DATA_HI
+#define IO_VDC1_STATUS		((volatile uint8_t*) 0x0000)
+#define IO_VDC1_INDEX		((volatile uint8_t*) 0x0000)
+#define IO_VDC1_DATA		((volatile uint16_t*) 0x0002)
+#define IO_VDC1_DATA_LO  ((volatile uint8_t*) 0x0002)
+#define IO_VDC1_DATA_HI  ((volatile uint8_t*) 0x0003)
 #define IO_VDC2_STATUS		((volatile uint8_t*) 0x0010)
 #define IO_VDC2_INDEX		((volatile uint8_t*) 0x0010)
 #define IO_VDC2_DATA		((volatile uint16_t*) 0x0012)

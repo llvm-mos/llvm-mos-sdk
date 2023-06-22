@@ -151,11 +151,301 @@ __attribute__((leaf)) void pce_bank456i_set(uint8_t id);
  */
 __attribute__((leaf)) void pce_bank56i_set(uint8_t id);
 
+static inline void pce_bank2_size1_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$04\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size1_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$04\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size2_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$04\n"
+        "pha\n"
+        "tma #$08\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size2_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$08\n"
+        "pla\n"
+        "tam #$04\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size3_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$04\n"
+        "pha\n"
+        "tma #$08\n"
+        "pha\n"
+        "tma #$10\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size3_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$10\n"
+        "pla\n"
+        "tam #$08\n"
+        "pla\n"
+        "tam #$04\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size4_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$04\n"
+        "pha\n"
+        "tma #$08\n"
+        "pha\n"
+        "tma #$10\n"
+        "pha\n"
+        "tma #$20\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size4_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$20\n"
+        "pla\n"
+        "tam #$10\n"
+        "pla\n"
+        "tam #$08\n"
+        "pla\n"
+        "tam #$04\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size5_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$04\n"
+        "pha\n"
+        "tma #$08\n"
+        "pha\n"
+        "tma #$10\n"
+        "pha\n"
+        "tma #$20\n"
+        "pha\n"
+        "tma #$40\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank2_size5_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$40\n"
+        "pla\n"
+        "tam #$20\n"
+        "pla\n"
+        "tam #$10\n"
+        "pla\n"
+        "tam #$08\n"
+        "pla\n"
+        "tam #$04\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank3_size1_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$08\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank3_size1_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$08\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank3_size2_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$08\n"
+        "pha\n"
+        "tma #$10\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank3_size2_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$10\n"
+        "pla\n"
+        "tam #$08\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank3_size3_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$08\n"
+        "pha\n"
+        "tma #$10\n"
+        "pha\n"
+        "tma #$20\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank3_size3_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$20\n"
+        "pla\n"
+        "tam #$10\n"
+        "pla\n"
+        "tam #$08\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank3_size4_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$08\n"
+        "pha\n"
+        "tma #$10\n"
+        "pha\n"
+        "tma #$20\n"
+        "pha\n"
+        "tma #$40\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank3_size4_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$40\n"
+        "pla\n"
+        "tam #$20\n"
+        "pla\n"
+        "tam #$10\n"
+        "pla\n"
+        "tam #$08\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank4_size1_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$10\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank4_size1_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$10\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank4_size2_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$10\n"
+        "pha\n"
+        "tma #$20\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank4_size2_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$20\n"
+        "pla\n"
+        "tam #$10\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank4_size3_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$10\n"
+        "pha\n"
+        "tma #$20\n"
+        "pha\n"
+        "tma #$40\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank4_size3_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$40\n"
+        "pla\n"
+        "tam #$20\n"
+        "pla\n"
+        "tam #$10\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank5_size1_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$20\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank5_size1_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$20\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank5_size2_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$20\n"
+        "pha\n"
+        "tma #$40\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank5_size2_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$40\n"
+        "pla\n"
+        "tam #$20\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank6_size1_push(void) {
+    __attribute__((leaf)) asm volatile (
+        "tma #$40\n"
+        "pha\n"
+        "" : : : "a");
+}
+
+static inline void pce_bank6_size1_pop(void) {
+    __attribute__((leaf)) asm volatile (
+        "pla\n"
+        "tam #$40\n"
+        "" : : : "a");
+}
+
 #define PCE_BANK_MASK(n) (1 << (n))
 #define PCE_BANK_OFFSET(n) ((n) << 13)
 #define PCE_BANK_SIZE(n) ((n) << 13)
 
-#define PCE_VBANK_USE_1(type, id, offset) \
+#define __PCE_VBANK_USE_1(type, id, offset) \
 static inline void pce_ ## type ## _vbank ## id ## _set(void) { \
     __attribute__((leaf)) asm volatile ( \
         "lda #mos8(__" #type "_vbank" #id "_bank)\n" \
@@ -167,7 +457,7 @@ static inline uint8_t pce_ ## type ## _vbank ## id ## _bank(void) { \
     return result; \
 }
 
-#define PCE_VBANK_USE_N(type, id, offset, size) \
+#define __PCE_VBANK_USE_N(type, id, offset, size) \
 static inline void pce_ ## type ## _vbank ## id ## _set(void) { \
     __attribute__((leaf)) asm volatile ( \
         "lda #mos8(__" #type "_vbank" #id "_bank)\n" \
@@ -178,34 +468,36 @@ static inline uint8_t pce_ ## type ## _vbank ## id ## _bank(void) { \
     __attribute__((leaf)) asm ( "ld%0 #mos8(__" #type "_vbank" #id "_bank)\n" : "=R"(result) ); \
     return result; \
 }
-#define PCE_VBANK_USE_2(type, id, offset) PCE_VBANK_USE_N(type, id, offset, 2)
-#define PCE_VBANK_USE_3(type, id, offset) PCE_VBANK_USE_N(type, id, offset, 3)
-#define PCE_VBANK_USE_4(type, id, offset) PCE_VBANK_USE_N(type, id, offset, 4)
-#define PCE_VBANK_USE_5(type, id, offset) PCE_VBANK_USE_N(type, id, offset, 5)
+#define __PCE_VBANK_USE_2(type, id, offset) __PCE_VBANK_USE_N(type, id, offset, 2)
+#define __PCE_VBANK_USE_3(type, id, offset) __PCE_VBANK_USE_N(type, id, offset, 3)
+#define __PCE_VBANK_USE_4(type, id, offset) __PCE_VBANK_USE_N(type, id, offset, 4)
+#define __PCE_VBANK_USE_5(type, id, offset) __PCE_VBANK_USE_N(type, id, offset, 5)
 
-#define PCE_VBANK_USE(type, id, offset, size) PCE_VBANK_USE_ ## size (type, id, offset)
+#define __PCE_VBANK_USE(type, id, offset, size) __PCE_VBANK_USE_ ## size (type, id, offset)
 
-#define PCE_VBANK_DECLARE(type, id, offset, size) \
+#define __PCE_VBANK_DECLARE(type, id, offset, size) \
 asm(".global __" #type "_vbank" #id "\n.global __" #type "_vbank" #id "_size\n.equ __" #type "_vbank" #id ", ((" #offset ") << 13)\n.equ __" #type "_vbank" #id "_size, ((" #size ") << 13)\n")
 
-#define PCE_VBANK_CALLBACK_DECLARE(type, id) \
+#define __PCE_VBANK_CALLBACK_DECLARE(type, id, offset, size) \
 __attribute__((leaf, callback(1), noinline, section("text.pce_" #type "_vbank" #id "_call"))) \
 void pce_ ## type ## _vbank ## id ## _call(void (*method)(void)) { \
+    pce_bank ## offset ## _size ## size ## _push(); \
     pce_ ## type ## _vbank ## id ## _set(); \
     method(); \
+    pce_bank ## offset ## _size ## size ## _pop(); \
 }
 
-#define PCE_VBANK_CALLBACK_USE(type, id) \
+#define __PCE_VBANK_CALLBACK_USE(type, id) \
 __attribute__((leaf, callback(1))) \
 void pce_ ## type ## _vbank ## id ## _call(void (*method)(void))
 
 #ifdef PCE_VBANK_IMPLEMENTATION
 #define PCE_ROM_VBANK_DEFINE(id, offset, size) \
-PCE_VBANK_DECLARE(rom, id, offset, size); \
-PCE_VBANK_USE(rom, id, offset, size) \
-PCE_VBANK_CALLBACK_DECLARE(rom, id)
+__PCE_VBANK_DECLARE(rom, id, offset, size); \
+__PCE_VBANK_USE(rom, id, offset, size) \
+__PCE_VBANK_CALLBACK_DECLARE(rom, id, offset, size)
 #define PCE_ROM_FIXED_BANK_SIZE(size) \
-PCE_VBANK_DECLARE(rom, 0, 8 - size, size)
+__PCE_VBANK_DECLARE(rom, 0, 8 - size, size)
 #define PCE_SGX_RAM(size) \
 asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
 #else
@@ -235,8 +527,8 @@ asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
  * @param size The size, in 8KB units (1-5).
  */
 #define PCE_ROM_VBANK_DEFINE(id, offset, size) \
-PCE_VBANK_USE(rom, id, offset, size) \
-PCE_VBANK_CALLBACK_USE(rom, id)
+__PCE_VBANK_USE(rom, id, offset, size) \
+__PCE_VBANK_CALLBACK_USE(rom, id)
 /**
  * @brief Define the size of the fixed bank ("virtual bank 0").
  * 

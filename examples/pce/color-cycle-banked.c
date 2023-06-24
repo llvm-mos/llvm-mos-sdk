@@ -11,23 +11,23 @@
 
 // Make sure to define this in only one compilation unit, *before* including
 // the pce.h header.
-#define PCE_VBANK_IMPLEMENTATION
+#define PCE_CONFIG_IMPLEMENTATION
 
 #include <pce.h>
 
-// Define a PCE virtual bank 1, with offset 6 (0xC000) and size 1 (8KB).
-PCE_ROM_VBANK_DEFINE(1, 6, 1);
+// Declare physical bank 1 to be at offset 0xC000.
+PCE_ROM_BANK_AT(1, 6);
 
 static uint16_t color;
 
-__attribute__((noinline, section(".rom_vbank1")))
+__attribute__((noinline, section(".rom_bank1")))
 void cycle_color(void) {
 	*IO_VCE_COLOR_INDEX = 0x100;
 	*IO_VCE_COLOR_DATA = color++;
 }
 
 int main(void) {
-	pce_rom_vbank1_set();
+	pce_rom_bank1_map();
 
 	while(1) {
 		cycle_color();

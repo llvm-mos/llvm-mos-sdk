@@ -445,92 +445,64 @@ static inline void pce_bank6_size1_pop(void) {
 #define PCE_BANK_OFFSET(n) ((n) << 13)
 #define PCE_BANK_SIZE(n) ((n) << 13)
 
-#define __PCE_VBANK_USE_1(type, id, offset) \
-static inline void pce_ ## type ## _vbank ## id ## _set(void) { \
+#define __PCE_ROM_BANK_DECLARE(id, offset, size) \
+asm(".global __rom_bank" #id "\n.global __rom_bank" #id "_size\n.equ __rom_bank" #id ", ((" #offset ") << 13)\n.equ __rom_bank" #id "_size, ((" #size ") << 13)\n")
+
+#define __PCE_ROM_BANK_USE(id, offset) \
+static inline void pce_rom_bank ## id ## _map(void) { \
     __attribute__((leaf)) asm volatile ( \
-        "lda #mos8(__" #type "_vbank" #id "_bank)\n" \
+        "lda #mos8(__rom_bank" #id "_bank)\n" \
         "tam #(1 << " #offset ")\n" : : : "a", "p" ); \
-} \
-static inline uint8_t pce_ ## type ## _vbank ## id ## _bank(void) { \
-    uint8_t result; \
-    __attribute__((leaf)) asm ( "ld%0 #mos8(__" #type "_vbank" #id "_bank)\n" : "=R"(result) ); \
-    return result; \
 }
 
-#define __PCE_VBANK_USE_N(type, id, offset, size) \
-static inline void pce_ ## type ## _vbank ## id ## _set(void) { \
-    __attribute__((leaf)) asm volatile ( \
-        "lda #mos8(__" #type "_vbank" #id "_bank)\n" \
-        "jsr pce_bank" #offset "_size" #size "i_set\n" : : : "a", "p" ); \
-} \
-static inline uint8_t pce_ ## type ## _vbank ## id ## _bank(void) { \
-    uint8_t result; \
-    __attribute__((leaf)) asm ( "ld%0 #mos8(__" #type "_vbank" #id "_bank)\n" : "=R"(result) ); \
-    return result; \
-}
-#define __PCE_VBANK_USE_2(type, id, offset) __PCE_VBANK_USE_N(type, id, offset, 2)
-#define __PCE_VBANK_USE_3(type, id, offset) __PCE_VBANK_USE_N(type, id, offset, 3)
-#define __PCE_VBANK_USE_4(type, id, offset) __PCE_VBANK_USE_N(type, id, offset, 4)
-#define __PCE_VBANK_USE_5(type, id, offset) __PCE_VBANK_USE_N(type, id, offset, 5)
-
-#define __PCE_VBANK_USE(type, id, offset, size) __PCE_VBANK_USE_ ## size (type, id, offset)
-
-#define __PCE_VBANK_DECLARE(type, id, offset, size) \
-asm(".global __" #type "_vbank" #id "\n.global __" #type "_vbank" #id "_size\n.equ __" #type "_vbank" #id ", ((" #offset ") << 13)\n.equ __" #type "_vbank" #id "_size, ((" #size ") << 13)\n")
-
-#define __PCE_VBANK_CALLBACK_DECLARE(type, id, offset, size) \
-__attribute__((leaf, callback(1), noinline, section("text.pce_" #type "_vbank" #id "_call"))) \
-void pce_ ## type ## _vbank ## id ## _call(void (*method)(void)) { \
-    pce_bank ## offset ## _size ## size ## _push(); \
-    pce_ ## type ## _vbank ## id ## _set(); \
+#define __PCE_ROM_BANK_CALLBACK_DECLARE(id, offset) \
+__attribute__((leaf, callback(1), noinline, section("text.pce_rom_bank" #id "_call"))) \
+void pce_rom_bank ## id ## _call(void (*method)(void)) { \
+    pce_bank ## offset ## _size1_push(); \
+    pce_rom_bank ## id ## _map(); \
     method(); \
-    pce_bank ## offset ## _size ## size ## _pop(); \
+    pce_bank ## offset ## _size1_pop(); \
 }
 
-#define __PCE_VBANK_CALLBACK_USE(type, id) \
+#define __PCE_ROM_BANK_CALLBACK_USE(id) \
 __attribute__((leaf, callback(1))) \
-void pce_ ## type ## _vbank ## id ## _call(void (*method)(void))
+void pce_rom_bank ## id ## _call(void (*method)(void))
 
-#ifdef PCE_VBANK_IMPLEMENTATION
-#define PCE_ROM_VBANK_DEFINE(id, offset, size) \
-__PCE_VBANK_DECLARE(rom, id, offset, size); \
-__PCE_VBANK_USE(rom, id, offset, size) \
-__PCE_VBANK_CALLBACK_DECLARE(rom, id, offset, size)
+#ifdef PCE_CONFIG_IMPLEMENTATION
+#define PCE_ROM_BANK_AT(id, offset) \
+__PCE_ROM_BANK_DECLARE(id, offset, 1); \
+__PCE_ROM_BANK_USE(id, offset) \
+__PCE_ROM_BANK_CALLBACK_DECLARE(id, offset)
 #define PCE_ROM_FIXED_BANK_SIZE(size) \
-__PCE_VBANK_DECLARE(rom, 0, 8 - size, size)
+__PCE_ROM_BANK_DECLARE(0, 8 - size, size)
 #define PCE_SGX_RAM(size) \
 asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
 #else
 /**
- * @brief Define a "virtual bank".
+ * @brief Define the memory offset for a given physical bank.
  * 
  * A virtual bank is a group of one or more physical banks, automatically
  * allocated by the linker.
  *
  * The recommended way to define virtual banks is to create a header file
- * (for example, "vbank.h") with PCE_ROM_VBANK_DEFINE entries, and a
- * source file ("vbank.c") which defines PCE_VBANK_IMPLEMENTATION, then
- * includes <pce.h>, then includes "vbank.h".
+ * (for example, "bank.h") with PCE_ROM_BANK_AT entries, and a source
+ * file ("bank.c") which defines PCE_CONFIG_IMPLEMENTATION, then
+ * includes <pce.h>, then includes "bank.h".
  *
- * A defined virtual bank N provides:
- * - the pce_vbankN_set() function, mapping the requested virtual bank,
- * - the pce_vbankN_bank() function, returning the first index of the virtual
- *   bank,
- * - the pce_vbankN_call(void (*method)(void)) function, allowing a safe
+ * A bank N defined in this manner provides:
+ * - the pce_rom_bankN_map() function, mapping the requested virtual bank,
+ * - the pce_rom_bankN_call(void (*method)(void)) function defines a safe
  *   trampoline to a function in another bank,
- * - the __rom_vbankN section,
- * - the __rom_vbankN_bank symbol, allowing referencing the first bank
- *   of the virtual bank in assembly code.
+ * - the __rom_bankN section.
  *
- * @param id The ID of the virtual bank.
+ * @param id The ID of the physical bank (0-127).
  * @param offset The memory offset, in 8KB units (2-6).
- * @param size The size, in 8KB units (1-5).
  */
-#define PCE_ROM_VBANK_DEFINE(id, offset, size) \
-__PCE_VBANK_USE(rom, id, offset, size) \
-__PCE_VBANK_CALLBACK_USE(rom, id)
+#define PCE_ROM_BANK_AT(id, offset) \
+__PCE_ROM_BANK_USE(id, offset) \
+__PCE_ROM_BANK_CALLBACK_USE(id)
 /**
- * @brief Define the size of the fixed bank ("virtual bank 0").
+ * @brief Define the size of the fixed bank (at the top of memory).
  * 
  * @param size The size, in 8KB units (1-6).
  */

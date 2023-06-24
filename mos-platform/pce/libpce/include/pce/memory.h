@@ -43,6 +43,8 @@ extern "C" {
 
 /**
  * @brief Perform a memory operation.
+ *
+ * Note that this function will stall interrupts until it is complete.
  * 
  * @param dest The destination address.
  * @param src The source address.
@@ -50,38 +52,6 @@ extern "C" {
  * @param mode The memory operation mode.
  */
 __attribute__((leaf)) void *pce_memop(void *dest, const void *src, uint16_t count, uint8_t mode);
-/**
- * @brief Perform a memory copy.
- * 
- * @param dest The destination address.
- * @param src The source address.
- * @param count Number of bytes. Note that 0 is equivalent to 65,536 bytes.
- */
-__attribute__((leaf)) void *pce_memcpy(void *dest, const void *src, uint16_t count);
-/**
- * @brief Perform a reverse memory copy (from last to first byte).
- * 
- * @param dest The destination address.
- * @param src The source address.
- * @param count Number of bytes. Note that 0 is equivalent to 65,536 bytes.
- */
-__attribute__((leaf)) void *pce_rmemcpy(void *dest, const void *src, uint16_t count);
-/**
- * @brief Perform a memory fill.
- * 
- * @param ptr The destination address.
- * @param value The value to set.
- * @param num Number of bytes. Note that 0 is equivalent to 65,536 bytes.
- */
-__attribute__((leaf)) void *pce_memset(void *ptr, uint8_t value, uint16_t num);
-/**
- * @brief Perform a memory move.
- * 
- * @param dest The destination address.
- * @param src The source address.
- * @param count Number of bytes. Note that 0 is equivalent to 65,536 bytes.
- */
-__attribute__((leaf)) void *pce_memmove(void *dest, const void *src, uint16_t count);
 
 #ifdef __cplusplus
 }

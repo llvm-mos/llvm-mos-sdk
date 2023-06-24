@@ -248,7 +248,7 @@ void pce_vdc_disable(uint8_t value);
  * @brief SuperGrafx: Check for presence.
  *
  * May cause minor graphical glitches if not called during VBlank.
- *
+ xz *
  * @return true The SuperGrafx is present.
  */
 bool pce_sgx_detect(void);

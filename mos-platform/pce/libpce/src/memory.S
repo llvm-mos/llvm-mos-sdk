@@ -26,6 +26,14 @@ pce_memop:
     stx __rc6
     ldx __rc3
     stx __rc7
+    ; fall into __pce_memop_inner
+; Inner version of pce_memop, more suitable for ASM calling.
+;
+; __rc4-__rc5 source
+; __rc6-__rc7 dest
+; __rc8-__rc9 length
+;   A         mode
+; clobbers __rc10, preserves __rc3
 __pce_memop_inner:
     ldy __rc3
     sta __rc3

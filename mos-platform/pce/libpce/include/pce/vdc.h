@@ -65,7 +65,7 @@ void pce_vdc_set_copy_word(void);
  * @brief Set the VDC's copy method to copy every row.
  * Alias for @ref pce_vdc_set_copy_word .
  */
-#define pce_vdc_set_copy_row() pce_vdc_set_copy_word()
+void pce_vdc_set_copy_row(void);
 
 /**
  * @brief Set the VDC's copy method to copy every 32nd word.
@@ -75,7 +75,7 @@ void pce_vdc_set_copy_32_words(void);
  * @brief Set the VDC's copy method to copy every column for a 32-wide display.
  * Alias for @ref pce_vdc_set_copy_32_words .
  */
-#define pce_vdc_set_copy_column_32() pce_vdc_set_copy_32_words()
+void pce_vdc_set_copy_column_32(void);
 
 /**
  * @brief Set the VDC's copy method to copy every 64th word.
@@ -85,7 +85,7 @@ void pce_vdc_set_copy_64_words(void);
  * @brief Set the VDC's copy method to copy every column for a 64-wide display.
  * Alias for @ref pce_vdc_set_copy_64_words .
  */
-#define pce_vdc_set_copy_column_64() pce_vdc_set_copy_64_words()
+void pce_vdc_set_copy_column_64(void);
 
 /**
  * @brief Set the VDC's copy method to copy every 128th word.
@@ -95,7 +95,7 @@ void pce_vdc_set_copy_128_words(void);
  * @brief Set the VDC's copy method to copy every column for a 128-wide display.
  * Alias for @ref pce_vdc_set_copy_128_words .
  */
-#define pce_vdc_set_copy_column_128() pce_vdc_set_copy_128_words()
+void pce_vdc_set_copy_column_128(void);
 
 /**
  * @brief Copy data from RAM to VRAM.
@@ -144,7 +144,7 @@ bool pce_vdc_dma_finished(void);
  *  - VCE_COLORBURST_OFF
  */
 void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags);
-#define pce_vdc_set_width(pixels, vce_flags) pce_vdc_set_width_tiles((pixels) >> 3, vce_flags)
+void pce_vdc_set_width(uint16_t pixels, uint8_t vce_flags);
 
 /**
  * @brief Set the VDC height, in raster lines.
@@ -152,9 +152,7 @@ void pce_vdc_set_width_tiles(uint8_t tiles, uint8_t vce_flags);
  * @param lines The number of raster lines.
  */
 void pce_vdc_set_height(uint8_t lines);
-#define pce_vdc_set_resolution(width_pixels, height_pixels, vce_flags) \
-    pce_vdc_set_width(width_pixels, vce_flags); \
-    pce_vdc_set_height(height_pixels)
+void pce_vdc_set_resolution(uint16_t width_pixels, uint8_t height_pixels, uint8_t vce_flags);
 
 /**
  * @brief Set the VDC background size.
@@ -187,62 +185,62 @@ void pce_vdc_disable(uint8_t value);
 /**
  * @brief Enable the background layer.
  */
-#define pce_vdc_bg_enable() pce_vdc_enable(VDC_CONTROL_ENABLE_BG)
+void pce_vdc_bg_enable(void);
 
 /**
  * @brief Disable the background layer.
  */
-#define pce_vdc_bg_disable() pce_vdc_disable(VDC_CONTROL_ENABLE_BG)
+void pce_vdc_bg_disable(void);
 
 /**
  * @brief Enable the sprite layer.
  */
-#define pce_vdc_sprite_enable() pce_vdc_enable(VDC_CONTROL_ENABLE_SPRITE)
+void pce_vdc_sprite_enable(void);
 
 /**
  * @brief Disable the sprite layer.
  */
-#define pce_vdc_sprite_disable() pce_vdc_disable(VDC_CONTROL_ENABLE_SPRITE)
+void pce_vdc_sprite_disable(void);
 
 /**
  * @brief Enable the scanline IRQ.
  */
-#define pce_vdc_irq_scanline_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SCANLINE)
+void pce_vdc_irq_scanline_enable(void);
 
 /**
  * @brief Disable the scanline IRQ.
  */
-#define pce_vdc_irq_scanline_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SCANLINE)
+void pce_vdc_irq_scanline_disable(void);
 
 /**
  * @brief Enable the sprite collision IRQ.
  */
-#define pce_vdc_irq_sprite_collide_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SPRITE_COLLIDE)
+void pce_vdc_irq_sprite_collide_enable(void);
 
 /**
  * @brief Disable the sprite collision IRQ.
  */
-#define pce_vdc_irq_sprite_collide_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SPRITE_COLLIDE)
+void pce_vdc_irq_sprite_collide_disable(void);
 
 /**
  * @brief Enable the sprite overflow IRQ.
  */
-#define pce_vdc_irq_sprite_overflow_enable() pce_vdc_enable(VDC_CONTROL_IRQ_SPRITE_OVERFLOW)
+void pce_vdc_irq_sprite_overflow_enable(void);
 
 /**
  * @brief Disable the sprite overflow IRQ.
  */
-#define pce_vdc_irq_sprite_overflow_disable() pce_vdc_disable(VDC_CONTROL_IRQ_SPRITE_OVERFLOW)
+void pce_vdc_irq_sprite_overflow_disable(void);
 
 /**
  * @brief Enable the veritcal blank IRQ.
  */
-#define pce_vdc_irq_vblank_enable() pce_vdc_enable(VDC_CONTROL_IRQ_VBLANK)
+void pce_vdc_irq_vblank_enable(void);
 
 /**
  * @brief Disable the veritcal blank IRQ.
  */
-#define pce_vdc_irq_vblank_disable() pce_vdc_disable(VDC_CONTROL_IRQ_VBLANK)
+void pce_vdc_irq_vblank_disable(void);
 
 /**
  * @brief SuperGrafx: Check for presence.
@@ -278,12 +276,12 @@ void pce_sgx_vdc_set(uint8_t id);
 /**
  * @brief SuperGrafx: Get the current VDC's index port location.
  */
-volatile uint8_t *pce_sgx_vdc_get_index();
+volatile uint8_t *pce_sgx_vdc_get_index(void);
 
 /**
  * @brief SuperGrafx: Get the current VDC's data port location.
  */
-volatile uint16_t *pce_sgx_vdc_get_data();
+volatile uint16_t *pce_sgx_vdc_get_data(void);
 
 #ifdef __cplusplus
 }

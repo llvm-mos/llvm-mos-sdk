@@ -186,14 +186,25 @@ void pce_vdc_disable(uint8_t value) {
 	*IO_VDC_DATA_LO = vdc_control_lo;
 }
 
+bool pce_sgx_detect(void) {
+	uint8_t value = *IO_VPC_CONTROL_HI; // unmapped on non-SGX
+	*IO_VPC_CONTROL_HI ^= 0xC0; // toggle only priority values to minimize glitching
+	if (*IO_VPC_CONTROL_HI == value) {
+		return false;
+	} else {
+		*IO_VPC_CONTROL_HI ^= 0xC0;
+		return true;
+	}
+}
+
 void pce_sgx_vdc1_set(void) {
 	__vdc_base = (volatile uint16_t*) 0x0000;
-	*IO_VPC_PORT_CONTROL = VPC_PORT_VDP1;
+	*IO_VPC_PORT = VPC_PORT_VDP1;
 }
 
 void pce_sgx_vdc2_set(void) {
 	__vdc_base = (volatile uint16_t*) 0x0010;
-	*IO_VPC_PORT_CONTROL = VPC_PORT_VDP2;
+	*IO_VPC_PORT = VPC_PORT_VDP2;
 }
 
 void pce_sgx_vdc_init(void) {
@@ -204,7 +215,7 @@ void pce_sgx_vdc_init(void) {
 
 void pce_sgx_vdc_set(uint8_t id) {
 	__vdc_base = (volatile uint16_t*) (id << 4);
-	*IO_VPC_PORT_CONTROL = id;
+	*IO_VPC_PORT = id;
 }
 
 volatile uint8_t *pce_sgx_vdc_get_index() {

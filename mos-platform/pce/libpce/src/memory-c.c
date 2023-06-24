@@ -15,19 +15,24 @@ void *memcpy(void *dest, const void *src, size_t count) {
     if (count != 0) return pce_memcpy(dest, src, count);
     else return dest;
 }
+
 __attribute__((leaf)) void *pce_memcpy(void *dest, const void *src, uint16_t count) {
     return pce_memop(dest, src, count, PCE_MEMOP_INCR_INCR);
 }
+
 void *rmemcpy(void *dest, const void *src, size_t count) {
     if (count != 0) return pce_rmemcpy(dest, src, count);
     else return dest;
 }
+
 void *memset(void *ptr, int value, size_t num) {
     return pce_memset(ptr, value, num);
 }
+
 void __memset(char *ptr, char value, size_t num) {
     pce_memset(ptr, value, num);
-}    
+}
+
 void *memmove(void *dest, const void *src, size_t num) {
     if (num != 0) return pce_memmove(dest, src, num);
     else return dest;

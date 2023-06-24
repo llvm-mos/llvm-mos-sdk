@@ -2,6 +2,13 @@ __rc0 = 0xf82000;
 INCLUDE imag-regs.ld
 ASSERT(__rc0 == 0xf82000, "Inconsistent zero page map.")
 ASSERT(__rc31 == 0xf8201f, "Inconsistent zero page map.")
+ASSERT(__rc4  == __rc3 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
+ASSERT(__rc5  == __rc4 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
+ASSERT(__rc6  == __rc5 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
+ASSERT(__rc7  == __rc6 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
+ASSERT(__rc8  == __rc7 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
+ASSERT(__rc9  == __rc8 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
+ASSERT(__rc10 == __rc9 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
 
 PROVIDE(__ram_bank_size = 0x2000);
 INCLUDE rom-banked-sections.ld
@@ -64,9 +71,18 @@ SECTIONS {
 	HIDDEN(__zero_zp_bss_start = __zp_bss_start + 1);
 	HIDDEN(__zero_zp_bss_size = __zp_bss_size >= 2 ? __zp_bss_size - 1 : 1);
 
-	.vector : {
+	.early_start : {
 		. = 0xfff6 - 35;
+		__early_start_start = .;
 		KEEP(*(.early_start))
+		__early_start_end = .;
+	} >c_rom
+
+	.vector : {
+		. = 0xfff6;
 		SHORT(irq_ext) SHORT(irq_vdc) SHORT(irq_timer) SHORT(nmi) SHORT(_early_start)
 	} >c_rom
 }
+
+ASSERT((__early_start_end - __early_start_start) == 35, "early_start code size changed - edit link.ld to match crt0/crt0.S")
+ASSERT(__early_start_end == 0xfff6, "early_start code size changed - edit link.ld to match crt0/crt0.S")

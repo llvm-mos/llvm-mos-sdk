@@ -245,6 +245,15 @@ void pce_vdc_disable(uint8_t value);
 #define pce_vdc_irq_vblank_disable() pce_vdc_disable(VDC_CONTROL_IRQ_VBLANK)
 
 /**
+ * @brief SuperGrafx: Check for presence.
+ *
+ * May cause minor graphical glitches if not called during VBlank.
+ *
+ * @return true The SuperGrafx is present.
+ */
+bool pce_sgx_detect(void);
+
+/**
  * @brief SuperGrafx: Initialize the second VDC.
  * 
  * This function *must* be called if you plan on using pce_sgx_vdc* methods.

@@ -343,6 +343,6 @@
 
 #define VPC_PORT_VDP1       0x00
 #define VPC_PORT_VDP2       0x01
-#define IO_VPC_PORT_CONTROL  ((volatile uint16_t*) 0x000E) /* controls ST0/ST1/ST2 */
+#define IO_VPC_PORT         ((volatile uint16_t*) 0x000E) /* controls ST0/ST1/ST2 */
 
 #endif /* _PCE_HARDWARE_H_ */

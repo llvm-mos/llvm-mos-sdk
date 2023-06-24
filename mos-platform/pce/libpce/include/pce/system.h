@@ -20,6 +20,11 @@ extern "C" {
  * Functionality related to the system.
  */
 
+#define NTSC_COLORBURST_FREQ (315 * 1000000 / 88)
+#define PCE_SYSTEM_FREQ (NTSC_COLORBURST_CLOCK * 6)
+#define PCE_CPU_FREQ (NTSC_COLORBURST_CLOCK * 2)
+#define PCE_TIMER_FREQ (PCE_CPU_FREQ / 1024)
+
 /**
  * @brief Enable the specified IRQs.
  *
@@ -29,6 +34,7 @@ extern "C" {
  * @param mask The IRQ mask to enable.
  */
 void pce_irq_enable(uint8_t mask);
+
 /**
  * @brief Disable the specified IRQs.
  * 
@@ -37,12 +43,15 @@ void pce_irq_enable(uint8_t mask);
 void pce_irq_disable(uint8_t mask);
 
 /**
+ * @brief Calculate the reload value for a given timer frequency (in Hz).
+ */
+#define PCE_FREQ_TO_TIMER(freq) ((PCE_TIMER_FREQ / (freq)) - 1)
+
+/**
  * @brief Initialize the timer with a given reload value.
  *
- * To calculate the reload value's resulting frequency, use the following
- * equation:
- *
- * Frequency ~= 6992 / (N + 1) Hz
+ * To calculate the reload value from a given frequency (in Hz), use the
+ * @ref PCE_FREQ_TO_TIMER macro.
  *
  * This function does not enable the timer automatically.
  *

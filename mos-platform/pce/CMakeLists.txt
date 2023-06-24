@@ -38,7 +38,6 @@ add_platform_library(pce-c
   libpce/src/bank-c.c
   libpce/src/joypad.c
   libpce/src/memory.S
-  libpce/src/memory-c.c
   libpce/src/psg.c
   libpce/src/system.c
   libpce/src/vce.c

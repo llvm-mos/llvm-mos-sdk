@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['padlib_2eh_1680',['padlib.h',['../padlib_8h.html',1,'']]],
-  ['peekpoke_2eh_1681',['peekpoke.h',['../peekpoke_8h.html',1,'']]],
-  ['private_2dtypeinfo_2eh_1682',['private-typeinfo.h',['../private-typeinfo_8h.html',1,'']]]
+  ['nes_2eh_2056',['nes.h',['../nes_8h.html',1,'']]],
+  ['nes_2einc_2057',['nes.inc',['../nes_8inc.html',1,'']]],
+  ['nesdoug_2eh_2058',['nesdoug.h',['../nesdoug_8h.html',1,'']]],
+  ['neslib_2eh_2059',['neslib.h',['../neslib_8h.html',1,'']]],
+  ['neslib_2einc_2060',['neslib.inc',['../neslib_8inc.html',1,'']]],
+  ['new_2061',['new',['../new.html',1,'']]],
+  ['ntsc_2einc_2062',['ntsc.inc',['../ntsc_8inc.html',1,'']]]
 ];

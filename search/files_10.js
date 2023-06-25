@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['setjmp_2eh_1685',['setjmp.h',['../setjmp_8h.html',1,'']]],
-  ['sim_2dio_2eh_1686',['sim-io.h',['../sim-io_8h.html',1,'']]],
-  ['sortron_2eh_1687',['sortron.h',['../sortron_8h.html',1,'']]],
-  ['stdio_2eh_1688',['stdio.h',['../stdio_8h.html',1,'']]],
-  ['stdlib_2eh_1689',['stdlib.h',['../common_2include_2stdlib_8h.html',1,'(Global Namespace)'],['../sim_2stdlib_8h.html',1,'(Global Namespace)']]],
-  ['string_2eh_1690',['string.h',['../string_8h.html',1,'']]]
+  ['padlib_2eh_2064',['padlib.h',['../padlib_8h.html',1,'']]],
+  ['pce_2eh_2065',['pce.h',['../pce_8h.html',1,'']]],
+  ['peekpoke_2eh_2066',['peekpoke.h',['../peekpoke_8h.html',1,'']]],
+  ['private_2dtypeinfo_2eh_2067',['private-typeinfo.h',['../private-typeinfo_8h.html',1,'']]],
+  ['psg_2eh_2068',['psg.h',['../psg_8h.html',1,'']]]
 ];

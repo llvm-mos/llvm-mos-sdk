@@ -9,10 +9,12 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - Atari 8-bit
   - XEX file
   - 8-KiB or 16-KiB standard cartridge
-- Commander X16
+- [Commander X16](https://www.commanderx16.com/)
 - Commodore 64
 - Commodore PET
-- MEGA65
+- [CP/M-65](https://github.com/davidgiven/cpm65)
+- [Dodo 6502 Game System](https://github.com/peternoyes/dodo)
+- [MEGA65](https://mega65.org/)
 - NES
   - NES-NROM
   - NES-MMC1
@@ -20,6 +22,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - NES-CNROM
 - Ohio Scientific Challenger 1P
 - PC Engine
+- [RPC/8e](http://www.eloraam.com/blog/2012/04/22/rp-control-internals/) (RedPower 2)
 - 6502 simulator (included)
 
 ## Notable features
@@ -115,20 +118,24 @@ need to prefix `clang` (or `clang++`) with a specific MOS platform provided by
 the SDK. This will ensure clang loads the correct configuration to generate
 executables and libraries for that target.
 
-| Platform                       | Command               |
-| -----------------------------  | --------------------- |
-| Atari 8-bit XEX                | `mos-atari8-clang`    |
-| Atari 8-bit Standard cartridge | `mos-atari8-stdcart`  |
-| Commander X16                  | `mos-cx16-clang`      |
-| Commodore 64                   | `mos-c64-clang`       | 
-| Commodore PET                  | `mos-pet-clang`       |
-| MEGA65                         | `mos-mega65-clang`    |
-| NES-CNROM                      | `mos-nes-cnrom-clang` |
-| NES-MMC1                       | `mos-nes-mmc1-clang`  |
-| NES-MMC3                       | `mos-nes-mmc3-clang`  |
-| NES-NROM                       | `mos-nes-nrom-clang`  |
-| Ohio Scientific Challenger 1P  | `mos-osi-c1p-clang`   |
-| 6502 simulator                 | `mos-sim-clang`       |
+| Platform                         | Command               |
+| -------------------------------- | --------------------- |
+| Atari 8-bit (.XEX)               | `mos-atari8-clang`    |
+| Atari 8-bit (Standard cartridge) | `mos-atari8-stdcart`  |
+| Commander X16                    | `mos-cx16-clang`      |
+| Commodore 64                     | `mos-c64-clang`       | 
+| Commodore PET                    | `mos-pet-clang`       |
+| CP/M-65                          | `mos-cpm65-clang`     |
+| Dodo 6502 Game System            | `mos-dodo-clang`      |
+| MEGA65                           | `mos-mega65-clang`    |
+| NES (CNROM mapper)               | `mos-nes-cnrom-clang` |
+| NES (MMC1 mapper)                | `mos-nes-mmc1-clang`  |
+| NES (MMC3 mapper)                | `mos-nes-mmc3-clang`  |
+| NES (NROM mapper)                | `mos-nes-nrom-clang`  |
+| Ohio Scientific Challenger 1P    | `mos-osi-c1p-clang`   |
+| PC Engine                        | `mos-pce-clang`       |
+| RPC/8e (RedPower 2)              | `mos-rpc8e-clang`     |
+| 6502 simulator                   | `mos-sim-clang`       |
 
 ```console
 $ cat <install_dir>/examples/hello-putchar.c

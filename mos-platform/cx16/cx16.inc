@@ -3,15 +3,55 @@
 ; See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 ; information.
 
-; Commander X16 definitions
+; Commander X16 definitions (unofficial ones were defined by cc65, best to avoid)
 
-; cx16 virtual 16 bit registers
-__r0	=	$02		; NOTE: overlaps __rc0, __rc1 (must be saved/restored)
-__r1	=	$04		; NOTE: overlaps __rc2, __rc3
-__r2	=	$06		; NOTE: overlaps __rc4, __rc5
-__r3	=	$08		; NOTE: overlaps __rc6, __rc7
-__r4	=	$0a		; NOTE: overlaps __rc8, __rc9
-__r5	=	$0c		; NOTE: overlaps __rc10, __rc11
+; saves X16 kernal registers (r11-r15) that llvm-mos needs preserved (rc20-rc29)
+; these are saved in r6-r10 (rc10-rc19, which X16 kernal preserves)
+.macro save_X16_scratch
+	ldy	__r11
+	sty	__r6
+	ldy	__r11+1
+	sty	__r6+1
+	ldy	__r12
+	sty	__r7
+	ldy	__r12+1
+	sty	__r7+1
+	ldy	__r13
+	sty	__r8
+	ldy	__r13+1
+	sty	__r8+1
+	ldy	__r14
+	sty	__r9
+	ldy	__r14+1
+	sty	__r9+1
+	ldy	__r15
+	sty	__r10
+	ldy	__r15+1
+	sty	__r10+1
+.endm
+
+.macro restore_X16_scratch
+	ldy	__r6
+	sty	__r11
+	ldy	__r6+1
+	sty	__r11+1
+	ldy	__r7
+	sty	__r12
+	ldy	__r7+1
+	sty	__r12+1
+	ldy	__r8
+	sty	__r13
+	ldy	__r8+1
+	sty	__r13+1
+	ldy	__r9
+	sty	__r14
+	ldy	__r9+1
+	sty	__r14+1
+	ldy	__r10
+	sty	__r15
+	ldy	__r10+1
+	sty	__r15+1
+.endm
 
 ; ---------------------------------------------------------------------------
 ; CX16 mostly Commodore C64 compatible kernal variables

@@ -51,7 +51,6 @@ add_platform_library(cx16-c
  cx16_k_joystick_scan.s
  cx16_k_kbdbuf_get_modifiers.s
  cx16_k_kbdbuf_peek.s
- cx16_k_kbdbuf_peek_len.s
  cx16_k_kbdbuf_put.s
  cx16_k_keymap_get_id.s
  cx16_k_keymap_set.s
@@ -74,5 +73,5 @@ add_platform_library(cx16-c
 )
 
 target_include_directories(cx16-c BEFORE PUBLIC .)
-target_compile_options(cx16-c PUBLIC -mcpu=mos65c02)
+target_compile_options(cx16-c PUBLIC -mcpu=mosw65c02)
 target_link_libraries(cx16-c PRIVATE common-asminc cx16)

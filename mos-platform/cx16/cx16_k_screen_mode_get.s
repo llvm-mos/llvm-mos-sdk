@@ -8,18 +8,19 @@
 ;                                                          rc2/3
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-screen_mode
+; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_screen_mode_get
 cx16_k_screen_mode_get:
-	sec			; c = set for get screen mode info
+	sec			; C = set for get screen mode info
 	jsr	__SCREEN_MODE
-	sty	__rc4		; save y (tile_h)
+	sty	__r4		; save tile_h
 	ldy	#0
 	sta	(__rc2),y	; store mode
 	iny
 	txa
 	sta	(__rc2),y	; store columns
 	iny
-	lda	__rc4
+	lda	__r4
 	sta	(__rc2),y	; store rows
 	rts

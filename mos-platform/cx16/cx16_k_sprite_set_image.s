@@ -3,36 +3,35 @@
 .text
 
 ; unsigned char cx16_k_sprite_set_image(unsigned char num, unsigned char w, unsigned char h, unsigned char maskflag, void *imageaddr, void *maskaddr, unsigned char bpp); // returns 0 on success
-;                                                     a                  x              rc2                rc3             rc4/5            rc6/7                   rc8
+; llvm-mos:                                           a                  x              rc2                rc3             rc4/5            rc6/7                   rc8
+; llvm-mos aliases:                                   a                  x              r0L                r0H             r1               r2                      r3L
+; X16 kernal:                                         A                  X              Y                  C               r0               r1                      r2L
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-sprite_set_image
+; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_sprite_set_image
 cx16_k_sprite_set_image:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
-	ldy	__rc4		; __r0 = imageaddr
-	sty	__r0
+	ldy	__rc2		; save h in r4 temp
+	sty	__r4
+	ldy	__rc3		; save maskflag in r4+1 temp
+	sty	__r4+1
+	ldy	__rc4
+	sty	__r0		; r0 = imageaddr
 	ldy	__rc4+1
 	sty	__r0+1
-	ldy	__rc6		; __r1 = maskaddr
-	sty	__r1
+	ldy	__rc6
+	sty	__r1		; r1 = maskaddr
 	ldy	__rc6+1
 	sty	__r1+1
-	ldy	__rc8		; __r2 = bpp
-	sty	__r2
-	ldy	__rc3		; maskflag
-	cpy	#1		; carry = maskflag >= 1
-				; a = num
-				; x = w
-	ldy	__rc2		; y = h
+	ldy	__rc8
+	sty	__r2		; r2 = bpp
+	ldy	__r4+1		; restore maskflag
+	cpy	#1		; C = set if maskflag >= 1
+				; A = num (already set)
+				; X = w (already set)
+	ldy	__r4		; Y = h
 	jsr	__SPRITE_SET_IMAGE
 	lda	#0		; return 0 on success
 	adc	#0		; return 1 on error (carry set)
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
 	rts

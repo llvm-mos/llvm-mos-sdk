@@ -10,18 +10,21 @@
 ;
 .global cx16_k_graph_draw_line
 cx16_k_graph_draw_line:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
+	save_X16_scratch
+	ldy	__rc6		; NOTE: copy args backwards due to overlap
+	sty	__r3		; __r3 = y2
+	ldy	__rc6+1
+	sty	__r3+1
+	ldy	__rc4
+	sty	__r2		; __r2 = x2
+	ldy	__rc4+1
+	sty	__r2+1
+	ldy	__rc2
+	sty	__r1		; __r1 = y1
+	ldy	__rc2+1
+	sty	__r1+1
 	sta	__r0		; __r0 = x1
 	stx	__r0+1
-				; __r1 = y1 (already set)
-				; __r2 = x2 (already set)
-				; __r3 = y2 (already set)
 	jsr	__GRAPH_DRAW_LINE
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
+	restore_X16_scratch
 	rts

@@ -4,25 +4,18 @@
 
 ;
 ; void cx16_k_fb_filter_pixels(void *filterfunc, unsigned int count);
-;                                    rc2/3                    a/x
+; llvm-mos:                            rc2/3                    A/X
+; llvm-mos aliases:                    r0                       A/X
+; X16 kernal:                          r0                       r1
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-fb_filter_pixels
 ;
 .global cx16_k_fb_filter_pixels
 cx16_k_fb_filter_pixels:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
-	ldy	__rc2		; __r0 = filterfunc
-	sty	__r0
-	ldy	__rc2+1
-	sty	__r0+1
-	sta	__r1		; __r1 = count
+	save_X16_scratch
+				; r0 = filterfunc (already set)
+	sta	__r1		; r1 = count
 	stx	__r1+1
 	jsr	__FB_FILTER_PIXELS
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
+	restore_X16_scratch
 	rts

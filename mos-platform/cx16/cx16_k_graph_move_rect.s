@@ -10,20 +10,29 @@
 ;
 .global cx16_k_graph_move_rect
 cx16_k_graph_move_rect:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
-	sta	__r0		; __r0 = sx
+	save_X16_scratch
+	ldy	__rc10		; NOTE: copy args backwards due to overlap
+	sty	__r5		; r5 = height
+	ldy	__rc10+1
+	sty	__r5+1
+	ldy	__rc8
+	sty	__r4		; r4 = width
+	ldy	__rc8+1
+	sty	__r4+1
+	ldy	__rc6
+	sty	__r3		; r3 = ty
+	ldy	__rc6+1
+	sty	__r3+1
+	ldy	__rc4
+	sty	__r2		; r2 = tx
+	ldy	__rc4+1
+	sty	__r2+1
+	ldy	__rc2
+	sty	__r1		; r1 = y
+	ldy	__rc2+1
+	sty	__r1+1
+	sta	__r0		; r0 = x
 	stx	__r0+1
-				; __r1 = sy (already set)
-				; __r2 = tx (already set)
-				; __r3 = ty (already set)
-				; __r4 = width (already set)
-				; __r5 = height (already set)
 	jsr	__GRAPH_MOVE_RECT
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
+	restore_X16_scratch
 	rts

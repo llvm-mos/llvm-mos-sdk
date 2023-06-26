@@ -384,8 +384,7 @@ int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned c
 long cx16_k_joystick_get(unsigned char sticknum); // returns $YYYYXXAA (see docs, result negative if joystick not present)
 void cx16_k_joystick_scan(void);
 unsigned char cx16_k_kbdbuf_get_modifiers(void);
-int cx16_k_kbdbuf_peek(void); // returns negative if empty
-unsigned char cx16_k_kbdbuf_peek_len(void);
+int cx16_k_kbdbuf_peek(unsigned char *index_ptr); // returns negative if empty, if index_ptr non-NULL set contents to queue length
 void cx16_k_kbdbuf_put(unsigned char c);
 const char* cx16_k_keymap_get_id(void);
 unsigned char cx16_k_keymap_set(const char* identifier);	// returns 0 on success

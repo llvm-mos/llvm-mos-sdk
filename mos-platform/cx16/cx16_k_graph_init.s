@@ -25,17 +25,8 @@
 ;
 .global cx16_k_graph_init
 cx16_k_graph_init:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
-	ldy	__rc2
-	sty	__r0		; __r0 = fb_vector_table
-	ldy	__rc2+1
-	sty	__r0+1
+	save_X16_scratch
+				; r0 = fb_vector_table (already set)
 	jsr	__GRAPH_INIT
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
+	restore_X16_scratch
 	rts

@@ -10,16 +10,10 @@
 ;
 .global cx16_k_graph_set_colors
 cx16_k_graph_set_colors:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
-				; a = stroke (already set)
-				; x = fill (already set)
-	ldy	__rc2		; y = background
+	save_X16_scratch
+				; A = stroke (already set)
+				; X = fill (already set)
+	ldy	__rc2		; Y = background
 	jsr	__GRAPH_SET_COLORS
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
+	restore_X16_scratch
 	rts

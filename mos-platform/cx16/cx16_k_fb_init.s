@@ -9,5 +9,8 @@
 ;
 .global cx16_k_fb_init
 cx16_k_fb_init:
-	jmp	__FB_INIT
+	save_X16_scratch
+	jsr	__FB_INIT
+	restore_X16_scratch
+	rts
 

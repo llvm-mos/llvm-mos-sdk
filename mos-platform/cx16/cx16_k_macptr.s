@@ -7,11 +7,12 @@
 ;                                  a                    x                rc2/3
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-macptr
+; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_macptr
 cx16_k_macptr:
-				; a = count
-	cpx	#1		; c = set if noadvance >= 1
+				; A = count
+	cpx	#1		; C = set if noadvance >= 1
 	ldx	__rc2		; x/y = destaddr
 	ldy	__rc2+1
 	jsr	__MACPTR

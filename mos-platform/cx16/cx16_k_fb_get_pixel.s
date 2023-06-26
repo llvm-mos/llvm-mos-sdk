@@ -9,4 +9,7 @@
 ;
 .global cx16_k_fb_get_pixel
 cx16_k_fb_get_pixel:
-	jmp	__FB_GET_PIXEL
+	save_X16_scratch
+	jsr	__FB_GET_PIXEL
+	restore_X16_scratch
+	rts

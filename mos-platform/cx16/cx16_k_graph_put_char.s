@@ -5,39 +5,31 @@
 ;
 ; typedef struct { int x, y } graph_pos_t;
 ; void cx16_k_graph_put_char(graph_pos_t *pos_ptr, unsigned char c);
-;                                         rc2/3                  a
+; llvm-mos:                               rc2/3                  A
+; llvm-mos aliases:                       r0                     A
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-graph_put_char
+; NOTE: As of x16-rom r43 modifies r11 & r13
 ;
 .global cx16_k_graph_put_char
 cx16_k_graph_put_char:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
-	ldy	__rc2		; save rc2/3
-	sty	__rc18		; to rc18/19
-	ldy	__rc3
-	sty	__rc19
+	save_X16_scratch
+	ldy	__rc2		; copy rc2/3 to r4 temp
+	sty	__r4
+	ldy	__rc2+1
+	sty	__r4+1
 	tax			; save c
-				; __r0 = pos_ptr->x
-				; __r1 = pos_ptr->y
 	ldy	#4-1		; copy 4 bytes
-copyposin:
-	lda	(__rc18),y	; from pos_ptr
-	sta	__r0,y		; to __r0 & __r1
+1:	lda	(__r4),y	; from pos_ptr x, y
+	sta	__r0,y		; to r0 & r1
 	dey
-	bpl	copyposin
-	txa			; a = c
+	bpl	1b
+	txa			; A = c
 	jsr	__GRAPH_PUT_CHAR
 	ldy	#4-1		; copy 4 bytes
-copyposout:
-	lda	__r0,y		; copy from __r0 & __r1
-	sta	(__rc18),y	; to pos_ptr
+2:	lda	__r0,y		; from r0 & r1
+	sta	(__r4),y	; to pos_ptr x, y
 	dey
-	bpl	copyposout
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
+	bpl	2b
+	restore_X16_scratch
 	rts

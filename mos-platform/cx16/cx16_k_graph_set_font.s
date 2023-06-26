@@ -10,17 +10,8 @@
 ;
 .global cx16_k_graph_set_font
 cx16_k_graph_set_font:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
-	ldy	__rc2		; __r0 = fontaddr
-	sty	__r0
-	ldy	__rc2+1
-	sty	__r0+1
+	save_X16_scratch
+				; r0 = fontaddr (already present)
 	jsr	__GRAPH_SET_FONT
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
+	restore_X16_scratch
 	rts

@@ -9,13 +9,7 @@
 ;
 .global cx16_k_console_get_char
 cx16_k_console_get_char:
-	ldy	__rc0		; save rc0/rc1 (overlaps cx16 __r0)
-	phy
-	ldy	__rc1
-	phy
+	save_X16_scratch
 	jsr	__CONSOLE_GET_CHAR
-	ply			; restore rc0/rc1
-	sty	__rc1
-	ply
-	sty	__rc0
+	restore_X16_scratch
 	rts

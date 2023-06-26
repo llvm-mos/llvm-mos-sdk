@@ -6,10 +6,12 @@
 ; unsigned long cx16_k_entropy_get(void); // returns 24-bit value
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-entropy_get
+; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_entropy_get
 cx16_k_entropy_get:
 	jsr	__ENTROPY_GET
-	stz	__rc3
-	sty	__rc2
+	stz	__rc2+1		; zero [31:24]
+	sty	__rc2		; set  [23:16]
+				; A/X  [15:0]
 	rts

@@ -45,19 +45,19 @@ __rc6  = __r2;
 __rc8  = __r3;
 /* X16 r4, r5 is left unallocated. */
 
-/* LLVM-MOS caller-saved => X16 caller-saved (rs5-rs9 => r6-r10). */
-__rc10 = __r6;
-__rc12 = __r7;
-__rc14 = __r8;
-__rc16 = __r9;
-__rc18 = __r10;
+/* LLVM-MOS caller-saved => X16 caller-saved (rs5-rs9 => r11-r15). */
+__rc10 = __r11;
+__rc12 = __r12;
+__rc14 = __r13;
+__rc16 = __r14;
+__rc18 = __r15;
 
-/* LLVM-MOS callee-saved => X16 callee-saved (scratch; rs10-rs14 => r11-r15). */
-__rc20 = __r11;
-__rc22 = __r12;
-__rc24 = __r13;
-__rc26 = __r14;
-__rc28 = __r15;
+/* LLVM-MOS callee-saved => X16 callee-saved (scratch; rs10-rs14 => r6-r10). */
+__rc20 = __r6;
+__rc22 = __r7;
+__rc24 = __r8;
+__rc26 = __r9;
+__rc28 = __r10;
 
 /* Remaining LLVM-MOS imaginary registers (rs0, rs15). */
 __rc0  = 0x0022;

@@ -30,6 +30,7 @@
 // Program arguments, error handling.
 
 uint32_t iso_offset_sectors = 0;
+bool iso_pad = true;
 
 static void error(int result, const char *msg, ...) {
   va_list ap;
@@ -80,6 +81,7 @@ static bool ends_with(std::string haystack, std::string needle, bool case_sensit
 // Disc building code - useful constants.
 
 #define SECTOR_SIZE 2048
+#define SECTORS_PER_SECOND 75
 
 static const char cd_symbol_prefix[] = "__cd_";
 static const char ipl_system[] = "PC Engine CD-ROM SYSTEM";
@@ -116,6 +118,7 @@ public:
   virtual uint8_t bank_start(void) { return 0; }
   virtual uint8_t bank_end(void) { return 0; }
   virtual uint8_t bank_count(void) { return (sectors() + 3) / 4; }
+  virtual bool hidden(void) { return false; }
  
   virtual void mark_ipl(void) {
     error(1, "Cannot turn \"%s\" into an initial program!", name().c_str());
@@ -147,6 +150,31 @@ static const std::function<bool(const std::string&, const std::string&)> longest
   return a < b;
 };
 
+class PadDiscEntry : public DiscEntry {
+public:
+  PadDiscEntry(std::string name, uint32_t sectors)
+      : DiscEntry(name), _sectors(sectors)
+    { }
+
+  virtual bool hidden(void) {
+    return true;
+  }
+
+  virtual void write(Disc &disc, std::ofstream &out) {
+    char buffer[SECTOR_SIZE] = {0};
+    for (auto i = 0; i < _sectors; i++) {
+      out.write(buffer, SECTOR_SIZE);
+    }
+  }
+
+  virtual uint32_t sectors(void) const {
+    return _sectors;
+  }
+
+private:
+  uint32_t _sectors;
+};
+
 class Disc {
 public:
   Disc() : _symbols(longest_first_compare) {}
@@ -157,21 +185,37 @@ public:
   }
 
   void add(std::shared_ptr<DiscEntry> ent) {
-    std::string symbol_name = cd_symbol_prefix + ent->symbol_name() + "__";
-    if (_symbols.find(symbol_name) != _symbols.end()) {
-      error(1, "Symbol name prefix collision: %s (%s) != %s (%s)",
-        symbol_name.c_str(), ent->name().c_str(),
-        symbol_name.c_str(), _symbols.find(symbol_name)->second->name().c_str());
+    if (!ent->hidden()) {
+      std::string symbol_name = cd_symbol_prefix + ent->symbol_name() + "__";
+      if (_symbols.find(symbol_name) != _symbols.end()) {
+        error(1, "Symbol name prefix collision: %s (%s) != %s (%s)",
+          symbol_name.c_str(), ent->name().c_str(),
+          symbol_name.c_str(), _symbols.find(symbol_name)->second->name().c_str());
+      }
+      _symbols[symbol_name] = ent;
     }
-    _symbols[symbol_name] = ent;
 
     ent->offset(size());
     _entries.push_back(ent);
   }
 
+  void finalize(void) {
+    if (iso_pad) {
+      // CD-ROM specification expects at least 2 seconds of trailing zeroes,
+      // and at least 6 seconds of length total.
+      uint32_t total_sectors = std::max(size(), 6U * SECTORS_PER_SECOND);
+      uint32_t pad_sectors = std::max(total_sectors - size(), 2U * SECTORS_PER_SECOND);
+      if (pad_sectors > 0) {
+        add(std::make_shared<PadDiscEntry>(PadDiscEntry("pad", pad_sectors)));
+      }
+    }
+  }
+
   void write(std::ofstream &out) {
     for (auto ent : _entries) {
-      fprintf(stderr, "Writing \"%s\" (%s%s) to ISO @ sector %d, size %d\n", ent->name().c_str(), cd_symbol_prefix, ent->symbol_name().c_str(), ent->offset(), ent->sectors());
+      if (!ent->hidden()) {
+        fprintf(stderr, "Writing \"%s\" (%s%s) to ISO @ sector %d, size %d\n", ent->name().c_str(), cd_symbol_prefix, ent->symbol_name().c_str(), ent->offset(), ent->sectors());
+      }
       out.seekp(ent->offset() * SECTOR_SIZE, std::ios::beg);
       ent->write(*this, out);
     }
@@ -596,6 +640,8 @@ int main(int argc, char *const *argv) {
   if (disc.entries().size() < 2) {
     error(1, "No files provided!");
   }
+
+  disc.finalize();
 
   std::ofstream outf(argv[1], std::ios_base::binary);
   if (!outf.good()) {

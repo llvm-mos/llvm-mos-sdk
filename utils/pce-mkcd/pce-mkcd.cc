@@ -609,6 +609,21 @@ static bool try_append_ipl(Disc &disc, std::string name) {
   return true;
 }
 
+static void add_file(Disc &disc, std::string filename) {
+  std::shared_ptr<DiscEntry> ptr;
+
+  if (ends_with(filename, ".elf", false)) {
+    ptr = std::make_shared<ElfDiscEntry>(ElfDiscEntry(filename));
+  } else {
+    ptr = std::make_shared<FileDiscEntry>(FileDiscEntry(filename));
+  }
+  if (disc.entries().size() == 1) {
+    ptr->mark_ipl();
+  }
+
+  disc.add(ptr);
+} 
+
 int main(int argc, char *const *argv) {
   Disc disc;
 
@@ -622,19 +637,19 @@ int main(int argc, char *const *argv) {
   }
 
   for (int i = 2; i < argc; i++) {
-    std::string filename = argv[i];
-    std::shared_ptr<DiscEntry> ptr;
-
-    if (ends_with(filename, ".elf", false)) {
-      ptr = std::make_shared<ElfDiscEntry>(ElfDiscEntry(filename));
+    if (argv[i][0] == '@') {
+      std::ifstream list(argv[i] + 1);
+      if (list.is_open()) {
+        std::string line;
+        while(std::getline(list, line)) {
+          if (!starts_with(line, "#")) {
+            add_file(disc, line);
+          }
+        }
+      }      
     } else {
-      ptr = std::make_shared<FileDiscEntry>(FileDiscEntry(filename));
+      add_file(disc, argv[i]);
     }
-    if (disc.entries().size() == 1) {
-      ptr->mark_ipl();
-    }
-
-    disc.add(ptr);
   }
 
   if (disc.entries().size() < 2) {

@@ -8,7 +8,7 @@
  * file in the project root for the full text.
  */
 
-#include "elf.h"
+#include "../elf-common/elf.h"
 #include <cstdarg>
 #include <cstdint>
 #include <cstring>
@@ -18,34 +18,7 @@
 #include <string>
 #include <vector>
 
-/* MOS relocations (at least, the ones we care about). */
-
-#define R_MOS_ADDR8 2
-#define R_MOS_ADDR16 3
-#define R_MOS_ADDR16_LO 4
-#define R_MOS_ADDR16_HI 5
-
-/* ELF structure definitions. */
-
-#define ELF32_EHDR_IDENT offsetof(Elf32_Ehdr, e_ident)
-#define ELF32_EHDR_PHENTSIZE offsetof(Elf32_Ehdr, e_phentsize)
-#define ELF32_EHDR_PHNUM offsetof(Elf32_Ehdr, e_phnum)
-#define ELF32_EHDR_PHOFF offsetof(Elf32_Ehdr, e_phoff)
-
-#define ELF32_PHDR_TYPE offsetof(Elf32_Phdr, p_type)
-#define ELF32_PHDR_FILESZ offsetof(Elf32_Phdr, p_filesz)
-#define ELF32_PHDR_OFFSET offsetof(Elf32_Phdr, p_offset)
-#define ELF32_PHDR_PADDR offsetof(Elf32_Phdr, p_paddr)
-#define ELF32_PHDR_VADDR offsetof(Elf32_Phdr, p_vaddr)
-#define ELF32_PHDR__SIZE sizeof(Elf32_Phdr)
-
-#define ELF32_SYM_VALUE offsetof(Elf32_Sym, st_value)
-#define ELF32_SYM_SHNDX offsetof(Elf32_Sym, st_shndx)
-#define ELF32_SYM__SIZE sizeof(Elf32_Sym)
-
-#define ELF32_RELA_INFO offsetof(Elf32_Rela, r_info)
-#define ELF32_RELA_OFFSET offsetof(Elf32_Rela, r_offset)
-#define ELF32_RELA__SIZE sizeof(Elf32_Rela)
+#include "../elf-common/elf-mos.h"
 
 static std::string outputFilename;
 static std::string inputFilename;

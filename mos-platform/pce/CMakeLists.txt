@@ -4,11 +4,11 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-include_directories(BEFORE SYSTEM .)
-
 install(FILES
   _rom-banked-sections.ld
 TYPE LIB)
+
+include_directories(BEFORE SYSTEM .)
 
 # crt0 build code
 

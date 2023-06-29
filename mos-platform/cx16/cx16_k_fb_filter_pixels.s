@@ -12,10 +12,7 @@
 ;
 .global cx16_k_fb_filter_pixels
 cx16_k_fb_filter_pixels:
-	save_X16_scratch
 				; r0 = filterfunc (already set)
 	sta	__r1		; r1 = count
 	stx	__r1+1
-	jsr	__FB_FILTER_PIXELS
-	restore_X16_scratch
-	rts
+	jmp	__FB_FILTER_PIXELS

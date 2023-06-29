@@ -9,11 +9,10 @@
 ; llvm-mos aliases:                       r0                     A
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-graph_put_char
-; NOTE: As of x16-rom r43 modifies r11 & r13
 ;
 .global cx16_k_graph_put_char
 cx16_k_graph_put_char:
-	save_X16_scratch
+	X16_pushw __r6		; paranoid about trashing r6
 	ldy	__rc2		; copy rc2/3 to r4 temp
 	sty	__r4
 	ldy	__rc2+1
@@ -31,5 +30,5 @@ cx16_k_graph_put_char:
 	sta	(__r4),y	; to pos_ptr x, y
 	dey
 	bpl	2b
-	restore_X16_scratch
+	X16_popw __r6
 	rts

@@ -12,7 +12,6 @@
 ;
 .global cx16_k_fb_fill_pixels
 cx16_k_fb_fill_pixels:
-	save_X16_scratch
 	ldy	__rc2		; NOTE: copy args backwards due to overlap
 	sty	__r1		; r1 = step
 	ldy	__rc2+1
@@ -20,6 +19,4 @@ cx16_k_fb_fill_pixels:
 	sta	__r0		; r0 = count
 	stx	__r0+1
 	lda	__rc4		; A = color
-	jsr	__FB_FILL_PIXELS
-	restore_X16_scratch
-	rts
+	jmp	__FB_FILL_PIXELS

@@ -5,52 +5,68 @@
 
 ; Commander X16 definitions (unofficial ones were defined by cc65, best to avoid)
 
-; saves X16 kernal registers (r11-r15) that llvm-mos needs preserved (rc20-rc29)
-; these are saved in r6-r10 (rc10-rc19, which X16 kernal preserves)
-.macro save_X16_scratch
-	ldy	__r11
-	sty	__r6
-	ldy	__r11+1
-	sty	__r6+1
-	ldy	__r12
-	sty	__r7
-	ldy	__r12+1
-	sty	__r7+1
-	ldy	__r13
-	sty	__r8
-	ldy	__r13+1
-	sty	__r8+1
-	ldy	__r14
-	sty	__r9
-	ldy	__r14+1
-	sty	__r9+1
-	ldy	__r15
-	sty	__r10
-	ldy	__r15+1
-	sty	__r10+1
+; saves a X16 kernal register on the stack using Y
+.macro X16_pushw	x16reg:req
+	ldy	\x16reg
+	phy
+	ldy	\x16reg+1
+	phy
 .endm
 
-.macro restore_X16_scratch
+; restore a X16 kernal register from the stack using Y
+.macro X16_popw	x16reg:req
+	ply
+	sty	\x16reg+1
+	ply
+	sty	\x16reg
+.endm
+
+; save X16 kernal registers (r6-r10) that llvm-mos needs preserved (rc20-rc29) using Y
+.macro X16_kernal_push_r6_r10
 	ldy	__r6
-	sty	__r11
+	phy
 	ldy	__r6+1
-	sty	__r11+1
+	phy
 	ldy	__r7
-	sty	__r12
+	phy
 	ldy	__r7+1
-	sty	__r12+1
+	phy
 	ldy	__r8
-	sty	__r13
+	phy
 	ldy	__r8+1
-	sty	__r13+1
+	phy
 	ldy	__r9
-	sty	__r14
+	phy
 	ldy	__r9+1
-	sty	__r14+1
+	phy
 	ldy	__r10
-	sty	__r15
+	phy
 	ldy	__r10+1
-	sty	__r15+1
+	phy
+.endm
+
+; restore X16 kernal registers (r6-r10) that llvm-mos needs preserved (rc20-rc29) using Y
+.macro X16_kernal_pop_r6_r10
+	ply
+	sty	__r10+1
+	ply
+	sty	__r10
+	ply
+	sty	__r9+1
+	ply
+	sty	__r9
+	ply
+	sty	__r8+1
+	ply
+	sty	__r8
+	ply
+	sty	__r7+1
+	ply
+	sty	__r7
+	ply
+	sty	__r6+1
+	ply
+	sty	__r6
 .endm
 
 ; ---------------------------------------------------------------------------

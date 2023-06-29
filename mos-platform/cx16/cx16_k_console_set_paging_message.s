@@ -12,8 +12,5 @@
 ;
 .global cx16_k_console_set_paging_message
 cx16_k_console_set_paging_message:
-	save_X16_scratch
     					; r0 = addr (already set)
-	jsr	__CONSOLE_SET_PAGE_MSG
-	restore_X16_scratch
-	rts
+	jmp	__CONSOLE_SET_PAGE_MSG

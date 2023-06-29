@@ -12,7 +12,6 @@
 ;
 .global cx16_k_fb_fill_pixels
 cx16_k_fb_fill_pixels:
-	save_X16_scratch
 	ldy	__rc8		; NOTE: copy args backwards due to overlap
 	sty	__r4		; r4 = count
 	ldy	__rc8+1
@@ -31,6 +30,4 @@ cx16_k_fb_fill_pixels:
 	sty	__r1+1
 	sta	__r0		; r0 = x
 	stx	__r0+1
-	jsr	__FB_MOVE_PIXELS
-	restore_X16_scratch
-	rts
+	jmp	__FB_MOVE_PIXELS

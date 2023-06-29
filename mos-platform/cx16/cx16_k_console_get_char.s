@@ -9,7 +9,7 @@
 ;
 .global cx16_k_console_get_char
 cx16_k_console_get_char:
-	save_X16_scratch
+	X16_pushw __r6		; documented as trashing r6
 	jsr	__CONSOLE_GET_CHAR
-	restore_X16_scratch
+	X16_popw __r6
 	rts

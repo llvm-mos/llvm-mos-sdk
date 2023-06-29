@@ -12,7 +12,7 @@
 ;
 .global cx16_k_console_init
 cx16_k_console_init:
-	save_X16_scratch
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 	ldy	__rc6		; NOTE: copy args backwards due to overlap
 	sty	__r3		; r3 = height
 	ldy	__rc6+1
@@ -27,6 +27,6 @@ cx16_k_console_init:
 	sty	__r1+1
 	sta	__r0		; r0 = x
 	stx	__r0+1
-	jsr	__CONSOLE_INIT
-	restore_X16_scratch
+	jmp	__CONSOLE_INIT
+	X16_kernal_pop_r6_r10
 	rts

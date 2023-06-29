@@ -19,14 +19,14 @@
 ;                  void *fb_move_pixels;
 ;                } graph_fb_functions_t;
 ; void cx16_k_graph_init(graph_fb_functions_t *fb_funcs_ptr);
-;                                              rc2/3
+; llvm-mos:                                    rc2/3
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-graph_init
 ;
 .global cx16_k_graph_init
 cx16_k_graph_init:
-	save_X16_scratch
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 				; r0 = fb_vector_table (already set)
 	jsr	__GRAPH_INIT
-	restore_X16_scratch
+	X16_kernal_pop_r6_r10
 	rts

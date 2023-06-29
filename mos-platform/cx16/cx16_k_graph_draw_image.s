@@ -4,13 +4,14 @@
 
 ;
 ; void cx16_k_graph_draw_image(unsigned int x, unsigned int y, void *imageaddr, unsigned int width, unsigned int height);
-;                                         a/x           rc2/3        rc4/5                   rc6/7               rc8/9
+; llvm-mos:                               A/X           rc2/3        rc4/5                   rc6/7               rc8/9
+; llvm-mos aliases:			  A/X           r0           r1                      r2                  r3
+; X16 kernal:                             r0            r1           r2                      r3                  r4
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-graph_draw_image
 ;
 .global cx16_k_graph_draw_image
 cx16_k_graph_draw_image:
-	save_X16_scratch
 	ldy	__rc8		; NOTE: copy args backwards due to overlap
 	sty	__r4		; r4 = height
 	ldy	__rc8+1
@@ -29,6 +30,4 @@ cx16_k_graph_draw_image:
 	sty	__r1+1
 	sta	__r0		; r0 = x
 	stx	__r0+1
-	jsr	__GRAPH_DRAW_IMAGE
-	restore_X16_scratch
-	rts
+	jmp	__GRAPH_DRAW_IMAGE

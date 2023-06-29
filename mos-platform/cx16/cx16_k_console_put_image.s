@@ -12,7 +12,7 @@
 ;
 .global cx16_k_console_put_image
 cx16_k_console_put_image:
-	save_X16_scratch
+	X16_pushw __r6		; paranoid about trashing r6
 	ldy	__rc4
 	sty	__r2		; r2 = height
 	ldy	__rc4+1
@@ -24,5 +24,5 @@ cx16_k_console_put_image:
 	ldy	__rc2+1
 	sty	__r0+1
 	jsr	__CONSOLE_PUT_IMAGE
-	restore_X16_scratch
+	X16_popw __r6
 	rts

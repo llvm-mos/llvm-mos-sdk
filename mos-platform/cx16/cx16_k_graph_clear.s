@@ -9,7 +9,4 @@
 ;
 .global cx16_k_graph_clear
 cx16_k_graph_clear:
-	save_X16_scratch
-	jsr	__GRAPH_CLEAR
-	restore_X16_scratch
-	rts
+	jmp	__GRAPH_CLEAR

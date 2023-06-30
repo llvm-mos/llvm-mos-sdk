@@ -35,12 +35,14 @@ target_compile_options(pce-cd-crt0 PUBLIC -mcpu=moshuc6280)
 
 # libpce extensions build code
 
-# add_platform_library(pce-cd-c)
+add_platform_library(pce-cd-c
+  libpce/src/cd/bios.c
+)
 
-# target_include_directories(pce-cd-c SYSTEM BEFORE PUBLIC libpce/include)
-# target_compile_options(pce-cd-c PUBLIC -mcpu=moshuc6280)
-# target_link_libraries(pce-cd-c PRIVATE common-asminc)
+target_include_directories(pce-cd-c SYSTEM BEFORE PUBLIC libpce/include)
+target_include_directories(pce-cd-c SYSTEM BEFORE PUBLIC ../pce-common/libpce/include)
+target_compile_options(pce-cd-c PUBLIC -mcpu=moshuc6280)
+target_link_libraries(pce-cd-c PRIVATE common-asminc)
 
-# install(DIRECTORY libpce/include/pce TYPE INCLUDE)
-# install(FILES libpce/include/pce-cd.h TYPE INCLUDE)
-
+install(DIRECTORY libpce/include/pce TYPE INCLUDE)
+install(FILES libpce/include/pce-cd.h TYPE INCLUDE)

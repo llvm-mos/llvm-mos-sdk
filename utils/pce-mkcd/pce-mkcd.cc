@@ -31,6 +31,21 @@
 
 uint32_t iso_offset_sectors = 0;
 bool iso_pad = true;
+typedef enum {
+  VERBOSITY_QUIET = 0,
+  VERBOSITY_INFO = 1,
+  VERBOSITY_VERBOSE = 2
+} verbosity_level;
+verbosity_level verbosity = VERBOSITY_INFO;
+
+static void log(verbosity_level log_verbosity, const char *msg, ...) {
+  if (verbosity >= log_verbosity) {
+    va_list ap;
+    va_start(ap, msg);
+    vfprintf(stderr, msg, ap);
+    fprintf(stderr, "\n");
+  }
+}
 
 static void error(int result, const char *msg, ...) {
   va_list ap;
@@ -206,6 +221,7 @@ public:
       uint32_t total_sectors = std::max(size(), 6U * SECTORS_PER_SECOND);
       uint32_t pad_sectors = std::max(total_sectors - size(), 2U * SECTORS_PER_SECOND);
       if (pad_sectors > 0) {
+        log(VERBOSITY_VERBOSE, "Adding %d sectors of padding required by CD-ROM specification.", pad_sectors);
         add(std::make_shared<PadDiscEntry>(PadDiscEntry("pad", pad_sectors)));
       }
     }
@@ -214,12 +230,12 @@ public:
   void write(std::ofstream &out) {
     for (auto ent : _entries) {
       if (!ent->hidden()) {
-        fprintf(stderr, "Writing \"%s\" (%s%s) to ISO @ sector %d, size %d\n", ent->name().c_str(), cd_symbol_prefix, ent->symbol_name().c_str(), ent->offset(), ent->sectors());
+        log(VERBOSITY_INFO, "Writing \"%s\" (%s%s) to ISO @ sector %d, size %d", ent->name().c_str(), cd_symbol_prefix, ent->symbol_name().c_str(), ent->offset(), ent->sectors());
       }
       out.seekp(ent->offset() * SECTOR_SIZE, std::ios::beg);
       ent->write(*this, out);
     }
-    fprintf(stderr, "Finished writing ISO, size %d\n", size());
+    log(VERBOSITY_INFO, "Finished writing ISO, size %d", size());
   }
 
   auto entries() { return _entries; }
@@ -466,6 +482,7 @@ public:
                 default:
                   error(1, "Unknown relocation type %d!", r_sym_type);
                 }
+                log(VERBOSITY_VERBOSE, "=> Relocating \"%s\" @ %08X => %X", r_sym_name.c_str(), r_addr, value);
 
                 uint8_t carry = 0;
                 for (auto x = 0; x < width; x++, value >>= 8) {

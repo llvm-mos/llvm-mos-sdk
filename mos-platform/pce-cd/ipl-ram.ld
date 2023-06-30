@@ -8,7 +8,4 @@ MEMORY {
 
 REGION_ALIAS("c_ram", console_ram)
 
-__stack = 0x4000;
-__mos_pce_cd_ipl = 1;
-
 INCLUDE cd-sections.ld

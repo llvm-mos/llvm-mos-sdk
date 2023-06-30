@@ -6,6 +6,7 @@ endif()
 
 install(FILES
   _rom-banked-sections.ld
+  rom-sections.ld
 TYPE LIB)
 
 include_directories(BEFORE SYSTEM .)

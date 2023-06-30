@@ -23,6 +23,7 @@ include_directories(BEFORE SYSTEM .)
 
 add_platform_library(pce-cd-crt0
   crt0/copy-zp-data.S
+  crt0/zero-bss.S
   crt0/zero-zp-bss.S
 )
 merge_libraries(pce-cd-crt0

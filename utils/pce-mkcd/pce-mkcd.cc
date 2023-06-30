@@ -445,6 +445,9 @@ public:
                   error(1, "Unknown CD symbol \"%s\"!", r_sym_name.c_str());
                 }
 
+                // The user may specify a __cd_ symbol as an immediate or as
+                // an address. Other relocation types are not supported, such
+                // as PCREL or ASCIIZ.
                 int width = 0;
                 switch (r_sym_type) {
                 case R_MOS_IMM8: width = 1; break;

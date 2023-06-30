@@ -8,7 +8,7 @@
  * file in the project root for the full text.
  */
 
-#include "../elf-common/elf.h"
+#include "../common/elf.h"
 #include <cstdarg>
 #include <cstdint>
 #include <cstring>
@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-#include "../elf-common/elf-mos.h"
+#include "../common/elf-mos.h"
 
 static std::string outputFilename;
 static std::string inputFilename;

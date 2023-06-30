@@ -7,7 +7,6 @@
  * file in the project root for the full text.
  */
 
-#include "../elf-common/elf.h"
 #include <algorithm>
 #include <cassert>
 #include <cctype>
@@ -25,9 +24,39 @@
 #include <string>
 #include <vector>
 
-#include "../elf-common/elf-mos.h"
+#include "../common/elf.h"
+#include "../common/elf-mos.h"
+
+#include "../common/parg/parg.h"
 
 // Program arguments, error handling.
+
+#define P_ARG_HELP 'h'
+#define P_ARG_QUIET 'q'
+#define P_ARG_VERBOSE 'v'
+#define P_ARG_ISO_OFFSET 128
+#define P_ARG_ISO_NO_PAD_END 129
+#define P_ARG_IPL 130
+
+static struct parg_option long_options[] = {
+  {"help", PARG_NOARG, 0, P_ARG_HELP},
+  {"ipl", PARG_REQARG, 0, P_ARG_IPL},
+  {"iso-no-pad-end", PARG_NOARG, 0, P_ARG_ISO_NO_PAD_END},
+  {"iso-offset", PARG_REQARG, 0, P_ARG_ISO_OFFSET},
+  {"quiet", PARG_NOARG, 0, P_ARG_QUIET},
+  {"verbose", PARG_NOARG, 0, P_ARG_VERBOSE},
+  {0, 0, 0, 0}
+};
+static const char *short_options = "hqv";
+
+static const char *long_option_descriptions[] = {
+  "Print help information.",
+  "Specify the path to the ipl.bin file (first CD sector).",
+  "Disable ISO padding mandated by the CD-ROM specification.",
+  "Offset at the beginning of the ISO, in sectors.",
+  "Disable progress messages.",
+  "Enable more verbose messages."
+};
 
 uint32_t iso_offset_sectors = 0;
 bool iso_pad = true;
@@ -644,19 +673,66 @@ static void add_file(Disc &disc, std::string filename) {
   disc.add(ptr);
 } 
 
-int main(int argc, char *const *argv) {
+static void usage(int return_code) {
+  if (return_code == 0) {
+    printf("pce-mkcd - create ISO image for pce-cd target\n\n");
+  }
+  printf("Usage: pce-mkcd <output.iso> <files...>\n\nOptions:\n");
+  const struct parg_option* option = long_options;
+  const char** description = long_option_descriptions;
+  while (option->name != nullptr) {
+    printf("  ");
+    if (isalnum(option->val)) printf("-%c, ", option->val);
+    printf("--%s", option->name);
+    if (option->has_arg == PARG_REQARG) printf(" <arg>");
+    if (option->has_arg == PARG_OPTARG) printf(" [arg]");
+    printf("    %s\n", *description);
+    option++; description++;
+  }
+  exit(return_code);
+}
+
+int main(int argc, char **argv) {
+  struct parg_state ps;
+  std::string ipl_path = "ipl.bin";
   Disc disc;
 
-  if (argc < 3) {
-    printf("Usage: pce-mkcd <output.iso> <files...>\n");
-    exit(1);
+  parg_init(&ps);
+  int optend = parg_reorder(argc, argv, short_options, long_options);
+
+  int optval;
+  while ((optval = parg_getopt_long(&ps, optend, argv, short_options, long_options, nullptr)) != -1) {
+    switch (optval) {
+    case P_ARG_HELP:
+      usage(0);
+      break;
+    case P_ARG_IPL:
+      ipl_path = ps.optarg;
+      break;
+    case P_ARG_ISO_NO_PAD_END:
+      iso_pad = false;
+      break;
+    case P_ARG_ISO_OFFSET:
+      iso_offset_sectors = atoi(ps.optarg);
+      break;
+    case P_ARG_QUIET:
+      verbosity = VERBOSITY_QUIET;
+      break;
+    case P_ARG_VERBOSE:
+      verbosity = VERBOSITY_VERBOSE;
+      break;
+    }
   }
 
-  if (!try_append_ipl(disc, "ipl.bin")) {
+  if ((argc - optend) < 2) {
+    usage(1);
+  }
+
+  if (!try_append_ipl(disc, ipl_path)) {
     error(1, "Could not locate 'ipl.bin' file!");
   }
 
-  for (int i = 2; i < argc; i++) {
+  for (int i = optend + 1; i < argc; i++) {
     if (argv[i][0] == '@') {
       std::ifstream list(argv[i] + 1);
       if (list.is_open()) {
@@ -673,12 +749,13 @@ int main(int argc, char *const *argv) {
   }
 
   if (disc.entries().size() < 2) {
-    error(1, "No files provided!");
+    log(VERBOSITY_QUIET, "No files provided!");
+    usage(1);
   }
 
   disc.finalize();
 
-  std::ofstream outf(argv[1], std::ios_base::binary);
+  std::ofstream outf(argv[optend], std::ios_base::binary);
   if (!outf.good()) {
     error(1, "Error opening \"%s\" for writing.", argv[1]);
   }

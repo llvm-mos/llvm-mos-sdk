@@ -108,7 +108,7 @@ bool pce_cdb_vram_in_use(void);
 /**
  * @brief Jump to the CD BIOS entrypoint, effectively doing a "soft reset".
  */
-void pce_cdb_start(void) __attribute__((noreturn));
+__attribute__((noreturn)) void pce_cdb_start(void);
 
 /**
  * @brief Reset the CD drive.
@@ -171,7 +171,7 @@ void pce_cdb_cd_seek(pce_sector_t sector);
  * @param address The address to write to, as well as the starting address.
  * @param length The data length, in sectors unless otherwise specified by the address type.
  */
-void pce_cdb_cd_exec(pce_sector_t sector, uint8_t address_type, uint16_t address, uint16_t length) __attribute__((noreturn));
+__attribute__((noreturn)) void pce_cdb_cd_exec(pce_sector_t sector, uint8_t address_type, uint16_t address, uint16_t length);
 
 typedef enum {
     PCE_CDB_CDDA_PLAY_MUTE = 0,

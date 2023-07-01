@@ -87,19 +87,19 @@ static void error(int result, const char *msg, ...) {
 
 // Vector utilities.
 
-static uint8_t byte_at(std::vector<char> vec, size_t offset) {
+static uint8_t byte_at(const std::vector<char> &vec, size_t offset) {
   return (uint8_t)vec[offset];
 }
 
-static uint16_t short_at(std::vector<char> vec, size_t offset) {
+static uint16_t short_at(const std::vector<char> &vec, size_t offset) {
   return (uint8_t)vec[offset] | ((uint8_t)vec[offset + 1] << 8);
 }
 
-static uint32_t int_at(std::vector<char> vec, size_t offset) {
+static uint32_t int_at(const std::vector<char> &vec, size_t offset) {
   return (uint8_t)vec[offset] | ((uint8_t)vec[offset + 1] << 8) | ((uint8_t)vec[offset + 2] << 16) | ((uint8_t)vec[offset + 3] << 24);
 }
 
-static std::vector<unsigned char> vector_at(std::vector<char> vec, size_t offset, size_t size) {
+static std::vector<unsigned char> vector_at(const std::vector<char> &vec, size_t offset, size_t size) {
   std::vector<unsigned char> sub(size);
   memcpy(&sub[0], &vec[offset], std::min(size, vec.size() - offset));
   return sub;
@@ -107,7 +107,7 @@ static std::vector<unsigned char> vector_at(std::vector<char> vec, size_t offset
 
 // String utilities.
 
-static bool starts_with(std::string haystack, std::string needle, bool case_sensitive = true) {
+static bool starts_with(const std::string &haystack, const std::string &needle, bool case_sensitive = true) {
   return needle.size() <= haystack.size() && std::equal(needle.cbegin(), needle.cend(), haystack.cbegin(),
     [case_sensitive](unsigned char a, unsigned char b) {
       return case_sensitive ? a == b : std::tolower(a) == std::tolower(b);
@@ -115,7 +115,7 @@ static bool starts_with(std::string haystack, std::string needle, bool case_sens
 }
 
 
-static bool ends_with(std::string haystack, std::string needle, bool case_sensitive = true) {
+static bool ends_with(const std::string &haystack, const std::string &needle, bool case_sensitive = true) {
   return needle.size() <= haystack.size() && std::equal(needle.crbegin(), needle.crend(), haystack.crbegin(),
     [case_sensitive](unsigned char a, unsigned char b) {
       return case_sensitive ? a == b : std::tolower(a) == std::tolower(b);
@@ -180,7 +180,7 @@ public:
     return symbol_name;
   }
 
-  virtual std::optional<uint32_t> resolve_symbol(std::string name) {
+  virtual std::optional<uint32_t> resolve_symbol(const std::string &name) {
     return std::nullopt;
   }
 
@@ -487,7 +487,7 @@ public:
                 } else if (r_sym_subname == "bank_count") {
                   value = entry.second->bank_count();
                 } else {
-                  error(1, "Unknown CD symbol \"%s\"!", r_sym_name.c_str());
+                  error(1, "Could not resolve CD symbol \"%s\"!", r_sym_name.c_str());
                 }
 
                 // The user may specify a __cd_ symbol as an immediate or as
@@ -509,7 +509,7 @@ public:
                 case R_MOS_FK_DATA_8: width = 8; break;
                 case R_MOS_IMM16: width = 2; break;
                 default:
-                  error(1, "Unknown relocation type %d!", r_sym_type);
+                  error(1, "Unsupported relocation type %d!", r_sym_type);
                 }
                 log(VERBOSITY_VERBOSE, "=> Relocating \"%s\" @ %08X => %X", r_sym_name.c_str(), r_addr, value);
 
@@ -590,7 +590,7 @@ public:
     }
   }
 
-  virtual std::optional<uint32_t> resolve_symbol(std::string name) override {
+  virtual std::optional<uint32_t> resolve_symbol(const std::string &name) override {
     for (auto i = 0; i < symtab_count; i++) {
       uint32_t sym = symtab_offset + (symtab_size * i);
       std::string sym_name = strtab_name(int_at(elf_data, sym + ELF32_SYM_NAME));

@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['round_5findeterminate_2691',['round_indeterminate',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a9aa7e9f8d978fbe044c24a67da2d0464',1,'std']]],
-  ['round_5fto_5fnearest_2692',['round_to_nearest',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a43219e58bf0b1438dce779ae47760772',1,'std']]],
-  ['round_5ftoward_5finfinity_2693',['round_toward_infinity',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a39c9297336599616c46f98eaf73c6191',1,'std']]],
-  ['round_5ftoward_5fneg_5finfinity_2694',['round_toward_neg_infinity',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a5e57d9d7178fe199cfd05b67e9d3c69d',1,'std']]],
-  ['round_5ftoward_5fzero_2695',['round_toward_zero',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a16cd490308c5bcba330c09f844f92f1d',1,'std']]]
+  ['fpidx_5fr0_3042',['FPIDX_R0',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5abdadb22b5afc3fe41ccfc3c3cc4ffb6b',1,'_atarios.h']]],
+  ['fpidx_5fr1_3043',['FPIDX_R1',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a28d565d6a0e7bdec1b5cf7c616b29268',1,'_atarios.h']]],
+  ['fpidx_5fr2_3044',['FPIDX_R2',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a60471fb4c48cf14218faed0f03f879f3',1,'_atarios.h']]],
+  ['fpidx_5fre_3045',['FPIDX_RE',['../__atarios_8h.html#a99fb83031ce9923c84392b4e92f956b5a20b66be4d38b2e253eafcaf7b896b3c4',1,'_atarios.h']]]
 ];

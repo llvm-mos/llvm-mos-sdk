@@ -1,8 +1,15 @@
 var searchData=
 [
-  ['the_2556',['THE',['../famitone2_2LICENSE.html#aabd6c1747aec577c04ba05e63e747ef4',1,'THE():&#160;LICENSE'],['../neslib_2LICENSE.html#aabd6c1747aec577c04ba05e63e747ef4',1,'THE():&#160;LICENSE']]],
-  ['tinyness_5fbefore_2557',['tinyness_before',['../classstd_1_1numeric__limits.html#afe0f1824edfa6b7477e8f537cf92c729',1,'std::numeric_limits']]],
-  ['to_2558',['to',['../nesdoug_8h.html#a79f084c23d40fda813d522615ffebd0c',1,'nesdoug.h']]],
-  ['traps_2559',['traps',['../classstd_1_1numeric__limits.html#aaeb01806265b7ce9bb547559d287cd8b',1,'std::numeric_limits']]],
-  ['type_2560',['type',['../structstd_1_1add__cv.html#a35f2c722c6e6295de4a209b4fb69530c',1,'std::add_cv::type()'],['../structstd_1_1add__const.html#a116f4a48d6e1b033dc8653d62788a31e',1,'std::add_const::type()'],['../structcbm__dirent.html#a8d70df007df4a9d4cfcef29cb93afd60',1,'cbm_dirent::type()']]]
+  ['scroll_2874',['scroll',['../nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec',1,'nesdoug.h']]],
+  ['second_2875',['second',['../structstd_1_1pair.html#ad4e5a31ca04fe500b97656f3a96126d9',1,'std::pair::second()'],['../structpce__cdb__toc__data.html#a4d419e440c082c12d058bdf9d7ccab37',1,'pce_cdb_toc_data::second()'],['../structpce__sector.html#ab72d420e530c9bace5fac1e516276140',1,'pce_sector::second()']]],
+  ['sell_2876',['sell',['../famitone2_2LICENSE.html#a759b1b43be17f3462aaf05b95a22806d',1,'sell():&#160;LICENSE'],['../neslib_2LICENSE.html#a759b1b43be17f3462aaf05b95a22806d',1,'sell():&#160;LICENSE']]],
+  ['sim_5freg_5fiface_2877',['sim_reg_iface',['../sim-io_8h.html#a6582d9e0d8ca73a606dc4bed7542d7dd',1,'sim-io.h']]],
+  ['size_2878',['size',['../structcbm__dirent.html#a014b8b3de80d2e673486d922d5c9bc15',1,'cbm_dirent::size()'],['../neslib_8h.html#a245260f6f74972558f61b85227df5aae',1,'size():&#160;neslib.h']]],
+  ['so_2879',['so',['../famitone2_2LICENSE.html#a2969b4ee37e0c6158bd89fb3dc1cf092',1,'so():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a5427552ea65c1fb8458a8887e2f0ee36',1,'so():&#160;LICENSE'],['../neslib_2LICENSE.html#a2969b4ee37e0c6158bd89fb3dc1cf092',1,'so():&#160;LICENSE']]],
+  ['software_2880',['Software',['../famitone2_2LICENSE.html#a67866dc35f5d8b442992e20df4079c24',1,'Software():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a22d3b013d1a8f7d63a8f24a3c87e3f6f',1,'Software():&#160;LICENSE'],['../neslib_2LICENSE.html#a67866dc35f5d8b442992e20df4079c24',1,'Software():&#160;LICENSE']]],
+  ['sounds_5fdata_2881',['sounds_data',['../famitone2_8h.html#a968ab7f22046d3b8b2018a2ee0743ae0',1,'famitone2.h']]],
+  ['src_2882',['src',['../memory_8h.html#ab3b4066b211a3d1de8f72e90b2bca8ab',1,'memory.h']]],
+  ['status_2883',['status',['../structpce__cdb__subq__data.html#a3312611f3a7117bdb1244dc486e23d50',1,'pce_cdb_subq_data']]],
+  ['strategy_2884',['strategy',['../structDRIVER.html#a98c6afbbae6c52c676e0813143972cfb',1,'DRIVER']]],
+  ['sublicense_2885',['sublicense',['../famitone2_2LICENSE.html#ac7cff9a79443080c7d6c571b7be21e58',1,'sublicense():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a99a9b04576e10c258075bcac51ce7c29',1,'sublicense():&#160;LICENSE'],['../neslib_2LICENSE.html#ac7cff9a79443080c7d6c571b7be21e58',1,'sublicense():&#160;LICENSE']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>llvm-mos-sdk: pce/libpce/include/pce/vdc.h File Reference</title>
+<title>llvm-mos-sdk: pce-common/libpce/include/pce/vdc.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_9ea13c73eb3d41038eb78e9d3e042628.html">pce</a></li><li class="navelem"><a class="el" href="dir_7ef7cfe637ac8bb59821da25e3da72a9.html">libpce</a></li><li class="navelem"><a class="el" href="dir_5911d59b966de1e13e1ea65d5dc8af13.html">include</a></li><li class="navelem"><a class="el" href="dir_9f1f61857de94e41a08a55225da121fb.html">pce</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_19dec2cfc20140c19304e1a398f6f599.html">pce-common</a></li><li class="navelem"><a class="el" href="dir_953b9b99268fa1df746e9c3e949716b6.html">libpce</a></li><li class="navelem"><a class="el" href="dir_7fa0c2b359c92ca6a1e3d8d1f5b1aaa7.html">include</a></li><li class="navelem"><a class="el" href="dir_18aebd74bde9bd38e823369643aa5026.html">pce</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -78,20 +78,22 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for vdc.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="vdc_8h__incl.png" border="0" usemap="#pce_2libpce_2include_2pce_2vdc_8h" alt=""/></div>
-<map name="pce_2libpce_2include_2pce_2vdc_8h" id="pce_2libpce_2include_2pce_2vdc_8h">
-<area shape="rect" title=" " alt="" coords="28,5,167,47"/>
-<area shape="rect" title=" " alt="" coords="5,95,88,121"/>
-<area shape="rect" title=" " alt="" coords="113,95,183,121"/>
+<div class="center"><img src="vdc_8h__incl.png" border="0" usemap="#pce-common_2libpce_2include_2pce_2vdc_8h" alt=""/></div>
+<map name="pce-common_2libpce_2include_2pce_2vdc_8h" id="pce-common_2libpce_2include_2pce_2vdc_8h">
+<area shape="rect" title=" " alt="" coords="5,5,207,47"/>
+<area shape="rect" title=" " alt="" coords="14,95,97,121"/>
+<area shape="rect" title=" " alt="" coords="121,95,192,121"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="vdc_8h__dep__incl.png" border="0" usemap="#pce_2libpce_2include_2pce_2vdc_8hdep" alt=""/></div>
-<map name="pce_2libpce_2include_2pce_2vdc_8hdep" id="pce_2libpce_2include_2pce_2vdc_8hdep">
-<area shape="rect" title=" " alt="" coords="5,5,144,47"/>
-<area shape="rect" href="pce_8h.html" title=" " alt="" coords="5,95,144,136"/>
+<div class="center"><img src="vdc_8h__dep__incl.png" border="0" usemap="#pce-common_2libpce_2include_2pce_2vdc_8hdep" alt=""/></div>
+<map name="pce-common_2libpce_2include_2pce_2vdc_8hdep" id="pce-common_2libpce_2include_2pce_2vdc_8hdep">
+<area shape="rect" title=" " alt="" coords="5,5,207,47"/>
+<area shape="rect" href="pce_8h.html" title=" " alt="" coords="5,95,207,136"/>
+<area shape="rect" href="bios_8h.html" title=" " alt="" coords="27,184,185,225"/>
+<area shape="rect" href="pce-cd_8h.html" title=" " alt="" coords="27,273,185,315"/>
 </map>
 </div>
 </div>
@@ -163,13 +165,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a1a252d587e8a830c8390d69e3f6b3180"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vdc_8h.html#a1a252d587e8a830c8390d69e3f6b3180">pce_vdc_set_copy_column_128</a> (void)</td></tr>
 <tr class="memdesc:a1a252d587e8a830c8390d69e3f6b3180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the VDC's copy method to copy every column for a 128-wide display. Alias for <a class="el" href="vdc_8h.html#a1320d1220a3f18e8efeb7549ecb177ce">pce_vdc_set_copy_128_words</a> .  <a href="vdc_8h.html#a1a252d587e8a830c8390d69e3f6b3180">More...</a><br /></td></tr>
 <tr class="separator:a1a252d587e8a830c8390d69e3f6b3180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56ce68be44a67bb3136710a221aa39ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vdc_8h.html#a56ce68be44a67bb3136710a221aa39ca">pce_vdc_copy_to_vram</a> (uint16_t dest, const void *source, uint16_t length)</td></tr>
+<tr class="memitem:a56ce68be44a67bb3136710a221aa39ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vdc_8h.html#a56ce68be44a67bb3136710a221aa39ca">pce_vdc_copy_to_vram</a> (uint16_t dest, const void *source, uint16_t <a class="el" href="bios_8h.html#a766e27240b5a5fd8763035537a67785f">length</a>)</td></tr>
 <tr class="memdesc:a56ce68be44a67bb3136710a221aa39ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy data from RAM to VRAM.  <a href="vdc_8h.html#a56ce68be44a67bb3136710a221aa39ca">More...</a><br /></td></tr>
 <tr class="separator:a56ce68be44a67bb3136710a221aa39ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabac4b20611c7e41ef8152c0743a4339"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vdc_8h.html#aabac4b20611c7e41ef8152c0743a4339">pce_vdc_copy_from_vram</a> (void *dest, uint16_t source, uint16_t length)</td></tr>
+<tr class="memitem:aabac4b20611c7e41ef8152c0743a4339"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vdc_8h.html#aabac4b20611c7e41ef8152c0743a4339">pce_vdc_copy_from_vram</a> (void *dest, uint16_t source, uint16_t <a class="el" href="bios_8h.html#a766e27240b5a5fd8763035537a67785f">length</a>)</td></tr>
 <tr class="memdesc:aabac4b20611c7e41ef8152c0743a4339"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy data from VRAM to RAM.  <a href="vdc_8h.html#aabac4b20611c7e41ef8152c0743a4339">More...</a><br /></td></tr>
 <tr class="separator:aabac4b20611c7e41ef8152c0743a4339"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad57a98ddecdfb304fea9e3f0d695c347"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vdc_8h.html#ad57a98ddecdfb304fea9e3f0d695c347">pce_vdc_dma_start</a> (uint8_t <a class="el" href="memory_8h.html#a2797713f0e84f822af4da1688cc1501c">mode</a>, uint16_t source, uint16_t dest, uint16_t length)</td></tr>
+<tr class="memitem:ad57a98ddecdfb304fea9e3f0d695c347"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vdc_8h.html#ad57a98ddecdfb304fea9e3f0d695c347">pce_vdc_dma_start</a> (uint8_t <a class="el" href="memory_8h.html#a2797713f0e84f822af4da1688cc1501c">mode</a>, uint16_t source, uint16_t dest, uint16_t <a class="el" href="bios_8h.html#a766e27240b5a5fd8763035537a67785f">length</a>)</td></tr>
 <tr class="memdesc:ad57a98ddecdfb304fea9e3f0d695c347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start a DMA operation on the VDC.  <a href="vdc_8h.html#ad57a98ddecdfb304fea9e3f0d695c347">More...</a><br /></td></tr>
 <tr class="separator:ad57a98ddecdfb304fea9e3f0d695c347"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9babf242e639b805f4ee9abd95ea79d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vdc_8h.html#aa9babf242e639b805f4ee9abd95ea79d">pce_vdc_dma_finished</a> (void)</td></tr>
@@ -829,11 +831,11 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mode</td><td>The DMA mode.<ul>
-<li><a class="el" href="pce_2libpce_2include_2pce_2hardware_8h.html#af032f1d509e22caa4f9835c636f49880">VDC_DMA_IRQ_SATB_DONE</a> - IRQ on VRAM-&gt;SATB transfer completion</li>
-<li><a class="el" href="pce_2libpce_2include_2pce_2hardware_8h.html#a3835273280686727c8f9a395d0405b94">VDC_DMA_IRQ_DONE</a> - IRQ on VRAM-&gt;VRAM transfer completion</li>
-<li><a class="el" href="pce_2libpce_2include_2pce_2hardware_8h.html#aa6c8f82262835a79c2502310eae4173b">VDC_DMA_SRC_DEC</a> - decrement source pointer (increment by default)</li>
-<li><a class="el" href="pce_2libpce_2include_2pce_2hardware_8h.html#ae955aa84bb632c0e3891e0c04a370cdc">VDC_DMA_DEST_DEC</a> - decrement destination pointer (increment by default)</li>
-<li><a class="el" href="pce_2libpce_2include_2pce_2hardware_8h.html#a2e7d89ad39f1afb0bf5258ba82ac85ee">VDC_DMA_REPEAT_SATB</a> - automatically schedule VRAM-&gt;SATB transfer </li>
+<li><a class="el" href="pce-common_2libpce_2include_2pce_2hardware_8h.html#af032f1d509e22caa4f9835c636f49880">VDC_DMA_IRQ_SATB_DONE</a> - IRQ on VRAM-&gt;SATB transfer completion</li>
+<li><a class="el" href="pce-common_2libpce_2include_2pce_2hardware_8h.html#a3835273280686727c8f9a395d0405b94">VDC_DMA_IRQ_DONE</a> - IRQ on VRAM-&gt;VRAM transfer completion</li>
+<li><a class="el" href="pce-common_2libpce_2include_2pce_2hardware_8h.html#aa6c8f82262835a79c2502310eae4173b">VDC_DMA_SRC_DEC</a> - decrement source pointer (increment by default)</li>
+<li><a class="el" href="pce-common_2libpce_2include_2pce_2hardware_8h.html#ae955aa84bb632c0e3891e0c04a370cdc">VDC_DMA_DEST_DEC</a> - decrement destination pointer (increment by default)</li>
+<li><a class="el" href="pce-common_2libpce_2include_2pce_2hardware_8h.html#a2e7d89ad39f1afb0bf5258ba82ac85ee">VDC_DMA_REPEAT_SATB</a> - automatically schedule VRAM-&gt;SATB transfer </li>
 </ul>
 </td></tr>
     <tr><td class="paramname">source</td><td>Source address in VRAM. </td></tr>

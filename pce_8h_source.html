@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>llvm-mos-sdk: pce/libpce/include/pce.h Source File</title>
+<title>llvm-mos-sdk: pce-common/libpce/include/pce.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_9ea13c73eb3d41038eb78e9d3e042628.html">pce</a></li><li class="navelem"><a class="el" href="dir_7ef7cfe637ac8bb59821da25e3da72a9.html">libpce</a></li><li class="navelem"><a class="el" href="dir_5911d59b966de1e13e1ea65d5dc8af13.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_19dec2cfc20140c19304e1a398f6f599.html">pce-common</a></li><li class="navelem"><a class="el" href="dir_953b9b99268fa1df746e9c3e949716b6.html">libpce</a></li><li class="navelem"><a class="el" href="dir_7fa0c2b359c92ca6a1e3d8d1f5b1aaa7.html">include</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -80,23 +80,29 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef _PCE_H_</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define _PCE_H_</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pce_2libpce_2include_2pce_2hardware_8h.html">pce/hardware.h</a>&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pce-common_2libpce_2include_2pce_2hardware_8h.html">pce/hardware.h</a>&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef __ASSEMBLER__</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pce_2libpce_2include_2pce_2bank_8h.html">pce/bank.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="joypad_8h.html">pce/joypad.h</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="memory_8h.html">pce/memory.h</a>&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="psg_8h.html">pce/psg.h</a>&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="system_8h.html">pce/system.h</a>&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="vce_8h.html">pce/vce.h</a>&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="vdc_8h.html">pce/vdc.h</a>&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* _PCE_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pce-common_2libpce_2include_2pce_2bank_8h.html">pce/bank.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;pce/config.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="joypad_8h.html">pce/joypad.h</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="memory_8h.html">pce/memory.h</a>&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="psg_8h.html">pce/psg.h</a>&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="system_8h.html">pce/system.h</a>&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="vce_8h.html">pce/vce.h</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="vdc_8h.html">pce/vdc.h</a>&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifdef __PCE_CD__</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pce-cd_8h.html">pce-cd.h</a>&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* _PCE_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="apce_2libpce_2include_2pce_2bank_8h_html"><div class="ttname"><a href="pce_2libpce_2include_2pce_2bank_8h.html">bank.h</a></div></div>
+<div class="ttc" id="apce-cd_8h_html"><div class="ttname"><a href="pce-cd_8h.html">pce-cd.h</a></div></div>
 <div class="ttc" id="avdc_8h_html"><div class="ttname"><a href="vdc_8h.html">vdc.h</a></div></div>
-<div class="ttc" id="apce_2libpce_2include_2pce_2hardware_8h_html"><div class="ttname"><a href="pce_2libpce_2include_2pce_2hardware_8h.html">hardware.h</a></div></div>
+<div class="ttc" id="apce-common_2libpce_2include_2pce_2hardware_8h_html"><div class="ttname"><a href="pce-common_2libpce_2include_2pce_2hardware_8h.html">hardware.h</a></div></div>
+<div class="ttc" id="apce-common_2libpce_2include_2pce_2bank_8h_html"><div class="ttname"><a href="pce-common_2libpce_2include_2pce_2bank_8h.html">bank.h</a></div></div>
 <div class="ttc" id="ajoypad_8h_html"><div class="ttname"><a href="joypad_8h.html">joypad.h</a></div></div>
 <div class="ttc" id="avce_8h_html"><div class="ttname"><a href="vce_8h.html">vce.h</a></div></div>
 <div class="ttc" id="asystem_8h_html"><div class="ttname"><a href="system_8h.html">system.h</a></div></div>

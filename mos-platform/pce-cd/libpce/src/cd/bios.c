@@ -43,7 +43,8 @@ bool pce_cdb_vram_in_use(void) {
     return *__vram_write_flag != 0;
 }
 
-void pce_cdb_start(void) __attribute__((noreturn)) {
+__attribute__((noreturn))
+void pce_cdb_start(void) {
     __attribute__((leaf)) asm volatile(
         ASM_BIOSCALL(0x00)
     );
@@ -91,7 +92,8 @@ void pce_cdb_cd_seek(pce_sector_t sector) {
     );
 }
 
-void pce_cdb_cd_exec(pce_sector_t sector, uint8_t address_type, uint16_t address, uint16_t length) __attribute__((noreturn)) {
+__attribute__((noreturn))
+void pce_cdb_cd_exec(pce_sector_t sector, uint8_t address_type, uint16_t address, uint16_t length) {
     *__cl = sector.hi;
     *__ch = sector.md;
     *__dl = sector.lo;
@@ -343,7 +345,7 @@ uint16_t pce_cdb_version(void) {
 }
 
 void pce_cdb_irq_set(uint8_t type, void (*irq_handler)(void)) {
-    uint16_t irq_handler_address = (uint16_t) &irq_handler;
+    uint16_t irq_handler_address = (uint16_t) irq_handler;
     uint8_t x = irq_handler_address;
     uint8_t y = irq_handler_address >> 8;
     __attribute__((leaf)) asm volatile(

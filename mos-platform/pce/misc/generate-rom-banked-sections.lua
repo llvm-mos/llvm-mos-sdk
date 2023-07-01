@@ -25,7 +25,7 @@ end
 printf("")
 io.write("__rom_size = MAX(")
 for i=BANK_MAX-1,1,-1 do
-	io.write(string.format("(__rom_bank%d_size > 0 ? %d : ", i, ((i + 1) * BANK_BYTES)))
+	io.write(string.format("(__rom_bank%d_size > 0 ? 0x%x : ", i, ((i + 1) * BANK_BYTES)))
 end
 io.write("0")
 for i=1,BANK_MAX-1,1 do
@@ -61,9 +61,9 @@ for i = 1,BANK_MAX-1 do
 	local bank_offset = (i + 1) * BANK_BYTES
 	if i < MPR_MAX then
 		-- Consider __rom_bank0's dynamic size.
-		printf("  rom_bank%d : ORIGIN = (%d + __rom_bank%d), LENGTH = (((__rom_size >= %d) && (__rom_bank0_size < %d)) ? 0x2000 : 0)", i, (i << 16), i, bank_offset, bank_offset)
+		printf("  rom_bank%d : ORIGIN = (0x%06x + __rom_bank%d), LENGTH = (((__rom_size >= 0x%x) && (__rom_bank0_size < 0x%x)) ? 0x2000 : 0)", i, (i << 16), i, bank_offset, bank_offset)
 	else
-		printf("  rom_bank%d : ORIGIN = (%d + __rom_bank%d), LENGTH = (__rom_size >= %d ? 0x2000 : 0)", i, (i << 16), i, bank_offset)
+		printf("  rom_bank%d : ORIGIN = (0x%06x + __rom_bank%d), LENGTH = (__rom_size >= 0x%x ? 0x2000 : 0)", i, (i << 16), i, bank_offset)
 	end
 end
 printf("}")

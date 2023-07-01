@@ -24,11 +24,11 @@ PROVIDE(__ram_bank124 = 0xc000);
 PROVIDE(__ram_bank125 = 0xc000);
 PROVIDE(__ram_bank126 = 0xc000);
 PROVIDE(__ram_bank127 = 0xc000);
-PROVIDE(__ram_bank128 = 16384);
-PROVIDE(__ram_bank129 = 24576);
-PROVIDE(__ram_bank130 = 32768);
-PROVIDE(__ram_bank131 = 40960);
-PROVIDE(__ram_bank132 = 49152);
+PROVIDE(__ram_bank128 = 0x4000);
+PROVIDE(__ram_bank129 = 0x6000);
+PROVIDE(__ram_bank130 = 0x8000);
+PROVIDE(__ram_bank131 = 0xa000);
+PROVIDE(__ram_bank132 = 0xc000);
 PROVIDE(__ram_bank133 = 0xc000);
 PROVIDE(__ram_bank134 = 0xc000);
 PROVIDE(__ram_bank135 = 0xc000);
@@ -67,38 +67,38 @@ __ram_bank134_bank = 134;
 __ram_bank135_bank = 135;
 
 MEMORY {
-  ram_bank104 (rwx) : ORIGIN = (23592960 + __ram_bank104), LENGTH = 0x2000
-  ram_bank105 (rwx) : ORIGIN = (23658496 + __ram_bank105), LENGTH = 0x2000
-  ram_bank106 (rwx) : ORIGIN = (23724032 + __ram_bank106), LENGTH = 0x2000
-  ram_bank107 (rwx) : ORIGIN = (23789568 + __ram_bank107), LENGTH = 0x2000
-  ram_bank108 (rwx) : ORIGIN = (23855104 + __ram_bank108), LENGTH = 0x2000
-  ram_bank109 (rwx) : ORIGIN = (23920640 + __ram_bank109), LENGTH = 0x2000
-  ram_bank110 (rwx) : ORIGIN = (23986176 + __ram_bank110), LENGTH = 0x2000
-  ram_bank111 (rwx) : ORIGIN = (24051712 + __ram_bank111), LENGTH = 0x2000
-  ram_bank112 (rwx) : ORIGIN = (24117248 + __ram_bank112), LENGTH = 0x2000
-  ram_bank113 (rwx) : ORIGIN = (24182784 + __ram_bank113), LENGTH = 0x2000
-  ram_bank114 (rwx) : ORIGIN = (24248320 + __ram_bank114), LENGTH = 0x2000
-  ram_bank115 (rwx) : ORIGIN = (24313856 + __ram_bank115), LENGTH = 0x2000
-  ram_bank116 (rwx) : ORIGIN = (24379392 + __ram_bank116), LENGTH = 0x2000
-  ram_bank117 (rwx) : ORIGIN = (24444928 + __ram_bank117), LENGTH = 0x2000
-  ram_bank118 (rwx) : ORIGIN = (24510464 + __ram_bank118), LENGTH = 0x2000
-  ram_bank119 (rwx) : ORIGIN = (24576000 + __ram_bank119), LENGTH = 0x2000
-  ram_bank120 (rwx) : ORIGIN = (24641536 + __ram_bank120), LENGTH = 0x2000
-  ram_bank121 (rwx) : ORIGIN = (24707072 + __ram_bank121), LENGTH = 0x2000
-  ram_bank122 (rwx) : ORIGIN = (24772608 + __ram_bank122), LENGTH = 0x2000
-  ram_bank123 (rwx) : ORIGIN = (24838144 + __ram_bank123), LENGTH = 0x2000
-  ram_bank124 (rwx) : ORIGIN = (24903680 + __ram_bank124), LENGTH = 0x2000
-  ram_bank125 (rwx) : ORIGIN = (24969216 + __ram_bank125), LENGTH = 0x2000
-  ram_bank126 (rwx) : ORIGIN = (25034752 + __ram_bank126), LENGTH = 0x2000
-  ram_bank127 (rwx) : ORIGIN = (25100288 + __ram_bank127), LENGTH = 0x2000
-  ram_bank128 (rwxa) : ORIGIN = (25165824 + __ram_bank128), LENGTH = 0x2000
-  ram_bank129 (rwxa) : ORIGIN = (25231360 + __ram_bank129), LENGTH = 0x2000
-  ram_bank130 (rwxa) : ORIGIN = (25296896 + __ram_bank130), LENGTH = 0x2000
-  ram_bank131 (rwxa) : ORIGIN = (25362432 + __ram_bank131), LENGTH = 0x2000
-  ram_bank132 (rwxa) : ORIGIN = (25427968 + __ram_bank132), LENGTH = 0x2000
-  ram_bank133 (rwx) : ORIGIN = (25493504 + __ram_bank133), LENGTH = 0x2000
-  ram_bank134 (rwx) : ORIGIN = (25559040 + __ram_bank134), LENGTH = 0x2000
-  ram_bank135 (rwx) : ORIGIN = (25624576 + __ram_bank135), LENGTH = 0x2000
+  ram_bank104 (rwx) : ORIGIN = (0x01680000 + __ram_bank104), LENGTH = 0x2000
+  ram_bank105 (rwx) : ORIGIN = (0x01690000 + __ram_bank105), LENGTH = 0x2000
+  ram_bank106 (rwx) : ORIGIN = (0x016a0000 + __ram_bank106), LENGTH = 0x2000
+  ram_bank107 (rwx) : ORIGIN = (0x016b0000 + __ram_bank107), LENGTH = 0x2000
+  ram_bank108 (rwx) : ORIGIN = (0x016c0000 + __ram_bank108), LENGTH = 0x2000
+  ram_bank109 (rwx) : ORIGIN = (0x016d0000 + __ram_bank109), LENGTH = 0x2000
+  ram_bank110 (rwx) : ORIGIN = (0x016e0000 + __ram_bank110), LENGTH = 0x2000
+  ram_bank111 (rwx) : ORIGIN = (0x016f0000 + __ram_bank111), LENGTH = 0x2000
+  ram_bank112 (rwx) : ORIGIN = (0x01700000 + __ram_bank112), LENGTH = 0x2000
+  ram_bank113 (rwx) : ORIGIN = (0x01710000 + __ram_bank113), LENGTH = 0x2000
+  ram_bank114 (rwx) : ORIGIN = (0x01720000 + __ram_bank114), LENGTH = 0x2000
+  ram_bank115 (rwx) : ORIGIN = (0x01730000 + __ram_bank115), LENGTH = 0x2000
+  ram_bank116 (rwx) : ORIGIN = (0x01740000 + __ram_bank116), LENGTH = 0x2000
+  ram_bank117 (rwx) : ORIGIN = (0x01750000 + __ram_bank117), LENGTH = 0x2000
+  ram_bank118 (rwx) : ORIGIN = (0x01760000 + __ram_bank118), LENGTH = 0x2000
+  ram_bank119 (rwx) : ORIGIN = (0x01770000 + __ram_bank119), LENGTH = 0x2000
+  ram_bank120 (rwx) : ORIGIN = (0x01780000 + __ram_bank120), LENGTH = 0x2000
+  ram_bank121 (rwx) : ORIGIN = (0x01790000 + __ram_bank121), LENGTH = 0x2000
+  ram_bank122 (rwx) : ORIGIN = (0x017a0000 + __ram_bank122), LENGTH = 0x2000
+  ram_bank123 (rwx) : ORIGIN = (0x017b0000 + __ram_bank123), LENGTH = 0x2000
+  ram_bank124 (rwx) : ORIGIN = (0x017c0000 + __ram_bank124), LENGTH = 0x2000
+  ram_bank125 (rwx) : ORIGIN = (0x017d0000 + __ram_bank125), LENGTH = 0x2000
+  ram_bank126 (rwx) : ORIGIN = (0x017e0000 + __ram_bank126), LENGTH = 0x2000
+  ram_bank127 (rwx) : ORIGIN = (0x017f0000 + __ram_bank127), LENGTH = 0x2000
+  ram_bank128 (rwxa) : ORIGIN = (0x01800000 + __ram_bank128), LENGTH = 0x2000
+  ram_bank129 (rwxa) : ORIGIN = (0x01810000 + __ram_bank129), LENGTH = 0x2000
+  ram_bank130 (rwxa) : ORIGIN = (0x01820000 + __ram_bank130), LENGTH = 0x2000
+  ram_bank131 (rwxa) : ORIGIN = (0x01830000 + __ram_bank131), LENGTH = 0x2000
+  ram_bank132 (rwxa) : ORIGIN = (0x01840000 + __ram_bank132), LENGTH = 0x2000
+  ram_bank133 (rwx) : ORIGIN = (0x01850000 + __ram_bank133), LENGTH = 0x2000
+  ram_bank134 (rwx) : ORIGIN = (0x01860000 + __ram_bank134), LENGTH = 0x2000
+  ram_bank135 (rwx) : ORIGIN = (0x01870000 + __ram_bank135), LENGTH = 0x2000
 }
 
 SECTIONS {

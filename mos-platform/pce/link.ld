@@ -1,17 +1,7 @@
-__rc0 = 0xf82000;
-INCLUDE imag-regs.ld
-ASSERT(__rc0 == 0xf82000, "Inconsistent zero page map.")
-ASSERT(__rc31 == 0xf8201f, "Inconsistent zero page map.")
-ASSERT(__rc4  == __rc3 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
-ASSERT(__rc5  == __rc4 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
-ASSERT(__rc6  == __rc5 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
-ASSERT(__rc7  == __rc6 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
-ASSERT(__rc8  == __rc7 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
-ASSERT(__rc9  == __rc8 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
-ASSERT(__rc10 == __rc9 + 1, "PCE target requires contiguous __rc3 through __rc10 for pce_memop.")
+INCLUDE pce-imag-regs.ld
 
 PROVIDE(__ram_bank_size = 0x2000);
-INCLUDE rom-banked-sections.ld
+INCLUDE _rom-banked-sections.ld
 REGION_ALIAS("c_rom", rom_bank0)
 
 /* Calculate starting bank values.
@@ -35,42 +25,9 @@ MEMORY {
 REGION_ALIAS("c_ram", ram)
 __stack = 0x2000 + __ram_bank_size;
 
+INCLUDE rom-sections.ld
+
 SECTIONS {
-	.text : {
-		INCLUDE text-sections.ld
-
-		KEEP(*(.irq_timer_begin))
-		KEEP(*(SORT_BY_INIT_PRIORITY(.irq_timer.* .irq_timer)))
-		KEEP(*(.irq_timer_end))
-
-		KEEP(*(.irq_vdc_begin))
-		KEEP(*(SORT_BY_INIT_PRIORITY(.irq_vdc.* .irq_vdc)))
-		KEEP(*(.irq_vdc_end))
-
-		KEEP(*(.irq_ext_begin))
-		KEEP(*(SORT_BY_INIT_PRIORITY(.irq_ext.* .irq_ext)))
-		KEEP(*(.irq_ext_end))
-	} >c_rom
-	.rodata : { INCLUDE rodata-sections.ld } >c_rom
-	.data : { INCLUDE data-sections.ld } >c_ram AT>c_rom
-	__data_load_start = LOADADDR(.data);
-	__data_size = SIZEOF(.data);
-	.zp.data : { INCLUDE zp-data-sections.ld } >zp AT>c_rom
-	__zp_data_load_start = LOADADDR(.zp.data);
-	__zp_data_size = SIZEOF(.zp.data);
-	.zp.bss (NOLOAD) : { INCLUDE zp-bss-sections.ld } >zp
-	INCLUDE zp-bss-symbols.ld
-	INCLUDE zp-noinit.ld
-	.bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram
-	INCLUDE bss-symbols.ld
-	.noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram
-
-	/* Used by zero-bss routines. */
-	HIDDEN(__zero_bss_start = __bss_start + 1);
-	HIDDEN(__zero_bss_size = __bss_size >= 2 ? __bss_size - 1 : 1);
-	HIDDEN(__zero_zp_bss_start = __zp_bss_start + 1);
-	HIDDEN(__zero_zp_bss_size = __zp_bss_size >= 2 ? __zp_bss_size - 1 : 1);
-
 	.early_start : {
 		. = 0xfff6 - 35;
 		__early_start_start = .;

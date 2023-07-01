@@ -25,6 +25,24 @@ int abs(int i);
 long labs(long i);
 long long llabs(long long i);
 
+typedef struct {
+  int quot;
+  int rem;
+} div_t;
+div_t div(int numer, int denom);
+
+typedef struct {
+  long quot;
+  long rem;
+} ldiv_t;
+ldiv_t ldiv(long numer, long denom);
+
+typedef struct {
+  long long quot;
+  long long rem;
+} lldiv_t;
+lldiv_t lldiv(long long numer, long long denom);
+
 /**
 Simple malloc/free implementation.
 

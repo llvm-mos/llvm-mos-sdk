@@ -3,6 +3,9 @@ add_platform_library(common-c
   # ctype.h
   ctype.c
 
+  # errno.h
+  errno.c
+
   # setjmp.h
   setjmp.S
 
@@ -12,11 +15,13 @@ add_platform_library(common-c
 
   # stdlib.h
   abs.cc
+  div.cc
   stdlib.cc
   new.cc
 
   # string.h
   mem.c
+  strerror.c
   string.c
 
   # exception

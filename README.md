@@ -22,6 +22,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - NES-CNROM
 - Ohio Scientific Challenger 1P
 - PC Engine
+  - PC Engine CD
 - [RPC/8e](http://www.eloraam.com/blog/2012/04/22/rp-control-internals/) (RedPower 2)
 - 6502 simulator (included)
 
@@ -49,7 +50,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - Excellent compiler usability
   - Clang's world-class error messages
   - IDE integration through the included custom clangd's Language Server Protocol
-  - Straigtforward invocations to compile for various targets: `mos-c64-clang++ -Os -o game.prg game.cc` 
+  - Straightforward invocations to compile for various targets: `mos-c64-clang++ -Os -o game.prg game.cc` 
 - A small standard library sufficient to provide the above and a few extras
   - Simple printf
   - Simple malloc/free
@@ -134,6 +135,7 @@ executables and libraries for that target.
 | NES (NROM mapper)                | `mos-nes-nrom-clang`  |
 | Ohio Scientific Challenger 1P    | `mos-osi-c1p-clang`   |
 | PC Engine                        | `mos-pce-clang`       |
+| PC Engine CD                     | `mos-pce-cd-clang`    |
 | RPC/8e (RedPower 2)              | `mos-rpc8e-clang`     |
 | 6502 simulator                   | `mos-sim-clang`       |
 

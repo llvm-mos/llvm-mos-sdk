@@ -129,7 +129,7 @@ var searchData=
   ['chr_5fbank0_5fcur_233',['CHR_BANK0_CUR',['../nes-mmc1_2bank_8h.html#a749487eef7a21c61d60f592ae3bac5bd',1,'bank.h']]],
   ['chr_5fbank1_5fcur_234',['CHR_BANK1_CUR',['../nes-mmc1_2bank_8h.html#adffb6f0da90eaeec8606e3441ae2bc49',1,'bank.h']]],
   ['chrnum_235',['chrnum',['../neslib_8h.html#af967a7c1ec19a7673dc6b0e5e6762068',1,'neslib.h']]],
-  ['chrout_2eh_236',['chrout.h',['../atari8_2chrout_8h.html',1,'(Global Namespace)'],['../commodore_2chrout_8h.html',1,'(Global Namespace)']]],
+  ['chrout_2eh_236',['chrout.h',['../atari8-common_2chrout_8h.html',1,'(Global Namespace)'],['../commodore_2chrout_8h.html',1,'(Global Namespace)']]],
   ['cia1_237',['CIA1',['../c64_8h.html#acb012180af18034ef3f844b198ecbe03',1,'c64.h']]],
   ['cia2_238',['CIA2',['../c64_8h.html#a0ba757ec1b739f01364a65585c1bad93',1,'c64.h']]],
   ['claim_239',['CLAIM',['../famitone2_2LICENSE.html#a5f32041b6392522235eea5ca8e40ef24',1,'CLAIM():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a4b9d75f081d50169f87a994c6e7f9c4d',1,'CLAIM():&#160;LICENSE'],['../neslib_2LICENSE.html#a5f32041b6392522235eea5ca8e40ef24',1,'CLAIM():&#160;LICENSE']]],

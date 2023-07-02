@@ -4,7 +4,7 @@ var searchData=
   ['c64_2einc_2267',['c64.inc',['../c64_8inc.html',1,'']]],
   ['cbm_2eh_2268',['cbm.h',['../cbm_8h.html',1,'']]],
   ['cbm_5fkernal_2einc_2269',['cbm_kernal.inc',['../cbm__kernal_8inc.html',1,'']]],
-  ['chrout_2eh_2270',['chrout.h',['../atari8_2chrout_8h.html',1,'(Global Namespace)'],['../commodore_2chrout_8h.html',1,'(Global Namespace)']]],
+  ['chrout_2eh_2270',['chrout.h',['../atari8-common_2chrout_8h.html',1,'(Global Namespace)'],['../commodore_2chrout_8h.html',1,'(Global Namespace)']]],
   ['climits_2271',['climits',['../climits.html',1,'']]],
   ['config_2eh_2272',['config.h',['../pce-cd_2libpce_2include_2pce_2config_8h.html',1,'(Global Namespace)'],['../pce-common_2libpce_2include_2pce_2config_8h.html',1,'(Global Namespace)']]],
   ['cpm_2eh_2273',['cpm.h',['../cpm_8h.html',1,'']]],

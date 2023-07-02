@@ -1,25 +1,9 @@
 var searchData=
 [
-  ['rank_2217',['rank',['../structstd_1_1rank.html',1,'std']]],
-  ['rank_3c_20t_5b_5d_3e_2218',['rank&lt; T[]&gt;',['../structstd_1_1rank_3_01T_0f_0e_4.html',1,'std']]],
-  ['rank_3c_20t_5bn_5d_3e_2219',['rank&lt; T[N]&gt;',['../structstd_1_1rank_3_01T_0fN_0e_4.html',1,'std']]],
-  ['reference_5fwrapper_2220',['reference_wrapper',['../classstd_1_1reference__wrapper.html',1,'std']]],
-  ['remove_5fall_5fextents_2221',['remove_all_extents',['../structstd_1_1remove__all__extents.html',1,'std']]],
-  ['remove_5fall_5fextents_3c_20t_5b_5d_3e_2222',['remove_all_extents&lt; T[]&gt;',['../structstd_1_1remove__all__extents_3_01T_0f_0e_4.html',1,'std']]],
-  ['remove_5fall_5fextents_3c_20t_5bn_5d_3e_2223',['remove_all_extents&lt; T[N]&gt;',['../structstd_1_1remove__all__extents_3_01T_0fN_0e_4.html',1,'std']]],
-  ['remove_5fcv_2224',['remove_cv',['../structstd_1_1remove__cv.html',1,'std']]],
-  ['remove_5fcv_3c_20const_20t_20_3e_2225',['remove_cv&lt; const T &gt;',['../structstd_1_1remove__cv_3_01const_01T_01_4.html',1,'std']]],
-  ['remove_5fcv_3c_20const_20volatile_20t_20_3e_2226',['remove_cv&lt; const volatile T &gt;',['../structstd_1_1remove__cv_3_01const_01volatile_01T_01_4.html',1,'std']]],
-  ['remove_5fcv_3c_20volatile_20t_20_3e_2227',['remove_cv&lt; volatile T &gt;',['../structstd_1_1remove__cv_3_01volatile_01T_01_4.html',1,'std']]],
-  ['remove_5fextent_2228',['remove_extent',['../structstd_1_1remove__extent.html',1,'std']]],
-  ['remove_5fextent_3c_20t_5b_5d_3e_2229',['remove_extent&lt; T[]&gt;',['../structstd_1_1remove__extent_3_01T_0f_0e_4.html',1,'std']]],
-  ['remove_5fextent_3c_20t_5bn_5d_3e_2230',['remove_extent&lt; T[N]&gt;',['../structstd_1_1remove__extent_3_01T_0fN_0e_4.html',1,'std']]],
-  ['remove_5fpointer_2231',['remove_pointer',['../structstd_1_1remove__pointer.html',1,'std']]],
-  ['remove_5fpointer_3c_20t_20_2a_20_3e_2232',['remove_pointer&lt; T * &gt;',['../structstd_1_1remove__pointer_3_01T_01_5_01_4.html',1,'std']]],
-  ['remove_5fpointer_3c_20t_20_2aconst_20_3e_2233',['remove_pointer&lt; T *const &gt;',['../structstd_1_1remove__pointer_3_01T_01_5const_01_4.html',1,'std']]],
-  ['remove_5fpointer_3c_20t_20_2aconst_20volatile_20_3e_2234',['remove_pointer&lt; T *const volatile &gt;',['../structstd_1_1remove__pointer_3_01T_01_5const_01volatile_01_4.html',1,'std']]],
-  ['remove_5fpointer_3c_20t_20_2avolatile_20_3e_2235',['remove_pointer&lt; T *volatile &gt;',['../structstd_1_1remove__pointer_3_01T_01_5volatile_01_4.html',1,'std']]],
-  ['remove_5freference_2236',['remove_reference',['../structstd_1_1remove__reference.html',1,'std']]],
-  ['remove_5freference_3c_20t_20_26_20_3e_2237',['remove_reference&lt; T &amp; &gt;',['../structstd_1_1remove__reference_3_01T_01_6_01_4.html',1,'std']]],
-  ['remove_5freference_3c_20t_20_26_26_20_3e_2238',['remove_reference&lt; T &amp;&amp; &gt;',['../structstd_1_1remove__reference_3_01T_01_6_6_01_4.html',1,'std']]]
+  ['pair_2250',['pair',['../structstd_1_1pair.html',1,'std']]],
+  ['pce_5fcdb_5fdivmod_5fs16_5fresult_2251',['pce_cdb_divmod_s16_result',['../structpce__cdb__divmod__s16__result.html',1,'']]],
+  ['pce_5fcdb_5fdivmod_5fu16_5fresult_2252',['pce_cdb_divmod_u16_result',['../structpce__cdb__divmod__u16__result.html',1,'']]],
+  ['pce_5fcdb_5fsubq_5fdata_2253',['pce_cdb_subq_data',['../structpce__cdb__subq__data.html',1,'']]],
+  ['pce_5fcdb_5ftoc_5fdata_2254',['pce_cdb_toc_data',['../structpce__cdb__toc__data.html',1,'']]],
+  ['pce_5fsector_2255',['pce_sector',['../structpce__sector.html',1,'']]]
 ];

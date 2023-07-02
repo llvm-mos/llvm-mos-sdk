@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['w_2897',['w',['../api_8h.html#a84259e58d5ffeb55767613f3341f11e2',1,'api.h']]]
+  ['unclaimed_2951',['unclaimed',['../struct__sim__reg.html#ab3a5e278b65999beb7b26b1e46494c19',1,'_sim_reg']]],
+  ['use_2952',['use',['../famitone2_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a37d51c2d1e9296bc4cd1ad1eb80d3096',1,'use():&#160;LICENSE'],['../neslib_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE']]]
 ];

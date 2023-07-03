@@ -6,7 +6,7 @@
 ; void set_tv(unsigned char type);    // set video signal type using TV_* enum constant
 ; llvm-mos:                 A
 ;
-; Derived from cc65. Modififed from original version.  See license information in cx16.h
+; Originally from cc65. Modified from original version.  See license information in cx16.h
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/set_tv.s
 ;
 .global set_tv

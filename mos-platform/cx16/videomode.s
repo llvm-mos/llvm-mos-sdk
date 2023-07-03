@@ -6,7 +6,7 @@
 ; signed char videomode(signed char mode);   // set video mode using VIDEOMODE_* enum constant, returns previous or -1 if error
 ; llvm-mos:                                      A
 ;
-; Derived from cc65. Modififed from original version.  See license information in cx16.h
+; Originally from cc65. Modified from original version.  See license information in cx16.h
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/videomode.s
 ;
 .global videomode

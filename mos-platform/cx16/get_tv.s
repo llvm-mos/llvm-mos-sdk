@@ -5,7 +5,7 @@
 ;
 ; unsigned char get_tv(void);    // return TV_* enum constant for current video signal type
 ;
-; Derived from cc65. Modififed from original version.  See license information in cx16.h
+; Originally from cc65. Modified from original version.  See license information in cx16.h
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/get_tv.s
 ;
 .global get_tv

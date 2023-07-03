@@ -6,7 +6,7 @@
 ; unsigned char vpeek(unsigned long addr);    // read byte from VERA VRAM address
 ; llvm-mos:                     A/X/rc2/3
 ;
-; Derived from cc65. Modififed from original version.  See license information in cx16.h
+; Originally from cc65. Modified from original version.  See license information in cx16.h
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/vpeek.s
 ;
 .global vpeek

@@ -5,7 +5,7 @@
 ;
 ; unsigned short get_numbanks(void); // return number of 8K RAM banks at 0xA000-0xBFFF (64=512K up to 256=2MB)
 ;
-; Derived from cc65. Modififed from original version.  See license information in cx16.h
+; Originally from cc65. Modified from original version.  See license information in cx16.h
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/get_numbanks.s
 ;
 .global get_numbanks

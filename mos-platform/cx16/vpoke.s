@@ -6,7 +6,7 @@
 ; void vpoke(unsigned char data, unsigned long addr); // write byte value to VERA VRAM address
 ; llvm-mos:                A                   X/rc2/3/4
 ;
-; Derived from cc65. Modififed from original version.  See license information in cx16.h
+; Originally from cc65. Modified from original version.  See license information in cx16.h
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/vpoke.s
 ;
 .global vpoke

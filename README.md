@@ -10,6 +10,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - XEX file
   - 8-KiB or 16-KiB standard cartridge
 - [Commander X16](https://www.commanderx16.com/)
+- [Commander X16](https://www.commanderx16.com/)
 - Commodore 64
 - Commodore PET
 - [CP/M-65](https://github.com/davidgiven/cpm65)

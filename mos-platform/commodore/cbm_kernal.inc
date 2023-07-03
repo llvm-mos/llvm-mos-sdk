@@ -14,13 +14,15 @@
 
 #ifdef __CX16__
   ; CX16 extended jump table
+  SAVEHL                        = $FEBA
   KBDBUF_PEEK                   = $FEBD
   KBDBUF_GET_MODIFIERS          = $FEC0
   KBDBUF_PUT                    = $FEC3
   I2C_READ_BYTE                 = $FEC6
   I2C_WRITE_BYTE                = $FEC9
-  CX_MONITOR                    = $FECC
+  MONITOR                       = $FECC
   ENTROPY_GET                   = $FECF
+  KEYMAP                        = $FED2
   CONSOLE_SET_PAGE_MSG          = $FED5
   CONSOLE_PUT_IMAGE             = $FED8
   CONSOLE_INIT                  = $FEDB
@@ -58,8 +60,8 @@
   GRAPH_SET_FONT                = $FF3B
   GRAPH_GET_CHAR_SIZE           = $FF3E
   GRAPH_PUT_CHAR                = $FF41
-  MULTI_ACPTR                   = $FF44
-  RESTORE_BASIC                 = $FF47
+  MACPTR                        = $FF44
+  ENTER_BASIC                   = $FF47
   CLOCK_SET_DATE_TIME           = $FF4D
   CLOCK_GET_DATE_TIME           = $FF50
   JOYSTICK_SCAN                 = $FF53
@@ -68,6 +70,7 @@
   SCREEN_SET_CHARSET            = $FF62
   MOUSE_CONFIG                  = $FF68
   MOUSE_GET                     = $FF6B
+  MOUSE_SCAN                    = $FF71
 #endif
 
 #ifdef __C128__

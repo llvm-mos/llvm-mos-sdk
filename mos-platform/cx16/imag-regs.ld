@@ -19,22 +19,27 @@
  * is, __r0 through __r15.
  */
 
-__r0  = 0x0002;
-__r1  = 0x0004;
-__r2  = 0x0006;
-__r3  = 0x0008;
-__r4  = 0x000a;
-__r5  = 0x000c;
-__r6  = 0x000e;
-__r7  = 0x0010;
-__r8  = 0x0012;
-__r9  = 0x0014;
-__r10 = 0x0016;
-__r11 = 0x0018;
-__r12 = 0x001a;
-__r13 = 0x001c;
-__r14 = 0x001e;
-__r15 = 0x0020;
+/* CAUTION: Some X16 kernal calls deviate from this convention!         */
+
+/* X16 kernal reg      X16 convention   LLVM reg alias  LLVM convention */
+__r0  = 0x0002;     /* in/out (args)    __rc2,  __rc3   trash           */
+__r1  = 0x0004;     /* in/out (args)    __rc4,  __rc5   trash           */
+__r2  = 0x0006;     /* in/out (args)    __rc6,  __rc7   trash           */
+__r3  = 0x0008;     /* in/out (args)    __rc8,  __rc9   trash           */
+__r4  = 0x000a;     /* in/out (args)      -      -      (mos-sdk temp)  */
+__r5  = 0x000c;     /* in/out (args)      -      -      (unused)        */
+__r6  = 0x000e;     /* preserve         __rc20, __rc21  preserve        */
+__r7  = 0x0010;     /* preserve         __rc22, __rc23  preserve        */
+__r8  = 0x0012;     /* preserve         __rc24, __rc25  preserve        */
+__r9  = 0x0014;     /* preserve         __rc26, __rc27  preserve        */
+__r10 = 0x0016;     /* preserve         __rc28, __rc29  preserve        */
+__r11 = 0x0018;     /* trash            __rc10, __rc11  trash           */
+__r12 = 0x001a;     /* trash            __rc12, __rc13  trash           */
+__r13 = 0x001c;     /* trash            __rc14, __rc15  trash           */
+__r14 = 0x001e;     /* trash            __rc16, __rc17  trash           */
+__r15 = 0x0020;     /* trash            __rc18, __rc19  trash           */
+/*    = 0x0022                          __rc0,  __rc1   preserve        */
+/*    = 0x0024                          __rc30, __rc31  preserve        */
 
 /* LLVM-MOS caller-saved => X16 callee-saved (arguments; rs1-rs4 => r0-r3).
  * This allows setting arguments in KERNAL wrappers without stashing.

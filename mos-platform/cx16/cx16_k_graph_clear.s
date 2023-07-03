@@ -9,4 +9,8 @@
 ;
 .global cx16_k_graph_clear
 cx16_k_graph_clear:
-	jmp	__GRAPH_CLEAR
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
+	jsr	__GRAPH_CLEAR
+	X16_kernal_pop_r6_r10
+	rts
+

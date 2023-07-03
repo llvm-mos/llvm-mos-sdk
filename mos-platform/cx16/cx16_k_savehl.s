@@ -4,10 +4,11 @@
 
 ;
 ; unsigned char cx16_k_savehl(void *startaddr, void *endaddr_plusone); // returns 0 on success
-;                                   rc2/3            rc4/5
+; llvm-mos:                         rc2/3            rc4/5
+; X16-kernel:                       A                X/Y
+;
 ; Not documented on https://github.com/X16Community/x16-docs
 ; similar to cbm_k_save, but no two byte header written
-; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_savehl
 cbm_k_savehl:

@@ -12,11 +12,13 @@
 ;
 .global cx16_k_graph_put_char
 cx16_k_graph_put_char:
-	X16_pushw __r6		; paranoid about trashing r6
-	ldy	__rc2		; copy rc2/3 to r4 temp
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
+	ldy	__rc2		; push rc2/3
 	sty	__r4
+	phy
 	ldy	__rc2+1
 	sty	__r4+1
+	phy
 	tax			; save c
 	ldy	#4-1		; copy 4 bytes
 1:	lda	(__r4),y	; from pos_ptr x, y
@@ -25,10 +27,14 @@ cx16_k_graph_put_char:
 	bpl	1b
 	txa			; A = c
 	jsr	__GRAPH_PUT_CHAR
+	ply
+	sty	__r4+1
+	ply
+	sty	__r4
 	ldy	#4-1		; copy 4 bytes
 2:	lda	__r0,y		; from r0 & r1
 	sta	(__r4),y	; to pos_ptr x, y
 	dey
 	bpl	2b
-	X16_popw __r6
+	X16_kernal_pop_r6_r10
 	rts

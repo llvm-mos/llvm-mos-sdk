@@ -12,17 +12,14 @@
 ;
 .global cx16_k_console_put_image
 cx16_k_console_put_image:
-	X16_pushw __r6		; paranoid about trashing r6
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 	ldy	__rc4
 	sty	__r2		; r2 = height
 	ldy	__rc4+1
 	sty	__r2+1
 	sta	__r1		; r1 = width
 	stx	__r1+1
-	ldy	__rc2
-	sty	__r0		; r0 = imageaddr
-	ldy	__rc2+1
-	sty	__r0+1
+				; r0 = imageaddr (already set)
 	jsr	__CONSOLE_PUT_IMAGE
-	X16_popw __r6
+	X16_kernal_pop_r6_r10
 	rts

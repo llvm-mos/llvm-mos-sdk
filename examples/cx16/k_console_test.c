@@ -20,42 +20,35 @@ unsigned char face[64] = {
     1, 1, 1, 1, 1, 1, 1, 1
 };
 
+void wait_key(void)
+{
+    while (cbm_k_getin() == 0)
+        ;
+}
+
+void console_puts(const char *str, unsigned char wordwrap)
+{
+    uint8_t c = 0;
+    while ((c = *str++) != 0)
+    {
+        cx16_k_console_put_char(c, wordwrap);
+    }
+}
+
 int main(void)
 {
     cx16_k_screen_mode_set(128);
-    cx16_k_console_init(10, 10, 320-20, 240-20);
-    cx16_k_console_put_char('\x92', 0);
-    cx16_k_console_put_char('H', 0);
-    cx16_k_console_put_char('e', 0);
-    cx16_k_console_put_char('l', 0);
-    cx16_k_console_put_char('l', 0);
-    cx16_k_console_put_char('o', 0);
-    cx16_k_console_put_char(' ', 0);
-    cx16_k_console_put_char('C', 0);
-    cx16_k_console_put_char('o', 0);
-    cx16_k_console_put_char('m', 0);
-    cx16_k_console_put_char('m', 0);
-    cx16_k_console_put_char('a', 0);
-    cx16_k_console_put_char('n', 0);
-    cx16_k_console_put_char('d', 0);
-    cx16_k_console_put_char('e', 0);
-    cx16_k_console_put_char('r', 0);
-    cx16_k_console_put_char(' ', 0);
-    cx16_k_console_put_char('X', 0);
-    cx16_k_console_put_char('1', 0);
-    cx16_k_console_put_char('6', 0);
-    cx16_k_console_put_char('!', 0);
+    cx16_k_graph_set_colors(1, 0, 0);
+    cx16_k_console_init(0, 0, 0, 0);
+    console_puts("\x92Hello Commander X16!", 0);
 
-    while (cbm_k_getin() == 0)
-        ;
+    wait_key();
 
-    cx16_k_console_put_image(face, 8, 8);   // TODO: Why does the screen clear?
+    // BUG: I don't understand why this clears/scrolls screen...
+    cx16_k_console_put_image(face, 8, 8);
 
-    while (cbm_k_getin() == 0)
-        ;
+    wait_key();
 
     cx16_k_screen_mode_set(0);
-    putchar(15);             // ISO mode
-
-    printf("Done\n");        // finished
+    printf("DONE.\n");
 }

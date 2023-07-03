@@ -9,7 +9,7 @@
 #include <cbm.h>
 #include <cx16.h>
 
-static void hexdump(void * ptr, size_t bytes)
+static void hexdump(const void * ptr, size_t bytes)
 {
     uint8_t * p = (uint8_t *)ptr;
     for (size_t i = 0; i < bytes; i++)
@@ -31,10 +31,9 @@ static void hexdump(void * ptr, size_t bytes)
     printf("\n");
 }
 
-
 int main(void)
 {
-    cx16_date_time_t tm;
+     static cx16_date_time_t tm;
 
     putchar(15);        // ISO mode
     printf("llvm-mos-sdk CX16 Kernal Test\n\n");

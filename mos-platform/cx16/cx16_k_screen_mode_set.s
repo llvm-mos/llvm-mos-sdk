@@ -4,10 +4,10 @@
 
 ;
 ; unsigned char cx16_k_screen_mode_set(unsigned char mode); // returns 0 on success
-;                                                    a
+; llvm-mos:                                          A
+; X16 kernal:                                        A
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-screen_mode
-; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_screen_mode_set
 cx16_k_screen_mode_set:

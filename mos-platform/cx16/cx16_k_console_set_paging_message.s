@@ -12,5 +12,8 @@
 ;
 .global cx16_k_console_set_paging_message
 cx16_k_console_set_paging_message:
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
     					; r0 = addr (already set)
-	jmp	__CONSOLE_SET_PAGE_MSG
+	jsr	__CONSOLE_SET_PAGE_MSG
+	X16_kernal_pop_r6_r10
+	rts

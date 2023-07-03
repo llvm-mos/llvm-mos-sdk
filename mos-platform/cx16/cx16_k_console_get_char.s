@@ -9,7 +9,7 @@
 ;
 .global cx16_k_console_get_char
 cx16_k_console_get_char:
-	X16_pushw __r6		; documented as trashing r6
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 	jsr	__CONSOLE_GET_CHAR
-	X16_popw __r6
+	X16_kernal_pop_r6_r10
 	rts

@@ -4,9 +4,9 @@
 
 ;
 ; int cx16_k_kbdbuf_peek(unsigned char *index_ptr); // returns negative if empty, if non-NULL contents of index set to queue length
+; llvm-mos:                             rc2/3
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-kbdbuf_peek
-; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_kbdbuf_peek
 cx16_k_kbdbuf_peek:

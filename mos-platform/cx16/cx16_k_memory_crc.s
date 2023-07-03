@@ -3,11 +3,12 @@
 .text
 
 ;
-; void * cx16_k_memory_crc(void *dataaddr, unsigned int num_bytes);
-;                                rc2/3                  a/x
+; unsigned int cx16_k_memory_crc(void *dataaddr, unsigned int num_bytes);
+; llvm-mos:                      rc2/3                  A/X
+; llvm-mos aliases:              r0                     A/X
+; X16 kernal:                    r0                     r1
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-memory_crc
-; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_memory_crc
 cx16_k_memory_crc:

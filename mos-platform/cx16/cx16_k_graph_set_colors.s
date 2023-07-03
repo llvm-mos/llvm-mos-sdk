@@ -11,7 +11,10 @@
 ;
 .global cx16_k_graph_set_colors
 cx16_k_graph_set_colors:
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 				; A = stroke (already set)
 				; X = fill (already set)
 	ldy	__rc2		; Y = background
-	jmp	__GRAPH_SET_COLORS
+	jsr	__GRAPH_SET_COLORS
+	X16_kernal_pop_r6_r10
+	rts

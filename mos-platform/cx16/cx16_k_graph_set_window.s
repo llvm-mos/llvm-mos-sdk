@@ -12,6 +12,7 @@
 ;
 .global cx16_k_graph_set_window
 cx16_k_graph_set_window:
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 	ldy	__rc6		; NOTE: copy args backwards due to overlap
 	sty	__r3		; r3 = height
 	ldy	__rc6+1
@@ -21,9 +22,11 @@ cx16_k_graph_set_window:
 	ldy	__rc4+1
 	sty	__r2+1
 	ldy	__rc2
-	sty	__r1		; r3 = y
+	sty	__r1		; r1 = y
 	ldy	__rc2+1
 	sty	__r1+1
 	sta	__r0		; r0 = x
 	stx	__r0+1
-	jmp	__GRAPH_SET_WINDOW
+	jsr	__GRAPH_SET_WINDOW
+	X16_kernal_pop_r6_r10
+	rts

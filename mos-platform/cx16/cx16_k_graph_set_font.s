@@ -10,5 +10,8 @@
 ;
 .global cx16_k_graph_set_font
 cx16_k_graph_set_font:
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 				; r0 = fontaddr (already present)
-	jmp	__GRAPH_SET_FONT
+	jsr	__GRAPH_SET_FONT
+	X16_kernal_pop_r6_r10
+	rts

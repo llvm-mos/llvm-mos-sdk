@@ -12,6 +12,7 @@
 ;
 .global cx16_k_clock_set_date_time
 cx16_k_clock_set_date_time:
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 	ldy	__rc6		; NOTE: copy args backwards due to overlap
 	sty	__r3		; r3L = jif
 	ldy	__rc5
@@ -24,4 +25,7 @@ cx16_k_clock_set_date_time:
 	sty	__r1		; r1L = day
 	stx	__r0+1		; r0H = month
 	sta	__r0		; r0L = year
-	jmp	__CLOCK_SET_DATE_TIME
+	jsr	__CLOCK_SET_DATE_TIME
+	X16_kernal_pop_r6_r10	; assuming additional regs trashed (paranoia)
+	rts
+

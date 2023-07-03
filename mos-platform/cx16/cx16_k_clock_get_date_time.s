@@ -11,14 +11,20 @@
 ;
 .global cx16_k_clock_get_date_time
 cx16_k_clock_get_date_time:
-	ldy	__rc2			; save datetime_ptr in r4
-	sty	__r4
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
+	ldy	__rc2			; push datetime_ptr
+	phy
 	ldy	__rc2+1
-	sty	__r4+1
+	phy
 	jsr	__CLOCK_GET_DATE_TIME
+	ply				; pop datetime_ptr to r4
+	sty	__r4+1
+	ply
+	sty	__r4
 	ldy	#7-1			; copy 7 bytes of data
 1:	lda	__r0,y
 	sta	(__r4),y
 	dey
 	bpl	1b
+	X16_kernal_pop_r6_r10
 	rts

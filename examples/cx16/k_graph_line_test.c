@@ -10,7 +10,8 @@
 
 int main(void)
 {
-    int16_t x, y, c;
+    int16_t x, y;
+    uint8_t c;
 
     cx16_k_screen_mode_set(128);        // 320x240x8-bpp
     cx16_k_graph_init(NULL);            // initialize kernal graph with defaults

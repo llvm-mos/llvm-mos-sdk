@@ -141,6 +141,7 @@
 
 /* get_tv() return codes
 ** set_tv() argument codes
+** NOTE: llvm-mos-sdk added newer 240P modes
 */
 enum {
     TV_NONE                     = 0x00,
@@ -150,7 +151,15 @@ enum {
     TV_NONE2,
     TV_VGA2,
     TV_NTSC_MONO,
-    TV_RGB2
+    TV_RGB2,
+    TV_NONE_240P,
+    TV_VGA_240P,
+    TV_NTSC_COLOR_240P,
+    TV_RGB_240P,
+    TV_NONE2_240P,
+    TV_VGA2_240P,
+    TV_NTSC_MONO_240P,
+    TV_RGB2_240P
 };
 
 /* Video modes for videomode() */
@@ -390,7 +399,7 @@ const char* cx16_k_keymap_get_id(void);
 unsigned char cx16_k_keymap_set(const char* identifier);	// returns 0 on success
 long cx16_k_macptr(unsigned char count, unsigned char noadvance, void *destaddr); // return negative if not supported
 void cx16_k_memory_copy(void *source, void *target, unsigned int num_bytes);
-void * cx16_k_memory_crc(void *dataaddr, unsigned int num_bytes);
+unsigned int cx16_k_memory_crc(void *dataaddr, unsigned int num_bytes);
 void cx16_k_memory_decompress(void *inaddr, void *outaddr);
 void cx16_k_memory_fill(void *addr, unsigned int num_bytes, unsigned char value);
 void cx16_k_monitor(void) __attribute__((noreturn));
@@ -404,5 +413,56 @@ void cx16_k_screen_set_charset(unsigned char charset_type, void *charsetaddr);
 unsigned char cx16_k_sprite_set_image(unsigned char num, unsigned char w, unsigned char h, unsigned char maskflag, void *imageaddr, void *maskaddr, unsigned char bpp); // returns 0 on success
 unsigned char cx16_k_sprite_set_position(unsigned char sprnum, unsigned int xpos, unsigned int ypos); // returns 0 on success
 
-/* End of cX16.h */
-#endif
+/* cc65 compatible cx16 functions */
+
+/* Return the number of 8K RAM banks that the machine has */
+/* at 0xA000-0xBFFF using MEMTOP (64=512K up to 256=2MB) */
+unsigned short get_numbanks(void); // return number of 8K RAM banks at 0xA000-0xBFFF (64=512K up to 256=2MB)
+
+/* Get the ROM build version.
+** -1 -- custom build
+** Negative -- prerelease build
+** Positive -- release build
+*/
+signed char get_ostype(void);  // return ROM build version (negative pre-release, -1=custom)
+
+/* Return the video signal type that the machine is using.
+** Return a TV_xx constant.
+*/
+unsigned char get_tv(void);    // return TV_* enum constant for current video signal type
+
+/* Set the video signal type that the machine will use.
+** Call with a TV_xx constant.
+** NOTE: Be careful, can overrides user setting for current monitor type (set in config menu)
+*/
+void set_tv(unsigned char type);    // set video signal type using TV_* enum constant
+
+/* Display the layers that are "named" by the bit flags in layers.
+** A value of 0b01 shows layer 0, a value of 0b10 shows layer 1,
+** a value of 0b11 shows both layers.  Return the previous value.
+*/
+unsigned char vera_layer_enable(unsigned char layers); // enable/disable VERA layers 0/1 (bits 0/1), returns previous
+
+/* Enable the sprite engine when mode is non-zero (true);
+** disable sprites when mode is zero.  Return the previous mode.
+*/
+unsigned char vera_sprites_enable(unsigned char enable); // enable/disable VERA sprites (0=off, non-zero=on), returns previous
+
+/* Set the video mode, return the old mode.
+** Return -1 if Mode isn't valid.
+** Call with one of the VIDEOMODE_xx constants.
+*/
+signed char videomode(signed char mode);   // set video mode using VIDEOMODE_* enum constant, returns previous or -1 if error
+
+/* Get a byte from a location in VERA's internal address space. */
+unsigned char vpeek(unsigned long addr);    // read byte from VERA VRAM address
+
+/* Put a byte into a location in VERA's internal address space.
+** (addr is second instead of first for the sake of code efficiency.)
+*/
+void vpoke(unsigned char data, unsigned long addr); // write byte value to VERA VRAM address
+
+void waitvsync(void);  // wait for the vertical blank interrupt
+
+#endif  // _CX16_H
+

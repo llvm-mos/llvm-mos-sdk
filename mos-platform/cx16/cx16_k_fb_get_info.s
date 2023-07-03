@@ -11,11 +11,15 @@
 ;
 .global cx16_k_fb_get_info
 cx16_k_fb_get_info:
-	ldy	__rc2			; save info_ptr in r4
-	sty	__r4
+	ldy	__rc2			; push info_ptr
+	phy
 	ldy	__rc2+1
-	sty	__r4+1
+	phy
 	jsr	__FB_GET_INFO
+	ply				; pop info_ptr to r4
+	sta	__r4+1
+	ply
+	sta	__r4
 	ldy	#5-1		; offset to depth
 	sta	(__r4),y	; store depth to info_ptr
 	dey			; copy remaining 4 bytes

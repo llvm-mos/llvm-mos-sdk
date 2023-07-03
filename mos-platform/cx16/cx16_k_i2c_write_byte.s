@@ -4,10 +4,10 @@
 
 ;
 ; int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned char byte); // return negative on error
-;                                         a                     x                     rc2
+; llvm-mos:                               A                     X                     rc2
+; X16 kernal:                             X                     Y                     A
 ;
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-i2c_write_byte
-; NOTE: does not appear to touch r10-r15 as of x16-rom r43
 ;
 .global cx16_k_i2c_write_byte
 cx16_k_i2c_write_byte:

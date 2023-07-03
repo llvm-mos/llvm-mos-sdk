@@ -12,6 +12,7 @@
 ;
 .global cx16_k_graph_draw_image
 cx16_k_graph_draw_image:
+	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 	ldy	__rc8		; NOTE: copy args backwards due to overlap
 	sty	__r4		; r4 = height
 	ldy	__rc8+1
@@ -30,4 +31,6 @@ cx16_k_graph_draw_image:
 	sty	__r1+1
 	sta	__r0		; r0 = x
 	stx	__r0+1
-	jmp	__GRAPH_DRAW_IMAGE
+	jsr	__GRAPH_DRAW_IMAGE
+	X16_kernal_pop_r6_r10
+	rts

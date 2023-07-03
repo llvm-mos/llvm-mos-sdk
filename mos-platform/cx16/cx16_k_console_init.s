@@ -27,6 +27,6 @@ cx16_k_console_init:
 	sty	__r1+1
 	sta	__r0		; r0 = x
 	stx	__r0+1
-	jmp	__CONSOLE_INIT
+	jsr	__CONSOLE_INIT
 	X16_kernal_pop_r6_r10
 	rts

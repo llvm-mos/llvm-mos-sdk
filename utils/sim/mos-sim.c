@@ -66,12 +66,12 @@ int8_t read6502(uint16_t address) {
 
 void finish(void) {
   if (shouldPrintCycles)
-    fprintf(stderr, "%ld cycles\n", clockticks6502);
+    fprintf(stderr, "%llu cycles\n", clockticks6502);
 
   if (shouldProfile)
     for (int addr = 0; addr < 65536; ++addr)
       if (clockTicksAtAddress[addr])
-        fprintf(stderr, "%04x %ld\n", addr, clockTicksAtAddress[addr]);
+        fprintf(stderr, "%04x %llu\n", addr, clockTicksAtAddress[addr]);
 }
 
 void write6502(uint16_t address, uint8_t value) {

@@ -3,7 +3,7 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-// Originally from cc65. Modififed from original version.
+// Originally from cc65. Modified from original version.
 
 /*****************************************************************************/
 /*                                                                           */
@@ -206,6 +206,7 @@ void cbm_k_bsout (unsigned char C);
 unsigned char cbm_k_chkin (unsigned char FN);
 unsigned char cbm_k_chrin (void);
 void cbm_k_chrout (unsigned char C);
+void cbm_k_cint (void);
 void cbm_k_ciout (unsigned char C);
 unsigned char cbm_k_ckout (unsigned char FN);
 void cbm_k_clall (void);
@@ -214,10 +215,10 @@ void cbm_k_clrch (void);
 unsigned char cbm_k_getin (void);
 unsigned cbm_k_iobase (void);
 void cbm_k_listen (unsigned char dev);
-unsigned int cbm_k_load(unsigned char flag, unsigned addr);
+void *cbm_k_load(unsigned char flag, void *startaddr);
 unsigned char cbm_k_open (void);
 unsigned char cbm_k_readst (void);
-unsigned char cbm_k_save(unsigned int start, unsigned int end);
+unsigned char cbm_k_save(void *startaddr, void *endaddr_plusone);
 void cbm_k_scnkey (void);
 void cbm_k_second (unsigned char addr);
 void cbm_k_setlfs (unsigned char LFN, unsigned char DEV,

@@ -9,9 +9,9 @@
 #include <cbm.h>
 #include <cx16.h>
 
-static void hexdump(const void * ptr, size_t bytes)
+static void hexdump(const void *ptr, size_t bytes)
 {
-    uint8_t * p = (uint8_t *)ptr;
+    uint8_t *p = (uint8_t *)ptr;
     for (size_t i = 0; i < bytes; i++)
     {
         if ((i & 0xf) == 0)
@@ -33,9 +33,9 @@ static void hexdump(const void * ptr, size_t bytes)
 
 int main(void)
 {
-     static cx16_date_time_t tm;
+    static cx16_date_time_t tm;
 
-    putchar(15);        // ISO mode
+    putchar(15); // ISO mode
     printf("llvm-mos-sdk CX16 Kernal Test\n\n");
 
     printf("\ncx16_k_clock_get_date_time(&tm);\n");
@@ -66,5 +66,5 @@ int main(void)
            tm.jif);
     hexdump(&tm, sizeof(tm));
 
-    printf("Done\n");        // finished
+    printf("Done\n"); // finished
 }

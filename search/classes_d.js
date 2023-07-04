@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vdc_5fsprite_5ft_2280',['vdc_sprite_t',['../structvdc__sprite__t.html',1,'']]]
+  ['screen_5fmode_5finfo_5ft_2392',['screen_mode_info_t',['../structscreen__mode__info__t.html',1,'']]]
 ];

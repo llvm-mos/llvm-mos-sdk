@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['quot_2921',['quot',['../structdiv__t.html#a0b9dda2884048daa68ca4aaa12b17b9a',1,'div_t::quot()'],['../structldiv__t.html#a73efd59c176304c327cb4214d0e5e5c9',1,'ldiv_t::quot()'],['../structlldiv__t.html#ae4d4bccdf22f41e052073f5790c5ec37',1,'lldiv_t::quot()'],['../structpce__cdb__divmod__u16__result.html#af41e946f1347671d2a5ae8d44bbaf571',1,'pce_cdb_divmod_u16_result::quot()'],['../structpce__cdb__divmod__s16__result.html#a9dc71aea0f5b61ff405bf2f482832863',1,'pce_cdb_divmod_s16_result::quot()']]]
+  ['pattern_3123',['pattern',['../structvdc__sprite__t.html#a22dc63f356b980100a028f7b7cda7787',1,'vdc_sprite_t']]],
+  ['ppu_5faddress_3124',['ppu_address',['../nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1',1,'nesdoug.h']]],
+  ['project_3125',['Project',['../famitone2_2LICENSE.html#abd395ffefac6eeefe0afc96b11cc2a4a',1,'Project():&#160;LICENSE'],['../neslib_2LICENSE.html#abd395ffefac6eeefe0afc96b11cc2a4a',1,'Project():&#160;LICENSE']]],
+  ['publish_3126',['publish',['../famitone2_2LICENSE.html#a5a51f55a6f42a006ce57f5f015db0854',1,'publish():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a1fa1a6567d41fe738adb2c8ead4d9da4',1,'publish():&#160;LICENSE'],['../neslib_2LICENSE.html#a5a51f55a6f42a006ce57f5f015db0854',1,'publish():&#160;LICENSE']]],
+  ['putchar_3127',['putchar',['../struct__sim__reg.html#ab7d530c65509116f5c15a442344f4c95',1,'_sim_reg']]]
 ];

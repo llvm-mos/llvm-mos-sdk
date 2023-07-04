@@ -1,21 +1,8 @@
 var searchData=
 [
-  ['m_2892',['m',['../api_8h.html#aa42a14a55408612ca8e84710f4947bd8',1,'api.h']]],
-  ['max_5fdigits10_2893',['max_digits10',['../classstd_1_1numeric__limits.html#a30a694c257a12e3d6b230d0e085834ff',1,'std::numeric_limits']]],
-  ['max_5fexponent_2894',['max_exponent',['../classstd_1_1numeric__limits.html#ac27dc383df557db8fd9c4bf1bb1cb9e9',1,'std::numeric_limits']]],
-  ['max_5fexponent10_2895',['max_exponent10',['../classstd_1_1numeric__limits.html#a48cf1b6629c63e50effbe19469010795',1,'std::numeric_limits']]],
-  ['md_2896',['md',['../structpce__cdb__toc__data.html#a1cae93eb6e4f9a882aa063c1f5c67120',1,'pce_cdb_toc_data::md()'],['../structpce__sector.html#a626e19aa78a8d12c3856cd13240855cf',1,'pce_sector::md()']]],
-  ['mem_2897',['mem',['../cpm_8h.html#a9838dbd07d4c4bc0be563ba01441c3c8',1,'cpm.h']]],
-  ['merchantability_2898',['MERCHANTABILITY',['../famitone2_2LICENSE.html#ab751e230e2b9e6aaa37a5b17c4c400f5',1,'MERCHANTABILITY():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a154f1f5773463ad5ca425974e396bfc9',1,'MERCHANTABILITY():&#160;LICENSE'],['../neslib_2LICENSE.html#ab751e230e2b9e6aaa37a5b17c4c400f5',1,'MERCHANTABILITY():&#160;LICENSE']]],
-  ['merge_2899',['merge',['../famitone2_2LICENSE.html#af27cd59a5108453496aaf4bfd6744372',1,'merge():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a678f9794a39fefbd251dd7995896d8d1',1,'merge():&#160;LICENSE'],['../neslib_2LICENSE.html#af27cd59a5108453496aaf4bfd6744372',1,'merge():&#160;LICENSE']]],
-  ['metatile_2900',['metatile',['../nesdoug_8h.html#ae725013a2102a058678dc9fcec752fde',1,'nesdoug.h']]],
-  ['method_2901',['method',['../nes-mmc1_2bank_8h.html#af9694b987bcde19711748c3e61a7fc53',1,'method():&#160;bank.h'],['../nes-mmc3_2bank_8h.html#a3c7086d577e56891127c05fc2f7cd43a',1,'method():&#160;bank.h']]],
-  ['min_5fexponent_2902',['min_exponent',['../classstd_1_1numeric__limits.html#a0715059d3049496d68041d77abc52dd2',1,'std::numeric_limits']]],
-  ['min_5fexponent10_2903',['min_exponent10',['../classstd_1_1numeric__limits.html#a1640eb19f654db57bdae03f68cbc9adb',1,'std::numeric_limits']]],
-  ['minor_2904',['minor',['../api_8h.html#a9048027ea488be2a2e7e68fa0fbf330f',1,'api.h']]],
-  ['minute_2905',['minute',['../structpce__cdb__toc__data.html#a03bdd121846410c9c72a21a7550f0ed0',1,'pce_cdb_toc_data::minute()'],['../structpce__sector.html#a12f2e4ee9e6eee2075482af45f60877d',1,'pce_sector::minute()']]],
-  ['mmc1_5fctrl_5fcur_2906',['MMC1_CTRL_CUR',['../nes-mmc1_2bank_8h.html#a20c672d3d4952b4f4c46613a7c360b26',1,'bank.h']]],
-  ['mode_2907',['mode',['../memory_8h.html#a2797713f0e84f822af4da1688cc1501c',1,'memory.h']]],
-  ['modify_2908',['modify',['../famitone2_2LICENSE.html#a831c469129bf3e6a7ac32392af950a10',1,'modify():&#160;LICENSE'],['../nesdoug_2LICENSE.html#aee84c67625753d080ce4d4cd2057a61f',1,'modify():&#160;LICENSE'],['../neslib_2LICENSE.html#a831c469129bf3e6a7ac32392af950a10',1,'modify():&#160;LICENSE']]],
-  ['music_5fdata_2909',['music_data',['../famitone2_8h.html#aac2b94d5396c8a29af7652e6ee7bd9ae',1,'famitone2.h']]]
+  ['len_3092',['len',['../nesdoug_8h.html#af91696d822b18489bb5090a43e213907',1,'len():&#160;nesdoug.h'],['../neslib_8h.html#a4960e0db764d064fd8e2ed33fe9bdbe9',1,'len():&#160;neslib.h']]],
+  ['length_3093',['length',['../bios_8h.html#a766e27240b5a5fd8763035537a67785f',1,'bios.h']]],
+  ['liability_3094',['LIABILITY',['../famitone2_2LICENSE.html#a7cd49e37ab1f2a8d78d13aba9c37d478',1,'LIABILITY():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a423d0246c9909c890b555df1a2650497',1,'LIABILITY():&#160;LICENSE'],['../neslib_2LICENSE.html#a7cd49e37ab1f2a8d78d13aba9c37d478',1,'LIABILITY():&#160;LICENSE']]],
+  ['license_3095',['License',['../famitone2_2LICENSE.html#a617d07764b5e443b4132e47f1032ee88',1,'License():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a60f93f2e9762d28b8073ebf84ec890c7',1,'License():&#160;LICENSE'],['../neslib_2LICENSE.html#a617d07764b5e443b4132e47f1032ee88',1,'License():&#160;LICENSE']]],
+  ['lo_3096',['lo',['../structpce__cdb__toc__data.html#a9cd25b733d163a1b34542e5558d841e4',1,'pce_cdb_toc_data::lo()'],['../structpce__sector.html#a3ff0c5887ac81993d521b2acd2388159',1,'pce_sector::lo()']]]
 ];

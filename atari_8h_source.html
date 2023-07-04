@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// information.</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Originally from cc65. Modififed from original version.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Originally from cc65. Modified from original version.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/*                                                                           */</span></div>
@@ -303,7 +303,7 @@ $(function() {
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">// TODO</span></div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> waitvsync (<span class="keywordtype">void</span>);                            <span class="comment">/* wait for start of next frame */</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0">waitvsync</a> (<span class="keywordtype">void</span>);                            <span class="comment">/* wait for start of next frame */</span></div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span>  __fastcall__ _graphics (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="memory_8h.html#a2797713f0e84f822af4da1688cc1501c">mode</a>); <span class="comment">/* mode value same as in BASIC */</span></div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> __fastcall__ _scroll (<span class="keywordtype">signed</span> <span class="keywordtype">char</span> numlines);</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                                          <span class="comment">/* numlines &gt; 0  scrolls up */</span></div>
@@ -316,8 +316,8 @@ $(function() {
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">// TODO</span></div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> get_ostype(<span class="keywordtype">void</span>);       <span class="comment">/* get ROM version */</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> get_tv(<span class="keywordtype">void</span>);           <span class="comment">/* get TV system */</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="cx16_8h.html#a727086a761e93150eccea8300bfc9100">get_ostype</a>(<span class="keywordtype">void</span>);       <span class="comment">/* get ROM version */</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="cx16_8h.html#ae54ac1f863d721cd796a750e0f7b3626">get_tv</a>(<span class="keywordtype">void</span>);           <span class="comment">/* get TV system */</span></div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> _save_vecs(<span class="keywordtype">void</span>);                <span class="comment">/* save system vectors */</span></div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">void</span> _rest_vecs(<span class="keywordtype">void</span>);                <span class="comment">/* restore system vectors */</span></div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">char</span> *_getdefdev(<span class="keywordtype">void</span>);               <span class="comment">/* get default floppy device */</span></div>
@@ -553,6 +553,9 @@ $(function() {
 <div class="ttc" id="a__atarios_8h_html"><div class="ttname"><a href="__atarios_8h.html">_atarios.h</a></div></div>
 <div class="ttc" id="a__antic_8h_html"><div class="ttname"><a href="__antic_8h.html">_antic.h</a></div></div>
 <div class="ttc" id="a__pia_8h_html"><div class="ttname"><a href="__pia_8h.html">_pia.h</a></div></div>
+<div class="ttc" id="acx16_8h_html_a727086a761e93150eccea8300bfc9100"><div class="ttname"><a href="cx16_8h.html#a727086a761e93150eccea8300bfc9100">get_ostype</a></div><div class="ttdeci">signed char get_ostype(void)</div></div>
+<div class="ttc" id="acx16_8h_html_ae54ac1f863d721cd796a750e0f7b3626"><div class="ttname"><a href="cx16_8h.html#ae54ac1f863d721cd796a750e0f7b3626">get_tv</a></div><div class="ttdeci">unsigned char get_tv(void)</div></div>
+<div class="ttc" id="acx16_8h_html_aaf15b34f75b159dacf4c7460ae8f79e0"><div class="ttname"><a href="cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0">waitvsync</a></div><div class="ttdeci">void waitvsync(void)</div></div>
 <div class="ttc" id="amemory_8h_html_a2797713f0e84f822af4da1688cc1501c"><div class="ttname"><a href="memory_8h.html#a2797713f0e84f822af4da1688cc1501c">mode</a></div><div class="ttdeci">const void uint16_t uint8_t mode</div><div class="ttdef"><b>Definition:</b> memory.h:54</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

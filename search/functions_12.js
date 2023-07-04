@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7etype_5finfo_2741',['~type_info',['../classstd_1_1type__info.html#a4d637825f52d28522ae7c7bcfd872c0f',1,'std::type_info']]]
+  ['waitvsync_2925',['waitvsync',['../cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0',1,'cx16.h']]]
 ];

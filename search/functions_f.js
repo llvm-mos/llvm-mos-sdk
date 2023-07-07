@@ -19,7 +19,7 @@ var searchData=
   ['set_5fscroll_5fx_2886',['set_scroll_x',['../nesdoug_8h.html#a9f756a4238c3dd594f4234d0b3ffb204',1,'nesdoug.h']]],
   ['set_5fscroll_5fy_2887',['set_scroll_y',['../nesdoug_8h.html#a74a51ec73fb1dc96b74fb2e777de7ec8',1,'nesdoug.h']]],
   ['set_5fterminate_2888',['set_terminate',['../namespacestd.html#a1058583dd3e6fc0300fd4cd0f65d242a',1,'std']]],
-  ['set_5ftv_2889',['set_tv',['../cx16_8h.html#abc45264b25a955f854c66c8d3b0fc87d',1,'cx16.h']]],
+  ['set_5ftv_2889',['set_tv',['../cx16_8h.html#a5afe00043d144f43009c5a8086bee559',1,'cx16.h']]],
   ['set_5fvram_5fbuffer_2890',['set_vram_buffer',['../nesdoug_8h.html#a117f5381d0360f566b03749ca40499e8',1,'nesdoug.h']]],
   ['set_5fvram_5fupdate_2891',['set_vram_update',['../neslib_8h.html#a30e14306bd9659ce78f5402586445fa9',1,'neslib.h']]],
   ['signaling_5fnan_2892',['signaling_NaN',['../classstd_1_1numeric__limits.html#a2ab956bb27d4d97e27ef60b7ada9c82f',1,'std::numeric_limits']]],

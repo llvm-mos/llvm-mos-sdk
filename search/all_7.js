@@ -9,7 +9,7 @@ var searchData=
   ['fb_5ffill_5fpixels_560',['fb_fill_pixels',['../structgraph__fb__functions__t.html#a14ac5624ee04af65ea0771ed33f9b8c7',1,'graph_fb_functions_t']]],
   ['fb_5ffilter_5fpixels_561',['fb_filter_pixels',['../structgraph__fb__functions__t.html#a5d76839aab6413833ef9286d4964e018',1,'graph_fb_functions_t']]],
   ['fb_5fget_5finfo_562',['fb_get_info',['../structgraph__fb__functions__t.html#ade0a5bbfff5cdb094fe70cc83c6b8a07',1,'graph_fb_functions_t']]],
-  ['fb_5fget_5fpixel_563',['fb_get_pixel',['../structgraph__fb__functions__t.html#a6dd0450124f3fe082c4ac049014aeb67',1,'graph_fb_functions_t::fb_get_pixel()'],['../cx16_8h.html#a35e06956b330c18f5bf1677c699d0ed1',1,'fb_get_pixel():&#160;cx16.h']]],
+  ['fb_5fget_5fpixel_563',['fb_get_pixel',['../structgraph__fb__functions__t.html#a6dd0450124f3fe082c4ac049014aeb67',1,'graph_fb_functions_t::fb_get_pixel()'],['../cx16_8h.html#a993c4d2f30b861d585f9244cfdac1295',1,'fb_get_pixel():&#160;cx16.h']]],
   ['fb_5fget_5fpixels_564',['fb_get_pixels',['../structgraph__fb__functions__t.html#a9e8f85d993d50f17a7ffbb1700905861',1,'graph_fb_functions_t']]],
   ['fb_5finit_565',['fb_init',['../structgraph__fb__functions__t.html#ac3b54a0e9b65d85cf39d222d212185d9',1,'graph_fb_functions_t']]],
   ['fb_5fmove_5fpixels_566',['fb_move_pixels',['../structgraph__fb__functions__t.html#aa88e3d748a2a546fc2c2a3c82c8805eb',1,'graph_fb_functions_t']]],

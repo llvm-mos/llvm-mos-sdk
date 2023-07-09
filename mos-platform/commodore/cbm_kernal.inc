@@ -97,7 +97,7 @@
   CINT         = $FF81
   IOINIT       = $FF84
   RAMTAS       = $FF87
-#elseif defined(__VIC20__)
+#elif defined(__VIC20__)
   CINT         = $E518         ; No entries are in the Kernal jump table of the VIC-20 for these three (3) functions.
   IOINIT       = $FDF9         ; The entries for these functions have been set to point directly to the functions
   RAMTAS       = $FD8D         ; in the Kernal, to maintain compatibility with the other Commodore platforms.

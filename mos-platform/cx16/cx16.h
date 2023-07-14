@@ -35,6 +35,10 @@
 #ifndef _CX16_H
 #define _CX16_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Check for errors */
 #ifndef __CX16__
 #  error This module may be used only when compiling for the CX16!
@@ -464,5 +468,8 @@ void vpoke(unsigned char data, unsigned long addr) __attribute__((leaf)); // wri
 
 void waitvsync(void);  // wait for the vertical blank interrupt
 
+#ifdef __cplusplus
+}
+#endif
 #endif  // _CX16_H
 

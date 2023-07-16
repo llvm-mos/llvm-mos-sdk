@@ -10,6 +10,14 @@
 #include <cbm.h>  // Commodore kernal functions
 #include <cx16.h> // X16 specific kernal functions
 
+// NOTE: I believe the file access routines used here are
+//       portable to other CBM machines, however, this
+//       example does make use of a few minor X16 features
+//       mostly dealing with ASCII use 80 column formatting
+//       and some X16 specific control codes.
+//       Currently it has only been tested on X16 (with
+//       llvm-mos and cc65 [messed up screen I/O on cc65]).
+
 uint8_t device_num = 8; // CBM device number (8 = main disk)
 uint8_t cbm_error;      // CBM error code
 char cbm_status[64];    // CBM device status string
@@ -176,6 +184,7 @@ char read_buffer[256];
 
 void show_status(void)
 {
+    // X16: control codes defines
     printf("%s=%c%d \"%s\"%c\n", cbm_error < 20 ? "success" : "failure", cbm_error < 20 ? CH_WHITE : CH_LIGHTRED, cbm_error, cbm_status, CH_WHITE);
 }
 
@@ -183,7 +192,7 @@ int main(void)
 {
     int16_t len;
 
-    putchar(CH_FONT_ISO); // use ISO character set mode (for upper/lower)
+    putchar(CH_FONT_ISO); // X16: use ISO character set mode (for upper/lower)
     printf("Simple test of CBM file access routines.\n\n");
     cbm_get_status();
     printf("Initial device 8 status: \"%s\"\n\n", cbm_status);

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['license_2453',['LICENSE',['../famitone2_2LICENSE.html',1,'(Global Namespace)'],['../nesdoug_2LICENSE.html',1,'(Global Namespace)'],['../neslib_2LICENSE.html',1,'(Global Namespace)']]],
-  ['limits_2454',['limits',['../limits.html',1,'']]]
+  ['license_2455',['LICENSE',['../famitone2_2LICENSE.html',1,'(Global Namespace)'],['../nesdoug_2LICENSE.html',1,'(Global Namespace)'],['../neslib_2LICENSE.html',1,'(Global Namespace)']]],
+  ['limits_2456',['limits',['../limits.html',1,'']]]
 ];

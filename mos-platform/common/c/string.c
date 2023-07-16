@@ -122,13 +122,13 @@ __attribute__((weak)) char *strtok(char *string, const char *separators) {
 }
 
 __attribute__((weak)) char *strcat(char *restrict s1, const char *restrict s2) {
-  unsigned int len = strlen(s1);
+  size_t len = strlen(s1);
   strcpy(s1 + len, s2);
 }
 
 __attribute__((weak)) char *strncat(char *restrict s1, const char *restrict s2,
                                     size_t n) {
-  unsigned int len = strlen(s1);
+  size_t len = strlen(s1);
   if (strlen(s2) < n) {
     strcpy(s1 + len, s2);
   } else {

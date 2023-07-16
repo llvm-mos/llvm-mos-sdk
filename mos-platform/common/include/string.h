@@ -32,6 +32,9 @@ size_t strspn(const char* string, const char* in);
 char* strpbrk(const char* string, const char* brk);
 char* strtok(char* string, const char* separators);
 
+char *strcat(char * __restrict__ s1, const char * __restrict__ s2);
+char *strncat(char * __restrict__ s1, const char * __restrict__ s2, size_t n);
+
 // Version of memset with better arguments for MOS. All non-pointer arguments
 // can fit in registers, and there is no superfluous return value. Compiler
 // intrinsic memset calls use this version, and user code is free to as well.

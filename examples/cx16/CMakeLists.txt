@@ -1,3 +1,6 @@
+add_executable(k_cbm_file_test.prg k_cbm_file_test.c)
+install_example(k_cbm_file_test.prg)
+
 add_executable(k_console_test.prg k_console_test.c)
 install_example(k_console_test.prg)
 

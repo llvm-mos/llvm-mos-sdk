@@ -1,3 +1,4 @@
-llvm-mos-sdk.code-workspace
-.vscode
-build
+.DS_Store
+*.code-workspace
+.vscode/**
+build/**

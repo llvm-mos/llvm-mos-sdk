@@ -21,17 +21,17 @@ extern "C" {
  */
 
 typedef struct pce_sector {
-    union {
-        struct {
-            uint8_t track, track_end;
-        };
-        struct {
-            uint8_t frame, second, minute;
-        };
-        struct {
-            uint8_t lo, md, hi;
-        };
+  union {
+    struct {
+      uint8_t track, track_end;
     };
+    struct {
+      uint8_t frame, second, minute;
+    };
+    struct {
+      uint8_t lo, md, hi;
+    };
+  };
 } pce_sector_t;
 
 #ifdef __cplusplus

@@ -1,22 +1,22 @@
 #include <bank.h>
-#include <stdlib.h>
 #include <peekpoke.h>
+#include <stdlib.h>
 
 volatile const char c[15000] = {1, [14999] = 2};
 
-__attribute__((section(".prg_rom_0.rodata")))
-volatile const char d[15000] = {3, [14999] = 4};
+__attribute__((section(".prg_rom_0.rodata"))) volatile const char d[15000] = {
+    3, [14999] = 4};
 
-__attribute__((section(".prg_rom_14.rodata")))
-volatile const char e[15000] = {5, [14999] = 6};
+__attribute__((section(".prg_rom_14.rodata"))) volatile const char e[15000] = {
+    5, [14999] = 6};
 
 __attribute__((noinline, section(".prg_rom_0.text"))) char bank_0_fn(void) {
-  asm volatile ("");
+  asm volatile("");
   return 7;
 }
 
 __attribute__((noinline, section(".prg_rom_14.text"))) char bank_14_fn(void) {
-  asm volatile ("");
+  asm volatile("");
   return 8;
 }
 

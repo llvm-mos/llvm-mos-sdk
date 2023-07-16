@@ -5,6 +5,8 @@
 
 // Originally from cc65. Modified from original version.
 
+// clang-format off
+
 /*****************************************************************************/
 /*                                                                           */
 /*                                  _pbi.h                                   */

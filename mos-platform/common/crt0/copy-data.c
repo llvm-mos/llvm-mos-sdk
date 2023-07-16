@@ -1,11 +1,9 @@
 #include <string.h>
 
-asm(
-  ".global __do_copy_data\n"
-  ".section .init.200,\"axR\",@progbits\n"
-  "__do_copy_data:\n"
-  "  jsr __copy_data\n"
-);
+asm(".global __do_copy_data\n"
+    ".section .init.200,\"axR\",@progbits\n"
+    "__do_copy_data:\n"
+    "  jsr __copy_data\n");
 
 extern char __data_start[];
 extern void __data_size;

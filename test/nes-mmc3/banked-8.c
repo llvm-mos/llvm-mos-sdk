@@ -21,7 +21,7 @@ int main(void) {
   if (large_array[0x4fff] != 4)
     return EXIT_FAILURE;
 
-  if ((unsigned) bank_0 >= 0xa000)
+  if ((unsigned)bank_0 >= 0xa000)
     return EXIT_FAILURE;
   set_prg_8000(0);
   if (bank_0[0] != 1)
@@ -29,7 +29,7 @@ int main(void) {
   if (bank_0[0x1fff] != 2)
     return EXIT_FAILURE;
 
-  if ((unsigned) bank_1 >= 0xa000)
+  if ((unsigned)bank_1 >= 0xa000)
     return EXIT_FAILURE;
   set_prg_bank(1, (unsigned)bank_1 >> 8);
   if (bank_1[0] != 3)

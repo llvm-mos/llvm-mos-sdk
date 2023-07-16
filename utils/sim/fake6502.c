@@ -1,3 +1,5 @@
+// clang-format off
+
 /*
 Copyright 2021 LLVM-MOS Project
 Licensed under the Apache License, Version 2.0 with LLVM Exceptions.

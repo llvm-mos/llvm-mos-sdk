@@ -2,7 +2,8 @@
 #include <peekpoke.h>
 #include <stdlib.h>
 
-__attribute__((used, section(".chr_rom")))  const char cr[4096] =  {1, [4095] = 2};
+__attribute__((used, section(".chr_rom")))
+const char cr[4096] = {1, [4095] = 2};
 
 char read_ppu(unsigned ppu_addr) {
   (void)PPU.status;

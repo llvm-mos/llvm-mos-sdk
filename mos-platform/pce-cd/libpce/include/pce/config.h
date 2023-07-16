@@ -20,42 +20,49 @@ extern "C" {
  * Functionality related to output ELF configuration.
  */
 
-#define __PCE_RAM_BANK_DECLARE(id, offset, size) \
-asm(".global __ram_bank" #id "\n.global __ram_bank" #id "_size\n.equ __ram_bank" #id ", ((" #offset ") << 13)\n.equ __ram_bank" #id "_size, ((" #size ") << 13)\n")
+#define __PCE_RAM_BANK_DECLARE(id, offset, size)                               \
+  asm(".global __ram_bank" #id "\n.global __ram_bank" #id                      \
+      "_size\n.equ __ram_bank" #id ", ((" #offset                              \
+      ") << 13)\n.equ __ram_bank" #id "_size, ((" #size ") << 13)\n")
 
-#define __PCE_RAM_BANK_USE(id, offset) \
-static inline void pce_ram_bank ## id ## _map(void) { \
-    __attribute__((leaf)) asm volatile ( \
-        "lda #mos8(__ram_bank" #id "_bank)\n" \
-        "tam #(1 << " #offset ")\n" : : : "a", "p" ); \
-}
+#define __PCE_RAM_BANK_USE(id, offset)                                         \
+  static inline void pce_ram_bank##id##_map(void) {                            \
+    __attribute__((leaf)) asm volatile("lda #mos8(__ram_bank" #id "_bank)\n"   \
+                                       "tam #(1 << " #offset ")\n"             \
+                                       :                                       \
+                                       :                                       \
+                                       : "a", "p");                            \
+  }
 
-#define __PCE_RAM_BANK_CALLBACK_DECLARE(id, offset) \
-__attribute__((leaf, callback(1), noinline, section("text.pce_ram_bank" #id "_call"))) \
-void pce_ram_bank ## id ## _call(void (*method)(void)) { \
-    pce_bank ## offset ## _size1_push(); \
-    pce_ram_bank ## id ## _map(); \
-    method(); \
-    pce_bank ## offset ## _size1_pop(); \
-}
+#define __PCE_RAM_BANK_CALLBACK_DECLARE(id, offset)                            \
+  __attribute__((                                                              \
+      leaf, callback(1), noinline,                                             \
+      section("text.pce_ram_bank" #id                                          \
+              "_call"))) void pce_ram_bank##id##_call(void (*method)(void)) {  \
+    pce_bank##offset##_size1_push();                                           \
+    pce_ram_bank##id##_map();                                                  \
+    method();                                                                  \
+    pce_bank##offset##_size1_pop();                                            \
+  }
 
-#define __PCE_RAM_BANK_CALLBACK_USE(id) \
-__attribute__((leaf, callback(1))) \
-void pce_ram_bank ## id ## _call(void (*method)(void))
+#define __PCE_RAM_BANK_CALLBACK_USE(id)                                        \
+  __attribute__((leaf, callback(1))) void pce_ram_bank##id##_call(             \
+      void (*method)(void))
 
 #ifdef PCE_CONFIG_IMPLEMENTATION
-#define PCE_RAM_BANK_AT(id, offset) \
-__PCE_RAM_BANK_DECLARE(id, offset, 1); \
-__PCE_RAM_BANK_USE(id, offset) \
-__PCE_RAM_BANK_CALLBACK_DECLARE(id, offset)
-#define PCE_CDB_USE_PSG_DRIVER(value) \
-asm(".global __pce_cdb_use_psg\n.equ __pce_cdb_use_psg, " #value "\n")
-#define PCE_CDB_USE_GRAPHICS_DRIVER(value) \
-asm(".global __pce_cdb_use_graphics\n.equ __pce_cdb_use_graphics, " #value "\n")
+#define PCE_RAM_BANK_AT(id, offset)                                            \
+  __PCE_RAM_BANK_DECLARE(id, offset, 1);                                       \
+  __PCE_RAM_BANK_USE(id, offset)                                               \
+  __PCE_RAM_BANK_CALLBACK_DECLARE(id, offset)
+#define PCE_CDB_USE_PSG_DRIVER(value)                                          \
+  asm(".global __pce_cdb_use_psg\n.equ __pce_cdb_use_psg, " #value "\n")
+#define PCE_CDB_USE_GRAPHICS_DRIVER(value)                                     \
+  asm(".global __pce_cdb_use_graphics\n.equ __pce_cdb_use_graphics, " #value   \
+      "\n")
 #else
 /**
  * @brief Define the memory offset for a given physical bank.
- * 
+ *
  * A virtual bank is a group of one or more physical banks, automatically
  * allocated by the linker.
  *
@@ -73,9 +80,9 @@ asm(".global __pce_cdb_use_graphics\n.equ __pce_cdb_use_graphics, " #value "\n")
  * @param id The ID of the physical bank (0-127).
  * @param offset The memory offset, in 8KB units (2-6).
  */
-#define PCE_RAM_BANK_AT(id, offset) \
-__PCE_RAM_BANK_USE(id, offset) \
-__PCE_RAM_BANK_CALLBACK_USE(id)
+#define PCE_RAM_BANK_AT(id, offset)                                            \
+  __PCE_RAM_BANK_USE(id, offset)                                               \
+  __PCE_RAM_BANK_CALLBACK_USE(id)
 /**
  * @brief Set to 1 to enable using the BIOS PSG driver. This reserves
  * additional console RAM (6 bytes ZP, 838 bytes RAM).

@@ -20,42 +20,47 @@ extern "C" {
  * Functionality related to output ELF configuration.
  */
 
-#define __PCE_ROM_BANK_DECLARE(id, offset, size) \
-asm(".global __rom_bank" #id "\n.global __rom_bank" #id "_size\n.equ __rom_bank" #id ", ((" #offset ") << 13)\n.equ __rom_bank" #id "_size, ((" #size ") << 13)\n")
+#define __PCE_ROM_BANK_DECLARE(id, offset, size)                               \
+  asm(".global __rom_bank" #id "\n.global __rom_bank" #id                      \
+      "_size\n.equ __rom_bank" #id ", ((" #offset                              \
+      ") << 13)\n.equ __rom_bank" #id "_size, ((" #size ") << 13)\n")
 
-#define __PCE_ROM_BANK_USE(id, offset) \
-static inline void pce_rom_bank ## id ## _map(void) { \
-    __attribute__((leaf)) asm volatile ( \
-        "lda #mos8(__rom_bank" #id "_bank)\n" \
-        "tam #(1 << " #offset ")\n" : : : "a", "p" ); \
-}
+#define __PCE_ROM_BANK_USE(id, offset)                                         \
+  static inline void pce_rom_bank##id##_map(void) {                            \
+    __attribute__((leaf)) asm volatile("lda #mos8(__rom_bank" #id "_bank)\n"   \
+                                       "tam #(1 << " #offset ")\n"             \
+                                       :                                       \
+                                       :                                       \
+                                       : "a", "p");                            \
+  }
 
-#define __PCE_ROM_BANK_CALLBACK_DECLARE(id, offset) \
-__attribute__((leaf, callback(1), noinline, section("text.pce_rom_bank" #id "_call"))) \
-void pce_rom_bank ## id ## _call(void (*method)(void)) { \
-    pce_bank ## offset ## _size1_push(); \
-    pce_rom_bank ## id ## _map(); \
-    method(); \
-    pce_bank ## offset ## _size1_pop(); \
-}
+#define __PCE_ROM_BANK_CALLBACK_DECLARE(id, offset)                            \
+  __attribute__((                                                              \
+      leaf, callback(1), noinline,                                             \
+      section("text.pce_rom_bank" #id                                          \
+              "_call"))) void pce_rom_bank##id##_call(void (*method)(void)) {  \
+    pce_bank##offset##_size1_push();                                           \
+    pce_rom_bank##id##_map();                                                  \
+    method();                                                                  \
+    pce_bank##offset##_size1_pop();                                            \
+  }
 
-#define __PCE_ROM_BANK_CALLBACK_USE(id) \
-__attribute__((leaf, callback(1))) \
-void pce_rom_bank ## id ## _call(void (*method)(void))
+#define __PCE_ROM_BANK_CALLBACK_USE(id)                                        \
+  __attribute__((leaf, callback(1))) void pce_rom_bank##id##_call(             \
+      void (*method)(void))
 
 #ifdef PCE_CONFIG_IMPLEMENTATION
-#define PCE_ROM_BANK_AT(id, offset) \
-__PCE_ROM_BANK_DECLARE(id, offset, 1); \
-__PCE_ROM_BANK_USE(id, offset) \
-__PCE_ROM_BANK_CALLBACK_DECLARE(id, offset)
-#define PCE_ROM_FIXED_BANK_SIZE(size) \
-__PCE_ROM_BANK_DECLARE(0, 8 - size, size)
-#define PCE_SGX_RAM(size) \
-asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
+#define PCE_ROM_BANK_AT(id, offset)                                            \
+  __PCE_ROM_BANK_DECLARE(id, offset, 1);                                       \
+  __PCE_ROM_BANK_USE(id, offset)                                               \
+  __PCE_ROM_BANK_CALLBACK_DECLARE(id, offset)
+#define PCE_ROM_FIXED_BANK_SIZE(size) __PCE_ROM_BANK_DECLARE(0, 8 - size, size)
+#define PCE_SGX_RAM(size)                                                      \
+  asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
 #else
 /**
  * @brief Define the memory offset for a given physical bank.
- * 
+ *
  * A virtual bank is a group of one or more physical banks, automatically
  * allocated by the linker.
  *
@@ -73,12 +78,12 @@ asm(".global __ram_bank_size\n.equ __ram_bank_size, ((" #size ") << 13)\n")
  * @param id The ID of the physical bank (0-127).
  * @param offset The memory offset, in 8KB units (2-6).
  */
-#define PCE_ROM_BANK_AT(id, offset) \
-__PCE_ROM_BANK_USE(id, offset) \
-__PCE_ROM_BANK_CALLBACK_USE(id)
+#define PCE_ROM_BANK_AT(id, offset)                                            \
+  __PCE_ROM_BANK_USE(id, offset)                                               \
+  __PCE_ROM_BANK_CALLBACK_USE(id)
 /**
  * @brief Define the size of the fixed bank (at the top of memory).
- * 
+ *
  * @param size The size, in 8KB units (1-6).
  */
 #define PCE_ROM_FIXED_BANK_SIZE(size)

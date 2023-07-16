@@ -5,19 +5,13 @@
 #include <stdlib.h>
 
 namespace {
-struct a_large_struct
-{
-  a_large_struct()
-  : an_array{ 5, 4, 3, 2, 1 }
-  {
-  }
+struct a_large_struct {
+  a_large_struct() : an_array{5, 4, 3, 2, 1} {}
 
   char an_array[129];
 };
 
-template <class T, size_t N>
-constexpr size_t static_size(const T (&)[N])
-{
+template <class T, size_t N> constexpr size_t static_size(const T (&)[N]) {
   return N;
 }
 
@@ -51,7 +45,8 @@ int main() {
     constexpr auto ALLOC_COUNT = 1000;
     const auto vector_of_ptrs = new std::size_t *[ALLOC_COUNT];
 
-    printf("READY TO FILL THE HEAP. BYTES IN USE SO FAR: %u\n", ::heap_bytes_used());
+    printf("READY TO FILL THE HEAP. BYTES IN USE SO FAR: %u\n",
+           ::heap_bytes_used());
 
     for (std::size_t j = 0; j < ALLOC_COUNT; j += 1) {
       vector_of_ptrs[j] = nullptr;
@@ -87,7 +82,7 @@ int main() {
       delete vector_of_ptrs[i]; // manual delete required for raw ptrs.
     }
 
-    delete [] vector_of_ptrs;
+    delete[] vector_of_ptrs;
   }
 
   // At the end of the program, there should only be a few bytes in use by the

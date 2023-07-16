@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <chrout.h>
+#include <stdio.h>
 
-void __putchar(char c) {
-  __chrout(c);
-}
+void __putchar(char c) { __chrout(c); }

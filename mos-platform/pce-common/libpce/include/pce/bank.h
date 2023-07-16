@@ -152,293 +152,353 @@ __attribute__((leaf)) void pce_bank456i_set(uint8_t id);
 __attribute__((leaf)) void pce_bank56i_set(uint8_t id);
 
 static inline void pce_bank2_size1_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$04\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$04\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size1_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$04\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$04\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size2_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$04\n"
-        "pha\n"
-        "tma #$08\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$04\n"
+                                     "pha\n"
+                                     "tma #$08\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size2_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$08\n"
-        "pla\n"
-        "tam #$04\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$08\n"
+                                     "pla\n"
+                                     "tam #$04\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size3_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$04\n"
-        "pha\n"
-        "tma #$08\n"
-        "pha\n"
-        "tma #$10\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$04\n"
+                                     "pha\n"
+                                     "tma #$08\n"
+                                     "pha\n"
+                                     "tma #$10\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size3_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$10\n"
-        "pla\n"
-        "tam #$08\n"
-        "pla\n"
-        "tam #$04\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$10\n"
+                                     "pla\n"
+                                     "tam #$08\n"
+                                     "pla\n"
+                                     "tam #$04\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size4_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$04\n"
-        "pha\n"
-        "tma #$08\n"
-        "pha\n"
-        "tma #$10\n"
-        "pha\n"
-        "tma #$20\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$04\n"
+                                     "pha\n"
+                                     "tma #$08\n"
+                                     "pha\n"
+                                     "tma #$10\n"
+                                     "pha\n"
+                                     "tma #$20\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size4_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$20\n"
-        "pla\n"
-        "tam #$10\n"
-        "pla\n"
-        "tam #$08\n"
-        "pla\n"
-        "tam #$04\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$20\n"
+                                     "pla\n"
+                                     "tam #$10\n"
+                                     "pla\n"
+                                     "tam #$08\n"
+                                     "pla\n"
+                                     "tam #$04\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size5_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$04\n"
-        "pha\n"
-        "tma #$08\n"
-        "pha\n"
-        "tma #$10\n"
-        "pha\n"
-        "tma #$20\n"
-        "pha\n"
-        "tma #$40\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$04\n"
+                                     "pha\n"
+                                     "tma #$08\n"
+                                     "pha\n"
+                                     "tma #$10\n"
+                                     "pha\n"
+                                     "tma #$20\n"
+                                     "pha\n"
+                                     "tma #$40\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank2_size5_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$40\n"
-        "pla\n"
-        "tam #$20\n"
-        "pla\n"
-        "tam #$10\n"
-        "pla\n"
-        "tam #$08\n"
-        "pla\n"
-        "tam #$04\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$40\n"
+                                     "pla\n"
+                                     "tam #$20\n"
+                                     "pla\n"
+                                     "tam #$10\n"
+                                     "pla\n"
+                                     "tam #$08\n"
+                                     "pla\n"
+                                     "tam #$04\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank3_size1_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$08\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$08\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank3_size1_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$08\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$08\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank3_size2_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$08\n"
-        "pha\n"
-        "tma #$10\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$08\n"
+                                     "pha\n"
+                                     "tma #$10\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank3_size2_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$10\n"
-        "pla\n"
-        "tam #$08\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$10\n"
+                                     "pla\n"
+                                     "tam #$08\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank3_size3_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$08\n"
-        "pha\n"
-        "tma #$10\n"
-        "pha\n"
-        "tma #$20\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$08\n"
+                                     "pha\n"
+                                     "tma #$10\n"
+                                     "pha\n"
+                                     "tma #$20\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank3_size3_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$20\n"
-        "pla\n"
-        "tam #$10\n"
-        "pla\n"
-        "tam #$08\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$20\n"
+                                     "pla\n"
+                                     "tam #$10\n"
+                                     "pla\n"
+                                     "tam #$08\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank3_size4_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$08\n"
-        "pha\n"
-        "tma #$10\n"
-        "pha\n"
-        "tma #$20\n"
-        "pha\n"
-        "tma #$40\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$08\n"
+                                     "pha\n"
+                                     "tma #$10\n"
+                                     "pha\n"
+                                     "tma #$20\n"
+                                     "pha\n"
+                                     "tma #$40\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank3_size4_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$40\n"
-        "pla\n"
-        "tam #$20\n"
-        "pla\n"
-        "tam #$10\n"
-        "pla\n"
-        "tam #$08\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$40\n"
+                                     "pla\n"
+                                     "tam #$20\n"
+                                     "pla\n"
+                                     "tam #$10\n"
+                                     "pla\n"
+                                     "tam #$08\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank4_size1_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$10\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$10\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank4_size1_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$10\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$10\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank4_size2_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$10\n"
-        "pha\n"
-        "tma #$20\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$10\n"
+                                     "pha\n"
+                                     "tma #$20\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank4_size2_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$20\n"
-        "pla\n"
-        "tam #$10\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$20\n"
+                                     "pla\n"
+                                     "tam #$10\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank4_size3_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$10\n"
-        "pha\n"
-        "tma #$20\n"
-        "pha\n"
-        "tma #$40\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$10\n"
+                                     "pha\n"
+                                     "tma #$20\n"
+                                     "pha\n"
+                                     "tma #$40\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank4_size3_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$40\n"
-        "pla\n"
-        "tam #$20\n"
-        "pla\n"
-        "tam #$10\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$40\n"
+                                     "pla\n"
+                                     "tam #$20\n"
+                                     "pla\n"
+                                     "tam #$10\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank5_size1_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$20\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$20\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank5_size1_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$20\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$20\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank5_size2_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$20\n"
-        "pha\n"
-        "tma #$40\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$20\n"
+                                     "pha\n"
+                                     "tma #$40\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank5_size2_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$40\n"
-        "pla\n"
-        "tam #$20\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$40\n"
+                                     "pla\n"
+                                     "tam #$20\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank6_size1_push(void) {
-    __attribute__((leaf)) asm volatile (
-        "tma #$40\n"
-        "pha\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("tma #$40\n"
+                                     "pha\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 static inline void pce_bank6_size1_pop(void) {
-    __attribute__((leaf)) asm volatile (
-        "pla\n"
-        "tam #$40\n"
-        "" : : : "a");
+  __attribute__((leaf)) asm volatile("pla\n"
+                                     "tam #$40\n"
+                                     ""
+                                     :
+                                     :
+                                     : "a");
 }
 
 #define PCE_BANK_MASK(n) (1 << (n))

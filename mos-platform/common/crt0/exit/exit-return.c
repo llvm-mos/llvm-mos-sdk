@@ -1,9 +1,7 @@
-asm (
-  ".global __after_main\n"
-  ".section .after_main,\"axR\",@progbits\n"
-  "__after_main:\n"
-  "  jmp __exit_return\n"
-);
+asm(".global __after_main\n"
+    ".section .after_main,\"axR\",@progbits\n"
+    "__after_main:\n"
+    "  jmp __exit_return\n");
 
 __attribute__((leaf)) void _fini(void);
 

@@ -1,6 +1,6 @@
 #include <cstdint>
-#include <new>
 #include <exception>
+#include <new>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -27,22 +27,20 @@ struct block {
 
 static_assert(sizeof(block) == sizeof(std::size_t), "!!!");
 
-
 // This is a first fit free list allocator.
-// It is initialized with a single element; and only increases in size if the heap
-// becomes fragmented.  So; even though it's operations are linear with respect
-// to the number of "holes" made in the heap through fragmentation.
+// It is initialized with a single element; and only increases in size if the
+// heap becomes fragmented.  So; even though it's operations are linear with
+// respect to the number of "holes" made in the heap through fragmentation.
 
-// This allocator is suitable for 8-bit systems with 16-bit, 64kbyte address spaces.  In that
-// scenario the worst case scenario would be the maximum amount of allcations where each allocation
-// is the smallest allocation, which is 2 bytes.
-// The maximum number of allocations is 64kbyte / 8 bytes = 8 k allocs:
+// This allocator is suitable for 8-bit systems with 16-bit, 64kbyte address
+// spaces.  In that scenario the worst case scenario would be the maximum amount
+// of allcations where each allocation is the smallest allocation, which is 2
+// bytes. The maximum number of allocations is 64kbyte / 8 bytes = 8 k allocs:
 //   6 bytes per block + 2 byte minimum allocation.
-// In order to have holes, each allocation would have to be separated from an adjacent
-// allocation by some free memory.  So the maximum number of holes is half the maximum
-// number of allocs: 8k / 2 = 4k.
-// In that scenario; randomly freeing or allocing, there would be, at most, 4096 entries to traverse.
-
+// In order to have holes, each allocation would have to be separated from an
+// adjacent allocation by some free memory.  So the maximum number of holes is
+// half the maximum number of allocs: 8k / 2 = 4k. In that scenario; randomly
+// freeing or allocing, there would be, at most, 4096 entries to traverse.
 
 // A doubly-linked list of blocks of memory.
 // The next node pointer, the previous node pointer, and the size of the block
@@ -88,9 +86,7 @@ public:
       return *this;
     }
 
-    bool operator==(const iterator &rhs) const {
-      return m_ptr == rhs.m_ptr;
-    }
+    bool operator==(const iterator &rhs) const { return m_ptr == rhs.m_ptr; }
 
     bool operator!=(const iterator &rhs) const {
       return !this->operator==(rhs);
@@ -191,8 +187,8 @@ public:
         // Adjacent block is free.
         // See if there is enough space free to realloc. We do not need
         // to account for creating another block, since the free_blk m_size
-        // member already excludes the bytes for the free block node, and that block
-        // node will just get moved further into the free block.
+        // member already excludes the bytes for the free block node, and that
+        // block node will just get moved further into the free block.
         if (free_blk.m_size >= sz) {
           // Adjacent block is free and large enough.
           return &free_blk;
@@ -210,9 +206,9 @@ public:
   }
 
   // Free a block by re-inserting it in the free list.
-  // Freeing blocks is O(n) in terms of number of free segments that have to be traversed
-  // to find the place in the free list to restore the block.  In cases of low fragmentation,
-  // the size of this list will be low.
+  // Freeing blocks is O(n) in terms of number of free segments that have to be
+  // traversed to find the place in the free list to restore the block.  In
+  // cases of low fragmentation, the size of this list will be low.
   void free_block(block *const block) {
     block_node *last_block_node = nullptr;
     for (auto &free_blk : *this) {
@@ -292,7 +288,7 @@ public:
     }
   }
 
-  void merge_adjacent_allocated(block & left, block & right) {
+  void merge_adjacent_allocated(block &left, block &right) {
     // Merging two allocations makes the left allocation larger
     // by the size of the right allocation, plus the size of the right
     // allocations node.
@@ -301,7 +297,7 @@ public:
 
 private:
   // Nodes are added at the end of the list.
-  block_node * add_node(block_node *node) {
+  block_node *add_node(block_node *node) {
     list_node *node_last = m_head;
     for (; node_last->m_next; node_last = node_last->m_next) {
     }
@@ -404,7 +400,6 @@ __attribute__((weak)) void free(void *ptr) {
   free_list.free_block(block::get_block(static_cast<std::byte *>(ptr)));
   free_list.coalesce_blocks();
 }
-
 }
 
 __attribute__((weak)) void *operator new(std::size_t count,
@@ -427,8 +422,7 @@ __attribute__((weak)) void *operator new(std::size_t count,
       newp();
       // If newp returned, then we retry the loop.  Continue
       // until we succeed in allocation, throw, or get_new_handler returns null.
-    }
-    else {
+    } else {
       // no user-provided new_handler.
       return nullptr;
     }

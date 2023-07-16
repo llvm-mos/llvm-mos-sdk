@@ -3,8 +3,10 @@
 #include <peekpoke.h>
 #include <stdlib.h>
 
-__attribute__((used, section(".chr_rom_0")))  const char cr0[4096] =  {1, [4095] = 2};
-__attribute__((used, section(".chr_rom_31"))) const char cr31[4096] = {3, [4095] = 4};
+__attribute__((used, section(".chr_rom_0")))
+const char cr0[4096] = {1, [4095] = 2};
+__attribute__((used, section(".chr_rom_31")))
+const char cr31[4096] = {3, [4095] = 4};
 
 char read_ppu(unsigned ppu_addr) {
   (void)PPU.status;
@@ -14,9 +16,7 @@ char read_ppu(unsigned ppu_addr) {
   return PPU.vram.data;
 }
 
-void set_4k_banks(void) {
-  set_mmc1_ctrl(0b11100);
-}
+void set_4k_banks(void) { set_mmc1_ctrl(0b11100); }
 
 int main(void) {
   set_4k_banks();

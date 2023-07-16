@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * CDDL HEADER START
  *

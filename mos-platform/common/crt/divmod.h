@@ -147,9 +147,15 @@ template <typename T> static inline T umod(T a, T b) {
 #endif // __SLOW_DIV
 
 template <typename T> struct make_unsigned;
-template <> struct make_unsigned<signed char> { typedef char type; };
-template <> struct make_unsigned<int> { typedef unsigned type; };
-template <> struct make_unsigned<long> { typedef unsigned long type; };
+template <> struct make_unsigned<signed char> {
+  typedef char type;
+};
+template <> struct make_unsigned<int> {
+  typedef unsigned type;
+};
+template <> struct make_unsigned<long> {
+  typedef unsigned long type;
+};
 template <> struct make_unsigned<long long> {
   typedef unsigned long long type;
 };

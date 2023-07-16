@@ -13,9 +13,9 @@
 
 #ifndef __ASSEMBLER__
 #include <rpc8e/cpu.h>
-#include <rpc8e/mmu.h>
 #include <rpc8e/display.h>
 #include <rpc8e/drive.h>
+#include <rpc8e/mmu.h>
 #include <rpc8e/sortron.h>
 #endif
 

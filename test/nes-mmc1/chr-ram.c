@@ -8,9 +8,7 @@ asm(".globl __chr_rom_size\n"
     ".globl __chr_ram_size\n"
     "__chr_ram_size = 8\n");
 
-void set_8k_banks(void) {
-  set_mmc1_ctrl(0b01100);
-}
+void set_8k_banks(void) { set_mmc1_ctrl(0b01100); }
 
 void poke_ppu(unsigned addr, char val) {
   PPU.vram.address = addr >> 8;

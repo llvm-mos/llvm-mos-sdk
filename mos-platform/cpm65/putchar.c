@@ -6,12 +6,11 @@
  * file in the project root for the full text.
  */
 
-#include <stdio.h>
 #include <cpm.h>
+#include <stdio.h>
 
 void __putchar(char c) {
   if (__builtin_expect(c == '\n', 0))
-  	cpm_conout('\r');
+    cpm_conout('\r');
   cpm_conout(c);
 }
-

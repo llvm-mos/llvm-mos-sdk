@@ -20,16 +20,15 @@ PCE_ROM_BANK_AT(1, 6);
 
 static uint16_t color;
 
-__attribute__((noinline, section(".rom_bank1")))
-void cycle_color(void) {
-	*IO_VCE_COLOR_INDEX = 0x100;
-	*IO_VCE_COLOR_DATA = color++;
+__attribute__((noinline, section(".rom_bank1"))) void cycle_color(void) {
+  *IO_VCE_COLOR_INDEX = 0x100;
+  *IO_VCE_COLOR_DATA = color++;
 }
 
 int main(void) {
-	pce_rom_bank1_map();
+  pce_rom_bank1_map();
 
-	while(1) {
-		cycle_color();
-	}
+  while (1) {
+    cycle_color();
+  }
 }

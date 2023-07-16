@@ -4,16 +4,14 @@
 extern void __kbhit(void);
 extern unsigned char volatile __CHARBUF;
 
-int getchar(void)
-{
-    do
-    {
-        __kbhit();
-    } while (!__CHARBUF);
-    
-    int const result = __CHARBUF;
+int getchar(void) {
+  do {
+    __kbhit();
+  } while (!__CHARBUF);
 
-    __CHARBUF = 0;
+  int const result = __CHARBUF;
 
-    return result;
+  __CHARBUF = 0;
+
+  return result;
 }

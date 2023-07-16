@@ -24,8 +24,8 @@
 #include <string>
 #include <vector>
 
-#include "../common/elf.h"
 #include "../common/elf-mos.h"
+#include "../common/elf.h"
 
 #include "../common/parg/parg.h"
 
@@ -39,24 +39,22 @@
 #define P_ARG_IPL 130
 
 static struct parg_option long_options[] = {
-  {"help", PARG_NOARG, 0, P_ARG_HELP},
-  {"ipl", PARG_REQARG, 0, P_ARG_IPL},
-  {"iso-no-pad-end", PARG_NOARG, 0, P_ARG_ISO_NO_PAD_END},
-  {"iso-offset", PARG_REQARG, 0, P_ARG_ISO_OFFSET},
-  {"quiet", PARG_NOARG, 0, P_ARG_QUIET},
-  {"verbose", PARG_NOARG, 0, P_ARG_VERBOSE},
-  {0, 0, 0, 0}
-};
+    {"help", PARG_NOARG, 0, P_ARG_HELP},
+    {"ipl", PARG_REQARG, 0, P_ARG_IPL},
+    {"iso-no-pad-end", PARG_NOARG, 0, P_ARG_ISO_NO_PAD_END},
+    {"iso-offset", PARG_REQARG, 0, P_ARG_ISO_OFFSET},
+    {"quiet", PARG_NOARG, 0, P_ARG_QUIET},
+    {"verbose", PARG_NOARG, 0, P_ARG_VERBOSE},
+    {0, 0, 0, 0}};
 static const char *short_options = "hqv";
 
 static const char *long_option_descriptions[] = {
-  "Print help information.",
-  "Specify the path to the ipl.bin file (first CD sector).",
-  "Disable ISO padding mandated by the CD-ROM specification.",
-  "Offset at the beginning of the ISO, in sectors.",
-  "Disable progress messages.",
-  "Enable more verbose messages."
-};
+    "Print help information.",
+    "Specify the path to the ipl.bin file (first CD sector).",
+    "Disable ISO padding mandated by the CD-ROM specification.",
+    "Offset at the beginning of the ISO, in sectors.",
+    "Disable progress messages.",
+    "Enable more verbose messages."};
 
 uint32_t iso_offset_sectors = 0;
 bool iso_pad = true;
@@ -96,10 +94,12 @@ static uint16_t short_at(const std::vector<char> &vec, size_t offset) {
 }
 
 static uint32_t int_at(const std::vector<char> &vec, size_t offset) {
-  return (uint8_t)vec[offset] | ((uint8_t)vec[offset + 1] << 8) | ((uint8_t)vec[offset + 2] << 16) | ((uint8_t)vec[offset + 3] << 24);
+  return (uint8_t)vec[offset] | ((uint8_t)vec[offset + 1] << 8) |
+         ((uint8_t)vec[offset + 2] << 16) | ((uint8_t)vec[offset + 3] << 24);
 }
 
-static std::vector<unsigned char> vector_at(const std::vector<char> &vec, size_t offset, size_t size) {
+static std::vector<unsigned char> vector_at(const std::vector<char> &vec,
+                                            size_t offset, size_t size) {
   std::vector<unsigned char> sub(size);
   memcpy(&sub[0], &vec[offset], std::min(size, vec.size() - offset));
   return sub;
@@ -107,19 +107,26 @@ static std::vector<unsigned char> vector_at(const std::vector<char> &vec, size_t
 
 // String utilities.
 
-static bool starts_with(const std::string &haystack, const std::string &needle, bool case_sensitive = true) {
-  return needle.size() <= haystack.size() && std::equal(needle.cbegin(), needle.cend(), haystack.cbegin(),
-    [case_sensitive](unsigned char a, unsigned char b) {
-      return case_sensitive ? a == b : std::tolower(a) == std::tolower(b);
-    });
+static bool starts_with(const std::string &haystack, const std::string &needle,
+                        bool case_sensitive = true) {
+  return needle.size() <= haystack.size() &&
+         std::equal(needle.cbegin(), needle.cend(), haystack.cbegin(),
+                    [case_sensitive](unsigned char a, unsigned char b) {
+                      return case_sensitive
+                                 ? a == b
+                                 : std::tolower(a) == std::tolower(b);
+                    });
 }
 
-
-static bool ends_with(const std::string &haystack, const std::string &needle, bool case_sensitive = true) {
-  return needle.size() <= haystack.size() && std::equal(needle.crbegin(), needle.crend(), haystack.crbegin(),
-    [case_sensitive](unsigned char a, unsigned char b) {
-      return case_sensitive ? a == b : std::tolower(a) == std::tolower(b);
-    });
+static bool ends_with(const std::string &haystack, const std::string &needle,
+                      bool case_sensitive = true) {
+  return needle.size() <= haystack.size() &&
+         std::equal(needle.crbegin(), needle.crend(), haystack.crbegin(),
+                    [case_sensitive](unsigned char a, unsigned char b) {
+                      return case_sensitive
+                                 ? a == b
+                                 : std::tolower(a) == std::tolower(b);
+                    });
 }
 
 // Disc building code - useful constants.
@@ -129,7 +136,8 @@ static bool ends_with(const std::string &haystack, const std::string &needle, bo
 
 static const char cd_symbol_prefix[] = "__cd_";
 static const char ipl_system[] = "PC Engine CD-ROM SYSTEM";
-static const char ipl_copyright[] = "Copyright HUDSON SOFT / NEC Home Electronics,Ltd.";
+static const char ipl_copyright[] =
+    "Copyright HUDSON SOFT / NEC Home Electronics,Ltd.";
 
 // Disc building code.
 
@@ -149,9 +157,7 @@ class Disc;
 
 class DiscEntry {
 public:
-  DiscEntry(std::string name)
-      : _name(name)
-    { }
+  DiscEntry(std::string name) : _name(name) {}
 
   std::string name(void) const { return _name; }
   uint32_t offset(void) const { return _offset; }
@@ -163,20 +169,21 @@ public:
   virtual uint8_t bank_end(void) { return 0; }
   virtual uint8_t bank_count(void) { return (sectors() + 3) / 4; }
   virtual bool hidden(void) { return false; }
- 
+
   virtual void mark_ipl(void) {
     error(1, "Cannot turn \"%s\" into an initial program!", name().c_str());
   }
 
   virtual std::string symbol_name(void) {
     std::string symbol_name = name();
-    while (starts_with(symbol_name, "../") || starts_with(symbol_name, "..\\")) {
+    while (starts_with(symbol_name, "../") ||
+           starts_with(symbol_name, "..\\")) {
       symbol_name = symbol_name.substr(3);
     }
     std::transform(symbol_name.begin(), symbol_name.end(), symbol_name.begin(),
-      [](unsigned char c){
-        return std::isalnum(c) ? std::tolower(c) : '_';
-      });
+                   [](unsigned char c) {
+                     return std::isalnum(c) ? std::tolower(c) : '_';
+                   });
     return symbol_name;
   }
 
@@ -189,20 +196,19 @@ private:
   uint32_t _offset;
 };
 
-static const std::function<bool(const std::string&, const std::string&)> longest_first_compare = [](const std::string& a, const std::string& b) {
-  if (a.length() != b.length()) return a.length() > b.length();
-  return a < b;
-};
+static const std::function<bool(const std::string &, const std::string &)>
+    longest_first_compare = [](const std::string &a, const std::string &b) {
+      if (a.length() != b.length())
+        return a.length() > b.length();
+      return a < b;
+    };
 
 class PadDiscEntry : public DiscEntry {
 public:
   PadDiscEntry(std::string name, uint32_t sectors)
-      : DiscEntry(name), _sectors(sectors)
-    { }
+      : DiscEntry(name), _sectors(sectors) {}
 
-  virtual bool hidden(void) {
-    return true;
-  }
+  virtual bool hidden(void) { return true; }
 
   virtual void write(Disc &disc, std::ofstream &out) {
     char buffer[SECTOR_SIZE] = {0};
@@ -211,9 +217,7 @@ public:
     }
   }
 
-  virtual uint32_t sectors(void) const {
-    return _sectors;
-  }
+  virtual uint32_t sectors(void) const { return _sectors; }
 
 private:
   uint32_t _sectors;
@@ -233,8 +237,8 @@ public:
       std::string symbol_name = cd_symbol_prefix + ent->symbol_name() + "__";
       if (_symbols.find(symbol_name) != _symbols.end()) {
         error(1, "Symbol name prefix collision: %s (%s) != %s (%s)",
-          symbol_name.c_str(), ent->name().c_str(),
-          symbol_name.c_str(), _symbols.find(symbol_name)->second->name().c_str());
+              symbol_name.c_str(), ent->name().c_str(), symbol_name.c_str(),
+              _symbols.find(symbol_name)->second->name().c_str());
       }
       _symbols[symbol_name] = ent;
     }
@@ -248,9 +252,12 @@ public:
       // CD-ROM specification expects at least 2 seconds of trailing zeroes,
       // and at least 6 seconds of length total.
       uint32_t total_sectors = std::max(size(), 6U * SECTORS_PER_SECOND);
-      uint32_t pad_sectors = std::max(total_sectors - size(), 2U * SECTORS_PER_SECOND);
+      uint32_t pad_sectors =
+          std::max(total_sectors - size(), 2U * SECTORS_PER_SECOND);
       if (pad_sectors > 0) {
-        log(VERBOSITY_VERBOSE, "Adding %d sectors of padding required by CD-ROM specification.", pad_sectors);
+        log(VERBOSITY_VERBOSE,
+            "Adding %d sectors of padding required by CD-ROM specification.",
+            pad_sectors);
         add(std::make_shared<PadDiscEntry>(PadDiscEntry("pad", pad_sectors)));
       }
     }
@@ -259,7 +266,9 @@ public:
   void write(std::ofstream &out) {
     for (auto ent : _entries) {
       if (!ent->hidden()) {
-        log(VERBOSITY_INFO, "Writing \"%s\" (%s%s) to ISO @ sector %d, size %d", ent->name().c_str(), cd_symbol_prefix, ent->symbol_name().c_str(), ent->offset(), ent->sectors());
+        log(VERBOSITY_INFO, "Writing \"%s\" (%s%s) to ISO @ sector %d, size %d",
+            ent->name().c_str(), cd_symbol_prefix, ent->symbol_name().c_str(),
+            ent->offset(), ent->sectors());
       }
       out.seekp(ent->offset() * SECTOR_SIZE, std::ios::beg);
       ent->write(*this, out);
@@ -272,14 +281,15 @@ public:
 
 private:
   std::vector<std::shared_ptr<DiscEntry>> _entries;
-  std::map<std::string, std::shared_ptr<DiscEntry>, decltype(longest_first_compare)> _symbols;
+  std::map<std::string, std::shared_ptr<DiscEntry>,
+           decltype(longest_first_compare)>
+      _symbols;
 };
 
 class ArrayDiscEntry : public DiscEntry {
 public:
   ArrayDiscEntry(std::string name, std::vector<char> data)
-      : DiscEntry(name), _data(data)
-    { }
+      : DiscEntry(name), _data(data) {}
 
   virtual void write(Disc &disc, std::ofstream &out) {
     out.write(&_data[0], _data.size());
@@ -296,8 +306,7 @@ private:
 
 class FileDiscEntry : public DiscEntry {
 public:
-  FileDiscEntry(std::string name)
-      : DiscEntry(name) { 
+  FileDiscEntry(std::string name) : DiscEntry(name) {
     _stream = std::ifstream(name, std::fstream::binary);
     _stream.seekg(0, std::ios::end);
     _length = _stream.tellg();
@@ -306,7 +315,7 @@ public:
   virtual void write(Disc &disc, std::ofstream &out) {
     char buffer[SECTOR_SIZE];
     uint32_t sectors_written = 0;
-    
+
     _stream.seekg(0, std::ios::beg);
     do {
       _stream.read(buffer, SECTOR_SIZE);
@@ -318,25 +327,18 @@ public:
     assert(sectors_written == sectors());
   }
 
-  virtual uint32_t sectors(void) const {
-    return bytes_to_sectors(_length);
-  }
+  virtual uint32_t sectors(void) const { return bytes_to_sectors(_length); }
 
 private:
   std::ifstream _stream;
   uint32_t _length;
 };
 
-typedef enum {
-  ELF_IPL_RAM,
-  ELF_IPL_CARD,
-  ELF_CARD
-} ElfMode;
+typedef enum { ELF_IPL_RAM, ELF_IPL_CARD, ELF_CARD } ElfMode;
 
 class ElfDiscEntry : public DiscEntry {
 public:
-  ElfDiscEntry(std::string name)
-      : DiscEntry(name) { 
+  ElfDiscEntry(std::string name) : DiscEntry(name) {
     std::ifstream stream(name, std::fstream::binary);
     elf_data = std::vector<char>((std::istreambuf_iterator<char>(stream)),
                                  std::istreambuf_iterator<char>());
@@ -359,7 +361,7 @@ public:
     shdr_offset = int_at(elf_data, ELF32_EHDR_SHOFF);
     shdr_count = short_at(elf_data, ELF32_EHDR_SHNUM);
     shdr_size = short_at(elf_data, ELF32_EHDR_SHENTSIZE);
-    
+
     // Figure out ELF card data size by examining the Program Header.
     card_address_low = -1;
     card_address_high = 0;
@@ -385,33 +387,37 @@ public:
       elf_mode = ELF_IPL_RAM;
       card_address_low = 0x00f83000;
       card_address_high = 0x00f83800;
-    } else if (card_address_low >= 0x01680000 && card_address_high < 0x01880000) {
+    } else if (card_address_low >= 0x01680000 &&
+               card_address_high < 0x01880000) {
       // Valid configuration - System Card upload.
       elf_mode = ELF_CARD;
       // Start at the beginning of an MPR bank.
       card_address_low &= ~0x1FFF;
     } else {
-      error(1, "Don't know how to convert ELF file \"%s\" (%08X - %08X) into binary file!",
-        name.c_str(), card_address_low, card_address_high);
+      error(1,
+            "Don't know how to convert ELF file \"%s\" (%08X - %08X) into "
+            "binary file!",
+            name.c_str(), card_address_low, card_address_high);
     }
 
     // Locate the symbol and string tables.
     for (auto i = 0; i < shdr_count; i++) {
       uint32_t shdr = shdr_offset + (shdr_size * i);
       switch (int_at(elf_data, shdr + ELF32_SHDR_TYPE)) {
-        case SHT_STRTAB: {
-          strtab_offset = int_at(elf_data, shdr + ELF32_SHDR_OFFSET);
-          strtab_size = int_at(elf_data, shdr + ELF32_SHDR_SIZE);
-        } break;
-        case SHT_SYMTAB: {
-          symtab_offset = int_at(elf_data, shdr + ELF32_SHDR_OFFSET);
-          symtab_size = int_at(elf_data, shdr + ELF32_SHDR_ENTSIZE);
-          symtab_count = int_at(elf_data, shdr + ELF32_SHDR_SIZE);
-          if (symtab_count == 0 || symtab_size == 0 || (symtab_count % symtab_size) != 0) {
-            error(1, "Unsupported layout of .symtab!");
-          }
-          symtab_count /= symtab_size;
-        } break;
+      case SHT_STRTAB: {
+        strtab_offset = int_at(elf_data, shdr + ELF32_SHDR_OFFSET);
+        strtab_size = int_at(elf_data, shdr + ELF32_SHDR_SIZE);
+      } break;
+      case SHT_SYMTAB: {
+        symtab_offset = int_at(elf_data, shdr + ELF32_SHDR_OFFSET);
+        symtab_size = int_at(elf_data, shdr + ELF32_SHDR_ENTSIZE);
+        symtab_count = int_at(elf_data, shdr + ELF32_SHDR_SIZE);
+        if (symtab_count == 0 || symtab_size == 0 ||
+            (symtab_count % symtab_size) != 0) {
+          error(1, "Unsupported layout of .symtab!");
+        }
+        symtab_count /= symtab_size;
+      } break;
       }
     }
   }
@@ -435,7 +441,8 @@ public:
 
         uint8_t mpr_bank = (addr >> 16) & 0xFF;
         uint8_t mpr_index = (addr >> 13) & 0x7;
-        if (mpr_index >= 2 && mpr_index <= 6 && mpr_bank >= 0x80 && mpr_bank <= 0x87) {
+        if (mpr_index >= 2 && mpr_index <= 6 && mpr_bank >= 0x80 &&
+            mpr_bank <= 0x87) {
           mpr_mapping[mpr_index - 2] = mpr_bank - 0x80;
         }
       }
@@ -452,14 +459,18 @@ public:
           uint32_t rela = rela_offset + j;
           uint32_t r_addr = int_at(elf_data, rela + ELF32_RELA_OFFSET);
           uint32_t r_file_offset = addr_to_file_offset(r_addr);
-          uint32_t r_sym_index = ELF32_R_SYM(int_at(elf_data, rela + ELF32_RELA_INFO));
-          uint32_t r_sym_type = ELF32_R_TYPE(int_at(elf_data, rela + ELF32_RELA_INFO));
+          uint32_t r_sym_index =
+              ELF32_R_SYM(int_at(elf_data, rela + ELF32_RELA_INFO));
+          uint32_t r_sym_type =
+              ELF32_R_TYPE(int_at(elf_data, rela + ELF32_RELA_INFO));
           uint32_t r_sym = symtab_offset + r_sym_index * symtab_size;
-          std::string r_sym_name = strtab_name(int_at(elf_data, r_sym + ELF32_SYM_NAME));
+          std::string r_sym_name =
+              strtab_name(int_at(elf_data, r_sym + ELF32_SYM_NAME));
           uint32_t r_sym_value = int_at(elf_data, r_sym + ELF32_SYM_VALUE);
           uint16_t r_sym_shndx = short_at(elf_data, r_sym + ELF32_SYM_SHNDX);
 
-          // All resolved symbols are relocated - look only for unresolved symbols.
+          // All resolved symbols are relocated - look only for unresolved
+          // symbols.
           if (starts_with(r_sym_name, cd_symbol_prefix)) {
             bool found = false;
             for (auto entry : disc.symbols()) {
@@ -470,11 +481,13 @@ public:
 
                 if (starts_with(r_sym_subname, "sym_")) {
                   auto r_sym_other = r_sym_subname.substr(4);
-                  auto r_sym_other_value = r_disc_entry->resolve_symbol(r_sym_other);
+                  auto r_sym_other_value =
+                      r_disc_entry->resolve_symbol(r_sym_other);
                   if (r_sym_other_value.has_value()) {
                     value = r_sym_other_value.value();
                   } else {
-                    error(1, "Could not locate symbol \"%s\" (%s).", r_sym_other.c_str(), r_sym_name.c_str());
+                    error(1, "Could not locate symbol \"%s\" (%s).",
+                          r_sym_other.c_str(), r_sym_name.c_str());
                   }
                 } else if (r_sym_subname == "sector") {
                   value = entry.second->offset();
@@ -487,7 +500,8 @@ public:
                 } else if (r_sym_subname == "bank_count") {
                   value = entry.second->bank_count();
                 } else {
-                  error(1, "Could not resolve CD symbol \"%s\"!", r_sym_name.c_str());
+                  error(1, "Could not resolve CD symbol \"%s\"!",
+                        r_sym_name.c_str());
                 }
 
                 // The user may specify a __cd_ symbol as an immediate or as
@@ -495,27 +509,58 @@ public:
                 // as PCREL or ASCIIZ.
                 int width = 0;
                 switch (r_sym_type) {
-                case R_MOS_IMM8: width = 1; break;
-                case R_MOS_ADDR8: width = 1; break;
-                case R_MOS_ADDR16: width = 2; break;
-                case R_MOS_ADDR16_LO: width = 1; break;
-                case R_MOS_ADDR16_HI: width = 1; value >>= 8; break;
-                case R_MOS_ADDR24: width = 3; break;
-                case R_MOS_ADDR24_BANK: width = 1; value >>= 16; break;
-                case R_MOS_ADDR24_SEGMENT: width = 2; break;
-                case R_MOS_ADDR24_SEGMENT_LO: width = 1; break;
-                case R_MOS_ADDR24_SEGMENT_HI: width = 1; value >>= 8; break;
-                case R_MOS_FK_DATA_4: width = 4; break;
-                case R_MOS_FK_DATA_8: width = 8; break;
-                case R_MOS_IMM16: width = 2; break;
+                case R_MOS_IMM8:
+                  width = 1;
+                  break;
+                case R_MOS_ADDR8:
+                  width = 1;
+                  break;
+                case R_MOS_ADDR16:
+                  width = 2;
+                  break;
+                case R_MOS_ADDR16_LO:
+                  width = 1;
+                  break;
+                case R_MOS_ADDR16_HI:
+                  width = 1;
+                  value >>= 8;
+                  break;
+                case R_MOS_ADDR24:
+                  width = 3;
+                  break;
+                case R_MOS_ADDR24_BANK:
+                  width = 1;
+                  value >>= 16;
+                  break;
+                case R_MOS_ADDR24_SEGMENT:
+                  width = 2;
+                  break;
+                case R_MOS_ADDR24_SEGMENT_LO:
+                  width = 1;
+                  break;
+                case R_MOS_ADDR24_SEGMENT_HI:
+                  width = 1;
+                  value >>= 8;
+                  break;
+                case R_MOS_FK_DATA_4:
+                  width = 4;
+                  break;
+                case R_MOS_FK_DATA_8:
+                  width = 8;
+                  break;
+                case R_MOS_IMM16:
+                  width = 2;
+                  break;
                 default:
                   error(1, "Unsupported relocation type %d!", r_sym_type);
                 }
-                log(VERBOSITY_VERBOSE, "=> Relocating \"%s\" @ %08X => %X", r_sym_name.c_str(), r_addr, value);
+                log(VERBOSITY_VERBOSE, "=> Relocating \"%s\" @ %08X => %X",
+                    r_sym_name.c_str(), r_addr, value);
 
                 uint8_t carry = 0;
                 for (auto x = 0; x < width; x++, value >>= 8) {
-                  uint16_t sum = ((uint8_t) data[r_file_offset + x]) + (value & 0xFF) + carry;
+                  uint16_t sum = ((uint8_t)data[r_file_offset + x]) +
+                                 (value & 0xFF) + carry;
                   carry = (sum >> 8);
                   data[r_file_offset + x] = sum;
                 }
@@ -526,7 +571,8 @@ public:
             }
 
             if (!found) {
-              error(1, "Could not locate file for CD symbol \"%s\"!", r_sym_name.c_str());
+              error(1, "Could not locate file for CD symbol \"%s\"!",
+                    r_sym_name.c_str());
             }
           }
         }
@@ -542,7 +588,8 @@ public:
       char buffer[32] = {0};
       out.seekp(start, std::ios::beg);
       if (elf_mode == ELF_IPL_RAM) {
-        auto start_address = resolve_symbol("_start").value_or(card_address_low) & 0x7FF;        
+        auto start_address =
+            resolve_symbol("_start").value_or(card_address_low) & 0x7FF;
         buffer[6] = start_address; // code sector jump address
         buffer[7] = start_address >> 8;
       } else {
@@ -550,10 +597,11 @@ public:
         buffer[0] = code_sector >> 16;
         buffer[1] = code_sector >> 8;
         buffer[2] = code_sector;
-        buffer[3] = (sectors() - 1); // code sector count
+        buffer[3] = (sectors() - 1);  // code sector count
         buffer[4] = card_address_low; // code sector load address
         buffer[5] = card_address_low >> 8;
-        auto start_address = resolve_symbol("_start").value_or(card_address_low);        
+        auto start_address =
+            resolve_symbol("_start").value_or(card_address_low);
         buffer[6] = start_address; // code sector jump address
         buffer[7] = start_address >> 8;
       }
@@ -574,9 +622,12 @@ public:
     if (elf_mode == ELF_IPL_RAM) {
       return 1;
     } else {
-      uint16_t diff_banks = (card_address_high >> 16) - (card_address_low >> 16);
-      uint16_t diff_addresses = ((card_address_high & 0x1FFF) / SECTOR_SIZE) + 1;
-      uint16_t diff_sectors = diff_banks * (8192 / SECTOR_SIZE) + diff_addresses;
+      uint16_t diff_banks =
+          (card_address_high >> 16) - (card_address_low >> 16);
+      uint16_t diff_addresses =
+          ((card_address_high & 0x1FFF) / SECTOR_SIZE) + 1;
+      uint16_t diff_sectors =
+          diff_banks * (8192 / SECTOR_SIZE) + diff_addresses;
       if (should_prepend_ipl()) {
         diff_sectors++;
       }
@@ -590,10 +641,12 @@ public:
     }
   }
 
-  virtual std::optional<uint32_t> resolve_symbol(const std::string &name) override {
+  virtual std::optional<uint32_t>
+  resolve_symbol(const std::string &name) override {
     for (auto i = 0; i < symtab_count; i++) {
       uint32_t sym = symtab_offset + (symtab_size * i);
-      std::string sym_name = strtab_name(int_at(elf_data, sym + ELF32_SYM_NAME));
+      std::string sym_name =
+          strtab_name(int_at(elf_data, sym + ELF32_SYM_NAME));
       uint32_t sym_value = int_at(elf_data, sym + ELF32_SYM_VALUE);
       uint16_t sym_shndx = short_at(elf_data, sym + ELF32_SYM_SHNDX);
       if (sym_name == name && sym_shndx == SHN_ABS) {
@@ -603,18 +656,12 @@ public:
     return DiscEntry::resolve_symbol(name);
   }
 
-  virtual uint8_t bank_start(void) override {
-    return (card_address_low >> 16);
-  }
+  virtual uint8_t bank_start(void) override { return (card_address_low >> 16); }
 
-  virtual uint8_t bank_end(void) override {
-    return (card_address_high >> 16);
-  }
+  virtual uint8_t bank_end(void) override { return (card_address_high >> 16); }
 
 private:
-  bool should_prepend_ipl(void) const {
-    return elf_mode == ELF_IPL_CARD;
-  }
+  bool should_prepend_ipl(void) const { return elf_mode == ELF_IPL_CARD; }
 
   bool should_write_ipl(void) const {
     return elf_mode == ELF_IPL_RAM || elf_mode == ELF_IPL_CARD;
@@ -630,10 +677,12 @@ private:
 
   uint32_t addr_to_file_offset(uint32_t addr) {
     if (addr < card_address_low || addr > card_address_high) {
-      error(1, "File address %08X out of range (%08X - %08X)", addr, card_address_low, card_address_high);
+      error(1, "File address %08X out of range (%08X - %08X)", addr,
+            card_address_low, card_address_high);
     }
     addr -= card_address_low;
-    return ((addr >> 16) * 0x2000) + (addr & 0x1FFF) + (should_prepend_ipl() ? SECTOR_SIZE : 0x0);
+    return ((addr >> 16) * 0x2000) + (addr & 0x1FFF) +
+           (should_prepend_ipl() ? SECTOR_SIZE : 0x0);
   }
 
   ElfMode elf_mode;
@@ -650,11 +699,14 @@ static const std::string elf_ext = ".elf";
 static bool try_append_ipl(Disc &disc, std::string name) {
   std::vector<char> buffer(2048);
   std::ifstream file(name, std::ios_base::binary);
-  if (!file.good()) return false;
+  if (!file.good())
+    return false;
   file.read(&buffer[0], SECTOR_SIZE);
-  if (file.gcount() != SECTOR_SIZE) return false;
+  if (file.gcount() != SECTOR_SIZE)
+    return false;
 
-  disc.add(std::make_shared<ArrayDiscEntry>(ArrayDiscEntry("sector_0", buffer)));
+  disc.add(
+      std::make_shared<ArrayDiscEntry>(ArrayDiscEntry("sector_0", buffer)));
   return true;
 }
 
@@ -671,23 +723,27 @@ static void add_file(Disc &disc, std::string filename) {
   }
 
   disc.add(ptr);
-} 
+}
 
 static void usage(int return_code) {
   if (return_code == 0) {
     printf("pce-mkcd - create ISO image for pce-cd target\n\n");
   }
   printf("Usage: pce-mkcd <output.iso> <files...>\n\nOptions:\n");
-  const struct parg_option* option = long_options;
-  const char** description = long_option_descriptions;
+  const struct parg_option *option = long_options;
+  const char **description = long_option_descriptions;
   while (option->name != nullptr) {
     printf("  ");
-    if (isalnum(option->val)) printf("-%c, ", option->val);
+    if (isalnum(option->val))
+      printf("-%c, ", option->val);
     printf("--%s", option->name);
-    if (option->has_arg == PARG_REQARG) printf(" <arg>");
-    if (option->has_arg == PARG_OPTARG) printf(" [arg]");
+    if (option->has_arg == PARG_REQARG)
+      printf(" <arg>");
+    if (option->has_arg == PARG_OPTARG)
+      printf(" [arg]");
     printf("    %s\n", *description);
-    option++; description++;
+    option++;
+    description++;
   }
   exit(return_code);
 }
@@ -701,7 +757,8 @@ int main(int argc, char **argv) {
   int optend = parg_reorder(argc, argv, short_options, long_options);
 
   int optval;
-  while ((optval = parg_getopt_long(&ps, optend, argv, short_options, long_options, nullptr)) != -1) {
+  while ((optval = parg_getopt_long(&ps, optend, argv, short_options,
+                                    long_options, nullptr)) != -1) {
     switch (optval) {
     case P_ARG_HELP:
       usage(0);
@@ -737,12 +794,12 @@ int main(int argc, char **argv) {
       std::ifstream list(argv[i] + 1);
       if (list.is_open()) {
         std::string line;
-        while(std::getline(list, line)) {
+        while (std::getline(list, line)) {
           if (!starts_with(line, "#")) {
             add_file(disc, line);
           }
         }
-      }      
+      }
     } else {
       add_file(disc, argv[i]);
     }

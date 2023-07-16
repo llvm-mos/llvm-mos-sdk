@@ -43,6 +43,7 @@ typedef struct {
 } lldiv_t;
 lldiv_t lldiv(long long numer, long long denom);
 
+// clang-format off
 /**
 Simple malloc/free implementation.
 
@@ -56,8 +57,6 @@ utilize any of the memory between the base heap address and the top of the
 software-defined stack.
 
 Typical memory map, for a target that loads programs into RAM:
-
-
 
                                          ┌─────────────────────────────────┐
                                          │Reserved or otherwise unavailable│
@@ -99,6 +98,7 @@ Typical memory map, for a target that loads programs into RAM:
       │                            │
 0x0000└────────────────────────────┘
 */
+// clang-format on
 
 void *malloc(size_t size);
 void free(void *ptr);

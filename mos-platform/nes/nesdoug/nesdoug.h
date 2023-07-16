@@ -23,10 +23,12 @@ void set_vram_buffer(void);
 __attribute__((leaf)) void one_vram_buffer(char data, int ppu_address);
 
 // to push multiple writes as one sequential horizontal write to the vram_buffer
-__attribute__((leaf)) void multi_vram_buffer_horz(const void *data, char len, int ppu_address);
+__attribute__((leaf)) void multi_vram_buffer_horz(const void *data, char len,
+                                                  int ppu_address);
 
 // to push multiple writes as one sequential vertical write to the vram_buffer
-__attribute__((leaf)) void multi_vram_buffer_vert(const void *data, char len, int ppu_address);
+__attribute__((leaf)) void multi_vram_buffer_vert(const void *data, char len,
+                                                  int ppu_address);
 
 // pad 0 or 1, use AFTER pad_poll() to get the trigger / new button presses
 // more efficient than pad_trigger, which runs the entire pad_poll code again

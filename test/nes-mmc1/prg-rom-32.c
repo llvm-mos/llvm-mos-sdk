@@ -1,10 +1,10 @@
-#include <stdlib.h>
 #include <peekpoke.h>
+#include <stdlib.h>
 
 volatile const char c[15000] = {1, [14999] = 2};
 
-__attribute__((section(".prg_rom_0")))
-volatile const char d[16372] = {3, [16371] = 4};
+__attribute__((section(".prg_rom_0"))) volatile const char d[16372] = {
+    3, [16371] = 4};
 
 int main(void) {
   if (c[0] != 1)

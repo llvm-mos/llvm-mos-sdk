@@ -33,7 +33,8 @@ extern "C" {
  * @param width Width.
  * @param height Height.
  */
-void rpc8e_display_blit_shift(uint8_t sx, uint8_t sy, uint8_t dx, uint8_t dy, uint8_t width, uint8_t height);
+void rpc8e_display_blit_shift(uint8_t sx, uint8_t sy, uint8_t dx, uint8_t dy,
+                              uint8_t width, uint8_t height);
 
 /**
  * @brief Fill an area of the display with a character.
@@ -44,7 +45,8 @@ void rpc8e_display_blit_shift(uint8_t sx, uint8_t sy, uint8_t dx, uint8_t dy, ui
  * @param height Height.
  * @param fiilchar The character to fill the area with.
  */
-void rpc8e_display_blit_fill(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t fillchar);
+void rpc8e_display_blit_fill(uint8_t x, uint8_t y, uint8_t width,
+                             uint8_t height, uint8_t fillchar);
 
 /**
  * @brief Clear the display.

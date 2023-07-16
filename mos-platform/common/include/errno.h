@@ -9,11 +9,11 @@ extern int _errno;
 #define errno (_errno)
 
 #define ERANGE 1
-#define EDOM   2
+#define EDOM 2
 #define EILSEQ 3
 #define EINVAL 4
 #define ENOMEM 5
-#define ELAST  5
+#define ELAST 5
 
 #ifdef __cplusplus
 }

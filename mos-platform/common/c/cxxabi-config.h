@@ -14,12 +14,11 @@
 #endif
 
 #if defined(__clang__)
-#  define _LIBCXXABI_COMPILER_CLANG
-#  ifndef __apple_build_version__
-#    define _LIBCXXABI_CLANG_VER (__clang_major__ * 100 + __clang_minor__)
-#  endif
+#define _LIBCXXABI_COMPILER_CLANG
+#ifndef __apple_build_version__
+#define _LIBCXXABI_CLANG_VER (__clang_major__ * 100 + __clang_minor__)
 #endif
-
+#endif
 
 #if !defined(_LIBCXXABI_DISABLE_VISIBILITY_ANNOTATIONS)
 #define _LIBCXXABI_HIDDEN __attribute__((__visibility__("hidden")))
@@ -49,11 +48,10 @@
 #define _LIBCXXABI_NO_CFI
 #endif
 
-
 #if defined(_LIBCXXABI_COMPILER_CLANG)
-#  if !__has_feature(cxx_exceptions)
-#    define _LIBCXXABI_NO_EXCEPTIONS
-#  endif
+#if !__has_feature(cxx_exceptions)
+#define _LIBCXXABI_NO_EXCEPTIONS
+#endif
 #endif
 
 #endif // ____CXXABI_CONFIG_H

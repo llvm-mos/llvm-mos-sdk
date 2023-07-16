@@ -10,8 +10,8 @@
 #define _PCE_CD_H_
 
 #ifndef __ASSEMBLER__
-#include <pce/cd/types.h>
 #include <pce/cd/bios.h>
+#include <pce/cd/types.h>
 #endif
 
 #endif /* _PCE_CD_H_ */

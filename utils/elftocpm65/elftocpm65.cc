@@ -157,8 +157,7 @@ int main(int argc, char *const *argv) {
         bytes[targetAddress - 0x200 + i] = elf.byteAt(codeOffset + i);
     };
 
-    for (int phdr = 0; phdr < elf.phdrCount(); phdr++)
-    {
+    for (int phdr = 0; phdr < elf.phdrCount(); phdr++) {
       uint32_t off = elf.findPhdr(phdr);
       if (elf.longAt(off + ELF32_PHDR_TYPE) == PT_LOAD)
         append_phdr(off);
@@ -173,14 +172,14 @@ int main(int argc, char *const *argv) {
 
   /* Second-last phdr must contain the relocations. */
 
-  uint32_t relaPhdr = elf.findPhdr(elf.phdrCount()-2);
+  uint32_t relaPhdr = elf.findPhdr(elf.phdrCount() - 2);
   uint32_t relaCount =
       elf.longAt(relaPhdr + ELF32_PHDR_FILESZ) / ELF32_RELA__SIZE;
   uint32_t relaOffset = elf.longAt(relaPhdr + ELF32_PHDR_OFFSET);
 
   /* Last phdr must contain the symbol table. */
 
-  uint32_t symbolPhdr = elf.findPhdr(elf.phdrCount()-1);
+  uint32_t symbolPhdr = elf.findPhdr(elf.phdrCount() - 1);
   uint32_t symbolCount =
       elf.longAt(symbolPhdr + ELF32_PHDR_FILESZ) / ELF32_SYM__SIZE;
   uint32_t symbolOffset = elf.longAt(symbolPhdr + ELF32_PHDR_OFFSET);

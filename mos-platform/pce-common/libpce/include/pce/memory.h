@@ -33,25 +33,29 @@ extern "C" {
  */
 #define PCE_MEMOP_INCR_NONE 0xD3
 /**
- * @brief Memory operation mode: Increment source, alternate between destination and destination + 1.
+ * @brief Memory operation mode: Increment source, alternate between destination
+ * and destination + 1.
  */
-#define PCE_MEMOP_INCR_ALT  0xE3
+#define PCE_MEMOP_INCR_ALT 0xE3
 /**
- * @brief Memory operation mode: Alternate between source and source + 1, increment destination.
+ * @brief Memory operation mode: Alternate between source and source + 1,
+ * increment destination.
  */
-#define PCE_MEMOP_ALT_INCR  0xF3
+#define PCE_MEMOP_ALT_INCR 0xF3
 
 /**
  * @brief Perform a memory operation.
  *
  * Note that this function will stall interrupts until it is complete.
- * 
+ *
  * @param dest The destination address.
  * @param src The source address.
- * @param count Number of repetitions (bytes). Note that 0 is equivalent to 65,536 bytes.
+ * @param count Number of repetitions (bytes). Note that 0 is equivalent to
+ * 65,536 bytes.
  * @param mode The memory operation mode.
  */
-__attribute__((leaf)) void *pce_memop(void *dest, const void *src, uint16_t count, uint8_t mode);
+__attribute__((leaf)) void *pce_memop(void *dest, const void *src,
+                                      uint16_t count, uint8_t mode);
 
 #ifdef __cplusplus
 }

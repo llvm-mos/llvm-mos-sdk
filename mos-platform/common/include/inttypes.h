@@ -1,8 +1,8 @@
 #ifndef _INTTYPES_H_
 #define _INTTYPES_H_
 
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #define PRId8 "hhd"
 #define PRIdLEAST8 PRId8

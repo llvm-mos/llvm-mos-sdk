@@ -73,4 +73,3 @@ bool type_info::before(const type_info &rhs) const noexcept {
 const char *type_info::name() const noexcept { return __type_name; }
 
 } // namespace std
-

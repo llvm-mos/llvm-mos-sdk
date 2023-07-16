@@ -100,7 +100,7 @@ __attribute__((leaf)) void set_mirroring(char mirroring);
 void set_prg_mode(char mode);
 
 #define CHR_A12_STRAIGHT 0
-#define CHR_A12_INVERT   0x80
+#define CHR_A12_INVERT 0x80
 // Set whether CHR A12 is inverted. Takes effect after the next PRG or CHR bank
 // switch.
 void set_chr_a12_inversion(char mode);

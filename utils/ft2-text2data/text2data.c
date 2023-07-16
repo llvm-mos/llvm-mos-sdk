@@ -1,3 +1,4 @@
+// clang-format off
 // text2data.cpp : nesdoug bug fix fork
 // changes marked with **
 // originally by Shiru

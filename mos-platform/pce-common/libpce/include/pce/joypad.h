@@ -20,18 +20,18 @@ extern "C" {
  * Functionality related to the joypad.
  */
 
-#define KEY_LEFT	0x80
-#define KEY_RIGHT	0x40
-#define KEY_DOWN	0x20
-#define KEY_UP		0x10
-#define KEY_RUN		0x08
-#define KEY_SELECT	0x04
-#define KEY_2		0x02
-#define KEY_1		0x01
+#define KEY_LEFT 0x80
+#define KEY_RIGHT 0x40
+#define KEY_DOWN 0x20
+#define KEY_UP 0x10
+#define KEY_RUN 0x08
+#define KEY_SELECT 0x04
+#define KEY_2 0x02
+#define KEY_1 0x01
 
 /**
  * @brief Write a value to the joypad I/O port, then read the result.
- * 
+ *
  * @param value The value to write.
  * @return uint8_t The value read.
  */
@@ -39,7 +39,7 @@ uint8_t pce_joypad_wr(uint8_t value);
 
 /**
  * @brief Read the first joypad controller's pressed buttons.
- * 
+ *
  * @return uint8_t Buttons currently pressed.
  */
 uint8_t pce_joypad_read(void);
@@ -50,7 +50,7 @@ uint8_t pce_joypad_read(void);
  * If a multitap is to be used, one should use this function for all
  * controllers after the first one (which should use @ref pce_joypad_read
  * instead).
- * 
+ *
  * @return uint8_t Buttons currently pressed.
  */
 uint8_t pce_joypad_next(void);

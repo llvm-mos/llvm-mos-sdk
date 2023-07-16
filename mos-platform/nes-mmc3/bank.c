@@ -39,13 +39,9 @@ __attribute__((weak)) void set_chr_mode_5(char chr_id) {
   POKE(0x8001, chr_id);
 }
 
-__attribute__((weak)) void set_mirroring(char mode) {
-  POKE(0xa000, mode);
-}
+__attribute__((weak)) void set_mirroring(char mode) { POKE(0xa000, mode); }
 
-__attribute__((weak)) void set_wram_mode(char mode) {
-  POKE(0xa001, mode);
-}
+__attribute__((weak)) void set_wram_mode(char mode) { POKE(0xa001, mode); }
 
 __attribute__((weak)) void set_prg_mode(char mode) {
   __bank_select_hi = (__bank_select_hi & ~PRG_MODE_1) | mode;

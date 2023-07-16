@@ -6,15 +6,17 @@
  * information.
  */
 
-#include <stdint.h>
 #include <rpc8e.h>
+#include <stdint.h>
 
 bool rpc8e_sortron_command(uint8_t id) {
-	*IO_SORTRON_COMMAND = id;
-	while (true) {
-		uint8_t status = *IO_SORTRON_STATUS;
-		if (status == SORTRON_STATUS_SUCCESS) return true;
-		if (status == SORTRON_STATUS_ERROR) return false;
-		rpc8e_cpu_wait();
-	}
+  *IO_SORTRON_COMMAND = id;
+  while (true) {
+    uint8_t status = *IO_SORTRON_STATUS;
+    if (status == SORTRON_STATUS_SUCCESS)
+      return true;
+    if (status == SORTRON_STATUS_ERROR)
+      return false;
+    rpc8e_cpu_wait();
+  }
 }

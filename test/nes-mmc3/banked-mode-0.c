@@ -10,7 +10,7 @@ __attribute__((section(".prg_rom_1"))) volatile const char bank_1[0x2000] = {
 __attribute__((section(".prg_rom_2"))) volatile const char bank_2[0x2000] = {
     [0] = 5, [0x1fff] = 6};
 
-asm (".globl __prg_rom_2\n__prg_rom_2 = 0xa000\n");
+asm(".globl __prg_rom_2\n__prg_rom_2 = 0xa000\n");
 
 int main(void) {
   if ((unsigned)large_array < 0xc000)

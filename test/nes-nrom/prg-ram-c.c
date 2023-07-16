@@ -1,9 +1,9 @@
-#include <stdlib.h>
 #include <peekpoke.h>
+#include <stdlib.h>
 
 asm(".global __prg_ram_size\n__prg_ram_size=8\n");
 
-volatile char c[8100] = {1, [8099]=2};
+volatile char c[8100] = {1, [8099] = 2};
 
 int main(void) {
   if (c[0] != 1 || c[8099] != 2)

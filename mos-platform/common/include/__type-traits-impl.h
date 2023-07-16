@@ -23,7 +23,9 @@ template <class T> inline constexpr bool is_integral_v = is_integral<T>::value;
 
 template <bool B, class T = void> struct enable_if {};
 
-template <class T> struct enable_if<true, T> { typedef T type; };
+template <class T> struct enable_if<true, T> {
+  typedef T type;
+};
 
 template <bool B, class T = void>
 using enable_if_t = typename enable_if<B, T>::type;

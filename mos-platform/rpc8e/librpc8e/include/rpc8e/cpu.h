@@ -26,7 +26,7 @@ extern "C" {
  * On 65EL02, this means stalling for 1 world tick (0.05 seconds).
  */
 static inline void rpc8e_cpu_wait(void) {
-	__attribute__((leaf)) asm volatile("wai");
+  __attribute__((leaf)) asm volatile("wai");
 }
 
 #ifdef __cplusplus

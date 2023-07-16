@@ -18,22 +18,22 @@ char *strchr(const char *s, int c);
 
 int strcmp(const char *s1, const char *s2);
 
-char *strcpy(char * __restrict__ s1, const char * __restrict__ s2);
+char *strcpy(char *__restrict__ s1, const char *__restrict__ s2);
 
 const char *strerror(int n);
 
 size_t strlen(const char *s);
 int strncmp(const char *s1, const char *s2, size_t n);
-char *strncpy(char * __restrict__ s1, const char * __restrict__ s2, size_t n);
+char *strncpy(char *__restrict__ s1, const char *__restrict__ s2, size_t n);
 
 char *strrchr(const char *s, int c);
 char *strrev(char *str);
-size_t strspn(const char* string, const char* in);
-char* strpbrk(const char* string, const char* brk);
-char* strtok(char* string, const char* separators);
+size_t strspn(const char *string, const char *in);
+char *strpbrk(const char *string, const char *brk);
+char *strtok(char *string, const char *separators);
 
-char *strcat(char * __restrict__ s1, const char * __restrict__ s2);
-char *strncat(char * __restrict__ s1, const char * __restrict__ s2, size_t n);
+char *strcat(char *__restrict__ s1, const char *__restrict__ s2);
+char *strncat(char *__restrict__ s1, const char *__restrict__ s2, size_t n);
 
 // Version of memset with better arguments for MOS. All non-pointer arguments
 // can fit in registers, and there is no superfluous return value. Compiler

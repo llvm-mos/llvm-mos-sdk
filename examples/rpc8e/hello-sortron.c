@@ -9,8 +9,8 @@
  * work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-#include <stdio.h>
 #include <rpc8e.h>
+#include <stdio.h>
 
 // The Sortron is an inventory access device.
 

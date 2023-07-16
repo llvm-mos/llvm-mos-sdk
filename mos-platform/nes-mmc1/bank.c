@@ -44,7 +44,6 @@ extern __attribute__((
     weak, alias("_MMC1_CTRL_CUR"))) volatile const char MMC1_CTRL_CUR;
 __attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS;
 
-
 #define MMC1_CTRL 0x8000
 #define MMC1_CHR0 0xa000
 #define MMC1_CHR1 0xc000

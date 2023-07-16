@@ -1,13 +1,10 @@
 #include <ctype.h>
 
-int isalnum(int c) {
-  return isalpha(c) || isdigit(c);
-}
+int isalnum(int c) { return isalpha(c) || isdigit(c); }
 
 int isalpha(int c) {
   char ch = (char)c;
-  return ((ch >= 'A') && (ch <= 'Z'))
-    || ((ch >= 'a') && (ch <= 'z'));
+  return ((ch >= 'A') && (ch <= 'Z')) || ((ch >= 'a') && (ch <= 'z'));
 }
 
 int isblank(int c) {
@@ -40,14 +37,12 @@ int isprint(int c) {
   return ch > 0x1f && ch < 0x7f /*DEL*/;
 }
 
-int ispunct(int c) {
-  return isprint(c) && !isspace(c) && !isalnum(c);
-}
+int ispunct(int c) { return isprint(c) && !isspace(c) && !isalnum(c); }
 
 int isspace(int c) {
   char ch = c;
-  return (ch == ' ') || (ch == '\t') || (ch == '\n') ||
-  	(ch == '\f') || (ch == '\r') || (ch == '\v');
+  return (ch == ' ') || (ch == '\t') || (ch == '\n') || (ch == '\f') ||
+         (ch == '\r') || (ch == '\v');
 }
 
 int isupper(int c) {
@@ -57,9 +52,8 @@ int isupper(int c) {
 
 int isxdigit(int c) {
   char ch = (char)c;
-  return ((ch >= '0') && (ch <= '9'))
-    || ((ch >= 'a') && (ch <= 'f'))
-    || ((ch >= 'A') && (ch <= 'F'));
+  return ((ch >= '0') && (ch <= '9')) || ((ch >= 'a') && (ch <= 'f')) ||
+         ((ch >= 'A') && (ch <= 'F'));
 }
 
 int tolower(int c) {

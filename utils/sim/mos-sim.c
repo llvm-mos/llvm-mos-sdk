@@ -116,9 +116,9 @@ bool parseFlag(int *argc, const char ***argv) {
   return true;
 }
 
-
 int main(int argc, const char *argv[]) {
-  while (parseFlag(&argc, &argv));
+  while (parseFlag(&argc, &argv))
+    ;
 
   if (argc < 2) {
     fputs(usage, stderr);
@@ -180,7 +180,8 @@ int main(int argc, const char *argv[]) {
   reset6502(cmos);
   for (;;) {
     if (shouldTrace)
-      fprintf(stderr, "%04x a:%02x x:%02x y:%02x s: %02x st:%02x\n", pc, a, x, y, sp, status);
+      fprintf(stderr, "%04x a:%02x x:%02x y:%02x s: %02x st:%02x\n", pc, a, x,
+              y, sp, status);
     uint32_t clockTicksBefore = clockticks6502;
     uint16_t addr = pc;
     step6502();

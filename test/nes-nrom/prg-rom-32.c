@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <peekpoke.h>
+#include <stdlib.h>
 
 asm(".globl __prg_rom_size\n__prg_rom_size=32\n");
 

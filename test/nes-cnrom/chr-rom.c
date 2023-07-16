@@ -11,7 +11,7 @@ __attribute__((used, section(".chr_rom_255")))
 const char cr255[8192] = {3, [8191] = 4};
 
 void set_bank(char b) {
-  static const char rom_bytes[] = {0, [1]=1, [255]=255};
+  static const char rom_bytes[] = {0, [1] = 1, [255] = 255};
   POKE(&rom_bytes[b], b);
 }
 

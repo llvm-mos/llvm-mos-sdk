@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <stdint.h>
+#include <stdio.h>
 
 // Kernal line buffer is 80 bytes. It appears that if 80 chars are input, the
 // buffer is reset.

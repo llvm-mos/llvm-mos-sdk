@@ -1,3 +1,4 @@
+// clang-format off
 //this code was initially made in 2006 as 6507 emulator
 //it is stripped down version without tracking timings etc
 

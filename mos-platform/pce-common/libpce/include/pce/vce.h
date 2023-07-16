@@ -20,11 +20,11 @@ extern "C" {
  * Functionality related to the VCE.
  */
 
-#define VCE_COLOR_INDEX(index, color) (((uint16_t) (index) << 4) + color)
+#define VCE_COLOR_INDEX(index, color) (((uint16_t)(index) << 4) + color)
 
 /**
  * @brief Get a color from the VCE.
- * 
+ *
  * @param index The color index - @ref VCE_COLOR_INDEX
  * @return uint16_t The color value.
  */
@@ -32,7 +32,7 @@ uint16_t pce_vce_get_color(uint16_t index);
 
 /**
  * @brief Set a color to the VCE.
- * 
+ *
  * @param index The color index - @ref VCE_COLOR_INDEX
  * @param value The color value.
  */
@@ -40,7 +40,7 @@ void pce_vce_set_color(uint16_t index, uint16_t value);
 
 /**
  * @brief Copy palettes (N x 16 colors) from RAM to the VCE.
- * 
+ *
  * @param index Destination palette index, from 0 to 31.
  * @param source Source memory address.
  * @param count Palette count, from 1 to 32.
@@ -49,7 +49,7 @@ void pce_vce_copy_palette(uint8_t index, const void *source, uint8_t count);
 
 /**
  * @brief Copy palettes (N x 16 colors) from the VCE to RAM.
- * 
+ *
  * @param dest Destination memory address.
  * @param index Source palette index, from 0 to 31.
  * @param count Palette count, from 1 to 32.

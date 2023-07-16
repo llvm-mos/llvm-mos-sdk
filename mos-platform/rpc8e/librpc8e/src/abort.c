@@ -9,6 +9,7 @@
 #include <stdio.h>
 
 void abort(void) {
-   puts("Aborted");
-   while(1);
+  puts("Aborted");
+  while (1)
+    ;
 }

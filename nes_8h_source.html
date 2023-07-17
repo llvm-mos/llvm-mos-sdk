@@ -76,170 +76,172 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Originally from cc65. Modified from original version.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/*                                   nes.h                                   */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// clang-format off</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*                      NES system specific definitions                      */</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*                                   nes.h                                   */</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/*                      NES system specific definitions                      */</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/* (C) 2002-2003 Groepaz/Hitmen                                              */</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/*                                                                           */</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/* This software is provided &#39;as-is&#39;, without any expressed or implied       */</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/* warranty.  In no event will the authors be held liable for any damages    */</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/* arising from the use of this software.                                    */</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/* Permission is granted to anyone to use this software for any purpose,     */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/* including commercial applications, and to alter it and redistribute it    */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/* freely, subject to the following restrictions:                            */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/* 1. The origin of this software must not be misrepresented; you must not   */</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/*    claim that you wrote the original software. If you use this software   */</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*    in a product, an acknowledgment in the product documentation would be  */</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/*    appreciated but is not required.                                       */</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/* 2. Altered source versions must be plainly marked as such, and must not   */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/*    be misrepresented as being the original software.                      */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/* 3. This notice may not be removed or altered from any source              */</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/*    distribution.                                                          */</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/* (C) 2002-2003 Groepaz/Hitmen                                              */</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/* This software is provided &#39;as-is&#39;, without any expressed or implied       */</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/* warranty.  In no event will the authors be held liable for any damages    */</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/* arising from the use of this software.                                    */</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/* Permission is granted to anyone to use this software for any purpose,     */</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/* including commercial applications, and to alter it and redistribute it    */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/* freely, subject to the following restrictions:                            */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/* 1. The origin of this software must not be misrepresented; you must not   */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/*    claim that you wrote the original software. If you use this software   */</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/*    in a product, an acknowledgment in the product documentation would be  */</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/*    appreciated but is not required.                                       */</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/* 2. Altered source versions must be plainly marked as such, and must not   */</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/*    be misrepresented as being the original software.                      */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/* 3. This notice may not be removed or altered from any source              */</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/*    distribution.                                                          */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#ifndef _NES_H</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#define _NES_H</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#ifndef _NES_H</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#define _NES_H</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/* Check for errors */</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#if !defined(__NES__)</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#  error This module may only be used when compiling for the NES!</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/* Check for errors */</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#if !defined(__NES__)</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#  error This module may only be used when compiling for the NES!</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/* Color defines */</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="nes_8h.html#aba2a7fe77a7501e5844370eec0185207">   53</a></span>&#160;<span class="preprocessor">#define COLOR_BLACK             0x00</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="nes_8h.html#a9b44987ffdc2af19b635206b94334b69">   54</a></span>&#160;<span class="preprocessor">#define COLOR_WHITE             0x01</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="nes_8h.html#ad86358bf19927183dd7b4ae215a29731">   55</a></span>&#160;<span class="preprocessor">#define COLOR_RED               0x02</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="nes_8h.html#a82573859711fce56f1aa0a76b18a9b18">   56</a></span>&#160;<span class="preprocessor">#define COLOR_CYAN              0x03</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="nes_8h.html#a361bd41194ac13caf9169f3f689dc179">   57</a></span>&#160;<span class="preprocessor">#define COLOR_PURPLE            0x04</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="nes_8h.html#afc9149f5de51bd9ac4f5ebbfa153f018">   58</a></span>&#160;<span class="preprocessor">#define COLOR_GREEN             0x05</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="nes_8h.html#a23c70d699a5a775bc2e1ebeb8603f630">   59</a></span>&#160;<span class="preprocessor">#define COLOR_BLUE              0x06</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="nes_8h.html#a4534b577b74a58b0f4b7be027af664e0">   60</a></span>&#160;<span class="preprocessor">#define COLOR_YELLOW            0x07</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="nes_8h.html#aef75f616b9a3fdb10d38395dfb996873">   61</a></span>&#160;<span class="preprocessor">#define COLOR_ORANGE            0x08</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="nes_8h.html#a928e144dbbe4316dbb854245c7e38de7">   62</a></span>&#160;<span class="preprocessor">#define COLOR_BROWN             0x09</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="nes_8h.html#a2e9fc5fbc41405fbe24d3a3c22ebd569">   63</a></span>&#160;<span class="preprocessor">#define COLOR_LIGHTRED          0x0A</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="nes_8h.html#a5bce5c772b201cec1d19557a1e356540">   64</a></span>&#160;<span class="preprocessor">#define COLOR_GRAY1             0x0B</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="nes_8h.html#a50c6fc74cd1de4fe69eaa39c8bba5d00">   65</a></span>&#160;<span class="preprocessor">#define COLOR_GRAY2             0x0C</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="nes_8h.html#ad587a2ba9bfcb1e32be24b61c932853b">   66</a></span>&#160;<span class="preprocessor">#define COLOR_LIGHTGREEN        0x0D</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="nes_8h.html#a04ee62baabfde3568b5d7a7293b4bc70">   67</a></span>&#160;<span class="preprocessor">#define COLOR_LIGHTBLUE         0x0E</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="nes_8h.html#afae46e996f4c7cd08bffac180411c61b">   68</a></span>&#160;<span class="preprocessor">#define COLOR_GRAY3             0x0F</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/* Masks for joy_read */</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="nes_8h.html#a14b65bde283ccc527dfeb5466cf6a9b6">   71</a></span>&#160;<span class="preprocessor">#define JOY_UP_MASK     0x10</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="nes_8h.html#a67a2a0cc1c9721809aaf6cdf21b16c1a">   72</a></span>&#160;<span class="preprocessor">#define JOY_DOWN_MASK   0x20</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="nes_8h.html#a1322d19f2111ee0082bb92e21242985b">   73</a></span>&#160;<span class="preprocessor">#define JOY_LEFT_MASK   0x40</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="nes_8h.html#a7cdef401bc87a915d6ccc36012ea0749">   74</a></span>&#160;<span class="preprocessor">#define JOY_RIGHT_MASK  0x80</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="nes_8h.html#a250ed0dbb7e306e97a2878c0aa075652">   75</a></span>&#160;<span class="preprocessor">#define JOY_BTN_1_MASK  0x01</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="nes_8h.html#ac8888e9b80d632c561c4b173ebd00d68">   76</a></span>&#160;<span class="preprocessor">#define JOY_BTN_2_MASK  0x02</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="nes_8h.html#aa3a12c2c8a27b00365b17e3129ca4d1d">   77</a></span>&#160;<span class="preprocessor">#define JOY_BTN_3_MASK  0x04</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="nes_8h.html#a052d45af64ad42fa05f02d99e8b8e171">   78</a></span>&#160;<span class="preprocessor">#define JOY_BTN_4_MASK  0x08</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="nes_8h.html#a5043c766457559cbaaf473fe3b31c027">   80</a></span>&#160;<span class="preprocessor">#define JOY_BTN_A_MASK  JOY_BTN_1_MASK</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="nes_8h.html#a99a34b1a51bcc468a0c32971a8f81863">   81</a></span>&#160;<span class="preprocessor">#define JOY_BTN_B_MASK  JOY_BTN_2_MASK</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="nes_8h.html#a7ec2c684c31d541caf62cd50ce7dbfe5">   82</a></span>&#160;<span class="preprocessor">#define JOY_SELECT_MASK JOY_BTN_3_MASK</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="nes_8h.html#a6dbc7dc1d56c7e5e84430c8a643117ce">   83</a></span>&#160;<span class="preprocessor">#define JOY_START_MASK  JOY_BTN_4_MASK</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="nes_8h.html#a53ad88704c4a129db54452aceace5c1e">   85</a></span>&#160;<span class="preprocessor">#define JOY_BTN_A(v)    ((v) &amp; JOY_BTN_A_MASK)</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="nes_8h.html#adeab6bbc0b54d1e9408d6d82655f8922">   86</a></span>&#160;<span class="preprocessor">#define JOY_BTN_B(v)    ((v) &amp; JOY_BTN_B_MASK)</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="nes_8h.html#ae7ee6650346dc8bd4ebcceb575125b07">   87</a></span>&#160;<span class="preprocessor">#define JOY_SELECT(v)   ((v) &amp; JOY_SELECT_MASK)</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="nes_8h.html#aa4dbe3a2a1d945cf728fab425265ce66">   88</a></span>&#160;<span class="preprocessor">#define JOY_START(v)    ((v) &amp; JOY_START_MASK)</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">/* Return codes of get_tv */</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="nes_8h.html#ace941c3fd02b99aa2a805899337b7734">   91</a></span>&#160;<span class="preprocessor">#define TV_NTSC         0</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="nes_8h.html#ad501c95c6165cc2637bd792f1de3d4e1">   92</a></span>&#160;<span class="preprocessor">#define TV_PAL          1</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="nes_8h.html#a0abe73b04b5c7c55bb4cf11520b6a31d">   93</a></span>&#160;<span class="preprocessor">#define TV_OTHER        2</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">/* Define hardware */</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/* Color defines */</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="nes_8h.html#aba2a7fe77a7501e5844370eec0185207">   55</a></span>&#160;<span class="preprocessor">#define COLOR_BLACK             0x00</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="nes_8h.html#a9b44987ffdc2af19b635206b94334b69">   56</a></span>&#160;<span class="preprocessor">#define COLOR_WHITE             0x01</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="nes_8h.html#ad86358bf19927183dd7b4ae215a29731">   57</a></span>&#160;<span class="preprocessor">#define COLOR_RED               0x02</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="nes_8h.html#a82573859711fce56f1aa0a76b18a9b18">   58</a></span>&#160;<span class="preprocessor">#define COLOR_CYAN              0x03</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="nes_8h.html#a361bd41194ac13caf9169f3f689dc179">   59</a></span>&#160;<span class="preprocessor">#define COLOR_PURPLE            0x04</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="nes_8h.html#afc9149f5de51bd9ac4f5ebbfa153f018">   60</a></span>&#160;<span class="preprocessor">#define COLOR_GREEN             0x05</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="nes_8h.html#a23c70d699a5a775bc2e1ebeb8603f630">   61</a></span>&#160;<span class="preprocessor">#define COLOR_BLUE              0x06</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="nes_8h.html#a4534b577b74a58b0f4b7be027af664e0">   62</a></span>&#160;<span class="preprocessor">#define COLOR_YELLOW            0x07</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="nes_8h.html#aef75f616b9a3fdb10d38395dfb996873">   63</a></span>&#160;<span class="preprocessor">#define COLOR_ORANGE            0x08</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="nes_8h.html#a928e144dbbe4316dbb854245c7e38de7">   64</a></span>&#160;<span class="preprocessor">#define COLOR_BROWN             0x09</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="nes_8h.html#a2e9fc5fbc41405fbe24d3a3c22ebd569">   65</a></span>&#160;<span class="preprocessor">#define COLOR_LIGHTRED          0x0A</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="nes_8h.html#a5bce5c772b201cec1d19557a1e356540">   66</a></span>&#160;<span class="preprocessor">#define COLOR_GRAY1             0x0B</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="nes_8h.html#a50c6fc74cd1de4fe69eaa39c8bba5d00">   67</a></span>&#160;<span class="preprocessor">#define COLOR_GRAY2             0x0C</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="nes_8h.html#ad587a2ba9bfcb1e32be24b61c932853b">   68</a></span>&#160;<span class="preprocessor">#define COLOR_LIGHTGREEN        0x0D</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="nes_8h.html#a04ee62baabfde3568b5d7a7293b4bc70">   69</a></span>&#160;<span class="preprocessor">#define COLOR_LIGHTBLUE         0x0E</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="nes_8h.html#afae46e996f4c7cd08bffac180411c61b">   70</a></span>&#160;<span class="preprocessor">#define COLOR_GRAY3             0x0F</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/* Masks for joy_read */</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="nes_8h.html#a14b65bde283ccc527dfeb5466cf6a9b6">   73</a></span>&#160;<span class="preprocessor">#define JOY_UP_MASK     0x10</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="nes_8h.html#a67a2a0cc1c9721809aaf6cdf21b16c1a">   74</a></span>&#160;<span class="preprocessor">#define JOY_DOWN_MASK   0x20</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="nes_8h.html#a1322d19f2111ee0082bb92e21242985b">   75</a></span>&#160;<span class="preprocessor">#define JOY_LEFT_MASK   0x40</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="nes_8h.html#a7cdef401bc87a915d6ccc36012ea0749">   76</a></span>&#160;<span class="preprocessor">#define JOY_RIGHT_MASK  0x80</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="nes_8h.html#a250ed0dbb7e306e97a2878c0aa075652">   77</a></span>&#160;<span class="preprocessor">#define JOY_BTN_1_MASK  0x01</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="nes_8h.html#ac8888e9b80d632c561c4b173ebd00d68">   78</a></span>&#160;<span class="preprocessor">#define JOY_BTN_2_MASK  0x02</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="nes_8h.html#aa3a12c2c8a27b00365b17e3129ca4d1d">   79</a></span>&#160;<span class="preprocessor">#define JOY_BTN_3_MASK  0x04</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="nes_8h.html#a052d45af64ad42fa05f02d99e8b8e171">   80</a></span>&#160;<span class="preprocessor">#define JOY_BTN_4_MASK  0x08</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="nes_8h.html#a5043c766457559cbaaf473fe3b31c027">   82</a></span>&#160;<span class="preprocessor">#define JOY_BTN_A_MASK  JOY_BTN_1_MASK</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="nes_8h.html#a99a34b1a51bcc468a0c32971a8f81863">   83</a></span>&#160;<span class="preprocessor">#define JOY_BTN_B_MASK  JOY_BTN_2_MASK</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="nes_8h.html#a7ec2c684c31d541caf62cd50ce7dbfe5">   84</a></span>&#160;<span class="preprocessor">#define JOY_SELECT_MASK JOY_BTN_3_MASK</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="nes_8h.html#a6dbc7dc1d56c7e5e84430c8a643117ce">   85</a></span>&#160;<span class="preprocessor">#define JOY_START_MASK  JOY_BTN_4_MASK</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="nes_8h.html#a53ad88704c4a129db54452aceace5c1e">   87</a></span>&#160;<span class="preprocessor">#define JOY_BTN_A(v)    ((v) &amp; JOY_BTN_A_MASK)</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="nes_8h.html#adeab6bbc0b54d1e9408d6d82655f8922">   88</a></span>&#160;<span class="preprocessor">#define JOY_BTN_B(v)    ((v) &amp; JOY_BTN_B_MASK)</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="nes_8h.html#ae7ee6650346dc8bd4ebcceb575125b07">   89</a></span>&#160;<span class="preprocessor">#define JOY_SELECT(v)   ((v) &amp; JOY_SELECT_MASK)</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="nes_8h.html#aa4dbe3a2a1d945cf728fab425265ce66">   90</a></span>&#160;<span class="preprocessor">#define JOY_START(v)    ((v) &amp; JOY_START_MASK)</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">/* Return codes of get_tv */</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="nes_8h.html#ace941c3fd02b99aa2a805899337b7734">   93</a></span>&#160;<span class="preprocessor">#define TV_NTSC         0</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="nes_8h.html#ad501c95c6165cc2637bd792f1de3d4e1">   94</a></span>&#160;<span class="preprocessor">#define TV_PAL          1</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="nes_8h.html#a0abe73b04b5c7c55bb4cf11520b6a31d">   95</a></span>&#160;<span class="preprocessor">#define TV_OTHER        2</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/* Picture Processing Unit */</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">struct </span>__ppu {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> mask;                 <span class="comment">/* color; show sprites, background */</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">char</span> <span class="keyword">const</span> status;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bios_8h.html#aa137c1d2696e2763e22c44299393db13">address</a>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    } sprite;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bios_8h.html#aa137c1d2696e2763e22c44299393db13">address</a>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    } vram;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="nes_8h.html#aa9720ef12852cf4e0293b5a0a8b19bdc">  112</a></span>&#160;<span class="preprocessor">#define PPU             (*(volatile struct __ppu*)0x2000)</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="nes_8h.html#acb7c8c50552db20506d6c5b46c1ad5dc">  113</a></span>&#160;<span class="preprocessor">#define SPRITE_DMA      (APU.sprite.dma)</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">/* Audio Processing Unit */</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">struct </span>__apu {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;          <span class="comment">/* duty, counter halt, volume/envelope */</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> ramp;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> period_low;       <span class="comment">/* timing */</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> len_period_high;  <span class="comment">/* length, timing */</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    } pulse[2];</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> counter;          <span class="comment">/* counter halt, linear counter */</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> unused;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> period_low;       <span class="comment">/* timing */</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> len_period_high;  <span class="comment">/* length, timing */</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    } triangle;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;          <span class="comment">/* counter halt, volume/envelope */</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> unused;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> period;           <span class="comment">/* loop, timing */</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">len</a>;              <span class="comment">/* length */</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    } noise;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;          <span class="comment">/* IRQ, loop, rate */</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> output;           <span class="comment">/* output value */</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bios_8h.html#aa137c1d2696e2763e22c44299393db13">address</a>;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bios_8h.html#a766e27240b5a5fd8763035537a67785f">length</a>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    } delta_mod;                        <span class="comment">/* delta pulse-code modulation */</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> dma;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    } sprite;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordtype">char</span> status;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> unused;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> fcontrol;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;};</div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="nes_8h.html#a91dbab715925a94659e228a3097155c4">  148</a></span>&#160;<span class="preprocessor">#define APU             (*(volatile struct __apu*)0x4000)</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="nes_8h.html#a5e5969c81cac9fe99fbf77b9a025037a">  150</a></span>&#160;<span class="preprocessor">#define JOYPAD          ((unsigned char volatile[2])0x4016)</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/* Define hardware */</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">/* Picture Processing Unit */</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">struct </span>__ppu {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> mask;                 <span class="comment">/* color; show sprites, background */</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">char</span> <span class="keyword">const</span> status;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bios_8h.html#aa137c1d2696e2763e22c44299393db13">address</a>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    } sprite;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bios_8h.html#aa137c1d2696e2763e22c44299393db13">address</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    } vram;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="nes_8h.html#aa9720ef12852cf4e0293b5a0a8b19bdc">  114</a></span>&#160;<span class="preprocessor">#define PPU             (*(volatile struct __ppu*)0x2000)</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="nes_8h.html#acb7c8c50552db20506d6c5b46c1ad5dc">  115</a></span>&#160;<span class="preprocessor">#define SPRITE_DMA      (APU.sprite.dma)</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">/* Audio Processing Unit */</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">struct </span>__apu {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;          <span class="comment">/* duty, counter halt, volume/envelope */</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> ramp;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> period_low;       <span class="comment">/* timing */</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> len_period_high;  <span class="comment">/* length, timing */</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    } pulse[2];</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> counter;          <span class="comment">/* counter halt, linear counter */</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> unused;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> period_low;       <span class="comment">/* timing */</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> len_period_high;  <span class="comment">/* length, timing */</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    } triangle;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;          <span class="comment">/* counter halt, volume/envelope */</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> unused;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> period;           <span class="comment">/* loop, timing */</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">len</a>;              <span class="comment">/* length */</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    } noise;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> control;          <span class="comment">/* IRQ, loop, rate */</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> output;           <span class="comment">/* output value */</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bios_8h.html#aa137c1d2696e2763e22c44299393db13">address</a>;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bios_8h.html#a766e27240b5a5fd8763035537a67785f">length</a>;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    } delta_mod;                        <span class="comment">/* delta pulse-code modulation */</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> dma;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    } sprite;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordtype">char</span> status;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> unused;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> fcontrol;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;};</div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="nes_8h.html#a91dbab715925a94659e228a3097155c4">  150</a></span>&#160;<span class="preprocessor">#define APU             (*(volatile struct __apu*)0x4000)</span></div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">// TODO</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keywordtype">void</span> <a class="code" href="cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0">waitvsync</a> (<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">/* Wait for start of the next frame */</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="cx16_8h.html#aed9504e60597aa96638a3c1f5721d360">get_tv</a> (<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">/* Return the video mode the machine is using. */</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="nes_8h.html#a5e5969c81cac9fe99fbf77b9a025037a">  152</a></span>&#160;<span class="preprocessor">#define JOYPAD          ((unsigned char volatile[2])0x4016)</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">// TODO</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keywordtype">void</span> <a class="code" href="cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0">waitvsync</a> (<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">/* Wait for start of the next frame */</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="cx16_8h.html#aed9504e60597aa96638a3c1f5721d360">get_tv</a> (<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">/* Return the video mode the machine is using. */</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">/* End of nes.h */</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">/* End of nes.h */</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aneslib_8h_html_aac68389240a6f659c888e1dc7ed82fb6"><div class="ttname"><a href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a></div><div class="ttdeci">char const void * data</div><div class="ttdef"><b>Definition:</b> neslib.h:92</div></div>
-<div class="ttc" id="abios_8h_html_a766e27240b5a5fd8763035537a67785f"><div class="ttname"><a href="bios_8h.html#a766e27240b5a5fd8763035537a67785f">length</a></div><div class="ttdeci">uint8_t uint16_t uint16_t length</div><div class="ttdef"><b>Definition:</b> bios.h:174</div></div>
+<div class="ttc" id="abios_8h_html_a766e27240b5a5fd8763035537a67785f"><div class="ttname"><a href="bios_8h.html#a766e27240b5a5fd8763035537a67785f">length</a></div><div class="ttdeci">uint8_t uint16_t uint16_t length</div><div class="ttdef"><b>Definition:</b> bios.h:181</div></div>
 <div class="ttc" id="acx16_8h_html_aed9504e60597aa96638a3c1f5721d360"><div class="ttname"><a href="cx16_8h.html#aed9504e60597aa96638a3c1f5721d360">get_tv</a></div><div class="ttdeci">unsigned char get_tv(void) __attribute__((leaf))</div></div>
-<div class="ttc" id="anesdoug_8h_html_a80675ee63d0ab830a427bb355c5996ec"><div class="ttname"><a href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a></div><div class="ttdeci">unsigned scroll</div><div class="ttdef"><b>Definition:</b> nesdoug.h:68</div></div>
+<div class="ttc" id="anesdoug_8h_html_a80675ee63d0ab830a427bb355c5996ec"><div class="ttname"><a href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a></div><div class="ttdeci">unsigned scroll</div><div class="ttdef"><b>Definition:</b> nesdoug.h:70</div></div>
 <div class="ttc" id="acx16_8h_html_aaf15b34f75b159dacf4c7460ae8f79e0"><div class="ttname"><a href="cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0">waitvsync</a></div><div class="ttdeci">void waitvsync(void)</div></div>
-<div class="ttc" id="abios_8h_html_aa137c1d2696e2763e22c44299393db13"><div class="ttname"><a href="bios_8h.html#aa137c1d2696e2763e22c44299393db13">address</a></div><div class="ttdeci">uint8_t uint16_t address</div><div class="ttdef"><b>Definition:</b> bios.h:174</div></div>
+<div class="ttc" id="abios_8h_html_aa137c1d2696e2763e22c44299393db13"><div class="ttname"><a href="bios_8h.html#aa137c1d2696e2763e22c44299393db13">address</a></div><div class="ttdeci">uint8_t uint16_t address</div><div class="ttdef"><b>Definition:</b> bios.h:180</div></div>
 <div class="ttc" id="anesdoug_8h_html_af91696d822b18489bb5090a43e213907"><div class="ttname"><a href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">len</a></div><div class="ttdeci">char len</div><div class="ttdef"><b>Definition:</b> nesdoug.h:26</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

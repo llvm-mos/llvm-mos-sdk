@@ -76,141 +76,143 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Originally from cc65. Modified from original version.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/*                                  _vic2.h                                  */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// clang-format off</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*                Internal include file, do not use directly                 */</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*                                  _vic2.h                                  */</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/*                Internal include file, do not use directly                 */</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/* (C) 1998-2012, Ullrich von Bassewitz                                      */</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*                Roemerstrasse 52                                           */</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*                D-70794 Filderstadt                                        */</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/* EMail:         uz@cc65.org                                                */</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/* This software is provided &#39;as-is&#39;, without any expressed or implied       */</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/* warranty.  In no event will the authors be held liable for any damages    */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/* arising from the use of this software.                                    */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/* Permission is granted to anyone to use this software for any purpose,     */</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/* including commercial applications, and to alter it and redistribute it    */</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/* freely, subject to the following restrictions:                            */</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/* 1. The origin of this software must not be misrepresented; you must not   */</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/*    claim that you wrote the original software. If you use this software   */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/*    in a product, an acknowledgment in the product documentation would be  */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/*    appreciated but is not required.                                       */</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/* 2. Altered source versions must be plainly marked as such, and must not   */</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/*    be misrepresented as being the original software.                      */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/* 3. This notice may not be removed or altered from any source              */</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/*    distribution.                                                          */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/*                                                                           */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/* (C) 1998-2012, Ullrich von Bassewitz                                      */</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/*                Roemerstrasse 52                                           */</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/*                D-70794 Filderstadt                                        */</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/* EMail:         uz@cc65.org                                                */</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/* This software is provided &#39;as-is&#39;, without any expressed or implied       */</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/* warranty.  In no event will the authors be held liable for any damages    */</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/* arising from the use of this software.                                    */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">/* Permission is granted to anyone to use this software for any purpose,     */</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/* including commercial applications, and to alter it and redistribute it    */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/* freely, subject to the following restrictions:                            */</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/* 1. The origin of this software must not be misrepresented; you must not   */</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/*    claim that you wrote the original software. If you use this software   */</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/*    in a product, an acknowledgment in the product documentation would be  */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/*    appreciated but is not required.                                       */</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/* 2. Altered source versions must be plainly marked as such, and must not   */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/*    be misrepresented as being the original software.                      */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/* 3. This notice may not be removed or altered from any source              */</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/*    distribution.                                                          */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/*                                                                           */</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/*****************************************************************************/</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#ifndef __VIC2_H</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define __VIC2_H</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifndef __VIC2_H</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define __VIC2_H</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/* Define a structure with the vic register offsets. In cc65 mode, there</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">** are aliases for the field accessible as arrays.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">struct </span>__vic2 {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">union </span>{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr0_x;         <span class="comment">/* Sprite 0, X coordinate */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr0_y;         <span class="comment">/* Sprite 0, Y coordinate */</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr1_x;         <span class="comment">/* Sprite 1, X coordinate */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr1_y;         <span class="comment">/* Sprite 1, Y coordinate */</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr2_x;         <span class="comment">/* Sprite 2, X coordinate */</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr2_y;         <span class="comment">/* Sprite 2, Y coordinate */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr3_x;         <span class="comment">/* Sprite 3, X coordinate */</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr3_y;         <span class="comment">/* Sprite 3, Y coordinate */</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr4_x;         <span class="comment">/* Sprite 4, X coordinate */</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr4_y;         <span class="comment">/* Sprite 4, Y coordinate */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr5_x;         <span class="comment">/* Sprite 5, X coordinate */</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr5_y;         <span class="comment">/* Sprite 5, Y coordinate */</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr6_x;         <span class="comment">/* Sprite 6, X coordinate */</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr6_y;         <span class="comment">/* Sprite 6, Y coordinate */</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr7_x;         <span class="comment">/* Sprite 7, X coordinate */</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr7_y;         <span class="comment">/* Sprite 7, Y coordinate */</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        };</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   <a class="code" href="api_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>;              <span class="comment">/* X coordinate */</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   <a class="code" href="api_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>;              <span class="comment">/* Y coordinate */</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        } spr_pos[8];</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    };</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_hi_x;       <span class="comment">/* High bits of X coordinate */</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           ctrl1;          <span class="comment">/* Control register 1 */</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           rasterline;     <span class="comment">/* Current raster line */</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">union </span>{</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   strobe_x;       <span class="comment">/* Light pen, X position */</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   strobe_y;       <span class="comment">/* Light pen, Y position */</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        };</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   <a class="code" href="api_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>;              <span class="comment">/* Light pen, X position */</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   <a class="code" href="api_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>;              <span class="comment">/* Light pen, Y position */</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        } strobe;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    };</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_ena;        <span class="comment">/* Enable sprites */</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           ctrl2;          <span class="comment">/* Control register 2 */</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_exp_y;      <span class="comment">/* Expand sprites in Y dir */</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           addr;           <span class="comment">/* Address of chargen and video ram */</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           irr;            <span class="comment">/* Interrupt request register */</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           imr;            <span class="comment">/* Interrupt mask register */</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_bg_prio;    <span class="comment">/* Priority to background */</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_mcolor;     <span class="comment">/* Sprite multicolor bits */</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_exp_x;      <span class="comment">/* Expand sprites in X dir */</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_coll;       <span class="comment">/* Sprite/sprite collision reg */</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_bg_coll;    <span class="comment">/* Sprite/background collision reg */</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           bordercolor;    <span class="comment">/* Border color */</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">union </span>{</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   bgcolor0;       <span class="comment">/* Background color 0 */</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   bgcolor1;       <span class="comment">/* Background color 1 */</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   bgcolor2;       <span class="comment">/* Background color 2 */</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   bgcolor3;       <span class="comment">/* Background color 3 */</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        };</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>       bgcolor[4];     <span class="comment">/* Background colors */</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    };</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">union </span>{</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr_mcolor0;    <span class="comment">/* Color 0 for multicolor sprites */</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr_mcolor1;    <span class="comment">/* Color 1 for multicolor sprites */</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        };</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="comment">/* spr_color is already used ... */</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>       spr_mcolors[2]; <span class="comment">/* Color for multicolor sprites */</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    };</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">union </span>{</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr0_color;     <span class="comment">/* Color sprite 0 */</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr1_color;     <span class="comment">/* Color sprite 1 */</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr2_color;     <span class="comment">/* Color sprite 2 */</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr3_color;     <span class="comment">/* Color sprite 3 */</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr4_color;     <span class="comment">/* Color sprite 4 */</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr5_color;     <span class="comment">/* Color sprite 5 */</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr6_color;     <span class="comment">/* Color sprite 6 */</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr7_color;     <span class="comment">/* Color sprite 7 */</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        };</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>       spr_color[8];   <span class="comment">/* Colors for the sprites */</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    };</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="comment">/* The following ones are only valid in the C128: */</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           x_kbd;          <span class="comment">/* Additional keyboard lines */</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           <a class="code" href="sim_2stdlib_8h.html#a64751aebe7bbfb0a75d1a44df9f5c3d5">clock</a>;          <span class="comment">/* Clock switch bit */</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;};</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/* Define a structure with the vic register offsets. In cc65 mode, there</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">** are aliases for the field accessible as arrays.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">struct </span>__vic2 {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">union </span>{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr0_x;         <span class="comment">/* Sprite 0, X coordinate */</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr0_y;         <span class="comment">/* Sprite 0, Y coordinate */</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr1_x;         <span class="comment">/* Sprite 1, X coordinate */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr1_y;         <span class="comment">/* Sprite 1, Y coordinate */</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr2_x;         <span class="comment">/* Sprite 2, X coordinate */</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr2_y;         <span class="comment">/* Sprite 2, Y coordinate */</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr3_x;         <span class="comment">/* Sprite 3, X coordinate */</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr3_y;         <span class="comment">/* Sprite 3, Y coordinate */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr4_x;         <span class="comment">/* Sprite 4, X coordinate */</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr4_y;         <span class="comment">/* Sprite 4, Y coordinate */</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr5_x;         <span class="comment">/* Sprite 5, X coordinate */</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr5_y;         <span class="comment">/* Sprite 5, Y coordinate */</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr6_x;         <span class="comment">/* Sprite 6, X coordinate */</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr6_y;         <span class="comment">/* Sprite 6, Y coordinate */</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr7_x;         <span class="comment">/* Sprite 7, X coordinate */</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr7_y;         <span class="comment">/* Sprite 7, Y coordinate */</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        };</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   <a class="code" href="api_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>;              <span class="comment">/* X coordinate */</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   <a class="code" href="api_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>;              <span class="comment">/* Y coordinate */</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        } spr_pos[8];</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    };</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_hi_x;       <span class="comment">/* High bits of X coordinate */</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           ctrl1;          <span class="comment">/* Control register 1 */</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           rasterline;     <span class="comment">/* Current raster line */</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">union </span>{</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   strobe_x;       <span class="comment">/* Light pen, X position */</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   strobe_y;       <span class="comment">/* Light pen, Y position */</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        };</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   <a class="code" href="api_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>;              <span class="comment">/* Light pen, X position */</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   <a class="code" href="api_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>;              <span class="comment">/* Light pen, Y position */</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        } strobe;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    };</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_ena;        <span class="comment">/* Enable sprites */</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           ctrl2;          <span class="comment">/* Control register 2 */</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_exp_y;      <span class="comment">/* Expand sprites in Y dir */</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           addr;           <span class="comment">/* Address of chargen and video ram */</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           irr;            <span class="comment">/* Interrupt request register */</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           imr;            <span class="comment">/* Interrupt mask register */</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_bg_prio;    <span class="comment">/* Priority to background */</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_mcolor;     <span class="comment">/* Sprite multicolor bits */</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_exp_x;      <span class="comment">/* Expand sprites in X dir */</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_coll;       <span class="comment">/* Sprite/sprite collision reg */</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           spr_bg_coll;    <span class="comment">/* Sprite/background collision reg */</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           bordercolor;    <span class="comment">/* Border color */</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">union </span>{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   bgcolor0;       <span class="comment">/* Background color 0 */</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   bgcolor1;       <span class="comment">/* Background color 1 */</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   bgcolor2;       <span class="comment">/* Background color 2 */</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   bgcolor3;       <span class="comment">/* Background color 3 */</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        };</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>       bgcolor[4];     <span class="comment">/* Background colors */</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    };</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">union </span>{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr_mcolor0;    <span class="comment">/* Color 0 for multicolor sprites */</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr_mcolor1;    <span class="comment">/* Color 1 for multicolor sprites */</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        };</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment">/* spr_color is already used ... */</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>       spr_mcolors[2]; <span class="comment">/* Color for multicolor sprites */</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    };</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keyword">union </span>{</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr0_color;     <span class="comment">/* Color sprite 0 */</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr1_color;     <span class="comment">/* Color sprite 1 */</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr2_color;     <span class="comment">/* Color sprite 2 */</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr3_color;     <span class="comment">/* Color sprite 3 */</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr4_color;     <span class="comment">/* Color sprite 4 */</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr5_color;     <span class="comment">/* Color sprite 5 */</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr6_color;     <span class="comment">/* Color sprite 6 */</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>   spr7_color;     <span class="comment">/* Color sprite 7 */</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        };</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>       spr_color[8];   <span class="comment">/* Colors for the sprites */</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    };</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="comment">/* The following ones are only valid in the C128: */</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           x_kbd;          <span class="comment">/* Additional keyboard lines */</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>           <a class="code" href="sim_2stdlib_8h.html#a64751aebe7bbfb0a75d1a44df9f5c3d5">clock</a>;          <span class="comment">/* Clock switch bit */</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;};</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">/* End of _vic2.h */</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">/* End of _vic2.h */</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aapi_8h_html_ac38a342729250f8b4b5dd7239e4930f1"><div class="ttname"><a href="api_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a></div><div class="ttdeci">byte byte y</div><div class="ttdef"><b>Definition:</b> api.h:26</div></div>
 <div class="ttc" id="asim_2stdlib_8h_html_a64751aebe7bbfb0a75d1a44df9f5c3d5"><div class="ttname"><a href="sim_2stdlib_8h.html#a64751aebe7bbfb0a75d1a44df9f5c3d5">clock</a></div><div class="ttdeci">unsigned long clock()</div></div>

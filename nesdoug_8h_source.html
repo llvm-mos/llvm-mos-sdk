@@ -94,148 +94,150 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">   23</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> one_vram_buffer(<span class="keywordtype">char</span> <a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>, <span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// to push multiple writes as one sequential horizontal write to the vram_buffer</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">   26</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> multi_vram_buffer_horz(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">len</a>, <span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// to push multiple writes as one sequential vertical write to the vram_buffer</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> multi_vram_buffer_vert(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">len</a>, <span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// pad 0 or 1, use AFTER pad_poll() to get the trigger / new button presses</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// more efficient than pad_trigger, which runs the entire pad_poll code again</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ac38ed7645e9658f43ec2e042fa5b97fa">get_pad_new</a>(<span class="keywordtype">char</span> pad);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// use this internal value to time events, this ticks up every frame</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a87e74bea686801a5940c71e00fbe9a8e">get_frame_count</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// this will alter the tempo of music, range 1-12 are reasonable, low is faster</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// default is 6</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// music_play also sets the tempo, and any Fxx effect in the song will too</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// you will probably have to repeatedly set_music_speed() every frame</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// music_stop() and music_pause() also overwrite this value</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a06aae981ec47588daad043800692d853">set_music_speed</a>(<span class="keywordtype">char</span> tempo);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// expects an object (struct) where the first 4 bytes are X, Y, width, height</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">// you will probably have to pass the address of the object like &amp;object</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// the struct can be bigger than 4 bytes, as long as the first 4 bytes are X, Y,</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// width, height</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#af939bde22909fa3ebb725009989cdaec">   49</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">char</span> check_collision(<span class="keywordtype">void</span> *object1, <span class="keywordtype">void</span> *<a class="code" href="nesdoug_8h.html#af939bde22909fa3ebb725009989cdaec">object2</a>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">// adapted from Shiru&#39;s &quot;Chase&quot; game code</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">// values must be 0-8, 0 = all black, 8 = all white, 4 = normal</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a79f084c23d40fda813d522615ffebd0c">   53</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> pal_fade_to(<span class="keywordtype">char</span> from, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a79f084c23d40fda813d522615ffebd0c">to</a>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">// x can be in the range 0-0x1ff, but any value would be fine, it discards</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">// higher bits</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a9f756a4238c3dd594f4234d0b3ffb204">set_scroll_x</a>(<span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">// y can be in the range 0-0x1ff, but any value would be fine, it discards</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">// higher bits NOTE - different system than neslib (which needs y in range</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">// 0-0x1df) the advantage here, is you can set Y scroll to 0xff (-1) to shift</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">// the screen down 1, which aligns it with sprites, which are shifted down 1</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">// pixel</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a74a51ec73fb1dc96b74fb2e777de7ec8">set_scroll_y</a>(<span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">// add a value to y scroll, keep the low byte in the 0-0xef range</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">// returns y scroll, which will have to be passed to set_scroll_y</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">   68</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">int</span> add_scroll_y(<span class="keywordtype">char</span> add, <span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// subtract a value from y scroll, keep the low byte in the 0-0xef range</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">// returns y scroll, which will have to be passed to set_scroll_y</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;__attribute__((leaf)) <span class="keywordtype">int</span> sub_scroll_y(<span class="keywordtype">char</span> sub, <span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a>);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">// gets a ppu address from x and y coordinates (in pixels)</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">// x is screen pixels 0-255, y is screen pixels 0-239, nt is nametable 0-3</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">   76</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">int</span> get_ppu_addr(<span class="keywordtype">char</span> nt, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">// gets a ppu address in the attribute table from x and y coordinates (in</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">// pixels) x is screen pixels 0-255, y is screen pixels 0-239, nt is nametable</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">// 0-3</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;__attribute__((leaf)) <span class="keywordtype">int</span> get_at_addr(<span class="keywordtype">char</span> nt, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">// the next 4 functions are for my metatile system, as described in my tutorial</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">// nesdoug.com</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">// for the metatile system, pass it the addresses of the room data</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">// room data should be exactly 240 bytes (16x15)</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">// each byte represents a 16x16 px block of the screen</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a76e4ed0df8992e865f9cf0eb58c01f3e">set_data_pointer</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">// for the metatile system, pass it the addresses of the metatile data</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">// a metatile is a 16x16 px block</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">// metatiles is variable length, 5 bytes per metatile...</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">// TopL, TopR, BottomL, BottomR, then 1 byte of palette 0-3</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">// max metatiles = 51 (because 51 x 5 = 255)</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a042b6f8b75ea01fdd1927f61935fe04a">set_mt_pointer</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *metatiles);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">// will push 1 metatile and 0 attribute bytes to the vram_buffer</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">// make sure to set_vram_buffer(), and clear_vram_buffer(),</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">// and set_mt_pointer()</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">// &quot;metatile&quot; should be 0-50, like the metatile data</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ae725013a2102a058678dc9fcec752fde">  102</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> buffer_1_mt(<span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ae725013a2102a058678dc9fcec752fde">metatile</a>);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">// will push 4 metatiles (2x2 box) and 1 attribute byte to the vram_buffer</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">// this affects a 32x32 px area of the screen, and pushes 17 bytes to the</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">// vram_buffer. make sure to set_vram_buffer(), and clear_vram_buffer(),</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">// set_data_pointer(), and set_mt_pointer()</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">// &quot;index&quot; is which starting byte in the room data, to convert to tiles.</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">// use index = (y &amp; 0xf0) + (x &gt;&gt; 4); where x 0-255 and y 0-239;</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">// index should be 0-239, like the room data it represents</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">  111</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> buffer_4_mt(<span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">// same as flush_vram_update, but assumes that a pointer to the vram has been</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">// set already this is for when the screen is OFF, but you still want to write</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">// to the PPU with the vram_buffer system</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> flush_vram_update2(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">// change the PPU&#39;s color emphasis bits</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a4fe7e80c8887c46523f0cfebc576e305">color_emphasis</a>(<span class="keywordtype">char</span> color);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a6b680fce71e5264511c8c08bec5a8912">  121</a></span>&#160;<span class="preprocessor">#define COL_EMP_BLUE 0x80</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ad64e2ad425f7904e018170ed5e9b984a">  122</a></span>&#160;<span class="preprocessor">#define COL_EMP_GREEN 0x40</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a067388285fbc717ff10c39b8c83286e4">  123</a></span>&#160;<span class="preprocessor">#define COL_EMP_RED 0x20</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#aac52250ff2e54320911aa7ee39321662">  124</a></span>&#160;<span class="preprocessor">#define COL_EMP_NORMAL 0x00</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ab34691aa47fb1d651417c9ce560754f9">  125</a></span>&#160;<span class="preprocessor">#define COL_EMP_DARK 0xe0</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">// a version of split that actually changes the y scroll midscreen</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">// requires a sprite zero hit, or will crash</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> xy_split(<span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, <span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">// For debugging. Insert at the end of the game loop, to see how much frame is</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">// left. Will print a gray line on the screen. Distance to the bottom = how much</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">// is left. No line, possibly means that you are in v-blank.</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> gray_line(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">// for getting or modifying just 1 byte of an int</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">   26</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> multi_vram_buffer_horz(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">len</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                                  <span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// to push multiple writes as one sequential vertical write to the vram_buffer</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> multi_vram_buffer_vert(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#af91696d822b18489bb5090a43e213907">len</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                                                  <span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// pad 0 or 1, use AFTER pad_poll() to get the trigger / new button presses</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// more efficient than pad_trigger, which runs the entire pad_poll code again</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ac38ed7645e9658f43ec2e042fa5b97fa">get_pad_new</a>(<span class="keywordtype">char</span> pad);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// use this internal value to time events, this ticks up every frame</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a87e74bea686801a5940c71e00fbe9a8e">get_frame_count</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// this will alter the tempo of music, range 1-12 are reasonable, low is faster</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// default is 6</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// music_play also sets the tempo, and any Fxx effect in the song will too</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// you will probably have to repeatedly set_music_speed() every frame</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// music_stop() and music_pause() also overwrite this value</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a06aae981ec47588daad043800692d853">set_music_speed</a>(<span class="keywordtype">char</span> tempo);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// expects an object (struct) where the first 4 bytes are X, Y, width, height</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// you will probably have to pass the address of the object like &amp;object</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// the struct can be bigger than 4 bytes, as long as the first 4 bytes are X, Y,</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// width, height</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#af939bde22909fa3ebb725009989cdaec">   51</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">char</span> check_collision(<span class="keywordtype">void</span> *object1, <span class="keywordtype">void</span> *<a class="code" href="nesdoug_8h.html#af939bde22909fa3ebb725009989cdaec">object2</a>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">// adapted from Shiru&#39;s &quot;Chase&quot; game code</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">// values must be 0-8, 0 = all black, 8 = all white, 4 = normal</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a79f084c23d40fda813d522615ffebd0c">   55</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> pal_fade_to(<span class="keywordtype">char</span> from, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a79f084c23d40fda813d522615ffebd0c">to</a>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">// x can be in the range 0-0x1ff, but any value would be fine, it discards</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">// higher bits</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a9f756a4238c3dd594f4234d0b3ffb204">set_scroll_x</a>(<span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">// y can be in the range 0-0x1ff, but any value would be fine, it discards</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">// higher bits NOTE - different system than neslib (which needs y in range</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">// 0-0x1df) the advantage here, is you can set Y scroll to 0xff (-1) to shift</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">// the screen down 1, which aligns it with sprites, which are shifted down 1</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// pixel</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a74a51ec73fb1dc96b74fb2e777de7ec8">set_scroll_y</a>(<span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">// add a value to y scroll, keep the low byte in the 0-0xef range</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">// returns y scroll, which will have to be passed to set_scroll_y</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">   70</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">int</span> add_scroll_y(<span class="keywordtype">char</span> add, <span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">// subtract a value from y scroll, keep the low byte in the 0-0xef range</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">// returns y scroll, which will have to be passed to set_scroll_y</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;__attribute__((leaf)) <span class="keywordtype">int</span> sub_scroll_y(<span class="keywordtype">char</span> sub, <span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">// gets a ppu address from x and y coordinates (in pixels)</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">// x is screen pixels 0-255, y is screen pixels 0-239, nt is nametable 0-3</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">   78</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">int</span> get_ppu_addr(<span class="keywordtype">char</span> nt, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">// gets a ppu address in the attribute table from x and y coordinates (in</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">// pixels) x is screen pixels 0-255, y is screen pixels 0-239, nt is nametable</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">// 0-3</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;__attribute__((leaf)) <span class="keywordtype">int</span> get_at_addr(<span class="keywordtype">char</span> nt, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">// the next 4 functions are for my metatile system, as described in my tutorial</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">// nesdoug.com</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">// for the metatile system, pass it the addresses of the room data</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">// room data should be exactly 240 bytes (16x15)</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">// each byte represents a 16x16 px block of the screen</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a76e4ed0df8992e865f9cf0eb58c01f3e">set_data_pointer</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *<a class="code" href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">// for the metatile system, pass it the addresses of the metatile data</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">// a metatile is a 16x16 px block</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">// metatiles is variable length, 5 bytes per metatile...</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">// TopL, TopR, BottomL, BottomR, then 1 byte of palette 0-3</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">// max metatiles = 51 (because 51 x 5 = 255)</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a042b6f8b75ea01fdd1927f61935fe04a">set_mt_pointer</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *metatiles);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">// will push 1 metatile and 0 attribute bytes to the vram_buffer</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">// make sure to set_vram_buffer(), and clear_vram_buffer(),</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">// and set_mt_pointer()</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">// &quot;metatile&quot; should be 0-50, like the metatile data</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ae725013a2102a058678dc9fcec752fde">  104</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> buffer_1_mt(<span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#ae725013a2102a058678dc9fcec752fde">metatile</a>);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">// will push 4 metatiles (2x2 box) and 1 attribute byte to the vram_buffer</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">// this affects a 32x32 px area of the screen, and pushes 17 bytes to the</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">// vram_buffer. make sure to set_vram_buffer(), and clear_vram_buffer(),</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">// set_data_pointer(), and set_mt_pointer()</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">// &quot;index&quot; is which starting byte in the room data, to convert to tiles.</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">// use index = (y &amp; 0xf0) + (x &gt;&gt; 4); where x 0-255 and y 0-239;</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">// index should be 0-239, like the room data it represents</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">  113</a></span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> buffer_4_mt(<span class="keywordtype">int</span> <a class="code" href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a>, <span class="keywordtype">char</span> <a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">// same as flush_vram_update, but assumes that a pointer to the vram has been</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">// set already this is for when the screen is OFF, but you still want to write</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">// to the PPU with the vram_buffer system</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> flush_vram_update2(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">// change the PPU&#39;s color emphasis bits</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a4fe7e80c8887c46523f0cfebc576e305">color_emphasis</a>(<span class="keywordtype">char</span> color);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a6b680fce71e5264511c8c08bec5a8912">  123</a></span>&#160;<span class="preprocessor">#define COL_EMP_BLUE 0x80</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ad64e2ad425f7904e018170ed5e9b984a">  124</a></span>&#160;<span class="preprocessor">#define COL_EMP_GREEN 0x40</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#a067388285fbc717ff10c39b8c83286e4">  125</a></span>&#160;<span class="preprocessor">#define COL_EMP_RED 0x20</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#aac52250ff2e54320911aa7ee39321662">  126</a></span>&#160;<span class="preprocessor">#define COL_EMP_NORMAL 0x00</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ab34691aa47fb1d651417c9ce560754f9">  127</a></span>&#160;<span class="preprocessor">#define COL_EMP_DARK 0xe0</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">// a version of split that actually changes the y scroll midscreen</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">// requires a sprite zero hit, or will crash</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> xy_split(<span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, <span class="keywordtype">unsigned</span> <a class="code" href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">// For debugging. Insert at the end of the game loop, to see how much frame is</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">// left. Will print a gray line on the screen. Distance to the bottom = how much</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">// is left. No line, possibly means that you are in v-blank.</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;__attribute__((leaf)) <span class="keywordtype">void</span> gray_line(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#aa3284df8fbbe1a9b57477d66511a3e89">  138</a></span>&#160;<span class="preprocessor">#define high_byte(a) *((char *)&amp;a + 1)</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ae28ebb1a4aea886daadc5bca0efb1a52">  139</a></span>&#160;<span class="preprocessor">#define low_byte(a) *((char *)&amp;a)</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="peekpoke_8h.html">peekpoke.h</a>&gt;</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">// for getting or modifying just 1 byte of an int</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#aa3284df8fbbe1a9b57477d66511a3e89">  140</a></span>&#160;<span class="preprocessor">#define high_byte(a) *((char *)&amp;a + 1)</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="nesdoug_8h.html#ae28ebb1a4aea886daadc5bca0efb1a52">  141</a></span>&#160;<span class="preprocessor">#define low_byte(a) *((char *)&amp;a)</span></div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">// get from the frame count. You can use a button (start on title screen) to</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">// trigger</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a2741238c33f3d7b081715675f43fcf89">seed_rng</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">#endif // _NESDOUG_H_</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="peekpoke_8h.html">peekpoke.h</a>&gt;</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">// get from the frame count. You can use a button (start on title screen) to</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">// trigger</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">void</span> <a class="code" href="nesdoug_8h.html#a2741238c33f3d7b081715675f43fcf89">seed_rng</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#endif // _NESDOUG_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anesdoug_8h_html_a74a51ec73fb1dc96b74fb2e777de7ec8"><div class="ttname"><a href="nesdoug_8h.html#a74a51ec73fb1dc96b74fb2e777de7ec8">set_scroll_y</a></div><div class="ttdeci">void set_scroll_y(unsigned y)</div></div>
 <div class="ttc" id="aneslib_8h_html_aac68389240a6f659c888e1dc7ed82fb6"><div class="ttname"><a href="neslib_8h.html#aac68389240a6f659c888e1dc7ed82fb6">data</a></div><div class="ttdeci">char const void * data</div><div class="ttdef"><b>Definition:</b> neslib.h:92</div></div>
 <div class="ttc" id="anesdoug_8h_html_a4fe7e80c8887c46523f0cfebc576e305"><div class="ttname"><a href="nesdoug_8h.html#a4fe7e80c8887c46523f0cfebc576e305">color_emphasis</a></div><div class="ttdeci">void color_emphasis(char color)</div></div>
 <div class="ttc" id="anesdoug_8h_html_a2741238c33f3d7b081715675f43fcf89"><div class="ttname"><a href="nesdoug_8h.html#a2741238c33f3d7b081715675f43fcf89">seed_rng</a></div><div class="ttdeci">void seed_rng(void)</div></div>
 <div class="ttc" id="anesdoug_8h_html_ac38ed7645e9658f43ec2e042fa5b97fa"><div class="ttname"><a href="nesdoug_8h.html#ac38ed7645e9658f43ec2e042fa5b97fa">get_pad_new</a></div><div class="ttdeci">char get_pad_new(char pad)</div></div>
-<div class="ttc" id="anesdoug_8h_html_ab06e9aa782b61ccfb42f7c48996f6ed4"><div class="ttname"><a href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a></div><div class="ttdeci">char x</div><div class="ttdef"><b>Definition:</b> nesdoug.h:76</div></div>
+<div class="ttc" id="anesdoug_8h_html_ab06e9aa782b61ccfb42f7c48996f6ed4"><div class="ttname"><a href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a></div><div class="ttdeci">char x</div><div class="ttdef"><b>Definition:</b> nesdoug.h:78</div></div>
 <div class="ttc" id="apeekpoke_8h_html"><div class="ttname"><a href="peekpoke_8h.html">peekpoke.h</a></div></div>
-<div class="ttc" id="anesdoug_8h_html_a79f084c23d40fda813d522615ffebd0c"><div class="ttname"><a href="nesdoug_8h.html#a79f084c23d40fda813d522615ffebd0c">to</a></div><div class="ttdeci">char to</div><div class="ttdef"><b>Definition:</b> nesdoug.h:53</div></div>
-<div class="ttc" id="anesdoug_8h_html_ac38a342729250f8b4b5dd7239e4930f1"><div class="ttname"><a href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a></div><div class="ttdeci">char char y</div><div class="ttdef"><b>Definition:</b> nesdoug.h:76</div></div>
-<div class="ttc" id="anesdoug_8h_html_a8f564a8b3781dfabef60c05915da85f8"><div class="ttname"><a href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a></div><div class="ttdeci">char index</div><div class="ttdef"><b>Definition:</b> nesdoug.h:111</div></div>
+<div class="ttc" id="anesdoug_8h_html_a79f084c23d40fda813d522615ffebd0c"><div class="ttname"><a href="nesdoug_8h.html#a79f084c23d40fda813d522615ffebd0c">to</a></div><div class="ttdeci">char to</div><div class="ttdef"><b>Definition:</b> nesdoug.h:55</div></div>
+<div class="ttc" id="anesdoug_8h_html_ac38a342729250f8b4b5dd7239e4930f1"><div class="ttname"><a href="nesdoug_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a></div><div class="ttdeci">char char y</div><div class="ttdef"><b>Definition:</b> nesdoug.h:78</div></div>
+<div class="ttc" id="anesdoug_8h_html_a8f564a8b3781dfabef60c05915da85f8"><div class="ttname"><a href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a></div><div class="ttdeci">char index</div><div class="ttdef"><b>Definition:</b> nesdoug.h:113</div></div>
 <div class="ttc" id="anesdoug_8h_html_a76e4ed0df8992e865f9cf0eb58c01f3e"><div class="ttname"><a href="nesdoug_8h.html#a76e4ed0df8992e865f9cf0eb58c01f3e">set_data_pointer</a></div><div class="ttdeci">void set_data_pointer(const void *data)</div></div>
-<div class="ttc" id="anesdoug_8h_html_af939bde22909fa3ebb725009989cdaec"><div class="ttname"><a href="nesdoug_8h.html#af939bde22909fa3ebb725009989cdaec">object2</a></div><div class="ttdeci">void * object2</div><div class="ttdef"><b>Definition:</b> nesdoug.h:49</div></div>
-<div class="ttc" id="anesdoug_8h_html_a80675ee63d0ab830a427bb355c5996ec"><div class="ttname"><a href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a></div><div class="ttdeci">unsigned scroll</div><div class="ttdef"><b>Definition:</b> nesdoug.h:68</div></div>
+<div class="ttc" id="anesdoug_8h_html_af939bde22909fa3ebb725009989cdaec"><div class="ttname"><a href="nesdoug_8h.html#af939bde22909fa3ebb725009989cdaec">object2</a></div><div class="ttdeci">void * object2</div><div class="ttdef"><b>Definition:</b> nesdoug.h:51</div></div>
+<div class="ttc" id="anesdoug_8h_html_a80675ee63d0ab830a427bb355c5996ec"><div class="ttname"><a href="nesdoug_8h.html#a80675ee63d0ab830a427bb355c5996ec">scroll</a></div><div class="ttdeci">unsigned scroll</div><div class="ttdef"><b>Definition:</b> nesdoug.h:70</div></div>
 <div class="ttc" id="anesdoug_8h_html_a6a8d94a2631d95fbef64128812a85ce1"><div class="ttname"><a href="nesdoug_8h.html#a6a8d94a2631d95fbef64128812a85ce1">ppu_address</a></div><div class="ttdeci">int ppu_address</div><div class="ttdef"><b>Definition:</b> nesdoug.h:23</div></div>
-<div class="ttc" id="anesdoug_8h_html_ae725013a2102a058678dc9fcec752fde"><div class="ttname"><a href="nesdoug_8h.html#ae725013a2102a058678dc9fcec752fde">metatile</a></div><div class="ttdeci">char metatile</div><div class="ttdef"><b>Definition:</b> nesdoug.h:102</div></div>
+<div class="ttc" id="anesdoug_8h_html_ae725013a2102a058678dc9fcec752fde"><div class="ttname"><a href="nesdoug_8h.html#ae725013a2102a058678dc9fcec752fde">metatile</a></div><div class="ttdeci">char metatile</div><div class="ttdef"><b>Definition:</b> nesdoug.h:104</div></div>
 <div class="ttc" id="anesdoug_8h_html_a042b6f8b75ea01fdd1927f61935fe04a"><div class="ttname"><a href="nesdoug_8h.html#a042b6f8b75ea01fdd1927f61935fe04a">set_mt_pointer</a></div><div class="ttdeci">void set_mt_pointer(const void *metatiles)</div></div>
 <div class="ttc" id="anesdoug_8h_html_a87e74bea686801a5940c71e00fbe9a8e"><div class="ttname"><a href="nesdoug_8h.html#a87e74bea686801a5940c71e00fbe9a8e">get_frame_count</a></div><div class="ttdeci">char get_frame_count(void)</div></div>
 <div class="ttc" id="anesdoug_8h_html_a9f756a4238c3dd594f4234d0b3ffb204"><div class="ttname"><a href="nesdoug_8h.html#a9f756a4238c3dd594f4234d0b3ffb204">set_scroll_x</a></div><div class="ttdeci">void set_scroll_x(unsigned x)</div></div>

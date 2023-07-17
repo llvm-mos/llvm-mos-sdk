@@ -105,11 +105,11 @@ $(function() {
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">void</span> <a class="code" href="system_8h.html#a9482f688bfd1ca09f788b64db5dcc3ca">pce_timer_disable</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> pce_cpu_irq_enable() {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    __attribute__((leaf)) <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;cli\n&quot;</span>);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  __attribute__((leaf)) <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;cli\n&quot;</span>);</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> pce_cpu_irq_disable() {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    __attribute__((leaf)) <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;sei\n&quot;</span>);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  __attribute__((leaf)) <span class="keyword">asm</span> <span class="keyword">volatile</span>(<span class="stringliteral">&quot;sei\n&quot;</span>);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
@@ -122,7 +122,7 @@ $(function() {
 <div class="ttc" id="asystem_8h_html_ab1abe6b6fda4d3fdcdc068f7ef8a8649"><div class="ttname"><a href="system_8h.html#ab1abe6b6fda4d3fdcdc068f7ef8a8649">pce_irq_disable</a></div><div class="ttdeci">void pce_irq_disable(uint8_t mask)</div><div class="ttdoc">Disable the specified IRQs.</div></div>
 <div class="ttc" id="asystem_8h_html_a0e5d887ff7c488d45496743dd8ac6eda"><div class="ttname"><a href="system_8h.html#a0e5d887ff7c488d45496743dd8ac6eda">pce_timer_enable</a></div><div class="ttdeci">void pce_timer_enable(void)</div><div class="ttdoc">Enable the timer.</div></div>
 <div class="ttc" id="anamespacestd_html_a6d89cedd5261b21b5ec15155b9161dd8"><div class="ttname"><a href="namespacestd.html#a6d89cedd5261b21b5ec15155b9161dd8">std::uint8_t</a></div><div class="ttdeci">::uint8_t uint8_t</div><div class="ttdef"><b>Definition:</b> cstdint:21</div></div>
-<div class="ttc" id="amemory_8h_html_ab5f5eef872ec5f049b302678d546b79f"><div class="ttname"><a href="memory_8h.html#ab5f5eef872ec5f049b302678d546b79f">count</a></div><div class="ttdeci">const void uint16_t count</div><div class="ttdef"><b>Definition:</b> memory.h:54</div></div>
+<div class="ttc" id="amemory_8h_html_ab5f5eef872ec5f049b302678d546b79f"><div class="ttname"><a href="memory_8h.html#ab5f5eef872ec5f049b302678d546b79f">count</a></div><div class="ttdeci">const void uint16_t count</div><div class="ttdef"><b>Definition:</b> memory.h:58</div></div>
 <div class="ttc" id="asystem_8h_html_ad19f351c1dc47c768d66843538d8ffd8"><div class="ttname"><a href="system_8h.html#ad19f351c1dc47c768d66843538d8ffd8">pce_timer_set</a></div><div class="ttdeci">void pce_timer_set(uint8_t count)</div><div class="ttdoc">Initialize the timer with a given reload value.</div></div>
 <div class="ttc" id="asystem_8h_html_a9482f688bfd1ca09f788b64db5dcc3ca"><div class="ttname"><a href="system_8h.html#a9482f688bfd1ca09f788b64db5dcc3ca">pce_timer_disable</a></div><div class="ttdeci">void pce_timer_disable(void)</div><div class="ttdoc">Disable the timer.</div></div>
 <!-- start footer part -->

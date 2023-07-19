@@ -25,5 +25,4 @@ add_platform_object_file(nes-mmc3-reset-banked-mode-1-o reset-banked-mode-1.o re
 
 add_platform_library(nes-mmc3-c bank.c bank.s irq.c irq.s)
 target_include_directories(nes-mmc3-c PRIVATE ../nes)
-merge_libraries(nes-mmc3-c common-c)
 target_link_libraries(nes-mmc3-c PRIVATE common-asminc)

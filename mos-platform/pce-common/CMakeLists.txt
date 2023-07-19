@@ -12,9 +12,6 @@ TYPE LIB)
 
 # libpce build code
 
-add_platform_object_file(pce-common-crt0-o crt0.o)
-
-add_platform_library(pce-common-crt0)
 add_platform_library(pce-common-c
   libpce/src/bank.S
   libpce/src/bank-c.c

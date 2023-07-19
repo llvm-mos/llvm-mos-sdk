@@ -84,4 +84,4 @@ add_platform_library(cx16-c
 
 target_include_directories(cx16-c BEFORE PUBLIC .)
 target_compile_options(cx16-c PUBLIC -mcpu=mosw65c02)
-target_link_libraries(cx16-c PRIVATE common-asminc cx16)
+target_link_libraries(cx16-c PRIVATE common-asminc)

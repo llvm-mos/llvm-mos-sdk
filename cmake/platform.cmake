@@ -40,6 +40,10 @@ function(platform name)
   set(HOSTED ${ARGS_HOSTED})
   set(HOSTED ${ARGS_HOSTED} PARENT_SCOPE)
 
+  # Allow transitive parents to be looked up.
+  add_custom_target(${name})
+  set_property(TARGET ${name} PROPERTY PARENT ${PARENT})
+
   set(CMAKE_INSTALL_LIBDIR mos-platform/${PLATFORM}/lib)
   set(CMAKE_INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR} PARENT_SCOPE)
   set(CMAKE_INSTALL_INCLUDEDIR mos-platform/${PLATFORM}/include)
@@ -174,12 +178,15 @@ endfunction()
 
 # Merge the library of the same name (sans the platform prefix) in the parent
 # platform into the given target. If there is no parent or corresponding
-# library, does nothing.
+# library, does nothing. Walks parents transitively until a match is found.
 function(_merge_parent_library target)
-  if(PARENT)
+  get_target_property(PARENT ${PLATFORM} PARENT)
+  while(PARENT)
     string(REGEX REPLACE ^${PLATFORM} ${PARENT} parent_target ${target})
     if(TARGET ${parent_target})
       merge_libraries(${target} ${parent_target})
+      break()
     endif()
-  endif()
+    get_target_property(PARENT ${PARENT} PARENT)
+  endwhile()
 endfunction()

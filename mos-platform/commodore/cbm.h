@@ -219,6 +219,7 @@ unsigned cbm_k_iobase (void) __attribute__((leaf));
 void cbm_k_listen (unsigned char dev);
 void *cbm_k_load(unsigned char flag, void *startaddr) __attribute__((leaf));
 unsigned char cbm_k_open (void) __attribute__((leaf));
+unsigned long cbm_k_rdtim (void) __attribute__((leaf));
 unsigned char cbm_k_readst (void);
 unsigned char cbm_k_save(void *startaddr, void *endaddr_plusone) __attribute__((leaf));
 void cbm_k_scnkey (void);

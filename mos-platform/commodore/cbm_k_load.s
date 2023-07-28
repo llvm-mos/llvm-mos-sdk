@@ -12,8 +12,10 @@ cbm_k_load:
 	ldy __rc2+1
 	jsr __LOAD
 	bcc noerror
-	; error code in a ;
+	; store error code in A
+	sta __rc2
 	ldx #0
+	stx __rc2+1
 	rts
 noerror:
 	stx __rc2	; store end+1 low

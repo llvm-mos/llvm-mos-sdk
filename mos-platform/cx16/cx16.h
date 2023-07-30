@@ -412,6 +412,7 @@ void cx16_k_monitor(void) __attribute__((noreturn));
 void cx16_k_mouse_config(unsigned char showmouse, unsigned char xsize8, unsigned char ysize8) __attribute__((leaf));
 unsigned char cx16_k_mouse_get(mouse_pos_t *mouse_pos_ptr) __attribute__((leaf));	// returns mouse button byte
 void cx16_k_mouse_scan(void) __attribute__((leaf));
+unsigned long cx16_k_rdtim(void) __attribute__((leaf));
 unsigned char cx16_k_savehl(void *startaddr, void *endaddr_plusone) __attribute__((leaf)); // returns 0 on success
 unsigned char cx16_k_screen_mode_get(screen_mode_info_t *info_ptr) __attribute__((leaf)); // returns 0 on success
 unsigned char cx16_k_screen_mode_set(unsigned char mode) __attribute__((leaf)); // returns 0 on success

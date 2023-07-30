@@ -63,6 +63,7 @@ add_platform_library(cx16-c
  cx16_k_mouse_config.s
  cx16_k_mouse_get.s
  cx16_k_mouse_scan.s
+ cx16_k_rdtim.s
  cx16_k_savehl.s
  cx16_k_screen_mode_get.s
  cx16_k_screen_mode_set.s

@@ -418,7 +418,9 @@ static void bit() {
     result = (uint16_t)a & value;
 
     zerocalc(result);
-    status = (status & 0x3F) | (uint8_t)(value & 0xC0);
+    // Immediate addressing mode only affects Z.
+    if (opcode != 0x89)
+      status = (status & 0x3F) | (uint8_t)(value & 0xC0);
 }
 
 static void bmi() {

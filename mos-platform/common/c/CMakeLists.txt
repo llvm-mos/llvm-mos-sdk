@@ -15,6 +15,7 @@ add_platform_library(common-c
 
   # stdlib.h
   abs.cc
+  atoi.cc
   div.cc
   stdlib.cc
   new.cc

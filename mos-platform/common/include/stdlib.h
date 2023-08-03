@@ -25,6 +25,9 @@ int abs(int i);
 long labs(long i);
 long long llabs(long long i);
 
+int atoi(const char *s);
+long atol(const char *s);
+
 typedef struct {
   int quot;
   int rem;

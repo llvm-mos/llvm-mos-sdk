@@ -11,7 +11,7 @@ template <typename T> static inline T _atoi(const char *str) {
 	else if (*str == '-') { sign = true; str++; }
 
 	while (*str >= '0' && *str <= '9') {
-		result = (result * 10) + (*(str++));
+		result = (result * 10) + (*(str++) - '0');
 	}
 	return sign ? -result : result;
 }

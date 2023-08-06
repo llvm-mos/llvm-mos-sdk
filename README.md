@@ -9,6 +9,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - Atari 8-bit
   - XEX file
   - 8-KiB or 16-KiB standard cartridge
+- [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
 - Commodore 64
 - Commodore PET

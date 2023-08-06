@@ -48,70 +48,58 @@ __serial_isr_end:
   rts
 
 ; Get a character from the serial receive buffer.
-.global getchar
-.section .text.getchar,"ax",@progbits
-getchar:
+.global __chrin
+.section .text.__chrin,"ax",@progbits
+__chrin:
   ldx __serial_rx_out           ; Do we have a character?
   cpx __serial_rx_in
-  beq getchar                   ; No, then go back and wait again.
+  beq __chrin                   ; No, then go back and wait again.
   inc __serial_rx_out           ; Increment the buffer's output pointer.
   lda __serial_rx_in            ; Are we now below the low water mark?
   sec
   sbc __serial_rx_out
   cmp #RX_LOW
-  bcs __getchar_have_char
+  bcs __chrin_have_char
   lda #$09                      ; Turn receive interrupts back on.
   sta ACIA_CMD
-__getchar_have_char:
+__chrin_have_char:
   lda __serial_rx_buffer,x
   ldx #0
   rts
 
 ; Get a character from the serial receive buffer, without waiting.
-.global getchar_no_wait
-.section .text.getchar_no_wait,"ax",@progbits
-getchar_no_wait:
+.global __chrin_no_wait
+.section .text.__chrin_no_wait,"ax",@progbits
+__chrin_no_wait:
   ldx __serial_rx_out           ; Do we have a character?
   cpx __serial_rx_in
-  beq __getchar_no_char
+  beq __chrin_no_char
   inc __serial_rx_out           ; Increment the buffer's output pointer.
   lda __serial_rx_in            ; Are we now below the low water mark?
   sec
   sbc __serial_rx_out
   cmp #RX_LOW
-  bcs __getchar_no_wait_have_char
+  bcs __chrin_no_wait_have_char
   lda #$09                      ; Turn receive interrupts back on.
   sta ACIA_CMD
-__getchar_no_wait_have_char:
+__chrin_no_wait_have_char:
   lda __serial_rx_buffer,x
   ldx #0
   rts
-__getchar_no_char:
+__chrin_no_char:
   lda #$ff                      ; No character available, return -1.
   tax
   rts
 
-; Put a character to the serial port, with LF -> CRLF conversion.
-.global __putchar
-.section .text.__putchar,"ax",@progbits
-__putchar:
-  cmp #$0a
-  bne __putchar_regular
-  lda #$0d
-  jsr putchar_raw
-  lda #$0a
-__putchar_regular:
-  jmp putchar_raw
-
-; Put a character to the serial port, without LF -> CRLF conversion.
-.global putchar_raw
-.section .text.putchar_raw,"ax",@progbits
-putchar_raw:
+; Put a character to the serial port.
+.global __chrout
+.section .text.__chrout,"ax",@progbits
+__chrout:
   sta ACIA_DATA                 ; Transmit A using the ACIA.
   ldx #$70                      ; Wait ~560us for the byte to be transmitted.
-__putchar_wait_for_tx:
+__chrout_wait_for_tx:
   dex
-  bne __putchar_wait_for_tx
+  bne __chrout_wait_for_tx
   rts
 
 ; Control variables for the serial input buffer in the zero page.

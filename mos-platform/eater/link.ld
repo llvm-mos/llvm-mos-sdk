@@ -26,8 +26,6 @@ SECTIONS {
   .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>rom
   __zp_data_load_start = LOADADDR(.zp.data) - LOADADDR(.rodata) + ADDR(.rodata);
   __zp_data_size = SIZEOF(.zp.data);
-  .data_initializers ADDR(.rodata) + SIZEOF(.rodata) + __data_size +
-                   __zp_data_size : {} >rom
   .zp.bss (NOLOAD) : {
     INCLUDE zp-bss-sections.ld
   } >zp

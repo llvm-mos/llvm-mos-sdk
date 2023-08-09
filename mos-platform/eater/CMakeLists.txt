@@ -28,6 +28,7 @@ add_platform_library(eater-c
   abort.c
   delay.c
   getchar.c
+  lcd.c
   putchar.c
 )
 

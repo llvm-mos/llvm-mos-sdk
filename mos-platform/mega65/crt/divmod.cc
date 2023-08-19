@@ -1,9 +1,9 @@
 #include "divmod.h"
 
 extern "C" {
-char __udivqi3(char a, char b) { return udiv(a, b); }
-unsigned __udivhi3(unsigned a, unsigned b) { return udiv(a, b); }
-unsigned long __udivsi3(unsigned long a, unsigned long b) { return udiv(a, b); }
+char __udivqi3(char a, char b) { return udiv_m65(a, b); }
+unsigned __udivhi3(unsigned a, unsigned b) { return udiv_m65(a, b); }
+unsigned long __udivsi3(unsigned long a, unsigned long b) { return udiv_m65(a, b); }
 unsigned long long __udivdi3(unsigned long long a, unsigned long long b) {
   return udiv(a, b);
 }

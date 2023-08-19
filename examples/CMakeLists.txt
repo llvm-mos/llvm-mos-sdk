@@ -42,3 +42,7 @@ endif()
 if(PLATFORM STREQUAL eater)
   add_subdirectory(eater)
 endif()
+if(PLATFORM MATCHES ^mega65)
+  add_subdirectory(mega65)
+endif()
+

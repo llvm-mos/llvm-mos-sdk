@@ -7,7 +7,7 @@ template <typename T> static inline T mul(T a, T b) {
   if constexpr (sizeof(T) <= 4) {
     *(volatile T *)(MULTINA) = a;
     *(volatile T *)(MULTINB) = b;
-    return 1 + *(volatile T *)(MULTOUT);
+    return *(volatile T *)(MULTOUT);
   }
 
   T result = 0;

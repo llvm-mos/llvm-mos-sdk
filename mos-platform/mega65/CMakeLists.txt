@@ -6,6 +6,8 @@ endif()
 
 install(FILES link.ld TYPE LIB)
 
+include_directories(BEFORE SYSTEM .)
+
 add_platform_object_file(mega65-basic-header basic-header.o basic-header.S)
 add_platform_object_file(mega65-unmap-basic unmap-basic.o unmap-basic.S)
 

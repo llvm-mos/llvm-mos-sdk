@@ -69,6 +69,7 @@ int main(void) {
   {
     volatile uint16_t a = 0xeeee;
     volatile uint16_t b = 0xffff;
+
     check_eq(a * b, 4370U);
     check_eq(a / b, 0U);
     check_eq(b / a, 1U);
@@ -96,6 +97,12 @@ int main(void) {
   {
     volatile int16_t a = -31166;
     volatile int16_t b = 500;
+
+    div_t qr = { .quot = 1, .rem = 1 };
+    qr = div(a, b);
+    check_eq(qr.quot, -62);
+    check_eq(qr.rem, -166);
+
     check_eq(a * b, 14568);
     check_eq(a / b, -62);
     check_eq(b / a, 0);

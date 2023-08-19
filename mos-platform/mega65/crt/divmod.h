@@ -67,7 +67,19 @@ template <typename T> static inline T udiv(T a, T b) {
   return q;
 }
 
+template <typename T> static inline T umod_m65(T a, T b) {
+  if (b != 0) {
+    T q = udiv_m65(a, b);
+    return (q != 0) ? a - q * b : a;
+  }
+  // the math register does nothing if b==0 so we must catch this
+  return 0;
+}
+
 template <typename T> static inline T umod(T a, T b) {
+  if constexpr (sizeof(T) <= 4) {
+    return umod_m65(a, b);
+  }
   if (!b || b > a)
     return a;
 
@@ -104,8 +116,15 @@ template <typename T> static inline T umod(T a, T b) {
 
 template <typename T> static inline T udivmod(T a, T b, T *rem) {
   if constexpr (sizeof(T) <= 4) {
-    *rem = umod(a, b);
-    return udiv_m65(a, b);
+    if (b != 0) {
+      T q = udiv_m65(a, b);
+      *rem = (q != 0) ? a - q * b : a;
+      return q;
+    } else {
+      // the math register does nothing if b==0 so we must catch this
+      *rem = 0;
+      return 0;
+    }
   }
 
   if (!b || b > a) {

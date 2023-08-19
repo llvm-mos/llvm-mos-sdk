@@ -1,5 +1,5 @@
 /**
- * Tests various math functions (mul, div, mod)
+ * Tests various math operators and functions (*, /, %, div)
  */
 
 #include <stdint.h>
@@ -26,16 +26,16 @@ int main(void) {
     check_eq(b % a, 18763853131503ULL);
     a = 3;
     b = 2;
-    check_eq(a % b, 1ULL); // 3 & 2
+    check_eq(a % b, 1ULL);
     a = 0;
     b = 2;
-    check_eq(a % b, 0ULL); // 0 & 2
+    check_eq(a % b, 0ULL);
     a = 3;
     b = 20;
-    check_eq(a % b, 3ULL); // 3 & 20
+    check_eq(a % b, 3ULL);
     a = 20;
     b = 3;
-    check_eq(a % b, 2ULL); // 20 & 3
+    check_eq(a % b, 2ULL);
   }
 
   {
@@ -53,16 +53,32 @@ int main(void) {
     check_eq(b % a, 4369UL);
     a = 3;
     b = 2;
-    check_eq(a % b, 1UL); // 3 & 2
+    check_eq(a % b, 1UL);
     a = 0;
     b = 2;
-    check_eq(a % b, 0UL); // 0 & 2
+    check_eq(a % b, 0UL);
     a = 3;
     b = 20;
-    check_eq(a % b, 3UL); // 3 & 20
+    check_eq(a % b, 3UL);
     a = 20;
     b = 3;
-    check_eq(a % b, 2UL); // 20 & 3
+    check_eq(a % b, 2UL);
+  }
+
+  {
+    // 32-bit, signed
+    volatile int32_t a = 32000;
+    volatile int32_t b = -1500;
+    check_eq(a * b, -48000000L);
+    check_eq(a / b, -21L);
+    check_eq(b / a, 0L);
+    check_eq(a % b, 500L);
+    check_eq(b % a, -1500L);
+
+    ldiv_t qr = { .quot = 1, .rem = 1 };
+    qr = ldiv(a, b);
+    check_eq(qr.quot, -21L);
+    check_eq(qr.rem, 500L);
   }
 
   // 16-bit
@@ -81,16 +97,16 @@ int main(void) {
     check_eq(a / b, 50U);
     a = 3;
     b = 2;
-    check_eq(a % b, 1U); // 3 & 2
+    check_eq(a % b, 1U);
     a = 0;
     b = 2;
-    check_eq(a % b, 0U); // 0 & 2
+    check_eq(a % b, 0U);
     a = 3;
     b = 20;
-    check_eq(a % b, 3U); // 3 & 20
+    check_eq(a % b, 3U);
     a = 20;
     b = 3;
-    check_eq(a % b, 2U); // 20 & 3
+    check_eq(a % b, 2U);
   }
 
   // 16-bit, signed
@@ -114,16 +130,16 @@ int main(void) {
     check_eq(a / b, -50);
     a = 3;
     b = 2;
-    check_eq(a % b, 1); // 3 & 2
+    check_eq(a % b, 1);
     a = 0;
     b = 2;
-    check_eq(a % b, 0); // 0 & 2
+    check_eq(a % b, 0);
     a = 3;
     b = 20;
-    check_eq(a % b, 3); // 3 & 20
+    check_eq(a % b, 3);
     a = 20;
     b = 3;
-    check_eq(a % b, 2); // 20 & 3
+    check_eq(a % b, 2);
   }
 
   // 8-bit
@@ -137,16 +153,16 @@ int main(void) {
     check_eq<uint8_t>((uint8_t)(b % a), 17);
     a = 3;
     b = 2;
-    check_eq(a % b, 1); // 3 & 2
+    check_eq(a % b, 1);
     a = 0;
     b = 2;
-    check_eq(a % b, 0); // 0 & 2
+    check_eq(a % b, 0);
     a = 3;
     b = 20;
-    check_eq(a % b, 3); // 3 & 20
+    check_eq(a % b, 3);
     a = 20;
     b = 3;
-    check_eq(a % b, 2); // 20 & 3
+    check_eq(a % b, 2);
   }
   return 0;
 }

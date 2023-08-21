@@ -5,8 +5,6 @@
 
 // Originally from KickC. Modified from original version.
 
-// clang-format off
-
 /*
  * MIT License
  *
@@ -19,8 +17,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -104,8 +102,8 @@ struct MOS4569_VICIII {
   char SPRITE6_COLOR;
   /// $D02e Color Sprite 7
   char SPRITE7_COLOR;
-  /// $D02f KEY register is used for choosing between the different I/O personalities.
-  /// This disables/enables different registers in $D000-$DFFF
+  /// $D02f KEY register is used for choosing between the different I/O
+  /// personalities. This disables/enables different registers in $D000-$DFFF
   /// $00: C64 personality
   /// $A5, $96: C65 personality
   /// $45, $54: MEGA65 ETHERNET  personality
@@ -182,4 +180,4 @@ struct MOS4569_VICIII {
 #ifdef __cplusplus
 }
 #endif
-#endif 
+#endif // _MOS4569_H

@@ -5,8 +5,6 @@
 
 // Originally from KickC. Modified from original version.
 
-// clang-format off
-
 /*
  * MIT License
  *
@@ -19,8 +17,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -37,7 +35,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 /// @file
 /// MEGA65 Video Interface Chip (VIC IV)
@@ -107,8 +104,8 @@ struct MEGA65_VICIV {
   char SPRITE6_COLOR;
   /// $D02e Color Sprite 7
   char SPRITE7_COLOR;
-  /// $D02f KEY register is used for choosing between the different I/O personalities.
-  /// This disables/enables different registers in $D000-$DFFF
+  /// $D02f KEY register is used for choosing between the different I/O
+  /// personalities. This disables/enables different registers in $D000-$DFFF
   /// $00: C64 personality
   /// $A5, $96: C65 personality
   /// $45, $54: MEGA65 ETHERNET  personality
@@ -182,27 +179,27 @@ struct MEGA65_VICIV {
   char B7PIX;
   /// $D048 top border position (low byte)
   char TBDRPOS_LO;
-  /// $D049 top border position (high nibble) and sprite bitplane-modify-mode enables
-  /// 0-3 Top border position (high nibble)
-  /// 4-7 Sprite bitplane-modify-mode enables for sprite 0-3
+  /// $D049 top border position (high nibble) and sprite bitplane-modify-mode
+  /// enables 0-3 Top border position (high nibble) 4-7 Sprite
+  /// bitplane-modify-mode enables for sprite 0-3
   char TBDRPOS_HI;
   /// $D04A bottom border position (low byte)
   char BBDRPOS_LO;
-  /// $D04B bottom border position (high nibble) and sprite bitplane-modify-mode enables
-  /// 0-3 Bottom border position (high nibble)
-  /// 4-7 Sprite bitplane-modify-mode enables for sprite 4-7
+  /// $D04B bottom border position (high nibble) and sprite bitplane-modify-mode
+  /// enables 0-3 Bottom border position (high nibble) 4-7 Sprite
+  /// bitplane-modify-mode enables for sprite 4-7
   char BBDRPOS_HI;
   /// $D04C character generator horizontal position (low byte)
   char TEXTXPOS_LO;
-  /// $D04D character generator horizontal position (high nibble) and sprite horizontal tile enables
-  /// 0-3 Character generator horizontal position (high nibble)
-  /// 4-7 Sprite horizontal tile enables for sprite 0-3
+  /// $D04D character generator horizontal position (high nibble) and sprite
+  /// horizontal tile enables 0-3 Character generator horizontal position (high
+  /// nibble) 4-7 Sprite horizontal tile enables for sprite 0-3
   char TEXTXPOS_HI;
   /// $D04E character generator vertical position (low byte)
   char TEXTYPOS_LO;
-  /// $D04F character generator vertical position (high nibble) and sprite horizontal tile enables
-  /// 0-3 Character generator vertical position (high nibble)
-  /// 4-7 Sprite horizontal tile enables for sprite 4-7
+  /// $D04F character generator vertical position (high nibble) and sprite
+  /// horizontal tile enables 0-3 Character generator vertical position (high
+  /// nibble) 4-7 Sprite horizontal tile enables for sprite 4-7
   char TEXTYPOS_HI;
   /// $D050 Read horizontal raster scan position (lower byte)
   char XPOS_LO;
@@ -232,22 +229,29 @@ struct MEGA65_VICIV {
   char SPRHGTEN;
   /// $D056  Sprite extended height size (sprite pixels high)
   char SPRHGHT;
-  /// $D057 SPRX64EN Sprite extended width enables (8 bytes per sprite row 64 pixels wide for normal sprites or 16 pixels wide for 16-colour sprite mode)
+  /// $D057 SPRX64EN Sprite extended width enables (8 bytes per sprite row 64
+  /// pixels wide for normal sprites or 16 pixels wide for 16-colour sprite
+  /// mode)
   char SPRX64EN;
   /// $D058 CHARSTEP_LO characters per logical text row (LSB)
   char CHARSTEP_LO;
   /// $D059 CHARSTEP_HI characters per logical text row (MSB)
   char CHARSTEP_HI;
-  /// $D05A CHRXSCL Horizontal hardware scale of text mode (pixel 120ths per pixel)
+  /// $D05A CHRXSCL Horizontal hardware scale of text mode (pixel 120ths per
+  /// pixel)
   char CHRXSCL;
-  /// $D05B CHRYSCL Vertical scaling of text mode (number of physical rasters per char text row)
+  /// $D05B CHRYSCL Vertical scaling of text mode (number of physical rasters
+  /// per char text row)
   char CHRYSCL;
   /// $D05C SIDBDRWD Width of single side border (LSB)
   char SIDBDRWD_LO;
   /// $D05D SIDBDRWD side border width (MSB)
   /// 0-5 side border width (upper bits)
-  ///   6 RSTDELEN Enable raster delay (delays raster counter and interrupts by one line to match output pipeline latency)
-  ///   7 HOTREG Enable VIC-II hot registers. When enabled, touching many VIC-II registers causes the VIC-IV to recalculate display parameters, such as border positions and sizes.
+  ///   6 RSTDELEN Enable raster delay (delays raster counter and interrupts by
+  ///   one line to match output pipeline latency) 7 HOTREG Enable VIC-II hot
+  ///   registers. When enabled, touching many VIC-II registers causes the
+  ///   VIC-IV to recalculate display parameters, such as border positions and
+  ///   sizes.
   char SIDBDRWD_HI;
   /// $D05E CHRCOUNT Number of characters to display per row
   char CHRCOUNT;
@@ -286,18 +290,22 @@ struct MEGA65_VICIV {
   char SPRPTRADR_LOHI;
   /// $D06E.0-6 SPRPTRADR sprite pointer address (bits 22 - 16)
   /// 0-6 sprite pointer address (bits 22 - 16)
-  ///   7 SPRPTR16 16-bit sprite pointer mode (allows sprites to be located on any 64 byte boundary in chip RAM)
+  ///   7 SPRPTR16 16-bit sprite pointer mode (allows sprites to be located on
+  ///   any 64 byte boundary in chip RAM)
   char SPRPTRADR_HILO;
   /// $D06F First VIC-II raster line
   /// 0-5 RASLINE0 first VIC-II raster line
-  ///   6 VGAHDTV Select more VGA-compatible mode if set, instead of HDMI/HDTV VIC-II cycle-exact frame timing. May help to produce a functional display on older VGA monitors.
-  ///   7 PALNTSC NTSC emulation mode (max raster 262)
+  ///   6 VGAHDTV Select more VGA-compatible mode if set, instead of HDMI/HDTV
+  ///   VIC-II cycle-exact frame timing. May help to produce a functional
+  ///   display on older VGA monitors. 7 PALNTSC NTSC emulation mode (max raster
+  ///   262)
   /// bit 7 6
   ///     0 0 => PAL, 720x576 @ 50Hz
   ///     0 1 => PAL, 720x576 50Hz, NTSC max raster
   ///     1 0 => NTSC, 720x480 @ 60Hz
   ///     1 1 => NTSC 720x480 60Hz
-  ///     ? ? => Default to NTSC 800x600 60Hz (see https://github.com/MEGA65/mega65-core/blob/master/src/vhdl/viciv.vhdl)
+  ///     ? ? => Default to NTSC 800x600 60Hz (see
+  ///     https://github.com/MEGA65/mega65-core/blob/master/src/vhdl/viciv.vhdl)
   char RASLINE0;
   /// $D070 VIC-IV palette bank selection
   /// 1-0 ABTPALSEL VIC-IV bitmap/text palette bank (alternate palette)
@@ -328,7 +336,8 @@ struct MEGA65_VICIV {
   /// $D07A RSTCMP Raster compare value MSB
   /// 0-2 RSTCMP Raster compare value MSB
   /// 3-6 RESERVED
-  ///   7 FNRSTCMP Raster compare is in physical rasters if set, or VIC-II raster if clear
+  ///   7 FNRSTCMP Raster compare is in physical rasters if set, or VIC-II
+  ///   raster if clear
   char RSTCMP;
   /// $D07B Number of text rows to display
   char ROWCOUNT;
@@ -349,9 +358,9 @@ struct MEGA65_VICIV {
   char DEBUGXY;
 };
 
-/// $D02f KEY register is used for choosing between the different I/O personalities.
-/// This disables/enables different registers in $D000-$DFFF
-/// $00: C64 personality
+/// $D02f KEY register is used for choosing between the different I/O
+/// personalities. This disables/enables different registers in $D000-$DFFF $00:
+/// C64 personality
 #define VICIV_KEY_C64 0x00
 /// $A5, $96: C65 personality
 #define VICIV_KEY_C65_A 0xa5
@@ -416,10 +425,11 @@ struct MEGA65_VICIV {
 #define VICIV_ALPHEN 0x80
 
 /// $D06E.0-6 SPRPTRADR sprite pointer address (bits 22 - 16)
-///   7 SPRPTR16 16-bit sprite pointer mode (allows sprites to be located on any 64 byte boundary in chip RAM)
+///   7 SPRPTR16 16-bit sprite pointer mode (allows sprites to be located on any
+///   64 byte boundary in chip RAM)
 #define VICIV_SPRPTR16 0x80
 
 #ifdef __cplusplus
 }
 #endif
-#endif 
+#endif // _MEGA65_VICIV_H

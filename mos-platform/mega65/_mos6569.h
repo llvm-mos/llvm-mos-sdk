@@ -5,8 +5,6 @@
 
 // Originally from KickC. Modified from original version.
 
-// clang-format off
-
 /*
  * MIT License
  *
@@ -251,4 +249,4 @@ struct MOS6569_VICII {
 #ifdef __cplusplus
 }
 #endif
-#endif 
+#endif // _MOS6569_H

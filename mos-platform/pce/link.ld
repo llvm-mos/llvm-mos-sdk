@@ -18,7 +18,7 @@ __start_bank_5 = ((__rom_bank0_size >= (3 << 13)) ? ((__rom_bank0_size >> 13) - 
 __start_bank_6 = ((__rom_bank0_size >= (2 << 13)) ? ((__rom_bank0_size >> 13) - 1) : 0x00);
 
 MEMORY {
-	zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
+	zp : ORIGIN = __rc31 + 1, LENGTH = 0xf82100 - (__rc31 + 1)
 	ram (rw) : ORIGIN = 0xf82200, LENGTH = __ram_bank_size - 0x200
 }
 

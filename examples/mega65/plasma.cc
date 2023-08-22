@@ -136,6 +136,7 @@ public:
 
     write_to_screen();
   }
+
   // Write summed buffers to screen memory
   // Set a 2 byte stride - one for text, one for color - after each write
   inline void write_to_screen() const {
@@ -143,8 +144,7 @@ public:
     for (const auto y : ydata) {
 #pragma unroll
       for (const auto x : xdata) {
-        *screen = y + x;
-        screen++;
+        *(screen++) = y + x;
       }
     }
   }

@@ -36,13 +36,8 @@ public:
   }
 };
 
-/// Helper function to write a single byte to memory
-template <class T> inline void poke(const uint16_t address, const T value) {
-  *reinterpret_cast<volatile T *>(address) = value;
-}
-
 /// Sets MEGA65 speed to 3.5 Mhz
-void speed_mode3() {
+inline void speed_mode3() {
   VICIV.CONTROLB |= VICIV_FAST;
   VICIV.CONTROLC &= ~VICIV_VFAST;
 }
@@ -74,7 +69,7 @@ constexpr uint8_t sine_table[UINT8_MAX + 1] = {
 
 /// Generate charset with 8 * 256 characters at given address
 void make_charset(uint16_t charset_address, RandomXORS &rng) {
-  // Lambda function to generate a single 8x8 bit pattern
+  // Lambda function to generate a single 8x8 pixels pattern
   auto make_char = [&](const uint8_t sine) {
     uint8_t pattern = 0;
     constexpr uint8_t bits[8] = {1, 2, 4, 8, 16, 32, 64, 128};
@@ -85,9 +80,11 @@ void make_charset(uint16_t charset_address, RandomXORS &rng) {
     }
     return pattern;
   };
+
+  auto charset = reinterpret_cast<volatile uint8_t *>(charset_address);
   for (const auto sine : sine_table) {
     for (int _i = 0; _i < 8; ++_i) {
-      poke(charset_address, make_char(sine));
+      *(charset++) = make_char(sine);
     }
   }
 }
@@ -108,9 +105,9 @@ public:
   /// Generate and activate charset at given address
   Plasma(const uint16_t charset_address, RandomXORS &rng) {
     make_charset(charset_address, rng);
-    VICIV.CHARPTR_LOLO = charset_address & 0x0000FFUL;
-    VICIV.CHARPTR_LOHI = (charset_address & 0xFF00UL) >> 8;
-    VICIV.CHARPTR_HILO = (charset_address & 0xFF0000UL) >> 16;
+    VICIV.CHARPTR_LOLO = charset_address & 0xffUL;
+    VICIV.CHARPTR_LOHI = (charset_address & 0xff00UL) >> 8;
+    VICIV.CHARPTR_HILO = (charset_address & 0xff0000UL) >> 16;
   }
 
   /// Draw next frame
@@ -138,7 +135,6 @@ public:
   }
 
   // Write summed buffers to screen memory
-  // Set a 2 byte stride - one for text, one for color - after each write
   inline void write_to_screen() const {
     auto screen = reinterpret_cast<volatile uint8_t *>(&DEFAULT_SCREEN);
     for (const auto y : ydata) {

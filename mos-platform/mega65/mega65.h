@@ -94,7 +94,7 @@ extern "C" {
 /// DMAgic F018 Controller
 #define DMA (*(volatile struct F018_DMAGIC *)0xd700)
 /// Color Ram
-#define COLORRAM (*(char *)0xd800)
+#define COLORRAM (*(volatile char *)0xd800)
 
 /// Default address of screen character matrix
 #ifdef __MEGA65_C64__

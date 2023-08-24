@@ -35,35 +35,37 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
+
 /// @file
 /// MEGA65 Registers and Constants
 #ifndef __MEGA65__
 #error This module may only be used when compiling for the C64!
 #endif
-#include <_mos4569.h>
-#include <_mos6526.h>
-#include <_mos6569.h>
-#include <_mos6581.h>
+#include <_6526.h>
+#include <_sid.h>
+#include <_vic.h>
+#include <_vic3.h>
+#include <_vic4.h>
 #include <mega65-f018.h>
 #include <mega65-hypervisor.h>
 #include <mega65-math.h>
-#include <mega65-viciv.h>
 #include <stdint.h>
 
 /// I/O Personality selection
-#define IO_KEY (*(volatile char *)0xd02f)
+#define IO_KEY (*(volatile uint8_t *)0xd02f)
 /// C65 Banking Register
-#define IO_BANK (*(volatile char *)0xd030)
+#define IO_BANK (*(volatile uint8_t *)0xd030)
 /// Map 2nd KB of colour RAM $DC00-$DFFF (hiding CIA's)
 #define CRAM2K 0b00000001
 
 /// Processor port data direction register
-#define PROCPORT_DDR (*(volatile char *)0x00)
+#define PROCPORT_DDR (*(volatile uint8_t *)0x00)
 /// Mask for PROCESSOR_PORT_DDR which allows only memory configuration to be
 /// written
 #define PROCPORT_DDR_MEMORY_MASK 0b00000111
 /// Processor Port Register controlling RAM/ROM configuration and the datasette
-#define PROCPORT (*(volatile char *)0x01)
+#define PROCPORT (*(volatile uint8_t *)0x01)
 /// RAM in all three areas 0xA000, 0xD000, 0xE000
 #define PROCPORT_RAM_ALL 0b00000000
 /// RAM in 0xA000, 0xE000 I/O in 0xD000
@@ -76,43 +78,55 @@ extern "C" {
 #define PROCPORT_BASIC_KERNEL_IO 0b00000111
 
 /// The VIC-II MOS 6567/6569
-#define VICII (*(volatile struct MOS6569_VICII *)0xd000)
+#define VICII (*(volatile struct __vic2 *)0xd000)
 /// The VIC III MOS 4567/4569
-#define VICIII (*(volatile struct MOS4569_VICIII *)0xd000)
+#define VICIII (*(volatile struct __vic3 *)0xd020)
 /// The VIC IV
-#define VICIV (*(volatile struct MEGA65_VICIV *)0xd000)
+#define VICIV (*(volatile struct __vic3 *)0xd020)
 /// The address of the CHARGEN character set
-#define CHARGEN (*(volatile char *)0xd000)
+#define CHARGEN (*(volatile uint8_t *)0xd000)
 /// Palette RED
-#define PALETTE_RED (*(volatile char *)0xd100)
+#define PALETTE_RED (*(volatile uint8_t *)0xd100)
 /// Palette GREEN
-#define PALETTE_GREEN (*(volatile char *)0xd200)
+#define PALETTE_GREEN (*(volatile uint8_t *)0xd200)
 /// Palette BLUE
-#define PALETTE_BLUE (*(volatile char *)0xd300)
-/// The SID MOS 6581/8580
-#define SID (*(volatile struct MOS6581_SID *)0xd400)
+#define PALETTE_BLUE (*(volatile uint8_t *)0xd300)
+/// SID MOS 6581/8580
+#define SID1 (*(volatile struct __sid *)0xd400)
+/// SID MOS 6581/8580
+#define SID2 (*(volatile struct __sid *)0xd420)
+/// SID MOS 6581/8580
+#define SID3 (*(volatile struct __sid *)0xd440)
+/// SID MOS 6581/8580
+#define SID4 (*(volatile struct __sid *)0xd460)
+/// SID select mode (0=6581, 1=8580)
+#define SIDMODE (*(volatile uint8_t *)0xd63c)
 /// DMAgic F018 Controller
 #define DMA (*(volatile struct F018_DMAGIC *)0xd700)
+/// Math busy flag
+#define MATHBUSY (*(volatile uint8_t *)0xd70f)
+/// Math accelerator
+#define MATH (*(volatile struct cpu_math *)0xd768)
 /// Color Ram
-#define COLORRAM (*(volatile char *)0xd800)
+#define COLORRAM (*(volatile uint8_t *)0xd800)
 
 /// Default address of screen character matrix
 #ifdef __MEGA65_C64__
-#define DEFAULT_SCREEN (*(volatile char *)0x0400)
+#define DEFAULT_SCREEN (*(volatile uint8_t *)0x0400)
 #else
-#define DEFAULT_SCREEN (*(volatile char *)0x0800)
+#define DEFAULT_SCREEN (*(volatile uint8_t *)0x0800)
 #endif
 
 /// The CIA#1: keyboard matrix, joystick #1/#2
-#define CIA1 (*(volatile struct MOS6526_CIA *)0xdc00)
+#define CIA1 (*(volatile struct __6526 *)0xdc00)
 /// The CIA#2: Serial bus, RS-232, VIC memory bank
-#define CIA2 (*(volatile struct MOS6526_CIA *)0xdd00)
+#define CIA2 (*(volatile struct __6526 *)0xdd00)
 /// CIA#1 Interrupt for reading in ASM
-#define CIA1_INTERRUPT (*(volatile char *)0xdc0d)
+#define CIA1_INTERRUPT (*(volatile uint8_t *)0xdc0d)
 /// CIA#2 timer A&B as one single 32-bit value
 #define CIA2_TIMER_AB (*(volatile uint32_t *)0xdd04)
 /// CIA#2 Interrupt for reading in ASM
-#define CIA2_INTERRUPT (*(volatile char *)0xdd0d)
+#define CIA2_INTERRUPT (*(volatile uint8_t *)0xdd0d)
 
 /// Pointer to interrupt function
 typedef void (*IRQ_TYPE)(void);

@@ -39,136 +39,136 @@ extern "C" {
 // MEGA65 HyperVisor
 
 // TRAP Writing triggers hypervisor trap $00
-#define HTRAP00 (*(volatile char *)0xd640)
+#define htrap00 (*(volatile char *)0xd640)
 // TRAP Writing triggers hypervisor trap $01
-#define HTRAP01 (*(volatile char *)0xd641)
+#define htrap01 (*(volatile char *)0xd641)
 // TRAP Writing triggers hypervisor trap $02
-#define HTRAP02 (*(volatile char *)0xd642)
+#define htrap02 (*(volatile char *)0xd642)
 // TRAP Writing triggers hypervisor trap $03
-#define HTRAP03 (*(volatile char *)0xd643)
+#define htrap03 (*(volatile char *)0xd643)
 // TRAP Writing triggers hypervisor trap $04
-#define HTRAP04 (*(volatile char *)0xd644)
+#define htrap04 (*(volatile char *)0xd644)
 // TRAP Writing triggers hypervisor trap $05
-#define HTRAP05 (*(volatile char *)0xd645)
+#define htrap05 (*(volatile char *)0xd645)
 // TRAP Writing triggers hypervisor trap $06
-#define HTRAP06 (*(volatile char *)0xd646)
+#define htrap06 (*(volatile char *)0xd646)
 // TRAP Writing triggers hypervisor trap $07
-#define HTRAP07 (*(volatile char *)0xd647)
+#define htrap07 (*(volatile char *)0xd647)
 // TRAP Writing triggers hypervisor trap $08
-#define HTRAP08 (*(volatile char *)0xd648)
+#define htrap08 (*(volatile char *)0xd648)
 // TRAP Writing triggers hypervisor trap $09
-#define HTRAP09 (*(volatile char *)0xd649)
+#define htrap09 (*(volatile char *)0xd649)
 // TRAP Writing triggers hypervisor trap $0a
-#define HTRAP0A (*(volatile char *)0xd64a)
+#define htrap0a (*(volatile char *)0xd64a)
 // TRAP Writing triggers hypervisor trap $0b
-#define HTRAP0B (*(volatile char *)0xd64b)
+#define htrap0b (*(volatile char *)0xd64b)
 // TRAP Writing triggers hypervisor trap $0c
-#define HTRAP0C (*(volatile char *)0xd64c)
-// TRAP Writing triggers hypervisor trap $0d
-#define HTRAP0D (*(volatile char *)0xd64d)
+#define htrap0c (*(volatile char *)0xd64c)
+// TRAP writing triggers hypervisor trap $0d
+#define htrap0d (*(volatile char *)0xd64d)
 // TRAP Writing triggers hypervisor trap $0e
-#define HTRAP0E (*(volatile char *)0xd64e)
+#define htrap0e (*(volatile char *)0xd64e)
 // TRAP Writing triggers hypervisor trap $0f
-#define HTRAP0F (*(volatile char *)0xd64f)
+#define htrap0f (*(volatile char *)0xd64f)
 
 // TRAP Writing triggers hypervisor trap $10
-#define HTRAP10 (*(volatile char *)0xd650)
+#define htrap10 (*(volatile char *)0xd650)
 // TRAP Writing triggers hypervisor trap $11
-#define HTRAP11 (*(volatile char *)0xd651)
+#define htrap11 (*(volatile char *)0xd651)
 // TRAP Writing triggers hypervisor trap $12
-#define HTRAP12 (*(volatile char *)0xd652)
+#define htrap12 (*(volatile char *)0xd652)
 // TRAP Writing triggers hypervisor trap $13
-#define HTRAP13 (*(volatile char *)0xd653)
+#define htrap13 (*(volatile char *)0xd653)
 // TRAP Writing triggers hypervisor trap $14
-#define HTRAP14 (*(volatile char *)0xd654)
+#define htrap14 (*(volatile char *)0xd654)
 // TRAP Writing triggers hypervisor trap $15
-#define HTRAP15 (*(volatile char *)0xd655)
+#define htrap15 (*(volatile char *)0xd655)
 // TRAP Writing triggers hypervisor trap $16
-#define HTRAP16 (*(volatile char *)0xd656)
+#define htrap16 (*(volatile char *)0xd656)
 // TRAP Writing triggers hypervisor trap $17
-#define HTRAP17 (*(volatile char *)0xd657)
+#define htrap17 (*(volatile char *)0xd657)
 // TRAP Writing triggers hypervisor trap $18
-#define HTRAP18 (*(volatile char *)0xd658)
+#define htrap18 (*(volatile char *)0xd658)
 // TRAP Writing triggers hypervisor trap $19
-#define HTRAP19 (*(volatile char *)0xd659)
+#define htrap19 (*(volatile char *)0xd659)
 // TRAP Writing triggers hypervisor trap $1a
-#define HTRAP1A (*(volatile char *)0xd65a)
+#define htrap1a (*(volatile char *)0xd65a)
 // TRAP Writing triggers hypervisor trap $1b
-#define HTRAP1B (*(volatile char *)0xd65b)
+#define htrap1b (*(volatile char *)0xd65b)
 // TRAP Writing triggers hypervisor trap $1c
-#define HTRAP1C (*(volatile char *)0xd65c)
+#define htrap1c (*(volatile char *)0xd65c)
 // TRAP Writing triggers hypervisor trap $1d
-#define HTRAP1D (*(volatile char *)0xd65d)
+#define htrap1d (*(volatile char *)0xd65d)
 // TRAP Writing triggers hypervisor trap $1e
-#define HTRAP1E (*(volatile char *)0xd65e)
+#define htrap1e (*(volatile char *)0xd65e)
 // TRAP Writing triggers hypervisor trap $1f
-#define HTRAP1F (*(volatile char *)0xd65f)
+#define htrap1f (*(volatile char *)0xd65f)
 
 // TRAP Writing triggers hypervisor trap $20
-#define HTRAP20 (*(volatile char *)0xd660)
+#define htrap20 (*(volatile char *)0xd660)
 // TRAP Writing triggers hypervisor trap $21
-#define HTRAP21 (*(volatile char *)0xd661)
+#define htrap21 (*(volatile char *)0xd661)
 // TRAP Writing triggers hypervisor trap $22
-#define HTRAP22 (*(volatile char *)0xd662)
+#define htrap22 (*(volatile char *)0xd662)
 // TRAP Writing triggers hypervisor trap $23
-#define HTRAP23 (*(volatile char *)0xd663)
+#define htrap23 (*(volatile char *)0xd663)
 // TRAP Writing triggers hypervisor trap $24
-#define HTRAP24 (*(volatile char *)0xd664)
+#define htrap24 (*(volatile char *)0xd664)
 // TRAP Writing triggers hypervisor trap $25
-#define HTRAP25 (*(volatile char *)0xd665)
+#define htrap25 (*(volatile char *)0xd665)
 // TRAP Writing triggers hypervisor trap $26
-#define HTRAP26 (*(volatile char *)0xd666)
+#define htrap26 (*(volatile char *)0xd666)
 // TRAP Writing triggers hypervisor trap $27
-#define HTRAP27 (*(volatile char *)0xd667)
+#define htrap27 (*(volatile char *)0xd667)
 // TRAP Writing triggers hypervisor trap $28
-#define HTRAP28 (*(volatile char *)0xd668)
+#define htrap28 (*(volatile char *)0xd668)
 // TRAP Writing triggers hypervisor trap $29
-#define HTRAP29 (*(volatile char *)0xd669)
+#define htrap29 (*(volatile char *)0xd669)
 // TRAP Writing triggers hypervisor trap $2a
-#define HTRAP2A (*(volatile char *)0xd66a)
+#define htrap2a (*(volatile char *)0xd66a)
 // TRAP Writing triggers hypervisor trap $2b
-#define HTRAP2B (*(volatile char *)0xd66b)
+#define htrap2b (*(volatile char *)0xd66b)
 // TRAP Writing triggers hypervisor trap $2c
-#define HTRAP2C (*(volatile char *)0xd66c)
+#define htrap2c (*(volatile char *)0xd66c)
 // TRAP Writing triggers hypervisor trap $2d
-#define HTRAP2D (*(volatile char *)0xd66d)
+#define htrap2d (*(volatile char *)0xd66d)
 // TRAP Writing triggers hypervisor trap $2e
-#define HTRAP2E (*(volatile char *)0xd66e)
+#define htrap2e (*(volatile char *)0xd66e)
 // TRAP Writing triggers hypervisor trap $2f
-#define HTRAP2F (*(volatile char *)0xd66f)
+#define htrap2f (*(volatile char *)0xd66f)
 
 // TRAP Writing triggers hypervisor trap $30
-#define HTRAP30 (*(volatile char *)0xd670)
+#define htrap30 (*(volatile char *)0xd670)
 // TRAP Writing triggers hypervisor trap $31
-#define HTRAP31 (*(volatile char *)0xd671)
+#define htrap31 (*(volatile char *)0xd671)
 // TRAP Writing triggers hypervisor trap $32
-#define HTRAP32 (*(volatile char *)0xd672)
+#define htrap32 (*(volatile char *)0xd672)
 // TRAP Writing triggers hypervisor trap $33
-#define HTRAP33 (*(volatile char *)0xd673)
+#define htrap33 (*(volatile char *)0xd673)
 // TRAP Writing triggers hypervisor trap $34
-#define HTRAP34 (*(volatile char *)0xd674)
+#define htrap34 (*(volatile char *)0xd674)
 // TRAP Writing triggers hypervisor trap $35
-#define HTRAP35 (*(volatile char *)0xd675)
+#define htrap35 (*(volatile char *)0xd675)
 // TRAP Writing triggers hypervisor trap $36
-#define HTRAP36 (*(volatile char *)0xd676)
+#define htrap36 (*(volatile char *)0xd676)
 // TRAP Writing triggers hypervisor trap $37
-#define HTRAP37 (*(volatile char *)0xd677)
+#define htrap37 (*(volatile char *)0xd677)
 // TRAP Writing triggers hypervisor trap $38
-#define HTRAP38 (*(volatile char *)0xd678)
+#define htrap38 (*(volatile char *)0xd678)
 // TRAP Writing triggers hypervisor trap $39
-#define HTRAP39 (*(volatile char *)0xd679)
+#define htrap39 (*(volatile char *)0xd679)
 // TRAP Writing triggers hypervisor trap $3a
-#define HTRAP3A (*(volatile char *)0xd67a)
+#define htrap3a (*(volatile char *)0xd67a)
 // TRAP Writing triggers hypervisor trap $3b
-#define HTRAP3B (*(volatile char *)0xd67b)
+#define htrap3b (*(volatile char *)0xd67b)
 // TRAP Writing triggers hypervisor trap $3c
-#define HTRAP3C (*(volatile char *)0xd67c)
+#define htrap3c (*(volatile char *)0xd67c)
 // TRAP Writing triggers hypervisor trap $3d
-#define HTRAP3D (*(volatile char *)0xd67d)
+#define htrap3d (*(volatile char *)0xd67d)
 // TRAP Writing triggers hypervisor trap $3e
-#define HTRAP3E (*(volatile char *)0xd67e)
+#define htrap3e (*(volatile char *)0xd67e)
 // TRAP Writing triggers hypervisor trap $3f
-#define HTRAP3F (*(volatile char *)0xd67f)
+#define htrap3f (*(volatile char *)0xd67f)
 
 #ifdef __cplusplus
 }

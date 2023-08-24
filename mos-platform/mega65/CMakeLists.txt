@@ -4,15 +4,12 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 install(FILES
-    _mos4569.h
-    _mos6526.h
-    _mos6569.h
-    _mos6581.h
+    _vic3.h
+    _vic4.h
     mega65.h
     mega65-f018.h
     mega65-hypervisor.h
     mega65-math.h
-    mega65-viciv.h
 TYPE INCLUDE)
 
 install(FILES link.ld TYPE LIB)

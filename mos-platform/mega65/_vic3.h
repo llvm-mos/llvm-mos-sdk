@@ -28,87 +28,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef _MOS4569_H
-#define _MOS4569_H
+#ifndef _VIC3_H
+#define _VIC3_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#include <stdint.h>
+
 /// @file
 /// @brief MOS 4567 / 4569 Video Interface Chip (VIC III)
 
 /// MOS 4567 / 4569 Video Interface Chip (VIC III)
-struct MOS4569_VICIII {
-  char SPRITE0_X;
-  char SPRITE0_Y;
-  char SPRITE1_X;
-  char SPRITE1_Y;
-  char SPRITE2_X;
-  char SPRITE2_Y;
-  char SPRITE3_X;
-  char SPRITE3_Y;
-  char SPRITE4_X;
-  char SPRITE4_Y;
-  char SPRITE5_X;
-  char SPRITE5_Y;
-  char SPRITE6_X;
-  char SPRITE6_Y;
-  char SPRITE7_X;
-  char SPRITE7_Y;
-  char SPRITES_XMSB;
-  char CONTROL1;
-  char RASTER;
-  char LIGHTPEN_X;
-  char LIGHTPEN_Y;
-  char SPRITES_ENABLE;
-  char CONTROL2;
-  char SPRITES_EXPAND_Y;
-  char MEMORY;
-  char IRQ_STATUS;
-  char IRQ_ENABLE;
-  char SPRITES_PRIORITY;
-  char SPRITES_MC;
-  char SPRITES_EXPAND_X;
-  char SPRITES_COLLISION;
-  char SPRITES_BG_COLLISION;
+struct __vic3 {
   /// $D020 Border Color
-  char BORDER_COLOR;
+  uint8_t border_color;
   /// $D021 Background Color 0
-  char BG_COLOR;
+  uint8_t bg_color;
   /// $D022 Background Color 1
-  char BG_COLOR1;
+  uint8_t bg_color1;
   /// $D023 Background Color 2
-  char BG_COLOR2;
+  uint8_t bg_color2;
   /// $D024 Background Color 3
-  char BG_COLOR3;
+  uint8_t bg_color3;
   /// $D025 Sprite multicolor 0
-  char SPRITES_MCOLOR1;
+  uint8_t sprites_mcolor1;
   /// $D026 Sprite multicolor 1
-  char SPRITES_MCOLOR2;
+  uint8_t sprites_mcolor2;
   /// $D027 Color Sprite 0
-  char SPRITE0_COLOR;
+  uint8_t sprite0_color;
   /// $D028 Color Sprite 1
-  char SPRITE1_COLOR;
+  uint8_t sprite1_color;
   /// $D029 Color Sprite 2
-  char SPRITE2_COLOR;
+  uint8_t sprite2_color;
   /// $D02a Color Sprite 3
-  char SPRITE3_COLOR;
+  uint8_t sprite3_color;
   /// $D02b Color Sprite 4
-  char SPRITE4_COLOR;
+  uint8_t sprite4_color;
   /// $D02c Color Sprite 5
-  char SPRITE5_COLOR;
+  uint8_t sprite5_color;
   /// $D02d Color Sprite 6
-  char SPRITE6_COLOR;
+  uint8_t sprite6_color;
   /// $D02e Color Sprite 7
-  char SPRITE7_COLOR;
+  uint8_t sprite7_color;
   /// $D02f KEY register is used for choosing between the different I/O
   /// personalities. This disables/enables different registers in $D000-$DFFF
   /// $00: C64 personality
   /// $A5, $96: C65 personality
   /// $45, $54: MEGA65 ETHERNET  personality
   /// $47, $53: MEGA65  personality
-  char KEY;
+  uint8_t key;
   /// $D030 VIC-III Control Register A (ROM banks)
   /// Bit        20-bit Address       16-bit Address  Read-Write
   /// 0 CRAM2K   $1F800 – $1FFFF,     $D800 – $DFFF   Y
@@ -118,7 +88,7 @@ struct MOS4569_VICIII {
   /// 5 ROMC     $2C000 – $2CFFF      $C000 – $CFFF   N
   /// 6 CROM9    $29000 – $29FFF      $D000 – $DFFF   N
   /// 7 ROME     $3E000 – $3FFFF      $E000 – $FFFF   N
-  char CONTROLA;
+  uint8_t controla;
   /// $D031 VIC-III Control Register B
   /// BIT
   /// 0    INT   Enable VIC-III interlaced mode
@@ -129,55 +99,55 @@ struct MOS4569_VICIII {
   /// 5    ATTR  Enable extended attributes and 8 bit colour entries
   /// 6    FAST  Enable C65 FAST mode (3 .5MHz)
   /// 7    H640  Enable C64 640 horizontal pixels / 80 column mode
-  char CONTROLB;
-  char UNUSED;
+  uint8_t controlb;
+  uint8_t unused;
   /// $D033  Bitplane 0 Address
   /// 1-3    B0ADEVN    Bitplane 0 address, even lines
   /// 5-7    B0ADODD    Bitplane 0 address, odd lines
-  char B0_ADDR;
+  uint8_t b0_addr;
   /// $D034  Bitplane 1 Address
-  char B1_ADDR;
+  uint8_t b1_addr;
   /// $D035  Bitplane 2 Address
-  char B2_ADDR;
+  uint8_t b2_addr;
   /// $D036  Bitplane 3 Address
-  char B3_ADDR;
+  uint8_t b3_addr;
   /// $D037  Bitplane 4 Address
-  char B4_ADDR;
+  uint8_t b4_addr;
   /// $D038  Bitplane 5 Address
-  char B5_ADDR;
+  uint8_t b5_addr;
   /// $D039  Bitplane 6 Address
-  char B6_ADDR;
+  uint8_t b6_addr;
   /// $D03A  Bitplane 7 Address
-  char B7_ADDR;
+  uint8_t b7_addr;
   /// $D03B  Complement bitplane flags
-  char BPCOMP;
+  uint8_t bpcomp;
   /// $D03C  Bitplane X
-  char BPX;
+  uint8_t bpx;
   /// $D03D  Bitplane Y
-  char BPY;
+  uint8_t bpy;
   /// $D03E  Bitplane X Offset
-  char HPOS;
+  uint8_t hpos;
   /// $D03F  Bitplane Y Offset
-  char VPOS;
+  uint8_t vpos;
   /// $D040  Display Address Translater (DAT) Bitplane 0 port
-  char B0PIX;
+  uint8_t b0pix;
   /// $D041  Display Address Translater (DAT) Bitplane 1 port
-  char B1PIX;
+  uint8_t b1pix;
   /// $D042  Display Address Translater (DAT) Bitplane 2 port
-  char B2PIX;
+  uint8_t b2pix;
   /// $D043  Display Address Translater (DAT) Bitplane 3 port
-  char B3PIX;
+  uint8_t b3pix;
   /// $D044  Display Address Translater (DAT) Bitplane 4 port
-  char B4PIX;
+  uint8_t b4pix;
   /// $D045  Display Address Translater (DAT) Bitplane 5 port
-  char B5PIX;
+  uint8_t b5pix;
   /// $D046  Display Address Translater (DAT) Bitplane 6 port
-  char B6PIX;
+  uint8_t b6pix;
   /// $D047  Display Address Translater (DAT) Bitplane 7 port
-  char B7PIX;
+  uint8_t b7pix;
 };
 
 #ifdef __cplusplus
 }
 #endif
-#endif // _MOS4569_H
+#endif // _VIC3_H

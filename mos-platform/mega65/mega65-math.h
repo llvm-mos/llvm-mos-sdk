@@ -3,32 +3,6 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-// Originally from KickC. Modified from original version.
-
-/*
- * MIT License
- *
- * Copyright (c) 2017 Jesper Gravgaard
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 #ifndef _MEGA65_MATH_H
 #define _MEGA65_MATH_H
 
@@ -41,63 +15,62 @@ extern "C" {
 /// @file
 /// MEGA65 CPU MATHS ACCELERATION REGISTERS
 ///
-/// Every MEGA65 contains a combined 32-bit hardware multiplier and divider.
-/// This device takes two 32-bit inputs, MULTINA and MULTINB, and simultaneously
-/// calculates: • the 64-bit product of MULTINA and MULTINB • the 32-bit whole
+/// MEGA65 contains a combined 32-bit hardware multiplier and divider.
+/// It takes two 32-bit inputs, MULTINA and MULTINB, and simultaneously
+/// calculates:
+/// 1. the 64-bit product of MULTINA and MULTINB
+/// 2. 32-bit whole
 /// part of MULTINA / MULTINB • the 32-bit fractional part of MULTINA / MULTINB
-/// It is always updating the outputs based on the inputs, so there is no need
+/// It is always updating the outputs based on the inputs, so there's no need
 /// to take special action when changing the inputs. The multiplier takes 1
 /// cycle to calculate, and the updated result will thus be available
 /// immediately. The hardware divider, however, can take up to 16 cycles
-/// depending on the particular inputs. Thus programmers should insert a short
-/// delay after changing the inputs before reading the output. As this delay is
-/// so short, it can be implemented by simply reading the first byte of the
-/// result four times consecutively, as the 4th read will occur after the result
-/// has settled.
+/// depending on inputs.
 
-/// $D70F MATH BUSY
-/// Bit 7: DIVBUSY
-/// Bit 6: MULBUSY
-#define MATH_BUSY (*(volatile char *)0xd70f)
-
-/// $D768-$D76F DIVOUT 64-bit output of MULTINA ÷ MULTINB
-/// $D768-$D76B DIVOUT FRAC 32-bit output of MULTINA ÷ MULTINB
-#define MATH_DIVOUT_FRAC_CHAR0 (*(volatile signed char *)0xd768)
-#define MATH_DIVOUT_FRAC_CHAR1 (*(volatile signed char *)0xd769)
-#define MATH_DIVOUT_FRAC_CHAR2 (*(volatile signed char *)0xd76a)
-#define MATH_DIVOUT_FRAC_CHAR3 (*(volatile signed char *)0xd76b)
-#define MATH_DIVOUT_FRAC_INT0 (*(volatile int16_t *)0xd768)
-#define MATH_DIVOUT_FRAC_INT1 (*(volatile int16_t *)0xd76a)
-#define MATH_DIVOUT_FRAC_LONG0 (*(volatile int32_t *)0xd768)
-/// $D768-$D76F DIVOUT 64-bit output of MULTINA ÷ MULTINB
-#define MATH_DIVOUT_WHOLE_CHAR0 (*(volatile signed char *)0xd76c)
-#define MATH_DIVOUT_WHOLE_INT0 (*(volatile int16_t *)0xd76c)
-#define MATH_DIVOUT_WHOLE_INT1 (*(volatile int16_t *)0xd76e)
-#define MATH_DIVOUT_WHOLE_LONG (*(volatile int32_t *)0xd76c)
-
-/// $D770-$D773 MULTINA Multiplier input A / Divider numerator (32 bit)
-#define MATH_MULTINA_CHAR0 (*(volatile signed char *)0xd770)
-#define MATH_MULTINA_CHAR1 (*(volatile signed char *)0xd771)
-#define MATH_MULTINA_CHAR2 (*(volatile signed char *)0xd772)
-#define MATH_MULTINA_CHAR3 (*(volatile signed char *)0xd773)
-#define MATH_MULTINA_INT0 (*(volatile int16_t *)0xd770)
-#define MATH_MULTINA_INT1 (*(volatile int16_t *)0xd772)
-#define MATH_MULTINA_LONG (*(volatile int32_t *)0xd770)
-
-/// $D774-$D777 MULTINB Multiplier input B / Divider denominator (32 bit)
-#define MATH_MULTINB_CHAR0 (*(volatile signed char *)0xd774)
-#define MATH_MULTINB_CHAR1 (*(volatile signed char *)0xd775)
-#define MATH_MULTINB_CHAR2 (*(volatile signed char *)0xd776)
-#define MATH_MULTINB_CHAR3 (*(volatile signed char *)0xd777)
-#define MATH_MULTINB_INT0 (*(volatile int16_t *)0xd774)
-#define MATH_MULTINB_INT1 (*(volatile int16_t *)0xd776)
-#define MATH_MULTINB_LONG (*(volatile int32_t *)0xd774)
-
-/// $D778-$D77F MULTOUT 64-bit output of MULTINA × MULTINB
-#define MATH_MULTOUT_CHAR0 (*(volatile signed char *)0xd778)
-#define MATH_MULTOUT_INT0 (*(volatile int16_t *)0xd778)
-#define MATH_MULTOUT_LONG0 (*(volatile int32_t *)0xd778)
-#define MATH_MULTOUT_LONG1 (*(volatile int32_t *)0xd77c)
+struct cpu_math {
+  /// 0xD768: Fractional part of MULTINA / MULTINB
+  uint32_t divout_fract;
+  /// 0xD76C: Whole part of MULTINA / MULTINB
+  uint32_t divout_whole;
+  /// 0xD770: 32-bit Multiplier input A
+  uint32_t multina;
+  /// 0xD774: 32-bit Multiplier input B
+  uint32_t multinb;
+  /// 0xD778: 64-but product of MULTINA and MULTINB
+  uint64_t multout;
+  /// 0xD780: 32-bit programmable input
+  uint32_t mathin0;
+  /// 0xD784: 32-bit programmable input
+  uint32_t mathin1;
+  /// 0xD788: 32-bit programmable input
+  uint32_t mathin2;
+  /// 0xD78C: 32-bit programmable input
+  uint32_t mathin3;
+  /// 0xD790: 32-bit programmable input
+  uint32_t mathin4;
+  /// 0xD794: 32-bit programmable input
+  uint32_t mathin5;
+  /// 0xD798: 32-bit programmable input
+  uint32_t mathin6;
+  /// 0xD79C: 32-bit programmable input
+  uint32_t mathin7;
+  /// 0xD7A0: 32-bit programmable input
+  uint32_t mathin8;
+  /// 0xD7A4: 32-bit programmable input
+  uint32_t mathin9;
+  /// 0xD7A8: 32-bit programmable input
+  uint32_t mathinA;
+  /// 0xD7AC: 32-bit programmable input
+  uint32_t mathinB;
+  /// 0xD7B0: 32-bit programmable input
+  uint32_t mathinC;
+  /// 0xD7B4: 32-bit programmable input
+  uint32_t mathinD;
+  /// 0xD7B8: 32-bit programmable input
+  uint32_t mathinE;
+  /// 0xD7BC: 32-bit programmable input
+  uint32_t mathinF;
+}
 
 #ifdef __cplusplus
 }

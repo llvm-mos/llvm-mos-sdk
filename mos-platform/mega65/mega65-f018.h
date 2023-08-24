@@ -35,6 +35,8 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
+
 /// @file
 /// MEGA65 DMA
 ///
@@ -53,50 +55,50 @@ extern "C" {
 /// https://github.com/lgblgblgb/xemu/blob/master/xemu/f018_core.c
 
 /// Registers of the MEGA65 enchanced F018 DMAgic Controller
-struct F018_DMAGIC {
+struct dma_controller {
   /// $D700 ADDRLSBTRIG DMAgic DMA list address LSB, and trigger DMA (when
   /// written). We also clear out the upper address bits in case an enhanced job
   /// had set them.
-  char ADDRLSBTRIG;
+  uint8_t addrlsbtrig;
   /// $D701 ADDRMSB DMA list address high byte (address bits 8 -- 15).
-  char ADDRMSB;
+  uint8_t addrmsb;
   /// $D702 ADDRBANK DMA list address bank (address bits 16 -- 22). Writing
   /// clears $D704.
-  char ADDRBANK;
+  uint8_t addrbank;
   /// $D703 EN018B DMA enable F018B mode (adds sub-command byte )
   /// bit 0 enable F018B mode.
-  char EN018B;
+  uint8_t en018b;
   /// $D704 ADDRMB DMA list address mega-byte
-  char ADDRMB;
+  uint8_t addrmb;
   /// $D705 ETRIG Set low-order byte of DMA list address, and trigger Enhanced
   /// DMA job Works like $D700, but enables DMA option lists.
-  char ETRIG;
+  uint8_t etrig;
   /// $D706-$D70D Unused
-  char UNUSED1[8];
+  uint8_t unused1[8];
   /// $D70E ADDRLSB DMA list address low byte (address bits 0 -- 7) WITHOUT
   /// STARTING A DMA JOB (used by Hypervisor for unfreezing DMA-using tasks)
-  char ADDRLSB;
+  uint8_t addrlsb;
   /// $D70F Unused
-  char UNUSED2;
+  uint8_t unused2;
   /// $D710 MISC (non-DMA) options
   /// $D710.0 - MISC:BADLEN Enable badline emulation
   /// $D710.1 - MISC:SLIEN Enable 6502-style slow (7 cycle) interrupts
   /// $D710.2 - MISC:VDCSEN Enable VDC interface simulation
-  char MISC;
+  uint8_t misc;
 };
 
 /// F018A DMA list entry
-struct DMA_LIST_F018A {
+struct dma_list_f018a {
   /// DMA command
   /// 0-1 command (00: copy, 01: mix (unsupported) 10: swap (unsupported) 11:
   /// fill )
   ///   2 chain
   ///   3 allow interrupt (unsupported)
-  char command;
+  uint8_t command;
   /// Count of bytes to copy/fill
-  unsigned int count;
+  size_t count;
   /// Source address (low byte is used as data for command fill)
-  char *src;
+  uint8_t *src;
   /// Source address bank
   /// bits
   ///    7 src I/O
@@ -104,9 +106,9 @@ struct DMA_LIST_F018A {
   ///    5 src modulo
   ///    4 src hold
   ///  0-3 address bank (which 64k bank is the address in)
-  char src_bank;
+  uint8_t src_bank;
   /// Destination address
-  char *dest;
+  uint8_t *dest;
   /// Destination address bank
   /// bits
   ///    7 dest I/O
@@ -114,13 +116,13 @@ struct DMA_LIST_F018A {
   ///    5 dest modulo
   ///    4 dest hold
   ///  0-3 address bank (which 64k bank is the address in)
-  char dest_bank;
+  uint8_t dest_bank;
   /// Modulo value (unused)
-  unsigned int modulo;
+  uint16_t modulo;
 };
 
 /// F018B DMA list entry
-struct DMA_LIST_F018B {
+struct dma_list_f018b {
   /// DMA command (format F018B)
   /// bits
   /// 0-1 command (00: copy, 01: mix (unsupported) 10: swap (unsupported) 11:
@@ -129,32 +131,32 @@ struct DMA_LIST_F018B {
   ///   3 allow interrupt (unsupported)
   ///   4 src direction
   ///   5 dest direction
-  char command;
+  uint8_t command;
   /// Count of bytes to copy/fill
-  unsigned int count;
+  size_t count;
   /// Source address (low byte is used as data for command fill)
-  char *src;
+  uint8_t *src;
   /// Source address bank
   /// bits
   ///    7 src I/O
   ///  0-6 dest address bank (which 64k bank is the address in)
-  char src_bank;
+  uint8_t src_bank;
   /// Destination address
-  char *dest;
+  uint8_t *dest;
   /// Destination address bank
   /// bits
   ///    7 dest I/O
   ///  0-6 dest address bank (which 64k bank is the address in)
-  char dest_bank;
+  uint8_t dest_bank;
   /// Sub-command
   /// bits
   ///   0 src modulo (unsupported)
   ///   1 src hold
   ///   2 dest modulo (unsupported)
   ///   3 dest hold
-  char sub_command;
+  uint8_t sub_command;
   /// Modulo value (unused)
-  unsigned int modulo;
+  uin16_t modulo;
 };
 
 /// DMA command copy

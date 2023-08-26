@@ -3,7 +3,8 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-// Originally from KickC. Modified from original version.
+// Partially sourced from KickC and modified from original version;
+// original license follows:
 
 /*
  * MIT License
@@ -31,26 +32,57 @@
 #ifndef _MEGA65_H
 #define _MEGA65_H
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <stdint.h>
-
-/// @file
-/// MEGA65 Registers and Constants
-#ifndef __MEGA65__
-#error This module may only be used when compiling for the C64!
-#endif
 #include <_6526.h>
 #include <_sid.h>
-#include <_vic.h>
+#include <_vic2.h>
 #include <_vic3.h>
 #include <_vic4.h>
-#include <mega65-f018.h>
-#include <mega65-hypervisor.h>
-#include <mega65-math.h>
-#include <stdint.h>
+
+struct __hypervisor {
+  uint8_t htrap[64];
+};
+
+/// Registers for the MEGA65 math accelerator
+struct __cpu_math {
+  union {
+    struct {
+      uint32_t divout_fract; //!< Fractional part of MULTINA / MULTINB (0xD768)
+      uint32_t divout_whole; //!< Whole part of MULTINA / MULTINB (0xD76C)
+    };
+#ifndef __CC65__
+    uint64_t divout; //!< 64-bit result of MULTINA / MULTINB (0xD768)
+#endif
+  };
+  /// 32-bit Multiplier input A (0xD770)
+  uint32_t multina;
+  /// 32-bit Multiplier input B (0xD774)
+  uint32_t multinb;
+  /// 64-but product of MULTINA and MULTINB (0xD778)
+#ifdef __CC65__
+  uint32_t multout_lsb;
+  uint32_t multout_msb;
+#else
+  uint64_t multout;
+#endif
+  /// 32-bit programmable input (0xD780)
+  uint32_t mathin[16];
+};
+#ifdef __cplusplus
+static_assert(sizeof(__cpu_math) == 88);
+#endif
+
+/// RGB color palette
+struct __color_palette {
+  uint8_t red[256];
+  uint8_t green[256];
+  uint8_t blue[256];
+};
 
 /// I/O Personality selection
 #define IO_KEY (*(volatile uint8_t *)0xd02f)
@@ -58,7 +90,6 @@ extern "C" {
 #define IO_BANK (*(volatile uint8_t *)0xd030)
 /// Map 2nd KB of colour RAM $DC00-$DFFF (hiding CIA's)
 #define CRAM2K 0b00000001
-
 /// Processor port data direction register
 #define PROCPORT_DDR (*(volatile uint8_t *)0x00)
 /// Mask for PROCESSOR_PORT_DDR which allows only memory configuration to be
@@ -76,21 +107,14 @@ extern "C" {
 #define PROCPORT_KERNEL_IO 0b00000110
 /// BASIC in 0xA000, I/O in 0xD000, KERNEL in 0xE000
 #define PROCPORT_BASIC_KERNEL_IO 0b00000111
-
 /// The VIC-II MOS 6567/6569
 #define VICII (*(volatile struct __vic2 *)0xd000)
-/// The VIC III MOS 4567/4569
-#define VICIII (*(volatile struct __vic3 *)0xd020)
 /// The VIC IV
-#define VICIV (*(volatile struct __vic3 *)0xd020)
+#define VICIV (*(volatile struct __vic4 *)0xd000)
 /// The address of the CHARGEN character set
 #define CHARGEN (*(volatile uint8_t *)0xd000)
-/// Palette RED
-#define PALETTE_RED (*(volatile uint8_t *)0xd100)
-/// Palette GREEN
-#define PALETTE_GREEN (*(volatile uint8_t *)0xd200)
-/// Palette BLUE
-#define PALETTE_BLUE (*(volatile uint8_t *)0xd300)
+/// Color palette
+#define PALETTE (*(volatile struct __color_palette *)0xd100)
 /// SID MOS 6581/8580
 #define SID1 (*(volatile struct __sid *)0xd400)
 /// SID MOS 6581/8580
@@ -101,22 +125,16 @@ extern "C" {
 #define SID4 (*(volatile struct __sid *)0xd460)
 /// SID select mode (0=6581, 1=8580)
 #define SIDMODE (*(volatile uint8_t *)0xd63c)
-/// DMAgic F018 Controller
-#define DMA (*(volatile struct F018_DMAGIC *)0xd700)
+/// Hypervisor traps
+#define HYPERVISOR (*(volatile struct __hypervisor *)0xd640)
 /// Math busy flag
 #define MATHBUSY (*(volatile uint8_t *)0xd70f)
 /// Math accelerator
-#define MATH (*(volatile struct cpu_math *)0xd768)
+#define MATH (*(volatile struct __cpu_math *)0xd768)
 /// Color Ram
 #define COLORRAM (*(volatile uint8_t *)0xd800)
-
 /// Default address of screen character matrix
-#ifdef __MEGA65_C64__
-#define DEFAULT_SCREEN (*(volatile uint8_t *)0x0400)
-#else
 #define DEFAULT_SCREEN (*(volatile uint8_t *)0x0800)
-#endif
-
 /// The CIA#1: keyboard matrix, joystick #1/#2
 #define CIA1 (*(volatile struct __6526 *)0xdc00)
 /// The CIA#2: Serial bus, RS-232, VIC memory bank
@@ -130,7 +148,6 @@ extern "C" {
 
 /// Pointer to interrupt function
 typedef void (*IRQ_TYPE)(void);
-
 /// The vector used when the KERNAL serves IRQ interrupts
 #define KERNEL_IRQ (*(volatile IRQ_TYPE *)0x0314)
 /// The vector used when the KERNAL serves NMI interrupts
@@ -138,23 +155,23 @@ typedef void (*IRQ_TYPE)(void);
 /// The vector used when the HARDWARE serves IRQ interrupts
 #define HARDWARE_IRQ (*(volatile IRQ_TYPE *)0xfffe)
 
-/// The colors of the C64
-#define BLACK 0x0
-#define WHITE 0x1
-#define RED 0x2
-#define CYAN 0x3
-#define PURPLE 0x4
-#define GREEN 0x5
-#define BLUE 0x6
-#define YELLOW 0x7
-#define ORANGE 0x8
-#define BROWN 0x9
-#define PINK 0xa
-#define DARK_GREY 0xb
-#define GREY 0xc
-#define LIGHT_GREEN 0xd
-#define LIGHT_BLUE 0xe
-#define LIGHT_GREY 0xf
+// C64 colors
+#define COLOR_BLACK 0x00
+#define COLOR_WHITE 0x01
+#define COLOR_RED 0x02
+#define COLOR_CYAN 0x03
+#define COLOR_PURPLE 0x04
+#define COLOR_GREEN 0x05
+#define COLOR_BLUE 0x06
+#define COLOR_YELLOW 0x07
+#define COLOR_ORANGE 0x08
+#define COLOR_BROWN 0x09
+#define COLOR_LIGHTRED 0x0A
+#define COLOR_GRAY1 0x0B
+#define COLOR_GRAY2 0x0C
+#define COLOR_LIGHTGREEN 0x0D
+#define COLOR_LIGHTBLUE 0x0E
+#define COLOR_GRAY3 0x0F
 
 #ifdef __cplusplus
 }

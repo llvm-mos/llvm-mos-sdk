@@ -37,9 +37,9 @@ public:
 };
 
 /// Sets MEGA65 speed to 3.5 Mhz
-inline void speed_mode3() {
-  VICIV.CONTROLB |= VICIV_FAST;
-  VICIV.CONTROLC &= ~VICIV_VFAST;
+void speed_mode3() {
+  VICIV.controlb |= VIC3_FAST_MASK;
+  VICIV.controlc &= ~VIC4_VFAST_MASK;
 }
 
 // Cyclic sine lookup table
@@ -105,9 +105,7 @@ public:
   /// Generate and activate charset at given address
   Plasma(const uint16_t charset_address, RandomXORS &rng) {
     make_charset(charset_address, rng);
-    VICIV.CHARPTR_LOLO = charset_address & 0xffUL;
-    VICIV.CHARPTR_LOHI = (charset_address & 0xff00UL) >> 8;
-    VICIV.CHARPTR_HILO = (charset_address & 0xff0000UL) >> 16;
+    VICIV.charptr = charset_address;
   }
 
   /// Draw next frame

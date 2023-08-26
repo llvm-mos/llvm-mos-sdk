@@ -7,9 +7,6 @@ install(FILES
     _vic3.h
     _vic4.h
     mega65.h
-    mega65-f018.h
-    mega65-hypervisor.h
-    mega65-math.h
 TYPE INCLUDE)
 
 install(FILES link.ld TYPE LIB)

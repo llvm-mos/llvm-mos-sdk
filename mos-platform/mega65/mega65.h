@@ -3,6 +3,30 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
+/*
+MIT License
+
+Copyright (c) 2023 The MEGA65 Community
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #ifndef _MEGA65_H
 #define _MEGA65_H
 
@@ -12,6 +36,7 @@
 extern "C" {
 #endif
 
+#include <_45E100.h>
 #include <_6526.h>
 #include <_sid.h>
 #include <_vic2.h>
@@ -119,43 +144,6 @@ struct __color_palette {
   uint8_t red[256];   //!< Red palette values (reversed nybl order)
   uint8_t green[256]; //!< Green palette values (reversed nybl order)
   uint8_t blue[256];  //!< Blue palette values (reversed nybl order)
-};
-
-/// 45E100 Fast Ethernet controller
-///
-/// Enabled by writing 0x53 and then 0x47 to VIC-IV register 0xD02F
-struct __45E100 {
-  uint8_t ctrl1; //!< Control register 1 (offset 0x00)
-  uint8_t ctrl2; //!< Control register 2 (offset 0x01)
-  union {
-    uint16_t txsz; //!< X Packet size (offset 0x02)
-    struct {
-      uint8_t txsz_lsb; //!< X Packet size (low byte) (offset 0x02)
-      uint8_t txsz_msb; //!< X Packet size (high byte) (offset 0x03)
-    };
-  };
-  uint8_t command; //!< Write-only command register (offset 0x04)
-  uint8_t ctrl3;   //!< Control register 3 (offset 0x05)
-  /// MIIM PHY number (use 0 for Nexys4, 1 for MEGA65 r1 PCBs)
-  /// and MIIM register number (offset 0x06)
-  uint8_t miim_phy_reg;
-  uint16_t miimv;     //!< MIIM register value (offset 0x07)
-  uint8_t macaddr[6]; //!< MAC address (offset 0x09)
-};
-#ifdef __cplusplus
-static_assert(sizeof(struct __45E100) == 15);
-#endif
-
-/// 45E100 Fast Ethernet controller commands
-enum {
-  ETHERNET_STOPTX = 0,
-  ETHERNET_STARTTX = 1,
-  ETHERNET_RXNORMAL = 208,
-  ETHERNET_DEBUGVIC = 212,
-  ETHERNET_DEBUGCPU = 220,
-  ETHERNET_RXONLYONE = 222,
-  ETHERNET_FRAME1K = 241,
-  ETHERNET_FRAME2K = 242
 };
 
 /// 6510/45GS10 CPU port DDR

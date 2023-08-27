@@ -1,9 +1,8 @@
 #include <mega65.h>
-#include <stdbool.h>
 
 int main(void) {
   VICIV.screencol = COLOR_LIGHTBLUE;
-  while (true) {
+  while (1) {
     VICIV.bordercol++;
   }
   return 0;

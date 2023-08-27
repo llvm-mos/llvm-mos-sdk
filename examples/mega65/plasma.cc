@@ -4,22 +4,44 @@
 // information.
 
 /*
+MIT License
+
+Copyright (c) 2023 The MEGA65 Community
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+/*
  * Simplistic character-mode plasma effect
  *
- * Sourced from cc65/samples/cbm
+ * Inspired by cc65/samples/cbm
  * - 2001 by groepaz
- * - Cleanup and porting by Ullrich von Bassewitz.
+ * - Cleanup and porting by Ullrich von Bassewitz
  * - 2023 Mega65/LLVM-MOS C++ adaptation (Wombat)
- *   Clang's `#pragma unroll` gives a significant speedup when -Os
  */
 
 #include <array>
 #include <cstdint>
 #include <mega65.h>
 
-/**
- * @brief Simple pseudo-random number generator
- *
+/*
+ * Simple pseudo-random number generator
  * See https://en.wikipedia.org/wiki/Xorshift
  */
 class RandomXORS {
@@ -36,13 +58,17 @@ public:
   }
 };
 
-/// Sets MEGA65 speed to 3.5 Mhz
+/*
+ * Sets MEGA65 speed to 3.5 Mhz
+ */
 void speed_mode3() {
   VICIV.ctrlb |= VIC3_FAST_MASK;
   VICIV.ctrlc &= ~VIC4_VFAST_MASK;
 }
 
-// Cyclic sine lookup table
+/*
+ * Cyclic sine lookup table
+ */
 constexpr uint8_t sine_table[UINT8_MAX + 1] = {
     0x80, 0x7d, 0x7a, 0x77, 0x74, 0x70, 0x6d, 0x6a, 0x67, 0x64, 0x61, 0x5e,
     0x5b, 0x58, 0x55, 0x52, 0x4f, 0x4d, 0x4a, 0x47, 0x44, 0x41, 0x3f, 0x3c,
@@ -67,9 +93,13 @@ constexpr uint8_t sine_table[UINT8_MAX + 1] = {
     0xb1, 0xae, 0xab, 0xa8, 0xa5, 0xa2, 0x9f, 0x9c, 0x99, 0x96, 0x93, 0x90,
     0x8c, 0x89, 0x86, 0x83};
 
-/// Generate charset with 8 * 256 characters at given address
+/*
+ * Generate charset with 8 * 256 characters at given address
+ */
 void make_charset(uint16_t charset_address, RandomXORS &rng) {
-  // Lambda function to generate a single 8x8 pixels pattern
+  /*
+   * Lambda function to generate a single 8x8 pixels pattern
+   */
   auto make_char = [&](const uint8_t sine) {
     uint8_t pattern = 0;
     constexpr uint8_t bits[8] = {1, 2, 4, 8, 16, 32, 64, 128};
@@ -89,8 +119,8 @@ void make_charset(uint16_t charset_address, RandomXORS &rng) {
   }
 }
 
-/**
- * @brief Plasma effect class
+/*
+ * Plasma class
  */
 template <size_t COLS, size_t ROWS> class Plasma {
 private:
@@ -102,13 +132,17 @@ private:
   uint8_t y_cnt2 = 0;
 
 public:
-  /// Generate and activate charset at given address
+  /*
+   * Generate and activate charset at given address
+   */
   Plasma(const uint16_t charset_address, RandomXORS &rng) {
     make_charset(charset_address, rng);
     VICIV.charptr = charset_address;
   }
 
-  /// Draw next frame
+  /*
+   * Draw frame
+   */
   inline void update() {
     auto i = y_cnt1;
     auto j = y_cnt2;
@@ -132,13 +166,15 @@ public:
     write_to_screen();
   }
 
-  // Write summed buffers to screen memory
+  /*
+   * Write summed buffers to screen memory
+   */
   inline void write_to_screen() const {
-    auto screen = reinterpret_cast<volatile uint8_t *>(&DEFAULT_SCREEN);
+    auto screen_ptr = reinterpret_cast<volatile uint8_t *>(&DEFAULT_SCREEN);
     for (const auto y : ydata) {
 #pragma unroll
       for (const auto x : xdata) {
-        *(screen++) = y + x;
+        *(screen_ptr++) = y + x;
       }
     }
   }

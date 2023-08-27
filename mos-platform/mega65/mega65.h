@@ -3,32 +3,6 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-// Partially sourced from KickC and modified from original version;
-// original license follows:
-
-/*
- * MIT License
- *
- * Copyright (c) 2017 Jesper Gravgaard
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 #ifndef _MEGA65_H
 #define _MEGA65_H
 
@@ -44,9 +18,69 @@ extern "C" {
 #include <_vic3.h>
 #include <_vic4.h>
 
+/// Hypervisor registers (0xD640-0xD67F)
 struct __hypervisor {
-  uint8_t htrap[64];
+  union {
+    uint8_t htrap[64];
+    struct {
+      /// Hypervisor A register storage
+      uint8_t rega; // 0xD640
+      /// Hypervisor X register storage
+      uint8_t regx;    // 0xD641
+      uint8_t unused1; // 0xD642
+      /// Hypervisor Z register storage
+      uint8_t regz; // 0xD643
+      /// Hypervisor B register storage
+      uint8_t regb; // 0xD644
+      /// Hypervisor SPL register storage
+      uint8_t spl; // 0xD645
+      /// Hypervisor SPH register storage
+      uint8_t sph; // 0xD646
+      /// Hypervisor P register storage
+      uint8_t pflags; // 0xD647
+      /// Hypervisor PC-low register storage
+      uint8_t pcl; // 0xD648
+      /// Hypervisor PC-high register storage
+      uint8_t pch;     // 0xD649
+      uint8_t maplo1;  // 0xD64A
+      uint8_t maplo2;  // 0xD64B
+      uint8_t maphi1;  // 0xD64C
+      uint8_t maphi2;  // 0xD64D
+      uint8_t maplomb; // 0xD64E
+      uint8_t maphimb; // 0xD64F
+      /// Hypervisor CPU port $00 value
+      uint8_t port00; // 0xD650
+      /// Hypervisor CPU port $01 value
+      uint8_t port01;     // 0xD651
+      uint8_t vicmode;    // 0xD652
+      uint8_t dma_src_mb; // 0xD653
+      /// Hypervisor DMAgic destination MB
+      uint8_t dma_dst_hb; // 0xD654
+      /// Hypervisor DMAGic list address
+      uint32_t dmaladdr;   // 0xD655
+      uint8_t vflop;       // 0xD659
+      uint8_t unused2[22]; // 0xD65A
+      /// Hypervisor GeoRAM base address (x MB)
+      uint8_t georambase; // 0xD670
+      /// Hypervisor GeoRAM address mask (applied to GeoRAM block register)
+      uint8_t georammask; // 0xD671
+      /// Enable composited Matrix Mode, and disable UART access to serial
+      /// monitor.
+      uint8_t matrixen;   // 0xD672
+      uint8_t unused3[9]; // 0xD673
+      /// Hypervisor write serial output to UART monitor
+      uint8_t uartdata; // 0xD67C
+      uint8_t watchdog; // 0xD67D
+      /// Hypervisor already-upgraded bit (writing sets permanently)
+      uint8_t hicked; // 0xD67E
+      /// Writing trigger return from hypervisor
+      uint8_t enterexit; // 0xD67F
+    };
+  };
 };
+#ifdef __cplusplus
+static_assert(sizeof(struct __hypervisor) == 64);
+#endif
 
 /// Registers for the MEGA65 math accelerator
 struct __cpu_math {
@@ -64,12 +98,15 @@ struct __cpu_math {
   /// 32-bit Multiplier input B (0xD774)
   uint32_t multinb;
   /// 64-but product of MULTINA and MULTINB (0xD778)
-#ifdef __CC65__
-  uint32_t multout_lsb;
-  uint32_t multout_msb;
-#else
-  uint64_t multout;
+  union {
+    struct {
+      uint32_t multout_lsb;
+      uint32_t multout_msb;
+    };
+#ifndef __CC65__
+    uint64_t multout;
 #endif
+  };
   /// 32-bit programmable input (0xD780)
   uint32_t mathin[16];
 };
@@ -79,40 +116,58 @@ static_assert(sizeof(__cpu_math) == 88);
 
 /// RGB color palette
 struct __color_palette {
-  uint8_t red[256];
-  uint8_t green[256];
-  uint8_t blue[256];
+  uint8_t red[256];   //!< Red palette values (reversed nybl order)
+  uint8_t green[256]; //!< Green palette values (reversed nybl order)
+  uint8_t blue[256];  //!< Blue palette values (reversed nybl order)
 };
 
-/// I/O Personality selection
-#define IO_KEY (*(volatile uint8_t *)0xd02f)
-/// C65 Banking Register
-#define IO_BANK (*(volatile uint8_t *)0xd030)
-/// Map 2nd KB of colour RAM $DC00-$DFFF (hiding CIA's)
-#define CRAM2K 0b00000001
-/// Processor port data direction register
-#define PROCPORT_DDR (*(volatile uint8_t *)0x00)
-/// Mask for PROCESSOR_PORT_DDR which allows only memory configuration to be
-/// written
-#define PROCPORT_DDR_MEMORY_MASK 0b00000111
-/// Processor Port Register controlling RAM/ROM configuration and the datasette
-#define PROCPORT (*(volatile uint8_t *)0x01)
-/// RAM in all three areas 0xA000, 0xD000, 0xE000
-#define PROCPORT_RAM_ALL 0b00000000
-/// RAM in 0xA000, 0xE000 I/O in 0xD000
-#define PROCPORT_RAM_IO 0b00000101
-/// RAM in 0xA000, 0xE000 CHAR ROM in 0xD000
-#define PROCPORT_RAM_CHARROM 0b00000001
-/// RAM in 0xA000, I/O in 0xD000, KERNEL in 0xE000
-#define PROCPORT_KERNEL_IO 0b00000110
-/// BASIC in 0xA000, I/O in 0xD000, KERNEL in 0xE000
-#define PROCPORT_BASIC_KERNEL_IO 0b00000111
-/// The VIC-II MOS 6567/6569
+/// 45E100 Fast Ethernet controller
+///
+/// Enabled by writing 0x53 and then 0x47 to VIC-IV register 0xD02F
+struct __45E100 {
+  uint8_t ctrl1; //!< Control register 1 (offset 0x00)
+  uint8_t ctrl2; //!< Control register 2 (offset 0x01)
+  union {
+    uint16_t txsz; //!< X Packet size (offset 0x02)
+    struct {
+      uint8_t txsz_lsb; //!< X Packet size (low byte) (offset 0x02)
+      uint8_t txsz_msb; //!< X Packet size (high byte) (offset 0x03)
+    };
+  };
+  uint8_t command; //!< Write-only command register (offset 0x04)
+  uint8_t ctrl3;   //!< Control register 3 (offset 0x05)
+  /// MIIM PHY number (use 0 for Nexys4, 1 for MEGA65 r1 PCBs)
+  /// and MIIM register number (offset 0x06)
+  uint8_t miim_phy_reg;
+  uint16_t miimv;     //!< MIIM register value (offset 0x07)
+  uint8_t macaddr[6]; //!< MAC address (offset 0x09)
+};
+#ifdef __cplusplus
+static_assert(sizeof(struct __45E100) == 15);
+#endif
+
+/// 45E100 Fast Ethernet controller commands
+enum {
+  ETHERNET_STOPTX = 0,
+  ETHERNET_STARTTX = 1,
+  ETHERNET_RXNORMAL = 208,
+  ETHERNET_DEBUGVIC = 212,
+  ETHERNET_DEBUGCPU = 220,
+  ETHERNET_RXONLYONE = 222,
+  ETHERNET_FRAME1K = 241,
+  ETHERNET_FRAME2K = 242
+};
+
+/// 6510/45GS10 CPU port DDR
+#define CPU_PORTDDR (*(volatile uint8_t *)0x0000)
+/// 6510/45GS10 CPU port data
+#define CPU_PORT (*(volatile uint8_t *)0x0001)
+/// Default address of screen character matrix
+#define DEFAULT_SCREEN (*(volatile uint8_t *)0x0800)
+/// The VIC-II
 #define VICII (*(volatile struct __vic2 *)0xd000)
 /// The VIC IV
 #define VICIV (*(volatile struct __vic4 *)0xd000)
-/// The address of the CHARGEN character set
-#define CHARGEN (*(volatile uint8_t *)0xd000)
 /// Color palette
 #define PALETTE (*(volatile struct __color_palette *)0xd100)
 /// SID MOS 6581/8580
@@ -127,33 +182,16 @@ struct __color_palette {
 #define SIDMODE (*(volatile uint8_t *)0xd63c)
 /// Hypervisor traps
 #define HYPERVISOR (*(volatile struct __hypervisor *)0xd640)
+/// Ethernet controller
+#define ETHERNET (*(volatile struct __45E100 *)0xd6e0)
 /// Math busy flag
 #define MATHBUSY (*(volatile uint8_t *)0xd70f)
 /// Math accelerator
 #define MATH (*(volatile struct __cpu_math *)0xd768)
-/// Color Ram
-#define COLORRAM (*(volatile uint8_t *)0xd800)
-/// Default address of screen character matrix
-#define DEFAULT_SCREEN (*(volatile uint8_t *)0x0800)
-/// The CIA#1: keyboard matrix, joystick #1/#2
+/// The CIA 1
 #define CIA1 (*(volatile struct __6526 *)0xdc00)
-/// The CIA#2: Serial bus, RS-232, VIC memory bank
+/// The CIA 2
 #define CIA2 (*(volatile struct __6526 *)0xdd00)
-/// CIA#1 Interrupt for reading in ASM
-#define CIA1_INTERRUPT (*(volatile uint8_t *)0xdc0d)
-/// CIA#2 timer A&B as one single 32-bit value
-#define CIA2_TIMER_AB (*(volatile uint32_t *)0xdd04)
-/// CIA#2 Interrupt for reading in ASM
-#define CIA2_INTERRUPT (*(volatile uint8_t *)0xdd0d)
-
-/// Pointer to interrupt function
-typedef void (*IRQ_TYPE)(void);
-/// The vector used when the KERNAL serves IRQ interrupts
-#define KERNEL_IRQ (*(volatile IRQ_TYPE *)0x0314)
-/// The vector used when the KERNAL serves NMI interrupts
-#define KERNEL_NMI (*(volatile IRQ_TYPE *)0x0318)
-/// The vector used when the HARDWARE serves IRQ interrupts
-#define HARDWARE_IRQ (*(volatile IRQ_TYPE *)0xfffe)
 
 // C64 colors
 #define COLOR_BLACK 0x00
@@ -174,6 +212,6 @@ typedef void (*IRQ_TYPE)(void);
 #define COLOR_GRAY3 0x0F
 
 #ifdef __cplusplus
-}
+} // extern block
 #endif
 #endif // _MEGA65_H

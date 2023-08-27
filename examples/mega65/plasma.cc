@@ -38,8 +38,8 @@ public:
 
 /// Sets MEGA65 speed to 3.5 Mhz
 void speed_mode3() {
-  VICIV.controlb |= VIC3_FAST_MASK;
-  VICIV.controlc &= ~VIC4_VFAST_MASK;
+  VICIV.ctrlb |= VIC3_FAST_MASK;
+  VICIV.ctrlc &= ~VIC4_VFAST_MASK;
 }
 
 // Cyclic sine lookup table

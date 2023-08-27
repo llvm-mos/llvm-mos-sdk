@@ -123,4 +123,3 @@
 #define VIC3_B7ADODD_MASK 0b11100000
 
 #endif // _VIC3_H
-

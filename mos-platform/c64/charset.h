@@ -24,10 +24,11 @@ template <std::size_t N> struct UnshiftedString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
-      return C;
+      throw "Unsupported";
 
-    case 'a' ... 'z':
-      return C - 0x20; // Map to uppercase.
+    // C0 control codes are uninterpreted.
+    case 0x0000 ... 0x001f:
+      return C;
 
       // Name: Map from Commodore 64/128 (interchange) primary character set to
       // Unicode
@@ -321,6 +322,10 @@ template <std::size_t N> struct ShiftedString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
+      throw "Unsupported";
+
+    // C0 control codes are uninterpreted.
+    case 0x0000 ... 0x001f:
       return C;
 
       // Name: Map from Commodore 64/128 (interchange) alternate character set
@@ -604,7 +609,9 @@ template <std::size_t N> struct UnshiftedVideoString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
-      return C;
+      if (C < 0x80)
+        return C;
+      throw "Unsupported";
 
       // Name: Map from Commodore 64/128 (video) primary character set to
       // Unicode
@@ -940,7 +947,9 @@ template <std::size_t N> struct UnshiftedReverseVideoString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
-      return C;
+      if (C < 0x80)
+        return C;
+      throw "Unsupported";
 
       // Name: Map from Commodore 64/128 (video) primary character set to
       // Unicode
@@ -1276,7 +1285,9 @@ template <std::size_t N> struct ShiftedVideoString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
-      return C;
+      if (C < 0x80)
+        return C;
+      throw "Unsupported";
 
       // Name: Map from Commodore 64/128 (video) alternate character set to
       // Unicode
@@ -1606,7 +1617,7 @@ template <std::size_t N> struct ShiftedReverseVideoString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
-      return C;
+      throw "Unsupported";
 
       // Name: Map from Commodore 64/128 (video) alternate character set to
       // Unicode

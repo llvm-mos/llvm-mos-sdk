@@ -609,8 +609,6 @@ template <std::size_t N> struct UnshiftedVideoString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
-      if (C < 0x80)
-        return C;
       throw "Unsupported";
 
       // Name: Map from Commodore 64/128 (video) primary character set to
@@ -947,8 +945,6 @@ template <std::size_t N> struct UnshiftedReverseVideoString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
-      if (C < 0x80)
-        return C;
       throw "Unsupported";
 
       // Name: Map from Commodore 64/128 (video) primary character set to
@@ -1285,8 +1281,6 @@ template <std::size_t N> struct ShiftedVideoString {
   constexpr char TranslateUnicode(char32_t C) {
     switch (C) {
     default:
-      if (C < 0x80)
-        return C;
       throw "Unsupported";
 
       // Name: Map from Commodore 64/128 (video) alternate character set to

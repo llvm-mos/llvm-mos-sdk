@@ -35,20 +35,12 @@ SECTIONS {
        *(.nmi_begin)
        *(SORT_BY_INIT_PRIORITY(.nmi.* .nmi))
        *(.nmi_end)
-  } >c_rom
-  .rodata : { INCLUDE rodata-sections.ld } >c_rom
-  .data : { INCLUDE data-sections.ld } >c_ram AT>c_rom
-  __data_load_start = LOADADDR(.data);
-  __data_size = SIZEOF(.data);
-  .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>c_rom
-  __zp_data_load_start = LOADADDR(.zp.data);
-  __zp_data_size = SIZEOF(.zp.data);
-  .zp.bss (NOLOAD) : { INCLUDE zp-bss-sections.ld } >zp
-  INCLUDE zp-bss-symbols.ld
-  INCLUDE zp-noinit.ld
-  .bss (NOLOAD) : { INCLUDE bss-sections.ld } >c_ram
-  INCLUDE bss-symbols.ld
-  .noinit (NOLOAD) : { INCLUDE noinit-sections.ld } >c_ram
+  } >c_readonly
+  INCLUDE rodata.ld
+  INCLUDE data.ld
+  INCLUDE zp.ld
+  INCLUDE bss.ld
+  INCLUDE noinit.ld
 
   .chr_rom : { KEEP(*(.chr_rom .chr_rom.*)) } >chr_rom
 }

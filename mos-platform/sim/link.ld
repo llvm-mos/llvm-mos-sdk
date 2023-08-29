@@ -13,6 +13,9 @@ MEMORY {
     ram (rw) : ORIGIN = 0x0200, LENGTH = 0xfdf0
 }
 
+REGION_ALIAS("c_readonly", ram)
+REGION_ALIAS("c_writeable", ram)
+
 SECTIONS { INCLUDE c.ld }
 
 /* Set initial soft stack address to just above last memory address. (It grows down.) */

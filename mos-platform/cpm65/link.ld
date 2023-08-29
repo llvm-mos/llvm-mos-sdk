@@ -20,6 +20,9 @@ PHDRS {
 	symtab PT_NULL;
 }
 
+REGION_ALIAS("c_readonly", ram)
+REGION_ALIAS("c_writeable", ram)
+
 SECTIONS {
 	.zp.bss (NOLOAD) : { INCLUDE zp-bss-sections.ld } >zp :NONE
 	INCLUDE zp-bss-symbols.ld
@@ -46,9 +49,7 @@ SECTIONS {
 		*(.zp.data .zp.data.*)
 		*(.zp.rodata .zp.rodata.*)
 	} >zp AT>ram :init
-	__zp_data_load_start = ADDR(.text) + 
-		(LOADADDR(.zp.data) - LOADADDR(.text));
-	__zp_data_size = SIZEOF(.zp.data);
+        INCLUDE zp-data-symbols.ld
 
 	.pblock (NOLOAD) : {
 		_pblock = .;

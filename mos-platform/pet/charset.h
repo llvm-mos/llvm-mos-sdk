@@ -30,15 +30,12 @@ template <size_t N> struct UnshiftedString {
     case 0x0000 ... 0x001f:
       return C;
 
-      // Name: Map from Commodore 64/128 (interchange) primary character set to
+      // Name: Map from Commodore PET (interchange) primary character set to
       // Unicode
 
       // Date: 2018 April 20
 
       // Author: Rebecca Bettencourt <support@kreativekorp.com>
-
-      // UNICODE LICENSE V3
-      // Copyright © 1991-2023 Unicode, Inc.
 
     case 0x0020:
       return 0x20; // SPACE
@@ -160,8 +157,8 @@ template <size_t N> struct UnshiftedString {
       return 0x5A; // LATIN CAPITAL LETTER Z
     case 0x005B:
       return 0x5B; // LEFT SQUARE BRACKET
-    case 0x00A3:
-      return 0x5C; // POUND SIGN
+    case 0x005C:
+      return 0x5C; // REVERSE SOLIDUS
     case 0x005D:
       return 0x5D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -195,11 +192,9 @@ template <size_t N> struct UnshiftedString {
     case 0x1FB7C:
       return 0x6C; // LEFT AND LOWER ONE EIGHTH BLOCK
     case 0x2572:
-      return 0x6D; // BOX DRAWINGS LIGHT DIAGONAL UPPER LEFT TO LOWER
-                   // RIGHT
+      return 0x6D; // BOX DRAWINGS LIGHT DIAGONAL UPPER LEFT TO LOWER RIGHT
     case 0x2571:
-      return 0x6E; // BOX DRAWINGS LIGHT DIAGONAL UPPER RIGHT TO LOWER
-                   // LEFT
+      return 0x6E; // BOX DRAWINGS LIGHT DIAGONAL UPPER RIGHT TO LOWER LEFT
     case 0x1FB7D:
       return 0x6F; // LEFT AND UPPER ONE EIGHTH BLOCK
     case 0x1FB7E:
@@ -307,13 +302,6 @@ template <size_t N> struct UnshiftedString {
 template <size_t N> struct ShiftedString {
   char Str[N]{};
 
-  constexpr ShiftedString(char const (&Src)[N]) {
-    for (size_t I = 0; I < N; ++I) {
-      if (Src[I] >= 0x80)
-        throw "use U prefix for unicode string literals";
-      Str[I] = TranslateUnicode(Src[I]);
-    }
-  }
   constexpr ShiftedString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -328,15 +316,12 @@ template <size_t N> struct ShiftedString {
     case 0x0000 ... 0x001f:
       return C;
 
-      // Name: Map from Commodore 64/128 (interchange) alternate character set
-      // to Unicode
+      // Name: Map from Commodore PET (interchange) alternate character set to
+      // Unicode
 
       // Date: 2018 October 11
 
       // Author: Rebecca Bettencourt <support@kreativekorp.com>
-
-      // UNICODE LICENSE V3
-      // Copyright © 1991-2023 Unicode, Inc.
 
     case 0x0020:
       return 0x20; // SPACE
@@ -458,8 +443,8 @@ template <size_t N> struct ShiftedString {
       return 0x5A; // LATIN SMALL LETTER Z
     case 0x005B:
       return 0x5B; // LEFT SQUARE BRACKET
-    case 0x00A3:
-      return 0x5C; // POUND SIGN
+    case 0x005C:
+      return 0x5C; // REVERSE SOLIDUS
     case 0x005D:
       return 0x5D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -526,8 +511,8 @@ template <size_t N> struct ShiftedString {
       return 0x7C; // LEFT HALF MEDIUM SHADE
     case 0x2502:
       return 0x7D; // BOX DRAWINGS LIGHT VERTICAL
-    case 0x1FB96:
-      return 0x7E; // INVERSE CHECKER BOARD FILL
+    case 0x1FB95:
+      return 0x7E; // CHECKER BOARD FILL
     case 0x1FB98:
       return 0x7F; // UPPER LEFT TO LOWER RIGHT FILL
     case 0x00A0:
@@ -595,7 +580,7 @@ template <size_t N> struct ShiftedString {
     case 0x259A:
       return 0xBF; // QUADRANT UPPER LEFT AND LOWER RIGHT
     }
-  };
+  }
 };
 
 template <size_t N> struct UnshiftedVideoString {
@@ -674,8 +659,8 @@ template <size_t N> struct UnshiftedVideoString {
       return 0x1A; // LATIN CAPITAL LETTER Z
     case 0x005B:
       return 0x1B; // LEFT SQUARE BRACKET
-    case 0x00A3:
-      return 0x1C; // POUND SIGN
+    case 0x005C:
+      return 0x1C; // REVERSE SOLIDUS
     case 0x005D:
       return 0x1D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -1064,8 +1049,8 @@ template <size_t N> struct UnshiftedReverseVideoString {
       return 0x9A; // LATIN CAPITAL LETTER Z
     case 0x005B:
       return 0x9B; // LEFT SQUARE BRACKET
-    case 0x00A3:
-      return 0x9C; // POUND SIGN
+    case 0x005C:
+      return 0x9C; // REVERSE SOLIDUS
     case 0x005D:
       return 0x9D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -1283,8 +1268,7 @@ template <size_t N> struct ShiftedVideoString {
     default:
       throw "Unsupported";
 
-      // Name: Map from Commodore 64/128 (video) alternate character set to
-      // Unicode
+      // Name: Map from Commodore PET (video) alternate character set to Unicode
 
       // Date: 2018 October 11
 
@@ -1346,8 +1330,8 @@ template <size_t N> struct ShiftedVideoString {
       return 0x1A; // LATIN SMALL LETTER Z
     case 0x005B:
       return 0x1B; // LEFT SQUARE BRACKET
-    case 0x00A3:
-      return 0x1C; // POUND SIGN
+    case 0x005C:
+      return 0x1C; // REVERSE SOLIDUS
     case 0x005D:
       return 0x1D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -1478,8 +1462,8 @@ template <size_t N> struct ShiftedVideoString {
       return 0x5C; // LEFT HALF MEDIUM SHADE
     case 0x2502:
       return 0x5D; // BOX DRAWINGS LIGHT VERTICAL
-    case 0x1FB96:
-      return 0x5E; // INVERSE CHECKER BOARD FILL
+    case 0x1FB95:
+      return 0x5E; // CHECKER BOARD FILL
     case 0x1FB98:
       return 0x5F; // UPPER LEFT TO LOWER RIGHT FILL
     case 0x00A0:
@@ -1548,8 +1532,8 @@ template <size_t N> struct ShiftedVideoString {
       return 0x7F; // QUADRANT UPPER LEFT AND LOWER RIGHT
     case 0x1FB94:
       return 0xDC; // LEFT HALF INVERSE MEDIUM SHADE AND RIGHT HALF BLOCK
-    case 0x1FB95:
-      return 0xDE; // CHECKER BOARD FILL
+    case 0x1FB96:
+      return 0xDE; // INVERSE CHECKER BOARD FILL
     case 0x2588:
       return 0xE0; // FULL BLOCK
     case 0x2590:
@@ -1622,8 +1606,8 @@ template <size_t N> struct ShiftedReverseVideoString {
 
     case 0x1FB94:
       return 0x5C; // LEFT HALF INVERSE MEDIUM SHADE AND RIGHT HALF BLOCK
-    case 0x1FB95:
-      return 0x5E; // CHECKER BOARD FILL
+    case 0x1FB96:
+      return 0x5E; // INVERSE CHECKER BOARD FILL
     case 0x2588:
       return 0x60; // FULL BLOCK
     case 0x2590:
@@ -1726,8 +1710,8 @@ template <size_t N> struct ShiftedReverseVideoString {
       return 0x9A; // LATIN SMALL LETTER Z
     case 0x005B:
       return 0x9B; // LEFT SQUARE BRACKET
-    case 0x00A3:
-      return 0x9C; // POUND SIGN
+    case 0x005C:
+      return 0x9C; // REVERSE SOLIDUS
     case 0x005D:
       return 0x9D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -1858,8 +1842,8 @@ template <size_t N> struct ShiftedReverseVideoString {
       return 0xDC; // LEFT HALF MEDIUM SHADE
     case 0x2502:
       return 0xDD; // BOX DRAWINGS LIGHT VERTICAL
-    case 0x1FB96:
-      return 0xDE; // INVERSE CHECKER BOARD FILL
+    case 0x1FB95:
+      return 0xDE; // CHECKER BOARD FILL
     case 0x1FB98:
       return 0xDF; // UPPER LEFT TO LOWER RIGHT FILL
     case 0x00A0:
@@ -1935,6 +1919,7 @@ template <size_t N> struct ShiftedReverseVideoString {
 template <charset_impl::UnshiftedString S> constexpr auto operator""_u() {
   return S.Str;
 }
+
 template <charset_impl::ShiftedString S> constexpr auto operator""_s() {
   return S.Str;
 }

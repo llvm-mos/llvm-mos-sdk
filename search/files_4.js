@@ -4,7 +4,7 @@ var searchData=
   ['c64_2einc_2447',['c64.inc',['../c64_8inc.html',1,'']]],
   ['cbm_2eh_2448',['cbm.h',['../cbm_8h.html',1,'']]],
   ['cbm_5fkernal_2einc_2449',['cbm_kernal.inc',['../cbm__kernal_8inc.html',1,'']]],
-  ['charset_2eh_2450',['charset.h',['../charset_8h.html',1,'']]],
+  ['charset_2eh_2450',['charset.h',['../c64_2charset_8h.html',1,'(Global Namespace)'],['../pet_2charset_8h.html',1,'(Global Namespace)']]],
   ['chrin_2eh_2451',['chrin.h',['../chrin_8h.html',1,'']]],
   ['chrout_2eh_2452',['chrout.h',['../atari8-common_2chrout_8h.html',1,'(Global Namespace)'],['../commodore_2chrout_8h.html',1,'(Global Namespace)'],['../eater_2chrout_8h.html',1,'(Global Namespace)']]],
   ['climits_2453',['climits',['../climits.html',1,'']]],

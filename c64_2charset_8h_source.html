@@ -69,7 +69,7 @@ $(function() {
 <div class="title">charset.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="charset_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2023 LLVM-MOS Project Licensed under the Apache License,</span></div>
+<a href="c64_2charset_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2023 LLVM-MOS Project Licensed under the Apache License,</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Version 2.0 with LLVM Exceptions. See</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// information.</span></div>
@@ -84,11 +84,11 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>charset_impl {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span> &lt;std::<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>UnshiftedString {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>UnshiftedString {</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">char</span> Str[N]{};</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  constexpr UnshiftedString(char32_t <span class="keyword">const</span> (&amp;Src)[N]) {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb">std::size_t</a> I = 0; I &lt; N; ++I)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> I = 0; I &lt; N; ++I)</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      Str[I] = TranslateUnicode(Src[I]);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  }</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
@@ -375,18 +375,18 @@ $(function() {
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  }</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;};</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="keyword">template</span> &lt;std::<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>ShiftedString {</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>ShiftedString {</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;  <span class="keywordtype">char</span> Str[N]{};</div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  constexpr ShiftedString(<span class="keywordtype">char</span> <span class="keyword">const</span> (&amp;Src)[N]) {</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb">std::size_t</a> I = 0; I &lt; N; ++I) {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> I = 0; I &lt; N; ++I) {</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;      <span class="keywordflow">if</span> (Src[I] &gt;= 0x80)</div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordflow">throw</span> <span class="stringliteral">&quot;use U prefix for unicode string literals&quot;</span>;</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;      Str[I] = TranslateUnicode(Src[I]);</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    }</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  }</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  constexpr ShiftedString(char32_t <span class="keyword">const</span> (&amp;Src)[N]) {</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb">std::size_t</a> I = 0; I &lt; N; ++I)</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> I = 0; I &lt; N; ++I)</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;      Str[I] = TranslateUnicode(Src[I]);</div>
 <div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  }</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
@@ -669,11 +669,11 @@ $(function() {
 <div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;  };</div>
 <div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;};</div>
 <div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160; </div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="keyword">template</span> &lt;std::<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>UnshiftedVideoString {</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>UnshiftedVideoString {</div>
 <div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;  <span class="keywordtype">char</span> Str[N]{};</div>
 <div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160; </div>
 <div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;  constexpr UnshiftedVideoString(char32_t <span class="keyword">const</span> (&amp;Src)[N]) {</div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb">std::size_t</a> I = 0; I &lt; N; ++I)</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> I = 0; I &lt; N; ++I)</div>
 <div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;      Str[I] = TranslateUnicode(Src[I]);</div>
 <div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;  }</div>
 <div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160; </div>
@@ -1005,11 +1005,11 @@ $(function() {
 <div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160;  }</div>
 <div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160;};</div>
 <div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160; </div>
-<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;<span class="keyword">template</span> &lt;std::<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>UnshiftedReverseVideoString {</div>
+<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>UnshiftedReverseVideoString {</div>
 <div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;  <span class="keywordtype">char</span> Str[N]{};</div>
 <div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160; </div>
 <div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;  constexpr UnshiftedReverseVideoString(char32_t <span class="keyword">const</span> (&amp;Src)[N]) {</div>
-<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb">std::size_t</a> I = 0; I &lt; N; ++I)</div>
+<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> I = 0; I &lt; N; ++I)</div>
 <div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;      Str[I] = TranslateUnicode(Src[I]);</div>
 <div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;  }</div>
 <div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160; </div>
@@ -1341,11 +1341,11 @@ $(function() {
 <div class="line"><a name="l01270"></a><span class="lineno"> 1270</span>&#160;  }</div>
 <div class="line"><a name="l01271"></a><span class="lineno"> 1271</span>&#160;};</div>
 <div class="line"><a name="l01272"></a><span class="lineno"> 1272</span>&#160; </div>
-<div class="line"><a name="l01273"></a><span class="lineno"> 1273</span>&#160;<span class="keyword">template</span> &lt;std::<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>ShiftedVideoString {</div>
+<div class="line"><a name="l01273"></a><span class="lineno"> 1273</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>ShiftedVideoString {</div>
 <div class="line"><a name="l01274"></a><span class="lineno"> 1274</span>&#160;  <span class="keywordtype">char</span> Str[N]{};</div>
 <div class="line"><a name="l01275"></a><span class="lineno"> 1275</span>&#160; </div>
 <div class="line"><a name="l01276"></a><span class="lineno"> 1276</span>&#160;  constexpr ShiftedVideoString(char32_t <span class="keyword">const</span> (&amp;Src)[N]) {</div>
-<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb">std::size_t</a> I = 0; I &lt; N; ++I)</div>
+<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> I = 0; I &lt; N; ++I)</div>
 <div class="line"><a name="l01278"></a><span class="lineno"> 1278</span>&#160;      Str[I] = TranslateUnicode(Src[I]);</div>
 <div class="line"><a name="l01279"></a><span class="lineno"> 1279</span>&#160;  }</div>
 <div class="line"><a name="l01280"></a><span class="lineno"> 1280</span>&#160; </div>
@@ -1671,11 +1671,11 @@ $(function() {
 <div class="line"><a name="l01600"></a><span class="lineno"> 1600</span>&#160;  }</div>
 <div class="line"><a name="l01601"></a><span class="lineno"> 1601</span>&#160;};</div>
 <div class="line"><a name="l01602"></a><span class="lineno"> 1602</span>&#160; </div>
-<div class="line"><a name="l01603"></a><span class="lineno"> 1603</span>&#160;<span class="keyword">template</span> &lt;std::<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>ShiftedReverseVideoString {</div>
+<div class="line"><a name="l01603"></a><span class="lineno"> 1603</span>&#160;<span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> N&gt; <span class="keyword">struct </span>ShiftedReverseVideoString {</div>
 <div class="line"><a name="l01604"></a><span class="lineno"> 1604</span>&#160;  <span class="keywordtype">char</span> Str[N]{};</div>
 <div class="line"><a name="l01605"></a><span class="lineno"> 1605</span>&#160; </div>
 <div class="line"><a name="l01606"></a><span class="lineno"> 1606</span>&#160;  constexpr ShiftedReverseVideoString(char32_t <span class="keyword">const</span> (&amp;Src)[N]) {</div>
-<div class="line"><a name="l01607"></a><span class="lineno"> 1607</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb">std::size_t</a> I = 0; I &lt; N; ++I)</div>
+<div class="line"><a name="l01607"></a><span class="lineno"> 1607</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> I = 0; I &lt; N; ++I)</div>
 <div class="line"><a name="l01608"></a><span class="lineno"> 1608</span>&#160;      Str[I] = TranslateUnicode(Src[I]);</div>
 <div class="line"><a name="l01609"></a><span class="lineno"> 1609</span>&#160;  }</div>
 <div class="line"><a name="l01610"></a><span class="lineno"> 1610</span>&#160; </div>
@@ -2031,7 +2031,6 @@ $(function() {
 <div class="line"><a name="l01960"></a><span class="lineno"> 1960</span>&#160;<span class="preprocessor">#endif // not _CHARSET_H</span></div>
 <div class="line"><a name="l01961"></a><span class="lineno"> 1961</span>&#160;<span class="preprocessor">#endif // __cplusplus &gt;= 202002L</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespacestd_html_ae42c45d609eacb3768b7b10c1d90eabb"><div class="ttname"><a href="namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb">std::size_t</a></div><div class="ttdeci">::size_t size_t</div><div class="ttdef"><b>Definition:</b> cstddef:7</div></div>
 <div class="ttc" id="acstddef_html"><div class="ttname"><a href="cstddef.html">cstddef</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -21,6 +21,7 @@ __do_init_systick:
   lda #$a0                      ; Enable T2 interrupts.
   sta VIA_IER
   lda #$00                      ; T2 in one-shot mode.
+  sta VIA_ACR
   lda #mos16lo(T2COUNT)         ; T2 interrupt every 1000 clock ticks.
   sta VIA_T2CL
   lda #mos16hi(T2COUNT)

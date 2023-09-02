@@ -1031,9 +1031,9 @@ static const uint32_t ticktable_nmos[256] = {
 static void (*addrtable_cmos[256])() = {
 /*        |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  |  F  |     */
 /* 0 */     imp, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imp, abso, abso, abso,  zpr, /* 0 */
-/* 1 */     rel, indy, inzp,  imp,   zp,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, abso, absx, absx,  zpr, /* 1 */
+/* 1 */     rel, indy, inzp,  imp,   zp,  zpx,  zpx,   zp,  imp, absy,  acc,  imp, abso, absx, absx,  zpr, /* 1 */
 /* 2 */    abso, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imp, abso, abso, abso,  zpr, /* 2 */
-/* 3 */     rel, indy, inzp,  imp,  zpx,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, absx, absx, absx,  zpr, /* 3 */
+/* 3 */     rel, indy, inzp,  imp,  zpx,  zpx,  zpx,   zp,  imp, absy,  acc,  imp, absx, absx, absx,  zpr, /* 3 */
 /* 4 */     imp, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imp, abso, abso, abso,  zpr, /* 4 */
 /* 5 */     rel, indy, inzp,  imp,  zpx,  zpx,  zpx,   zp,  imp, absy,  imp,  imp, abso, absx, absx,  zpr, /* 5 */
 /* 6 */     imp, indx,  imm,  imp,   zp,   zp,   zp,   zp,  imp,  imm,  acc,  imp,  ind, abso, abso,  zpr, /* 6 */

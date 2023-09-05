@@ -6,7 +6,7 @@
 /*
 MIT License
 
-Copyright (c) 2023 The MEGA65 Community
+Copyright (c) 2023 Mikael Lund aka Wombat
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -341,358 +341,137 @@ static_assert(sizeof(__vic4) == 0x80);
 
 /*
  * The following masks are auto-generated from iomap.txt.
- * See https://github.com/mega65/mega65-symbols
+ * See https://github.com/dansanderson/mega65-symbols
+ * Date: 2023-08-25
  */
 
-/** display border colour (256 colour) */
-#define VIC4_BORDERCOL_MASK 0b11111111
-
-/** screen colour (256 colour) */
-#define VIC4_SCREENCOL_MASK 0b11111111
-
-/** multi-colour 1 (256 colour) */
-#define VIC4_MC1_MASK 0b11111111
-
-/** multi-colour 2 (256 colour) */
-#define VIC4_MC2_MASK 0b11111111
-
-/** multi-colour 3 (256 colour) */
-#define VIC4_MC3_MASK 0b11111111
-
-/** top border position MSB */
-#define VIC4_TBDRPOS_MASK 0b00001111
-
-/** Sprite bitplane-modify-mode enables */
-#define VIC4_SPRBPMEN_MASK 0b11110000
-
-/** bottom border position */
-#define VIC4_BBDRPOS_MASK 0b00001111
-
-/** Sprite bitplane-modify-mode enables */
-#define GS_VIC4_SPRBPMEN_MASK 0b11110000
-
-/** character generator horizontal position */
-#define VIC4_TEXTXPOS_MASK 0b00001111
-
-/** Sprite horizontal tile enables. */
-#define VIC4_SPRTILEN_MASK 0b11110000
-
-/** Character generator vertical position */
-#define VIC4_TEXTYPOS_MASK 0b00001111
-
-/** Sprite 7-4 horizontal tile enables */
-#define GS_VIC4_SPRTILEN_MASK 0b11110000
-
-/** Read horizontal raster scan position MSB */
-#define VIC4_XPOSMSB_MASK 0b00111111
-
-/** When set, the Raster Rewrite Buffer is only updated every 2nd raster line,
- * limiting resolution to V200, but allowing more cycles for Raster-Rewrite
- * actions. */
-#define VIC4_DBLRR_MASK 0b01000000
-
-/** When clear, raster rewrite double buffering is used */
-#define VIC4_NORRDEL_MASK 0b10000000
-
-/** Read physical raster position */
-#define VIC4_FN_RASTER_MSB_MASK 0b00000111
-
-/** Enable simulated shadow-mask (PALEMU must also be enabled) */
-#define VIC4_SHDEMU_MASK 0b01000000
-
-/** Read raster compare source (0=VIC-IV fine raster, 1=VIC-II raster), provides
- * same value as set in FNRSTCMP */
-#define VIC4_FNRST_MASK 0b10000000
-
-/** enable 16-bit character numbers (two screen bytes per character)
- */
-#define VIC4_CHR16_MASK 0b00000001
-
-/** enable full-colour mode for character numbers <=$FF */
-#define VIC4_FCLRLO_MASK 0b00000010
-
-/** enable full-colour mode for character numbers >$FF */
-#define VIC4_FCLRHI_MASK 0b00000100
-
-/** video output horizontal smoothing enable */
-#define VIC4_SMTH_MASK 0b00001000
-
-/** Sprite H640 enable */
-#define VIC4_SPR_H640_MASK 0b00010000
-
-/** Enable PAL CRT-like scan-line emulation */
-#define VIC4_PALEMU_MASK 0b00100000
-
-/** C65GS FAST mode (48MHz) */
-#define VIC4_VFAST_MASK 0b01000000
-
-/** Alpha compositor enable */
-#define VIC4_ALPHEN_MASK 0b10000000
-
-/** side border width (MSB) */
-#define VIC4_SDBDRWD_MSB_MASK 0b00111111
-
-/** Enable raster delay (delays raster counter and interrupts by one line to
- * match output pipeline latency) */
-#define VIC4_RST_DELEN_MASK 0b01000000
-
-/** Enable VIC-II hot registers. When enabled, touching many VIC-II registers
- * causes the VIC-IV to recalculate display parameters, such as border positions
- * and sizes */
-#define VIC4_HOTREG_MASK 0b10000000
-
-/** screen RAM precise base address (bits 31 - 24) */
-#define VIC4_SCRNPTRMB_MASK 0b00001111
-
-/** Number of characters to display per */
-#define VIC4_CHRCOUNT_MASK 0b00110000
-
-/** source full-colour character data from expansion RAM */
-#define VIC4_EXGLYPH_MASK 0b10000000
-
-/** sprite pointer address (bits 23 - 16) */
-#define VIC4_SPRPTRBNK_MASK 0b01111111
-
-/** 16-bit sprite pointer mode (allows sprites to be located on any 64 byte
- * boundary in chip RAM) */
-#define VIC4_SPR_PTR16_MASK 0b10000000
-
-/** first VIC-II raster line */
-#define VIC4_RASLINE0_MASK 0b00111111
-
-/** Select more VGA-compatible mode if set, instead of HDMI/HDTV VIC-II
- * cycle-exact frame timing. May help to produce a functional display on older
- * VGA monitors. */
-#define VIC4_VGAHDTV_MASK 0b01000000
-
-/** NTSC emulation mode (max raster = 262) */
-#define VIC4_PALNTSC_MASK 0b10000000
-
-/** VIC-IV bitmap/text palette bank (alternate palette) */
-#define VIC4_ABTPALSEL_MASK 0b00000011
-
-/** sprite palette bank */
-#define VIC4_SPRPALSEL_MASK 0b00001100
-
-/** bitmap/text palette bank */
-#define VIC4_BTPALSEL_MASK 0b00110000
-
-/** palette bank mapped at $D100-$D3FF */
-#define VIC4_MAPEDPAL_MASK 0b11000000
-
-/** Alpha delay for compositor */
-#define VIC4_ALPHADELAY_MASK 0b00001111
-
-/** physical rasters per VIC-II raster (1 to 16) */
-#define VIC4_RASTERHEIGHT_MASK 0b11110000
-
-/** Raster compare value MSB */
-#define VIC4_RASCMP_MSB_MASK 0b00000111
-
-/** Continuously monitor sprite pointer, to allow changing sprite data source
- * while a sprite is being drawn */
-#define VIC4_SPTR_CONT_MASK 0b00001000
-
-/** Reserved. */
-#define VIC4_RESV_MASK 0b00110000
-
-/** Enable additional IRQ sources, e.g., raster X position. */
-#define VIC4_EXTIRQS_MASK 0b01000000
-
-/** Raster compare is in physical rasters if clear, or VIC-II rasters if set
- * */
-#define VIC4_FNRST_CMP_MASK 0b10000000
-
-/** Set which 128KB bank bitplanes */
-#define VIC4_BIT_PBANK_MASK 0b00000111
-
-/** @RESV */
-#define GS_VIC4_RESV_MASK 0b00001000
-
-/** hsync polarity */
-#define VIC4_HSYNCP_MASK 0b00010000
-
-/** vsync polarity */
-#define VIC4_VSYNCP_MASK 0b00100000
-
-/** VIC-IV debug pixel select red(01), green(10) or blue(11) channel visible in
- * $D07D */
-#define VIC4_DEBUGC_MASK 0b11000000
-
-/** display border colour (256 colour) */
-#define VIC4_BORDERCOL_MASK 0b11111111
-
-/** screen colour (256 colour) */
-#define VIC4_SCREENCOL_MASK 0b11111111
-
-/** multi-colour 1 (256 colour) */
-#define VIC4_MC1_MASK 0b11111111
-
-/** multi-colour 2 (256 colour) */
-#define VIC4_MC2_MASK 0b11111111
-
-/** multi-colour 3 (256 colour) */
-#define VIC4_MC3_MASK 0b11111111
-
-/** top border position MSB */
-#define VIC4_TBDRPOS_MASK 0b00001111
-
-/** Sprite bitplane-modify-mode enables */
-#define VIC4_SPRBPMEN_MASK 0b11110000
-
-/** bottom border position */
-#define VIC4_BBDRPOS_MASK 0b00001111
-
-/** Sprite bitplane-modify-mode enables */
-#define GS_VIC4_SPRBPMEN_MASK 0b11110000
-
-/** character generator horizontal position */
-#define VIC4_TEXTXPOS_MASK 0b00001111
-
-/** Sprite horizontal tile enables. */
-#define VIC4_SPRTILEN_MASK 0b11110000
-
-/** Character generator vertical position */
-#define VIC4_TEXTYPOS_MASK 0b00001111
-
-/** Sprite 7-4 horizontal tile enables */
-#define GS_VIC4_SPRTILEN_MASK 0b11110000
-
-/** Read horizontal raster scan position MSB */
-#define VIC4_XPOSMSB_MASK 0b00111111
-
-/** When set, the Raster Rewrite Buffer is only updated every 2nd raster line,
- * limiting resolution to V200, but allowing more cycles for Raster-Rewrite
- * actions. */
-#define VIC4_DBLRR_MASK 0b01000000
-
-/** When clear, raster rewrite double buffering is used */
-#define VIC4_NORRDEL_MASK 0b10000000
-
-/** Read physical raster position */
-#define VIC4_FN_RASTER_MSB_MASK 0b00000111
-
-/** Enable simulated shadow-mask (PALEMU must also be enabled) */
-#define VIC4_SHDEMU_MASK 0b01000000
-
-/** Read raster compare source (0=VIC-IV fine raster, 1=VIC-II raster), provides
- * same value as set in FNRSTCMP */
-#define VIC4_FNRST_MASK 0b10000000
-
-/** enable 16-bit character numbers (two screen bytes per character)
- */
-#define VIC4_CHR16_MASK 0b00000001
-
-/** enable full-colour mode for character numbers <=$FF */
-#define VIC4_FCLRLO_MASK 0b00000010
-
-/** enable full-colour mode for character numbers >$FF */
-#define VIC4_FCLRHI_MASK 0b00000100
-
-/** video output horizontal smoothing enable */
-#define VIC4_SMTH_MASK 0b00001000
-
-/** Sprite H640 enable */
-#define VIC4_SPR_H640_MASK 0b00010000
-
-/** Enable PAL CRT-like scan-line emulation */
-#define VIC4_PALEMU_MASK 0b00100000
-
-/** C65GS FAST mode (48MHz) */
-#define VIC4_VFAST_MASK 0b01000000
-
-/** Alpha compositor enable */
-#define VIC4_ALPHEN_MASK 0b10000000
-
-/** side border width (MSB) */
-#define VIC4_SDBDRWD_MSB_MASK 0b00111111
-
-/** Enable raster delay (delays raster counter and interrupts by one line to
- * match output pipeline latency) */
-#define VIC4_RST_DELEN_MASK 0b01000000
-
-/** Enable VIC-II hot registers. When enabled, touching many VIC-II registers
- * causes the VIC-IV to recalculate display parameters, such as border positions
- * and sizes */
-#define VIC4_HOTREG_MASK 0b10000000
-
-/** screen RAM precise base address (bits 31 - 24) */
-#define VIC4_SCRNPTRMB_MASK 0b00001111
-
-/** Number of characters to display per */
-#define VIC4_CHRCOUNT_MASK 0b00110000
-
-/** source full-colour character data from expansion RAM */
-#define VIC4_EXGLYPH_MASK 0b10000000
-
-/** sprite pointer address (bits 23 - 16) */
-#define VIC4_SPRPTRBNK_MASK 0b01111111
-
-/** 16-bit sprite pointer mode (allows sprites to be located on any 64 byte
- * boundary in chip RAM) */
-#define VIC4_SPR_PTR16_MASK 0b10000000
-
-/** first VIC-II raster line */
-#define VIC4_RASLINE0_MASK 0b00111111
-
-/** Select more VGA-compatible mode if set, instead of HDMI/HDTV VIC-II
- * cycle-exact frame timing. May help to produce a functional display on older
- * VGA monitors. */
-#define VIC4_VGAHDTV_MASK 0b01000000
-
-/** NTSC emulation mode (max raster = 262) */
-#define VIC4_PALNTSC_MASK 0b10000000
-
-/** VIC-IV bitmap/text palette bank (alternate palette) */
-#define VIC4_ABTPALSEL_MASK 0b00000011
-
-/** sprite palette bank */
-#define VIC4_SPRPALSEL_MASK 0b00001100
-
-/** bitmap/text palette bank */
-#define VIC4_BTPALSEL_MASK 0b00110000
-
-/** palette bank mapped at $D100-$D3FF */
-#define VIC4_MAPEDPAL_MASK 0b11000000
-
-/** Alpha delay for compositor */
-#define VIC4_ALPHADELAY_MASK 0b00001111
-
-/** physical rasters per VIC-II raster (1 to 16) */
-#define VIC4_RASTERHEIGHT_MASK 0b11110000
-
-/** Raster compare value MSB */
-#define VIC4_RASCMP_MSB_MASK 0b00000111
-
-/** Continuously monitor sprite pointer, to allow changing sprite data source
- * while a sprite is being drawn */
-#define VIC4_SPTR_CONT_MASK 0b00001000
-
-/** Reserved. */
-#define VIC4_RESV_MASK 0b00110000
-
-/** Enable additional IRQ sources, e.g., raster X position. */
-#define VIC4_EXTIRQS_MASK 0b01000000
-
-/** Raster compare is in physical rasters if clear, or VIC-II rasters if set
- * */
-#define VIC4_FNRST_CMP_MASK 0b10000000
-
-/** Set which 128KB bank bitplanes */
-#define VIC4_BIT_PBANK_MASK 0b00000111
-
-/** @RESV */
-#define GS_VIC4_RESV_MASK 0b00001000
-
-/** hsync polarity */
-#define VIC4_HSYNCP_MASK 0b00010000
-
-/** vsync polarity */
-#define VIC4_VSYNCP_MASK 0b00100000
-
-/** VIC-IV debug pixel select red(01), green(10) or blue(11) channel visible in
- * $D07D */
-#define VIC4_DEBUGC_MASK 0b11000000
+enum
+#ifdef __clang__
+    : uint8_t
+#endif
+{
+  /** display border colour (256 colour) */
+  VIC4_BORDERCOL_MASK = 0b11111111,
+  /** screen colour (256 colour) */
+  VIC4_SCREENCOL_MASK = 0b11111111,
+  /** multi-colour 1 (256 colour) */
+  VIC4_MC1_MASK = 0b11111111,
+  /** multi-colour 2 (256 colour) */
+  VIC4_MC2_MASK = 0b11111111,
+  /** multi-colour 3 (256 colour) */
+  VIC4_MC3_MASK = 0b11111111,
+  /** top border position MSB */
+  VIC4_TBDRPOS_MASK = 0b00001111,
+  /** Sprite bitplane-modify-mode enables */
+  VIC4_SPRBPMEN_MASK = 0b11110000,
+  /** bottom border position */
+  VIC4_BBDRPOS_MASK = 0b00001111,
+  /** Sprite bitplane-modify-mode enables */
+  GS_VIC4_SPRBPMEN_MASK = 0b11110000,
+  /** character generator horizontal position */
+  VIC4_TEXTXPOS_MASK = 0b00001111,
+  /** Sprite horizontal tile enables. */
+  VIC4_SPRTILEN_MASK = 0b11110000,
+  /** Character generator vertical position */
+  VIC4_TEXTYPOS_MASK = 0b00001111,
+  /** Sprite 7-4 horizontal tile enables */
+  GS_VIC4_SPRTILEN_MASK = 0b11110000,
+  /** Read horizontal raster scan position MSB */
+  VIC4_XPOSMSB_MASK = 0b00111111,
+  /** When set, the Raster Rewrite Buffer is only updated every 2nd raster line,
+   * limiting resolution to V200, but allowing more cycles for Raster-Rewrite
+   * actions. */
+  VIC4_DBLRR_MASK = 0b01000000,
+  /** When clear, raster rewrite double buffering is used */
+  VIC4_NORRDEL_MASK = 0b10000000,
+  /** Read physical raster position */
+  VIC4_FN_RASTER_MSB_MASK = 0b00000111,
+  /** Enable simulated shadow-mask (PALEMU must also be enabled) */
+  VIC4_SHDEMU_MASK = 0b01000000,
+  /** Read raster compare source (0=VIC-IV fine raster, 1=VIC-II raster),
+   * provides same value as set in FNRSTCMP */
+  VIC4_FNRST_MASK = 0b10000000,
+  /** enable 16-bit character numbers (two screen bytes per character)
+   */
+  VIC4_CHR16_MASK = 0b00000001,
+  /** enable full-colour mode for character numbers <=$FF */
+  VIC4_FCLRLO_MASK = 0b00000010,
+  /** enable full-colour mode for character numbers >$FF */
+  VIC4_FCLRHI_MASK = 0b00000100,
+  /** video output horizontal smoothing enable */
+  VIC4_SMTH_MASK = 0b00001000,
+  /** Sprite H640 enable */
+  VIC4_SPR_H640_MASK = 0b00010000,
+  /** Enable PAL CRT-like scan-line emulation */
+  VIC4_PALEMU_MASK = 0b00100000,
+  /** C65GS FAST mode (48MHz) */
+  VIC4_VFAST_MASK = 0b01000000,
+  /** Alpha compositor enable */
+  VIC4_ALPHEN_MASK = 0b10000000,
+  /** side border width (MSB) */
+  VIC4_SDBDRWD_MSB_MASK = 0b00111111,
+  /** Enable raster delay (delays raster counter and interrupts by one line to
+   * match output pipeline latency) */
+  VIC4_RST_DELEN_MASK = 0b01000000,
+  /** Enable VIC-II hot registers. When enabled, touching many VIC-II registers
+   * causes the VIC-IV to recalculate display parameters, such as border
+   * positions and sizes */
+  VIC4_HOTREG_MASK = 0b10000000,
+  /** screen RAM precise base address (bits 31 - 24) */
+  VIC4_SCRNPTRMB_MASK = 0b00001111,
+  /** Number of characters to display per */
+  VIC4_CHRCOUNT_MASK = 0b00110000,
+  /** source full-colour character data from expansion RAM */
+  VIC4_EXGLYPH_MASK = 0b10000000,
+  /** sprite pointer address (bits 23 - 16) */
+  VIC4_SPRPTRBNK_MASK = 0b01111111,
+  /** 16-bit sprite pointer mode (allows sprites to be located on any 64 byte
+   * boundary in chip RAM) */
+  VIC4_SPR_PTR16_MASK = 0b10000000,
+  /** first VIC-II raster line */
+  VIC4_RASLINE0_MASK = 0b00111111,
+  /** Select more VGA-compatible mode if set, instead of HDMI/HDTV VIC-II
+   * cycle-exact frame timing. May help to produce a functional display on older
+   * VGA monitors. */
+  VIC4_VGAHDTV_MASK = 0b01000000,
+  /** NTSC emulation mode (max raster = 262) */
+  VIC4_PALNTSC_MASK = 0b10000000,
+  /** VIC-IV bitmap/text palette bank (alternate palette) */
+  VIC4_ABTPALSEL_MASK = 0b00000011,
+  /** sprite palette bank */
+  VIC4_SPRPALSEL_MASK = 0b00001100,
+  /** bitmap/text palette bank */
+  VIC4_BTPALSEL_MASK = 0b00110000,
+  /** palette bank mapped at $D100-$D3FF */
+  VIC4_MAPEDPAL_MASK = 0b11000000,
+  /** Alpha delay for compositor */
+  VIC4_ALPHADELAY_MASK = 0b00001111,
+  /** physical rasters per VIC-II raster (1 to 16) */
+  VIC4_RASTERHEIGHT_MASK = 0b11110000,
+  /** Raster compare value MSB */
+  VIC4_RASCMP_MSB_MASK = 0b00000111,
+  /** Continuously monitor sprite pointer, to allow changing sprite data source
+   * while a sprite is being drawn */
+  VIC4_SPTR_CONT_MASK = 0b00001000,
+  /** Reserved. */
+  VIC4_RESV_MASK = 0b00110000,
+  /** Enable additional IRQ sources, e.g., raster X position. */
+  VIC4_EXTIRQS_MASK = 0b01000000,
+  /** Raster compare is in physical rasters if clear, or VIC-II rasters if set
+   * */
+  VIC4_FNRST_CMP_MASK = 0b10000000,
+  /** Set which 128KB bank bitplanes */
+  VIC4_BIT_PBANK_MASK = 0b00000111,
+  /** @RESV */
+  GS_VIC4_RESV_MASK = 0b00001000,
+  /** hsync polarity */
+  VIC4_HSYNCP_MASK = 0b00010000,
+  /** vsync polarity */
+  VIC4_VSYNCP_MASK = 0b00100000,
+  /** VIC-IV debug pixel select red(01), green(10) or blue(11) channel visible
+   * in $D07D */
+  VIC4_DEBUGC_MASK = 0b11000000
+};
 
 #ifdef __cplusplus
 }

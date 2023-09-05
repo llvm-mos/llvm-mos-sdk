@@ -6,7 +6,7 @@
 /*
 MIT License
 
-Copyright (c) 2023 The MEGA65 Community
+Copyright (c) 2023 Mikael Lund aka Wombat
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,11 @@ static_assert(sizeof(struct __45E100) == 15);
 #endif
 
 /// 45E100 Fast Ethernet controller commands
-enum {
+enum
+#ifdef __clang__
+    : uint8_t
+#endif
+{
   ETHERNET_STOPTX = 0,
   ETHERNET_STARTTX = 1,
   ETHERNET_RXNORMAL = 208,
@@ -75,71 +79,61 @@ enum {
 
 /*
  * The following masks are auto-generated from iomap.txt.
- * See https://github.com/mega65/mega65-symbols
+ * See https://github.com/dansanderson/mega65-symbols
+ * Date: 2023-08-25
  */
 
-/** Write 0 to hold ethernet controller under reset */
-#define ETH_RST_MASK 0b00000001
-
-/** Write 0 to hold ethernet controller transmit sub-system under reset */
-#define ETH_TXRST_MASK 0b00000010
-
-/** Read ethernet RX bits currently on the wire */
-#define ETH_DRXD_MASK 0b00000100
-
-/** Read ethernet RX data valid (debug) */
-#define ETH_DRXDV_MASK 0b00001000
-
-/** Allow remote keyboard input via magic ethernet frames */
-#define ETH_KEYEN_MASK 0b00010000
-
-/** Indicate if ethernet RX is blocked until RX buffers freed */
-#define ETH_RXBLKD_MASK 0b01000000
-
-/** Ethernet transmit side is idle, i.e., a packet can be sent. */
-#define ETH_TXIDLE_MASK 0b10000000
-
-/** Number of free receive buffers */
-#define ETH_RXBF_MASK 0b00000110
-
-/** Enable streaming of CPU instruction stream or VIC-IV display on ethernet */
-#define ETH_STRM_MASK 0b00001000
-
-/** Ethernet TX IRQ status */
-#define ETH_TXQ_MASK 0b00010000
-
-/** Ethernet RX IRQ status */
-#define ETH_RXQ_MASK 0b00100000
-
-/** Enable ethernet TX IRQ */
-#define ETH_TXQEN_MASK 0b01000000
-
-/** Enable ethernet RX IRQ */
-#define ETH_RXQEN_MASK 0b10000000
-
-/** Ethernet disable promiscuous mode */
-#define ETH_NOPROM_MASK 0b00000001
-
-/** Disable CRC check for received packets */
-#define ETH_NOCRC_MASK 0b00000010
-
-/** Ethernet TX clock phase adjust */
-#define ETH_TXPH_MASK 0b00001100
-
-/** Accept broadcast frames */
-#define ETH_BCST_MASK 0b00010000
-
-/** Accept multicast frames */
-#define ETH_MCST_MASK 0b00100000
-
-/** Ethernet RX clock phase adjust */
-#define ETH_RXPH_MASK 0b11000000
-
-/** Ethernet MIIM register number */
-#define ETH_MIIMREG_MASK 0b00011111
-
-/** Ethernet MIIM PHY number (use 0 for Nexys4, 1 for MEGA65 r1 PCBs) */
-#define ETH_MIIMPHY_MASK 0b11100000
+enum
+#ifdef __clang__
+    : uint8_t
+#endif
+{
+  /** Write 0 to hold ethernet controller under reset */
+  ETH_RST_MASK = 0b00000001,
+  /** Write 0 to hold ethernet controller transmit sub-system under reset
+   */
+  ETH_TXRST_MASK = 0b00000010,
+  /** Read ethernet RX bits currently on the wire */
+  ETH_DRXD_MASK = 0b00000100,
+  /** Read ethernet RX data valid (debug) */
+  ETH_DRXDV_MASK = 0b00001000,
+  /** Allow remote keyboard input via magic ethernet frames */
+  ETH_KEYEN_MASK = 0b00010000,
+  /** Indicate if ethernet RX is blocked until RX buffers freed */
+  ETH_RXBLKD_MASK = 0b01000000,
+  /** Ethernet transmit side is idle, i.e., a packet can be sent. */
+  ETH_TXIDLE_MASK = 0b10000000,
+  /** Number of free receive buffers */
+  ETH_RXBF_MASK = 0b00000110,
+  /** Enable streaming of CPU instruction stream or VIC-IV display on
+   * ethernet
+   */
+  ETH_STRM_MASK = 0b00001000,
+  /** Ethernet TX IRQ status */
+  ETH_TXQ_MASK = 0b00010000,
+  /** Ethernet RX IRQ status */
+  ETH_RXQ_MASK = 0b00100000,
+  /** Enable ethernet TX IRQ */
+  ETH_TXQEN_MASK = 0b01000000,
+  /** Enable ethernet RX IRQ */
+  ETH_RXQEN_MASK = 0b10000000,
+  /** Ethernet disable promiscuous mode */
+  ETH_NOPROM_MASK = 0b00000001,
+  /** Disable CRC check for received packets */
+  ETH_NOCRC_MASK = 0b00000010,
+  /** Ethernet TX clock phase adjust */
+  ETH_TXPH_MASK = 0b00001100,
+  /** Accept broadcast frames */
+  ETH_BCST_MASK = 0b00010000,
+  /** Accept multicast frames */
+  ETH_MCST_MASK = 0b00100000,
+  /** Ethernet RX clock phase adjust */
+  ETH_RXPH_MASK = 0b11000000,
+  /** Ethernet MIIM register number */
+  ETH_MIIMREG_MASK = 0b00011111,
+  /** Ethernet MIIM PHY number (use 0 for Nexys4, 1 for MEGA65 r1 PCBs) */
+  ETH_MIIMPHY_MASK = 0b11100000
+};
 
 #ifdef __cplusplus
 } // extern block

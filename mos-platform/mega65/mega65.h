@@ -6,7 +6,7 @@
 /*
 MIT License
 
-Copyright (c) 2023 The MEGA65 Community
+Copyright (c) 2023 Mikael Lund aka Wombat
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +34,14 @@ SOFTWARE.
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu-anonymous-struct"
+#pragma clang diagnostic ignored "-Wnested-anon-types"
+#pragma clang diagnostic ignored "-Wgnu-binary-literal"
+#pragma clang diagnostic ignored "-Wfixed-enum-extension"
 #endif
 
 #include <_45E100.h>
@@ -182,22 +190,32 @@ struct __color_palette {
 #define CIA2 (*(volatile struct __6526 *)0xdd00)
 
 // C64 colors
-#define COLOR_BLACK 0x00
-#define COLOR_WHITE 0x01
-#define COLOR_RED 0x02
-#define COLOR_CYAN 0x03
-#define COLOR_PURPLE 0x04
-#define COLOR_GREEN 0x05
-#define COLOR_BLUE 0x06
-#define COLOR_YELLOW 0x07
-#define COLOR_ORANGE 0x08
-#define COLOR_BROWN 0x09
-#define COLOR_LIGHTRED 0x0A
-#define COLOR_GRAY1 0x0B
-#define COLOR_GRAY2 0x0C
-#define COLOR_LIGHTGREEN 0x0D
-#define COLOR_LIGHTBLUE 0x0E
-#define COLOR_GRAY3 0x0F
+enum
+#ifdef __clang__
+    : uint8_t
+#endif
+{
+  COLOR_BLACK = 0x00,
+  COLOR_WHITE = 0x01,
+  COLOR_RED = 0x02,
+  COLOR_CYAN = 0x03,
+  COLOR_PURPLE = 0x04,
+  COLOR_GREEN = 0x05,
+  COLOR_BLUE = 0x06,
+  COLOR_YELLOW = 0x07,
+  COLOR_ORANGE = 0x08,
+  COLOR_BROWN = 0x09,
+  COLOR_LIGHTRED = 0x0A,
+  COLOR_GRAY1 = 0x0B,
+  COLOR_GRAY2 = 0x0C,
+  COLOR_LIGHTGREEN = 0x0D,
+  COLOR_LIGHTBLUE = 0x0E,
+  COLOR_GRAY3 = 0x0F
+};
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
 #ifdef __cplusplus
 } // extern block

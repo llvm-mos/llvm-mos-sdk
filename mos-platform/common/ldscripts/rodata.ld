@@ -1,1 +1,1 @@
-.rodata : { INCLUDE rodata-sections.ld }
+.rodata : { INCLUDE rodata-sections.ld } >c_readonly

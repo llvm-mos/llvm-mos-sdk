@@ -60,7 +60,7 @@ MEMORY {
   reset_fixed : ORIGIN = 0x10000 - 12, LENGTH = 12
 }
 
-REGION_ALIAS("c_rom", prg_rom_fixed)
+REGION_ALIAS("c_readonly", prg_rom_fixed)
 
 SECTIONS {
   .prg_rom_0     : { *(.prg_rom_0     .prg_rom_0.*)     } >prg_rom_0

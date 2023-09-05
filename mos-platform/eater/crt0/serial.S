@@ -30,9 +30,9 @@ __do_init_serial:
 .section .text.__serial_isr,"axR",@progbits
 __serial_isr:
   lda ACIA_STATUS               ; Is there an ACIA interrupt pending?
-  bpl __serial_isr_end
+  bpl .L__serial_isr_end
   and #$08                      ; Is RDRF set, indicating a received byte?
-  beq __serial_isr_end
+  beq .L__serial_isr_end
   lda ACIA_DATA                 ; Retrieve the character that just arrived.
   ldx __serial_rx_in            ; Add it to the serial receive buffer.
   sta __serial_rx_buffer,x
@@ -41,10 +41,10 @@ __serial_isr:
   sec
   sbc __serial_rx_out
   cmp #RX_HIGH
-  bcc __serial_isr_end
+  bcc .L__serial_isr_end
   lda #$01                      ; Disable receive interrupts.
   sta ACIA_CMD
-__serial_isr_end:
+.L__serial_isr_end:
   rts
 
 ; Get a character from the serial receive buffer.
@@ -59,10 +59,10 @@ __chrin:
   sec
   sbc __serial_rx_out
   cmp #RX_LOW
-  bcs __chrin_have_char
+  bcs .L__chrin_have_char
   lda #$09                      ; Turn receive interrupts back on.
   sta ACIA_CMD
-__chrin_have_char:
+.L__chrin_have_char:
   lda __serial_rx_buffer,x
   ldx #0
   rts
@@ -73,20 +73,20 @@ __chrin_have_char:
 __chrin_no_wait:
   ldx __serial_rx_out           ; Do we have a character?
   cpx __serial_rx_in
-  beq __chrin_no_char
+  beq .L__chrin_no_char
   inc __serial_rx_out           ; Increment the buffer's output pointer.
   lda __serial_rx_in            ; Are we now below the low water mark?
   sec
   sbc __serial_rx_out
   cmp #RX_LOW
-  bcs __chrin_no_wait_have_char
+  bcs .L__chrin_no_wait_have_char
   lda #$09                      ; Turn receive interrupts back on.
   sta ACIA_CMD
-__chrin_no_wait_have_char:
+.L__chrin_no_wait_have_char:
   lda __serial_rx_buffer,x
   ldx #0
   rts
-__chrin_no_char:
+.L__chrin_no_char:
   lda #$ff                      ; No character available, return -1.
   tax
   rts
@@ -97,9 +97,9 @@ __chrin_no_char:
 __chrout:
   sta ACIA_DATA                 ; Transmit A using the ACIA.
   ldx #$70                      ; Wait ~560us for the byte to be transmitted.
-__chrout_wait_for_tx:
+.L__chrout_wait_for_tx:
   dex
-  bne __chrout_wait_for_tx
+  bne .L__chrout_wait_for_tx
   rts
 
 ; Control variables for the serial input buffer in the zero page.

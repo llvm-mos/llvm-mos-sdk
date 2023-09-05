@@ -6,6 +6,6 @@ MEMORY {
 	console_ram (rw) : ORIGIN = 0xf83090, LENGTH = 0x4000 - 0x3090
 }
 
-REGION_ALIAS("c_ram", console_ram)
+REGION_ALIAS("c_writeable", console_ram)
 
 INCLUDE cd-sections.ld

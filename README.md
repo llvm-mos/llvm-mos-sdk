@@ -83,6 +83,17 @@ First, download and extract the archive for your platform.
 - [Mac OS](https://github.com/llvm-mos/llvm-mos-sdk/releases/latest/download/llvm-mos-macos.tar.xz)
 - [Windows](https://github.com/llvm-mos/llvm-mos-sdk/releases/latest/download/llvm-mos-windows.7z)
 
+### (macOS Only) Remove Quarantine
+
+On macOS, downloading a package automatically applies a quarantine to the file.
+This will also affect the extracted binaries from the package, which causes
+GateKeeper to prevent them from running. To avoid this, run the following on the
+downloaded package before extracting it:
+
+```shell
+$ xattr -d com.apple.quarantine llvm-mos-macos.tar.xz
+```
+
 ### (Optional) Add LLVM-MOS to PATH
 
 If you like, you can add LLVM-MOS to your path. This will make accessing

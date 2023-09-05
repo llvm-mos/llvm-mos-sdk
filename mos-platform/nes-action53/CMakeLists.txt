@@ -7,8 +7,7 @@ endif()
 install(FILES
   _prg-rom-banked.ld
   common.ld
-  prg-rom-32.ld
-  prg-rom-64.ld
+  prg-rom.ld
 TYPE LIB)
 install(FILES bank.h TYPE INCLUDE)
 

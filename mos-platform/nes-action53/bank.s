@@ -95,12 +95,7 @@ split_chr_bank:
 .weak set_mirroring
 set_mirroring:
 	and #0b11
-	; TODO: support 32kb prg rom size entries
-; .if __prg_rom_size == 32
-	; ora #0b00001100
-; .else
-    ora #0b00011100
-; .endif
+	ora #__supervisor_outer_bank
 	sta __rc2
 	lda #$80
 	sta _BANK_SHADOW

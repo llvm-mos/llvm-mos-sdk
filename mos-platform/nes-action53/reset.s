@@ -6,6 +6,8 @@ _reset_stub:
     sta $5000
     lda #$ff
     sta $8000
+    lda #2
+    jsr set_mirroring
     jmp _start
 
 .section .vectors,"ax",@progbits

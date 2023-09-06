@@ -84,7 +84,7 @@ clearVRAM:
 	sta PPUSCROLL
 	sta PPUSCROLL
 
-.section .nmi,"axR",@progbits
+.section .nmi.050,"axR",@progbits
 	jsr neslib_nmi
 
 .section .text.neslib_nmi,"ax",@progbits

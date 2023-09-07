@@ -15,10 +15,8 @@ MEMORY {
   prg_rom_0     : ORIGIN = __prg_rom_0_lma,     LENGTH = __prg_rom_size >= 32  ? 0x4000 : 0
   prg_rom_1     : ORIGIN = __prg_rom_1_lma,     LENGTH = __prg_rom_size >= 64  ? 0x4000 : 0
   prg_rom_2     : ORIGIN = __prg_rom_2_lma,     LENGTH = __prg_rom_size >= 64  ? 0x4000 : 0
-  prg_rom_fixed : ORIGIN = __prg_rom_fixed_lma, LENGTH = 0x4000 - 0x32
+  prg_rom_fixed : ORIGIN = __prg_rom_fixed_lma, LENGTH = 0x4000 - 0x20
 
-  /* Reset stub for the fixed bank. */
-  reset_stub : ORIGIN = 0x10000 - 0x32, LENGTH = 0x12
   /* Skip over the required loader space in $ffd0-$fff9 */
   space_for_supervisor : ORIGIN = 0x10000 - 0x20, LENGTH = 0x1a
   vectors : ORIGIN = 0x10000 - 0x6, LENGTH = 6
@@ -36,6 +34,5 @@ SECTIONS {
 INCLUDE dpcm.ld
 
 SECTIONS {
-  .reset_stub : { KEEP(*(.reset_stub)) } >reset_stub
   .vectors : { KEEP(*(.vectors)) } >vectors
 }

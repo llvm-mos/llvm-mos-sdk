@@ -32,17 +32,18 @@
 A53_REG_SELECT	= $5000
 A53_REG_VALUE	= $8000
 
-.section .nmi,"axR",@progbits
-	jsr bank_nmi
-
-.section .text.bank_nmi,"ax",@progbits
-.globl bank_nmi
-bank_nmi:
+.section .nmi.150,"axR",@progbits
+.globl swap_chr_bank_nmi
+swap_chr_bank_nmi:
 	lda #$00
 	sta A53_REG_SELECT
 	lda _CHR_BANK_NEXT
 	sta _CHR_BANK
 	sta A53_REG_VALUE
+
+.section .nmi.300,"axR",@progbits
+.globl restore_prg_bank_nmi
+restore_prg_bank_nmi:
 	lda #$01
 	sta A53_REG_SELECT
 	lda _PRG_BANK
@@ -51,7 +52,6 @@ bank_nmi:
 	; in case we interrupted a bank switch on the main thread
 	lda _BANK_SHADOW
 	sta A53_REG_SELECT
-	rts
 
 .section .text.get_chr_bank,"ax",@progbits
 .globl __get_chr_bank

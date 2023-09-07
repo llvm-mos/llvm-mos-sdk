@@ -504,7 +504,7 @@ music_pause:
 ; in: none
 ;------------------------------------------------------------------------------
 
-.section .nmi,"axR",@progbits
+.section .nmi.200,"axR",@progbits
 	jsr FamiToneUpdate
 
 .section .text.famitone_update,"ax",@progbits

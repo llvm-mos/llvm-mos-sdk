@@ -8,7 +8,6 @@ OUTPUT_FORMAT {
   FULL(prg_rom_1)
   FULL(prg_rom_2)
   FULL(prg_rom_fixed)
-  FULL(reset_stub)
   FULL(space_for_supervisor)
   FULL(vectors)
   FULL(chr_rom)

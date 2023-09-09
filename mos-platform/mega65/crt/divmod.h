@@ -1,20 +1,21 @@
 #ifndef __SLOW_DIV
 
-#define DIVBUSY 0xD70F
-#define DIVOUT_FRAC 0xD768
-#define DIVOUT_WHOLE 0xD76C
-#define MULTINA 0xD770
-#define MULTINB 0xD774
-#define MULTOUT 0xD778
+#include <stdint.h>
 
-// Max 32-bit unsigned integer division using MEGA65 accelerated math registers
+// Max 32-bit unsigned integer division using MEGA65
+// accelerated math registers
 template <typename T> static inline T udiv_m65(const T a, const T b) {
+  static_assert(sizeof(T) <= 4, "integers can be maximum 32-bits");
+  auto &MULTINA = *(volatile T *)(0xD770);
+  auto &MULTINB = *(volatile T *)(0xD774);
+  auto &DIVBUSY = *(volatile uint8_t *)(0xD70F);
+  auto &DIVOUT_WHOLE = *(volatile T *)(0xD76C);
   if (b) {
-    *(volatile unsigned long *)(MULTINA) = a;
-    *(volatile unsigned long *)(MULTINB) = b;
-    while (*(volatile unsigned char *)(DIVBUSY)) {
+    MULTINA = a;
+    MULTINB = b;
+    while (DIVBUSY) {
     };
-    return *(volatile T *)(DIVOUT_WHOLE);
+    return DIVOUT_WHOLE;
   }
   return 0;
 }

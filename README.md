@@ -148,6 +148,7 @@ executables and libraries for that target.
 | NES (MMC1 mapper)                | `mos-nes-mmc1-clang`     |
 | NES (MMC3 mapper)                | `mos-nes-mmc3-clang`     |
 | NES (NROM mapper)                | `mos-nes-nrom-clang`     |
+| NES (UNROM mapper)               | `mos-nes-unrom-clang`    |
 | Ohio Scientific Challenger 1P    | `mos-osi-c1p-clang`      |
 | PC Engine                        | `mos-pce-clang`          |
 | PC Engine CD                     | `mos-pce-cd-clang`       |

@@ -74,7 +74,7 @@ MEMORY {
   prg_rom_61    : ORIGIN = __prg_rom_61_lma,    LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
   prg_rom_fixed : ORIGIN = __prg_rom_fixed_lma, LENGTH = 0x4000
 }
-REGION_ALIAS("c_rom", prg_rom_fixed)
+REGION_ALIAS("c_readonly", prg_rom_fixed)
 
 SECTIONS { .prg_rom_61 : { *(.prg_rom_61 .prg_rom_61.*) } >prg_rom_61 }
 

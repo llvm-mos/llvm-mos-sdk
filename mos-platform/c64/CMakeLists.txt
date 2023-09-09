@@ -9,6 +9,7 @@ install(FILES
   _sid.h
   _vic2.h
   c64.h
+  charset.h
 TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)
 

@@ -84,7 +84,7 @@ clearVRAM:
 	sta PPUSCROLL
 	sta PPUSCROLL
 
-.section .nmi,"axR",@progbits
+.section .nmi.050,"axR",@progbits
 	jsr neslib_nmi
 
 .section .text.neslib_nmi,"ax",@progbits
@@ -311,11 +311,10 @@ oam_spr:
 	lda __rc3
 	sta OAM_BUF+2,y
 
-	iny
-	iny
-	iny
-	iny
-	sty SPRID
+	tya
+	clc ; if we can prove Carry is always false, then we don't need this
+	adc #$04
+	sta SPRID
 	rts
 
 

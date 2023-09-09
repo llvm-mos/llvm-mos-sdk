@@ -5,11 +5,7 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-install(FILES
-  cart-rom-fixed.ld
-  link.ld
-  stdcart.ld
-TYPE LIB)
+install(FILES link.ld TYPE LIB)
 
 add_platform_library(atari8-stdcart-crt0 syms.s)
 merge_libraries(atari8-stdcart-crt0

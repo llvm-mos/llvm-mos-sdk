@@ -71,7 +71,7 @@ __prg_rom_fixed_lma = 0xa000;
 __prg_rom_fixed_offset = __prg_rom_size * 1024 - 0x6000;
 
 MEMORY { prg_rom_fixed : ORIGIN = __prg_rom_fixed_lma, LENGTH = 0x6000 }
-REGION_ALIAS("c_rom", prg_rom_fixed)
+REGION_ALIAS("c_readonly", prg_rom_fixed)
 
 INCLUDE dpcm.ld
 INCLUDE _reset.ld

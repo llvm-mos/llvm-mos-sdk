@@ -26,64 +26,82 @@
 
 .include "imag.inc"
 
-.zeropage _PRG_BANK, _CHR_BANK0, _CHR_BANK1, _MMC1_CTRL_NMI, _CHR_BANK0_CUR
-.zeropage _CHR_BANK1_CUR, _MMC1_CTRL_CUR, _IN_PROGRESS
+.zeropage _PRG_BANK, _CHR_BANK
+.zeropage _BANK_SHADOW, _CHR_BANK_NEXT
 
-MMC1_CTRL	= $8000
-MMC1_CHR0	= $a000
-MMC1_CHR1	= $c000
-MMC1_PRG	= $e000
+A53_REG_SELECT	= $5000
+A53_REG_VALUE	= $8000
 
-; macro to write to an mmc1 register, which goes one bit at a time, 5 bits wide.
-.macro mmc1_register_write addr
-	.rept 4
-		sta \addr
-		lsr
-	.endr
-	sta \addr
-.endmacro
+.section .nmi.150,"axR",@progbits
+.globl swap_chr_bank_nmi
+swap_chr_bank_nmi:
+	lda #$00
+	sta A53_REG_SELECT
+	lda _CHR_BANK_NEXT
+	sta _CHR_BANK
+	sta A53_REG_VALUE
 
-.section .nmi.100,"axR",@progbits
-	jsr bank_nmi
+.section .nmi.300,"axR",@progbits
+.globl restore_prg_bank_nmi
+restore_prg_bank_nmi:
+	lda #$01
+	sta A53_REG_SELECT
+	lda _PRG_BANK
+	sta A53_REG_VALUE
+	; Restore the A53_REG_SELECT value before returning from NMI
+	; in case we interrupted a bank switch on the main thread
+	lda _BANK_SHADOW
+	sta A53_REG_SELECT
 
-.section .text.bank_nmi,"ax",@progbits
-.globl bank_nmi
-bank_nmi:
-	inc __reset_mmc1_byte
-	lda _CHR_BANK0
-	sta _CHR_BANK0_CUR
-	mmc1_register_write MMC1_CHR0
-	lda _CHR_BANK1
-	sta _CHR_BANK1_CUR
-	mmc1_register_write MMC1_CHR1
-	lda _MMC1_CTRL_NMI
-	sta _MMC1_CTRL_CUR
-	mmc1_register_write MMC1_CTRL
-	lda #0
-	sta _IN_PROGRESS
+.section .text.get_chr_bank,"ax",@progbits
+.globl __get_chr_bank
+.weak get_chr_bank
+__get_chr_bank:
+get_chr_bank:
+	lda _CHR_BANK
 	rts
 
-.section .text.set_chr_bank_0,"ax",@progbits
-.weak set_chr_bank_0
-set_chr_bank_0:
-	sta _CHR_BANK0
+.section .text.set_chr_bank,"ax",@progbits
+.weak set_chr_bank
+set_chr_bank:
+	sta _CHR_BANK_NEXT
+	sta _CHR_BANK
+	lda #$00
+	sta _BANK_SHADOW
+	sta A53_REG_SELECT
+	lda _CHR_BANK
+	sta A53_REG_VALUE
 	rts
 
-.section .text.set_chr_bank_1,"ax",@progbits
-.weak set_chr_bank_1
-set_chr_bank_1:
-	sta _CHR_BANK1
+.section .text.swap_chr_bank,"ax",@progbits
+.weak swap_chr_bank
+swap_chr_bank:
+	sta _CHR_BANK_NEXT
+	rts
+
+.section .text.split_chr_bank,"ax",@progbits
+.weak split_chr_bank
+split_chr_bank:
+	sta _CHR_BANK
+	lda #$00
+	sta _BANK_SHADOW
+	sta A53_REG_SELECT
+	lda _CHR_BANK
+	sta A53_REG_VALUE
 	rts
 
 .section .text.set_mirroring,"ax",@progbits
+
 .weak set_mirroring
 set_mirroring:
 	and #0b11
+	ora #__supervisor_outer_bank
 	sta __rc2
-	lda _MMC1_CTRL_NMI
-	and #0b11100
-	ora __rc2
-	sta _MMC1_CTRL_NMI
+	lda #$80
+	sta _BANK_SHADOW
+	sta A53_REG_SELECT
+	lda __rc2
+	sta A53_REG_VALUE
 	rts
 
 .section .text.get_prg_bank,"ax",@progbits
@@ -99,22 +117,13 @@ get_prg_bank:
 .weak set_prg_bank
 __set_prg_bank:
 set_prg_bank:
-	tay
-.Lset:
-	inc __reset_mmc1_byte
-	ldx #1
-	stx _IN_PROGRESS
-	mmc1_register_write MMC1_PRG
-	ldx _IN_PROGRESS
-	beq .Lretry
-	dex
-	stx _IN_PROGRESS
-	sty _PRG_BANK
+	sta _PRG_BANK
+	lda #$01
+	sta _BANK_SHADOW
+	sta A53_REG_SELECT
+	lda _PRG_BANK
+	sta A53_REG_VALUE
 	rts
-.Lretry:
-	tya
-	jmp .Lset
-
 
 
 .section .text.banked_call,"ax",@progbits
@@ -123,13 +132,12 @@ banked_call:
 	tay
 	lda _PRG_BANK
 	pha
-	tya
-	jsr __set_prg_bank
-	lda __rc2
-	sta __rc18
-	lda __rc3
-	sta __rc19
-	jsr __call_indir
+		tya
+		jsr __set_prg_bank
+		lda __rc2
+		sta __rc18
+		lda __rc3
+		sta __rc19
+		jsr __call_indir
 	pla
-	jsr __set_prg_bank
-	rts
+	jmp __set_prg_bank

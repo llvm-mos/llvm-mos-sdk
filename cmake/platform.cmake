@@ -131,7 +131,7 @@ function(add_platform_object_file target output)
 
   add_custom_command(OUTPUT ${output}
     COMMAND ${LLVM_MOS_LINKER} -r -o ${output} --whole-archive
-            $<TARGET_FILE:${target}>)
+    $<TARGET_FILE:${target}> DEPENDS ${target})
   add_custom_target(${target}-o ALL DEPENDS ${output})
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${output} TYPE LIB)
 

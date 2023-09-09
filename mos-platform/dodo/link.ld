@@ -8,15 +8,15 @@ MEMORY {
     fram (rw) : ORIGIN = 0x5800, LENGTH = 0x2000
 }
 
+REGION_ALIAS("c_readonly", fram)
+REGION_ALIAS("c_writeable", ram)
+
 SECTIONS {
     /* dodo jumps to $5900 to start the game */
     .text 0x5900 : { INCLUDE text-sections.ld } >fram
-    .rodata : { INCLUDE rodata-sections.ld } >fram
-    .data : { INCLUDE data-sections.ld } >fram
-    .zp.data : { INCLUDE zp-data-sections.ld } >zp AT>fram
-    INCLUDE zp-data-symbols.ld
-    INCLUDE zp-bss.ld
-    INCLUDE zp-noinit.ld
+    INCLUDE rodata.ld
+    INCLUDE data.ld
+    INCLUDE zp.ld
     INCLUDE bss.ld
     INCLUDE noinit.ld
 }

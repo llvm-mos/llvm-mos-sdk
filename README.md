@@ -17,10 +17,11 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - [Dodo 6502 Game System](https://github.com/peternoyes/dodo)
 - [MEGA65](https://mega65.org/)
 - NES
-  - NES-NROM
-  - NES-MMC1
-  - NES-MMC3
-  - NES-CNROM
+  - Action 53
+  - CNROM
+  - NROM 
+  - MMC1
+  - MMC3
 - Ohio Scientific Challenger 1P
 - PC Engine
   - PC Engine CD
@@ -83,6 +84,17 @@ First, download and extract the archive for your platform.
 - [Mac OS](https://github.com/llvm-mos/llvm-mos-sdk/releases/latest/download/llvm-mos-macos.tar.xz)
 - [Windows](https://github.com/llvm-mos/llvm-mos-sdk/releases/latest/download/llvm-mos-windows.7z)
 
+### (macOS Only) Remove Quarantine
+
+On macOS, downloading a package automatically applies a quarantine to the file.
+This will also affect the extracted binaries from the package, which causes
+GateKeeper to prevent them from running. To avoid this, run the following on the
+downloaded package before extracting it:
+
+```shell
+$ xattr -d com.apple.quarantine llvm-mos-macos.tar.xz
+```
+
 ### (Optional) Add LLVM-MOS to PATH
 
 If you like, you can add LLVM-MOS to your path. This will make accessing
@@ -120,26 +132,27 @@ need to prefix `clang` (or `clang++`) with a specific MOS platform provided by
 the SDK. This will ensure clang loads the correct configuration to generate
 executables and libraries for that target.
 
-| Platform                         | Command               |
-| -------------------------------- | --------------------- |
-| Atari 8-bit (.XEX)               | `mos-atari8-clang`    |
-| Atari 8-bit (Standard cartridge) | `mos-atari8-stdcart`  |
-| Ben Eater's 6502 Breadboard Kit  | `mos-eater-clang`     |
-| Commander X16                    | `mos-cx16-clang`      |
-| Commodore 64                     | `mos-c64-clang`       | 
-| Commodore PET                    | `mos-pet-clang`       |
-| CP/M-65                          | `mos-cpm65-clang`     |
-| Dodo 6502 Game System            | `mos-dodo-clang`      |
-| MEGA65                           | `mos-mega65-clang`    |
-| NES (CNROM mapper)               | `mos-nes-cnrom-clang` |
-| NES (MMC1 mapper)                | `mos-nes-mmc1-clang`  |
-| NES (MMC3 mapper)                | `mos-nes-mmc3-clang`  |
-| NES (NROM mapper)                | `mos-nes-nrom-clang`  |
-| Ohio Scientific Challenger 1P    | `mos-osi-c1p-clang`   |
-| PC Engine                        | `mos-pce-clang`       |
-| PC Engine CD                     | `mos-pce-cd-clang`    |
-| RPC/8e (RedPower 2)              | `mos-rpc8e-clang`     |
-| 6502 simulator                   | `mos-sim-clang`       |
+| Platform                         | Command                  |
+| -------------------------------- | ------------------------ |
+| Atari 8-bit (.XEX)               | `mos-atari8-clang`       |
+| Atari 8-bit (Standard cartridge) | `mos-atari8-stdcart`     |
+| Ben Eater's 6502 Breadboard Kit  | `mos-eater-clang`        |
+| Commander X16                    | `mos-cx16-clang`         |
+| Commodore 64                     | `mos-c64-clang`          | 
+| Commodore PET                    | `mos-pet-clang`          |
+| CP/M-65                          | `mos-cpm65-clang`        |
+| Dodo 6502 Game System            | `mos-dodo-clang`         |
+| MEGA65                           | `mos-mega65-clang`       |
+| NES (Action53 mapper)            | `mos-nes-action53-clang` |
+| NES (CNROM mapper)               | `mos-nes-cnrom-clang`    |
+| NES (MMC1 mapper)                | `mos-nes-mmc1-clang`     |
+| NES (MMC3 mapper)                | `mos-nes-mmc3-clang`     |
+| NES (NROM mapper)                | `mos-nes-nrom-clang`     |
+| Ohio Scientific Challenger 1P    | `mos-osi-c1p-clang`      |
+| PC Engine                        | `mos-pce-clang`          |
+| PC Engine CD                     | `mos-pce-cd-clang`       |
+| RPC/8e (RedPower 2)              | `mos-rpc8e-clang`        |
+| 6502 simulator                   | `mos-sim-clang`          |
 
 ```console
 $ cat <install_dir>/examples/hello-putchar.c

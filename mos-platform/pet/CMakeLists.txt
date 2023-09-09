@@ -4,6 +4,7 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
+install(FILES charset.h TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)
 
 add_platform_object_file(pet-basic-header basic-header.o basic-header.S)

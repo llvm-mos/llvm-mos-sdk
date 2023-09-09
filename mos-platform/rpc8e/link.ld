@@ -10,6 +10,9 @@ MEMORY {
     ram (rw) : ORIGIN = 0x0500, LENGTH = 0x10000 - 0x0500
 }
 
+REGION_ALIAS("c_readonly", ram)
+REGION_ALIAS("c_writeable", ram)
+
 SECTIONS {
     /* _start must be first. */
     INCLUDE text.ld

@@ -1,1 +1,1 @@
-.text : { INCLUDE text-sections.ld }
+.text : { INCLUDE text-sections.ld } >c_readonly

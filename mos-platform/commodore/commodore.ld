@@ -14,6 +14,9 @@ MEMORY { zp : ORIGIN = __rc31 + 1, LENGTH = __basic_zp_end - (__rc31 + 1) }
 
 INPUT(basic-header.o)
 
+REGION_ALIAS("c_readonly", ram)
+REGION_ALIAS("c_writeable", ram)
+
 SECTIONS {
     /* BASIC program that jumps to _start. */
     .basic_header : { *(.basic_header) }

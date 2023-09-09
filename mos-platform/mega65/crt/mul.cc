@@ -2,11 +2,17 @@
 #define MULTINB 0xD774
 #define MULTOUT 0xD778
 
+__attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS = 0;
+
 template <typename T> static inline T mul(T a, T b) {
   // 32-bit unsigned integer multiplication using hardware math registers
   if constexpr (sizeof(T) <= 4) {
-    *(volatile T *)(MULTINA) = a;
-    *(volatile T *)(MULTINB) = b;
+    do {
+      _IN_PROGRESS = 1;
+      *(volatile T *)(MULTINA) = a;
+      *(volatile T *)(MULTINB) = b;
+    } while (!_IN_PROGRESS);
+    _IN_PROGRESS = 0;
     return *(volatile T *)(MULTOUT);
   }
 

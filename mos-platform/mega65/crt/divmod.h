@@ -1,23 +1,29 @@
 #ifndef __SLOW_DIV
 
+__attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS = 0;
+
 #include <stdint.h>
 
 // Max 32-bit unsigned integer division using MEGA65
 // accelerated math registers
 template <typename T> static inline T udiv_m65(const T a, const T b) {
   static_assert(sizeof(T) <= 4, "integers can be maximum 32-bits");
-  auto &MULTINA = *(volatile T *)(0xD770);
-  auto &MULTINB = *(volatile T *)(0xD774);
-  auto &DIVBUSY = *(volatile uint8_t *)(0xD70F);
-  auto &DIVOUT_WHOLE = *(volatile T *)(0xD76C);
-  if (b) {
-    MULTINA = a;
-    MULTINB = b;
-    while (DIVBUSY) {
-    };
-    return DIVOUT_WHOLE;
+  if (b == 0) {
+    return 0;
   }
-  return 0;
+  auto &multina = *(volatile T *)(0xD770);
+  auto &multinb = *(volatile T *)(0xD774);
+  auto &divbusy = *(volatile uint8_t *)(0xD70F);
+  auto &divout_whole = *(volatile T *)(0xD76C);
+  do {
+    _IN_PROGRESS = 1;
+    multina = a;
+    multinb = b;
+    while (divbusy) {
+    };
+  } while (!_IN_PROGRESS);
+  _IN_PROGRESS = 0;
+  return divout_whole;
 }
 
 // Relatively straigtforward implementation of long division in C. Not

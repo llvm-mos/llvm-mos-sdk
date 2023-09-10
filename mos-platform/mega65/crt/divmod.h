@@ -8,7 +8,7 @@
 #define DIVOUT_WHOLE (*(volatile T *)(0xD76C))
 
 // State to prevent race conditions on math registers during interrupts
-extern __attribute__((section(".zp.bss"))) volatile char _MATH_IN_PROGRESS = 0;
+extern __attribute__((section(".zp.bss"))) volatile char _MATH_IN_PROGRESS;
 
 #ifndef __SLOW_DIV
 

@@ -1,5 +1,7 @@
 #include "divmod_m65.h"
 
+#ifndef __SLOW_DIV
+
 __attribute__((section(".zp.bss"))) volatile char _MATH_IN_PROGRESS = 0;
 
 extern "C" {
@@ -40,3 +42,5 @@ int __divmodhi4(int a, int b, int *rem) { return divmod(a, b, rem); }
 // si and di versions of [u]divmod are broken out into divmod_large.cc to
 // prevent LTO; see there for details.
 }
+
+#endif

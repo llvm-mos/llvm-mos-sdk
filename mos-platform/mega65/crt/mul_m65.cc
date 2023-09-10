@@ -1,5 +1,7 @@
 #include "divmod_m65.h"
 
+#ifndef __SLOW_DIV
+
 template <typename T> static T mul(T a, T b) {
   if constexpr (sizeof(T) <= 4) {
     // ≤32 bit multiplication in hardware
@@ -37,3 +39,5 @@ unsigned long long __muldi3(unsigned long long a, unsigned long long b) {
   return mul(a, b);
 }
 }
+
+#endif

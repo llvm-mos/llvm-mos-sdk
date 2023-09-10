@@ -2,22 +2,36 @@
 
 #ifndef __SLOW_DIV
 
+#include <stdint.h>
+
+#define MULTINA 0xD770
+#define MULTINB 0xD774
+#define MULTOUT (*(volatile T *)(0xD778))
+#define DIVBUSY (*(volatile uint8_t *)(0xD70F))
+#define DIVOUT_WHOLE (*(volatile T *)(0xD76C))
+#define INTEGER_TOO_BIG "MEGA65 math register can take maximum 32-bit integers"
+
 // State to prevent race conditions on math registers during interrupts
-extern __attribute__((section(".zp.bss"))) volatile char _MATH_IN_PROGRESS;
+__attribute__((section(".zp.bss"))) volatile char _MATH_IN_PROGRESS = 0;
 
 namespace common::crt {
 #include "divmod.h"
-} // namespace common::crt
-#include <stdint.h>
+}
 
 namespace mega65::crt {
 
-#define DIVBUSY (*(volatile uint8_t *)(0xD70F))
-#define MULTINA (*(volatile T *)(0xD770))
-#define MULTINB (*(volatile T *)(0xD774))
-#define MULTOUT (*(volatile T *)(0xD778))
-#define DIVOUT_WHOLE (*(volatile T *)(0xD76C))
-#define INTEGER_TOO_BIG "MEGA65 math register can take maximum 32-bit integers"
+template <typename T> static T mul(T a, T b) {
+  static_assert(sizeof(T) <= 4, INTEGER_TOO_BIG);
+  T product;
+  do {
+    _MATH_IN_PROGRESS = 1;
+    (*(volatile T *)(MULTINA)) = a;
+    (*(volatile T *)(MULTINB)) = b;
+    product = MULTOUT;
+  } while (_MATH_IN_PROGRESS == 0);
+  _MATH_IN_PROGRESS = 0;
+  return product;
+}
 
 // Interrupt-safe max 32-bit unsigned integer division using MEGA65
 // accelerated math registers.
@@ -29,8 +43,8 @@ template <typename T> static T udiv(const T a, const T b) {
   T result;
   do {
     _MATH_IN_PROGRESS = 1;
-    MULTINA = a;
-    MULTINB = b;
+    (*(volatile uint32_t *)(MULTINA)) = (uint32_t)a;
+    (*(volatile uint32_t *)(MULTINB)) = (uint32_t)b;
     while (DIVBUSY) {
     };
     result = DIVOUT_WHOLE;

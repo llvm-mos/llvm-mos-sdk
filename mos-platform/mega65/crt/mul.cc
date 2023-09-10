@@ -1,32 +1,28 @@
-#define MULTINA 0xD770
-#define MULTINB 0xD774
-#define MULTOUT 0xD778
+#include "divmod.h"
 
-// Used to lock math register access if interrupts
-__attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS = 0;
-
-template <typename T> static inline T mul(T a, T b) {
-  // 32-bit unsigned integer multiplication using hardware math registers
+template <typename T> static T mul(T a, T b) {
   if constexpr (sizeof(T) <= 4) {
+    // ≤32 bit multiplication in hardware
     T product;
     do {
-      _IN_PROGRESS = 1;
-      *(volatile T *)(MULTINA) = a;
-      *(volatile T *)(MULTINB) = b;
-      product = *(volatile T *)(MULTOUT);
-    } while (!_IN_PROGRESS);
-    _IN_PROGRESS = 0;
+      _MATH_IN_PROGRESS = 1;
+      MULTINA = a;
+      MULTINB = b;
+      product = MULTOUT;
+    } while (_MATH_IN_PROGRESS == 0);
+    _MATH_IN_PROGRESS = 0;
+    return product;
+  } else {
+    // 64 bit multiplication in software
+    T product = 0;
+    while (b) {
+      if (b & 1)
+        product += a;
+      a <<= 1;
+      b >>= 1;
+    }
     return product;
   }
-
-  T result = 0;
-  while (b) {
-    if (b & 1)
-      result += a;
-    a <<= 1;
-    b >>= 1;
-  }
-  return result;
 }
 
 extern "C" {

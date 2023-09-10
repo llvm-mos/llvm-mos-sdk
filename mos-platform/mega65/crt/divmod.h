@@ -1,31 +1,34 @@
-#ifndef __SLOW_DIV
-
-// Used to lock math register access if interrupts
-__attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS = 0;
-
+#pragma once
 #include <stdint.h>
+
+#define DIVBUSY (*(volatile uint8_t *)(0xD70F))
+#define MULTINA (*(volatile T *)(0xD770))
+#define MULTINB (*(volatile T *)(0xD774))
+#define MULTOUT (*(volatile T *)(0xD778))
+#define DIVOUT_WHOLE (*(volatile T *)(0xD76C))
+
+// State to prevent race conditions on math registers during interrupts
+extern __attribute__((section(".zp.bss"))) volatile char _MATH_IN_PROGRESS = 0;
+
+#ifndef __SLOW_DIV
 
 // Interrupt-safe max 32-bit unsigned integer division using MEGA65
 // accelerated math registers.
-template <typename T> static inline T udiv_m65(const T a, const T b) {
+template <typename T> static T udiv_m65(const T a, const T b) {
   static_assert(sizeof(T) <= 4, "integers can be maximum 32-bits");
   if (b == 0) {
     return 0;
   }
-  auto &multina = *(volatile T *)(0xD770);
-  auto &multinb = *(volatile T *)(0xD774);
-  auto &divbusy = *(volatile uint8_t *)(0xD70F);
-  auto &divout_whole = *(volatile T *)(0xD76C);
   T result;
   do {
-    _IN_PROGRESS = 1;
-    multina = a;
-    multinb = b;
-    while (divbusy) {
+    _MATH_IN_PROGRESS = 1;
+    MULTINA = a;
+    MULTINB = b;
+    while (DIVBUSY) {
     };
-    result = divout_whole;
-  } while (!_IN_PROGRESS);
-  _IN_PROGRESS = 0;
+    result = DIVOUT_WHOLE;
+  } while (_MATH_IN_PROGRESS == 0);
+  _MATH_IN_PROGRESS = 0;
   return result;
 }
 

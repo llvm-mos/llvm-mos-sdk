@@ -42,7 +42,7 @@ extern __attribute__((
 __attribute__((section(".zp.bss"))) char _MMC1_CTRL_CUR;
 extern __attribute__((
     weak, alias("_MMC1_CTRL_CUR"))) volatile const char MMC1_CTRL_CUR;
-__attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS;
+__attribute__((section(".zp.bss"))) volatile char _MATH_IN_PROGRESS;
 
 #define MMC1_CTRL 0x8000
 #define MMC1_CHR0 0xa000
@@ -71,24 +71,24 @@ mmc1_register_write(unsigned addr, char val) {
 __attribute__((always_inline)) static inline void
 mmc1_register_write_retry(unsigned addr, char val) {
   do {
-    _IN_PROGRESS = 1;
+    _MATH_IN_PROGRESS = 1;
     reset_shift_register();
     mmc1_register_write(addr, val);
-  } while (!_IN_PROGRESS);
-  _IN_PROGRESS = 0;
+  } while (!_MATH_IN_PROGRESS);
+  _MATH_IN_PROGRESS = 0;
 }
 
 __attribute__((weak)) void split_chr_bank_0(char bank_id) {
   reset_shift_register();
   mmc1_register_write(MMC1_CHR0, bank_id);
-  _IN_PROGRESS = 0;
+  _MATH_IN_PROGRESS = 0;
   _CHR_BANK0_CUR = bank_id;
 }
 
 __attribute__((weak)) void split_chr_bank_1(char bank_id) {
   reset_shift_register();
   mmc1_register_write(MMC1_CHR1, bank_id);
-  _IN_PROGRESS = 0;
+  _MATH_IN_PROGRESS = 0;
   _CHR_BANK1_CUR = bank_id;
 }
 

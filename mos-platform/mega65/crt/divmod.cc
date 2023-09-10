@@ -1,5 +1,7 @@
 #include "divmod.h"
 
+__attribute__((section(".zp.bss"))) volatile char _MATH_IN_PROGRESS = 0;
+
 extern "C" {
 char __udivqi3(char a, char b) { return udiv_m65(a, b); }
 unsigned __udivhi3(unsigned a, unsigned b) { return udiv_m65(a, b); }

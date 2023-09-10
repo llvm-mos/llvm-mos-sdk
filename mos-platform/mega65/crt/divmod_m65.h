@@ -71,38 +71,23 @@ template <typename T> static inline T udivmod(T a, T b, T *rem) {
       T q = udiv_m65(a, b);
       *rem = (q != 0) ? a - q * b : a;
       return q;
-    } else {
-      // the math register does nothing if b==0 so we must catch this
-      *rem = 0;
-      return 0;
     }
+    // the math register does nothing if b==0 so we must catch this
+    *rem = 0;
+    return 0;
   }
 }
 
 template <typename T> static inline T div(T a, T b) {
-  T u = static_cast<T>(common::crt::safe_abs(a) / common::crt::safe_abs(b));
-  // Negating int_min here is fine, since it's only undefined behavior if the
-  // signed division itself is.
-  return (a < 0 != b < 0) ? -u : u;
+  return common::crt::div<T>(a, b);
 }
 
 template <typename T> static inline T mod(T a, T b) {
-  T u = static_cast<T>(common::crt::safe_abs(a) % common::crt::safe_abs(b));
-  // Negating int_min here is fine, since it's only undefined behavior if the
-  // signed mod itself is.
-  return a < 0 ? -u : u;
+  return common::crt::mod<T>(a, b);
 }
 
 template <typename T> static inline T divmod(T a, T b, T *rem) {
-  typedef typename common::crt::make_unsigned<T>::type UT;
-  UT urem;
-  T uq = static_cast<T>(
-      udivmod(common::crt::safe_abs(a), common::crt::safe_abs(b), &urem));
-
-  // Negating int_min here is fine, since it's only undefined behavior if the
-  // signed division itself is.
-  *rem = a < 0 ? -urem : urem;
-  return (a < 0 != b < 0) ? -uq : uq;
+  return common::crt::divmod<T>(a, b, rem);
 }
 
 #endif // __SLOW_DIV

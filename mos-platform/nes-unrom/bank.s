@@ -26,6 +26,10 @@
 
 .include "imag.inc"
 
+.section .text._bank,"ax",@progbits
+.global _BANK
+_BANK: .byte $FF
+
 .zeropage _PRG_BANK
 
 .section .text.set_prg_bank,"ax",@progbits
@@ -34,7 +38,7 @@
 __set_prg_bank:
 set_prg_bank:
 	sta _PRG_BANK
-	sta $8000
+	sta _BANK
 	rts
 
 .section .text.banked_call,"ax",@progbits
@@ -44,7 +48,7 @@ banked_call:
 	lda _PRG_BANK
 	pha
 		sty _PRG_BANK
-		sty $8000
+		sty _BANK
 		lda __rc2
 		sta __rc18
 		lda __rc3

@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.18)
+
+project(test-nes-unrom-512 LANGUAGES C)
+
+include(../test.cmake)
+
+add_mesen_test(minimal)
+add_mesen_test(prg-rom-512)
+add_mesen_test(prg-rom-banked-call)
+add_mesen_test(chr-ram)
+add_mesen_test(chr-rom)
+
+add_subdirectory(no-compile)

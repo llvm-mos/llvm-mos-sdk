@@ -1,4 +1,4 @@
-#include "divmod.h"
+#include "divmod_m65.h"
 
 template <typename T> static T mul(T a, T b) {
   if constexpr (sizeof(T) <= 4) {

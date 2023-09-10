@@ -2,18 +2,27 @@
 
 #ifndef __SLOW_DIV
 
+namespace mega65::crt {
+
+template <typename T> static T mul(T a, T b) {
+  static_assert(sizeof(T) <= 4, INTEGER_TOO_BIG);
+  // ≤32 bit multiplication in hardware
+  T product;
+  do {
+    _MATH_IN_PROGRESS = 1;
+    MULTINA = a;
+    MULTINB = b;
+    product = MULTOUT;
+  } while (_MATH_IN_PROGRESS == 0);
+  _MATH_IN_PROGRESS = 0;
+  return product;
+}
+
+} // namespace mega65::crt
+
 template <typename T> static T mul(T a, T b) {
   if constexpr (sizeof(T) <= 4) {
-    // ≤32 bit multiplication in hardware
-    T product;
-    do {
-      _MATH_IN_PROGRESS = 1;
-      MULTINA = a;
-      MULTINB = b;
-      product = MULTOUT;
-    } while (_MATH_IN_PROGRESS == 0);
-    _MATH_IN_PROGRESS = 0;
-    return product;
+    return mega65::crt::mul(a, b);
   } else {
     // 64 bit multiplication in software
     T product = 0;

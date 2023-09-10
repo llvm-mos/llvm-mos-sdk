@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 template <class T> void check_eq(T a, T b) {
-  (a != b) ? printf("MISMATCH\n") : printf("OK ");
+  (a != b) ? __putchar('!') : __putchar('.');
 }
 
 int main(void) {

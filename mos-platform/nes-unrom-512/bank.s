@@ -36,6 +36,6 @@ banked_call:
 	lda _BANK_SHADOW
 	and #$70
 	ora __rc16
-	sta _BANK ; stored: new bank shadow value
+	sta _BANK ; stored: previous bank shadow value
 	sta _BANK_SHADOW
 	rts

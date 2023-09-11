@@ -18,7 +18,7 @@ banked_call:
 	sta __rc17 ; __rc17 = requested PRG bank
 	lda _BANK_SHADOW
 	and #$1F
-	sta __rc16 ; __rc16 = previous PRG bank
+	sta __rc20 ; __rc20 = previous PRG bank (saved)
 	lda _BANK_SHADOW
 	and #$70
 	ora __rc17
@@ -35,7 +35,7 @@ banked_call:
 	; restore PRG bank
 	lda _BANK_SHADOW
 	and #$70
-	ora __rc16
+	ora __rc20
 	sta _BANK ; stored: previous bank shadow value
 	sta _BANK_SHADOW
 	rts

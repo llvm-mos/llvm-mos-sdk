@@ -14,6 +14,9 @@ _BANK: .byte $FF
 .section .text.banked_call,"ax",@progbits
 .weak banked_call
 banked_call:
+	lda __rc20
+	pha
+
 	; adjust PRG bank
 	sta __rc17 ; __rc17 = requested PRG bank
 	lda _BANK_SHADOW
@@ -38,4 +41,7 @@ banked_call:
 	ora __rc20
 	sta _BANK ; stored: previous bank shadow value
 	sta _BANK_SHADOW
+
+	pla
+	sta __rc20
 	rts

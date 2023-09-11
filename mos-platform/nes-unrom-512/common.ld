@@ -2,7 +2,8 @@
 
 INCLUDE nes.ld
 
-ASSERT(__chr_rom_size <= 32, "UNROM only supports up to 32 KiB of CHR-ROM.")
+ASSERT(__chr_rom_size <= 32,
+       "UNROM-512 only supports up to 32 KiB of CHR-ROM.")
 ASSERT(__chr_ram_size + __chr_nvram_size <= 32,
        "UNROM-512 only supports up to 32 KiB of CHR-(NV)RAM.")
 

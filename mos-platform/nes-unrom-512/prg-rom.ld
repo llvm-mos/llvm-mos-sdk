@@ -37,8 +37,5 @@ OUTPUT_FORMAT {
   FULL(prg_rom_30)
   FULL(prg_rom_fixed)
   FULL(vectors)
-  FULL(chr_rom_0)
-  FULL(chr_rom_1)
-  FULL(chr_rom_2)
-  FULL(chr_rom_3)
+  FULL(chr_rom)
 }

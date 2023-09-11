@@ -7,6 +7,6 @@ ASSERT(__chr_ram_size + __chr_nvram_size <= 8,
        "UNROM only supports up to 8KiB of CHR-(NV)RAM.")
 
 ASSERT(__prg_ram_size == 0,
-       "Action53 does not support PRG RAM")
+       "UNROM does not support PRG RAM")
 ASSERT(__prg_nvram_size == 0,
-       "Action53 does not support PRG-NVRAM")
+       "UNROM does not support PRG-NVRAM")

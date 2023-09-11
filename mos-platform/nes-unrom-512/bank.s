@@ -14,11 +14,12 @@ _BANK: .byte $FF
 .section .text.banked_call,"ax",@progbits
 .weak banked_call
 banked_call:
+	sta __rc17 ; __rc17 = requested PRG bank
+	
 	lda __rc20
 	pha
 
 	; adjust PRG bank
-	sta __rc17 ; __rc17 = requested PRG bank
 	lda _BANK_SHADOW
 	and #$1F
 	sta __rc20 ; __rc20 = previous PRG bank (saved)

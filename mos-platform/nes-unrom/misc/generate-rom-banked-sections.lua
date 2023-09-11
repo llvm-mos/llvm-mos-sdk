@@ -62,6 +62,7 @@ end
 print([[  .prg_rom_fixed : { *(.prg_rom_fixed .prg_rom_fixed.*) } >prg_rom_fixed
 }
 
+INCLUDE rompoke-table.ld
 INCLUDE dpcm.ld
 
 SECTIONS {

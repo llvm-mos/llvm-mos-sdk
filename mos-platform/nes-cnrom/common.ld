@@ -3,6 +3,7 @@
 INCLUDE nes.ld
 INCLUDE prg-ram-fixed.ld
 INCLUDE prg-rom-fixed.ld
+INCLUDE _rompoke.ld
 
 ASSERT(__chr_ram_size + __chr_nvram_size + __chr_rom_size <= 2048,
        "CNROM only supports up to 2048 KiB of CHR.")

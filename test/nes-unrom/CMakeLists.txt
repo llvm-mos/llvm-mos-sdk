@@ -6,3 +6,4 @@ include(../test.cmake)
 
 add_mesen_test(minimal)
 add_mesen_test(prg-rom-256)
+add_mesen_test(prg-rom-banked-call)

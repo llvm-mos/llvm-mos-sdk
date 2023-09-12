@@ -21,6 +21,14 @@ local CONFIG_MAP = {
 		{8, "(__chr_rom_size + __chr_ram_size + __chr_nvram_size)", ">log2", 8, ["description"] = "CHR ROM bank"},
 		["none_if"] = "__submapper == 1"
 	},
+	["color-dreams"] = {
+		{2, "__prg_rom_size", ">log2", 32, ["description"] = "PRG ROM bank"},
+		{2, nil, ["description"] = "Lockout"},
+		{4, "(__chr_rom_size + __chr_ram_size + __chr_nvram_size)", ">log2", 4, ["description"] = "CHR ROM bank"}
+	},
+	["cprom"] = {
+		{8, "(__chr_rom_size + __chr_ram_size + __chr_nvram_size)", ">log2", 4, ["description"] = "CHR RAM bank"}
+	},
 	["gnrom"] = {
 		{4, "__chr_rom_size", ">log2", 8, ["description"] = "CHR ROM bank"},
 		{4, "__prg_rom_size", ">log2", 32, ["description"] = "PRG ROM bank"}

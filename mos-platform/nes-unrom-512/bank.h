@@ -29,13 +29,23 @@ extern "C" {
 	asm(".globl __mirroring\n.globl __four_screen\n__mirroring = 0\n__four_screen = 1\n")
 
 /**
- * @brief Define this in a .c file to use 4-screen mirroring, with the last 8 KB of CHR-RAM
- * dedicated to storing the four name tables.
+ * @brief Define this in a .c file to use 4-screen mirroring, with the last
+ * 8 KB of CHR-RAM dedicated to storing the four name tables.
  *
- * In this mode, only banks 0-2 of CHR-RAM are fully safe to use for pattern table data.
+ * In this mode, only banks 0-2 of CHR-RAM are fully safe to use for pattern
+ * table data.
  */
 #define MAPPER_USE_4_SCREEN_NAMETABLE \
 	asm(".globl __mirroring\n.globl __four_screen\n__mirroring = 1\n__four_screen = 1\n")
+
+/**
+ * @brief Define this in a .c file to use the self-flashable board.
+ *
+ * This also protects against bus conflicts, removing the bus conflict table
+ * from the fixed ROM bank.
+ */
+#define MAPPER_USE_SELF_FLASHABLE_BOARD \
+	asm(".globl __battery\n__battery = 1\n")
 
 #define PRG_BANK_MASK       0x1F
 #define PRG_BANK_SHIFT      0

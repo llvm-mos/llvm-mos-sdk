@@ -8,10 +8,10 @@
 
 __attribute__((section(".zp.bss"))) char _BANK_SHADOW;
 
-__attribute__((leaf)) char get_prg_bank(void) {
+__attribute__((leaf)) char get_chr_bank(void) {
   return _BANK_SHADOW;
 }
 
-__attribute__((leaf)) void set_prg_bank(char value) {
+__attribute__((leaf)) void set_chr_bank(char value) {
   rom_poke_safe(_BANK_SHADOW = value);
 }

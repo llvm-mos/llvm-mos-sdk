@@ -152,6 +152,7 @@ SECTIONS {
   .chr_rom_3   : { KEEP(*(.chr_rom_3   .chr_rom_3.*)) }   >chr_rom_3
 }
 
+INCLUDE rompoke-table.ld
 INCLUDE dpcm.ld
 
 SECTIONS {

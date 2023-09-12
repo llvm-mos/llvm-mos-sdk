@@ -6,6 +6,7 @@ endif()
 
 install(FILES
   _prg-rom-banked.ld
+  _rompoke.ld
   common.ld
   prg-rom.ld
 TYPE LIB)

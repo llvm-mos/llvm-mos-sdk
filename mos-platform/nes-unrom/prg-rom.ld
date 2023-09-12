@@ -1,3 +1,4 @@
+INCLUDE _rompoke.ld
 INCLUDE _prg-rom-banked.ld
 
 PROVIDE(__prg_rom_size = 256);

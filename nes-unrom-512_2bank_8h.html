@@ -89,6 +89,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a67da685b5510cc8f6177bdaaea673a1d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-unrom-512_2bank_8h.html#a67da685b5510cc8f6177bdaaea673a1d">MAPPER_USE_4_SCREEN_NAMETABLE</a>&#160;&#160;&#160;asm(&quot;.globl __mirroring\n.globl __four_screen\n__mirroring = 1\n__four_screen = 1\n&quot;)</td></tr>
 <tr class="memdesc:a67da685b5510cc8f6177bdaaea673a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this in a .c file to use 4-screen mirroring, with the last 8 KB of CHR-RAM dedicated to storing the four name tables.  <a href="nes-unrom-512_2bank_8h.html#a67da685b5510cc8f6177bdaaea673a1d">More...</a><br /></td></tr>
 <tr class="separator:a67da685b5510cc8f6177bdaaea673a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85a44af36ba6e5b91ccf44aa56661e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-unrom-512_2bank_8h.html#ab85a44af36ba6e5b91ccf44aa56661e3">MAPPER_USE_SELF_FLASHABLE_BOARD</a>&#160;&#160;&#160;asm(&quot;.globl __battery\n__battery = 1\n&quot;)</td></tr>
+<tr class="memdesc:ab85a44af36ba6e5b91ccf44aa56661e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this in a .c file to use the self-flashable board.  <a href="nes-unrom-512_2bank_8h.html#ab85a44af36ba6e5b91ccf44aa56661e3">More...</a><br /></td></tr>
+<tr class="separator:ab85a44af36ba6e5b91ccf44aa56661e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5a667424963f41d270dce2f59807ebd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-unrom-512_2bank_8h.html#ac5a667424963f41d270dce2f59807ebd">PRG_BANK_MASK</a>&#160;&#160;&#160;0x1F</td></tr>
 <tr class="separator:ac5a667424963f41d270dce2f59807ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85bb68621357b7c8b4413a5305d42de0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-unrom-512_2bank_8h.html#a85bb68621357b7c8b4413a5305d42de0">PRG_BANK_SHIFT</a>&#160;&#160;&#160;0</td></tr>
@@ -288,6 +291,23 @@ Variables</h2></td></tr>
 
 <p>Define this in a .c file to use 4-screen mirroring, with the last 8 KB of CHR-RAM dedicated to storing the four name tables. </p>
 <p>In this mode, only banks 0-2 of CHR-RAM are fully safe to use for pattern table data. </p>
+
+</div>
+</div>
+<a id="ab85a44af36ba6e5b91ccf44aa56661e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab85a44af36ba6e5b91ccf44aa56661e3">&#9670;&nbsp;</a></span>MAPPER_USE_SELF_FLASHABLE_BOARD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAPPER_USE_SELF_FLASHABLE_BOARD&#160;&#160;&#160;asm(&quot;.globl __battery\n__battery = 1\n&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define this in a .c file to use the self-flashable board. </p>
+<p>This also protects against bus conflicts, removing the bus conflict table from the fixed ROM bank. </p>
 
 </div>
 </div>

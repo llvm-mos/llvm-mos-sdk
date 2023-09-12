@@ -25,6 +25,8 @@ if(HOSTED)
   install_example(hello-putchar)
   add_executable(init-functions init-functions.cc)
   install_example(init-functions)
+  add_executable(struct-of-arrays struct-of-arrays.cc)
+  install_example(struct-of-arrays)
 endif()
 
 if(PLATFORM MATCHES ^nes-)

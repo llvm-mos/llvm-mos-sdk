@@ -17,6 +17,10 @@ print([[/**
  * (for sections N > __rom_poke_table_size). This has the effect of only
  * emitting a byte in "__rom_poke_table_size" consecutive sections, creating
  * the desired dynamically sized table.
+ *
+ * The fill pattern chooses to emit all four bytes as a repeating sequence,
+ * as the value is interpreted as big-endian, even though we only use one byte
+ * of that.
  */]])
 
 print("SECTIONS {")
@@ -25,7 +29,7 @@ for i=0,255 do
   if i == 0 then
     print("    __rom_poke_table = .;")
   end
-	print(string.format("    FILL(0x%02x)", i))
+	print(string.format("    FILL(0x%08X)", i * 0x1010101))
 	print(string.format("    . = . + (__rom_poke_table_size > %d ? 1 : 0);", i))
   print("  } >c_readonly")
 end

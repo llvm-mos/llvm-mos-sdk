@@ -12,7 +12,7 @@ for i=0,255 do
   if i == 0 then
     print("    __rom_poke_table = .;")
   end
-	print(string.format("    FILL(0x%08x)", i * 0x01010101))
+	print(string.format("    FILL(0x%02x)", i))
 	print(string.format("    . = . + (__rom_poke_table_size > %d ? 1 : 0);", i))
   print("  } >c_readonly")
 end

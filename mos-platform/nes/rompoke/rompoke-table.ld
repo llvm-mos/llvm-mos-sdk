@@ -2,1027 +2,1027 @@
 SECTIONS {
   .rom_poke_table_0 : {
     __rom_poke_table = .;
-    FILL(0x00000000)
+    FILL(0x00)
     . = . + (__rom_poke_table_size > 0 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_1 : {
-    FILL(0x01010101)
+    FILL(0x01)
     . = . + (__rom_poke_table_size > 1 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_2 : {
-    FILL(0x02020202)
+    FILL(0x02)
     . = . + (__rom_poke_table_size > 2 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_3 : {
-    FILL(0x03030303)
+    FILL(0x03)
     . = . + (__rom_poke_table_size > 3 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_4 : {
-    FILL(0x04040404)
+    FILL(0x04)
     . = . + (__rom_poke_table_size > 4 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_5 : {
-    FILL(0x05050505)
+    FILL(0x05)
     . = . + (__rom_poke_table_size > 5 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_6 : {
-    FILL(0x06060606)
+    FILL(0x06)
     . = . + (__rom_poke_table_size > 6 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_7 : {
-    FILL(0x07070707)
+    FILL(0x07)
     . = . + (__rom_poke_table_size > 7 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_8 : {
-    FILL(0x08080808)
+    FILL(0x08)
     . = . + (__rom_poke_table_size > 8 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_9 : {
-    FILL(0x09090909)
+    FILL(0x09)
     . = . + (__rom_poke_table_size > 9 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_10 : {
-    FILL(0x0a0a0a0a)
+    FILL(0x0a)
     . = . + (__rom_poke_table_size > 10 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_11 : {
-    FILL(0x0b0b0b0b)
+    FILL(0x0b)
     . = . + (__rom_poke_table_size > 11 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_12 : {
-    FILL(0x0c0c0c0c)
+    FILL(0x0c)
     . = . + (__rom_poke_table_size > 12 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_13 : {
-    FILL(0x0d0d0d0d)
+    FILL(0x0d)
     . = . + (__rom_poke_table_size > 13 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_14 : {
-    FILL(0x0e0e0e0e)
+    FILL(0x0e)
     . = . + (__rom_poke_table_size > 14 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_15 : {
-    FILL(0x0f0f0f0f)
+    FILL(0x0f)
     . = . + (__rom_poke_table_size > 15 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_16 : {
-    FILL(0x10101010)
+    FILL(0x10)
     . = . + (__rom_poke_table_size > 16 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_17 : {
-    FILL(0x11111111)
+    FILL(0x11)
     . = . + (__rom_poke_table_size > 17 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_18 : {
-    FILL(0x12121212)
+    FILL(0x12)
     . = . + (__rom_poke_table_size > 18 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_19 : {
-    FILL(0x13131313)
+    FILL(0x13)
     . = . + (__rom_poke_table_size > 19 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_20 : {
-    FILL(0x14141414)
+    FILL(0x14)
     . = . + (__rom_poke_table_size > 20 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_21 : {
-    FILL(0x15151515)
+    FILL(0x15)
     . = . + (__rom_poke_table_size > 21 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_22 : {
-    FILL(0x16161616)
+    FILL(0x16)
     . = . + (__rom_poke_table_size > 22 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_23 : {
-    FILL(0x17171717)
+    FILL(0x17)
     . = . + (__rom_poke_table_size > 23 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_24 : {
-    FILL(0x18181818)
+    FILL(0x18)
     . = . + (__rom_poke_table_size > 24 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_25 : {
-    FILL(0x19191919)
+    FILL(0x19)
     . = . + (__rom_poke_table_size > 25 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_26 : {
-    FILL(0x1a1a1a1a)
+    FILL(0x1a)
     . = . + (__rom_poke_table_size > 26 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_27 : {
-    FILL(0x1b1b1b1b)
+    FILL(0x1b)
     . = . + (__rom_poke_table_size > 27 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_28 : {
-    FILL(0x1c1c1c1c)
+    FILL(0x1c)
     . = . + (__rom_poke_table_size > 28 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_29 : {
-    FILL(0x1d1d1d1d)
+    FILL(0x1d)
     . = . + (__rom_poke_table_size > 29 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_30 : {
-    FILL(0x1e1e1e1e)
+    FILL(0x1e)
     . = . + (__rom_poke_table_size > 30 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_31 : {
-    FILL(0x1f1f1f1f)
+    FILL(0x1f)
     . = . + (__rom_poke_table_size > 31 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_32 : {
-    FILL(0x20202020)
+    FILL(0x20)
     . = . + (__rom_poke_table_size > 32 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_33 : {
-    FILL(0x21212121)
+    FILL(0x21)
     . = . + (__rom_poke_table_size > 33 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_34 : {
-    FILL(0x22222222)
+    FILL(0x22)
     . = . + (__rom_poke_table_size > 34 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_35 : {
-    FILL(0x23232323)
+    FILL(0x23)
     . = . + (__rom_poke_table_size > 35 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_36 : {
-    FILL(0x24242424)
+    FILL(0x24)
     . = . + (__rom_poke_table_size > 36 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_37 : {
-    FILL(0x25252525)
+    FILL(0x25)
     . = . + (__rom_poke_table_size > 37 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_38 : {
-    FILL(0x26262626)
+    FILL(0x26)
     . = . + (__rom_poke_table_size > 38 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_39 : {
-    FILL(0x27272727)
+    FILL(0x27)
     . = . + (__rom_poke_table_size > 39 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_40 : {
-    FILL(0x28282828)
+    FILL(0x28)
     . = . + (__rom_poke_table_size > 40 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_41 : {
-    FILL(0x29292929)
+    FILL(0x29)
     . = . + (__rom_poke_table_size > 41 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_42 : {
-    FILL(0x2a2a2a2a)
+    FILL(0x2a)
     . = . + (__rom_poke_table_size > 42 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_43 : {
-    FILL(0x2b2b2b2b)
+    FILL(0x2b)
     . = . + (__rom_poke_table_size > 43 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_44 : {
-    FILL(0x2c2c2c2c)
+    FILL(0x2c)
     . = . + (__rom_poke_table_size > 44 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_45 : {
-    FILL(0x2d2d2d2d)
+    FILL(0x2d)
     . = . + (__rom_poke_table_size > 45 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_46 : {
-    FILL(0x2e2e2e2e)
+    FILL(0x2e)
     . = . + (__rom_poke_table_size > 46 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_47 : {
-    FILL(0x2f2f2f2f)
+    FILL(0x2f)
     . = . + (__rom_poke_table_size > 47 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_48 : {
-    FILL(0x30303030)
+    FILL(0x30)
     . = . + (__rom_poke_table_size > 48 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_49 : {
-    FILL(0x31313131)
+    FILL(0x31)
     . = . + (__rom_poke_table_size > 49 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_50 : {
-    FILL(0x32323232)
+    FILL(0x32)
     . = . + (__rom_poke_table_size > 50 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_51 : {
-    FILL(0x33333333)
+    FILL(0x33)
     . = . + (__rom_poke_table_size > 51 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_52 : {
-    FILL(0x34343434)
+    FILL(0x34)
     . = . + (__rom_poke_table_size > 52 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_53 : {
-    FILL(0x35353535)
+    FILL(0x35)
     . = . + (__rom_poke_table_size > 53 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_54 : {
-    FILL(0x36363636)
+    FILL(0x36)
     . = . + (__rom_poke_table_size > 54 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_55 : {
-    FILL(0x37373737)
+    FILL(0x37)
     . = . + (__rom_poke_table_size > 55 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_56 : {
-    FILL(0x38383838)
+    FILL(0x38)
     . = . + (__rom_poke_table_size > 56 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_57 : {
-    FILL(0x39393939)
+    FILL(0x39)
     . = . + (__rom_poke_table_size > 57 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_58 : {
-    FILL(0x3a3a3a3a)
+    FILL(0x3a)
     . = . + (__rom_poke_table_size > 58 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_59 : {
-    FILL(0x3b3b3b3b)
+    FILL(0x3b)
     . = . + (__rom_poke_table_size > 59 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_60 : {
-    FILL(0x3c3c3c3c)
+    FILL(0x3c)
     . = . + (__rom_poke_table_size > 60 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_61 : {
-    FILL(0x3d3d3d3d)
+    FILL(0x3d)
     . = . + (__rom_poke_table_size > 61 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_62 : {
-    FILL(0x3e3e3e3e)
+    FILL(0x3e)
     . = . + (__rom_poke_table_size > 62 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_63 : {
-    FILL(0x3f3f3f3f)
+    FILL(0x3f)
     . = . + (__rom_poke_table_size > 63 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_64 : {
-    FILL(0x40404040)
+    FILL(0x40)
     . = . + (__rom_poke_table_size > 64 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_65 : {
-    FILL(0x41414141)
+    FILL(0x41)
     . = . + (__rom_poke_table_size > 65 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_66 : {
-    FILL(0x42424242)
+    FILL(0x42)
     . = . + (__rom_poke_table_size > 66 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_67 : {
-    FILL(0x43434343)
+    FILL(0x43)
     . = . + (__rom_poke_table_size > 67 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_68 : {
-    FILL(0x44444444)
+    FILL(0x44)
     . = . + (__rom_poke_table_size > 68 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_69 : {
-    FILL(0x45454545)
+    FILL(0x45)
     . = . + (__rom_poke_table_size > 69 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_70 : {
-    FILL(0x46464646)
+    FILL(0x46)
     . = . + (__rom_poke_table_size > 70 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_71 : {
-    FILL(0x47474747)
+    FILL(0x47)
     . = . + (__rom_poke_table_size > 71 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_72 : {
-    FILL(0x48484848)
+    FILL(0x48)
     . = . + (__rom_poke_table_size > 72 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_73 : {
-    FILL(0x49494949)
+    FILL(0x49)
     . = . + (__rom_poke_table_size > 73 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_74 : {
-    FILL(0x4a4a4a4a)
+    FILL(0x4a)
     . = . + (__rom_poke_table_size > 74 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_75 : {
-    FILL(0x4b4b4b4b)
+    FILL(0x4b)
     . = . + (__rom_poke_table_size > 75 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_76 : {
-    FILL(0x4c4c4c4c)
+    FILL(0x4c)
     . = . + (__rom_poke_table_size > 76 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_77 : {
-    FILL(0x4d4d4d4d)
+    FILL(0x4d)
     . = . + (__rom_poke_table_size > 77 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_78 : {
-    FILL(0x4e4e4e4e)
+    FILL(0x4e)
     . = . + (__rom_poke_table_size > 78 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_79 : {
-    FILL(0x4f4f4f4f)
+    FILL(0x4f)
     . = . + (__rom_poke_table_size > 79 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_80 : {
-    FILL(0x50505050)
+    FILL(0x50)
     . = . + (__rom_poke_table_size > 80 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_81 : {
-    FILL(0x51515151)
+    FILL(0x51)
     . = . + (__rom_poke_table_size > 81 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_82 : {
-    FILL(0x52525252)
+    FILL(0x52)
     . = . + (__rom_poke_table_size > 82 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_83 : {
-    FILL(0x53535353)
+    FILL(0x53)
     . = . + (__rom_poke_table_size > 83 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_84 : {
-    FILL(0x54545454)
+    FILL(0x54)
     . = . + (__rom_poke_table_size > 84 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_85 : {
-    FILL(0x55555555)
+    FILL(0x55)
     . = . + (__rom_poke_table_size > 85 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_86 : {
-    FILL(0x56565656)
+    FILL(0x56)
     . = . + (__rom_poke_table_size > 86 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_87 : {
-    FILL(0x57575757)
+    FILL(0x57)
     . = . + (__rom_poke_table_size > 87 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_88 : {
-    FILL(0x58585858)
+    FILL(0x58)
     . = . + (__rom_poke_table_size > 88 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_89 : {
-    FILL(0x59595959)
+    FILL(0x59)
     . = . + (__rom_poke_table_size > 89 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_90 : {
-    FILL(0x5a5a5a5a)
+    FILL(0x5a)
     . = . + (__rom_poke_table_size > 90 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_91 : {
-    FILL(0x5b5b5b5b)
+    FILL(0x5b)
     . = . + (__rom_poke_table_size > 91 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_92 : {
-    FILL(0x5c5c5c5c)
+    FILL(0x5c)
     . = . + (__rom_poke_table_size > 92 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_93 : {
-    FILL(0x5d5d5d5d)
+    FILL(0x5d)
     . = . + (__rom_poke_table_size > 93 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_94 : {
-    FILL(0x5e5e5e5e)
+    FILL(0x5e)
     . = . + (__rom_poke_table_size > 94 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_95 : {
-    FILL(0x5f5f5f5f)
+    FILL(0x5f)
     . = . + (__rom_poke_table_size > 95 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_96 : {
-    FILL(0x60606060)
+    FILL(0x60)
     . = . + (__rom_poke_table_size > 96 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_97 : {
-    FILL(0x61616161)
+    FILL(0x61)
     . = . + (__rom_poke_table_size > 97 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_98 : {
-    FILL(0x62626262)
+    FILL(0x62)
     . = . + (__rom_poke_table_size > 98 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_99 : {
-    FILL(0x63636363)
+    FILL(0x63)
     . = . + (__rom_poke_table_size > 99 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_100 : {
-    FILL(0x64646464)
+    FILL(0x64)
     . = . + (__rom_poke_table_size > 100 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_101 : {
-    FILL(0x65656565)
+    FILL(0x65)
     . = . + (__rom_poke_table_size > 101 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_102 : {
-    FILL(0x66666666)
+    FILL(0x66)
     . = . + (__rom_poke_table_size > 102 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_103 : {
-    FILL(0x67676767)
+    FILL(0x67)
     . = . + (__rom_poke_table_size > 103 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_104 : {
-    FILL(0x68686868)
+    FILL(0x68)
     . = . + (__rom_poke_table_size > 104 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_105 : {
-    FILL(0x69696969)
+    FILL(0x69)
     . = . + (__rom_poke_table_size > 105 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_106 : {
-    FILL(0x6a6a6a6a)
+    FILL(0x6a)
     . = . + (__rom_poke_table_size > 106 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_107 : {
-    FILL(0x6b6b6b6b)
+    FILL(0x6b)
     . = . + (__rom_poke_table_size > 107 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_108 : {
-    FILL(0x6c6c6c6c)
+    FILL(0x6c)
     . = . + (__rom_poke_table_size > 108 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_109 : {
-    FILL(0x6d6d6d6d)
+    FILL(0x6d)
     . = . + (__rom_poke_table_size > 109 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_110 : {
-    FILL(0x6e6e6e6e)
+    FILL(0x6e)
     . = . + (__rom_poke_table_size > 110 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_111 : {
-    FILL(0x6f6f6f6f)
+    FILL(0x6f)
     . = . + (__rom_poke_table_size > 111 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_112 : {
-    FILL(0x70707070)
+    FILL(0x70)
     . = . + (__rom_poke_table_size > 112 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_113 : {
-    FILL(0x71717171)
+    FILL(0x71)
     . = . + (__rom_poke_table_size > 113 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_114 : {
-    FILL(0x72727272)
+    FILL(0x72)
     . = . + (__rom_poke_table_size > 114 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_115 : {
-    FILL(0x73737373)
+    FILL(0x73)
     . = . + (__rom_poke_table_size > 115 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_116 : {
-    FILL(0x74747474)
+    FILL(0x74)
     . = . + (__rom_poke_table_size > 116 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_117 : {
-    FILL(0x75757575)
+    FILL(0x75)
     . = . + (__rom_poke_table_size > 117 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_118 : {
-    FILL(0x76767676)
+    FILL(0x76)
     . = . + (__rom_poke_table_size > 118 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_119 : {
-    FILL(0x77777777)
+    FILL(0x77)
     . = . + (__rom_poke_table_size > 119 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_120 : {
-    FILL(0x78787878)
+    FILL(0x78)
     . = . + (__rom_poke_table_size > 120 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_121 : {
-    FILL(0x79797979)
+    FILL(0x79)
     . = . + (__rom_poke_table_size > 121 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_122 : {
-    FILL(0x7a7a7a7a)
+    FILL(0x7a)
     . = . + (__rom_poke_table_size > 122 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_123 : {
-    FILL(0x7b7b7b7b)
+    FILL(0x7b)
     . = . + (__rom_poke_table_size > 123 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_124 : {
-    FILL(0x7c7c7c7c)
+    FILL(0x7c)
     . = . + (__rom_poke_table_size > 124 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_125 : {
-    FILL(0x7d7d7d7d)
+    FILL(0x7d)
     . = . + (__rom_poke_table_size > 125 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_126 : {
-    FILL(0x7e7e7e7e)
+    FILL(0x7e)
     . = . + (__rom_poke_table_size > 126 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_127 : {
-    FILL(0x7f7f7f7f)
+    FILL(0x7f)
     . = . + (__rom_poke_table_size > 127 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_128 : {
-    FILL(0x80808080)
+    FILL(0x80)
     . = . + (__rom_poke_table_size > 128 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_129 : {
-    FILL(0x81818181)
+    FILL(0x81)
     . = . + (__rom_poke_table_size > 129 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_130 : {
-    FILL(0x82828282)
+    FILL(0x82)
     . = . + (__rom_poke_table_size > 130 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_131 : {
-    FILL(0x83838383)
+    FILL(0x83)
     . = . + (__rom_poke_table_size > 131 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_132 : {
-    FILL(0x84848484)
+    FILL(0x84)
     . = . + (__rom_poke_table_size > 132 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_133 : {
-    FILL(0x85858585)
+    FILL(0x85)
     . = . + (__rom_poke_table_size > 133 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_134 : {
-    FILL(0x86868686)
+    FILL(0x86)
     . = . + (__rom_poke_table_size > 134 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_135 : {
-    FILL(0x87878787)
+    FILL(0x87)
     . = . + (__rom_poke_table_size > 135 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_136 : {
-    FILL(0x88888888)
+    FILL(0x88)
     . = . + (__rom_poke_table_size > 136 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_137 : {
-    FILL(0x89898989)
+    FILL(0x89)
     . = . + (__rom_poke_table_size > 137 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_138 : {
-    FILL(0x8a8a8a8a)
+    FILL(0x8a)
     . = . + (__rom_poke_table_size > 138 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_139 : {
-    FILL(0x8b8b8b8b)
+    FILL(0x8b)
     . = . + (__rom_poke_table_size > 139 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_140 : {
-    FILL(0x8c8c8c8c)
+    FILL(0x8c)
     . = . + (__rom_poke_table_size > 140 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_141 : {
-    FILL(0x8d8d8d8d)
+    FILL(0x8d)
     . = . + (__rom_poke_table_size > 141 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_142 : {
-    FILL(0x8e8e8e8e)
+    FILL(0x8e)
     . = . + (__rom_poke_table_size > 142 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_143 : {
-    FILL(0x8f8f8f8f)
+    FILL(0x8f)
     . = . + (__rom_poke_table_size > 143 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_144 : {
-    FILL(0x90909090)
+    FILL(0x90)
     . = . + (__rom_poke_table_size > 144 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_145 : {
-    FILL(0x91919191)
+    FILL(0x91)
     . = . + (__rom_poke_table_size > 145 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_146 : {
-    FILL(0x92929292)
+    FILL(0x92)
     . = . + (__rom_poke_table_size > 146 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_147 : {
-    FILL(0x93939393)
+    FILL(0x93)
     . = . + (__rom_poke_table_size > 147 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_148 : {
-    FILL(0x94949494)
+    FILL(0x94)
     . = . + (__rom_poke_table_size > 148 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_149 : {
-    FILL(0x95959595)
+    FILL(0x95)
     . = . + (__rom_poke_table_size > 149 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_150 : {
-    FILL(0x96969696)
+    FILL(0x96)
     . = . + (__rom_poke_table_size > 150 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_151 : {
-    FILL(0x97979797)
+    FILL(0x97)
     . = . + (__rom_poke_table_size > 151 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_152 : {
-    FILL(0x98989898)
+    FILL(0x98)
     . = . + (__rom_poke_table_size > 152 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_153 : {
-    FILL(0x99999999)
+    FILL(0x99)
     . = . + (__rom_poke_table_size > 153 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_154 : {
-    FILL(0x9a9a9a9a)
+    FILL(0x9a)
     . = . + (__rom_poke_table_size > 154 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_155 : {
-    FILL(0x9b9b9b9b)
+    FILL(0x9b)
     . = . + (__rom_poke_table_size > 155 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_156 : {
-    FILL(0x9c9c9c9c)
+    FILL(0x9c)
     . = . + (__rom_poke_table_size > 156 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_157 : {
-    FILL(0x9d9d9d9d)
+    FILL(0x9d)
     . = . + (__rom_poke_table_size > 157 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_158 : {
-    FILL(0x9e9e9e9e)
+    FILL(0x9e)
     . = . + (__rom_poke_table_size > 158 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_159 : {
-    FILL(0x9f9f9f9f)
+    FILL(0x9f)
     . = . + (__rom_poke_table_size > 159 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_160 : {
-    FILL(0xa0a0a0a0)
+    FILL(0xa0)
     . = . + (__rom_poke_table_size > 160 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_161 : {
-    FILL(0xa1a1a1a1)
+    FILL(0xa1)
     . = . + (__rom_poke_table_size > 161 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_162 : {
-    FILL(0xa2a2a2a2)
+    FILL(0xa2)
     . = . + (__rom_poke_table_size > 162 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_163 : {
-    FILL(0xa3a3a3a3)
+    FILL(0xa3)
     . = . + (__rom_poke_table_size > 163 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_164 : {
-    FILL(0xa4a4a4a4)
+    FILL(0xa4)
     . = . + (__rom_poke_table_size > 164 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_165 : {
-    FILL(0xa5a5a5a5)
+    FILL(0xa5)
     . = . + (__rom_poke_table_size > 165 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_166 : {
-    FILL(0xa6a6a6a6)
+    FILL(0xa6)
     . = . + (__rom_poke_table_size > 166 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_167 : {
-    FILL(0xa7a7a7a7)
+    FILL(0xa7)
     . = . + (__rom_poke_table_size > 167 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_168 : {
-    FILL(0xa8a8a8a8)
+    FILL(0xa8)
     . = . + (__rom_poke_table_size > 168 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_169 : {
-    FILL(0xa9a9a9a9)
+    FILL(0xa9)
     . = . + (__rom_poke_table_size > 169 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_170 : {
-    FILL(0xaaaaaaaa)
+    FILL(0xaa)
     . = . + (__rom_poke_table_size > 170 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_171 : {
-    FILL(0xabababab)
+    FILL(0xab)
     . = . + (__rom_poke_table_size > 171 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_172 : {
-    FILL(0xacacacac)
+    FILL(0xac)
     . = . + (__rom_poke_table_size > 172 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_173 : {
-    FILL(0xadadadad)
+    FILL(0xad)
     . = . + (__rom_poke_table_size > 173 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_174 : {
-    FILL(0xaeaeaeae)
+    FILL(0xae)
     . = . + (__rom_poke_table_size > 174 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_175 : {
-    FILL(0xafafafaf)
+    FILL(0xaf)
     . = . + (__rom_poke_table_size > 175 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_176 : {
-    FILL(0xb0b0b0b0)
+    FILL(0xb0)
     . = . + (__rom_poke_table_size > 176 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_177 : {
-    FILL(0xb1b1b1b1)
+    FILL(0xb1)
     . = . + (__rom_poke_table_size > 177 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_178 : {
-    FILL(0xb2b2b2b2)
+    FILL(0xb2)
     . = . + (__rom_poke_table_size > 178 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_179 : {
-    FILL(0xb3b3b3b3)
+    FILL(0xb3)
     . = . + (__rom_poke_table_size > 179 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_180 : {
-    FILL(0xb4b4b4b4)
+    FILL(0xb4)
     . = . + (__rom_poke_table_size > 180 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_181 : {
-    FILL(0xb5b5b5b5)
+    FILL(0xb5)
     . = . + (__rom_poke_table_size > 181 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_182 : {
-    FILL(0xb6b6b6b6)
+    FILL(0xb6)
     . = . + (__rom_poke_table_size > 182 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_183 : {
-    FILL(0xb7b7b7b7)
+    FILL(0xb7)
     . = . + (__rom_poke_table_size > 183 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_184 : {
-    FILL(0xb8b8b8b8)
+    FILL(0xb8)
     . = . + (__rom_poke_table_size > 184 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_185 : {
-    FILL(0xb9b9b9b9)
+    FILL(0xb9)
     . = . + (__rom_poke_table_size > 185 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_186 : {
-    FILL(0xbabababa)
+    FILL(0xba)
     . = . + (__rom_poke_table_size > 186 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_187 : {
-    FILL(0xbbbbbbbb)
+    FILL(0xbb)
     . = . + (__rom_poke_table_size > 187 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_188 : {
-    FILL(0xbcbcbcbc)
+    FILL(0xbc)
     . = . + (__rom_poke_table_size > 188 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_189 : {
-    FILL(0xbdbdbdbd)
+    FILL(0xbd)
     . = . + (__rom_poke_table_size > 189 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_190 : {
-    FILL(0xbebebebe)
+    FILL(0xbe)
     . = . + (__rom_poke_table_size > 190 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_191 : {
-    FILL(0xbfbfbfbf)
+    FILL(0xbf)
     . = . + (__rom_poke_table_size > 191 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_192 : {
-    FILL(0xc0c0c0c0)
+    FILL(0xc0)
     . = . + (__rom_poke_table_size > 192 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_193 : {
-    FILL(0xc1c1c1c1)
+    FILL(0xc1)
     . = . + (__rom_poke_table_size > 193 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_194 : {
-    FILL(0xc2c2c2c2)
+    FILL(0xc2)
     . = . + (__rom_poke_table_size > 194 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_195 : {
-    FILL(0xc3c3c3c3)
+    FILL(0xc3)
     . = . + (__rom_poke_table_size > 195 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_196 : {
-    FILL(0xc4c4c4c4)
+    FILL(0xc4)
     . = . + (__rom_poke_table_size > 196 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_197 : {
-    FILL(0xc5c5c5c5)
+    FILL(0xc5)
     . = . + (__rom_poke_table_size > 197 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_198 : {
-    FILL(0xc6c6c6c6)
+    FILL(0xc6)
     . = . + (__rom_poke_table_size > 198 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_199 : {
-    FILL(0xc7c7c7c7)
+    FILL(0xc7)
     . = . + (__rom_poke_table_size > 199 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_200 : {
-    FILL(0xc8c8c8c8)
+    FILL(0xc8)
     . = . + (__rom_poke_table_size > 200 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_201 : {
-    FILL(0xc9c9c9c9)
+    FILL(0xc9)
     . = . + (__rom_poke_table_size > 201 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_202 : {
-    FILL(0xcacacaca)
+    FILL(0xca)
     . = . + (__rom_poke_table_size > 202 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_203 : {
-    FILL(0xcbcbcbcb)
+    FILL(0xcb)
     . = . + (__rom_poke_table_size > 203 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_204 : {
-    FILL(0xcccccccc)
+    FILL(0xcc)
     . = . + (__rom_poke_table_size > 204 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_205 : {
-    FILL(0xcdcdcdcd)
+    FILL(0xcd)
     . = . + (__rom_poke_table_size > 205 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_206 : {
-    FILL(0xcececece)
+    FILL(0xce)
     . = . + (__rom_poke_table_size > 206 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_207 : {
-    FILL(0xcfcfcfcf)
+    FILL(0xcf)
     . = . + (__rom_poke_table_size > 207 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_208 : {
-    FILL(0xd0d0d0d0)
+    FILL(0xd0)
     . = . + (__rom_poke_table_size > 208 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_209 : {
-    FILL(0xd1d1d1d1)
+    FILL(0xd1)
     . = . + (__rom_poke_table_size > 209 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_210 : {
-    FILL(0xd2d2d2d2)
+    FILL(0xd2)
     . = . + (__rom_poke_table_size > 210 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_211 : {
-    FILL(0xd3d3d3d3)
+    FILL(0xd3)
     . = . + (__rom_poke_table_size > 211 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_212 : {
-    FILL(0xd4d4d4d4)
+    FILL(0xd4)
     . = . + (__rom_poke_table_size > 212 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_213 : {
-    FILL(0xd5d5d5d5)
+    FILL(0xd5)
     . = . + (__rom_poke_table_size > 213 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_214 : {
-    FILL(0xd6d6d6d6)
+    FILL(0xd6)
     . = . + (__rom_poke_table_size > 214 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_215 : {
-    FILL(0xd7d7d7d7)
+    FILL(0xd7)
     . = . + (__rom_poke_table_size > 215 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_216 : {
-    FILL(0xd8d8d8d8)
+    FILL(0xd8)
     . = . + (__rom_poke_table_size > 216 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_217 : {
-    FILL(0xd9d9d9d9)
+    FILL(0xd9)
     . = . + (__rom_poke_table_size > 217 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_218 : {
-    FILL(0xdadadada)
+    FILL(0xda)
     . = . + (__rom_poke_table_size > 218 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_219 : {
-    FILL(0xdbdbdbdb)
+    FILL(0xdb)
     . = . + (__rom_poke_table_size > 219 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_220 : {
-    FILL(0xdcdcdcdc)
+    FILL(0xdc)
     . = . + (__rom_poke_table_size > 220 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_221 : {
-    FILL(0xdddddddd)
+    FILL(0xdd)
     . = . + (__rom_poke_table_size > 221 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_222 : {
-    FILL(0xdededede)
+    FILL(0xde)
     . = . + (__rom_poke_table_size > 222 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_223 : {
-    FILL(0xdfdfdfdf)
+    FILL(0xdf)
     . = . + (__rom_poke_table_size > 223 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_224 : {
-    FILL(0xe0e0e0e0)
+    FILL(0xe0)
     . = . + (__rom_poke_table_size > 224 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_225 : {
-    FILL(0xe1e1e1e1)
+    FILL(0xe1)
     . = . + (__rom_poke_table_size > 225 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_226 : {
-    FILL(0xe2e2e2e2)
+    FILL(0xe2)
     . = . + (__rom_poke_table_size > 226 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_227 : {
-    FILL(0xe3e3e3e3)
+    FILL(0xe3)
     . = . + (__rom_poke_table_size > 227 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_228 : {
-    FILL(0xe4e4e4e4)
+    FILL(0xe4)
     . = . + (__rom_poke_table_size > 228 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_229 : {
-    FILL(0xe5e5e5e5)
+    FILL(0xe5)
     . = . + (__rom_poke_table_size > 229 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_230 : {
-    FILL(0xe6e6e6e6)
+    FILL(0xe6)
     . = . + (__rom_poke_table_size > 230 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_231 : {
-    FILL(0xe7e7e7e7)
+    FILL(0xe7)
     . = . + (__rom_poke_table_size > 231 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_232 : {
-    FILL(0xe8e8e8e8)
+    FILL(0xe8)
     . = . + (__rom_poke_table_size > 232 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_233 : {
-    FILL(0xe9e9e9e9)
+    FILL(0xe9)
     . = . + (__rom_poke_table_size > 233 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_234 : {
-    FILL(0xeaeaeaea)
+    FILL(0xea)
     . = . + (__rom_poke_table_size > 234 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_235 : {
-    FILL(0xebebebeb)
+    FILL(0xeb)
     . = . + (__rom_poke_table_size > 235 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_236 : {
-    FILL(0xecececec)
+    FILL(0xec)
     . = . + (__rom_poke_table_size > 236 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_237 : {
-    FILL(0xedededed)
+    FILL(0xed)
     . = . + (__rom_poke_table_size > 237 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_238 : {
-    FILL(0xeeeeeeee)
+    FILL(0xee)
     . = . + (__rom_poke_table_size > 238 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_239 : {
-    FILL(0xefefefef)
+    FILL(0xef)
     . = . + (__rom_poke_table_size > 239 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_240 : {
-    FILL(0xf0f0f0f0)
+    FILL(0xf0)
     . = . + (__rom_poke_table_size > 240 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_241 : {
-    FILL(0xf1f1f1f1)
+    FILL(0xf1)
     . = . + (__rom_poke_table_size > 241 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_242 : {
-    FILL(0xf2f2f2f2)
+    FILL(0xf2)
     . = . + (__rom_poke_table_size > 242 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_243 : {
-    FILL(0xf3f3f3f3)
+    FILL(0xf3)
     . = . + (__rom_poke_table_size > 243 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_244 : {
-    FILL(0xf4f4f4f4)
+    FILL(0xf4)
     . = . + (__rom_poke_table_size > 244 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_245 : {
-    FILL(0xf5f5f5f5)
+    FILL(0xf5)
     . = . + (__rom_poke_table_size > 245 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_246 : {
-    FILL(0xf6f6f6f6)
+    FILL(0xf6)
     . = . + (__rom_poke_table_size > 246 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_247 : {
-    FILL(0xf7f7f7f7)
+    FILL(0xf7)
     . = . + (__rom_poke_table_size > 247 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_248 : {
-    FILL(0xf8f8f8f8)
+    FILL(0xf8)
     . = . + (__rom_poke_table_size > 248 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_249 : {
-    FILL(0xf9f9f9f9)
+    FILL(0xf9)
     . = . + (__rom_poke_table_size > 249 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_250 : {
-    FILL(0xfafafafa)
+    FILL(0xfa)
     . = . + (__rom_poke_table_size > 250 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_251 : {
-    FILL(0xfbfbfbfb)
+    FILL(0xfb)
     . = . + (__rom_poke_table_size > 251 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_252 : {
-    FILL(0xfcfcfcfc)
+    FILL(0xfc)
     . = . + (__rom_poke_table_size > 252 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_253 : {
-    FILL(0xfdfdfdfd)
+    FILL(0xfd)
     . = . + (__rom_poke_table_size > 253 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_254 : {
-    FILL(0xfefefefe)
+    FILL(0xfe)
     . = . + (__rom_poke_table_size > 254 ? 1 : 0);
   } >c_readonly
   .rom_poke_table_255 : {
-    FILL(0xffffffff)
+    FILL(0xff)
     . = . + (__rom_poke_table_size > 255 ? 1 : 0);
   } >c_readonly
 }

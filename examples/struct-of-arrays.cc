@@ -2,12 +2,10 @@
 #include <soa.h>
 #include <string.h>
 
-// This provides an exposition of the C++ struct-of-arrays library, soa.h.
-// This represents an array of types as a multidimensional array of bytes: the
-// outer index is the byte offset within the wrapped type, and the inner index
-// is the array index. That is, all of the first bytes are stored, then all of
-// the second bytes, etc. With some care, this allows using the absolute indexed
-// addressing mode to access any byte of the array without pointer arithmetic.
+// This file provides an exposition of the syntax of the C++ struct-of-arrays
+// library, soa.h. This allows expressing arrays of multi-byte types in such a
+// way that the 6502 absolute indexed addressing mode can be used to access the
+// contents. See the introduction in mos-platform/common/include/soa.h.
 
 void transparent_struct();
 

@@ -11,25 +11,37 @@ namespace soa {
 
 /// An array implemented as a struct of arrays.
 ///
-/// This data structure is logically similar to a C-style array, but each byte
-/// of the array's element type is represented as a seperate array of bytes. In
-/// other words, if a C array were represented as a multidimimensional array of
-/// bytes, uint8_t Bytes[ArrayIdx][ByteIdx], this data structure is its
-/// transpose, uint8_t Bytes[ByteIdx][ArrayIdx]. This can provide more efficient
-/// addressing on the 6502, since its 8-bit indexed addressing modes preclude
-/// automatic scaling needed to efficiently access traditional C arrays.
+/// Consider a normal C array, `T array[N]`. If sizeof(T) > 1, then to access
+/// the `k`th byte of the `I`th entry requires evalutating the expression
+/// `array + sizeof(T) * I + k`. Even if `k` and `array` (that is, it's address)
+/// are compile-time constants, evaluating the index still requires a multiply
+/// and 16-bit addition in the worst case.
+///
+/// You could think of this as the following multidimensional array: `uint8_t
+/// array[Idx][ByteIdx]`. The first `Idx` ranges over `N`, while the second
+/// ranges over `sizeof(T)`.
+///
+/// Instead, the indices of this array could be swapped: `uint8_t
+/// array[ByteIdx][Idx]`. Then, accessing the `k`th byte of element `I` would
+/// involve the expression `array + N * k + I`. But, very commonly `array` and
+/// `N * k` are compile time constants! This expression can then be computed
+/// implicitly by the absolute indexed addressing mode. This kind of layout is
+/// commonly performed by hand by experienced C and assembly-language 6502
+/// programmers.
+///
+/// This library organizes its bytes in precisely the way described above, but
+/// with similar syntax to a regular C++ array. To provide a
+/// performance benefit, you must ensure the array's address is at a link-time
+/// constant memory location, and the offsets accessed for each element must
+/// be compile-time constants. That means that no pointers can
+/// be formed into the contents of an array element; this library enforces this.
+/// Also, this class loses its performance benefit, and indeed, may hurt
+/// performance, if accessed through a pointer, since the addressing described
+/// above then intrinsically involves 16-bit pointer arithmetic.
 ///
 /// Because the representation of the elements is broken apart, only trivial
-/// types with standard layouts are supported (think C-style types).
-///
-/// This class loses its performance benefit, and indeed, may hurt performance,
-/// if accessed through a pointer. All uses of this object should be by
-/// explicitly naming the definition. This tends to imply that the definition
-/// is global, but it may also be used as a local variable in functions that
-/// the compiler can prove do not recurse.
-///
-/// The type parameter must be a trivial type with standard layout. It must have
-/// an alignment requirment of 1 byte, and it must not be volatile.
+/// types with standard layouts are supported (think C-style types). It must
+/// have an alignment requirment of 1 byte, and it must not be volatile.
 template <typename T, uint8_t N> class Array;
 
 /// Pointer to an array element.

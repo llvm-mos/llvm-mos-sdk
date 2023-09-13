@@ -5,10 +5,6 @@
 
 .include "imag.inc"
 
-.section .text._bank,"ax",@progbits
-.global _BANK
-_BANK: .byte $FF
-
 .zeropage _BANK_SHADOW
 
 .section .text.banked_call,"ax",@progbits
@@ -24,10 +20,11 @@ banked_call:
 	and #$1F
 	sta __rc20 ; __rc20 = previous PRG bank (saved)
 	lda _BANK_SHADOW
-	and #$70
+	and #$E0
 	ora __rc17
-	sta _BANK ; stored: new bank shadow value
 	sta _BANK_SHADOW
+	tay
+	sta __rom_poke_table,y
 
 	; perform indirect call
 	lda __rc2
@@ -38,11 +35,11 @@ banked_call:
 
 	; restore PRG bank
 	lda _BANK_SHADOW
-	and #$70
+	and #$E0
 	ora __rc20
-	sta _BANK ; stored: previous bank shadow value
-	sta _BANK_SHADOW
-
+	tay
 	pla
 	sta __rc20
-	rts
+	tya
+	
+	jmp set_bank_state

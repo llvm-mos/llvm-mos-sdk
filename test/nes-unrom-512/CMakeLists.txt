@@ -9,5 +9,6 @@ add_mesen_test(prg-rom-512)
 add_mesen_test(prg-rom-banked-call)
 add_mesen_test(chr-ram)
 add_mesen_test(chr-rom)
+add_mesen_test(chr-swap-split)
 
 add_subdirectory(no-compile)

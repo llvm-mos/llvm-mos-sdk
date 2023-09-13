@@ -16,4 +16,5 @@ add_platform_object_file(nes-unrom-512-crt0-o crt0.o ines.s)
 add_platform_object_file(nes-unrom-512-reset-o reset.o reset.s)
 
 add_platform_library(nes-unrom-512-c bank.c bank.s)
+target_include_directories(nes-unrom-512-c SYSTEM BEFORE PUBLIC ../nes/rompoke)
 target_link_libraries(nes-unrom-512-c PRIVATE common-asminc)

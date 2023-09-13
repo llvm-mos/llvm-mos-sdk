@@ -77,23 +77,6 @@ __attribute__((leaf)) char get_bank_state(void);
 __attribute__((leaf)) char set_bank_state(char value);
 
 /**
- * @brief Get the value of some bits of the bank state.
- *
- * @param mask The mask to get the value by.
- * @return The masked bank value.
- */
-__attribute__((leaf)) char get_bank_bits(char mask);
-
-/**
- * @brief Set the value of some bits of the bank state.
- *
- * @param mask The mask to set the value by.
- * @param value The value to set. Assumed to be masked.
- * @return The complete previous bank state.
- */
-__attribute__((leaf)) char set_bank_bits(char mask, char value);
-
-/**
  * @brief Call a function from the given $8000-$BFFF PRG bank.
  * 
  * @param bank_id The bank ID to use.
@@ -125,12 +108,29 @@ __attribute__((leaf)) char set_prg_bank(char bank_id);
 __attribute__((leaf)) char get_chr_bank(void);
 
 /**
- * @brief Switch to the given CHR bank.
+ * @brief Switch to the given CHR bank immediately.
  *
  * @param bank_id The bank ID to switch to (0-3).
- * @return The previous bank state.
  */
-__attribute__((leaf)) char set_chr_bank(char bank_id);
+__attribute__((leaf)) void set_chr_bank(char bank_id);
+
+/**
+ * @brief Switch to the given CHR bank at the next NMI.
+ * This function will only work correctly if NMI generation is enabled
+ * (PPUCTRL bit 7).
+ *
+ * @param bank_id The bank ID to switch to (0-3).
+ */
+__attribute__((leaf)) void swap_chr_bank(char bank_id);
+
+/**
+ * @brief Switch to the given CHR bank until the next NMI.
+ * This function will only work correctly if NMI generation is enabled
+ * (PPUCTRL bit 7).
+ *
+ * @param bank_id The bank ID to switch to (0-3).
+ */
+__attribute__((leaf)) void split_chr_bank(char bank_id);
 
 /**
  * @brief Get the current mirrored screen.
@@ -141,13 +141,32 @@ __attribute__((leaf)) char set_chr_bank(char bank_id);
 __attribute__((leaf)) char get_mirrored_screen(void);
 
 /**
- * @brief Switch to the given mirrored screen.
+ * @brief Switch to the given mirrored screen immediately.
  * This is only effective under @ref MAPPER_USE_1_SCREEN .
  *
  * @param screen_id The mirrored screen to switch to (0-1).
- * @return The previous bank state.
  */
-__attribute__((leaf)) char set_mirrored_screen(char screen_id);
+__attribute__((leaf)) void set_mirrored_screen(char screen_id);
+
+/**
+ * @brief Switch to the given mirrored screen at the next NMI.
+ * This is only effective under @ref MAPPER_USE_1_SCREEN .
+ * This function will only work correctly if NMI generation is enabled
+ * (PPUCTRL bit 7).
+ *
+ * @param screen_id The mirrored screen to switch to (0-1).
+ */
+__attribute__((leaf)) void swap_mirrored_screen(char screen_id);
+
+/**
+ * @brief Switch to the given mirrored screen until the next NMI.
+ * This is only effective under @ref MAPPER_USE_1_SCREEN .
+ * This function will only work correctly if NMI generation is enabled
+ * (PPUCTRL bit 7).
+ *
+ * @param screen_id The mirrored screen to switch to (0-1).
+ */
+__attribute__((leaf)) void split_mirrored_screen(char screen_id);
 
 #ifdef __cplusplus
 }

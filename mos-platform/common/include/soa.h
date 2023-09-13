@@ -14,7 +14,7 @@ namespace soa {
 /// Consider a normal C array, `T array[N]`. If sizeof(T) > 1, then to access
 /// the `k`th byte of the `I`th entry requires evalutating the expression
 /// `array + sizeof(T) * I + k`. Even if `k` and `array` (that is, it's address)
-/// are compile-time constants, evaluating the index still requires a multiply
+/// are constant, evaluating the index still requires a multiply
 /// and 16-bit addition in the worst case.
 ///
 /// You could think of this as the following multidimensional array: `uint8_t
@@ -24,20 +24,20 @@ namespace soa {
 /// Instead, the indices of this array could be swapped: `uint8_t
 /// array[ByteIdx][Idx]`. Then, accessing the `k`th byte of element `I` would
 /// involve the expression `array + N * k + I`. But, very commonly `array` and
-/// `N * k` are compile time constants! This expression can then be computed
+/// `N * k` are constants! This expression can then be computed
 /// implicitly by the absolute indexed addressing mode. This kind of layout is
 /// commonly performed by hand by experienced C and assembly-language 6502
 /// programmers.
 ///
 /// This library organizes its bytes in precisely the way described above, but
 /// with similar syntax to a regular C++ array. To provide a
-/// performance benefit, you must ensure the array's address is at a link-time
-/// constant memory location, and the offsets accessed for each element must
-/// be compile-time constants. That means that no pointers can
-/// be formed into the contents of an array element; this library enforces this.
-/// Also, this class loses its performance benefit, and indeed, may hurt
-/// performance, if accessed through a pointer, since the addressing described
-/// above then intrinsically involves 16-bit pointer arithmetic.
+/// performance benefit you must ensure the array's address is at a link-time
+/// constant memory location. Simlarly, no pointers can
+/// be formed into the contents of an array element, otherwise the offset into
+/// an array element wouldn't be a compile-time constant. Also, this class loses
+/// its performance benefit, and indeed, may hurt performance, if accessed
+/// through a pointer to soa::Array, since the addressing described above then
+/// intrinsically involves 16-bit pointer arithmetic.
 ///
 /// Because the representation of the elements is broken apart, only trivial
 /// types with standard layouts are supported (think C-style types). It must

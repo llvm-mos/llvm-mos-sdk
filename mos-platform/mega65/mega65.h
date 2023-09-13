@@ -118,30 +118,37 @@ static_assert(sizeof(struct __hypervisor) == 64);
 /// Registers for the MEGA65 math accelerator
 struct __cpu_math {
   union {
-    struct {
-      uint32_t divout_fract; //!< Fractional part of MULTINA / MULTINB (0xD768)
-      uint32_t divout_whole; //!< Whole part of MULTINA / MULTINB (0xD76C)
-    };
-#ifndef __CC65__
-    uint64_t divout; //!< 64-bit result of MULTINA / MULTINB (0xD768)
-#endif
+    uint8_t divout_fract8;  //!< Fractional part of MULTINA / MULTINB (0xD768)
+    uint16_t divout_fract16;//!< Fractional part of MULTINA / MULTINB (0xD768)
+    uint32_t divout_fract32;//!< Fractional part of MULTINA / MULTINB (0xD768)
   };
-  /// 32-bit Multiplier input A (0xD770)
-  uint32_t multina;
-  /// 32-bit Multiplier input B (0xD774)
-  uint32_t multinb;
-  /// 64-but product of MULTINA and MULTINB (0xD778)
   union {
-    struct {
-      uint32_t multout_lsb;
-      uint32_t multout_msb;
-    };
-#ifndef __CC65__
-    uint64_t multout;
+    uint8_t divout_whole8;  //!< Whole part of MULTINA / MULTINB (0xD76C)
+    uint16_t divout_whole16;//!< Whole part of MULTINA / MULTINB (0xD76C)
+    uint32_t divout_whole32;//!< Whole part of MULTINA / MULTINB (0xD76C)
+  };
+  union {
+    uint8_t multina8;   //!< 8-bit Multiplier input A (0xD770)
+    uint16_t multina16; //!< 16-bit Multiplier input A (0xD770)
+    uint32_t multina32; //!< 32-bit Multiplier input A (0xD770)
+  };
+  union {
+    uint8_t multinb8;   //!< 8-bit Multiplier input B (0xD774)
+    uint16_t multinb16; //!< 16-bit Multiplier input B (0xD774)
+    uint32_t multinb32; //!< 32-bit Multiplier input B (0xD774)
+  };
+  /// 64-bit product of MULTINA and MULTINB (0xD778)
+  union {
+    uint8_t multout8;
+    uint16_t multout16;
+    uint32_t multout32;
+#ifdef __clang__
+    uint64_t multout64;
+#else
+    uint8_t multout64[8];
 #endif
   };
-  /// 32-bit programmable input (0xD780)
-  uint32_t mathin[16];
+  uint32_t mathin[16]; //!< 32-bit programmable input (0xD780)
 };
 #ifdef __cplusplus
 static_assert(sizeof(__cpu_math) == 88);

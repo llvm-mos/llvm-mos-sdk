@@ -6,26 +6,19 @@
 #include <rompoke.h>
 #include "bank.h"
 
-__attribute__((section(".zp.bss"))) char _BANK_SHADOW;
+__attribute__((section(".zp.bss"))) volatile char _BANK_SHADOW;
 
 __attribute__((leaf)) void set_chr_bank(char value) {
-  asm volatile("" ::: "memory");
   _BANK_SHADOW = value;
-  asm volatile("" ::: "memory");
   rom_poke_safe(value);
-  asm volatile("" ::: "memory");
 }
 
 __attribute__((leaf)) void swap_chr_bank(char value) {
-  asm volatile("" ::: "memory");
   _BANK_SHADOW = value;
-  asm volatile("" ::: "memory");
 }
 
 __attribute__((leaf)) void split_chr_bank(char value) {
-  asm volatile("" ::: "memory");
   rom_poke_safe(value);
-  asm volatile("" ::: "memory");
 }
 
 /**

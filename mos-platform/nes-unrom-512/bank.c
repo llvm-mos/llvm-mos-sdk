@@ -9,24 +9,21 @@
 /**
  * @brief Shadow variable for the currently set bank state.
  */
-__attribute__((section(".zp.bss"))) char _BANK_SHADOW;
+__attribute__((section(".zp.bss"))) volatile char _BANK_SHADOW;
 /**
  * @brief Shadow variable for the CHR/mirroring bank state 
  * to be set at next NMI.
  */
-char _CHR_NMI_BANK_SHADOW;
+volatile char _CHR_NMI_BANK_SHADOW;
 
 __attribute__((leaf)) inline char get_bank_state(void) {
   return _BANK_SHADOW;
 }
 
 __attribute__((leaf)) inline char set_bank_state(char value) {
-  asm volatile("" ::: "memory");
   char old = _BANK_SHADOW;
   _BANK_SHADOW = value;
-  asm volatile("" ::: "memory");
   rom_poke_safe(value);
-  asm volatile("" ::: "memory");
   return old;
 }
 
@@ -35,42 +32,32 @@ __attribute__((leaf)) static inline char get_bank_bits(char mask) {
 }
 
 __attribute__((leaf)) static inline char set_prg_bank_bits(char mask, char value) {
-  asm volatile("" ::: "memory");
   char old = _BANK_SHADOW;
   char new = (old & (~mask)) | value;
   _BANK_SHADOW = new;
-  asm volatile("" ::: "memory");
   rom_poke_safe(new);
-  asm volatile("" ::: "memory");
   return old;
 }
 
 __attribute__((leaf)) static inline void swap_chr_bank_bits(char mask, char value) {
-  asm volatile("" ::: "memory");
   char old = _CHR_NMI_BANK_SHADOW;
   _CHR_NMI_BANK_SHADOW = (old & (~mask)) | value;
-  asm volatile("" ::: "memory");
 }
 
 // Both set _BANK_SHADOW and write to ROM without using _CHR_NMI_BANK_SHADOW.
 #define split_chr_bank_bits set_prg_bank_bits
 
 __attribute__((leaf)) static inline void set_chr_bank_bits(char mask, char value) {
-  asm volatile("" ::: "memory");
-
   // swap
   char old = _CHR_NMI_BANK_SHADOW;
   char new_chr = (old & (~mask)) | value;
   _CHR_NMI_BANK_SHADOW = new_chr;
-  asm volatile("" ::: "memory");
 
   // split
   char current_non_chr = _BANK_SHADOW & 0x1F;
   char new = current_non_chr | new_chr;
   _BANK_SHADOW = new;
-  asm volatile("" ::: "memory");
   rom_poke_safe(new);
-  asm volatile("" ::: "memory");
 }
 
 __attribute__((leaf)) char get_prg_bank(void) {

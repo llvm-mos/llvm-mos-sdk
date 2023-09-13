@@ -9,18 +9,15 @@
 /**
  * @brief Shadow variable for the currently set bank state.
  */
-__attribute__((section(".zp.bss"))) char _BANK_SHADOW;
+__attribute__((section(".zp.bss"))) volatile char _BANK_SHADOW;
 
 __attribute__((leaf)) char get_prg_bank(void) {
   return _BANK_SHADOW;
 }
 
 __attribute__((leaf)) void set_prg_bank(char value) {
-  asm volatile("" ::: "memory");
   _BANK_SHADOW = value;
-  asm volatile("" ::: "memory");
   rom_poke_safe(value);
-  asm volatile("" ::: "memory");
 }
 
 /**

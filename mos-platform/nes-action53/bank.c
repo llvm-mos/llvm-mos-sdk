@@ -27,6 +27,5 @@
 #include "bank.h"
 
 __attribute__((section(".zp.bss"))) char _PRG_BANK;
-__attribute__((section(".zp.bss"))) char _CHR_BANK;
 __attribute__((section(".zp.bss"))) char _BANK_SHADOW;
 __attribute__((section(".zp.bss"))) char _CHR_BANK_NEXT;

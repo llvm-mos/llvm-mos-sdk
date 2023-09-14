@@ -11,18 +11,29 @@ extern "C" {
 #endif
 
 /**
- * @brief Get the current CHR bank.
- * 
- * @return The current CHR bank.
- */
-__attribute__((leaf)) char get_chr_bank(void);
-
-/**
  * @brief Switch to the given CHR bank.
  * 
  * @param bank_id The bank ID to switch to.
  */
 __attribute__((leaf)) void set_chr_bank(char bank_id);
+
+/**
+ * @brief Switch to the given CHR bank at the next NMI.
+ * This function will only work correctly if NMI generation is enabled
+ * (PPUCTRL bit 7).
+ *
+ * @param bank_id The bank ID to switch to.
+ */
+__attribute__((leaf)) void swap_chr_bank(char bank_id);
+
+/**
+ * @brief Switch to the given CHR bank until the next NMI.
+ * This function will only work correctly if NMI generation is enabled
+ * (PPUCTRL bit 7).
+ *
+ * @param bank_id The bank ID to switch to.
+ */
+__attribute__((leaf)) void split_chr_bank(char bank_id);
 
 #ifdef __cplusplus
 }

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['value_3278',['value',['../nes-unrom-512_2bank_8h.html#a1de5cca0fbfc376f5a6997b84006e25e',1,'bank.h']]]
+  ['w_3277',['w',['../api_8h.html#a84259e58d5ffeb55767613f3341f11e2',1,'api.h']]],
+  ['width_3278',['width',['../structcx16__fb__info__t.html#a139636c309e36d26d72845a2127f4b3f',1,'cx16_fb_info_t']]]
 ];

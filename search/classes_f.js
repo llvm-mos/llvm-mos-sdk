@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['type_5fidentity_2471',['type_identity',['../structstd_1_1type__identity.html',1,'std']]],
-  ['type_5finfo_2472',['type_info',['../classstd_1_1type__info.html',1,'std']]]
+  ['type_5fidentity_2470',['type_identity',['../structstd_1_1type__identity.html',1,'std']]],
+  ['type_5finfo_2471',['type_info',['../classstd_1_1type__info.html',1,'std']]]
 ];

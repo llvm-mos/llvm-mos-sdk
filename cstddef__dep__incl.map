@@ -1,9 +1,10 @@
 <map id="common/include/cstddef" name="common/include/cstddef">
-<area shape="rect" id="node1" title=" " alt="" coords="273,5,456,32"/>
-<area shape="rect" id="node2" href="$array.html" title=" " alt="" coords="94,169,262,196"/>
-<area shape="rect" id="node3" href="$initializer__list.html" title=" " alt="" coords="26,87,249,114"/>
-<area shape="rect" id="node4" href="$iterator.html" title=" " alt="" coords="273,87,456,114"/>
-<area shape="rect" id="node5" href="$new.html" title=" " alt="" coords="480,87,641,114"/>
-<area shape="rect" id="node6" href="$type__traits.html" title=" " alt="" coords="666,80,828,121"/>
-<area shape="rect" id="node7" href="$utility.html" title=" " alt="" coords="661,169,833,196"/>
+<area shape="rect" id="node1" title=" " alt="" coords="238,5,421,32"/>
+<area shape="rect" id="node2" href="$array.html" title=" " alt="" coords="5,169,173,196"/>
+<area shape="rect" id="node3" href="$initializer__list.html" title=" " alt="" coords="209,169,431,196"/>
+<area shape="rect" id="node5" href="$iterator.html" title=" " alt="" coords="109,87,291,114"/>
+<area shape="rect" id="node6" href="$new.html" title=" " alt="" coords="367,87,529,114"/>
+<area shape="rect" id="node7" href="$type__traits.html" title=" " alt="" coords="553,80,716,121"/>
+<area shape="rect" id="node4" href="$soa_8h.html" title=" " alt="" coords="409,244,578,271"/>
+<area shape="rect" id="node8" href="$utility.html" title=" " alt="" coords="557,169,729,196"/>
 </map>

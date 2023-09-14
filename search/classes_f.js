@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['vdc_5fsprite_5ft_2444',['vdc_sprite_t',['../structvdc__sprite__t.html',1,'']]]
+  ['type_5fidentity_2471',['type_identity',['../structstd_1_1type__identity.html',1,'std']]],
+  ['type_5finfo_2472',['type_info',['../classstd_1_1type__info.html',1,'std']]]
 ];

@@ -1,0 +1,12 @@
+<map id="common/include/soa.h" name="common/include/soa.h">
+<area shape="rect" id="node1" title=" " alt="" coords="133,5,303,32"/>
+<area shape="rect" id="node2" href="$cstdint.html" title=" " alt="" coords="30,80,97,107"/>
+<area shape="rect" id="node4" href="$initializer__list.html" title=" " alt="" coords="100,155,211,181"/>
+<area shape="rect" id="node8" href="$new.html" title=" " alt="" coords="193,80,243,107"/>
+<area shape="rect" id="node9" href="$type__traits.html" title=" " alt="" coords="287,155,379,181"/>
+<area shape="rect" id="node10" href="$utility.html" title=" " alt="" coords="319,80,379,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,76,181"/>
+<area shape="rect" id="node5" href="$cstddef.html" title=" " alt="" coords="213,229,284,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="158,304,233,331"/>
+<area shape="rect" id="node7" title=" " alt="" coords="257,304,408,331"/>
+</map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['has_5funique_5fobject_5frepresentations_2312',['has_unique_object_representations',['../structstd_1_1has__unique__object__representations.html',1,'std']]],
-  ['has_5fvirtual_5fdestructor_2313',['has_virtual_destructor',['../structstd_1_1has__virtual__destructor.html',1,'std']]]
+  ['graph_5ffb_5ffunctions_5ft_2337',['graph_fb_functions_t',['../structgraph__fb__functions__t.html',1,'']]],
+  ['graph_5fpos_5ft_2338',['graph_pos_t',['../structgraph__pos__t.html',1,'']]]
 ];

@@ -87,26 +87,3 @@ SECTIONS {
   .reset       : { KEEP(*(.reset))       } >reset
   .reset_fixed : { KEEP(*(.reset_fixed)) } >reset_fixed
 }
-
-PROVIDE(__prg_rom_size = 256);
-
-OUTPUT_FORMAT {
-  INCLUDE ines-header.ld
-  FULL(prg_rom_0)     FULL(reset, ORIGIN(prg_rom_0)  + LENGTH(prg_rom_0),  LENGTH(prg_rom_0)  ? 12 : 0)
-  FULL(prg_rom_1)     FULL(reset, ORIGIN(prg_rom_1)  + LENGTH(prg_rom_1),  LENGTH(prg_rom_1)  ? 12 : 0
-  FULL(prg_rom_2)     FULL(reset, ORIGIN(prg_rom_2)  + LENGTH(prg_rom_2),  LENGTH(prg_rom_2)  ? 12 : 0
-  FULL(prg_rom_3)     FULL(reset, ORIGIN(prg_rom_3)  + LENGTH(prg_rom_3),  LENGTH(prg_rom_3)  ? 12 : 0
-  FULL(prg_rom_4)     FULL(reset, ORIGIN(prg_rom_4)  + LENGTH(prg_rom_4),  LENGTH(prg_rom_4)  ? 12 : 0
-  FULL(prg_rom_5)     FULL(reset, ORIGIN(prg_rom_5)  + LENGTH(prg_rom_5),  LENGTH(prg_rom_5)  ? 12 : 0
-  FULL(prg_rom_6)     FULL(reset, ORIGIN(prg_rom_6)  + LENGTH(prg_rom_6),  LENGTH(prg_rom_6)  ? 12 : 0
-  FULL(prg_rom_7)     FULL(reset, ORIGIN(prg_rom_7)  + LENGTH(prg_rom_7),  LENGTH(prg_rom_7)  ? 12 : 0
-  FULL(prg_rom_8)     FULL(reset, ORIGIN(prg_rom_8)  + LENGTH(prg_rom_8),  LENGTH(prg_rom_8)  ? 12 : 0
-  FULL(prg_rom_9)     FULL(reset, ORIGIN(prg_rom_9)  + LENGTH(prg_rom_9),  LENGTH(prg_rom_9)  ? 12 : 0
-  FULL(prg_rom_10)    FULL(reset, ORIGIN(prg_rom_10) + LENGTH(prg_rom_10), LENGTH(prg_rom_10) ? 12 : 0
-  FULL(prg_rom_11)    FULL(reset, ORIGIN(prg_rom_11) + LENGTH(prg_rom_11), LENGTH(prg_rom_11) ? 12 : 0
-  FULL(prg_rom_12)    FULL(reset, ORIGIN(prg_rom_12) + LENGTH(prg_rom_12), LENGTH(prg_rom_12) ? 12 : 0
-  FULL(prg_rom_13)    FULL(reset, ORIGIN(prg_rom_13) + LENGTH(prg_rom_13), LENGTH(prg_rom_13) ? 12 : 0
-  FULL(prg_rom_14)    FULL(reset, ORIGIN(prg_rom_14) + LENGTH(prg_rom_14), LENGTH(prg_rom_14) ? 12 : 0
-  FULL(prg_rom_fixed) FULL(reset_fixed)
-  FULL(chr_rom)
-}

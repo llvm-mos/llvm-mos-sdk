@@ -14,7 +14,7 @@ __attribute__((section(".zp.bss"))) volatile char _BANK_SHADOW;
  * @brief Shadow variable for the CHR/mirroring bank state 
  * to be set at next NMI.
  */
-volatile char _CHR_NMI_BANK_SHADOW;
+volatile char _CHR_BANK_NMI_NEXT;
 
 __attribute__((leaf)) inline char get_bank_state(void) {
   return _BANK_SHADOW;
@@ -40,18 +40,18 @@ __attribute__((leaf)) static inline char set_prg_bank_bits(char mask, char value
 }
 
 __attribute__((leaf)) static inline void swap_chr_bank_bits(char mask, char value) {
-  char old = _CHR_NMI_BANK_SHADOW;
-  _CHR_NMI_BANK_SHADOW = (old & (~mask)) | value;
+  char old = _CHR_BANK_NMI_NEXT;
+  _CHR_BANK_NMI_NEXT = (old & (~mask)) | value;
 }
 
-// Both set _BANK_SHADOW and write to ROM without using _CHR_NMI_BANK_SHADOW.
+// Both set _BANK_SHADOW and write to ROM without using _CHR_BANK_NMI_NEXT.
 #define split_chr_bank_bits set_prg_bank_bits
 
 __attribute__((leaf)) static inline void set_chr_bank_bits(char mask, char value) {
   // swap
-  char old = _CHR_NMI_BANK_SHADOW;
+  char old = _CHR_BANK_NMI_NEXT;
   char new_chr = (old & (~mask)) | value;
-  _CHR_NMI_BANK_SHADOW = new_chr;
+  _CHR_BANK_NMI_NEXT = new_chr;
 
   // split
   char current_non_chr = _BANK_SHADOW & 0x1F;
@@ -107,11 +107,11 @@ __attribute__((leaf)) inline void split_mirrored_screen(char screen_id) {
  * banked_call and the same "switch to new; run code; switch back to old"
  * code pattern inside NMI handlers.
  *
- * To handle CHR-ROM, _CHR_NMI_BANK_SHADOW is OR'd with the masked value of
+ * To handle CHR-ROM, _CHR_BANK_NMI_NEXT is OR'd with the masked value of
  * _BANK_SHADOW, then written back to _BANK_SHADOW. This allows handling all
  * inconsistency options:
  *
- * store _CHR_NMI_BANK_SHADOW
+ * store _CHR_BANK_NMI_NEXT
  * <- NMI writes value to _BANK_SHADOW, then to the mapper register
  * store _BANK_SHADOW
  * <- NMI writes value to the mapper register
@@ -120,7 +120,7 @@ __attribute__((leaf)) inline void split_mirrored_screen(char screen_id) {
 asm(".section .nmi.10,\"axR\",@progbits\n"
     "lda _BANK_SHADOW\n"
     "and #$1F\n"
-    "ora _CHR_NMI_BANK_SHADOW\n"
+    "ora _CHR_BANK_NMI_NEXT\n"
     "sta _BANK_SHADOW\n"
     "tay\n"
     "sta __rom_poke_table,y\n");

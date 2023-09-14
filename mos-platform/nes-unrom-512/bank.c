@@ -68,10 +68,6 @@ __attribute__((leaf)) char set_prg_bank(char value) {
   return set_prg_bank_bits(PRG_BANK_MASK, value);
 }
 
-__attribute__((leaf)) inline char get_chr_bank(void) {
-  return get_bank_bits(CHR_BANK_MASK) >> CHR_BANK_SHIFT;
-}
-
 __attribute__((leaf)) inline void set_chr_bank(char bank_id) {
   set_chr_bank_bits(CHR_BANK_MASK, bank_id << CHR_BANK_SHIFT);
 }
@@ -82,10 +78,6 @@ __attribute__((leaf)) inline void swap_chr_bank(char bank_id) {
 
 __attribute__((leaf)) inline void split_chr_bank(char bank_id) {
   split_chr_bank_bits(CHR_BANK_MASK, bank_id << CHR_BANK_SHIFT);
-}
-
-__attribute__((leaf)) inline char get_mirrored_screen(void) {
-  return get_bank_bits(MIRROR_SCREEN_MASK) >> MIRROR_SCREEN_SHIFT;
 }
 
 __attribute__((leaf)) inline void set_mirrored_screen(char screen_id) {

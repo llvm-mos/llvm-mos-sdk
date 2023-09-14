@@ -101,13 +101,6 @@ __attribute__((leaf)) char get_prg_bank(void);
 __attribute__((leaf)) char set_prg_bank(char bank_id);
 
 /**
- * @brief Get the current CHR bank.
- * 
- * @return The current CHR bank (0-3).
- */
-__attribute__((leaf)) char get_chr_bank(void);
-
-/**
  * @brief Switch to the given CHR bank immediately.
  *
  * @param bank_id The bank ID to switch to (0-3).
@@ -131,14 +124,6 @@ __attribute__((leaf)) void swap_chr_bank(char bank_id);
  * @param bank_id The bank ID to switch to (0-3).
  */
 __attribute__((leaf)) void split_chr_bank(char bank_id);
-
-/**
- * @brief Get the current mirrored screen.
- * This is only effective under @ref MAPPER_USE_1_SCREEN .
- * 
- * @return The current mirrored screen (0-1).
- */
-__attribute__((leaf)) char get_mirrored_screen(void);
 
 /**
  * @brief Switch to the given mirrored screen immediately.

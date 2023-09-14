@@ -33,6 +33,15 @@ __attribute__((section(".zp.bss"))) char _CHR_BANK0;
 __attribute__((section(".zp.bss"))) char _CHR_BANK1;
 __attribute__((section(".zp.data"))) char _MMC1_CTRL_NMI = 0x1f;
 
+__attribute__((section(".zp.bss"))) char _CHR_BANK0_CUR;
+extern __attribute__((
+    weak, alias("_CHR_BANK0_CUR"))) volatile const char CHR_BANK0_CUR;
+__attribute__((section(".zp.bss"))) char _CHR_BANK1_CUR;
+extern __attribute__((
+    weak, alias("_CHR_BANK1_CUR"))) volatile const char CHR_BANK1_CUR;
+__attribute__((section(".zp.bss"))) char _MMC1_CTRL_CUR;
+extern __attribute__((
+    weak, alias("_MMC1_CTRL_CUR"))) volatile const char MMC1_CTRL_CUR;
 __attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS;
 
 #define MMC1_CTRL 0x8000
@@ -73,12 +82,14 @@ __attribute__((weak)) void split_chr_bank_0(char bank_id) {
   reset_shift_register();
   mmc1_register_write(MMC1_CHR0, bank_id);
   _IN_PROGRESS = 0;
+  _CHR_BANK0_CUR = bank_id;
 }
 
 __attribute__((weak)) void split_chr_bank_1(char bank_id) {
   reset_shift_register();
   mmc1_register_write(MMC1_CHR1, bank_id);
   _IN_PROGRESS = 0;
+  _CHR_BANK1_CUR = bank_id;
 }
 
 __attribute__((weak)) void set_chr_bank_0_retry(char bank_id) {
@@ -94,6 +105,7 @@ __attribute__((weak)) void set_chr_bank_1_retry(char bank_id) {
 __attribute__((weak)) void set_mmc1_ctrl(char value) {
   _MMC1_CTRL_NMI = value;
   mmc1_register_write_retry(MMC1_CTRL, value);
+  _MMC1_CTRL_CUR = value;
 }
 
 // some things deleted

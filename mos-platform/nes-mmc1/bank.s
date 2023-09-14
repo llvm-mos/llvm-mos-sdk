@@ -26,7 +26,8 @@
 
 .include "imag.inc"
 
-.zeropage _PRG_BANK, _CHR_BANK0, _CHR_BANK1, _MMC1_CTRL_NMI, _IN_PROGRESS
+.zeropage _PRG_BANK, _CHR_BANK0, _CHR_BANK1, _MMC1_CTRL_NMI, _CHR_BANK0_CUR
+.zeropage _CHR_BANK1_CUR, _MMC1_CTRL_CUR, _IN_PROGRESS
 
 MMC1_CTRL	= $8000
 MMC1_CHR0	= $a000
@@ -50,10 +51,13 @@ MMC1_PRG	= $e000
 bank_nmi:
 	inc __reset_mmc1_byte
 	lda _CHR_BANK0
+	sta _CHR_BANK0_CUR
 	mmc1_register_write MMC1_CHR0
 	lda _CHR_BANK1
+	sta _CHR_BANK1_CUR
 	mmc1_register_write MMC1_CHR1
 	lda _MMC1_CTRL_NMI
+	sta _MMC1_CTRL_CUR
 	mmc1_register_write MMC1_CTRL
 	lda #0
 	sta _IN_PROGRESS

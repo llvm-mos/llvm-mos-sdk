@@ -26,7 +26,8 @@
 
 .include "imag.inc"
 
-.zeropage _PRG_BANK,_BANK_SHADOW, _CHR_BANK_NEXT
+.zeropage _PRG_BANK, _CHR_BANK
+.zeropage _BANK_SHADOW, _CHR_BANK_NEXT
 
 A53_REG_SELECT	= $5000
 A53_REG_VALUE	= $8000
@@ -37,6 +38,7 @@ swap_chr_bank_nmi:
 	lda #$00
 	sta A53_REG_SELECT
 	lda _CHR_BANK_NEXT
+	sta _CHR_BANK
 	sta A53_REG_VALUE
 
 .section .nmi.300,"axR",@progbits
@@ -51,13 +53,23 @@ restore_prg_bank_nmi:
 	lda _BANK_SHADOW
 	sta A53_REG_SELECT
 
+.section .text.get_chr_bank,"ax",@progbits
+.globl __get_chr_bank
+.weak get_chr_bank
+__get_chr_bank:
+get_chr_bank:
+	lda _CHR_BANK
+	rts
+
 .section .text.set_chr_bank,"ax",@progbits
 .weak set_chr_bank
 set_chr_bank:
 	sta _CHR_BANK_NEXT
-	ldx #$00
-	stx _BANK_SHADOW
-	stx A53_REG_SELECT
+	sta _CHR_BANK
+	lda #$00
+	sta _BANK_SHADOW
+	sta A53_REG_SELECT
+	lda _CHR_BANK
 	sta A53_REG_VALUE
 	rts
 
@@ -70,9 +82,11 @@ swap_chr_bank:
 .section .text.split_chr_bank,"ax",@progbits
 .weak split_chr_bank
 split_chr_bank:
-	ldx #$00
-	stx _BANK_SHADOW
-	stx A53_REG_SELECT
+	sta _CHR_BANK
+	lda #$00
+	sta _BANK_SHADOW
+	sta A53_REG_SELECT
+	lda _CHR_BANK
 	sta A53_REG_VALUE
 	rts
 

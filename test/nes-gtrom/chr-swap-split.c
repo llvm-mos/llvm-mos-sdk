@@ -11,7 +11,7 @@ asm(".globl __chr_ram_size\n"
 __attribute__((used, section(".chr_rom_0")))
 const char cr0[8192] = {1, [8191] = 2};
 __attribute__((used, section(".chr_rom_1")))
-const char cr3[8192] = {3, [8191] = 4};
+const char cr1[8192] = {3, [8191] = 4};
 
 void ppu_wait_vblank(void) {
   while (!(PPU.status & 0x80))

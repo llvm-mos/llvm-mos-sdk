@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 asm(".global __prg_ram_size\n__prg_ram_size=32\n");
+asm(".global __prg_rom_size\n__prg_rom_size=128\n");
 
 __attribute__((section(".prg_ram_0.noinit"))) volatile char c[8192];
 

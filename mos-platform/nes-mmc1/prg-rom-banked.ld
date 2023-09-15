@@ -87,3 +87,26 @@ SECTIONS {
   .reset       : { KEEP(*(.reset))       } >reset
   .reset_fixed : { KEEP(*(.reset_fixed)) } >reset_fixed
 }
+
+PROVIDE(__prg_rom_size = 256);
+
+OUTPUT_FORMAT {
+  INCLUDE ines-header.ld
+  FULL(prg_rom_0)     FULL(reset, 0, LENGTH(prg_rom_0)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_1)     FULL(reset, 0, LENGTH(prg_rom_1)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_2)     FULL(reset, 0, LENGTH(prg_rom_2)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_3)     FULL(reset, 0, LENGTH(prg_rom_3)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_4)     FULL(reset, 0, LENGTH(prg_rom_4)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_5)     FULL(reset, 0, LENGTH(prg_rom_5)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_6)     FULL(reset, 0, LENGTH(prg_rom_6)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_7)     FULL(reset, 0, LENGTH(prg_rom_7)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_8)     FULL(reset, 0, LENGTH(prg_rom_8)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_9)     FULL(reset, 0, LENGTH(prg_rom_9)  ? LENGTH(reset) : 0)
+  FULL(prg_rom_10)    FULL(reset, 0, LENGTH(prg_rom_10) ? LENGTH(reset) : 0)
+  FULL(prg_rom_11)    FULL(reset, 0, LENGTH(prg_rom_11) ? LENGTH(reset) : 0)
+  FULL(prg_rom_12)    FULL(reset, 0, LENGTH(prg_rom_12) ? LENGTH(reset) : 0)
+  FULL(prg_rom_13)    FULL(reset, 0, LENGTH(prg_rom_13) ? LENGTH(reset) : 0)
+  FULL(prg_rom_14)    FULL(reset, 0, LENGTH(prg_rom_14) ? LENGTH(reset) : 0)
+  FULL(prg_rom_fixed) FULL(reset_fixed)
+  FULL(chr_rom)
+}

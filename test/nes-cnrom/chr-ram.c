@@ -3,10 +3,8 @@
 #include <peekpoke.h>
 #include <stdlib.h>
 
-asm(".globl __chr_rom_size\n"
-    "__chr_rom_size = 0\n"
-    ".globl __chr_ram_size\n"
-    "__chr_ram_size = 512\n");
+MAPPER_CHR_ROM_KB(0);
+MAPPER_CHR_RAM_KB(512);
 
 void poke_ppu(unsigned addr, char val) {
   PPU.vram.address = addr >> 8;

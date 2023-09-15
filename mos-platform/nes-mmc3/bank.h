@@ -27,6 +27,8 @@
 #ifndef _BANK_H_
 #define _BANK_H_
 
+#include <ines.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

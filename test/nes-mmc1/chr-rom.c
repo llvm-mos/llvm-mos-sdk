@@ -21,8 +21,8 @@ void set_4k_banks(void) { set_mmc1_ctrl(0b11100); }
 int main(void) {
   set_4k_banks();
 
-  set_chr_bank_0_retry(0);
-  set_chr_bank_1_retry(31);
+  set_chr_bank_0(0);
+  set_chr_bank_1(31);
   if (read_ppu(0) != 1)
     return EXIT_FAILURE;
   if (read_ppu(4095) != 2)
@@ -32,7 +32,7 @@ int main(void) {
   if (read_ppu(8191) != 4)
     return EXIT_FAILURE;
 
-  set_chr_bank_1_retry(0);
+  set_chr_bank_1(0);
   if (read_ppu(4096) != 1)
     return EXIT_FAILURE;
   if (read_ppu(8191) != 2)

@@ -28,26 +28,28 @@
 
 #include <peekpoke.h>
 
-__attribute__((section(".zp.bss"))) char _PRG_BANK;
-__attribute__((section(".zp.bss"))) char _CHR_BANK0;
-__attribute__((section(".zp.bss"))) char _CHR_BANK1;
-__attribute__((section(".zp.data"))) char _MMC1_CTRL_NMI = 0x1f;
+// Always bring in the NMI handler
+asm(".globl bank_nmi");
 
-__attribute__((section(".zp.bss"))) char _CHR_BANK0_CUR;
-extern __attribute__((
-    weak, alias("_CHR_BANK0_CUR"))) volatile const char CHR_BANK0_CUR;
-__attribute__((section(".zp.bss"))) char _CHR_BANK1_CUR;
-extern __attribute__((
-    weak, alias("_CHR_BANK1_CUR"))) volatile const char CHR_BANK1_CUR;
-__attribute__((section(".zp.bss"))) char _MMC1_CTRL_CUR;
-extern __attribute__((
-    weak, alias("_MMC1_CTRL_CUR"))) volatile const char MMC1_CTRL_CUR;
+__attribute__((section(".zp.bss"))) volatile char _CHR_BANK0_NEXT;
+__attribute__((section(".zp.bss"))) volatile char _CHR_BANK1_NEXT;
+__attribute__((section(".zp.data"))) volatile char _MMC1_CTRL_NEXT =
+    CHR_ROM_BANK_MODE_4 | MIRROR_VERTICAL;
+
+__attribute__((section(".zp.bss"))) volatile char _PRG_BANK;
+__attribute__((section(".zp.bss"))) volatile char _CHR_BANK0;
+__attribute__((section(".zp.bss"))) volatile char _CHR_BANK1;
+__attribute__((section(".zp.data"))) volatile char _MMC1_CTRL =
+    PRG_ROM_BANK_MODE_FIXED_C000;
 __attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS;
 
 #define MMC1_CTRL 0x8000
 #define MMC1_CHR0 0xa000
 #define MMC1_CHR1 0xc000
 #define MMC1_PRG 0xe000
+
+#define DISABLE_IRQ() asm volatile("php\nsei")
+#define RESTORE_IRQ() asm volatile("plp")
 
 // Incrementing a 0xff ROM byte resets the MMC.
 __attribute__((used)) const char __reset_mmc1_byte = 0xff;
@@ -78,34 +80,130 @@ mmc1_register_write_retry(unsigned addr, char val) {
   _IN_PROGRESS = 0;
 }
 
-__attribute__((weak)) void split_chr_bank_0(char bank_id) {
+char get_prg_bank(void) { return _PRG_BANK; }
+__attribute__((alias("get_prg_bank"))) char __get_prg_bank(void);
+
+void set_chr_bank_0(char bank_id) {
+  defer_chr_bank_0(bank_id);
+  mmc1_register_write_retry(MMC1_CHR0, bank_id);
+  _CHR_BANK0 = bank_id;
+}
+
+void set_chr_bank_1(char bank_id) {
+  defer_chr_bank_1(bank_id);
+  mmc1_register_write_retry(MMC1_CHR1, bank_id);
+  _CHR_BANK1 = bank_id;
+}
+
+void split_chr_bank_0(char bank_id) {
+  DISABLE_IRQ();
   reset_shift_register();
   mmc1_register_write(MMC1_CHR0, bank_id);
+  if (_IN_PROGRESS)
+    _CHR_BANK0 = bank_id;
+  RESTORE_IRQ();
   _IN_PROGRESS = 0;
-  _CHR_BANK0_CUR = bank_id;
 }
 
-__attribute__((weak)) void split_chr_bank_1(char bank_id) {
+void defer_chr_bank_0(char bank_id) { _CHR_BANK0_NEXT = bank_id; }
+
+void defer_chr_bank_1(char bank_id) { _CHR_BANK1_NEXT = bank_id; }
+
+void split_chr_bank_1(char bank_id) {
+  DISABLE_IRQ();
   reset_shift_register();
   mmc1_register_write(MMC1_CHR1, bank_id);
+  if (_IN_PROGRESS)
+    _CHR_BANK1 = bank_id;
+  RESTORE_IRQ();
   _IN_PROGRESS = 0;
-  _CHR_BANK1_CUR = bank_id;
 }
 
-__attribute__((weak)) void set_chr_bank_0_retry(char bank_id) {
-  _CHR_BANK0 = bank_id;
-  mmc1_register_write_retry(MMC1_CHR0, bank_id);
+extern char __chr_high_mask[];
+extern char __chr_low_mask[];
+
+char get_chr_bank_0_high(void) { return _CHR_BANK0 & (char)(__chr_high_mask); }
+
+void set_chr_bank_0_high(char bank_id) {
+  char s = _CHR_BANK0 & (char)(__chr_low_mask) | bank_id;
+  mmc1_register_write_retry(MMC1_CHR0, s);
+  _CHR_BANK0 = s;
 }
 
-__attribute__((weak)) void set_chr_bank_1_retry(char bank_id) {
-  _CHR_BANK1 = bank_id;
-  mmc1_register_write_retry(MMC1_CHR1, bank_id);
+char get_chr_bank_1_high(void) { return _CHR_BANK1 & (char)(__chr_high_mask); }
+
+void set_chr_bank_1_high(char bank_id) {
+  char s = _CHR_BANK1 & (char)(__chr_low_mask) | bank_id;
+  mmc1_register_write_retry(MMC1_CHR1, s);
+  _CHR_BANK1 = s;
 }
 
-__attribute__((weak)) void set_mmc1_ctrl(char value) {
-  _MMC1_CTRL_NMI = value;
+void set_mirroring(enum Mirroring mirroring) {
+  defer_mirroring(mirroring);
+  char s = _MMC1_CTRL & 0b11100 | mirroring;
+  mmc1_register_write_retry(MMC1_CTRL, s);
+  _MMC1_CTRL = s;
+}
+
+void split_mirroring(enum Mirroring mirroring) {
+  char s = _MMC1_CTRL & 0b11100 | mirroring;
+  DISABLE_IRQ();
+  reset_shift_register();
+  mmc1_register_write(MMC1_CTRL, s);
+  if (_IN_PROGRESS)
+    _MMC1_CTRL = s;
+  RESTORE_IRQ();
+  _IN_PROGRESS = 0;
+}
+
+void defer_mirroring(enum Mirroring mirroring) {
+  _MMC1_CTRL_NEXT = _MMC1_CTRL_NEXT & 0b01111 | mirroring;
+}
+
+void set_chr_rom_bank_mode(enum ChrRomBankMode mode) {
+  defer_chr_rom_bank_mode(mode);
+  char s = _MMC1_CTRL & 0b01111 | mode;
+  mmc1_register_write_retry(MMC1_CTRL, s);
+  _MMC1_CTRL = s;
+}
+
+void split_chr_rom_bank_mode(enum ChrRomBankMode mode) {
+  char s = _MMC1_CTRL & 0b01111 | mode;
+  DISABLE_IRQ();
+  reset_shift_register();
+  mmc1_register_write(MMC1_CTRL, s);
+  if (_IN_PROGRESS)
+    _MMC1_CTRL = s;
+  RESTORE_IRQ();
+  _IN_PROGRESS = 0;
+}
+
+void defer_chr_rom_bank_mode(enum ChrRomBankMode mode) {
+  _MMC1_CTRL_NEXT = _MMC1_CTRL_NEXT & 0b11100 | mode;
+}
+
+void set_prg_rom_bank_mode(enum PrgRomBankMode mode) {
+  char s = _MMC1_CTRL & 0b10011 | mode;
+  mmc1_register_write_retry(MMC1_CTRL, s);
+  _MMC1_CTRL = s;
+}
+
+enum PrgRomBankMode get_prg_rom_bank_mode(void) { return _MMC1_CTRL & 0b01100; }
+
+void set_mmc1_ctrl(char value) {
+  defer_mmc1_ctrl(value);
   mmc1_register_write_retry(MMC1_CTRL, value);
-  _MMC1_CTRL_CUR = value;
+  _MMC1_CTRL = value;
 }
 
-// some things deleted
+void split_mmc1_ctrl(char value) {
+  DISABLE_IRQ();
+  reset_shift_register();
+  mmc1_register_write(MMC1_CTRL, value);
+  if (_IN_PROGRESS)
+    _MMC1_CTRL = value;
+  RESTORE_IRQ();
+  _IN_PROGRESS = 0;
+}
+
+void defer_mmc1_ctrl(char value) { _MMC1_CTRL_NEXT = value & 0b10011; }

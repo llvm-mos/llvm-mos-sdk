@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 asm(".global __prg_ram_size\n__prg_ram_size=32\n");
+asm(".global __chr_rom_size\n__chr_rom_size=16\n");
 
 volatile char c[8100] = {1, [8099] = 2};
 

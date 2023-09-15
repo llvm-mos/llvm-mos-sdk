@@ -16,6 +16,22 @@ namespace charset_impl {
 template <size_t N> struct UnshiftedString {
   char Str[N]{};
 
+  constexpr UnshiftedString(char const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0x80)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+
+  constexpr UnshiftedString(char16_t const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0xD800 && Src[I] <= 0xDFFF)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+  
   constexpr UnshiftedString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -302,6 +318,22 @@ template <size_t N> struct UnshiftedString {
 template <size_t N> struct ShiftedString {
   char Str[N]{};
 
+  constexpr ShiftedString(char const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0x80)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+
+  constexpr ShiftedString(char16_t const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0xD800 && Src[I] <= 0xDFFF)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+  
   constexpr ShiftedString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -586,6 +618,22 @@ template <size_t N> struct ShiftedString {
 template <size_t N> struct UnshiftedVideoString {
   char Str[N]{};
 
+  constexpr UnshiftedVideoString(char const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0x80)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+
+  constexpr UnshiftedVideoString(char16_t const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0xD800 && Src[I] <= 0xDFFF)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+  
   constexpr UnshiftedVideoString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -922,6 +970,22 @@ template <size_t N> struct UnshiftedVideoString {
 template <size_t N> struct UnshiftedReverseVideoString {
   char Str[N]{};
 
+  constexpr UnshiftedReverseVideoString(char const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0x80)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+
+  constexpr UnshiftedReverseVideoString(char16_t const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0xD800 && Src[I] <= 0xDFFF)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+  
   constexpr UnshiftedReverseVideoString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -1258,6 +1322,22 @@ template <size_t N> struct UnshiftedReverseVideoString {
 template <size_t N> struct ShiftedVideoString {
   char Str[N]{};
 
+  constexpr ShiftedVideoString(char const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0x80)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+
+  constexpr ShiftedVideoString(char16_t const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0xD800 && Src[I] <= 0xDFFF)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+
   constexpr ShiftedVideoString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -1586,6 +1666,22 @@ template <size_t N> struct ShiftedVideoString {
 
 template <size_t N> struct ShiftedReverseVideoString {
   char Str[N]{};
+
+  constexpr ShiftedReverseVideoString(char const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0x80)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+
+  constexpr ShiftedReverseVideoString(char16_t const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0xD800 && Src[I] <= 0xDFFF)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
 
   constexpr ShiftedReverseVideoString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)

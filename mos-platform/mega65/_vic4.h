@@ -192,13 +192,13 @@ struct __vic4 {
     };
   };
   union {
-    /// Bottom border position (offset 0x4A)
-    uint8_t bbdrpos;
+    /// Bottom border position (offset 0x4A-0x4B)
+    uint16_t bbdrpos;
     struct {
-      /// Bottom border position (low byte) (offset 0x4A)
+      /// Bottom border position, low byte (offset 0x4A)
       uint8_t bbdrpos_lsb;
       /// Bottom border position and sprite bitplane-modify-mode enables (offset
-      /// 0x4B))
+      /// 0x4B)
       uint8_t bbdrpos_msb;
     };
   };
@@ -229,7 +229,7 @@ struct __vic4 {
   uint8_t spr_hght;
   /// Sprite extended width enables (offset 0x57)
   uint8_t spr_x64en;
-  /// Characters per logical text row (offset 0x58)
+  /// Characters per logical text row (offset 0x58-0x59)
   uint16_t linestep;
   /// Horizontal hardware scale of text mode (pixel 120ths per
   /// pixel) (offset 0x5A)
@@ -238,7 +238,7 @@ struct __vic4 {
   /// per char text row) (offset 0x5B)
   uint8_t chryscl;
   union {
-    /// Width of single side border (offset 0x5C)
+    /// Width of single side border (offset 0x5C-0x5D)
     uint16_t sdbdrwd;
     struct {
       /// Width of single side border (offset 0x5C)
@@ -247,7 +247,7 @@ struct __vic4 {
       uint8_t sdbdrwd_msb;
     };
   };
-  /// Number of characters to display per row (LSB) (offset: 0x5E)
+  /// Number of characters to display per row, LSB (offset: 0x5E)
   uint8_t chrcount;
   /// Sprite H640 X Super-MSBs (offset 0x5F)
   uint8_t spr_xsmsbs;
@@ -474,6 +474,6 @@ enum
 };
 
 #ifdef __cplusplus
-}
+} // extern block
 #endif
 #endif // _VIC4_H

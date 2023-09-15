@@ -144,9 +144,8 @@ struct __cpu_math {
     uint32_t multout32;
 #ifdef __clang__
     uint64_t multout64;
-#else
-    uint8_t multout64[8];
 #endif
+    uint8_t multout[8];
   };
   uint32_t mathin[16]; //!< 32-bit programmable input (0xD780)
 };

@@ -35,7 +35,7 @@ asm(".globl bank_nmi");
 __attribute__((section(".zp.bss"))) volatile char _CHR_BANK0_NEXT;
 __attribute__((section(".zp.bss"))) volatile char _CHR_BANK1_NEXT;
 __attribute__((section(".zp.data"))) volatile char _MMC1_CTRL_NEXT =
-    CHR_ROM_BANK_MODE_4 | MIRROR_VERTICAL;
+    CHR_BANK_MODE_4 | MIRROR_VERTICAL;
 
 __attribute__((section(".zp.bss"))) volatile char _PRG_BANK;
 __attribute__((section(".zp.bss"))) volatile char _CHR_BANK0;

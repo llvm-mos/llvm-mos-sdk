@@ -57,34 +57,34 @@ char get_prg_bank(void);
 
 // Set the current 1st 4k chr bank to the bank with this id.
 // This will take effect immediately and automatically rewrite at the top of
-// every frame
+// every frame. May have no immediate effect if interrupted by NMI.
 void set_chr_bank_0(char bank_id);
 
 // Set the current 2nd 4k chr bank to the bank with this id.
 // This will take effect immediately and automatically rewrite at the top of
-// every frame.
+// every frame. May have no immediate effect if interrupted by NMI.
 void set_chr_bank_1(char bank_id);
 
 // Set the current 1st 4k chr bank to the bank with this id.
 // this will take effect immediately, such as for mid screen changes
 // but then will be overwritten by the `[set/defer]_chr_bank_0()` value
-// in the next frame. If interrupted by NMI, may not have any effect.
+// in the next frame. May have no effect if interrupted by NMI.
 void split_chr_bank_0(char bank_id);
 
 // Set the current 2nd 4k chr bank to the bank with this id.
 // this will take effect immediately, such as for mid screen changes
 // but then will be overwritten by the `[set/defer]_chr_bank_1()` value
-// in the next frame. If interrupted by NMI, may not have any effect.
+// in the next frame. May have no effect if interrupted by NMI.
 void split_chr_bank_1(char bank_id);
 
 // Set the current 1st 4k chr bank to the bank with this id.
-// This will take effect at the next frame
-// and automatically rewrite at the top of every frame
+// This will take effect at the next frame and automatically rewrite at the top
+// of every frame.
 void defer_chr_bank_0(char bank_id);
 
 // Set the current 2nd 4k chr bank to the bank with this id.
-// this will take effect at the next frame
-// and automatically rewrite at the top of every frame
+// This will take effect at the next frame and automatically rewrite at the top
+// of every frame.
 void defer_chr_bank_1(char bank_id);
 
 // Return the high bits of CHR bank 0 that control PRG-RAM/ROM state. The return
@@ -126,11 +126,11 @@ enum Mirroring {
 // Set the current mirroring mode. Your options are MIRROR_LOWER_BANK,
 // MIRROR_UPPER_BANK, MIRROR_HORIZONTAL, and MIRROR_VERTICAL.
 // LOWER and UPPER are single screen modes. Applies immediately and reapplies at
-// each NMI.
+// each NMI. May have no immediate effect if interrupted by NMI.
 void set_mirroring(enum Mirroring mirroring);
 
 // Set the mirroring temporarily, but override with the previous setting at next
-// NMI. If interrupted by NMI, may not have any effect.
+// NMI. May have no effect if interrupted by NMI.
 void split_mirroring(enum Mirroring mirroring);
 
 // Set the mirroring to be applied automatically at the next NMI.
@@ -142,11 +142,11 @@ enum ChrRomBankMode {
 };
 
 // Set the current CHR-ROM bank mode. Applies immediately and reapplies at
-// each NMI.
+// each NMI. May have no immediate effect if interrupted by NMI.
 void set_chr_rom_bank_mode(enum ChrRomBankMode mode);
 
-// Set the CHR-ROM bank mode temporarily, but override with the previous setting at next
-// NMI. If interrupted by NMI, may not have any effect.
+// Set the CHR-ROM bank mode temporarily, but override with the previous setting
+// at next NMI. May have no effect if interrupted by NMI.
 void split_chr_rom_bank_mode(enum ChrRomBankMode mode);
 
 // Set the CHR-ROM bank mode to be applied automatically at the next NMI.
@@ -168,8 +168,8 @@ enum PrgRomBankMode get_prg_rom_bank_mode(void);
 void set_mmc1_ctrl(char value);
 
 // The mirroring and CHR-ROM bank mode settings are applied immediately, but
-// will be overwritten by future NMIs. The PRG-ROM bits are ignored. If
-// interrupted by NMI, may not have any effect.
+// will be overwritten by future NMIs. The PRG-ROM bits are ignored. May have no
+// effect if interruped by NMI.
 void split_mmc1_ctrl(char value);
 
 // The mirroring and CHR-ROM bank mode settings are applied immediately, but

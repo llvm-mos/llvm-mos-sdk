@@ -85,14 +85,12 @@ __attribute__((alias("get_prg_bank"))) char __get_prg_bank(void);
 
 void set_chr_bank_0(char bank_id) {
   defer_chr_bank_0(bank_id);
-  mmc1_register_write_retry(MMC1_CHR0, bank_id);
-  _CHR_BANK0 = bank_id;
+  split_chr_bank_0(bank_id);
 }
 
 void set_chr_bank_1(char bank_id) {
   defer_chr_bank_1(bank_id);
-  mmc1_register_write_retry(MMC1_CHR1, bank_id);
-  _CHR_BANK1 = bank_id;
+  split_chr_bank_1(bank_id);
 }
 
 void split_chr_bank_0(char bank_id) {
@@ -140,9 +138,7 @@ void set_chr_bank_1_high(char bank_id) {
 
 void set_mirroring(enum Mirroring mirroring) {
   defer_mirroring(mirroring);
-  char s = _MMC1_CTRL & 0b11100 | mirroring;
-  mmc1_register_write_retry(MMC1_CTRL, s);
-  _MMC1_CTRL = s;
+  split_mirroring(mirroring);
 }
 
 void split_mirroring(enum Mirroring mirroring) {
@@ -162,9 +158,7 @@ void defer_mirroring(enum Mirroring mirroring) {
 
 void set_chr_rom_bank_mode(enum ChrRomBankMode mode) {
   defer_chr_rom_bank_mode(mode);
-  char s = _MMC1_CTRL & 0b01111 | mode;
-  mmc1_register_write_retry(MMC1_CTRL, s);
-  _MMC1_CTRL = s;
+  split_chr_rom_bank_mode(mode);
 }
 
 void split_chr_rom_bank_mode(enum ChrRomBankMode mode) {

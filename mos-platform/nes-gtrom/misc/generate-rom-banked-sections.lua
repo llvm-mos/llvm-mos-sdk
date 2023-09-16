@@ -78,9 +78,8 @@ SECTIONS {
   /* Offset each non-fixed bank section's LMA by the fixed section. */
   /* This is accounted for in the custom output format. */]])
 for i=0,BANK_MAX do
-    printf([[  .prg_rom_%d : {
+    printf([[  .prg_rom_%d __prg_rom_%d_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_%d_lma + __prg_rom_fixed_size;
       *(.prg_rom_%d .prg_rom_%d.*)
       
       /* Non-fixed DPCM */

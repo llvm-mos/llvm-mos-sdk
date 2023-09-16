@@ -81,9 +81,8 @@ SECTIONS {
 
   /* Offset each non-fixed bank section's LMA by the fixed section. */
   /* This is accounted for in the custom output format. */
-  .prg_rom_0 : {
+  .prg_rom_0 __prg_rom_0_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_0_lma + __prg_rom_fixed_size;
       *(.prg_rom_0 .prg_rom_0.*)
       
       /* Non-fixed DPCM */
@@ -92,9 +91,8 @@ SECTIONS {
       KEEP(*(.dpcm_0 .dpcm_0.*))
   } >prg_rom_0
   PROVIDE(__dpcm_0_offset = ((__dpcm_0_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_1 : {
+  .prg_rom_1 __prg_rom_1_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_1_lma + __prg_rom_fixed_size;
       *(.prg_rom_1 .prg_rom_1.*)
       
       /* Non-fixed DPCM */
@@ -103,9 +101,8 @@ SECTIONS {
       KEEP(*(.dpcm_1 .dpcm_1.*))
   } >prg_rom_1
   PROVIDE(__dpcm_1_offset = ((__dpcm_1_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_2 : {
+  .prg_rom_2 __prg_rom_2_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_2_lma + __prg_rom_fixed_size;
       *(.prg_rom_2 .prg_rom_2.*)
       
       /* Non-fixed DPCM */
@@ -114,9 +111,8 @@ SECTIONS {
       KEEP(*(.dpcm_2 .dpcm_2.*))
   } >prg_rom_2
   PROVIDE(__dpcm_2_offset = ((__dpcm_2_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_3 : {
+  .prg_rom_3 __prg_rom_3_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_3_lma + __prg_rom_fixed_size;
       *(.prg_rom_3 .prg_rom_3.*)
       
       /* Non-fixed DPCM */
@@ -125,9 +121,8 @@ SECTIONS {
       KEEP(*(.dpcm_3 .dpcm_3.*))
   } >prg_rom_3
   PROVIDE(__dpcm_3_offset = ((__dpcm_3_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_4 : {
+  .prg_rom_4 __prg_rom_4_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_4_lma + __prg_rom_fixed_size;
       *(.prg_rom_4 .prg_rom_4.*)
       
       /* Non-fixed DPCM */
@@ -136,9 +131,8 @@ SECTIONS {
       KEEP(*(.dpcm_4 .dpcm_4.*))
   } >prg_rom_4
   PROVIDE(__dpcm_4_offset = ((__dpcm_4_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_5 : {
+  .prg_rom_5 __prg_rom_5_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_5_lma + __prg_rom_fixed_size;
       *(.prg_rom_5 .prg_rom_5.*)
       
       /* Non-fixed DPCM */
@@ -147,9 +141,8 @@ SECTIONS {
       KEEP(*(.dpcm_5 .dpcm_5.*))
   } >prg_rom_5
   PROVIDE(__dpcm_5_offset = ((__dpcm_5_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_6 : {
+  .prg_rom_6 __prg_rom_6_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_6_lma + __prg_rom_fixed_size;
       *(.prg_rom_6 .prg_rom_6.*)
       
       /* Non-fixed DPCM */
@@ -158,9 +151,8 @@ SECTIONS {
       KEEP(*(.dpcm_6 .dpcm_6.*))
   } >prg_rom_6
   PROVIDE(__dpcm_6_offset = ((__dpcm_6_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_7 : {
+  .prg_rom_7 __prg_rom_7_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_7_lma + __prg_rom_fixed_size;
       *(.prg_rom_7 .prg_rom_7.*)
       
       /* Non-fixed DPCM */
@@ -169,9 +161,8 @@ SECTIONS {
       KEEP(*(.dpcm_7 .dpcm_7.*))
   } >prg_rom_7
   PROVIDE(__dpcm_7_offset = ((__dpcm_7_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_8 : {
+  .prg_rom_8 __prg_rom_8_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_8_lma + __prg_rom_fixed_size;
       *(.prg_rom_8 .prg_rom_8.*)
       
       /* Non-fixed DPCM */
@@ -180,9 +171,8 @@ SECTIONS {
       KEEP(*(.dpcm_8 .dpcm_8.*))
   } >prg_rom_8
   PROVIDE(__dpcm_8_offset = ((__dpcm_8_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_9 : {
+  .prg_rom_9 __prg_rom_9_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_9_lma + __prg_rom_fixed_size;
       *(.prg_rom_9 .prg_rom_9.*)
       
       /* Non-fixed DPCM */
@@ -191,9 +181,8 @@ SECTIONS {
       KEEP(*(.dpcm_9 .dpcm_9.*))
   } >prg_rom_9
   PROVIDE(__dpcm_9_offset = ((__dpcm_9_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_10 : {
+  .prg_rom_10 __prg_rom_10_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_10_lma + __prg_rom_fixed_size;
       *(.prg_rom_10 .prg_rom_10.*)
       
       /* Non-fixed DPCM */
@@ -202,9 +191,8 @@ SECTIONS {
       KEEP(*(.dpcm_10 .dpcm_10.*))
   } >prg_rom_10
   PROVIDE(__dpcm_10_offset = ((__dpcm_10_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_11 : {
+  .prg_rom_11 __prg_rom_11_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_11_lma + __prg_rom_fixed_size;
       *(.prg_rom_11 .prg_rom_11.*)
       
       /* Non-fixed DPCM */
@@ -213,9 +201,8 @@ SECTIONS {
       KEEP(*(.dpcm_11 .dpcm_11.*))
   } >prg_rom_11
   PROVIDE(__dpcm_11_offset = ((__dpcm_11_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_12 : {
+  .prg_rom_12 __prg_rom_12_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_12_lma + __prg_rom_fixed_size;
       *(.prg_rom_12 .prg_rom_12.*)
       
       /* Non-fixed DPCM */
@@ -224,9 +211,8 @@ SECTIONS {
       KEEP(*(.dpcm_12 .dpcm_12.*))
   } >prg_rom_12
   PROVIDE(__dpcm_12_offset = ((__dpcm_12_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_13 : {
+  .prg_rom_13 __prg_rom_13_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_13_lma + __prg_rom_fixed_size;
       *(.prg_rom_13 .prg_rom_13.*)
       
       /* Non-fixed DPCM */
@@ -235,9 +221,8 @@ SECTIONS {
       KEEP(*(.dpcm_13 .dpcm_13.*))
   } >prg_rom_13
   PROVIDE(__dpcm_13_offset = ((__dpcm_13_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_14 : {
+  .prg_rom_14 __prg_rom_14_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_14_lma + __prg_rom_fixed_size;
       *(.prg_rom_14 .prg_rom_14.*)
       
       /* Non-fixed DPCM */
@@ -246,9 +231,8 @@ SECTIONS {
       KEEP(*(.dpcm_14 .dpcm_14.*))
   } >prg_rom_14
   PROVIDE(__dpcm_14_offset = ((__dpcm_14_start & 0xffff) - 0xc000) >> 6);
-  .prg_rom_15 : {
+  .prg_rom_15 __prg_rom_15_lma + __prg_rom_fixed_size : {
       /* Non-fixed bank */
-      . = __prg_rom_15_lma + __prg_rom_fixed_size;
       *(.prg_rom_15 .prg_rom_15.*)
       
       /* Non-fixed DPCM */

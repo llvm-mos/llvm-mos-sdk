@@ -35,9 +35,6 @@ extern "C" {
 
 // Contains functions to help with working with multiple PRG/CHR banks
 
-// Maximum level of recursion to allow with banked_call and similar functions.
-#define MAX_BANK_DEPTH 10
-
 // Switch to another bank and call this function.
 // Note: Using banked_call to call a second function from within
 // another banked_call is safe.

@@ -1,3 +1,4 @@
-asm(".globl __prg_ram_size\n__prg_ram_size=8\n"
-    ".globl __prg_nvram_size\n__prg_nvram_size=8\n");
+#include <bank.h>
+MAPPER_PRG_RAM_KB(8);
+MAPPER_PRG_NVRAM_KB(8);
 int main(void) { return 0; }

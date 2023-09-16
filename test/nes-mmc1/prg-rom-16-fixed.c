@@ -1,8 +1,8 @@
+#include <bank.h>
 #include <peekpoke.h>
 #include <stdlib.h>
 
-asm(".globl __prg_rom_size\n"
-    "__prg_rom_size = 16\n");
+MAPPER_PRG_ROM_KB(16);
 
 volatile const char c[15000] = {1, [14999] = 2};
 

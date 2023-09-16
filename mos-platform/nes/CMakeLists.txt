@@ -5,6 +5,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
+  ines.h
   nes.h
 TYPE INCLUDE)
 install(FILES

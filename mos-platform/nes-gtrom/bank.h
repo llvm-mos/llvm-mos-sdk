@@ -7,6 +7,7 @@
 #define _BANK_H_
 
 #include <stdbool.h>
+#include <ines.h>
 
 #ifdef __cplusplus
 extern "C" {

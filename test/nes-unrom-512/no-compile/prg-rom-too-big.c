@@ -1,2 +1,3 @@
-asm(".globl __prg_rom_size\n__prg_rom_size=1024\n");
+#include <bank.h>
+MAPPER_PRG_ROM_KB(1024);
 int main(void) { return 0; }

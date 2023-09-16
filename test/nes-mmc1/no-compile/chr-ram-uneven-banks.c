@@ -1,2 +1,3 @@
-asm(".globl __chr_ram_size\n__chr_ram_size=2\n");
+#include <bank.h>
+MAPPER_CHR_RAM_KB(2);
 int main(void) { return 0; }

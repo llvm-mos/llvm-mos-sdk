@@ -6,21 +6,11 @@
 #ifndef _BANK_H_
 #define _BANK_H_
 
+#include <ines.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/**
- * @brief Define this in a .c file to use 2-screen horizontal mirroring.
- */
-#define MAPPER_USE_2_SCREEN_HORIZONTAL \
-	asm(".globl __mirroring\n.globl __four_screen\n__mirroring = 0\n__four_screen = 0\n")
-
-/**
- * @brief Define this in a .c file to use 2-screen vertical mirroring.
- */
-#define MAPPER_USE_2_SCREEN_VERTICAL \
-	asm(".globl __mirroring\n.globl __four_screen\n__mirroring = 1\n__four_screen = 0\n")
 
 /**
  * @brief Define this in a .c file to use 1-screen switchable mirroring.

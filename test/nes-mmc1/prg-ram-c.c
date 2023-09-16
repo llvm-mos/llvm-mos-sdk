@@ -1,7 +1,8 @@
+#include <bank.h>
 #include <peekpoke.h>
 #include <stdlib.h>
 
-asm(".global __prg_ram_size\n__prg_ram_size=32\n");
+MAPPER_PRG_RAM_KB(32);
 
 volatile char c[8100] = {1, [8099] = 2};
 

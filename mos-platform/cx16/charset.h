@@ -46,12 +46,15 @@ template <size_t N> struct UnshiftedString {
     case 0x0000 ... 0x001f:
       return C;
 
-      // Name: Map from Commodore PET (interchange) primary character set to
+      // Name: Map from Commodore 64/128 (interchange) primary character set to
       // Unicode
 
       // Date: 2018 April 20
 
       // Author: Rebecca Bettencourt <support@kreativekorp.com>
+
+      // UNICODE LICENSE V3
+      // Copyright © 1991-2023 Unicode, Inc.
 
     case 0x0020:
       return 0x20; // SPACE
@@ -173,8 +176,8 @@ template <size_t N> struct UnshiftedString {
       return 0x5A; // LATIN CAPITAL LETTER Z
     case 0x005B:
       return 0x5B; // LEFT SQUARE BRACKET
-    case 0x005C:
-      return 0x5C; // REVERSE SOLIDUS
+    case 0x00A3:
+      return 0x5C; // POUND SIGN
     case 0x005D:
       return 0x5D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -208,9 +211,11 @@ template <size_t N> struct UnshiftedString {
     case 0x1FB7C:
       return 0x6C; // LEFT AND LOWER ONE EIGHTH BLOCK
     case 0x2572:
-      return 0x6D; // BOX DRAWINGS LIGHT DIAGONAL UPPER LEFT TO LOWER RIGHT
+      return 0x6D; // BOX DRAWINGS LIGHT DIAGONAL UPPER LEFT TO LOWER
+                   // RIGHT
     case 0x2571:
-      return 0x6E; // BOX DRAWINGS LIGHT DIAGONAL UPPER RIGHT TO LOWER LEFT
+      return 0x6E; // BOX DRAWINGS LIGHT DIAGONAL UPPER RIGHT TO LOWER
+                   // LEFT
     case 0x1FB7D:
       return 0x6F; // LEFT AND UPPER ONE EIGHTH BLOCK
     case 0x1FB7E:
@@ -348,12 +353,15 @@ template <size_t N> struct ShiftedString {
     case 0x0000 ... 0x001f:
       return C;
 
-      // Name: Map from Commodore PET (interchange) alternate character set to
-      // Unicode
+      // Name: Map from Commodore 64/128 (interchange) alternate character set
+      // to Unicode
 
       // Date: 2018 October 11
 
       // Author: Rebecca Bettencourt <support@kreativekorp.com>
+
+      // UNICODE LICENSE V3
+      // Copyright © 1991-2023 Unicode, Inc.
 
     case 0x0020:
       return 0x20; // SPACE
@@ -475,8 +483,8 @@ template <size_t N> struct ShiftedString {
       return 0x5A; // LATIN SMALL LETTER Z
     case 0x005B:
       return 0x5B; // LEFT SQUARE BRACKET
-    case 0x005C:
-      return 0x5C; // REVERSE SOLIDUS
+    case 0x00A3:
+      return 0x5C; // POUND SIGN
     case 0x005D:
       return 0x5D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -543,8 +551,8 @@ template <size_t N> struct ShiftedString {
       return 0x7C; // LEFT HALF MEDIUM SHADE
     case 0x2502:
       return 0x7D; // BOX DRAWINGS LIGHT VERTICAL
-    case 0x1FB95:
-      return 0x7E; // CHECKER BOARD FILL
+    case 0x1FB96:
+      return 0x7E; // INVERSE CHECKER BOARD FILL
     case 0x1FB98:
       return 0x7F; // UPPER LEFT TO LOWER RIGHT FILL
     case 0x00A0:
@@ -612,7 +620,7 @@ template <size_t N> struct ShiftedString {
     case 0x259A:
       return 0xBF; // QUADRANT UPPER LEFT AND LOWER RIGHT
     }
-  }
+  };
 };
 
 template <size_t N> struct UnshiftedVideoString {
@@ -707,8 +715,8 @@ template <size_t N> struct UnshiftedVideoString {
       return 0x1A; // LATIN CAPITAL LETTER Z
     case 0x005B:
       return 0x1B; // LEFT SQUARE BRACKET
-    case 0x005C:
-      return 0x1C; // REVERSE SOLIDUS
+    case 0x00A3:
+      return 0x1C; // POUND SIGN
     case 0x005D:
       return 0x1D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -1113,8 +1121,8 @@ template <size_t N> struct UnshiftedReverseVideoString {
       return 0x9A; // LATIN CAPITAL LETTER Z
     case 0x005B:
       return 0x9B; // LEFT SQUARE BRACKET
-    case 0x005C:
-      return 0x9C; // REVERSE SOLIDUS
+    case 0x00A3:
+      return 0x9C; // POUND SIGN
     case 0x005D:
       return 0x9D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -1348,7 +1356,8 @@ template <size_t N> struct ShiftedVideoString {
     default:
       throw "Unsupported";
 
-      // Name: Map from Commodore PET (video) alternate character set to Unicode
+      // Name: Map from Commodore 64/128 (video) alternate character set to
+      // Unicode
 
       // Date: 2018 October 11
 
@@ -1410,8 +1419,8 @@ template <size_t N> struct ShiftedVideoString {
       return 0x1A; // LATIN SMALL LETTER Z
     case 0x005B:
       return 0x1B; // LEFT SQUARE BRACKET
-    case 0x005C:
-      return 0x1C; // REVERSE SOLIDUS
+    case 0x00A3:
+      return 0x1C; // POUND SIGN
     case 0x005D:
       return 0x1D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -1542,8 +1551,8 @@ template <size_t N> struct ShiftedVideoString {
       return 0x5C; // LEFT HALF MEDIUM SHADE
     case 0x2502:
       return 0x5D; // BOX DRAWINGS LIGHT VERTICAL
-    case 0x1FB95:
-      return 0x5E; // CHECKER BOARD FILL
+    case 0x1FB96:
+      return 0x5E; // INVERSE CHECKER BOARD FILL
     case 0x1FB98:
       return 0x5F; // UPPER LEFT TO LOWER RIGHT FILL
     case 0x00A0:
@@ -1612,8 +1621,8 @@ template <size_t N> struct ShiftedVideoString {
       return 0x7F; // QUADRANT UPPER LEFT AND LOWER RIGHT
     case 0x1FB94:
       return 0xDC; // LEFT HALF INVERSE MEDIUM SHADE AND RIGHT HALF BLOCK
-    case 0x1FB96:
-      return 0xDE; // INVERSE CHECKER BOARD FILL
+    case 0x1FB95:
+      return 0xDE; // CHECKER BOARD FILL
     case 0x2588:
       return 0xE0; // FULL BLOCK
     case 0x2590:
@@ -1702,8 +1711,8 @@ template <size_t N> struct ShiftedReverseVideoString {
 
     case 0x1FB94:
       return 0x5C; // LEFT HALF INVERSE MEDIUM SHADE AND RIGHT HALF BLOCK
-    case 0x1FB96:
-      return 0x5E; // INVERSE CHECKER BOARD FILL
+    case 0x1FB95:
+      return 0x5E; // CHECKER BOARD FILL
     case 0x2588:
       return 0x60; // FULL BLOCK
     case 0x2590:
@@ -1806,8 +1815,8 @@ template <size_t N> struct ShiftedReverseVideoString {
       return 0x9A; // LATIN SMALL LETTER Z
     case 0x005B:
       return 0x9B; // LEFT SQUARE BRACKET
-    case 0x005C:
-      return 0x9C; // REVERSE SOLIDUS
+    case 0x00A3:
+      return 0x9C; // POUND SIGN
     case 0x005D:
       return 0x9D; // RIGHT SQUARE BRACKET
     case 0x2191:
@@ -1938,8 +1947,8 @@ template <size_t N> struct ShiftedReverseVideoString {
       return 0xDC; // LEFT HALF MEDIUM SHADE
     case 0x2502:
       return 0xDD; // BOX DRAWINGS LIGHT VERTICAL
-    case 0x1FB95:
-      return 0xDE; // CHECKER BOARD FILL
+    case 0x1FB96:
+      return 0xDE; // INVERSE CHECKER BOARD FILL
     case 0x1FB98:
       return 0xDF; // UPPER LEFT TO LOWER RIGHT FILL
     case 0x00A0:
@@ -2010,6 +2019,437 @@ template <size_t N> struct ShiftedReverseVideoString {
   }
 };
 
+template <size_t N> struct ISO885915String {
+  char Str[N]{};
+
+  constexpr ISO885915String(char const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0x80)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+
+  constexpr ISO885915String(char16_t const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I) {
+      if (Src[I] >= 0xD800 && Src[I] <= 0xDFFF)
+        throw "use U prefix for unicode string literals";
+      Str[I] = TranslateUnicode(Src[I]);
+    }
+  }
+  
+  constexpr ISO885915String(char32_t const (&Src)[N]) {
+    for (size_t I = 0; I < N; ++I)
+      Str[I] = TranslateUnicode(Src[I]);
+  }
+
+  constexpr char TranslateUnicode(char32_t C) {
+    switch (C) {
+    default:
+      throw "Unsupported";
+
+    // C0 and C1 control codes are uninterpreted.
+    case 0x0000 ... 0x001f:
+    case 0x0080 ... 0x009f:
+      return C;
+
+      // Name: ISO/IEC 8859-15:1999 to Unicode
+
+      // Date: 1999 July 27
+
+      // Authors: Markus Kuhn <http://www.cl.cam.ac.uk/~mgk25/>
+      //          Ken Whistler <ken@unicode.org>
+
+      // UNICODE LICENSE V3
+      // Copyright © 1991-2023 Unicode, Inc.
+    case 0x0020:
+      return 0x20; // SPACE
+    case 0x0021:
+      return 0x21; // EXCLAMATION MARK
+    case 0x0022:
+      return 0x22; // QUOTATION MARK
+    case 0x0023:
+      return 0x23; // NUMBER SIGN
+    case 0x0024:
+      return 0x24; // DOLLAR SIGN
+    case 0x0025:
+      return 0x25; // PERCENT SIGN
+    case 0x0026:
+      return 0x26; // AMPERSAND
+    case 0x0027:
+      return 0x27; // APOSTROPHE
+    case 0x0028:
+      return 0x28; // LEFT PARENTHESIS
+    case 0x0029:
+      return 0x29; // RIGHT PARENTHESIS
+    case 0x002A:
+      return 0x2A; // ASTERISK
+    case 0x002B:
+      return 0x2B; // PLUS SIGN
+    case 0x002C:
+      return 0x2C; // COMMA
+    case 0x002D:
+      return 0x2D; // HYPHEN-MINUS
+    case 0x002E:
+      return 0x2E; // FULL STOP
+    case 0x002F:
+      return 0x2F; // SOLIDUS
+    case 0x0030:
+      return 0x30; // DIGIT ZERO
+    case 0x0031:
+      return 0x31; // DIGIT ONE
+    case 0x0032:
+      return 0x32; // DIGIT TWO
+    case 0x0033:
+      return 0x33; // DIGIT THREE
+    case 0x0034:
+      return 0x34; // DIGIT FOUR
+    case 0x0035:
+      return 0x35; // DIGIT FIVE
+    case 0x0036:
+      return 0x36; // DIGIT SIX
+    case 0x0037:
+      return 0x37; // DIGIT SEVEN
+    case 0x0038:
+      return 0x38; // DIGIT EIGHT
+    case 0x0039:
+      return 0x39; // DIGIT NINE
+    case 0x003A:
+      return 0x3A; // COLON
+    case 0x003B:
+      return 0x3B; // SEMICOLON
+    case 0x003C:
+      return 0x3C; // LESS-THAN SIGN
+    case 0x003D:
+      return 0x3D; // EQUALS SIGN
+    case 0x003E:
+      return 0x3E; // GREATER-THAN SIGN
+    case 0x003F:
+      return 0x3F; // QUESTION MARK
+    case 0x0040:
+      return 0x40; // COMMERCIAL AT
+    case 0x0041:
+      return 0x41; // LATIN CAPITAL LETTER A
+    case 0x0042:
+      return 0x42; // LATIN CAPITAL LETTER B
+    case 0x0043:
+      return 0x43; // LATIN CAPITAL LETTER C
+    case 0x0044:
+      return 0x44; // LATIN CAPITAL LETTER D
+    case 0x0045:
+      return 0x45; // LATIN CAPITAL LETTER E
+    case 0x0046:
+      return 0x46; // LATIN CAPITAL LETTER F
+    case 0x0047:
+      return 0x47; // LATIN CAPITAL LETTER G
+    case 0x0048:
+      return 0x48; // LATIN CAPITAL LETTER H
+    case 0x0049:
+      return 0x49; // LATIN CAPITAL LETTER I
+    case 0x004A:
+      return 0x4A; // LATIN CAPITAL LETTER J
+    case 0x004B:
+      return 0x4B; // LATIN CAPITAL LETTER K
+    case 0x004C:
+      return 0x4C; // LATIN CAPITAL LETTER L
+    case 0x004D:
+      return 0x4D; // LATIN CAPITAL LETTER M
+    case 0x004E:
+      return 0x4E; // LATIN CAPITAL LETTER N
+    case 0x004F:
+      return 0x4F; // LATIN CAPITAL LETTER O
+    case 0x0050:
+      return 0x50; // LATIN CAPITAL LETTER P
+    case 0x0051:
+      return 0x51; // LATIN CAPITAL LETTER Q
+    case 0x0052:
+      return 0x52; // LATIN CAPITAL LETTER R
+    case 0x0053:
+      return 0x53; // LATIN CAPITAL LETTER S
+    case 0x0054:
+      return 0x54; // LATIN CAPITAL LETTER T
+    case 0x0055:
+      return 0x55; // LATIN CAPITAL LETTER U
+    case 0x0056:
+      return 0x56; // LATIN CAPITAL LETTER V
+    case 0x0057:
+      return 0x57; // LATIN CAPITAL LETTER W
+    case 0x0058:
+      return 0x58; // LATIN CAPITAL LETTER X
+    case 0x0059:
+      return 0x59; // LATIN CAPITAL LETTER Y
+    case 0x005A:
+      return 0x5A; // LATIN CAPITAL LETTER Z
+    case 0x005B:
+      return 0x5B; // LEFT SQUARE BRACKET
+    case 0x005C:
+      return 0x5C; // REVERSE SOLIDUS
+    case 0x005D:
+      return 0x5D; // RIGHT SQUARE BRACKET
+    case 0x005E:
+      return 0x5E; // CIRCUMFLEX ACCENT
+    case 0x005F:
+      return 0x5F; // LOW LINE
+    case 0x0060:
+      return 0x60; // GRAVE ACCENT
+    case 0x0061:
+      return 0x61; // LATIN SMALL LETTER A
+    case 0x0062:
+      return 0x62; // LATIN SMALL LETTER B
+    case 0x0063:
+      return 0x63; // LATIN SMALL LETTER C
+    case 0x0064:
+      return 0x64; // LATIN SMALL LETTER D
+    case 0x0065:
+      return 0x65; // LATIN SMALL LETTER E
+    case 0x0066:
+      return 0x66; // LATIN SMALL LETTER F
+    case 0x0067:
+      return 0x67; // LATIN SMALL LETTER G
+    case 0x0068:
+      return 0x68; // LATIN SMALL LETTER H
+    case 0x0069:
+      return 0x69; // LATIN SMALL LETTER I
+    case 0x006A:
+      return 0x6A; // LATIN SMALL LETTER J
+    case 0x006B:
+      return 0x6B; // LATIN SMALL LETTER K
+    case 0x006C:
+      return 0x6C; // LATIN SMALL LETTER L
+    case 0x006D:
+      return 0x6D; // LATIN SMALL LETTER M
+    case 0x006E:
+      return 0x6E; // LATIN SMALL LETTER N
+    case 0x006F:
+      return 0x6F; // LATIN SMALL LETTER O
+    case 0x0070:
+      return 0x70; // LATIN SMALL LETTER P
+    case 0x0071:
+      return 0x71; // LATIN SMALL LETTER Q
+    case 0x0072:
+      return 0x72; // LATIN SMALL LETTER R
+    case 0x0073:
+      return 0x73; // LATIN SMALL LETTER S
+    case 0x0074:
+      return 0x74; // LATIN SMALL LETTER T
+    case 0x0075:
+      return 0x75; // LATIN SMALL LETTER U
+    case 0x0076:
+      return 0x76; // LATIN SMALL LETTER V
+    case 0x0077:
+      return 0x77; // LATIN SMALL LETTER W
+    case 0x0078:
+      return 0x78; // LATIN SMALL LETTER X
+    case 0x0079:
+      return 0x79; // LATIN SMALL LETTER Y
+    case 0x007A:
+      return 0x7A; // LATIN SMALL LETTER Z
+    case 0x007B:
+      return 0x7B; // LEFT CURLY BRACKET
+    case 0x007C:
+      return 0x7C; // VERTICAL LINE
+    case 0x007D:
+      return 0x7D; // RIGHT CURLY BRACKET
+    case 0x007E:
+      return 0x7E; // TILDE
+    case 0x007F:
+      return 0x7F; // DELETE
+    case 0x00A0:
+      return 0xA0; // NO-BREAK SPACE
+    case 0x00A1:
+      return 0xA1; // INVERTED EXCLAMATION MARK
+    case 0x00A2:
+      return 0xA2; // CENT SIGN
+    case 0x00A3:
+      return 0xA3; // POUND SIGN
+    case 0x20AC:
+      return 0xA4; // EURO SIGN
+    case 0x00A5:
+      return 0xA5; // YEN SIGN
+    case 0x0160:
+      return 0xA6; // LATIN CAPITAL LETTER S WITH CARON
+    case 0x00A7:
+      return 0xA7; // SECTION SIGN
+    case 0x0161:
+      return 0xA8; // LATIN SMALL LETTER S WITH CARON
+    case 0x00A9:
+      return 0xA9; // COPYRIGHT SIGN
+    case 0x00AA:
+      return 0xAA; // FEMININE ORDINAL INDICATOR
+    case 0x00AB:
+      return 0xAB; // LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+    case 0x00AC:
+      return 0xAC; // NOT SIGN
+    case 0x00AD:
+      return 0xAD; // SOFT HYPHEN
+    case 0x00AE:
+      return 0xAE; // REGISTERED SIGN
+    case 0x00AF:
+      return 0xAF; // MACRON
+    case 0x00B0:
+      return 0xB0; // DEGREE SIGN
+    case 0x00B1:
+      return 0xB1; // PLUS-MINUS SIGN
+    case 0x00B2:
+      return 0xB2; // SUPERSCRIPT TWO
+    case 0x00B3:
+      return 0xB3; // SUPERSCRIPT THREE
+    case 0x017D:
+      return 0xB4; // LATIN CAPITAL LETTER Z WITH CARON
+    case 0x00B5:
+      return 0xB5; // MICRO SIGN
+    case 0x00B6:
+      return 0xB6; // PILCROW SIGN
+    case 0x00B7:
+      return 0xB7; // MIDDLE DOT
+    case 0x017E:
+      return 0xB8; // LATIN SMALL LETTER Z WITH CARON
+    case 0x00B9:
+      return 0xB9; // SUPERSCRIPT ONE
+    case 0x00BA:
+      return 0xBA; // MASCULINE ORDINAL INDICATOR
+    case 0x00BB:
+      return 0xBB; // RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+    case 0x0152:
+      return 0xBC; // LATIN CAPITAL LIGATURE OE
+    case 0x0153:
+      return 0xBD; // LATIN SMALL LIGATURE OE
+    case 0x0178:
+      return 0xBE; // LATIN CAPITAL LETTER Y WITH DIAERESIS
+    case 0x00BF:
+      return 0xBF; // INVERTED QUESTION MARK
+    case 0x00C0:
+      return 0xC0; // LATIN CAPITAL LETTER A WITH GRAVE
+    case 0x00C1:
+      return 0xC1; // LATIN CAPITAL LETTER A WITH ACUTE
+    case 0x00C2:
+      return 0xC2; // LATIN CAPITAL LETTER A WITH CIRCUMFLEX
+    case 0x00C3:
+      return 0xC3; // LATIN CAPITAL LETTER A WITH TILDE
+    case 0x00C4:
+      return 0xC4; // LATIN CAPITAL LETTER A WITH DIAERESIS
+    case 0x00C5:
+      return 0xC5; // LATIN CAPITAL LETTER A WITH RING ABOVE
+    case 0x00C6:
+      return 0xC6; // LATIN CAPITAL LETTER AE
+    case 0x00C7:
+      return 0xC7; // LATIN CAPITAL LETTER C WITH CEDILLA
+    case 0x00C8:
+      return 0xC8; // LATIN CAPITAL LETTER E WITH GRAVE
+    case 0x00C9:
+      return 0xC9; // LATIN CAPITAL LETTER E WITH ACUTE
+    case 0x00CA:
+      return 0xCA; // LATIN CAPITAL LETTER E WITH CIRCUMFLEX
+    case 0x00CB:
+      return 0xCB; // LATIN CAPITAL LETTER E WITH DIAERESIS
+    case 0x00CC:
+      return 0xCC; // LATIN CAPITAL LETTER I WITH GRAVE
+    case 0x00CD:
+      return 0xCD; // LATIN CAPITAL LETTER I WITH ACUTE
+    case 0x00CE:
+      return 0xCE; // LATIN CAPITAL LETTER I WITH CIRCUMFLEX
+    case 0x00CF:
+      return 0xCF; // LATIN CAPITAL LETTER I WITH DIAERESIS
+    case 0x00D0:
+      return 0xD0; // LATIN CAPITAL LETTER ETH
+    case 0x00D1:
+      return 0xD1; // LATIN CAPITAL LETTER N WITH TILDE
+    case 0x00D2:
+      return 0xD2; // LATIN CAPITAL LETTER O WITH GRAVE
+    case 0x00D3:
+      return 0xD3; // LATIN CAPITAL LETTER O WITH ACUTE
+    case 0x00D4:
+      return 0xD4; // LATIN CAPITAL LETTER O WITH CIRCUMFLEX
+    case 0x00D5:
+      return 0xD5; // LATIN CAPITAL LETTER O WITH TILDE
+    case 0x00D6:
+      return 0xD6; // LATIN CAPITAL LETTER O WITH DIAERESIS
+    case 0x00D7:
+      return 0xD7; // MULTIPLICATION SIGN
+    case 0x00D8:
+      return 0xD8; // LATIN CAPITAL LETTER O WITH STROKE
+    case 0x00D9:
+      return 0xD9; // LATIN CAPITAL LETTER U WITH GRAVE
+    case 0x00DA:
+      return 0xDA; // LATIN CAPITAL LETTER U WITH ACUTE
+    case 0x00DB:
+      return 0xDB; // LATIN CAPITAL LETTER U WITH CIRCUMFLEX
+    case 0x00DC:
+      return 0xDC; // LATIN CAPITAL LETTER U WITH DIAERESIS
+    case 0x00DD:
+      return 0xDD; // LATIN CAPITAL LETTER Y WITH ACUTE
+    case 0x00DE:
+      return 0xDE; // LATIN CAPITAL LETTER THORN
+    case 0x00DF:
+      return 0xDF; // LATIN SMALL LETTER SHARP S
+    case 0x00E0:
+      return 0xE0; // LATIN SMALL LETTER A WITH GRAVE
+    case 0x00E1:
+      return 0xE1; // LATIN SMALL LETTER A WITH ACUTE
+    case 0x00E2:
+      return 0xE2; // LATIN SMALL LETTER A WITH CIRCUMFLEX
+    case 0x00E3:
+      return 0xE3; // LATIN SMALL LETTER A WITH TILDE
+    case 0x00E4:
+      return 0xE4; // LATIN SMALL LETTER A WITH DIAERESIS
+    case 0x00E5:
+      return 0xE5; // LATIN SMALL LETTER A WITH RING ABOVE
+    case 0x00E6:
+      return 0xE6; // LATIN SMALL LETTER AE
+    case 0x00E7:
+      return 0xE7; // LATIN SMALL LETTER C WITH CEDILLA
+    case 0x00E8:
+      return 0xE8; // LATIN SMALL LETTER E WITH GRAVE
+    case 0x00E9:
+      return 0xE9; // LATIN SMALL LETTER E WITH ACUTE
+    case 0x00EA:
+      return 0xEA; // LATIN SMALL LETTER E WITH CIRCUMFLEX
+    case 0x00EB:
+      return 0xEB; // LATIN SMALL LETTER E WITH DIAERESIS
+    case 0x00EC:
+      return 0xEC; // LATIN SMALL LETTER I WITH GRAVE
+    case 0x00ED:
+      return 0xED; // LATIN SMALL LETTER I WITH ACUTE
+    case 0x00EE:
+      return 0xEE; // LATIN SMALL LETTER I WITH CIRCUMFLEX
+    case 0x00EF:
+      return 0xEF; // LATIN SMALL LETTER I WITH DIAERESIS
+    case 0x00F0:
+      return 0xF0; // LATIN SMALL LETTER ETH
+    case 0x00F1:
+      return 0xF1; // LATIN SMALL LETTER N WITH TILDE
+    case 0x00F2:
+      return 0xF2; // LATIN SMALL LETTER O WITH GRAVE
+    case 0x00F3:
+      return 0xF3; // LATIN SMALL LETTER O WITH ACUTE
+    case 0x00F4:
+      return 0xF4; // LATIN SMALL LETTER O WITH CIRCUMFLEX
+    case 0x00F5:
+      return 0xF5; // LATIN SMALL LETTER O WITH TILDE
+    case 0x00F6:
+      return 0xF6; // LATIN SMALL LETTER O WITH DIAERESIS
+    case 0x00F7:
+      return 0xF7; // DIVISION SIGN
+    case 0x00F8:
+      return 0xF8; // LATIN SMALL LETTER O WITH STROKE
+    case 0x00F9:
+      return 0xF9; // LATIN SMALL LETTER U WITH GRAVE
+    case 0x00FA:
+      return 0xFA; // LATIN SMALL LETTER U WITH ACUTE
+    case 0x00FB:
+      return 0xFB; // LATIN SMALL LETTER U WITH CIRCUMFLEX
+    case 0x00FC:
+      return 0xFC; // LATIN SMALL LETTER U WITH DIAERESIS
+    case 0x00FD:
+      return 0xFD; // LATIN SMALL LETTER Y WITH ACUTE
+    case 0x00FE:
+      return 0xFE; // LATIN SMALL LETTER THORN
+    case 0x00FF:
+      return 0xFF; // LATIN SMALL LETTER Y WITH DIAERESIS
+    }
+  }
+};
+
 } // namespace charset_impl
 
 template <charset_impl::UnshiftedString S> constexpr auto operator""_u() {
@@ -2035,6 +2475,10 @@ template <charset_impl::ShiftedVideoString S> constexpr auto operator""_sv() {
 
 template <charset_impl::ShiftedReverseVideoString S>
 constexpr auto operator""_srv() {
+  return S.Str;
+}
+
+template <charset_impl::ISO885915String S> constexpr auto operator""_i() {
   return S.Str;
 }
 

@@ -1,5 +1,8 @@
+#include <bank.h>
 #include <peekpoke.h>
 #include <stdlib.h>
+
+MAPPER_PRG_ROM_KB(32);
 
 volatile const char c[15000] = {1, [14999] = 2};
 
@@ -11,6 +14,7 @@ int main(void) {
     return EXIT_FAILURE;
   if (c[14999] != 2)
     return EXIT_FAILURE;
+  set_prg_bank(0);
   if (d[0] != 3)
     return EXIT_FAILURE;
   if (d[16371] != 4)

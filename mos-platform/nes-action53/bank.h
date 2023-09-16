@@ -27,6 +27,8 @@
 #ifndef _BANK_H_
 #define _BANK_H_
 
+#include <ines.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -46,10 +48,6 @@ __attribute__((leaf)) void set_prg_bank(char bank_id);
 // Get the current PRG bank at $8000-bfff.
 // returns: The current bank.
 __attribute__((leaf)) char get_prg_bank(void);
-
-// Get the current CHR bank.
-// returns: The current bank.
-__attribute__((leaf)) char get_chr_bank(void);
 
 // Set the current 8kb chr bank to the bank with this id.
 // this will take effect immediately

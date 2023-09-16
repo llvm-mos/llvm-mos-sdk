@@ -83,6 +83,12 @@ mmc1_register_write_retry(unsigned addr, char val) {
 char get_prg_bank(void) { return _PRG_BANK; }
 __attribute__((alias("get_prg_bank"))) char __get_prg_bank(void);
 
+void set_prg_bank(char bank_id) {
+  mmc1_register_write_retry(MMC1_PRG, bank_id);
+  _PRG_BANK = bank_id;
+}
+__attribute__((alias("set_prg_bank"))) void __set_prg_bank(char);
+
 void set_chr_bank_0(char bank_id) {
   defer_chr_bank_0(bank_id);
   split_chr_bank_0(bank_id);

@@ -69,27 +69,6 @@ bank_nmi:
         sta _IN_PROGRESS
         rts
 
-.section .text.set_prg_bank,"ax",@progbits
-.globl __set_prg_bank
-.globl set_prg_bank
-__set_prg_bank:
-set_prg_bank:
-        tay
-.Lset:
-        inc __reset_mmc1_byte
-        ldx #1
-        stx _IN_PROGRESS
-        mmc1_register_write MMC1_PRG
-        ldx _IN_PROGRESS
-        beq .Lretry
-        dex
-        stx _IN_PROGRESS
-        sty _PRG_BANK
-        rts
-.Lretry:
-        tya
-        jmp .Lset
-
 
 .section .text.banked_call,"ax",@progbits
 .globl banked_call

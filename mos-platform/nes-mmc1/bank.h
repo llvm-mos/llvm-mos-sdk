@@ -47,7 +47,7 @@ __attribute__((leaf, callback(2))) void banked_call(char bank_id,
 // Switch to the given bank (to $8000-bfff). Your prior bank is not saved.
 // Can be used for reading data with a function in the fixed bank.
 // bank_id: The bank to switch to.
-__attribute__((leaf)) void set_prg_bank(char bank_id);
+void set_prg_bank(char bank_id);
 
 // Get the current PRG bank at $8000-bfff.
 // returns: The current bank.

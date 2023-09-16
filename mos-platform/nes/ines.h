@@ -34,7 +34,7 @@
 	asm(".globl __battery\n__battery = 1")
 
 #define INES_TIMING(id) \
-    asm(".globl __timing\__timing = " #id)
+    asm(".globl __timing\n__timing = " #id)
 #define INES_TIMING_RP2C02 \
     asm(".globl __timing\n__timing = 0")
 #define INES_TIMING_RP2C07 \
@@ -44,6 +44,6 @@
 #define INES_TIMING_UA6538 \
     asm(".globl __timing\n__timing = 3")
 #define INES_DEFAULT_EXPANSION(id) \
-    asm(".globl __default_expansion_device\__default_expansion_device = " #id)
+    asm(".globl __default_expansion_device\n__default_expansion_device = " #id)
 
 #endif // _INES_H_

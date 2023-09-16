@@ -1,2 +1,3 @@
-asm(".globl __prg_nvram_size\n__prg_nvram_size=2");
+#include <bank.h>
+MAPPER_PRG_NVRAM_KB(2);
 int main(void) { return 0; }

@@ -12,6 +12,7 @@ install(FILES
   _pia.h
   _pokey.h
   atari.h
+  charset.h
   chrout.h
 TYPE INCLUDE)
 

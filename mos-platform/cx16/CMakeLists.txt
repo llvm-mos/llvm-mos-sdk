@@ -4,7 +4,11 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-install(FILES _6522.h cx16.h TYPE INCLUDE)
+install(FILES
+  _6522.h
+  charset.h
+  cx16.h
+TYPE INCLUDE)
 install(FILES imag-regs.ld link.ld TYPE LIB)
 
 install(FILES cx16.inc DESTINATION ${ASMINCDIR})

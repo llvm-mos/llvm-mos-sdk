@@ -4,7 +4,7 @@ var searchData=
   ['c64_2einc_2499',['c64.inc',['../c64_8inc.html',1,'']]],
   ['cbm_2eh_2500',['cbm.h',['../cbm_8h.html',1,'']]],
   ['cbm_5fkernal_2einc_2501',['cbm_kernal.inc',['../cbm__kernal_8inc.html',1,'']]],
-  ['charset_2eh_2502',['charset.h',['../c64_2charset_8h.html',1,'(Global Namespace)'],['../pet_2charset_8h.html',1,'(Global Namespace)']]],
+  ['charset_2eh_2502',['charset.h',['../atari8-common_2charset_8h.html',1,'(Global Namespace)'],['../c64_2charset_8h.html',1,'(Global Namespace)'],['../cx16_2charset_8h.html',1,'(Global Namespace)'],['../pet_2charset_8h.html',1,'(Global Namespace)']]],
   ['chrin_2eh_2503',['chrin.h',['../chrin_8h.html',1,'']]],
   ['chrout_2eh_2504',['chrout.h',['../atari8-common_2chrout_8h.html',1,'(Global Namespace)'],['../commodore_2chrout_8h.html',1,'(Global Namespace)'],['../eater_2chrout_8h.html',1,'(Global Namespace)']]],
   ['climits_2505',['climits',['../climits.html',1,'']]],

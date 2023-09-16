@@ -125,7 +125,7 @@ var searchData=
   ['chactl_5finv_5ftrans_238',['CHACTL_INV_TRANS',['../__antic_8h.html#a40c1cfdfe884d3738cd8956635ee1213',1,'_antic.h']]],
   ['channel_239',['channel',['../famitone2_8h.html#abd7697134589aaeaa645826770a848dd',1,'famitone2.h']]],
   ['charge_240',['charge',['../famitone2_2LICENSE.html#a9a191cb42b7fcb1a722d987afa500247',1,'charge():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a8941f0574e230fb7d86ff7827cbf54c7',1,'charge():&#160;LICENSE'],['../neslib_2LICENSE.html#a9a191cb42b7fcb1a722d987afa500247',1,'charge():&#160;LICENSE']]],
-  ['charset_2eh_241',['charset.h',['../c64_2charset_8h.html',1,'(Global Namespace)'],['../pet_2charset_8h.html',1,'(Global Namespace)']]],
+  ['charset_2eh_241',['charset.h',['../atari8-common_2charset_8h.html',1,'(Global Namespace)'],['../c64_2charset_8h.html',1,'(Global Namespace)'],['../cx16_2charset_8h.html',1,'(Global Namespace)'],['../pet_2charset_8h.html',1,'(Global Namespace)']]],
   ['chr_5fa12_5finvert_242',['CHR_A12_INVERT',['../nes-mmc3_2bank_8h.html#a8e183e03103e9588f689a3f976c342a3',1,'bank.h']]],
   ['chr_5fa12_5fstraight_243',['CHR_A12_STRAIGHT',['../nes-mmc3_2bank_8h.html#a62e1699e8e95100fcf82f6fb9421dcc7',1,'bank.h']]],
   ['chr_5fbank_244',['CHR_BANK',['../nes-unrom-512_2bank_8h.html#afa6f5dcf34f47c0afb29e282dd63c046',1,'bank.h']]],

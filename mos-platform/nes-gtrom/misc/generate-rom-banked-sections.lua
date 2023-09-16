@@ -79,15 +79,15 @@ SECTIONS {
   /* This is accounted for in the custom output format. */]])
 for i=0,BANK_MAX do
     printf([[  .prg_rom_%d __prg_rom_%d_lma + __prg_rom_fixed_size : {
-      /* Non-fixed bank */
-      *(.prg_rom_%d .prg_rom_%d.*)
-      
-      /* Non-fixed DPCM */
-      . = ABSOLUTE(.) < 0xc000 ? 0xc000 : ALIGN(64);
-      __dpcm_%d_start = .;
-      KEEP(*(.dpcm_%d .dpcm_%d.*))
+    *(.prg_rom_%d .prg_rom_%d.*)
+  } >prg_rom_%d]], i, i, i, i, i)
+    print("")
+    printf([[  .dpcm_%d ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_%d_lma + 0x4000 : ALIGN(64)) : {
+    __dpcm_%d_start = .;
+    KEEP(*(.dpcm_%d .dpcm_%d.*))
   } >prg_rom_%d
-  PROVIDE(__dpcm_%d_offset = ((__dpcm_%d_start & 0xffff) - 0xc000) >> 6);]], i, i, i, i, i, i, i, i, i, i)
+  PROVIDE(__dpcm_%d_offset = ((__dpcm_%d_start & 0xffff) - 0xc000) >> 6);]], i, i, i, i, i, i, i, i)
+  print("")
 end
 print([[
   .chr_rom_0   : { KEEP(*(.chr_rom_0   .chr_rom_0.*)) }   >chr_rom_0

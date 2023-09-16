@@ -2,9 +2,9 @@
 #include <peekpoke.h>
 #include <stdlib.h>
 
-asm(".global __prg_ram_size\n__prg_ram_size=32\n");
-asm(".global __chr_rom_size\n__chr_rom_size=16\n");
-asm(".global __prg_rom_size\n__prg_rom_size=128\n");
+MAPPER_PRG_RAM_KB(32);
+MAPPER_CHR_ROM_KB(16);
+MAPPER_PRG_ROM_KB(128);
 
 __attribute__((section(".prg_ram_0.noinit"))) volatile char c[8192];
 

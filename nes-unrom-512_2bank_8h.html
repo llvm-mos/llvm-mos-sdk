@@ -72,17 +72,21 @@ $(function() {
 <div class="title">bank.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;<a class="el" href="ines_8h_source.html">ines.h</a>&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for bank.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="nes-unrom-512_2bank_8h__incl.png" border="0" usemap="#nes-unrom-512_2bank_8h" alt=""/></div>
+<map name="nes-unrom-512_2bank_8h" id="nes-unrom-512_2bank_8h">
+<area shape="rect" title=" " alt="" coords="5,5,175,32"/>
+<area shape="rect" href="ines_8h.html" title=" " alt="" coords="59,80,121,107"/>
+</map>
+</div>
+</div>
 <p><a href="nes-unrom-512_2bank_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a41c2f7bb9a47d44c330800201ccd90a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-unrom-512_2bank_8h.html#a41c2f7bb9a47d44c330800201ccd90a4">MAPPER_USE_2_SCREEN_HORIZONTAL</a>&#160;&#160;&#160;asm(&quot;.globl __mirroring\n.globl __four_screen\n__mirroring = 0\n__four_screen = 0\n&quot;)</td></tr>
-<tr class="memdesc:a41c2f7bb9a47d44c330800201ccd90a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this in a .c file to use 2-screen horizontal mirroring.  <a href="nes-unrom-512_2bank_8h.html#a41c2f7bb9a47d44c330800201ccd90a4">More...</a><br /></td></tr>
-<tr class="separator:a41c2f7bb9a47d44c330800201ccd90a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97b519dbb25392e6b7be2a73c2940201"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-unrom-512_2bank_8h.html#a97b519dbb25392e6b7be2a73c2940201">MAPPER_USE_2_SCREEN_VERTICAL</a>&#160;&#160;&#160;asm(&quot;.globl __mirroring\n.globl __four_screen\n__mirroring = 1\n__four_screen = 0\n&quot;)</td></tr>
-<tr class="memdesc:a97b519dbb25392e6b7be2a73c2940201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this in a .c file to use 2-screen vertical mirroring.  <a href="nes-unrom-512_2bank_8h.html#a97b519dbb25392e6b7be2a73c2940201">More...</a><br /></td></tr>
-<tr class="separator:a97b519dbb25392e6b7be2a73c2940201"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ed1a3fde158b5f4dd2a232005b2b301"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-unrom-512_2bank_8h.html#a8ed1a3fde158b5f4dd2a232005b2b301">MAPPER_USE_1_SCREEN</a>&#160;&#160;&#160;asm(&quot;.globl __mirroring\n.globl __four_screen\n__mirroring = 0\n__four_screen = 1\n&quot;)</td></tr>
 <tr class="memdesc:a8ed1a3fde158b5f4dd2a232005b2b301"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this in a .c file to use 1-screen switchable mirroring.  <a href="nes-unrom-512_2bank_8h.html#a8ed1a3fde158b5f4dd2a232005b2b301">More...</a><br /></td></tr>
 <tr class="separator:a8ed1a3fde158b5f4dd2a232005b2b301"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,38 +244,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Define this in a .c file to use 1-screen switchable mirroring. </p>
-
-</div>
-</div>
-<a id="a41c2f7bb9a47d44c330800201ccd90a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41c2f7bb9a47d44c330800201ccd90a4">&#9670;&nbsp;</a></span>MAPPER_USE_2_SCREEN_HORIZONTAL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MAPPER_USE_2_SCREEN_HORIZONTAL&#160;&#160;&#160;asm(&quot;.globl __mirroring\n.globl __four_screen\n__mirroring = 0\n__four_screen = 0\n&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Define this in a .c file to use 2-screen horizontal mirroring. </p>
-
-</div>
-</div>
-<a id="a97b519dbb25392e6b7be2a73c2940201"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97b519dbb25392e6b7be2a73c2940201">&#9670;&nbsp;</a></span>MAPPER_USE_2_SCREEN_VERTICAL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MAPPER_USE_2_SCREEN_VERTICAL&#160;&#160;&#160;asm(&quot;.globl __mirroring\n.globl __four_screen\n__mirroring = 1\n__four_screen = 0\n&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Define this in a .c file to use 2-screen vertical mirroring. </p>
 
 </div>
 </div>

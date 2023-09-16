@@ -138,21 +138,21 @@ void split_mirroring(enum Mirroring mirroring);
 // Set the mirroring to be applied automatically at the next NMI.
 void defer_mirroring(enum Mirroring mirroring);
 
-enum ChrRomBankMode {
-  CHR_ROM_BANK_MODE_8 = 0b00000,
-  CHR_ROM_BANK_MODE_4 = 0b10000,
+enum ChrBankMode {
+  CHR_BANK_MODE_8 = 0b00000,
+  CHR_BANK_MODE_4 = 0b10000,
 };
 
-// Set the current CHR-ROM bank mode. Applies immediately and reapplies at
+// Set the current CHR bank mode. Applies immediately and reapplies at
 // each NMI. May have no immediate effect if interrupted by NMI.
-void set_chr_rom_bank_mode(enum ChrRomBankMode mode);
+void set_chr_bank_mode(enum ChrBankMode mode);
 
-// Set the CHR-ROM bank mode temporarily, but override with the previous setting
+// Set the CHR bank mode temporarily, but override with the previous setting
 // at next NMI. May have no effect if interrupted by NMI.
-void split_chr_rom_bank_mode(enum ChrRomBankMode mode);
+void split_chr_bank_mode(enum ChrBankMode mode);
 
-// Set the CHR-ROM bank mode to be applied automatically at the next NMI.
-void defer_chr_rom_bank_mode(enum ChrRomBankMode mode);
+// Set the CHR bank mode to be applied automatically at the next NMI.
+void defer_chr_bank_mode(enum ChrBankMode mode);
 
 enum PrgRomBankMode {
   PRG_ROM_BANK_MODE_32K = 0b00000,

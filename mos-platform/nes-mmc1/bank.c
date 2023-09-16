@@ -156,12 +156,12 @@ void defer_mirroring(enum Mirroring mirroring) {
   _MMC1_CTRL_NEXT = _MMC1_CTRL_NEXT & 0b01111 | mirroring;
 }
 
-void set_chr_rom_bank_mode(enum ChrRomBankMode mode) {
-  defer_chr_rom_bank_mode(mode);
-  split_chr_rom_bank_mode(mode);
+void set_chr_bank_mode(enum ChrBankMode mode) {
+  defer_chr_bank_mode(mode);
+  split_chr_bank_mode(mode);
 }
 
-void split_chr_rom_bank_mode(enum ChrRomBankMode mode) {
+void split_chr_bank_mode(enum ChrBankMode mode) {
   char s = _MMC1_CTRL & 0b01111 | mode;
   DISABLE_IRQ();
   reset_shift_register();
@@ -172,7 +172,7 @@ void split_chr_rom_bank_mode(enum ChrRomBankMode mode) {
   _IN_PROGRESS = 0;
 }
 
-void defer_chr_rom_bank_mode(enum ChrRomBankMode mode) {
+void defer_chr_bank_mode(enum ChrBankMode mode) {
   _MMC1_CTRL_NEXT = _MMC1_CTRL_NEXT & 0b11100 | mode;
 }
 

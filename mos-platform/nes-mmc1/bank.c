@@ -107,7 +107,7 @@ char get_prg_bank(void) { return _PRG_BANK; }
 __attribute__((alias("get_prg_bank"))) char __get_prg_bank(void);
 
 void set_prg_bank(char bank_id) {
-  set_register_bits(MMC1_PRG, &_PRG_BANK, 0xff, bank_id);
+  set_register_bits(MMC1_PRG, &_PRG_BANK, 0, bank_id);
 }
 __attribute__((alias("set_prg_bank"))) void __set_prg_bank(char);
 
@@ -122,7 +122,7 @@ void set_chr_bank_1(char bank_id) {
 }
 
 void split_chr_bank_0(char bank_id) {
-  set_register_bits(MMC1_CHR0, &_CHR_BANK0, 0xff, bank_id);
+  set_register_bits(MMC1_CHR0, &_CHR_BANK0, 0, bank_id);
 }
 
 void defer_chr_bank_0(char bank_id) { _CHR_BANK0_NEXT = bank_id; }
@@ -130,7 +130,7 @@ void defer_chr_bank_0(char bank_id) { _CHR_BANK0_NEXT = bank_id; }
 void defer_chr_bank_1(char bank_id) { _CHR_BANK1_NEXT = bank_id; }
 
 void split_chr_bank_1(char bank_id) {
-  set_register_bits(MMC1_CHR1, &_CHR_BANK1, 0xff, bank_id);
+  set_register_bits(MMC1_CHR1, &_CHR_BANK1, 0, bank_id);
 }
 
 extern char __chr_high_mask[];
@@ -153,13 +153,20 @@ void set_mirroring(enum Mirroring mirroring) {
   split_mirroring(mirroring);
 }
 
+static const char register_mask = 0b11111;
+static const char mirroring_mask = 0b00011;
+
 void split_mirroring(enum Mirroring mirroring) {
-  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0b11100, mirroring);
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, register_mask & ~mirroring_mask,
+                    mirroring);
 }
 
 void defer_mirroring(enum Mirroring mirroring) {
-  _MMC1_CTRL_NEXT = _MMC1_CTRL_NEXT & 0b01111 | mirroring;
+  _MMC1_CTRL_NEXT =
+      _MMC1_CTRL_NEXT & (register_mask & ~mirroring_mask) | mirroring;
 }
+
+static const char chr_bank_mode_mask = 0b10000;
 
 void set_chr_bank_mode(enum ChrBankMode mode) {
   defer_chr_bank_mode(mode);
@@ -167,18 +174,25 @@ void set_chr_bank_mode(enum ChrBankMode mode) {
 }
 
 void split_chr_bank_mode(enum ChrBankMode mode) {
-  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0b01111, mode);
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, register_mask & ~chr_bank_mode_mask,
+                    mode);
 }
 
 void defer_chr_bank_mode(enum ChrBankMode mode) {
-  _MMC1_CTRL_NEXT = _MMC1_CTRL_NEXT & 0b11100 | mode;
+  _MMC1_CTRL_NEXT =
+      _MMC1_CTRL_NEXT & (register_mask & ~chr_bank_mode_mask) | mode;
 }
+
+static const char prg_rom_bank_mode_mask = 0b01100;
 
 void set_prg_rom_bank_mode(enum PrgRomBankMode mode) {
-  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0b10011, mode);
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL,
+                    register_mask & ~prg_rom_bank_mode_mask, mode);
 }
 
-enum PrgRomBankMode get_prg_rom_bank_mode(void) { return _MMC1_CTRL & 0b01100; }
+enum PrgRomBankMode get_prg_rom_bank_mode(void) {
+  return _MMC1_CTRL & prg_rom_bank_mode_mask;
+}
 
 void set_mmc1_ctrl(char value) {
   defer_mmc1_ctrl(value);
@@ -186,7 +200,9 @@ void set_mmc1_ctrl(char value) {
 }
 
 void split_mmc1_ctrl(char value) {
-  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0xff, value);
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0, value);
 }
 
-void defer_mmc1_ctrl(char value) { _MMC1_CTRL_NEXT = value & 0b10011; }
+void defer_mmc1_ctrl(char value) {
+  _MMC1_CTRL_NEXT = value & (chr_bank_mode_mask | mirroring_mask);
+}

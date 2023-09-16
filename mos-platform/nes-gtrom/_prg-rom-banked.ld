@@ -60,6 +60,15 @@ MEMORY {
   chr_rom_1   : ORIGIN = 0x01002000, LENGTH = __chr_rom_size >= 16   ? 0x2000 : 0
 }
 
+/**
+ * Alias "c_readonly" to prg_rom_0. Everything placed in this memory region
+ * before the .prg_rom_fixed section is defined below (in file parsing order)
+ * will become part of the fixed bank.
+ *
+ * So long as all the read-only C sections have been allocated to the
+ * "c_readonly" region before this happens, the invariant of keeping all
+ * default C section code in a fixed section is maintained.
+ */
 REGION_ALIAS("c_readonly", prg_rom_0)
 
 SECTIONS {

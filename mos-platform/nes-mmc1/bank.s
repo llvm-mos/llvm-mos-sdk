@@ -105,5 +105,4 @@ banked_call:
         sta __rc19
         jsr __call_indir
         pla
-        jsr __set_prg_bank
-        rts
+        jmp __set_prg_bank

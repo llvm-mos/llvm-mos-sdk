@@ -27,6 +27,7 @@
 #include "bank.h"
 
 #include <peekpoke.h>
+#include <stdbool.h>
 
 // Always bring in the NMI handler
 asm(".globl bank_nmi");
@@ -41,7 +42,7 @@ __attribute__((section(".zp.bss"))) volatile char _CHR_BANK0;
 __attribute__((section(".zp.bss"))) volatile char _CHR_BANK1;
 __attribute__((section(".zp.data"))) volatile char _MMC1_CTRL =
     PRG_ROM_BANK_MODE_FIXED_C000;
-__attribute__((section(".zp.bss"))) volatile char _IN_PROGRESS;
+__attribute__((section(".zp.bss"))) volatile bool _IN_PROGRESS;
 
 #define MMC1_CTRL 0x8000
 #define MMC1_CHR0 0xa000
@@ -70,6 +71,7 @@ mmc1_register_write(unsigned addr, char val) {
   POKE(addr, val);
 }
 
+#if 0
 __attribute__((always_inline)) static inline void
 mmc1_register_write_retry(unsigned addr, char val) {
   do {
@@ -79,13 +81,45 @@ mmc1_register_write_retry(unsigned addr, char val) {
   } while (!_IN_PROGRESS);
   _IN_PROGRESS = 0;
 }
+#endif
+
+// Reliably set the given register with the given shadow to (current & cur_mask
+// | val).
+__attribute__((always_inline)) static inline void
+set_register_bits(unsigned addr, volatile char *shadow, char cur_mask,
+                  char val) {
+  DISABLE_IRQ();
+  char new = *shadow &cur_mask | val;
+  // Setting this afterwards would instead create the possibility
+  // that the NMI could occur between successful finish of the write and
+  // updating the shadow; in that case, the shadow would be wrong. Instead,
+  // this is set preemptively, and the NMI handler summarily flushes shadow
+  // registers, which makes state consistent on entry.
+  *shadow = new;
+  _IN_PROGRESS = true;
+  mmc1_register_write(addr, new);
+  while (!_IN_PROGRESS) {
+    _IN_PROGRESS = true;
+    // The write was interrupted by the NMI. The NMI is guaranteed to reset the
+    // shift register and perform full writes, after which some unknown number
+    // of writes were performed by this routine. Part of the NMI is flushing all
+    // shadow registers, and reliable (PRG) register state is callee-saved WRT
+    // NMI, so the write is complete. Accordingly, we just need to reset the
+    // shift register. This clobbers MMC1_CTRL, so flush its shadow afterwards.
+    // Do this in a loop until not interrupted by new NMIs (paranoid, but
+    // inexpensive).
+    reset_shift_register();
+    mmc1_register_write(MMC1_CTRL, _MMC1_CTRL);
+  }
+  _IN_PROGRESS = false;
+  RESTORE_IRQ();
+}
 
 char get_prg_bank(void) { return _PRG_BANK; }
 __attribute__((alias("get_prg_bank"))) char __get_prg_bank(void);
 
 void set_prg_bank(char bank_id) {
-  mmc1_register_write_retry(MMC1_PRG, bank_id);
-  _PRG_BANK = bank_id;
+  set_register_bits(MMC1_PRG, &_PRG_BANK, 0xff, bank_id);
 }
 __attribute__((alias("set_prg_bank"))) void __set_prg_bank(char);
 
@@ -100,13 +134,7 @@ void set_chr_bank_1(char bank_id) {
 }
 
 void split_chr_bank_0(char bank_id) {
-  DISABLE_IRQ();
-  reset_shift_register();
-  mmc1_register_write(MMC1_CHR0, bank_id);
-  if (_IN_PROGRESS)
-    _CHR_BANK0 = bank_id;
-  RESTORE_IRQ();
-  _IN_PROGRESS = 0;
+  set_register_bits(MMC1_CHR0, &_CHR_BANK0, 0xff, bank_id);
 }
 
 void defer_chr_bank_0(char bank_id) { _CHR_BANK0_NEXT = bank_id; }
@@ -114,13 +142,7 @@ void defer_chr_bank_0(char bank_id) { _CHR_BANK0_NEXT = bank_id; }
 void defer_chr_bank_1(char bank_id) { _CHR_BANK1_NEXT = bank_id; }
 
 void split_chr_bank_1(char bank_id) {
-  DISABLE_IRQ();
-  reset_shift_register();
-  mmc1_register_write(MMC1_CHR1, bank_id);
-  if (_IN_PROGRESS)
-    _CHR_BANK1 = bank_id;
-  RESTORE_IRQ();
-  _IN_PROGRESS = 0;
+  set_register_bits(MMC1_CHR1, &_CHR_BANK1, 0xff, bank_id);
 }
 
 extern char __chr_high_mask[];
@@ -129,17 +151,13 @@ extern char __chr_low_mask[];
 char get_chr_bank_0_high(void) { return _CHR_BANK0 & (char)(__chr_high_mask); }
 
 void set_chr_bank_0_high(char bank_id) {
-  char s = _CHR_BANK0 & (char)(__chr_low_mask) | bank_id;
-  mmc1_register_write_retry(MMC1_CHR0, s);
-  _CHR_BANK0 = s;
+  set_register_bits(MMC1_CHR0, &_CHR_BANK0, (char)(__chr_low_mask), bank_id);
 }
 
 char get_chr_bank_1_high(void) { return _CHR_BANK1 & (char)(__chr_high_mask); }
 
 void set_chr_bank_1_high(char bank_id) {
-  char s = _CHR_BANK1 & (char)(__chr_low_mask) | bank_id;
-  mmc1_register_write_retry(MMC1_CHR1, s);
-  _CHR_BANK1 = s;
+  set_register_bits(MMC1_CHR1, &_CHR_BANK1, (char)(__chr_low_mask), bank_id);
 }
 
 void set_mirroring(enum Mirroring mirroring) {
@@ -148,14 +166,7 @@ void set_mirroring(enum Mirroring mirroring) {
 }
 
 void split_mirroring(enum Mirroring mirroring) {
-  char s = _MMC1_CTRL & 0b11100 | mirroring;
-  DISABLE_IRQ();
-  reset_shift_register();
-  mmc1_register_write(MMC1_CTRL, s);
-  if (_IN_PROGRESS)
-    _MMC1_CTRL = s;
-  RESTORE_IRQ();
-  _IN_PROGRESS = 0;
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0b11100, mirroring);
 }
 
 void defer_mirroring(enum Mirroring mirroring) {
@@ -168,14 +179,7 @@ void set_chr_bank_mode(enum ChrBankMode mode) {
 }
 
 void split_chr_bank_mode(enum ChrBankMode mode) {
-  char s = _MMC1_CTRL & 0b01111 | mode;
-  DISABLE_IRQ();
-  reset_shift_register();
-  mmc1_register_write(MMC1_CTRL, s);
-  if (_IN_PROGRESS)
-    _MMC1_CTRL = s;
-  RESTORE_IRQ();
-  _IN_PROGRESS = 0;
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0b01111, mode);
 }
 
 void defer_chr_bank_mode(enum ChrBankMode mode) {
@@ -183,27 +187,18 @@ void defer_chr_bank_mode(enum ChrBankMode mode) {
 }
 
 void set_prg_rom_bank_mode(enum PrgRomBankMode mode) {
-  char s = _MMC1_CTRL & 0b10011 | mode;
-  mmc1_register_write_retry(MMC1_CTRL, s);
-  _MMC1_CTRL = s;
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0b10011, mode);
 }
 
 enum PrgRomBankMode get_prg_rom_bank_mode(void) { return _MMC1_CTRL & 0b01100; }
 
 void set_mmc1_ctrl(char value) {
   defer_mmc1_ctrl(value);
-  mmc1_register_write_retry(MMC1_CTRL, value);
-  _MMC1_CTRL = value;
+  split_mmc1_ctrl(value);
 }
 
 void split_mmc1_ctrl(char value) {
-  DISABLE_IRQ();
-  reset_shift_register();
-  mmc1_register_write(MMC1_CTRL, value);
-  if (_IN_PROGRESS)
-    _MMC1_CTRL = value;
-  RESTORE_IRQ();
-  _IN_PROGRESS = 0;
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0xff, value);
 }
 
 void defer_mmc1_ctrl(char value) { _MMC1_CTRL_NEXT = value & 0b10011; }

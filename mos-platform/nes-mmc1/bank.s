@@ -50,6 +50,13 @@ MMC1_PRG        = $e000
 .globl bank_nmi
 bank_nmi:
         inc __reset_mmc1_byte
+; Flush out the shadow registers, incorporating any NEXT changes. In addition
+; to applying any NEXT settings, this also finishes any writes in progress to
+; ensure that the shadow state and the register state match for the NMI. The
+; state setters contain logic to clean themselves up after detecting an
+; NMI-interrupted write.
+        lda _PRG_BANK
+        mmc1_register_write MMC1_PRG
         lda _CHR_BANK0
         and #__chr_high_mask
         ora _CHR_BANK0_NEXT

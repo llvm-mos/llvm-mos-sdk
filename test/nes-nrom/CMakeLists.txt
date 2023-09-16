@@ -18,4 +18,7 @@ target_link_options(prg-ram-c PRIVATE -Tcommon.ld -Tc-in-prg-ram.ld)
 
 add_mesen_test(zp-data)
 
+add_mesen_test(prg-rom-dpcm)
+add_mesen_test(prg-rom-dpcm-pad)
+
 add_subdirectory(no-compile)

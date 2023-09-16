@@ -145,6 +145,7 @@ executables and libraries for that target.
 | MEGA65                           | `mos-mega65-clang`        |
 | NES (Action53 mapper)            | `mos-nes-action53-clang`  |
 | NES (CNROM mapper)               | `mos-nes-cnrom-clang`     |
+| NES (GTROM mapper)               | `mos-nes-gtrom-clang`     |
 | NES (MMC1 mapper)                | `mos-nes-mmc1-clang`      |
 | NES (MMC3 mapper)                | `mos-nes-mmc3-clang`      |
 | NES (NROM mapper)                | `mos-nes-nrom-clang`      |

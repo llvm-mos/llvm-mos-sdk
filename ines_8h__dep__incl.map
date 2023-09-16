@@ -1,9 +1,10 @@
 <map id="nes/ines.h" name="nes/ines.h">
-<area shape="rect" id="node1" title=" " alt="" coords="453,5,541,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="535,5,623,32"/>
 <area shape="rect" id="node2" href="$nes-action53_2bank_8h.html" title=" " alt="" coords="5,80,160,107"/>
 <area shape="rect" id="node3" href="$nes-cnrom_2bank_8h.html" title=" " alt="" coords="184,80,323,107"/>
-<area shape="rect" id="node4" href="$nes-mmc1_2bank_8h.html" title=" " alt="" coords="347,80,485,107"/>
-<area shape="rect" id="node5" href="$nes-mmc3_2bank_8h.html" title=" " alt="" coords="509,80,648,107"/>
-<area shape="rect" id="node6" href="$nes-unrom_2bank_8h.html" title=" " alt="" coords="673,80,813,107"/>
-<area shape="rect" id="node7" href="$nes-unrom-512_2bank_8h.html" title=" " alt="" coords="837,80,1006,107"/>
+<area shape="rect" id="node4" href="$nes-gtrom_2bank_8h.html" title=" " alt="" coords="347,80,485,107"/>
+<area shape="rect" id="node5" href="$nes-mmc1_2bank_8h.html" title=" " alt="" coords="509,80,648,107"/>
+<area shape="rect" id="node6" href="$nes-mmc3_2bank_8h.html" title=" " alt="" coords="672,80,811,107"/>
+<area shape="rect" id="node7" href="$nes-unrom_2bank_8h.html" title=" " alt="" coords="835,80,975,107"/>
+<area shape="rect" id="node8" href="$nes-unrom-512_2bank_8h.html" title=" " alt="" coords="999,80,1169,107"/>
 </map>

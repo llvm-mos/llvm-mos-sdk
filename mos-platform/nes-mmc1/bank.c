@@ -200,7 +200,8 @@ void set_mmc1_ctrl(char value) {
 }
 
 void split_mmc1_ctrl(char value) {
-  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0, value);
+  set_register_bits(MMC1_CTRL, &_MMC1_CTRL, 0,
+                    value & (chr_bank_mode_mask | mirroring_mask));
 }
 
 void defer_mmc1_ctrl(char value) {

@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 MAPPER_PRG_RAM_KB(32);
-MAPPER_CHR_ROM_KB(16);
 MAPPER_PRG_ROM_KB(128);
 
 __attribute__((section(".prg_ram_0.noinit"))) volatile char c[8192];
@@ -12,7 +11,7 @@ __attribute__((section(".prg_ram_3.noinit"))) volatile char d[4097];
 __attribute__((section("_3.noinit"))) volatile char e[4095];
 
 void set_prg_ram_bank(char b) {
-  set_chr_bank_0_high(get_chr_bank_0_high() & 0b10000 | b << 2);
+  set_chr_bank_0_retry(CHR_BANK0_CUR & 0b10011 | (b << 2) & 0b1100);
 }
 
 int main(void) {

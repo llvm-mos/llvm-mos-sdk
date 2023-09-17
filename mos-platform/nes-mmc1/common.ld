@@ -18,23 +18,6 @@ ASSERT(__prg_nvram_size % 8 == 0,
 ASSERT(__prg_ram_size + __prg_nvram_size <= 32,
        "MMC1 only supports up to 32KiB of PRG-(NV)RAM.")
 
-ASSERT(__prg_ram_size + __prg_nvram_size < 16 ||
-       __chr_rom_size + __chr_ram_size + __chr_nvram_size < 64,
-       "PRG RAM address line conflicts with CHR A15; configure either <16 KiB PRG-RAM or <64 KiB CHR-RAM")
-
-ASSERT(__prg_ram_size + __prg_nvram_size < 32 ||
-       __chr_rom_size + __chr_ram_size + __chr_nvram_size < 32,
-       "PRG RAM address line conflicts with CHR A14; configure either <32 KiB PRG-RAM or <32 KiB CHR-RAM")
-
-/* Some MMC boards use the high bits of the CHR bank registers to control
- * PRG-ROM/RAM. This computes a pair of AND masks for selecting the low and
- * high bits of these banks. */
-
-/* This expression starts with all bits set and zeros the high bits not needed
- * to store the bank number. */
-__chr_low_mask = 0x1f >> 5 - LOG2CEIL((__chr_rom_size + __chr_ram_size + __chr_nvram_size) / 4);
-__chr_high_mask = ~__chr_low_mask & 0x1f;
-
 MEMORY {
   prg_ram_0 : ORIGIN = 0x006000, LENGTH = __prg_ram_size + __prg_nvram_size >= 8  ? 0x2000 : 0
   prg_ram_1 : ORIGIN = 0x016000, LENGTH = __prg_ram_size + __prg_nvram_size >= 16 ? 0x2000 : 0

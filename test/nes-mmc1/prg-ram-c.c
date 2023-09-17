@@ -3,7 +3,6 @@
 #include <stdlib.h>
 
 MAPPER_PRG_RAM_KB(32);
-MAPPER_CHR_ROM_KB(16);
 
 volatile char c[8100] = {1, [8099] = 2};
 

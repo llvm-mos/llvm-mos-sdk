@@ -26,69 +26,110 @@
 
 .include "imag.inc"
 
-.zeropage _PRG_BANK, _CHR_BANK0, _CHR_BANK1, _MMC1_CTRL, _CHR_BANK0_NEXT
-.zeropage _CHR_BANK1_NEXT, _MMC1_CTRL_NEXT, _IN_PROGRESS
+.zeropage _PRG_BANK, _CHR_BANK0, _CHR_BANK1, _MMC1_CTRL_NMI, _CHR_BANK0_CUR
+.zeropage _CHR_BANK1_CUR, _MMC1_CTRL_CUR, _IN_PROGRESS
 
-MMC1_CTRL       = $8000
-MMC1_CHR0       = $a000
-MMC1_CHR1       = $c000
-MMC1_PRG        = $e000
+MMC1_CTRL	= $8000
+MMC1_CHR0	= $a000
+MMC1_CHR1	= $c000
+MMC1_PRG	= $e000
 
 ; macro to write to an mmc1 register, which goes one bit at a time, 5 bits wide.
 .macro mmc1_register_write addr
-        .rept 4
-                sta \addr
-                lsr
-        .endr
-        sta \addr
+	.rept 4
+		sta \addr
+		lsr
+	.endr
+	sta \addr
 .endmacro
 
 .section .nmi.100,"axR",@progbits
-        jsr bank_nmi
+	jsr bank_nmi
 
-.section .text.bank_nmi,"axR",@progbits
+.section .text.bank_nmi,"ax",@progbits
 .globl bank_nmi
 bank_nmi:
-        inc __reset_mmc1_byte
-; Flush out the shadow registers, incorporating any NEXT changes. In addition
-; to applying any NEXT settings, this also finishes any writes in progress to
-; ensure that the shadow state and the register state match for the NMI. The
-; state setters contain logic to clean themselves up after detecting an
-; NMI-interrupted write.
-        lda _PRG_BANK
-        mmc1_register_write MMC1_PRG
-        lda _CHR_BANK0
-        and #__chr_high_mask
-        ora _CHR_BANK0_NEXT
-        sta _CHR_BANK0
-        mmc1_register_write MMC1_CHR0
-        lda _CHR_BANK1
-        and #__chr_high_mask
-        ora _CHR_BANK1_NEXT
-        sta _CHR_BANK1
-        mmc1_register_write MMC1_CHR1
-        lda _MMC1_CTRL
-        and #0b01100
-        ora _MMC1_CTRL_NEXT
-        sta _MMC1_CTRL
-        mmc1_register_write MMC1_CTRL
-        lda #0
-        sta _IN_PROGRESS
-        rts
+	inc __reset_mmc1_byte
+	lda _CHR_BANK0
+	sta _CHR_BANK0_CUR
+	mmc1_register_write MMC1_CHR0
+	lda _CHR_BANK1
+	sta _CHR_BANK1_CUR
+	mmc1_register_write MMC1_CHR1
+	lda _MMC1_CTRL_NMI
+	sta _MMC1_CTRL_CUR
+	mmc1_register_write MMC1_CTRL
+	lda #0
+	sta _IN_PROGRESS
+	rts
+
+.section .text.set_chr_bank_0,"ax",@progbits
+.weak set_chr_bank_0
+set_chr_bank_0:
+	sta _CHR_BANK0
+	rts
+
+.section .text.set_chr_bank_1,"ax",@progbits
+.weak set_chr_bank_1
+set_chr_bank_1:
+	sta _CHR_BANK1
+	rts
+
+.section .text.set_mirroring,"ax",@progbits
+.weak set_mirroring
+set_mirroring:
+	and #0b11
+	sta __rc2
+	lda _MMC1_CTRL_NMI
+	and #0b11100
+	ora __rc2
+	sta _MMC1_CTRL_NMI
+	rts
+
+.section .text.get_prg_bank,"ax",@progbits
+.globl __get_prg_bank
+.weak get_prg_bank
+__get_prg_bank:
+get_prg_bank:
+	lda _PRG_BANK
+	rts
+
+.section .text.set_prg_bank,"ax",@progbits
+.globl __set_prg_bank
+.weak set_prg_bank
+__set_prg_bank:
+set_prg_bank:
+	tay
+.Lset:
+	inc __reset_mmc1_byte
+	ldx #1
+	stx _IN_PROGRESS
+	mmc1_register_write MMC1_PRG
+	ldx _IN_PROGRESS
+	beq .Lretry
+	dex
+	stx _IN_PROGRESS
+	sty _PRG_BANK
+	rts
+.Lretry:
+	tya
+	jmp .Lset
+
 
 
 .section .text.banked_call,"ax",@progbits
-.globl banked_call
+.weak banked_call
 banked_call:
-        tay
-        lda _PRG_BANK
-        pha
-        tya
-        jsr __set_prg_bank
-        lda __rc2
-        sta __rc18
-        lda __rc3
-        sta __rc19
-        jsr __call_indir
-        pla
-        jmp __set_prg_bank
+	tay
+	lda _PRG_BANK
+	pha
+	tya
+	jsr __set_prg_bank
+	lda __rc2
+	sta __rc18
+	lda __rc3
+	sta __rc19
+	jsr __call_indir
+	pla
+	jsr __set_prg_bank
+	rts

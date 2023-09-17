@@ -15,6 +15,63 @@ extern "C" {
 // you shouldn't have to turn the screen off...
 // allowing us to make smooth scrolling games.
 
+// VRAM_BUF operations updated by Matthew "Cogwheel" Orlando - 2023-09-27
+//
+// Instead of using the top two bits of the address to identify the operation,
+// values above 0x2F (the largest high byte possible for a nametable address)
+// are treated as opcodes. This allows the system to support up to 208 unique
+// operations instead of the current 4 (of which only 3 are used).
+//
+// The following typedefs are representative only; they are implicit in the
+// assembly implementation. Though you may be able to use them to build
+// operations in ways that aren't currently supported by the API (e.g. adding
+// them to a queue)
+
+#define NAMETABLE_OP_MULTI_START 0x30
+
+// Single-tile operations include just the address and one byte of data.
+typedef struct {
+  char address_hi;  // Always below NAMETABLE_OP_MULTI_START
+  char address_lo;
+  char data;
+} nametable_op_single_header;
+
+typedef enum {
+  // TODO: if all of these end up being horz/vert pairs, maybe use top bit as an
+  // increment flag. E.g. something like:
+  //     typedef struct {
+  //       enum {/*ops...*/} op:7;
+  //       char vram_inc:1;
+  //     } nametable_opcode;
+
+  // copy nametable data directly into the buffer
+  nametable_opcode_copy_horz = NAMETABLE_OP_MULTI_START,
+  nametable_opcode_copy_vert,
+
+  /* TODO: things like:
+  // store a nametable data pointer in the buffer
+  nametable_opcode_ref_horz, nametable_opcode_ref_vert,
+
+  // fill with a single value
+  nametable_opcode_fill_horz, nametable_opcode_fill_vert,
+
+  // copy RLE data
+  nametable_opcode_rle_copy_horz, nametable_opcode_rle_copy_vert,
+
+  // ref RLE data
+  nametable_opcode_rle_ref_horz, nametable_opcode_rle_ref_vert,
+  */
+} nametable_opcode;
+
+// Multi-tile ops include the opcode, address and size. The data follows the
+// header in VRAM_BUF
+typedef struct {
+  nametable_opcode opcode;
+  char address_hi;
+  char address_lo;
+  char size;
+} nametable_op_multi_header;
+
 // sets the vram update to point to the vram_buffer. VRAM_BUF defined in crt0.s
 // this can be undone by set_vram_update(NULL)
 void set_vram_buffer(void);

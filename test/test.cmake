@@ -9,13 +9,6 @@ function(add_mesen_test name)
            $<TARGET_FILE:${name}> ${CMAKE_CURRENT_SOURCE_DIR}/../mesen.lua)
 endfunction()
 
-function(add_mesen_test name)
-  add_executable(${name} ${name}.c)
-  target_link_libraries(${name} test-lib)
-  add_test(NAME test-${name} COMMAND ${MESEN_COMMAND} --testrunner
-           $<TARGET_FILE:${name}> ${CMAKE_CURRENT_SOURCE_DIR}/../mesen.lua)
-endfunction()
-
 function(add_no_compile_test target)
   add_executable(${target} ${target}.c)
   add_test(NAME ${target}-no-compile COMMAND ${CMAKE_CTEST_COMMAND}

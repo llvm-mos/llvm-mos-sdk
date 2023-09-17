@@ -724,49 +724,49 @@ flush_vram_update2: ;minor changes %
 	ldy #0
 
 .LupdName:
-
+  ; The first byte is either nametable_op_single_header::address_hi or
+	; nametable_op_multi_header::opcode
 	lda (NAME_UPD_ADR),y
 	iny
-	cmp #$40				;is it a non-sequental write?
-	bcs .LupdNotSeq
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y
-	iny
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y
-	iny
-	sta PPUDATA
-	jmp .LupdName
-
-.LupdNotSeq:
-
-	tax
-	lda PPUCTRL_VAR
-	cpx #$80				;is it a horizontal or vertical sequence?
-	bcc .LupdHorzSeq
-	cpx #$ff				;is it end of the update?
+	cmp #$ff
 	beq .LupdDone
 
-.LupdVertSeq:
+	cmp #$30             ; nametable_opcode::copy_horz
+	beq .LupdHorzSeq
+	bcs .LupdVertSeq
 
-	ora #$04
-	bne .LupdNameSeq			;bra
+.LupdSingle:
+	sta PPUADDR
+	lda (NAME_UPD_ADR),y ; nametable_op_single_header::address_lo
+	iny
+	sta PPUADDR
+	lda (NAME_UPD_ADR),y ; nametable_op_single_header::data
+	iny
+	sta PPUDATA
+	bne .LupdName    ; always taken. Assumes index never wraps
+
+.LupdVertSeq:
+	; Set control bit for vertical traversal
+	lda PPUCTRL_VAR
+	ora #$04							; TODO constants for ctrl flags?
+	bne .LupdNameSeq			;always taken
 
 .LupdHorzSeq:
-
+	; Clear control bit for vertical traversal
+	lda PPUCTRL_VAR
 	and #$fb
 
 .LupdNameSeq:
-
+	; Store new control value
 	sta PPUCTRL
 
-	txa
-	and #$3f
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y
+	lda (NAME_UPD_ADR),y  ; nametable_op_multi_header::address_hi
 	iny
 	sta PPUADDR
-	lda (NAME_UPD_ADR),y
+	lda (NAME_UPD_ADR),y  ; nametable_op_multi_header::address_lo
+	iny
+	sta PPUADDR
+	lda (NAME_UPD_ADR),y  ; nametable_op_multi_header::size
 	iny
 	tax
 

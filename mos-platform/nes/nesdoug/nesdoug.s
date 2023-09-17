@@ -26,32 +26,41 @@ __post_vram_update:
 .section .text.multi_vram_buffer_horz,"ax",@progbits
 .globl multi_vram_buffer_horz
 multi_vram_buffer_horz:
-
-	sta __rc5 ; loop count
+	;     A - len
+	;     X - <ppu_address
+	; __rc2 - <data
+	; __rc3 - >data
+	; __rc4 - >ppu_address
 	ldy VRAM_INDEX
-	txa
-	sta VRAM_BUF+1, y
-	lda __rc4
-	clc
-	adc #$40 ; NT_UPD_HORZ
-	sta VRAM_BUF, y
+
+	sta __rc5         ; for loop comparison
+	sta VRAM_BUF+3, y ; nametable_op_multi_header::size
+
+	lda #$30          ; nametable_opcode::copy_horz
 
 multi_vram_buffer_common:
-	lda __rc5
-	sta VRAM_BUF+2, y
-	ldx VRAM_INDEX ;need y for source, x is for dest and for vram_index
-	inx
-	inx
-	inx
+	sta VRAM_BUF+0, y ; nametable_op_multi_header::opcode
+	lda __rc4
+	sta VRAM_BUF+1, y ; nametable_op_multi_header::address_hi
+	txa
+	sta VRAM_BUF+2, y ; nametable_op_multi_header::address_lo
+
+	; get data index past header
+	tya
+	clc
+	adc #4
+	tax ;need y for source, x is for dest and for vram_index
 
 	ldy #0
-.Lmulti_vram_buffer_horz_loop:
+
+  ; TODO: unroll?
+.Lmulti_vram_buffer_common_loop:
 	lda (__rc2), y
 	sta VRAM_BUF, x
 	inx
 	iny
 	cpy __rc5
-	bne .Lmulti_vram_buffer_horz_loop
+	bne .Lmulti_vram_buffer_common_loop
 	lda #$ff ;=NT_UPD_EOF
 	sta VRAM_BUF, x
 	stx VRAM_INDEX
@@ -64,16 +73,18 @@ multi_vram_buffer_common:
 .section .text.multi_vram_buffer_vert,"ax",@progbits
 .globl multi_vram_buffer_vert
 multi_vram_buffer_vert:
+	;     A - len
+	;     X - <ppu_address
+	; __rc2 - <data
+	; __rc3 - >data
+	; __rc4 - >ppu_address
 	ldy VRAM_INDEX
-	sta __rc5 ; loop count
-	txa
-	sta VRAM_BUF+1, y
-	lda __rc4
-	clc
-	adc #$80 ; NT_UPD_VERT
-	sta VRAM_BUF, y
 
-	jmp multi_vram_buffer_common
+	sta __rc5		      ; for loop comparison
+	sta VRAM_BUF+3, y ; nametable_op_multi_header::size
+
+	lda #$31          ; nametable_opcode::copy_vert
+	bne multi_vram_buffer_common ; always taken
 
 
 
@@ -82,16 +93,18 @@ multi_vram_buffer_vert:
 .section .text.one_vram_buffer,"ax",@progbits
 .globl one_vram_buffer
 one_vram_buffer:
-	sta __rc3
+	;     A - data
+	;     X - <ppu_address
+	; __rc2 - >ppu_address
 	ldy VRAM_INDEX
-	txa
-	sta VRAM_BUF+1, y
+
+	sta VRAM_BUF+2, y ; nametable_op_single_header::data
 	lda __rc2
-	sta VRAM_BUF, y
+	sta VRAM_BUF, y   ; nametable_op_single_header::address_hi
+	txa
+	sta VRAM_BUF+1, y ; nametable_op_single_header::address_lo
 	iny
 	iny
-	lda __rc3
-	sta VRAM_BUF, y
 	iny
 	lda #$ff ;=NT_UPD_EOF
 	sta VRAM_BUF, y

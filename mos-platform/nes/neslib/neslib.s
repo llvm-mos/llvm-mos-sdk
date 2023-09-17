@@ -724,50 +724,55 @@ flush_vram_update2: ;minor changes %
 	ldy #0
 
 .LupdName:
-
+	; First byte is upper PPU address or #$ff if done
 	lda (NAME_UPD_ADR),y
 	iny
-	cmp #$40				;is it a non-sequental write?
-	bcs .LupdNotSeq
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y
-	iny
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y
-	iny
-	sta PPUDATA
-	jmp .LupdName
+	cmp #$40            ; bits 6 and 7 indicate sequential ops
+	bcc .LupdSingle
 
-.LupdNotSeq:
-
+	; save upper address byte for arithmetic
 	tax
 	lda PPUCTRL_VAR
-	cpx #$80				;is it a horizontal or vertical sequence?
-	bcc .LupdHorzSeq
-	cpx #$ff				;is it end of the update?
+	cpx #$80             ; below 80 is horizontal
+	bmi .LupdHorzSeq
+	cpx #$ff
 	beq .LupdDone
 
 .LupdVertSeq:
+	; Set control bit for vertical traversal
+	ora #$04         ; TODO constants for ctrl flags?
+	bne .LupdNameSeq ;always taken
 
-	ora #$04
-	bne .LupdNameSeq			;bra
+.LupdSingle:
+	sta PPUADDR
+	lda (NAME_UPD_ADR),y ; address lo
+	iny
+	sta PPUADDR
+	lda (NAME_UPD_ADR),y ; data
+	iny
+	sta PPUDATA
+	bne .LupdName    ; always taken. Assumes index never wraps
 
 .LupdHorzSeq:
-
+	; Clear control bit for vertical traversal
 	and #$fb
 
 .LupdNameSeq:
-
+	; Store new control value
 	sta PPUCTRL
 
+	; Mask out top 2 bits of upper address byte
 	txa
-	and #$3f
+	and #$3F
+
 	sta PPUADDR
-	lda (NAME_UPD_ADR),y
+	lda (NAME_UPD_ADR),y  ; address lo
 	iny
 	sta PPUADDR
-	lda (NAME_UPD_ADR),y
+	lda (NAME_UPD_ADR),y  ; size
 	iny
+
+	; store size in counter
 	tax
 
 .LupdNameLoop:
@@ -784,8 +789,7 @@ flush_vram_update2: ;minor changes %
 	jmp .LupdName
 
 .LupdDone:
-	jsr __post_vram_update
-	rts
+	jmp __post_vram_update
 
 .weak __post_vram_update
 __post_vram_update:

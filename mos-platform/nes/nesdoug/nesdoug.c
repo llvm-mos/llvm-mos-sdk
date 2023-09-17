@@ -10,16 +10,65 @@
 // Keeping these functions in C LTOs them in, which informs LTO code generation
 // that the ZP regions aren't available. This saves users of the library from
 // having to manually reserve ZP space from LTO.
+
+#include "nesdoug.h"
+
 __attribute__((section(".zp.vram_index"))) char VRAM_INDEX;
 __attribute__((section(".zp.meta_ptr"))) const char *META_PTR;
 __attribute__((section(".zp.data_ptr"))) const char *DATA_PTR;
+__attribute__((section(".zp.name_upd_adr"))) volatile const char *NAME_UPD_ADR;
+__attribute__((section(".zp.name_upd_enable"))) volatile char NAME_UPD_ENABLE;
+
 
 extern char VRAM_BUF[];
-void set_vram_update(const void *buf);
-void set_vram_buffer(void) {
+
+void set_nametable_update(const void *buf) {
+  NAME_UPD_ADR = buf;
+  NAME_UPD_ENABLE = NAME_UPD_ADR != 0;
+}
+
+void set_nametable_buffer(void) {
   VRAM_BUF[0] = 0xff;
   VRAM_INDEX = 0;
-  set_vram_update(VRAM_BUF);
+  set_nametable_update(VRAM_BUF);
+}
+__attribute((always_inline)) void nametable_buffer_copy(nametable_dir dir,
+                                                        const void *data,
+                                                        int ppu_address,
+                                                        char len) {
+  nametable_buffer_copy_op(dir | nametable_op_copy, data, ppu_address, len);
+}
+
+__attribute__((always_inline)) void
+nametable_buffer_copy_horz(const void *data, int ppu_address, char len) {
+  nametable_buffer_copy(nametable_dir_horz, data, ppu_address, len);
+}
+
+__attribute__((always_inline)) void
+nametable_buffer_copy_vert(const void *data, int ppu_address, char len) {
+  nametable_buffer_copy(nametable_dir_vert, data, ppu_address, len);
+}
+
+__attribute__((deprecated, always_inline)) void set_vram_update(const void *buf) {
+  set_nametable_update(buf);
+}
+
+__attribute__((deprecated, always_inline)) void set_vram_buffer(void) {
+  set_nametable_buffer();
+}
+
+__attribute__((deprecated, always_inline)) void one_vram_buffer(char data, int ppu_address) {
+  nametable_buffer_one(data, ppu_address);
+}
+
+__attribute__((deprecated, always_inline)) void
+multi_vram_buffer_horz(const void *data, char len, int ppu_address) {
+  nametable_buffer_copy_horz(data, ppu_address, len);
+}
+
+__attribute__((deprecated, always_inline)) void
+multi_vram_buffer_vert(const void *data, char len, int ppu_address) {
+  nametable_buffer_copy_vert(data, ppu_address, len);
 }
 
 extern char PAD_STATET[];

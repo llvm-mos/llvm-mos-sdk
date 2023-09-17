@@ -27,39 +27,39 @@ extern "C" {
 // operations in ways that aren't currently supported by the API (e.g. adding
 // them to a queue)
 
-#define NAMETABLE_OP_MULTI_START 0x30
+#define NAMETABLE_OP_SEQ_START 0x30
 
 // Single-tile operations include just the address and one byte of data.
 typedef struct {
-  char address_hi;  // Always below NAMETABLE_OP_MULTI_START
+  char address_hi;  // Always < NAMETABLE_OP_SEQ_START
   char address_lo;
   char data;
-} nametable_op_single_header;
+} nametable_op_one;
 
+// TODO: check if this is redundant
 typedef enum {
-  // TODO: if all of these end up being horz/vert pairs, maybe use top bit as an
-  // increment flag. E.g. something like:
-  //     typedef struct {
-  //       enum {/*ops...*/} op:7;
-  //       char vram_inc:1;
-  //     } nametable_opcode;
+  nametable_dir_horz = 0x00,
+  nametable_dir_vert = 0x80,
+} nametable_dir;
 
+// The kind of sequential operation to perform
+// This will be ORed with nametable_dir for the full opcode
+typedef enum : char {
   // copy nametable data directly into the buffer
-  nametable_opcode_copy_horz = NAMETABLE_OP_MULTI_START,
-  nametable_opcode_copy_vert,
+  nametable_op_copy = NAMETABLE_OP_SEQ_START,
 
-  /* TODO: things like:
-  // store a nametable data pointer in the buffer
-  nametable_opcode_ref_horz, nametable_opcode_ref_vert,
+  // store a pointer to nametable data in the buffer
+  nametable_op_ref,
 
-  // fill with a single value
-  nametable_opcode_fill_horz, nametable_opcode_fill_vert,
+  // fill nametable span with a single value
+  nametable_op_fill,
 
+  /* TODO these and more?:
   // copy RLE data
-  nametable_opcode_rle_copy_horz, nametable_opcode_rle_copy_vert,
+  rle_copy,
 
   // ref RLE data
-  nametable_opcode_rle_ref_horz, nametable_opcode_rle_ref_vert,
+  rle_ref,
   */
 } nametable_opcode;
 
@@ -70,22 +70,66 @@ typedef struct {
   char address_hi;
   char address_lo;
   char size;
-} nametable_op_multi_header;
+} nametable_op_seq_header;
+
+// when display is enabled, vram access could only be done with this vram update
+// system the function sets a pointer to the update buffer that contains data
+// and addresses in a special format. It allows to write non-sequential bytes,
+// as well as horizontal or vertical nametable sequences. buffer pointer could
+// be changed during rendering, but it only takes effect on a new frame number
+// of transferred bytes is limited by vblank time to disable updates, call this
+// function with NULL pointer
+//
+// the update data format:
+//  nametable_op_one - for a non-sequential write
+//  nametable_op_seq_header, [bytes] - for a sequential write
+//  NT_UPD_EOF to mark end of the buffer
+//
+// length of this data should be under 128 bytes
+void set_nametable_update(const void *buf);
 
 // sets the vram update to point to the vram_buffer. VRAM_BUF defined in crt0.s
-// this can be undone by set_vram_update(NULL)
-void set_vram_buffer(void);
+// this can be undone by set_nametable_update(NULL)
+// TODO: make a version that preserves the index so that the buffer can be
+// swapped dynamically
+void set_nametable_buffer(void);
 
-// to push a single byte write to the vram_buffer
-__attribute__((leaf)) void one_vram_buffer(char data, int ppu_address);
+// Write a single tile update to the buffer
+__attribute__((leaf)) void nametable_buffer_one(char data, int ppu_address);
 
-// to push multiple writes as one sequential horizontal write to the vram_buffer
-__attribute__((leaf)) void multi_vram_buffer_horz(const void *data, char len,
-                                                  int ppu_address);
+// Low level helper for copying data into the buffer
+__attribute__((leaf)) void nametable_buffer_copy_op(nametable_opcode op,
+                                                    const void *data,
+                                                    int ppu_address, char len);
 
-// to push multiple writes as one sequential vertical write to the vram_buffer
-__attribute__((leaf)) void multi_vram_buffer_vert(const void *data, char len,
-                                                  int ppu_address);
+// Copy a span of raw data to the buffer
+void nametable_buffer_copy(nametable_dir dir, const void *data, int ppu_address,
+                           char len);
+
+// Copy a horizontal span of data to the buffer
+void nametable_buffer_copy_horz(const void *data, int ppu_address, char len);
+// Copy a vertical span of data to the buffer
+void nametable_buffer_copy_vert(const void *data, int ppu_address, char len);
+
+
+// BEGIN Legacy nesdoug APIs
+//
+// These are now aliases/wrappers for the updated APIs
+
+// Use set_nametable_buffer instead
+__attribute__((deprecated)) void set_vram_buffer(void);
+
+// Use `nametable_buffer_one` instead
+__attribute__((deprecated)) void one_vram_buffer(char data, int ppu_address);
+
+// Use `nametable_buffer_copy` instead
+__attribute__((deprecated, leaf)) void
+multi_vram_buffer_horz(const void *data, char len, int ppu_address);
+
+// Use `nametable_buffer_copy` instead
+__attribute__((deprecated, leaf)) void
+multi_vram_buffer_vert(const void *data, char len, int ppu_address);
+// END Legacy nesdoug APIs
 
 // pad 0 or 1, use AFTER pad_poll() to get the trigger / new button presses
 // more efficient than pad_trigger, which runs the entire pad_poll code again
@@ -196,8 +240,6 @@ __attribute__((leaf)) void gray_line(void);
 
 #define high_byte(a) *((char *)&a + 1)
 #define low_byte(a) *((char *)&a)
-
-#include <peekpoke.h>
 
 // get from the frame count. You can use a button (start on title screen) to
 // trigger

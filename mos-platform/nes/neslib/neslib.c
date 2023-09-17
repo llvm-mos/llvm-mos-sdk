@@ -16,8 +16,6 @@
 __attribute__((section(".zp.frame_cnt1"))) volatile char FRAME_CNT1;
 __attribute__((section(".zp.frame_cnt2"))) volatile char FRAME_CNT2;
 __attribute__((section(".zp.vram_update"))) volatile char VRAM_UPDATE;
-__attribute__((section(".zp.name_upd_adr"))) volatile const char *NAME_UPD_ADR;
-__attribute__((section(".zp.name_upd_enable"))) volatile char NAME_UPD_ENABLE;
 __attribute__((section(".zp.pal_update"))) volatile char PAL_UPDATE;
 __attribute__((section(".zp.pal_bg_ptr"))) volatile const char *PAL_BG_PTR;
 __attribute__((section(".zp.pal_spr_ptr"))) volatile const char *PAL_SPR_PTR;
@@ -89,11 +87,6 @@ char pad_trigger(char pad) {
 }
 
 char pad_state(char pad) { return PAD_STATE[pad]; }
-
-void set_vram_update(const void *buf) {
-  NAME_UPD_ADR = buf;
-  NAME_UPD_ENABLE = NAME_UPD_ADR != 0;
-}
 
 void vram_adr(unsigned adr) {
   PPU.vram.address = adr >> 8;

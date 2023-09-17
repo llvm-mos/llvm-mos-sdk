@@ -724,16 +724,18 @@ flush_vram_update2: ;minor changes %
 	ldy #0
 
 .LupdName:
-  ; The first byte is either nametable_op_single_header::address_hi or
-	; nametable_op_multi_header::opcode
+  ; The first byte is one of:
+	;   - nametable_op_one::address_hi
+	;   - nametable_op_seq_header::opcode
+	;   - 0xFF
 	lda (NAME_UPD_ADR),y
-	iny
 	cmp #$ff
 	beq .LupdDone
+	iny
 
-	cmp #$30             ; nametable_opcode::copy_horz
-	beq .LupdHorzSeq
-	bcs .LupdVertSeq
+	; is it a non-sequential update?
+	cmp #$30             ; NAMETABLE_OP_SEQ_START
+	bcs .LupdSeq
 
 .LupdSingle:
 	sta PPUADDR
@@ -745,38 +747,56 @@ flush_vram_update2: ;minor changes %
 	sta PPUDATA
 	bne .LupdName    ; always taken. Assumes index never wraps
 
-.LupdVertSeq:
-	; Set control bit for vertical traversal
+.LupdSeq:
+	; First bit of sequential opcode is the increment direction
+	asl  ; Shift left to set carry flag equal to top bit
+	sta __rc2  ; Save directionless opcode for later
 	lda PPUCTRL_VAR
-	ora #$04							; TODO constants for ctrl flags?
-	bne .LupdNameSeq			;always taken
+	bcs .LsetVert
 
-.LupdHorzSeq:
-	; Clear control bit for vertical traversal
-	lda PPUCTRL_VAR
+.LsetHorz:
 	and #$fb
+	bne .LsetDir			;always taken
 
-.LupdNameSeq:
-	; Store new control value
+.LsetVert:
+	; Set control bit for vertical traversal
+	ora #$04							; TODO constants for ctrl flags?
+
+.LsetDir:
 	sta PPUCTRL
 
-	lda (NAME_UPD_ADR),y  ; nametable_op_multi_header::address_hi
-	iny
+	; write address
+	lda (NAME_UPD_ADR), y
 	sta PPUADDR
-	lda (NAME_UPD_ADR),y  ; nametable_op_multi_header::address_lo
 	iny
+	lda (NAME_UPD_ADR), y
 	sta PPUADDR
-	lda (NAME_UPD_ADR),y  ; nametable_op_multi_header::size
+	iny
+
+	; load size
+	lda (NAME_UPD_ADR), y
 	iny
 	tax
 
-.LupdNameLoop:
+	; Choose the operation
+	lda __rc2
+	cmp #$62           ; nametable_op_ref << 1
+	bmi .LupdNameCopy
+	beq .LupdNameRef
+
+.LupdNameFill:
+	brk ; TODO
+
+.LupdNameRef:
+	brk ; TODO
+
+.LupdNameCopy:
 
 	lda (NAME_UPD_ADR),y
 	iny
 	sta PPUDATA
 	dex
-	bne .LupdNameLoop
+	bne .LupdNameCopy
 
 	lda PPUCTRL_VAR
 	sta PPUCTRL
@@ -784,8 +804,7 @@ flush_vram_update2: ;minor changes %
 	jmp .LupdName
 
 .LupdDone:
-	jsr __post_vram_update
-	rts
+	jmp __post_vram_update
 
 .weak __post_vram_update
 __post_vram_update:

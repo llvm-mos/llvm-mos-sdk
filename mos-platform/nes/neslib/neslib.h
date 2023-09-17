@@ -144,22 +144,8 @@ __attribute__((leaf)) unsigned rand16(void);
 // set random seed
 __attribute__((leaf)) void set_rand(unsigned seed);
 
-// when display is enabled, vram access could only be done with this vram update
-// system the function sets a pointer to the update buffer that contains data
-// and addresses in a special format. It allows to write non-sequential bytes,
-// as well as horizontal or vertical nametable sequences. buffer pointer could
-// be changed during rendering, but it only takes effect on a new frame number
-// of transferred bytes is limited by vblank time to disable updates, call this
-// function with NULL pointer
-//
-// the update data format:
-//  MSB, LSB, byte for a non-sequential write
-//  MSB|NT_UPD_HORZ, LSB, LEN, [bytes] for a horizontal sequence
-//  MSB|NT_UPD_VERT, LSB, LEN, [bytes] for a vertical sequence
-//  NT_UPD_EOF to mark end of the buffer
-//
-// length of this data should be under 256 bytes
-void set_vram_update(const void *buf);
+// Use `set_nametable_update` instead.
+__attribute__((deprecated)) void set_vram_update(const void *buf);
 
 // all following vram functions only work when display is disabled
 

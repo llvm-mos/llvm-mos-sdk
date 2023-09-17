@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['round_5findeterminate_3580',['round_indeterminate',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a9aa7e9f8d978fbe044c24a67da2d0464',1,'std']]],
-  ['round_5fto_5fnearest_3581',['round_to_nearest',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a43219e58bf0b1438dce779ae47760772',1,'std']]],
-  ['round_5ftoward_5finfinity_3582',['round_toward_infinity',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a39c9297336599616c46f98eaf73c6191',1,'std']]],
-  ['round_5ftoward_5fneg_5finfinity_3583',['round_toward_neg_infinity',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a5e57d9d7178fe199cfd05b67e9d3c69d',1,'std']]],
-  ['round_5ftoward_5fzero_3584',['round_toward_zero',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a16cd490308c5bcba330c09f844f92f1d',1,'std']]]
+  ['sortron_5fcommand_5fextract_5fslot_3536',['SORTRON_COMMAND_EXTRACT_SLOT',['../rpc8e_2librpc8e_2include_2rpc8e_2hardware_8h.html#aef8bc2894580aee9e7eec9165e591b5ba14d454b482646c840dea4ae44933c892',1,'hardware.h']]],
+  ['sortron_5fcommand_5fmatch_5finput_3537',['SORTRON_COMMAND_MATCH_INPUT',['../rpc8e_2librpc8e_2include_2rpc8e_2hardware_8h.html#aef8bc2894580aee9e7eec9165e591b5ba070af673cb0a9d109dd3f88a2f46109d',1,'hardware.h']]],
+  ['sortron_5fcommand_5fread_5fslot_3538',['SORTRON_COMMAND_READ_SLOT',['../rpc8e_2librpc8e_2include_2rpc8e_2hardware_8h.html#aef8bc2894580aee9e7eec9165e591b5bad9586dbf76b1c93b78a48602e6d5131f',1,'hardware.h']]],
+  ['sortron_5fcommand_5fread_5fslot_5fcount_3539',['SORTRON_COMMAND_READ_SLOT_COUNT',['../rpc8e_2librpc8e_2include_2rpc8e_2hardware_8h.html#aef8bc2894580aee9e7eec9165e591b5ba715b66717135b1009840bda6e714542b',1,'hardware.h']]]
 ];

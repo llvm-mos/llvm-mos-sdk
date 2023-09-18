@@ -22,6 +22,7 @@ add_platform_object_file(nes-mmc3-reset-fixed-o reset-fixed.o reset-fixed.s)
 add_platform_object_file(nes-mmc3-reset-banked-8-o reset-banked-8.o reset-banked-8.s)
 add_platform_object_file(nes-mmc3-reset-banked-mode-0-o reset-banked-mode-0.o reset-banked-mode-0.s)
 add_platform_object_file(nes-mmc3-reset-banked-mode-1-o reset-banked-mode-1.o reset-banked-mode-1.s)
+add_platform_object_file(nes-mmc3-init-c-in-prg-ram-o init-c-in-prg-ram.o init-c-in-prg-ram.s)
 
 add_platform_library(nes-mmc3-c bank.c bank.s irq.c irq.s)
 target_include_directories(nes-mmc3-c PRIVATE ../nes)

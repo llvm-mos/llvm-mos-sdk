@@ -785,10 +785,35 @@ flush_vram_update2: ;minor changes %
 	beq .LupdNameRef
 
 .LupdNameFill:
-	brk ; TODO
+	lda (NAME_UPD_ADR), y
+	iny
+; TODO: unroll?
+1:
+	sta PPUDATA
+	dex
+	bne 1b
+	beq .LupdName ; always taken
 
 .LupdNameRef:
-	brk ; TODO
+	; Load the pointer into `__rc2/3`
+	lda (NAME_UPD_ADR), y
+	iny
+	sta __rc2
+	lda (NAME_UPD_ADR), y
+	iny
+	sta __rc3
+
+	; Save y so we can use it for indexing the referenced data
+	sty __rc4
+	ldy #0
+1:
+	lda (__rc2), y
+	sta PPUDATA
+	iny
+	dex
+	bne 1b
+	ldy __rc4
+	bne .LupdName ; always taken - y is assumed not to overflow
 
 .LupdNameCopy:
 

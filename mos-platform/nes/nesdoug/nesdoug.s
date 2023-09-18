@@ -74,11 +74,11 @@ nametable_buffer_one:
 	; __rc2 - >ppu_address
 	ldy VRAM_INDEX
 
-	sta VRAM_BUF+2, y ; nametable_op_single_header::data
+	sta VRAM_BUF+2, y ; nametable_op_one::data
 	lda __rc2
-	sta VRAM_BUF, y   ; nametable_op_single_header::address_hi
+	sta VRAM_BUF, y   ; nametable_op_one::address_hi
 	txa
-	sta VRAM_BUF+1, y ; nametable_op_single_header::address_lo
+	sta VRAM_BUF+1, y ; nametable_op_one::address_lo
 	iny
 	iny
 	iny
@@ -88,6 +88,71 @@ nametable_buffer_one:
 	rts
 
 
+
+;void nametable_buffer_fill_op(nametable_opcode op, char data, int ppu_address, char len);
+.section .text.nametable_buffer_fill_op,"ax",@progbits
+.globl nametable_buffer_fill_op
+nametable_buffer_fill_op:
+	;     A - op
+	;     X - data
+	; __rc2 - <ppu_address
+	; __rc3 - >ppu_address
+	; __rc4 - len
+	ldy VRAM_INDEX
+
+	sta VRAM_BUF+0, y ; nametable_op_seq_header::opcode
+	lda __rc3
+	sta VRAM_BUF+1, y ; nametable_op_seq_header::address_hi
+	lda __rc2
+	sta VRAM_BUF+2, y ; nametable_op_seq_header::address_lo
+	lda __rc4
+	sta VRAM_BUF+3, y ; nametable_op_seq_header::size
+
+	txa
+	sta VRAM_BUF+4, y ; data
+
+	lda #$ff
+	sta VRAM_BUF+5, y
+	tya
+	clc
+	adc 5
+	sta VRAM_INDEX
+	rts
+
+
+
+;void nametable_buffer_ref_op(nametable_opcode op, const void *data, int ppu_address, char len);
+.section .text.nametable_buffer_ref_op,"ax",@progbits
+.globl nametable_buffer_ref_op
+nametable_buffer_ref_op:
+	;     A - op
+	;     X - <ppu_address
+	; __rc2 - <data
+	; __rc3 - >data
+	; __rc4 - >ppu_address
+	; __rc5 - len
+	ldy VRAM_INDEX
+
+	sta VRAM_BUF+0, y ; nametable_op_seq_header::opcode
+	lda __rc4
+	sta VRAM_BUF+1, y ; nametable_op_seq_header::address_hi
+	txa
+	sta VRAM_BUF+2, y ; nametable_op_seq_header::address_lo
+	lda __rc5
+	sta VRAM_BUF+3, y ; nametable_op_seq_header::size
+
+	lda __rc2
+	sta VRAM_BUF+4, y ; low byte of data pointer
+	lda __rc3
+	sta VRAM_BUF+5, y ; high byte of data pointer
+
+	lda #$ff
+	sta VRAM_BUF+6, y
+	tya
+	clc
+	adc #6
+	sta VRAM_INDEX
+	rts
 
 
 ;void clear_vram_buffer(void);

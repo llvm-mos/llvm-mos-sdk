@@ -32,21 +32,48 @@ void set_nametable_buffer(void) {
   VRAM_INDEX = 0;
   set_nametable_update(VRAM_BUF);
 }
+
 __attribute((always_inline)) void nametable_buffer_copy(nametable_dir dir,
                                                         const void *data,
                                                         int ppu_address,
                                                         char len) {
   nametable_buffer_copy_op(dir | nametable_op_copy, data, ppu_address, len);
 }
-
 __attribute__((always_inline)) void
 nametable_buffer_copy_horz(const void *data, int ppu_address, char len) {
   nametable_buffer_copy(nametable_dir_horz, data, ppu_address, len);
 }
-
 __attribute__((always_inline)) void
 nametable_buffer_copy_vert(const void *data, int ppu_address, char len) {
   nametable_buffer_copy(nametable_dir_vert, data, ppu_address, len);
+}
+
+__attribute__((always_inline)) void
+nametable_buffer_fill(nametable_dir dir, char data, int ppu_address, char len) {
+  nametable_buffer_fill_op(dir | nametable_op_fill, data, ppu_address, len);
+}
+__attribute__((always_inline)) void
+nametable_buffer_fill_horz(char data, int ppu_address, char len) {
+  nametable_buffer_fill(nametable_dir_horz, data, ppu_address, len);
+}
+__attribute__((always_inline)) void
+nametable_buffer_fill_vert(char data, int ppu_address, char len) {
+  nametable_buffer_fill(nametable_dir_vert, data, ppu_address, len);
+}
+
+__attribute__((always_inline)) void nametable_buffer_ref(nametable_dir dir,
+                                                         const void *data,
+                                                         int ppu_address,
+                                                         char len) {
+  nametable_buffer_ref_op(dir | nametable_op_ref, data, ppu_address, len);
+}
+__attribute__((always_inline)) void
+nametable_buffer_ref_horz(const void *data, int ppu_address, char len) {
+  nametable_buffer_ref(nametable_dir_horz, data, ppu_address, len);
+}
+__attribute__((always_inline)) void
+nametable_buffer_ref_vert(const void *data, int ppu_address, char len) {
+  nametable_buffer_ref(nametable_dir_vert, data, ppu_address, len);
 }
 
 __attribute__((deprecated, always_inline)) void set_vram_update(const void *buf) {

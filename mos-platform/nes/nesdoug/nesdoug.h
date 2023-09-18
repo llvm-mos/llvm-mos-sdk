@@ -101,16 +101,36 @@ __attribute__((leaf)) void nametable_buffer_one(char data, int ppu_address);
 __attribute__((leaf)) void nametable_buffer_copy_op(nametable_opcode op,
                                                     const void *data,
                                                     int ppu_address, char len);
-
 // Copy a span of raw data to the buffer
 void nametable_buffer_copy(nametable_dir dir, const void *data, int ppu_address,
                            char len);
-
 // Copy a horizontal span of data to the buffer
 void nametable_buffer_copy_horz(const void *data, int ppu_address, char len);
 // Copy a vertical span of data to the buffer
 void nametable_buffer_copy_vert(const void *data, int ppu_address, char len);
 
+
+// Low level helper for writing fill operations into buffer
+__attribute__((leaf)) void nametable_buffer_fill_op(nametable_opcode op,
+                                                    char data, int ppu_address,
+                                                    char len);
+// Set a single character to be filled for a span
+void nametable_buffer_fill(nametable_dir dir, char data, int ppu_address, char len);
+// Set a single character to be filled for a horizontal span
+void nametable_buffer_fill_horz(char data, int ppu_address, char len);
+// Set a single character to be filled for a vertical span
+void nametable_buffer_fill_vert(char data, int ppu_address, char len);
+
+// Low level helper for writing ref operations into buffer
+__attribute__((leaf)) void nametable_buffer_ref_op(nametable_opcode op,
+                                                   const void *data,
+                                                   int ppu_address, char len);
+// Set a pointer to be read from to fill a span
+void nametable_buffer_ref(nametable_dir dir, const void *data, int ppu_address, char len);
+// Set a pointer to be read from to fill a horizontal span
+void nametable_buffer_ref_horz(const void *data, int ppu_address, char len);
+// Set a pointer to be read from to fill a vertical span
+void nametable_buffer_ref_vert(const void *data, int ppu_address, char len);
 
 // BEGIN Legacy nesdoug APIs
 //

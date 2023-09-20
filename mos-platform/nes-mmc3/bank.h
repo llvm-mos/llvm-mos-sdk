@@ -33,6 +33,25 @@
 extern "C" {
 #endif
 
+/**
+ * @brief Define this in a .c file to use standard 2-screen mirrored nametables.
+ * This is the default for MMC3.
+ *
+ * Use `MAPPER_USE_HORIZONTAL_MIRRORING` or `MAPPER_USE_VERTICAL_MIRRORING` to
+ * set the mirror direction.
+ */
+#define MAPPER_USE_MIRRORED_NAMETABLE \
+  asm(".global __four_screen\n __four_screen = 0\n")
+
+/**
+ * @brief Define this in a .c file to use 4-screen mirroring, which uses 8 KiB
+ * of additional CHR-RAM to store the extra two nametables.
+ *
+ * Other mirroring flags are ignored when this is set.
+ */
+#define MAPPER_USE_4_SCREEN_NAMETABLE \
+  asm(".global __four_screen\n __four_screen = 1\n")
+
 // Contains functions to help with working with multiple PRG/CHR banks
 // For MMC3 code.
 

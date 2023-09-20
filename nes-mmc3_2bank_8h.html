@@ -88,6 +88,12 @@ Include dependency graph for bank.h:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ad090f37d8e070fe92c2695c39833cbe8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-mmc3_2bank_8h.html#ad090f37d8e070fe92c2695c39833cbe8">MAPPER_USE_MIRRORED_NAMETABLE</a>&#160;&#160;&#160;asm(&quot;.global __four_screen\n __four_screen = 0\n&quot;)</td></tr>
+<tr class="memdesc:ad090f37d8e070fe92c2695c39833cbe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this in a .c file to use standard 2-screen mirrored nametables. This is the default for MMC3.  <a href="nes-mmc3_2bank_8h.html#ad090f37d8e070fe92c2695c39833cbe8">More...</a><br /></td></tr>
+<tr class="separator:ad090f37d8e070fe92c2695c39833cbe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67da685b5510cc8f6177bdaaea673a1d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-mmc3_2bank_8h.html#a67da685b5510cc8f6177bdaaea673a1d">MAPPER_USE_4_SCREEN_NAMETABLE</a>&#160;&#160;&#160;asm(&quot;.global __four_screen\n __four_screen = 1\n&quot;)</td></tr>
+<tr class="memdesc:a67da685b5510cc8f6177bdaaea673a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define this in a .c file to use 4-screen mirroring, which uses 8 KiB of additional CHR-RAM to store the extra two nametables.  <a href="nes-mmc3_2bank_8h.html#a67da685b5510cc8f6177bdaaea673a1d">More...</a><br /></td></tr>
+<tr class="separator:a67da685b5510cc8f6177bdaaea673a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1c65a9927a1e5406a41b7b0be8d0a9f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-mmc3_2bank_8h.html#ad1c65a9927a1e5406a41b7b0be8d0a9f">MIRROR_VERTICAL</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:ad1c65a9927a1e5406a41b7b0be8d0a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac180a59d516761074a775cdef237c998"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes-mmc3_2bank_8h.html#ac180a59d516761074a775cdef237c998">MIRROR_HORIZONTAL</a>&#160;&#160;&#160;1</td></tr>
@@ -165,6 +171,40 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a67da685b5510cc8f6177bdaaea673a1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67da685b5510cc8f6177bdaaea673a1d">&#9670;&nbsp;</a></span>MAPPER_USE_4_SCREEN_NAMETABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAPPER_USE_4_SCREEN_NAMETABLE&#160;&#160;&#160;asm(&quot;.global __four_screen\n __four_screen = 1\n&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define this in a .c file to use 4-screen mirroring, which uses 8 KiB of additional CHR-RAM to store the extra two nametables. </p>
+<p>Other mirroring flags are ignored when this is set. </p>
+
+</div>
+</div>
+<a id="ad090f37d8e070fe92c2695c39833cbe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad090f37d8e070fe92c2695c39833cbe8">&#9670;&nbsp;</a></span>MAPPER_USE_MIRRORED_NAMETABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAPPER_USE_MIRRORED_NAMETABLE&#160;&#160;&#160;asm(&quot;.global __four_screen\n __four_screen = 0\n&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define this in a .c file to use standard 2-screen mirrored nametables. This is the default for MMC3. </p>
+<p>Use <code>MAPPER_USE_HORIZONTAL_MIRRORING</code> or <code>MAPPER_USE_VERTICAL_MIRRORING</code> to set the mirror direction. </p>
 
 </div>
 </div>

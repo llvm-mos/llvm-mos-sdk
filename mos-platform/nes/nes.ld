@@ -42,5 +42,7 @@ SECTIONS {
   INCLUDE bss.ld
   INCLUDE noinit.ld
 
+  .ram (NOLOAD) : { *(.ram .ram.*) } > ram
+
   .chr_rom : { KEEP(*(.chr_rom .chr_rom.*)) } >chr_rom
 }

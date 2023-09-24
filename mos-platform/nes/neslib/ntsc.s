@@ -6,12 +6,6 @@
 .section .init.275,"axR",@progbits
 .globl __do_init_ntsc_mode
 __do_init_ntsc_mode:
-	lda #0b10000000
-	sta PPUCTRL_VAR
-	sta PPUCTRL		;enable NMI
-	lda #0b00000110
-	sta PPUMASK_VAR
-
 waitSync3:
 	lda FRAME_CNT1
 1:
@@ -32,4 +26,13 @@ detectNTSC:
 	sta NTSC_MODE
 
 	jsr ppu_off
+
+	lda #0
+	sta __rc2
+	sta __rc3
+	jsr set_vram_update
+
+	lda #0
+	sta PPUSCROLL
+	sta PPUSCROLL
 

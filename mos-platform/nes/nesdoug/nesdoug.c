@@ -7,6 +7,21 @@
 // based on code by Groepaz/Hitmen <groepaz@gmx.net>, Ullrich von Bassewitz
 // <uz@cc65.org>
 
+// Keeping these functions in C LTOs them in, which informs LTO code generation
+// that the ZP regions aren't available. This saves users of the library from
+// having to manually reserve ZP space from LTO.
+__attribute__((section(".zp.vram_index"))) char VRAM_INDEX;
+__attribute__((section(".zp.meta_ptr"))) const char *META_PTR;
+__attribute__((section(".zp.data_ptr"))) const char *DATA_PTR;
+
+extern char VRAM_BUF[];
+void set_vram_update(const void *buf);
+void set_vram_buffer(void) {
+  VRAM_BUF[0] = 0xff;
+  VRAM_INDEX = 0;
+  set_vram_update(VRAM_BUF);
+}
+
 extern char PAD_STATET[];
 char get_pad_new(char pad) { return PAD_STATET[pad]; }
 
@@ -27,6 +42,11 @@ extern volatile char SCROLL_Y;
 void set_scroll_y(unsigned y) {
   SCROLL_Y = y;
   PPUCTRL_VAR = PPUCTRL_VAR & 0xfd | (y >> 8 & 0x01) << 1;
+}
+
+void set_data_pointer(const void *data) { DATA_PTR = (const char *)data; }
+void set_mt_pointer(const void *metatiles) {
+  META_PTR = (const char *)metatiles;
 }
 
 extern volatile char PPUMASK_VAR;

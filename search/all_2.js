@@ -28,7 +28,7 @@ var searchData=
   ['add_5frvalue_5freference_5ft_52',['add_rvalue_reference_t',['../namespacestd.html#a20672aa271b8e0a3ea345014a90fbbeb',1,'std']]],
   ['add_5fvolatile_53',['add_volatile',['../structstd_1_1add__volatile.html',1,'std']]],
   ['add_5fvolatile_5ft_54',['add_volatile_t',['../namespacestd.html#a12b9e18e256d28d364a86e5abe7d6544',1,'std']]],
-  ['addr_5fhi_55',['addr_hi',['../nes-mmc3_2bank_8h.html#a4b6d5982a670e9a2c66612a5cced6f4c',1,'bank.h']]],
+  ['addr_5fhi_55',['addr_hi',['../nes-mmc3_2mapper_8h.html#a4b6d5982a670e9a2c66612a5cced6f4c',1,'mapper.h']]],
   ['address_56',['address',['../bios_8h.html#aa137c1d2696e2763e22c44299393db13',1,'bios.h']]],
   ['address_5ftype_57',['address_type',['../bios_8h.html#acb6023792285d817ac4000375a09a040',1,'bios.h']]],
   ['adpcm_5fbuffer_5funder_5fhalf_58',['ADPCM_BUFFER_UNDER_HALF',['../bios_8h.html#a996591ea3e650fcc438c27a9e43b26bfa8d619867c5cb962b5c60e162610666ca',1,'bios.h']]],

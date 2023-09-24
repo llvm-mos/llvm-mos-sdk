@@ -1,8 +1,8 @@
 var searchData=
 [
   ['back_101',['back',['../structstd_1_1array.html#ad546e3037ba8f7928f91368d654ab063',1,'std::array::back()'],['../structstd_1_1array.html#ae27789071edbce0734a054ea81bba188',1,'std::array::back() const']]],
-  ['bank_2eh_102',['bank.h',['../nes-action53_2bank_8h.html',1,'(Global Namespace)'],['../nes-cnrom_2bank_8h.html',1,'(Global Namespace)'],['../nes-gtrom_2bank_8h.html',1,'(Global Namespace)'],['../nes-mmc1_2bank_8h.html',1,'(Global Namespace)'],['../nes-mmc3_2bank_8h.html',1,'(Global Namespace)'],['../nes-unrom_2bank_8h.html',1,'(Global Namespace)'],['../nes-unrom-512_2bank_8h.html',1,'(Global Namespace)'],['../pce-common_2libpce_2include_2pce_2bank_8h.html',1,'(Global Namespace)']]],
-  ['bank_5fid_103',['bank_id',['../nes-mmc3_2bank_8h.html#abfec782a5f6b8c007db3710f37ff8df8',1,'bank.h']]],
+  ['bank_2eh_102',['bank.h',['../bank_8h.html',1,'']]],
+  ['bank_5fid_103',['bank_id',['../nes-mmc3_2mapper_8h.html#abfec782a5f6b8c007db3710f37ff8df8',1,'mapper.h']]],
   ['bank_5fram_104',['BANK_RAM',['../cx16_8h.html#a88f6379e66d9c7a9a534bc23f2ed885b',1,'cx16.h']]],
   ['baseptr_105',['BasePtr',['../classsoa_1_1BasePtr.html',1,'soa::BasePtr&lt; T &gt;'],['../classsoa_1_1BasePtr.html#ababbf19256dd50cda4df8296106298d1',1,'soa::BasePtr::BasePtr(const uint8_t ByteArrays[][N], uint8_t Idx)'],['../classsoa_1_1BasePtr.html#af4d3b5f45f0517d202311d71169df4a1',1,'soa::BasePtr::BasePtr(uint8_t ByteArrays[][N], uint8_t Idx)']]],
   ['basic_106',['BASIC',['../atari_8h.html#a07b76b679f20134d56e04819f746fad6',1,'atari.h']]],

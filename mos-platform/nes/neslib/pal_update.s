@@ -11,7 +11,7 @@
 .globl PAL_BUF
 PAL_BUF = 0x0100
 
-.section .init.310,"axR",@progbits
+.section .init.265,"axR",@progbits
 .globl pal_update_init
 pal_update_init:
 	jsr pal_clear

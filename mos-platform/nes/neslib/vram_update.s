@@ -8,7 +8,7 @@
 .include "nes.inc"
 .include "neslib.inc"
 
-.section .init.340,"axR",@progbits
+.section .init.280,"axR",@progbits
 .globl vram_update_init
 vram_update_init:
 	lda #0

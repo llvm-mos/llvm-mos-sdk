@@ -15,7 +15,7 @@ OAM_BUF:
   .space 256
 
 
-.section .init.320,"axR",@progbits
+.section .init.270,"axR",@progbits
 .globl oam_update_init
 oam_update_init:
 	jsr oam_clear

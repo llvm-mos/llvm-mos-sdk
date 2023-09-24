@@ -33,7 +33,7 @@ clearRAM:
     bne 1b
 
 
-.section .init.270,"axR",@progbits
+.section .init.255,"axR",@progbits
 clearPalette:
 	lda #$3f
 	sta PPUADDR

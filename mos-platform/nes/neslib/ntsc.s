@@ -3,7 +3,7 @@
 .include "ntsc.inc"
 .include "neslib.inc"
 
-.section .init.330,"axR",@progbits
+.section .init.275,"axR",@progbits
 .globl __do_init_ntsc_mode
 __do_init_ntsc_mode:
 	lda #0b10000000

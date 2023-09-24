@@ -1,6 +1,6 @@
  .include "neslib.inc"
 
- .section .init.270,"axR",@progbits
+ .section .init.255,"axR",@progbits
 	lda #$fd
 	sta RAND_SEED
 	sta RAND_SEED+1

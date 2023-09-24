@@ -1,3 +1,3 @@
-#include <bank.h>
+#include <mapper.h>
 MAPPER_PRG_RAM_KB(2);
 int main(void) { return 0; }

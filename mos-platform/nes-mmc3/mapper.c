@@ -1,4 +1,4 @@
-#include "bank.h"
+#include "mapper.h"
 #include "peekpoke.h"
 
 __attribute__((section(".zp.bss"))) char __bank_select_hi;

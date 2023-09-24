@@ -24,8 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef _BANK_H_
-#define _BANK_H_
+#ifndef _MAPPER_H_
+#define _MAPPER_H_
 
 #include <ines.h>
 
@@ -33,6 +33,15 @@
 extern "C" {
 #endif
 
+// Contains functions to help with working with multiple PRG/CHR banks
+
+// Access the current settings of MMC1 registers.
+extern volatile const char CHR_BANK0_CUR;
+extern volatile const char CHR_BANK1_CUR;
+extern volatile const char MMC1_CTRL_CUR;
+
+// Maximum level of recursion to allow with banked_call and similar functions.
+#define MAX_BANK_DEPTH 10
 
 // Switch to another bank and call this function.
 // Note: Using banked_call to call a second function from within
@@ -49,28 +58,42 @@ __attribute__((leaf)) void set_prg_bank(char bank_id);
 // returns: The current bank.
 __attribute__((leaf)) char get_prg_bank(void);
 
-// Set the current 8kb chr bank to the bank with this id.
-// this will take effect immediately
-// and automatically rewrite at the top of every frame
-__attribute__((leaf)) void set_chr_bank(char bank_id);
-
-// Set the current 8kb chr bank to the bank with this id.
+// Set the current 1st 4k chr bank to the bank with this id.
 // this will take effect at the next frame
 // and automatically rewrite at the top of every frame
-__attribute__((leaf)) void swap_chr_bank(char bank_id);
+__attribute__((leaf)) void set_chr_bank_0(char bank_id);
 
-// Set the current 8kb chr bank to the bank with this id.
+// Set the current 2nd 4k chr bank to the bank with this id.
+// this will take effect at the next frame
+// and automatically rewrite at the top of every frame
+__attribute__((leaf)) void set_chr_bank_1(char bank_id);
+
+// Set the current 1st 4k chr bank to the bank with this id.
 // this will take effect immediately, such as for mid screen changes
-// but then will be overwritten by the set_chr_bank() value
+// but then will be overwritten by the set_chr_bank_0() value
 // in the next frame.
-__attribute__((leaf)) void split_chr_bank(char bank_id);
+void split_chr_bank_0(char bank_id);
+
+// Set the current 2nd 4k chr bank to the bank with this id.
+// this will take effect immediately, such as for mid screen changes
+// but then will be overwritten by the set_chr_bank_1() value
+// in the next frame.
+void split_chr_bank_1(char bank_id);
+
+// Sets the CHR bank 0 register to the given value and retries if interrupted.
+// Persists across NMIs.
+void set_chr_bank_0_retry(char bank_id);
+
+// Reliably sets the CHR bank 0 register to the given value and retries if
+// interrupted. Persists across NMIs.
+void set_chr_bank_1_retry(char bank_id);
 
 // if you need to swap CHR banks mid screen, perhaps you need more
 // than 256 unique tiles, first write (one time only) the CHR bank
-// for the top of the screen with set_chr_bank().
+// for the top of the screen with set_chr_bank_0().
 // Then, every frame, time a mid screen split (probably with
 // a sprite zero hit) and then change the CHR bank with
-// split_chr_bank().
+// split_chr_bank_0().
 //
 // example ---- in game loop
 // split(0); ---- wait for sprite zero hit, set X scroll to 0
@@ -86,8 +109,14 @@ __attribute__((leaf)) void split_chr_bank(char bank_id);
 // LOWER and UPPER are single screen modes.
 __attribute__((leaf)) void set_mirroring(char mirroring);
 
+// Set all 5 bits of the $8000 MMC1 Control register. Overwrites mirroring
+// setting.
+void set_mmc1_ctrl(char value);
+
+// some things deleted
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif // _BANK_H_
+#endif // _MAPPER_H_

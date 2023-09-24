@@ -24,8 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef _BANK_H_
-#define _BANK_H_
+#ifndef _MAPPER_H_
+#define _MAPPER_H_
 
 #include <ines.h>
 
@@ -153,4 +153,4 @@ __attribute__((leaf)) char is_irq_done(void);
 }
 #endif
 
-#endif // _BANK_H_
+#endif // _MAPPER_H_

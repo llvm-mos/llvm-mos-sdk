@@ -4,25 +4,26 @@
 // information.
 
 #include <rompoke.h>
-#include "bank.h"
+#include "mapper.h"
 
-/**
- * @brief Shadow variable for the currently set bank state.
- */
-__attribute__((section(".zp.bss"))) volatile char _BANK_SHADOW;
+__attribute__((section(".zp.bss"))) volatile char _BANK_NEXT;
 
-__attribute__((leaf)) char get_prg_bank(void) {
-  return _BANK_SHADOW;
+__attribute__((leaf)) void set_chr_bank(char value) {
+  _BANK_NEXT = value;
+  rom_poke_safe(value);
 }
 
-__attribute__((leaf)) void set_prg_bank(char value) {
-  _BANK_SHADOW = value;
+__attribute__((leaf)) void swap_chr_bank(char value) {
+  _BANK_NEXT = value;
+}
+
+__attribute__((leaf)) void split_chr_bank(char value) {
   rom_poke_safe(value);
 }
 
 /**
- * Pass _BANK_SHADOW to the physical bank value at the start of NMI. This
- * prevents an inconsistency if the NMI is fired between _BANK_SHADOW is set
+ * Pass _BANK_NEXT to the physical bank value at the start of NMI. This
+ * prevents an inconsistency if the NMI is fired between _BANK_NEXT is set
  * and the ROM being written to. Doing so at the *start* of NMI allows using
  * banked_call and the same "switch to new; run code; switch back to old"
  * code pattern inside NMI handlers.
@@ -31,6 +32,6 @@ __attribute__((leaf)) void set_prg_bank(char value) {
  * compiler to optimize unused shadow variables out.
  */
 asm(".section .nmi.10,\"axR\",@progbits\n"
-	  "lda _BANK_SHADOW\n"
+	  "lda _BANK_NEXT\n"
 	  "tay\n"
 	  "sta __rom_poke_table,y\n");

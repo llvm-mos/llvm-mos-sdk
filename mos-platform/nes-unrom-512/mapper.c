@@ -4,7 +4,7 @@
 // information.
 
 #include <rompoke.h>
-#include "bank.h"
+#include "mapper.h"
 
 /**
  * @brief Shadow variable for the currently set bank state.

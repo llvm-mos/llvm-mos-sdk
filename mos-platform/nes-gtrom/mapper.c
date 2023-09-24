@@ -4,7 +4,7 @@
 // information.
 
 #include <rompoke.h>
-#include "bank.h"
+#include "mapper.h"
 
 #define _BANK (*(volatile char*)0x5000)
 /**

@@ -1,4 +1,4 @@
-#include <bank.h>
+#include <mapper.h>
 #include <stdlib.h>
 
 volatile const char large_array[0x3000] = {[0] = 1, [0x2000] = 2, [0x2fff] = 3};

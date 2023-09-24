@@ -9,7 +9,7 @@
 // INES header configuration macros
 //
 // Define any of these in one .c/.cpp file to configure the project's INES
-// header. Additional defines are provided on some subtargets via <bank.h>.
+// header. Additional defines are provided on some subtargets via <mapper.h>.
 
 #define MAPPER_PRG_ROM_KB(kb) \
     asm(".globl __prg_rom_size\n__prg_rom_size = " #kb)

@@ -3,8 +3,8 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-#ifndef _BANK_H_
-#define _BANK_H_
+#ifndef _MAPPER_H_
+#define _MAPPER_H_
 
 #include <ines.h>
 
@@ -41,4 +41,4 @@ __attribute__((leaf)) void split_chr_bank(char bank_id);
 }
 #endif
 
-#endif // _BANK_H_
+#endif // _MAPPER_H_

@@ -1,4 +1,4 @@
-#include "bank.h"
+#include "mapper.h"
 
 __attribute__((section(".zp.noinit"))) const void *__irq_ptr;
 __attribute__((section(".zp.noinit"))) char __irq_index;

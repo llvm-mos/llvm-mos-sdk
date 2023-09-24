@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "bank.h"
+#include "mapper.h"
 
 __attribute__((section(".zp.bss"))) char _PRG_BANK;
 __attribute__((section(".zp.bss"))) char _BANK_SHADOW;

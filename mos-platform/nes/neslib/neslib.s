@@ -16,17 +16,6 @@
 .include "neslib.inc"
 .include "ntsc.inc"
 
-; Reserve space at beginning of RAM for OAM buffer.
-.section .noinit.oam_buf,"a",@nobits
-.globl OAM_BUF
-.align 256
-OAM_BUF:
-  .space 256
-
-; Place the pallette buffer at the very bottom 32 bytes of the hard stack.
-.globl PAL_BUF
-PAL_BUF = 0x0100
-
 .section .init.100,"axR",@progbits
 clearRAM:
     lda #0
@@ -44,7 +33,7 @@ clearRAM:
     bne 1b
 
 
-.section .init.270,"axR",@progbits
+.section .init.255,"axR",@progbits
 clearPalette:
 	lda #$3f
 	sta PPUADDR
@@ -69,95 +58,37 @@ clearVRAM:
 	dey
 	bne 1b
 
-	lda #4
-	jsr pal_bright
-	jsr pal_clear
-	jsr oam_clear
 
-	lda #0b10000000
-	sta PPUCTRL_VAR
-	sta PPUCTRL		;enable NMI
-	lda #0b00000110
-	sta PPUMASK_VAR
-
+.section .init.400,"axR",@progbits
+.globl neslib_final_init
+neslib_final_init:
 	lda #0
 	sta PPUSCROLL
 	sta PPUSCROLL
 
-.section .nmi.050,"axR",@progbits
-	jsr neslib_nmi
 
-.section .text.neslib_nmi,"ax",@progbits
-.globl neslib_nmi
-neslib_nmi:
+.section .nmi.050,"axR",@progbits
+.globl neslib_nmi_begin
+neslib_nmi_begin:
 	lda PPUMASK_VAR	;if rendering is disabled, do not access the VRAM at all
 	and #0b00011000
 	bne .LrenderingOn
-	jmp	.LskipAll
+	jmp neslib_nmi_skip
 
 .LrenderingOn:
 	lda VRAM_UPDATE ;is the frame complete?
 	bne .LdoUpdate
-	jmp .LskipAll ;skipUpd
+	jmp neslib_nmi_skip
 
 .LdoUpdate:
 	lda #0
 	sta VRAM_UPDATE
 
-	lda #>OAM_BUF		;update OAM
-	sta OAMDMA
 
-	lda PAL_UPDATE		;update palette if needed
-	bne .LupdPal
-	jmp .LupdVRAM
 
-.LupdPal:
-
-	ldx #0
-	stx PAL_UPDATE
-
-	lda #$3f
-	sta PPUADDR
-	stx PPUADDR
-
-	ldy PAL_BUF				;background color, remember it in X
-	lda (PAL_BG_PTR),y
-	sta PPUDATA
-	tax
-
-	.irp i,0,1,2
-	ldy PAL_BUF+1+\i
-	lda (PAL_BG_PTR),y
-	sta PPUDATA
-	.endr
-
-	.irp j,0,1,2
-	stx PPUDATA			;background color
-	.irp i,0,1,2
-	ldy PAL_BUF+5+(\j*4)+\i
-	lda (PAL_BG_PTR),y
-	sta PPUDATA
-	.endr
-	.endr
-
-	.irp j,0,1,2,3
-	stx PPUDATA			;background color
-	.irp i,0,1,2
-	ldy PAL_BUF+17+(\j*4)+\i
-	lda (PAL_SPR_PTR),y
-	sta PPUDATA
-	.endr
-	.endr
-
-.LupdVRAM:
-
-	lda NAME_UPD_ENABLE
-	beq .LskipUpd
-
-	jsr flush_vram_update2
-
-.LskipUpd:
-
+.section .nmi.075,"axR",@progbits
+.globl neslib_nmi_end
+neslib_nmi_end:
 	lda #0
 	sta PPUADDR
 	sta PPUADDR
@@ -170,8 +101,7 @@ neslib_nmi:
 	lda PPUCTRL_VAR
 	sta PPUCTRL
 
-.LskipAll:
-
+neslib_nmi_skip:
 	lda PPUMASK_VAR
 	sta PPUMASK
 
@@ -183,203 +113,6 @@ neslib_nmi:
 	lda #0
 	sta FRAME_CNT2
 .LskipNtsc:
-	rts
-
-;void pal_all(const char *data);
-.section .text.pal_all,"ax",@progbits
-.global pal_all
-pal_all:
-
-	ldx #$00
-	lda #$20
-
-.Lpal_copy:
-
-	sta __rc4
-
-	ldy #$00
-
-0:
-
-	lda (__rc2),y
-	sta PAL_BUF,x
-	inx
-	iny
-	dec __rc4
-	bne 0b
-
-	inc PAL_UPDATE
-
-	rts
-
-
-
-;void pal_bg(const char *data);
-.section .text.pal_bg,"ax",@progbits
-.globl pal_bg
-pal_bg:
-
-	ldx #$00
-	lda #$10
-	jmp .Lpal_copy
-
-
-
-;void pal_spr(const char *data);
-.section .text.pal_spr,"ax",@progbits
-.globl pal_spr
-pal_spr:
-
-	ldx #$10
-	txa
-	jmp .Lpal_copy
-
-
-
-;void pal_clear(void);
-.section .text.pal_clear,"ax",@progbits
-.globl pal_clear
-pal_clear:
-
-	lda #$0f
-	ldx #0
-
-0:
-
-	sta PAL_BUF,x
-	inx
-	cpx #$20
-	bne 0b
-	stx PAL_UPDATE
-	rts
-
-
-
-;void oam_clear(void);
-.section .text.oam_clear,"ax",@progbits
-.globl oam_clear
-oam_clear:
-
-	ldx #0
-	stx SPRID ; automatically sets sprid to zero
-	lda #$ff
-0:
-	sta OAM_BUF,x
-	inx
-	inx
-	inx
-	inx
-	bne 0b
-	rts
-
-
-;void oam_size(unsigned char size);
-.section .text.oam_size,"ax",@progbits
-.globl oam_size
-oam_size:
-
-	asl a
-	asl a
-	asl a
-	asl a
-	asl a
-	and #$20
-	sta __rc2
-	lda PPUCTRL_VAR
-	and #$df
-	ora __rc2
-	sta PPUCTRL_VAR
-
-	rts
-
-
-
-;void oam_spr(unsigned char x,unsigned char y,unsigned char chrnum,unsigned char attr);
-;sprid removed
-.section .text.oam_spr,"ax",@progbits
-.globl oam_spr
-oam_spr:
-	ldy SPRID
-	sta OAM_BUF+3,y
-
-	txa
-	sta OAM_BUF+0,y
-
-	lda __rc2
-	sta OAM_BUF+1,y
-
-	lda __rc3
-	sta OAM_BUF+2,y
-
-	tya
-	clc ; if we can prove Carry is always false, then we don't need this
-	adc #$04
-	sta SPRID
-	rts
-
-
-
-;void oam_meta_spr(unsigned char x,unsigned char y,const unsigned char *data);
-;sprid removed
-.section .text.oam_meta_spr,"ax",@progbits
-.globl oam_meta_spr
-oam_meta_spr:
-
-	sta __rc4
-	stx __rc5
-	ldx SPRID
-	ldy #0
-1:
-	lda (__rc2),y		;x offset
-	cmp #$80
-	beq 2f
-	iny
-	clc
-	adc __rc4
-	sta OAM_BUF+3,x
-	lda (__rc2),y		;y offset
-	iny
-	clc
-	adc __rc5
-	sta OAM_BUF+0,x
-	lda (__rc2),y		;tile
-	iny
-	sta OAM_BUF+1,x
-	lda (__rc2),y		;attribute
-	iny
-	sta OAM_BUF+2,x
-	inx
-	inx
-	inx
-	inx
-	jmp 1b
-2:
-	stx SPRID
-	rts
-
-
-
-;void oam_hide_rest(void);
-;sprid removed
-.section .text.oam_hide_rest,"ax",@progbits
-.globl oam_hide_rest
-oam_hide_rest:
-
-	ldx SPRID
-	lda #240
-
-0:
-
-	sta OAM_BUF,x
-	inx
-	inx
-	inx
-	inx
-	bne 0b
-	;x is zero
-	stx SPRID
-	rts
-
 
 
 ;void ppu_wait_frame(void);
@@ -709,94 +442,6 @@ pad_poll:
 
 
 
-;void flush_vram_update(unsigned char *buf);
-.section .text.flush_vram_update,"ax",@progbits
-.globl flush_vram_update
-flush_vram_update:
-	lda __rc2
-	sta NAME_UPD_ADR+0
-	lda __rc3
-	sta NAME_UPD_ADR+1
-
-.globl flush_vram_update2
-flush_vram_update2: ;minor changes %
-
-	ldy #0
-
-.LupdName:
-	; First byte is upper PPU address or #$ff if done
-	lda (NAME_UPD_ADR),y
-	iny
-	cmp #$40            ; bits 6 and 7 indicate sequential ops
-	bcc .LupdSingle
-
-	; save upper address byte for arithmetic
-	tax
-	lda PPUCTRL_VAR
-	cpx #$80             ; below 80 is horizontal
-	bmi .LupdHorzSeq
-	cpx #$ff
-	beq .LupdDone
-
-.LupdVertSeq:
-	; Set control bit for vertical traversal
-	ora #$04         ; TODO constants for ctrl flags?
-	bne .LupdNameSeq ;always taken
-
-.LupdSingle:
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y ; address lo
-	iny
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y ; data
-	iny
-	sta PPUDATA
-	bne .LupdName    ; always taken. Assumes index never wraps
-
-.LupdHorzSeq:
-	; Clear control bit for vertical traversal
-	and #$fb
-
-.LupdNameSeq:
-	; Store new control value
-	sta PPUCTRL
-
-	; Mask out top 2 bits of upper address byte
-	txa
-	and #$3F
-
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y  ; address lo
-	iny
-	sta PPUADDR
-	lda (NAME_UPD_ADR),y  ; size
-	iny
-
-	; store size in counter
-	tax
-
-.LupdNameLoop:
-
-	lda (NAME_UPD_ADR),y
-	iny
-	sta PPUDATA
-	dex
-	bne .LupdNameLoop
-
-	lda PPUCTRL_VAR
-	sta PPUCTRL
-
-	jmp .LupdName
-
-.LupdDone:
-	jmp __post_vram_update
-
-.weak __post_vram_update
-__post_vram_update:
-	rts
-
-
-
 ;void vram_fill(unsigned char n,unsigned int len);
 .section .text.vram_fill,"ax",@progbits
 .globl vram_fill
@@ -854,40 +499,3 @@ vram_inc:
 	rts
 
 
-
-.section .rodata.bright_table,"a",@progbits
-.globl __palBrightTableL
-.globl __palBrightTableH
-__palBrightTableL:
-
-	.byte palBrightTable0@mos16lo,palBrightTable1@mos16lo,palBrightTable2@mos16lo
-	.byte palBrightTable3@mos16lo,palBrightTable4@mos16lo,palBrightTable5@mos16lo
-	.byte palBrightTable6@mos16lo,palBrightTable7@mos16lo,palBrightTable8@mos16lo
-
-__palBrightTableH:
-
-	.byte palBrightTable0@mos16hi,palBrightTable1@mos16hi,palBrightTable2@mos16hi
-	.byte palBrightTable3@mos16hi,palBrightTable4@mos16hi,palBrightTable5@mos16hi
-	.byte palBrightTable6@mos16hi,palBrightTable7@mos16hi,palBrightTable8@mos16hi
-
-palBrightTable0:
-	.byte $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f	;black
-palBrightTable1:
-	.byte $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-palBrightTable2:
-	.byte $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-palBrightTable3:
-	.byte $0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$0f
-palBrightTable4:
-	.byte $00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0a,$0b,$0c,$0f,$0f,$0f	;normal colors
-palBrightTable5:
-	.byte $10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$1a,$1b,$1c,$00,$00,$00
-palBrightTable6:
-	.byte $10,$21,$22,$23,$24,$25,$26,$27,$28,$29,$2a,$2b,$2c,$10,$10,$10	;$10 because $20 is the same as $30
-palBrightTable7:
-	.byte $30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$3a,$3b,$3c,$20,$20,$20
-palBrightTable8:
-	.byte $30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30	;white
-	.byte $30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30
-	.byte $30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30
-	.byte $30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30

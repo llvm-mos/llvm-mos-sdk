@@ -1,7 +1,7 @@
 ;written by Doug Fraker
 ;version 1.2, 1/1/2022
 
-.zeropage VRAM_BUF, META_PTR, DATA_PTR
+.zeropage VRAM_INDEX, META_PTR, DATA_PTR
 
 
 

@@ -29,6 +29,8 @@ MEMORY {
   chr_rom : ORIGIN = 0x01000000, LENGTH = __chr_rom_size * 1024
 }
 
+__stack = 0x0800;
+
 SECTIONS {
   .text : {
        INCLUDE text-sections.ld

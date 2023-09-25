@@ -7,14 +7,6 @@
 
 .include "nes.inc"
 
-; Reserve space at beginning of RAM for OAM buffer.
-.section .noinit.oam_buf,"a",@nobits
-.globl OAM_BUF
-.align 256
-OAM_BUF:
-  .space 256
-
-
 .section .init.270,"axR",@progbits
 .globl oam_update_init
 oam_update_init:

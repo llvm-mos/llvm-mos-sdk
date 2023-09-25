@@ -12,6 +12,7 @@ add_platform_library(nes-nesdoug
   padlib.s
   vram_buffer.c
   vram_buffer.s
+  vram_buffer_ops.s
   zaplib.s
 )
 target_include_directories(nes-nesdoug BEFORE PUBLIC ..)

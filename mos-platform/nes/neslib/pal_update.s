@@ -7,10 +7,6 @@
 
 .include "nes.inc"
 
-; Place the pallette buffer at the very bottom 32 bytes of the hard stack.
-.globl PAL_BUF
-PAL_BUF = 0x0100
-
 .section .init.265,"axR",@progbits
 .globl pal_update_init
 pal_update_init:

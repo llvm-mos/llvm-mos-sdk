@@ -112,7 +112,7 @@ public:
 #pragma unroll
     for (uint8_t Idx = 0; Idx < sizeof(T); ++Idx)
       Bytes[Idx] = *BytePtrs[Idx];
-    return *reinterpret_cast<const T *>(Bytes);
+    return __builtin_bit_cast(T, Bytes);
   }
 
   template <typename... ArgsT>
@@ -123,7 +123,7 @@ public:
   template <typename Q = T>
   [[clang::always_inline]] std::enable_if_t<!std::is_const_v<Q>, const Ptr<T> &>
   operator=(const T &Val) {
-    auto *Bytes = reinterpret_cast<const uint8_t *>(&Val);
+    auto Bytes = __builtin_bit_cast(uint8_t[sizeof(T)], Val);
 #pragma unroll
     for (uint8_t Idx = 0; Idx < sizeof(T); ++Idx)
       *const_cast<uint8_t *>(BytePtrs[Idx]) = Bytes[Idx];
@@ -339,7 +339,7 @@ public:
   [[clang::always_inline]] constexpr Array(std::initializer_list<T> Entries) {
     uint8_t Idx = 0;
     for (const T &Entry : Entries) {
-      const auto *Bytes = reinterpret_cast<const uint8_t *>(&Entry);
+      const auto Bytes = __builtin_bit_cast(uint8_t[sizeof(T)], Entry);
 #pragma unroll
       for (uint8_t ByteIdx = 0; ByteIdx < sizeof(T); ++ByteIdx)
         ByteArrays[ByteIdx][Idx] = Bytes[ByteIdx];

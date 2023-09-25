@@ -1,6 +1,7 @@
 #ifndef _SOA_H
 #define _SOA_H
 
+#include <array>
 #include <cstdint>
 #include <initializer_list>
 #include <new>
@@ -70,6 +71,11 @@ template <typename T, uint8_t N> class Array;
 /// when using this.
 template <typename T> struct Ptr;
 
+template <class _ToType, class _FromType>
+constexpr _ToType __bit_cast(const _FromType &__from) {
+  return __builtin_bit_cast(_ToType, __from);
+}
+
 /// Base class for pointer to array elements.
 template <typename T> class BasePtr {
   static_assert(!std::is_volatile_v<T>, "volatile types are not supported");
@@ -112,7 +118,7 @@ public:
 #pragma unroll
     for (uint8_t Idx = 0; Idx < sizeof(T); ++Idx)
       Bytes[Idx] = *BytePtrs[Idx];
-    return *reinterpret_cast<const T *>(Bytes);
+    return __bit_cast<T>(Bytes);
   }
 
   template <typename... ArgsT>
@@ -339,7 +345,8 @@ public:
   [[clang::always_inline]] constexpr Array(std::initializer_list<T> Entries) {
     uint8_t Idx = 0;
     for (const T &Entry : Entries) {
-      const auto *Bytes = reinterpret_cast<const uint8_t *>(&Entry);
+      const auto Bytes =
+          __bit_cast<std::array<const uint8_t, sizeof(T)>>(Entry);
 #pragma unroll
       for (uint8_t ByteIdx = 0; ByteIdx < sizeof(T); ++ByteIdx)
         ByteArrays[ByteIdx][Idx] = Bytes[ByteIdx];

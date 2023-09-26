@@ -23,10 +23,12 @@
 #define R_MOS_ADDR24_SEGMENT 9
 #define R_MOS_ADDR24_SEGMENT_LO 10
 #define R_MOS_ADDR24_SEGMENT_HI 11
-#define R_MOS_FK_DATA_4 12
-#define R_MOS_FK_DATA_8 13
-#define R_MOS_ADDR_ASCIZ 14
-#define R_MOS_IMM16 15
+#define R_MOS_PCREL_16 12
+#define R_MOS_FK_DATA_4 13
+#define R_MOS_FK_DATA_8 14
+#define R_MOS_ADDR_ASCIZ 15
+#define R_MOS_IMM16 16
+#define R_MOS_ADDR13 17
 
 /* ELF structure definitions. */
 

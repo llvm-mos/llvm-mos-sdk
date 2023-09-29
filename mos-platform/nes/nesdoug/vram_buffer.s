@@ -4,9 +4,8 @@
 .zeropage VRAM_INDEX
 
 .section .noinit.vram_buf,"aw",@nobits
-.globl VRAM_BUF
+.weak VRAM_BUF
 .balign 128
-.weak
 VRAM_BUF:
 	.zero 128
 

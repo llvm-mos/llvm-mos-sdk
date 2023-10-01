@@ -149,7 +149,7 @@ struct __apu {
 };
 #define APU             (*(volatile struct __apu*)0x4000)
 
-#define JOYPAD          ((unsigned char volatile[2])0x4016)
+#define JOYPAD          ((volatile unsigned char *)0x4016)
 
 // TODO
 #if 0

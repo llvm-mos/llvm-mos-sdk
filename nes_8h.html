@@ -152,7 +152,7 @@ Macros</h2></td></tr>
 <tr class="separator:acb7c8c50552db20506d6c5b46c1ad5dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91dbab715925a94659e228a3097155c4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes_8h.html#a91dbab715925a94659e228a3097155c4">APU</a>&#160;&#160;&#160;(*(volatile struct __apu*)0x4000)</td></tr>
 <tr class="separator:a91dbab715925a94659e228a3097155c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e5969c81cac9fe99fbf77b9a025037a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes_8h.html#a5e5969c81cac9fe99fbf77b9a025037a">JOYPAD</a>&#160;&#160;&#160;((unsigned char volatile[2])0x4016)</td></tr>
+<tr class="memitem:a5e5969c81cac9fe99fbf77b9a025037a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nes_8h.html#a5e5969c81cac9fe99fbf77b9a025037a">JOYPAD</a>&#160;&#160;&#160;((volatile unsigned char *)0x4016)</td></tr>
 <tr class="separator:a5e5969c81cac9fe99fbf77b9a025037a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -641,7 +641,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define JOYPAD&#160;&#160;&#160;((unsigned char volatile[2])0x4016)</td>
+          <td class="memname">#define JOYPAD&#160;&#160;&#160;((volatile unsigned char *)0x4016)</td>
         </tr>
       </table>
 </div><div class="memdoc">

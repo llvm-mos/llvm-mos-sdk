@@ -1,6 +1,6 @@
 .include "imag.inc"
 
-.zeropage _bank_select_hi, _in_progress, _prg_8000, _prg_a000
+.zeropage __bank_select_hi, __in_progress, __prg_8000, __prg_a000
 
 .section .text.set_prg_bank,"ax",@progbits
 .globl __set_prg_bank

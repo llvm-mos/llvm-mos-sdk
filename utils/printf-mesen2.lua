@@ -1,6 +1,6 @@
--- Use this script with Mesen to direct libc stdout to the debug console.
+-- Use this script with Mesen 2 to direct libc stdout to the debug console.
 -- For example:
---   $ mesen my-project.nes $LLVM_MOS_SDK/utils/printf.lua
+--   $ mesen my-project.nes $LLVM_MOS_SDK/utils/printf-mesen2.lua
 
 str = ""
 function cb(address, value)
@@ -16,4 +16,4 @@ function cb(address, value)
   end
 end
 
-emu.addMemoryCallback(cb, emu.memCallbackType.cpuWrite, 0x401B)
+emu.addMemoryCallback(cb, emu.callbackType.write, 0x4018)

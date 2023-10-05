@@ -64,6 +64,9 @@ SECTIONS {
 	.rela.text : {
 	} :relo
 
+	.rela.data : {
+	} :relo
+	
 	.rela.rodata : {
 	} :relo
 

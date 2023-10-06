@@ -23,6 +23,7 @@
 static std::string outputFilename;
 static std::string inputFilename;
 static std::fstream outputFile;
+static bool verbose = false;
 
 static void error(const char *msg, ...) {
   va_list ap;
@@ -38,6 +39,12 @@ static void syntaxError() {
 }
 
 static void parseArguments(int argc, char *const *argv) {
+  if ((argc >= 1) && (strcmp(argv[1], "-v") == 0)) {
+    verbose = true;
+    argv++;
+    argc--;
+  }
+
   if (argc == 2) {
     inputFilename = argv[1];
     outputFilename =
@@ -192,11 +199,17 @@ int main(int argc, char *const *argv) {
     uint32_t value = elf.longAt(symbol + ELF32_SYM_VALUE);
     uint16_t shndx = elf.wordAt(symbol + ELF32_SYM_SHNDX);
 
+    if (verbose) {
+      printf("rela=%x offset=%x value=%x type=%d\n", rela, offset, value,
+             ELF32_R_TYPE(elf.longAt(rela + ELF32_RELA_INFO)));
+    }
+
     if (shndx != SHN_ABS) {
       if (value < 0x100) {
         /* Zero page address. */
 
         switch (ELF32_R_TYPE(elf.longAt(rela + ELF32_RELA_INFO))) {
+        case R_MOS_IMM8:
         case R_MOS_ADDR8:
         case R_MOS_ADDR16:
         case R_MOS_ADDR16_LO:

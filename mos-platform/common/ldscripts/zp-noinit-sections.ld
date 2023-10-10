@@ -1,1 +1,1 @@
-*(.zp .zp.* .zeropage .zeropage.* .directpage .directpage.*)
+*(.zp .zp.* .zeropage .zeropage.* .directpage .directpage.* ZEROPAGE)

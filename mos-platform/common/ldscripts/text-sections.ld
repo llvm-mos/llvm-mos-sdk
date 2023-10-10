@@ -10,7 +10,7 @@ _fini = .;
 *(SORT_BY_INIT_PRIORITY(.fini.* .fini))
 *(.fini_rts)
 
-*(.text .text.*)
+*(.text .text.* CODE LOWCODE ONCE STARTUP)
 
 /* A sorted list of initialization function pointers. Used for GCC
 * constructor attribute and C++ global constructors. */

@@ -4,7 +4,7 @@
 // information.
 
 __attribute__((section(".zp.pal_update"))) volatile char PAL_UPDATE;
-__attribute__((weak, aligned(32), section(".noinit.pal_buf"))) volatile char PAL_BUF[32];
+__attribute__((weak, aligned(32), section(".aligned.pal_buf"))) volatile char PAL_BUF[32];
 
 void pal_col(char index, char color) {
   PAL_BUF[index & 0x1f] = color;

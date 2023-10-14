@@ -3,7 +3,7 @@
 
 .zeropage VRAM_INDEX
 
-.section .noinit.vram_buf,"aw",@nobits
+.section .aligned.vram_buf,"aw",@nobits
 .weak VRAM_BUF
 .balign 128
 VRAM_BUF:

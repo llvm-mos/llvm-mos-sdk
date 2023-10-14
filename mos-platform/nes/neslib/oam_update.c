@@ -4,7 +4,7 @@
 // information.
 
 __attribute__((section(".zp.sprid"))) unsigned SPRID;
-__attribute__((weak, aligned(256), section(".noinit.oam_buf"))) char OAM_BUF[256];
+__attribute__((weak, aligned(256), section(".aligned.oam_buf"))) char OAM_BUF[256];
 
 void oam_set(char index) { SPRID = index & 0xfc; }
 

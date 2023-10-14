@@ -37,6 +37,9 @@ SECTIONS {
        *(.nmi_end)
   } >c_readonly
   INCLUDE rodata.ld
+  /* A naturally page-aligned place (0x200) to place noinit buffers with high
+   * alignment requirement (e.g. OAM) */
+  .aligned (NOLOAD) : { *(.aligned_buffers .aligned_buffers.*) } >ram
   INCLUDE data.ld
   INCLUDE zp.ld
   INCLUDE bss.ld

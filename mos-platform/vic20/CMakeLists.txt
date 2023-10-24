@@ -10,7 +10,7 @@ install(FILES
   charset.h
   vic20.h
 TYPE INCLUDE)
-install(FILES link.ld link-5k.ld link-8k.ld TYPE LIB)
+install(FILES link.ld TYPE LIB)
 
 add_platform_library(vic20-crt0
   init-stack-memtop.S

@@ -22,6 +22,6 @@ __stack = 0xD000;
 
 OUTPUT_FORMAT {
     /* Tells the C64 LOAD command where to place the file's contents. */
-    SHORT(0x0801)
+    SHORT(ORIGIN(ram))
     TRIM(ram)
 }

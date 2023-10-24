@@ -132,7 +132,7 @@ $(function() {
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#if   defined(__C64__)    &amp;&amp; !defined(_C64_H)</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#  include &lt;<a class="code" href="c64_8h.html">c64.h</a>&gt;</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#elif defined(__VIC20__)  &amp;&amp; !defined(_VIC20_H)</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#  include &lt;vic20.h&gt;</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#  include &lt;<a class="code" href="vic20_8h.html">vic20.h</a>&gt;</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#elif defined(__C128__)   &amp;&amp; !defined(_C128_H)</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#  include &lt;c128.h&gt;</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#elif defined(__PLUS4__)  &amp;&amp; !defined(_PLUS4_H)</span></div>
@@ -144,7 +144,7 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#elif defined(__CBM610__) &amp;&amp; !defined(_CBM610_H)</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#  include &lt;cbm610.h&gt;</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#elif defined(__PET__)    &amp;&amp; !defined(_PET_H)</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#  include &lt;pet.h&gt;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#  include &lt;<a class="code" href="pet_8h.html">pet.h</a>&gt;</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#elif defined(__CX16__)   &amp;&amp; !defined(_CX16_H)</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#  include &lt;<a class="code" href="cx16_8h.html">cx16.h</a>&gt;</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -423,6 +423,7 @@ $(function() {
 <div class="ttc" id="acbm_8h_html_ae7d0b496a22c0f9eae67d010480d98eb"><div class="ttname"><a href="cbm_8h.html#ae7d0b496a22c0f9eae67d010480d98eb">cbm_k_untlk</a></div><div class="ttdeci">void cbm_k_untlk(void)</div></div>
 <div class="ttc" id="aneslib_8h_html_a245260f6f74972558f61b85227df5aae"><div class="ttname"><a href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a></div><div class="ttdeci">unsigned size</div><div class="ttdef"><b>Definition:</b> neslib.h:185</div></div>
 <div class="ttc" id="acx16_8h_html"><div class="ttname"><a href="cx16_8h.html">cx16.h</a></div></div>
+<div class="ttc" id="avic20_8h_html"><div class="ttname"><a href="vic20_8h.html">vic20.h</a></div></div>
 <div class="ttc" id="acbm_8h_html_a2b24367b19af9f53476fc19fdbff2174"><div class="ttname"><a href="cbm_8h.html#a2b24367b19af9f53476fc19fdbff2174">cbm_k_load</a></div><div class="ttdeci">void * cbm_k_load(unsigned char flag, void *startaddr) __attribute__((leaf))</div></div>
 <div class="ttc" id="acbm_8h_html_a27f5dfa71ca4a3101e476d1984469d21"><div class="ttname"><a href="cbm_8h.html#a27f5dfa71ca4a3101e476d1984469d21">cbm_k_acptr</a></div><div class="ttdeci">unsigned char cbm_k_acptr(void)</div></div>
 <div class="ttc" id="astructcbm__dirent_html_a94cc4b7ec11936a774b70ffa197d2aa3"><div class="ttname"><a href="structcbm__dirent.html#a94cc4b7ec11936a774b70ffa197d2aa3">cbm_dirent::access</a></div><div class="ttdeci">unsigned char access</div><div class="ttdef"><b>Definition:</b> cbm.h:157</div></div>
@@ -443,6 +444,7 @@ $(function() {
 <div class="ttc" id="amemory_8h_html_a2797713f0e84f822af4da1688cc1501c"><div class="ttname"><a href="memory_8h.html#a2797713f0e84f822af4da1688cc1501c">mode</a></div><div class="ttdeci">const void uint16_t uint8_t mode</div><div class="ttdef"><b>Definition:</b> memory.h:58</div></div>
 <div class="ttc" id="astructcbm__dirent_html_a98c5c84318c6a7738197153c85304a65"><div class="ttname"><a href="structcbm__dirent.html#a98c5c84318c6a7738197153c85304a65">cbm_dirent::name</a></div><div class="ttdeci">char name[17]</div><div class="ttdef"><b>Definition:</b> cbm.h:154</div></div>
 <div class="ttc" id="acbm_8h_html_af1d02d0087493c2f5b5e0f9b67117c50"><div class="ttname"><a href="cbm_8h.html#af1d02d0087493c2f5b5e0f9b67117c50">cbm_k_cint</a></div><div class="ttdeci">void cbm_k_cint(void)</div></div>
+<div class="ttc" id="apet_8h_html"><div class="ttname"><a href="pet_8h.html">pet.h</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

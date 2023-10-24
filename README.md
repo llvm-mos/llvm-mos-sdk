@@ -140,6 +140,7 @@ executables and libraries for that target.
 | Commander X16                    | `mos-cx16-clang`          |
 | Commodore 64                     | `mos-c64-clang`           |
 | Commodore PET                    | `mos-pet-clang`           |
+| Commodore VIC-20                 | `mos-vic20-clang`         |
 | CP/M-65                          | `mos-cpm65-clang`         |
 | Dodo 6502 Game System            | `mos-dodo-clang`          |
 | MEGA65                           | `mos-mega65-clang`        |

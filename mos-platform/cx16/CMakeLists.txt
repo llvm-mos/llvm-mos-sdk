@@ -11,6 +11,11 @@ install(FILES
 TYPE INCLUDE)
 install(FILES imag-regs.ld link.ld TYPE LIB)
 
+add_platform_library(cx16-crt0)
+merge_libraries(cx16-crt0
+  common-init-stack
+)
+
 install(FILES cx16.inc DESTINATION ${ASMINCDIR})
 
 add_platform_object_file(cx16-basic-header basic-header.o basic-header.S)

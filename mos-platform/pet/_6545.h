@@ -9,13 +9,16 @@
 
 /*****************************************************************************/
 /*                                                                           */
-/*                                  _6522.h                                  */
+/*                                  _6545.h                                  */
 /*                                                                           */
 /*                Internal include file, do not use directly                 */
 /*                                                                           */
 /*                                                                           */
 /*                                                                           */
-/* (C) 2004 Stefan Haubenthal <polluks@sdf.lonestar.org>                     */
+/* (C) 1998-2000 Ullrich von Bassewitz                                       */
+/*               Wacholderweg 14                                             */
+/*               D-70597 Stuttgart                                           */
+/* EMail:        uz@musoftware.de                                            */
 /*                                                                           */
 /*                                                                           */
 /* This software is provided 'as-is', without any expressed or implied       */
@@ -39,38 +42,20 @@
 
 
 
-#ifndef __VIA_H
-#define __VIA_H
+#ifndef __6545_H
+#define __6545_H
 
 
 
-/* Define a structure with the 6522 register offsets.
-** NOTE: The timer registers are not declared as 16 bit registers, because
-** the order in which the two 8 bit halves are written is important, and
-** the compiler doesn't guarantee any order when writing 16 bit values.
-*/
-struct __6522 {
-    unsigned char       prb;            /* Port register B */
-    unsigned char       pra;            /* Port register A */
-    unsigned char       ddrb;           /* Data direction register B */
-    unsigned char       ddra;           /* Data direction register A */
-    unsigned char       t1_lo;          /* Timer 1, low byte */
-    unsigned char       t1_hi;          /* Timer 1, high byte */
-    unsigned char       t1l_lo;         /* Timer 1 latch, low byte */
-    unsigned char       t1l_hi;         /* Timer 1 latch, high byte */
-    unsigned char       t2_lo;          /* Timer 2, low byte */
-    unsigned char       t2_hi;          /* Timer 2, high byte */
-    unsigned char       sr;             /* Shift register */
-    unsigned char       acr;            /* Auxiliary control register */
-    unsigned char       pcr;            /* Peripheral control register */
-    unsigned char       ifr;            /* Interrupt flag register */
-    unsigned char       ier;            /* Interrupt enable register */
-    unsigned char       pra2;           /* Port register A w/o handshake */
+/* Define a structure with the 6545 register offsets */
+struct __6545 {
+    unsigned char       ctrl;           /* Control register */
+    unsigned char       data;           /* Data register */
 };
 
 
 
-/* End of _6522.h */
+/* End of _6545.h */
 #endif
 
 

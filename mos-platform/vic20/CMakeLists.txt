@@ -5,7 +5,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
-  _6522.h
+  ../commodore/_6522.h
   _vic.h
   charset.h
   vic20.h

@@ -13,7 +13,6 @@ install(FILES commodore.ld TYPE LIB)
 
 add_platform_library(commodore-crt0)
 merge_libraries(commodore-crt0
-  common-init-stack
   common-copy-zp-data
   common-zero-bss
   common-exit-return

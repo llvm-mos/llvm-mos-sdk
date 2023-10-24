@@ -19,6 +19,6 @@ __stack = 0x9f00;
 
 OUTPUT_FORMAT {
     /* Tells the LOAD command where to place the file's contents. */
-    SHORT(0x0801)
+    SHORT(ORIGIN(ram))
     TRIM(ram)
 }

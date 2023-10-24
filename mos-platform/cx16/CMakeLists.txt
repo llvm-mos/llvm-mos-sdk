@@ -5,11 +5,16 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
-  _6522.h
+  ../commodore/_6522.h
   charset.h
   cx16.h
 TYPE INCLUDE)
 install(FILES imag-regs.ld link.ld TYPE LIB)
+
+add_platform_library(cx16-crt0)
+merge_libraries(cx16-crt0
+  common-init-stack
+)
 
 install(FILES cx16.inc DESTINATION ${ASMINCDIR})
 

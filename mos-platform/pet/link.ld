@@ -23,6 +23,6 @@ __stack = (__ram_size * 1024);
 
 OUTPUT_FORMAT {
     /* Tells the PET LOAD command where to place the file's contents. */
-    SHORT(0x0401)
+    SHORT(ORIGIN(ram))
     TRIM(ram)
 }

@@ -9,16 +9,16 @@
 
 /*****************************************************************************/
 /*                                                                           */
-/*                                   vic20.h                                 */
+/*                                  c128.h                                   */
 /*                                                                           */
-/*                     VIC-20 system-specific definitions                    */
+/*                     C128 system specific definitions                      */
 /*                                                                           */
 /*                                                                           */
 /*                                                                           */
-/* (C) 1998-2004 Ullrich von Bassewitz                                       */
-/*               Roemerstrasse 52                                            */
-/*               D-70794 Filderstadt                                         */
-/* EMail:        uz@cc65.org                                                 */
+/* (C) 1998-2013, Ullrich von Bassewitz                                      */
+/*                Roemerstrasse 52                                           */
+/*                D-70794 Filderstadt                                        */
+/* EMail:         uz@cc65.org                                                */
 /*                                                                           */
 /*                                                                           */
 /* This software is provided 'as-is', without any expressed or implied       */
@@ -42,14 +42,14 @@
 
 
 
-#ifndef _VIC20_H
-#define _VIC20_H
+#ifndef _C128_H
+#define _C128_H
 
 
 
 /* Check for errors */
-#if !defined(__VIC20__)
-#  error This module may only be used when compiling for the Vic20!
+#if !defined(__C128__)
+#  error This module may only be used when compiling for the C128!
 #endif
 
 
@@ -64,8 +64,6 @@
 #define CH_F7                   136
 #define CH_F8                   140
 
-
-
 /* Color defines */
 #define COLOR_BLACK             0x00
 #define COLOR_WHITE             0x01
@@ -75,17 +73,14 @@
 #define COLOR_GREEN             0x05
 #define COLOR_BLUE              0x06
 #define COLOR_YELLOW            0x07
-/* Only the background and multi-color characters can have these colors. */
 #define COLOR_ORANGE            0x08
-#define COLOR_LIGHTORANGE       0x09
-#define COLOR_PINK              0x0A
-#define COLOR_LIGHTCYAN         0x0B
-#define COLOR_LIGHTVIOLET       0x0C
+#define COLOR_BROWN             0x09
+#define COLOR_LIGHTRED          0x0A
+#define COLOR_GRAY1             0x0B
+#define COLOR_GRAY2             0x0C
 #define COLOR_LIGHTGREEN        0x0D
 #define COLOR_LIGHTBLUE         0x0E
-#define COLOR_LIGHTYELLOW       0x0F
-
-
+#define COLOR_GRAY3             0x0F
 
 /* Masks for joy_read */
 #define JOY_UP_MASK             0x01
@@ -94,22 +89,66 @@
 #define JOY_RIGHT_MASK          0x08
 #define JOY_BTN_1_MASK          0x10
 
+/* Video mode defines */
+#define VIDEOMODE_40x25         0x00
+#define VIDEOMODE_80x25         0x80
+#define VIDEOMODE_40COL         VIDEOMODE_40x25
+#define VIDEOMODE_80COL         VIDEOMODE_80x25
+
 
 
 /* Define hardware */
-#include <_vic.h>
-#define VIC     (*(volatile struct __vic*)0x9000)
+#include <_vic2.h>
+#define VIC     (*(volatile struct __vic2*)0xD000)
 
-#include <_6522.h>
-#define VIA1    (*(volatile struct __6522*)0x9110)
-#define VIA2    (*(volatile struct __6522*)0x9120)
+#include <_sid.h>
+#define SID     (*(volatile struct __sid*)0xD400)
+
+#include <_vdc.h>
+#define VDC     (*(volatile struct __vdc*)0xD600)
+
+#include <_6526.h>
+#define CIA1    (*(volatile struct __6526*)0xDC00)
+#define CIA2    (*(volatile struct __6526*)0xDD00)
 
 
 
 /* Define special memory areas */
-#define COLOR_RAM       ((volatile unsigned char*)0x9600)
+#define COLOR_RAM       ((volatile unsigned char*)0xD800)
 
 
 
-/* End of vic20.h */
+/**
+ * @brief Set the video mode, return the old mode.
+ * 
+ * @param mode The video mode. Use one of the VIDEOMODE_xx constants.
+ * @return unsigned char The old mode.
+ */
+unsigned char videomode (unsigned char mode);
+
+/**
+ * @brief Switch the C128 into C64 mode. Note: This function will not return!
+ */
+ __attribute__((noreturn))
+void c64mode (void);
+
+/**
+ * @brief Switch the CPU into 2MHz mode. Note: This will disable video when in
+ * 40 column mode.
+ */
+void fast (void);
+
+/**
+ * @brief Switch the CPU into 1MHz mode.
+ */
+void slow (void);
+
+/**
+ * @brief Check CPU clock mode.
+ * 
+ * @return unsigned char 1 if the CPU is in 2MHz mode.
+ */
+unsigned char isfast (void);
+
+/* End of c128.h */
 #endif

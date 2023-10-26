@@ -139,6 +139,7 @@ executables and libraries for that target.
 | Ben Eater's 6502 Breadboard Kit  | `mos-eater-clang`         |
 | Commander X16                    | `mos-cx16-clang`          |
 | Commodore 64                     | `mos-c64-clang`           |
+| Commodore 128                    | `mos-c128-clang`          |
 | Commodore PET                    | `mos-pet-clang`           |
 | Commodore VIC-20                 | `mos-vic20-clang`         |
 | CP/M-65                          | `mos-cpm65-clang`         |

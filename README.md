@@ -12,14 +12,19 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
 - Commodore 64
+- Commodore 128
 - Commodore PET
+- Commodore VIC-20
 - [CP/M-65](https://github.com/davidgiven/cpm65)
 - [Dodo 6502 Game System](https://github.com/peternoyes/dodo)
 - [MEGA65](https://mega65.org/)
 - NES
   - Action 53
   - CNROM
-  - NROM 
+  - GTROM
+  - NROM
+  - UNROM
+  - UNROM-512
   - MMC1
   - MMC3
 - Ohio Scientific Challenger 1P

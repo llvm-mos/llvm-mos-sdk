@@ -1,1 +1,1 @@
-*(.rodata .rodata.*)
+*(.rodata .rodata.* RODATA)

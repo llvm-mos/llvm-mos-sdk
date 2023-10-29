@@ -3,22 +3,22 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-// Originally from cc65. Modified from original version.
+// Originally from cc65.
 
 // clang-format off
 
 /*****************************************************************************/
 /*                                                                           */
-/*                                   pet.h                                   */
+/*                                  _vdc.h                                   */
 /*                                                                           */
-/*                      PET system specific definitions                      */
+/*                Internal include file, do not use directly                 */
 /*                                                                           */
 /*                                                                           */
 /*                                                                           */
-/* (C) 1998-2005 Ullrich von Bassewitz                                       */
-/*               Roemerstrasse 52                                            */
-/*               D-70794 Filderstadt                                         */
-/* EMail:        uz@cc65.org                                                 */
+/* (C) 1998-2000 Ullrich von Bassewitz                                       */
+/*               Wacholderweg 14                                             */
+/*               D-70597 Stuttgart                                           */
+/* EMail:        uz@musoftware.de                                            */
 /*                                                                           */
 /*                                                                           */
 /* This software is provided 'as-is', without any expressed or implied       */
@@ -42,52 +42,21 @@
 
 
 
-#ifndef _PET_H
-#define _PET_H
+#ifndef __VDC_H
+#define __VDC_H
 
 
 
-/* Check for errors */
-#if !defined(__PET__)
-#  error This module may only be used when compiling for the CBM PET!
+/* Define a structure with the vdc register offsets */
+struct __vdc {
+    unsigned char       ctrl;           /* Control register */
+    unsigned char       data;           /* Data register */
+};
+
+
+
+/* End of _vdc.h */
 #endif
 
 
 
-/*****************************************************************************/
-/*                                   Data                                    */
-/*****************************************************************************/
-
-
-
-/* Color defines */
-#define COLOR_BLACK             0x00
-#define COLOR_WHITE             0x01
-
-/* Masks for joy_read */
-#define JOY_UP_MASK             0x01
-#define JOY_DOWN_MASK           0x02
-#define JOY_LEFT_MASK           0x04
-#define JOY_RIGHT_MASK          0x08
-#define JOY_BTN_1_MASK          0x10
-
-/* Define hardware */
-#include <_pia.h>
-#define PIA1    (*(volatile struct __pia*)0xE810)
-#define PIA2    (*(volatile struct __pia*)0xE820)
-
-#include <_6522.h>
-#define VIA     (*(volatile struct __6522*)0xE840)
-
-/* All models from 40xx and above */
-#include <_6545.h>
-#define CRTC    (*(volatile struct __6545)0xE880)
-
-/* SuperPET only */
-#include <_6551.h>
-#define ACIA    (*(volatile struct __6551*)0xEFF0)
-
-
-
-/* End of pet.h */
-#endif

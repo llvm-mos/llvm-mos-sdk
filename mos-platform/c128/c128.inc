@@ -1,4 +1,4 @@
-; Copyright 2022 LLVM-MOS Project
+; Copyright 2023 LLVM-MOS Project
 ; Licensed under the Apache License, Version 2.0 with LLVM Exceptions.
 ; See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 ; information.
@@ -6,57 +6,60 @@
 ; Originally from cc65. Modified from original version.
 
 ;
-; C64 generic definitions. Stolen from Elite128
+; C128 generic definitions. Stolen from Elite128
 ;
 
 
 ; ---------------------------------------------------------------------------
 ; Zero page, Commodore stuff
 
-VARTAB           = $2D          ; Pointer to start of BASIC variables
-MEMSIZE          = $37          ; Pointer to highest BASIC RAM location (+1)
-TXTPTR           = $7A          ; Pointer into BASIC source code
+TXTPTR           = $3D          ; Pointer into BASIC source code
 STATUS           = $90          ; Kernal I/O completion status
-TIME             = $A0          ; 60 HZ clock
+TIME             = $A0          ; 60HZ clock
 FNAM_LEN         = $B7          ; Length of filename
 SECADR           = $B9          ; Secondary address
 DEVNUM           = $BA          ; Device number
-FNAM             = $BB          ; Pointer to filename
-KEY_COUNT        = $C6          ; Number of keys in input buffer
-RVS              = $C7          ; Reverse flag
-CURS_FLAG        = $CC          ; 1 = cursor off
-CURS_BLINK       = $CD          ; Blink counter
-CURS_CHAR        = $CE          ; Character under the cursor
-CURS_STATE       = $CF          ; Cursor blink state
-SCREEN_PTR       = $D1          ; Pointer to current char in text screen
-CURS_X           = $D3          ; Cursor column
-CURS_Y           = $D6          ; Cursor row
-CRAM_PTR         = $F3          ; Pointer to current char in color RAM
-FREKZP           = $FB          ; Five unused bytes
+FNAM             = $BB          ; Address of filename
+FNAM_BANK        = $C7          ; Bank for filename
+KEY_COUNT        = $D0          ; Number of keys in input buffer
+FKEY_COUNT       = $D1          ; Characters for function key
+MODE             = $D7          ; 40-/80-column mode (bit 7: 80 columns)
+GRAPHM           = $D8          ; Graphics mode flags (bits 5-7)
+CHARDIS          = $D9          ; Bit 2 shadow for location $01
+CURS_X           = $EC          ; Cursor column
+CURS_Y           = $EB          ; Cursor row
+SCREEN_PTR       = $E0          ; Pointer to current char in text screen
+CRAM_PTR         = $E2          ; Pointer to current char in color RAM
 
-BASIC_BUF        = $200         ; Location of command-line
-BASIC_BUF_LEN   = 89            ; Maximum length of command-line
+CHARCOLOR        = $F1
+RVS              = $F3          ; Reverse output flag
+SCROLL           = $F8          ; Disable scrolling flag
 
-CHARCOLOR        = $286
-CURS_COLOR       = $287         ; Color under the cursor
-PALFLAG          = $2A6         ; $01 = PAL, $00 = NTSC
+BASIC_BUF        = $0200        ; Location of command-line
+BASIC_BUF_LEN   = 162           ; Maximum length of command-line
 
-KBDREPEAT        = $28a
-KBDREPEATRATE    = $28b
-KBDREPEATDELAY   = $28c
+FETCH            = $02A2        ; Fetch subroutine in RAM
+FETVEC           = $02AA        ; Vector patch location for FETCH
+STASH            = $02AF        ; Stash routine in RAM
+STAVEC           = $02B9        ; Vector patch location for STASH
+IRQInd           = $02FD        ; JMP $0000 -- used as indirect IRQ vector
+PALFLAG          = $0A03        ; $FF=PAL, $00=NTSC
+INIT_STATUS      = $0A04        ; Flags: Reset/Restore initiation status
+VM2              = $0A2D        ; VIC-IIe shadow for $D018 -- graphics mode
+FKEY_LEN         = $1000        ; Function key lengths
+FKEY_TEXT        = $100A        ; Function key texts
+
+KBDREPEAT        = $028a
+KBDREPEATRATE    = $028b
+KBDREPEATDELAY   = $028c
 
 ; ---------------------------------------------------------------------------
-; Vector and other locations
+; Vectors
 
 IRQVec           = $0314
 BRKVec           = $0316
 NMIVec           = $0318
-
-; ---------------------------------------------------------------------------
-; Screen size
-
-XSIZE           = 40
-YSIZE           = 25
+KeyStoreVec      = $033C
 
 ; ---------------------------------------------------------------------------
 ; I/O: VIC
@@ -161,8 +164,14 @@ SID_Read3        = $D41C
 ; ---------------------------------------------------------------------------
 ; I/O: VDC (128 only)
 
-VDC_INDEX        = $D600
-VDC_DATA         = $D601
+VDC_INDEX        = $D600        ; register address port
+VDC_DATA         = $D601        ; data port
+
+; Registers
+VDC_DATA_HI     = 18            ; video RAM address (big endian)
+VDC_DATA_LO     = 19
+VDC_CSET        = 28
+VDC_RAM_RW      = 31            ; RAM port
 
 ; ---------------------------------------------------------------------------
 ; I/O: Complex Interface Adapters
@@ -200,6 +209,19 @@ CIA2_CRA         = $DD0E
 CIA2_CRB         = $DD0F
 
 ; ---------------------------------------------------------------------------
+; I/O: MMU
+
+MMU_CR           = $FF00
+MMU_CFG_CC65     = %00001110    ; Bank 0 with kernal ROM
+MMU_CFG_RAM0_KERNAL = %00001110    ; Bank 0 with kernal ROM
+MMU_CFG_RAM0     = %00111111    ; Bank 0 full RAM
+MMU_CFG_RAM1     = %01111111    ; Bank 1 full RAM
+MMU_CFG_RAM2     = %10111111    ; Bank 2 full RAM
+MMU_CFG_RAM3     = %11111111    ; Bank 3 full RAM
+MMU_CFG_IFROM    = %01010111    ; Bank 1 with Internal Function RAM/ROM
+MMU_CFG_EFROM    = %01101011    ; Bank 1 with External Function RAM/ROM
+
+; ---------------------------------------------------------------------------
 ; Super CPU
 
 SCPU_VIC_Bank1   = $D075
@@ -208,17 +230,3 @@ SCPU_Fast        = $D07B
 SCPU_EnableRegs  = $D07E
 SCPU_DisableRegs = $D07F
 SCPU_Detect      = $D0BC
-
-
-; ---------------------------------------------------------------------------
-; Processor Port at $01
-
-LORAM           = $01           ; Enable the basic rom
-HIRAM           = $02           ; Enable the kernal rom
-IOEN            = $04           ; Enable I/O
-CASSDATA        = $08           ; Cassette data
-CASSPLAY        = $10           ; Cassette: Play
-CASSMOT         = $20           ; Cassette motor on
-TP_FAST         = $80           ; Switch Rossmoeller TurboProcess to fast mode
-
-RAMONLY         = $F8           ; (~(LORAM | HIRAM | IOEN)) & $FF

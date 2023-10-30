@@ -169,16 +169,16 @@ $(function() {
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">/* Define hardware */</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="__vic_8h.html">_vic.h</a>&gt;</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="vic20_8h.html#acaee9656c3ca46e30a0d71051917122a">  101</a></span>&#160;<span class="preprocessor">#define VIC     (*(struct __vic*)0x9000)</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="vic20_8h.html#acaee9656c3ca46e30a0d71051917122a">  101</a></span>&#160;<span class="preprocessor">#define VIC     (*(volatile struct __vic*)0x9000)</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="__6522_8h.html">_6522.h</a>&gt;</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="vic20_8h.html#aa6da535ec5d1b0aeabdda585776e01c8">  104</a></span>&#160;<span class="preprocessor">#define VIA1    (*(struct __6522*)0x9110)</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="vic20_8h.html#ade0c8bc0351fd669177bd25f4a6e1783">  105</a></span>&#160;<span class="preprocessor">#define VIA2    (*(struct __6522*)0x9120)</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="vic20_8h.html#aa6da535ec5d1b0aeabdda585776e01c8">  104</a></span>&#160;<span class="preprocessor">#define VIA1    (*(volatile struct __6522*)0x9110)</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="vic20_8h.html#ade0c8bc0351fd669177bd25f4a6e1783">  105</a></span>&#160;<span class="preprocessor">#define VIA2    (*(volatile struct __6522*)0x9120)</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">/* Define special memory areas */</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="vic20_8h.html#a9eb25633ded3612455a2b40f069ab1ed">  110</a></span>&#160;<span class="preprocessor">#define COLOR_RAM       ((unsigned char*)0x9600)</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="vic20_8h.html#a9eb25633ded3612455a2b40f069ab1ed">  110</a></span>&#160;<span class="preprocessor">#define COLOR_RAM       ((volatile unsigned char*)0x9600)</span></div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>

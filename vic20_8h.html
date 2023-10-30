@@ -146,13 +146,13 @@ Macros</h2></td></tr>
 <tr class="separator:a7cdef401bc87a915d6ccc36012ea0749"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a250ed0dbb7e306e97a2878c0aa075652"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#a250ed0dbb7e306e97a2878c0aa075652">JOY_BTN_1_MASK</a>&#160;&#160;&#160;0x10</td></tr>
 <tr class="separator:a250ed0dbb7e306e97a2878c0aa075652"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acaee9656c3ca46e30a0d71051917122a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#acaee9656c3ca46e30a0d71051917122a">VIC</a>&#160;&#160;&#160;(*(struct __vic*)0x9000)</td></tr>
+<tr class="memitem:acaee9656c3ca46e30a0d71051917122a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#acaee9656c3ca46e30a0d71051917122a">VIC</a>&#160;&#160;&#160;(*(volatile struct __vic*)0x9000)</td></tr>
 <tr class="separator:acaee9656c3ca46e30a0d71051917122a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6da535ec5d1b0aeabdda585776e01c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#aa6da535ec5d1b0aeabdda585776e01c8">VIA1</a>&#160;&#160;&#160;(*(struct __6522*)0x9110)</td></tr>
+<tr class="memitem:aa6da535ec5d1b0aeabdda585776e01c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#aa6da535ec5d1b0aeabdda585776e01c8">VIA1</a>&#160;&#160;&#160;(*(volatile struct __6522*)0x9110)</td></tr>
 <tr class="separator:aa6da535ec5d1b0aeabdda585776e01c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade0c8bc0351fd669177bd25f4a6e1783"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#ade0c8bc0351fd669177bd25f4a6e1783">VIA2</a>&#160;&#160;&#160;(*(struct __6522*)0x9120)</td></tr>
+<tr class="memitem:ade0c8bc0351fd669177bd25f4a6e1783"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#ade0c8bc0351fd669177bd25f4a6e1783">VIA2</a>&#160;&#160;&#160;(*(volatile struct __6522*)0x9120)</td></tr>
 <tr class="separator:ade0c8bc0351fd669177bd25f4a6e1783"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9eb25633ded3612455a2b40f069ab1ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#a9eb25633ded3612455a2b40f069ab1ed">COLOR_RAM</a>&#160;&#160;&#160;((unsigned char*)0x9600)</td></tr>
+<tr class="memitem:a9eb25633ded3612455a2b40f069ab1ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vic20_8h.html#a9eb25633ded3612455a2b40f069ab1ed">COLOR_RAM</a>&#160;&#160;&#160;((volatile unsigned char*)0x9600)</td></tr>
 <tr class="separator:a9eb25633ded3612455a2b40f069ab1ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -457,7 +457,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define COLOR_RAM&#160;&#160;&#160;((unsigned char*)0x9600)</td>
+          <td class="memname">#define COLOR_RAM&#160;&#160;&#160;((volatile unsigned char*)0x9600)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -583,7 +583,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VIA1&#160;&#160;&#160;(*(struct __6522*)0x9110)</td>
+          <td class="memname">#define VIA1&#160;&#160;&#160;(*(volatile struct __6522*)0x9110)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -597,7 +597,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VIA2&#160;&#160;&#160;(*(struct __6522*)0x9120)</td>
+          <td class="memname">#define VIA2&#160;&#160;&#160;(*(volatile struct __6522*)0x9120)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -611,7 +611,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VIC&#160;&#160;&#160;(*(struct __vic*)0x9000)</td>
+          <td class="memname">#define VIC&#160;&#160;&#160;(*(volatile struct __vic*)0x9000)</td>
         </tr>
       </table>
 </div><div class="memdoc">

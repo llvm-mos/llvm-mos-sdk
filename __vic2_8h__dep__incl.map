@@ -1,4 +1,5 @@
 <map id="c64/_vic2.h" name="c64/_vic2.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,100,32"/>
-<area shape="rect" id="node2" href="$c64_8h.html" title=" " alt="" coords="11,80,95,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="65,5,160,32"/>
+<area shape="rect" id="node2" href="$c128_8h.html" title=" " alt="" coords="5,80,105,107"/>
+<area shape="rect" id="node3" href="$c64_8h.html" title=" " alt="" coords="129,80,213,107"/>
 </map>

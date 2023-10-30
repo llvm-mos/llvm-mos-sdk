@@ -27,6 +27,7 @@ var searchData=
   ['_5fsim_5freg_25',['_sim_reg',['../struct__sim__reg.html',1,'']]],
   ['_5ftextcolor_26',['_textcolor',['../atari_8h.html#a68c8bbdd79ee6320b7e1dcdf0b34bb83',1,'atari.h']]],
   ['_5ftype_5ftraits_5f_27',['_TYPE_TRAITS_',['../type__traits.html#a6f3e620ffc12213dc6135bad13769689',1,'type_traits']]],
-  ['_5fvic_2eh_28',['_vic.h',['../__vic_8h.html',1,'']]],
-  ['_5fvic2_2eh_29',['_vic2.h',['../__vic2_8h.html',1,'']]]
+  ['_5fvdc_2eh_28',['_vdc.h',['../__vdc_8h.html',1,'']]],
+  ['_5fvic_2eh_29',['_vic.h',['../__vic_8h.html',1,'']]],
+  ['_5fvic2_2eh_30',['_vic2.h',['../__vic2_8h.html',1,'']]]
 ];

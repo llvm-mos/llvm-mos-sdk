@@ -1,3 +1,9 @@
+; Copyright 2023 LLVM-MOS Project
+; Licensed under the Apache License, Version 2.0 with LLVM Exceptions.
+; See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
+; information.
+; Originally from cc65. Modified from original version.
+
 .section .init.010,"axR",@progbits
 ; Clear decimal mode
         cld
@@ -15,9 +21,7 @@ clearLoop:
         pha
         bne     clearLoop
 
-.section .call_main.100,"axR",@progbits
-        jmp     main
-
 ; TODO: how do we get rid of "jsr main" in crt0?
-;.section .init.400,"axR",@progbits
-;	jmp	main
+
+.section .init.400,"axR",@progbits
+	jmp	main

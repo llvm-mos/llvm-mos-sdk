@@ -7,6 +7,10 @@ endif()
 file(READ clang.cfg CONFIG)
 
 install(FILES
+  mapper.h
+TYPE INCLUDE)
+
+install(FILES
   link.ld
 TYPE LIB)
 

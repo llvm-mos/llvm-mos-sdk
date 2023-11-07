@@ -13,8 +13,8 @@ install(FILES
   _riot.h
   _tia.h
   atari2600.h
+  atari2600_constants.h
   vcslib.h
-  mapper.h
 TYPE INCLUDE)
 
 install(FILES
@@ -24,6 +24,7 @@ install(FILES
 DESTINATION ${ASMINCDIR})
 
 add_platform_object_file(atari2600-crt0-o
+  crt0.o
   crt0.S
 )
 target_link_libraries(atari2600-crt0-o PRIVATE common-asminc)
@@ -39,6 +40,5 @@ target_link_libraries(atari2600-crt0 PRIVATE common-asminc)
 add_platform_library(atari2600-c
   frameloop.c
   vcslib.S
-  mapper.c
 )
 target_include_directories(atari2600-c BEFORE PUBLIC .)

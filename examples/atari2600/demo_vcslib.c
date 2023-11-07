@@ -3,6 +3,10 @@
 #include <vcslib.h>
 #include <peekpoke.h>
 
+#if defined(__ATARI2600_MAPPER__)
+#include <mapper.h>
+#endif
+
 #if !defined(__ATARI2600__)
 #error "This example is for Atari 2600 only"
 #endif
@@ -94,6 +98,9 @@ void test_ram(void) {
   xram_write(0x3f1, 0x55);
   x = xram_read(0x3f1);
   if (x != 0x55) asm("brk");
+  xram_write(0x3f2, 0xaa);
+  x = xram_read(0x3f2);
+  if (x != 0xaa) asm("brk");
   /*
   x = PEEK(&var); // 0xdeadbeef
   if (x != 0xef) asm("brk");

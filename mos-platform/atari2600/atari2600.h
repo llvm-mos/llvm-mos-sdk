@@ -1,3 +1,10 @@
+// Copyright 2023 LLVM-MOS Project
+// Licensed under the Apache License, Version 2.0 with LLVM Exceptions.
+// See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
+// information.
+
+// Originally from cc65. Modified from original version (added volatile).
+
 /*****************************************************************************/
 /*                                                                           */
 /* Atari VCS 2600 TIA & RIOT registers addresses                             */
@@ -18,6 +25,7 @@
 #include <_riot.h>
 #define RIOT (*(volatile struct __riot*)0x0280)
 
+#include <atari2600_constants.h>
 
 /* End of atari2600.h */
 #endif

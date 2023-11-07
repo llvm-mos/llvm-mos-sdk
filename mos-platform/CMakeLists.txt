@@ -46,6 +46,8 @@ else()
 endif()
 
 add_subdirectory(common)
+add_subdirectory(atari2600)
+add_subdirectory(atari2600-3e)
 add_subdirectory(atari8-common)
 add_subdirectory(atari8)
 add_subdirectory(atari8-stdcart)

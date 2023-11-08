@@ -3,14 +3,18 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
+// Functions for single-area RAM bank switching schemes.
+// (3E, E7)
+
 #ifndef _MAPPER_XRAM_H_
 #define _MAPPER_XRAM_H_
-
-#include <mapper_base.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+// RAM bank index type.
+typedef unsigned char ram_bank_t;
 
 // Macro to declare a variable in XRAM.
 // - index = bank index
@@ -23,11 +27,11 @@ extern "C" {
     __attribute__((section(".xram" #index "_write"))) volatile declaration##_write;
 
 // Switch in a RAM bank.
-__attribute__((weak, leaf)) void ram_select(bank_index_t bank_id);
+__attribute__((weak, leaf)) void ram_select(ram_bank_t bank_id);
 
 // Switch to another RAM bank and call this function.
-__attribute__((callback(2))) void banked_call_ram(bank_index_t bankId,
-                                                        void (*method)(void));
+__attribute__((callback(2))) void banked_call_ram(ram_bank_t bank_id,
+                                                  void (*method)(void));
 
 // Write a byte to extended RAM at set offset
 // RAM must be selected first, or use banked_call_ram

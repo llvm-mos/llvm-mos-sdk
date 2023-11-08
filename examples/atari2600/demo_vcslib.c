@@ -5,7 +5,7 @@
 #include <mapper.h>
 
 #ifdef __ATARI2600_MAPPER_3E__
-asm(".globl __cart_rom_size\n__cart_rom_size=6\n");
+asm(".globl __cart_rom_size\n__cart_rom_size=8\n");
 #endif
 
 #if !defined(__ATARI2600__)
@@ -14,7 +14,15 @@ asm(".globl __cart_rom_size\n__cart_rom_size=6\n");
 
 unsigned char color; // a frame counter
 
-void my_preframe(void) {
+#ifdef MAPPER_BANKED_ROM
+#define ROM_BANK(index) __attribute__((noinline, section(".rom"#index)))
+#else
+#define ROM_BANK(index)
+#endif
+
+#define KERNEL_BANK 1
+
+ROM_BANK(KERNEL_BANK) void my_preframe(void) {
   // Doing frame computation during blank
   // Update color
   TIA.colubk = color++; 
@@ -23,7 +31,7 @@ void my_preframe(void) {
   apply_hmove();
 }
 
-void my_doframe(void) {
+ROM_BANK(KERNEL_BANK) void my_doframe(void) {
   int i;
   char c = color;
   // Set player sprite color
@@ -39,15 +47,12 @@ void my_doframe(void) {
   TIA.grp0 = 0; // clear sprite
 }
 
-void my_postframe(void) {
+ROM_BANK(KERNEL_BANK) void my_postframe(void) {
   // additional post-frame processing goes here
 }
 
 // Display kernel loop
-#ifdef MAPPER_BANKED_ROM
-__attribute__((noinline, section(".rom1")))
-#endif
-void do_kernel_loop() {
+ROM_BANK(KERNEL_BANK) void do_kernel_loop() {
     // loop until reset released
     while (SW_RESET()) { }
     // loop forever
@@ -63,6 +68,8 @@ void do_kernel_loop() {
 }
 
 #ifdef MAPPER_XRAM
+
+// XRAM on the VCS has different areas for read vs. write
 
 typedef struct {
   char buf[256];
@@ -92,14 +99,6 @@ void test_ram(void) {
 
 int main() {
 
-// for Stella ROM detection (doesn't work well...)
-#ifdef MAPPER_TYPE_3E
-  asm("lda #0");
-  asm("sta $3e");
-  asm("sta $3f");
-  asm("sta $3f");
-#endif
-
   // test extra RAM, if available
 #ifdef MAPPER_XRAM  
   ram_select(0);
@@ -108,8 +107,8 @@ int main() {
 
   // test banked rom call, if available
 #ifdef MAPPER_BANKED_ROM
-  bank_select(0);
-  banked_call_rom(1, do_kernel_loop);
+  bank_select(KERNEL_BANK ^ 1);
+  banked_call_rom(KERNEL_BANK, do_kernel_loop);
 #else
   do_kernel_loop();
 #endif

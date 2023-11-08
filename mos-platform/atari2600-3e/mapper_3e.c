@@ -54,7 +54,6 @@ __attribute__((weak, callback(2))) void banked_call_ram(bank_index_t bankId,
   set_current_bank(previous_bank_id);
 }
 
-
 // From Stella (cartridge auto-detection):
 // 3E cart RAM bankswitching is triggered by storing the bank number
 // in address 3E using 'STA $3E', ROM bankswitching is triggered by
@@ -64,7 +63,11 @@ __attribute__((weak, callback(2))) void banked_call_ram(bank_index_t bankId,
 // https://github.com/stella-emu/stella/blob/d6224a8a6e30b4b323cde86ade2f05f75dcdfbec/src/emucore/CartDetector.cxx#L4
 // It also only calls the 3E detection routine on powers-of-two,
 // and if it hasn't detected Superchip via repeating bytes.
-//
+__attribute__((used, retain, section(".rom0"))) static void _stella_signature_3e() {
+  asm("sta $3f");
+  asm("sta $3e");
+  asm("sta $3f");
+}
 // Javatari.js detects 3E as a fallback for weird ROM sizes...
 // 6 KB, 14 KB, 18 KB, etc.
 // or if you have [3E] in the filename.

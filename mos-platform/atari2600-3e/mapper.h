@@ -10,5 +10,7 @@
 #define MAPPER_XRAM_READ 0x1000
 #define MAPPER_XRAM_WRITE 0x1400
 
-#include <mapper_base.h>
-#include <mapper_xram.h>
+#include <mapper_rom_single.h>
+#include <mapper_xram_single.h>
+
+typedef unsigned char bank_index_t;

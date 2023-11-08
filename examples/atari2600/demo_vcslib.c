@@ -2,47 +2,49 @@
 #include <atari2600.h>
 #include <vcslib.h>
 #include <peekpoke.h>
-
-#if defined(__ATARI2600_MAPPER__)
 #include <mapper.h>
+
+#ifdef __ATARI2600_MAPPER_3E__
+asm(".globl __cart_rom_size\n__cart_rom_size=6\n");
 #endif
 
 #if !defined(__ATARI2600__)
 #error "This example is for Atari 2600 only"
 #endif
 
-unsigned char color;
+unsigned char color; // a frame counter
 
 void my_preframe(void) {
   // Doing frame computation during blank
-  TIA.colubk = color++; // Update color
-  set_horiz_pos(0, 80); // Set player 1
+  // Update color
+  TIA.colubk = color++; 
+  // Set player 1 horizontal position
+  set_horiz_pos(0, color >= 0x80 ? -color : color); 
+  apply_hmove();
 }
 
 void my_doframe(void) {
   int i;
   char c = color;
+  // Set player sprite color
   TIA.colup0 = COLOR_CONV(color);
+  // Draw each scanline
   for (i=0; i<192; i++) {
-    TIA.wsync = 0;
-    TIA.colubk = COLOR_CONV(c);
-    TIA.pf1 = i;
-    TIA.grp0 = i;
+    TIA.wsync = 0; // sync to scanline
+    TIA.colubk = COLOR_CONV(c); // set background
+    TIA.pf1 = i; // set playfield
+    TIA.grp0 = i; // set sprite bitmap
     c++;
   }
-  TIA.grp0 = 0;
+  TIA.grp0 = 0; // clear sprite
 }
 
 void my_postframe(void) {
+  // additional post-frame processing goes here
 }
 
-// Testing memory zones
-const unsigned char rodata_v[] = "Hello!";
-unsigned char data_v = 0x77;
-unsigned char bss_v;
-
 // Display kernel loop
-#if defined(__ATARI2600_MAPPER__)
+#ifdef MAPPER_BANKED_ROM
 __attribute__((noinline, section(".rom1")))
 #endif
 void do_kernel_loop() {
@@ -50,50 +52,30 @@ void do_kernel_loop() {
     while (SW_RESET()) { }
     // loop forever
     while (1) {
-        // Vertical Sync signal
-        TIA.vsync = 0x02;
-        TIA.wsync = 0x00;
-        TIA.wsync = 0x00;
-        TIA.wsync = 0x00;
-        TIA.vsync = 0x00;
-
-        // Vertical Blank (preframe)
-        RIOT.tim64t = VBLANK_TIM64;
-        my_preframe();
-        while (RIOT.intim != 0) {}
-
-        TIA.wsync = 0x00;
-        TIA.vblank = 0x00; // Turn on beam
-
-        // Display frame (doframe)
-#ifdef PAL
-        RIOT.t1024t = KERNAL_T1024;
-#else
-        RIOT.tim64t = KERNAL_TIM64;
-#endif
-        my_doframe();
-        while (RIOT.intim != 0) {}
-
-        TIA.wsync = 0x00;
-        TIA.vblank = 0x02; // Turn off beam
-
-        // Overscan (postframe)
-        RIOT.tim64t = OVERSCAN_TIM64;
-        my_postframe();
-        while (RIOT.intim != 0) {}
-
-        // Test reset switch
-        if (SW_RESET()) {
-          asm("brk");
-        }
+      kernel_1();
+      my_preframe();
+      kernel_2();
+      my_doframe();
+      kernel_3();
+      my_postframe();
+      kernel_4();
     }
 }
 
-#if defined(__ATARI2600_MAPPER__)
+#ifdef MAPPER_XRAM
+
+typedef struct {
+  char buf[256];
+} XRAMStruct;
+
+// XRAM on the VCS has different areas for read vs. write
+// declare xram_data_read and xram_data_write as XRAM variables
+DECLARE_XRAM_VARIABLE(0, XRAMStruct xram_data);
+
 void test_ram(void) {
   char x;
-  POKE(0x17f0, 0xaa);
-  x = PEEK(0x13f0);
+  POKE(MAPPER_XRAM_WRITE | 0x7f0, 0xaa);
+  x = PEEK(MAPPER_XRAM_READ | 0x3f0);
   if (x != 0xaa) asm("brk");
   xram_write(0x3f1, 0x55);
   x = xram_read(0x3f1);
@@ -101,28 +83,36 @@ void test_ram(void) {
   xram_write(0x3f2, 0xaa);
   x = xram_read(0x3f2);
   if (x != 0xaa) asm("brk");
-  /*
-  x = PEEK(&var); // 0xdeadbeef
-  if (x != 0xef) asm("brk");
-  */
+  xram_data_write.buf[0] = 1;
+  x = xram_data_read.buf[0];
+  if (x != 1) asm("brk");
 }
+
 #endif
 
 int main() {
 
-  #if __ATARI2600_MAPPER__ == 0x3e
-  // for Stella detection
+// for Stella ROM detection (doesn't work well...)
+#ifdef MAPPER_TYPE_3E
   asm("lda #0");
   asm("sta $3e");
   asm("sta $3f");
   asm("sta $3f");
+#endif
+
+  // test extra RAM, if available
+#ifdef MAPPER_XRAM  
   ram_select(0);
   test_ram();
+#endif
+
+  // test banked rom call, if available
+#ifdef MAPPER_BANKED_ROM
   bank_select(0);
   banked_call_rom(1, do_kernel_loop);
-  #else
+#else
   do_kernel_loop();
-  #endif
+#endif
   
   return 0;
 }

@@ -45,6 +45,25 @@ MEMORY {
 
 REGION_ALIAS("c_readonly", perm)
 
+MEMORY {
+  xram0_read (rwxa)  : ORIGIN = 0x02001000, LENGTH = __cart_ram_size >= 4 ? 0x400 : 0
+  xram0_write (rwxa) : ORIGIN = 0x02001400, LENGTH = __cart_ram_size >= 4 ? 0x400 : 0
+  xram1_read (rwxa)  : ORIGIN = 0x02013000, LENGTH = __cart_ram_size >= 8 ? 0x400 : 0
+  xram1_write (rwxa) : ORIGIN = 0x02013400, LENGTH = __cart_ram_size >= 8 ? 0x400 : 0
+  xram2_read (rwxa)  : ORIGIN = 0x02025000, LENGTH = __cart_ram_size >= 12 ? 0x400 : 0
+  xram2_write (rwxa) : ORIGIN = 0x02025400, LENGTH = __cart_ram_size >= 12 ? 0x400 : 0
+  xram3_read (rwxa)  : ORIGIN = 0x02037000, LENGTH = __cart_ram_size >= 16 ? 0x400 : 0
+  xram3_write (rwxa) : ORIGIN = 0x02037400, LENGTH = __cart_ram_size >= 16 ? 0x400 : 0
+  xram4_read (rwxa)  : ORIGIN = 0x02049000, LENGTH = __cart_ram_size >= 20 ? 0x400 : 0
+  xram4_write (rwxa) : ORIGIN = 0x02049400, LENGTH = __cart_ram_size >= 20 ? 0x400 : 0
+  xram5_read (rwxa)  : ORIGIN = 0x0205b000, LENGTH = __cart_ram_size >= 24 ? 0x400 : 0
+  xram5_write (rwxa) : ORIGIN = 0x0205b400, LENGTH = __cart_ram_size >= 24 ? 0x400 : 0
+  xram6_read (rwxa)  : ORIGIN = 0x0206d000, LENGTH = __cart_ram_size >= 28 ? 0x400 : 0
+  xram6_write (rwxa) : ORIGIN = 0x0206d400, LENGTH = __cart_ram_size >= 28 ? 0x400 : 0
+  xram7_read (rwxa)  : ORIGIN = 0x0207f000, LENGTH = __cart_ram_size >= 32 ? 0x400 : 0
+  xram7_write (rwxa) : ORIGIN = 0x0207f400, LENGTH = __cart_ram_size >= 32 ? 0x400 : 0
+}
+
 SECTIONS {
   INCLUDE c.ld
 
@@ -64,7 +83,24 @@ SECTIONS {
   .rom13 : { *(.rom13 .rom13.*) } >rom13
   .rom14 : { *(.rom14 .rom14.*) } >rom14
 
-  .perm_fixed : { *(.perm_fixed .perm_fixed.*) } >perm
+  .perm : { *(.perm .perm.*) } >perm
+
+  .xram0_read (NOLOAD) : { *(.xram0_read .xram0_read.*) } >xram0_read
+  .xram0_write (NOLOAD) : { *(.xram0_write .xram0_write.*) } >xram0_write
+  .xram1_read (NOLOAD) : { *(.xram1_read .xram1_read.*) } >xram1_read
+  .xram1_write (NOLOAD) : { *(.xram1_write .xram1_write.*) } >xram1_write
+  .xram2_read (NOLOAD) : { *(.xram2_read .xram2_read.*) } >xram2_read
+  .xram2_write (NOLOAD) : { *(.xram2_write .xram2_write.*) } >xram2_write
+  .xram3_read (NOLOAD) : { *(.xram3_read .xram3_read.*) } >xram3_read
+  .xram3_write (NOLOAD) : { *(.xram3_write .xram3_write.*) } >xram3_write
+  .xram4_read (NOLOAD) : { *(.xram4_read .xram4_read.*) } >xram4_read
+  .xram4_write (NOLOAD) : { *(.xram4_write .xram4_write.*) } >xram4_write
+  .xram5_read (NOLOAD) : { *(.xram5_read .xram5_read.*) } >xram5_read
+  .xram5_write (NOLOAD) : { *(.xram5_write .xram5_write.*) } >xram5_write
+  .xram6_read (NOLOAD) : { *(.xram6_read .xram6_read.*) } >xram6_read
+  .xram6_write (NOLOAD) : { *(.xram6_write .xram6_write.*) } >xram6_write
+  .xram7_read (NOLOAD) : { *(.xram7_read .xram7_read.*) } >xram7_read
+  .xram7_write (NOLOAD) : { *(.xram7_write .xram7_write.*) } >xram7_write
 
   .vector 0x0000fffc : {
     /* we don't really need NMI on the 2600 */

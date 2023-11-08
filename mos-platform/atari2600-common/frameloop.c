@@ -50,8 +50,3 @@ void kernel_3(void) {
 void kernel_4(void) {
   while (RIOT.intim != 0) {}
 }
-
-// just reset when we exit
-void _exit(int status) {
-  asm("brk");
-}

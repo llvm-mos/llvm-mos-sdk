@@ -21,7 +21,7 @@ clearLoop:
         pha
         bne     clearLoop
 
+; we jump to main directly here to save 2 bytes of stack
 ; TODO: how do we get rid of "jsr main" in crt0?
-
 .section .init.400,"axR",@progbits
 	jmp	main

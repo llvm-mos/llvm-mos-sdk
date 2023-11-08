@@ -1,4 +1,4 @@
-platform(atari2600-3e COMPLETE PARENT atari2600)
+platform(atari2600-3e COMPLETE PARENT atari2600-common)
 
 if(NOT CMAKE_CROSSCOMPILING)
   return()

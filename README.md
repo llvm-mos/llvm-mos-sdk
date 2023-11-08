@@ -142,7 +142,7 @@ executables and libraries for that target.
 
 | Platform                         | Command                   |
 | -------------------------------- | ------------------------- |
-| Atari 2600 (4K)                  | `mos-atari2600-clang`     |
+| Atari 2600 (4K)                  | `mos-atari2600-4k-clang`  |
 | Atari 2600 (TigerVision 3E)      | `mos-atari2600-3e-clang`  |
 | Atari 8-bit (.XEX)               | `mos-atari8-clang`        |
 | Atari 8-bit (Standard cartridge) | `mos-atari8-stdcart`      |

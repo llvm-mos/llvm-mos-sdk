@@ -19,6 +19,10 @@
 #ifndef _ATARI2600_H
 #define _ATARI2600_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <_tia.h>
 #define TIA (*(volatile struct __tia*)0x0000)
 
@@ -26,6 +30,10 @@
 #define RIOT (*(volatile struct __riot*)0x0280)
 
 #include <atari2600_constants.h>
+
+#ifdef __cplusplus
+}
+#endif
 
 /* End of atari2600.h */
 #endif

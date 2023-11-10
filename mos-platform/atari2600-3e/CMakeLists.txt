@@ -14,6 +14,11 @@ install(FILES
   link.ld
 TYPE LIB)
 
+add_platform_object_file(atari2600-3e-init-mapper-o
+  init_mapper_3e.o
+  init_mapper_3e.S
+)
+
 add_platform_library(atari2600-3e-c
   mapper_3e.c
 )

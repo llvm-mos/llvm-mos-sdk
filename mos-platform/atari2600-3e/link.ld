@@ -2,6 +2,8 @@
 
 INCLUDE vcs.ld
 
+INPUT(init_mapper_3e.o)
+
 PROVIDE(__cart_rom_size = 32);
 PROVIDE(__cart_ram_size = 32);
 
@@ -24,49 +26,50 @@ ASSERT(__cart_ram_size % 2 == 0,
 */
 
 MEMORY {
-  rom0 (rx)     : ORIGIN = 0x01001000, LENGTH = 0x800
-  rom1 (rx)     : ORIGIN = 0x01013000, LENGTH = 0x800
-  rom2 (rx)     : ORIGIN = 0x01025000, LENGTH = __cart_rom_size >= 8 ? 0x800 : 0
-  rom3 (rx)     : ORIGIN = 0x01037000, LENGTH = __cart_rom_size >= 10 ? 0x800 : 0
-  rom4 (rx)     : ORIGIN = 0x01049000, LENGTH = __cart_rom_size >= 12 ? 0x800 : 0
-  rom5 (rx)     : ORIGIN = 0x0105b000, LENGTH = __cart_rom_size >= 14 ? 0x800 : 0
-  rom6 (rx)     : ORIGIN = 0x0106d000, LENGTH = __cart_rom_size >= 16 ? 0x800 : 0
-  rom7 (rx)     : ORIGIN = 0x0107f000, LENGTH = __cart_rom_size >= 18 ? 0x800 : 0
-  rom8 (rx)     : ORIGIN = 0x01081000, LENGTH = __cart_rom_size >= 20 ? 0x800 : 0
-  rom9 (rx)     : ORIGIN = 0x01093000, LENGTH = __cart_rom_size >= 22 ? 0x800 : 0
-  rom10 (rx)    : ORIGIN = 0x010a5000, LENGTH = __cart_rom_size >= 24 ? 0x800 : 0
-  rom11 (rx)    : ORIGIN = 0x010b7000, LENGTH = __cart_rom_size >= 26 ? 0x800 : 0
-  rom12 (rx)    : ORIGIN = 0x010c9000, LENGTH = __cart_rom_size >= 28 ? 0x800 : 0
-  rom13 (rx)    : ORIGIN = 0x010db000, LENGTH = __cart_rom_size >= 30 ? 0x800 : 0
-  rom14 (rx)    : ORIGIN = 0x010ed000, LENGTH = __cart_rom_size >= 32 ? 0x800 : 0
+  rom0     : ORIGIN = 0x01001000, LENGTH = 0x800
+  rom1     : ORIGIN = 0x01013000, LENGTH = 0x800
+  rom2     : ORIGIN = 0x01025000, LENGTH = __cart_rom_size >= 8 ? 0x800 : 0
+  rom3     : ORIGIN = 0x01037000, LENGTH = __cart_rom_size >= 10 ? 0x800 : 0
+  rom4     : ORIGIN = 0x01049000, LENGTH = __cart_rom_size >= 12 ? 0x800 : 0
+  rom5     : ORIGIN = 0x0105b000, LENGTH = __cart_rom_size >= 14 ? 0x800 : 0
+  rom6     : ORIGIN = 0x0106d000, LENGTH = __cart_rom_size >= 16 ? 0x800 : 0
+  rom7     : ORIGIN = 0x0107f000, LENGTH = __cart_rom_size >= 18 ? 0x800 : 0
+  rom8     : ORIGIN = 0x01081000, LENGTH = __cart_rom_size >= 20 ? 0x800 : 0
+  rom9     : ORIGIN = 0x01093000, LENGTH = __cart_rom_size >= 22 ? 0x800 : 0
+  rom10    : ORIGIN = 0x010a5000, LENGTH = __cart_rom_size >= 24 ? 0x800 : 0
+  rom11    : ORIGIN = 0x010b7000, LENGTH = __cart_rom_size >= 26 ? 0x800 : 0
+  rom12    : ORIGIN = 0x010c9000, LENGTH = __cart_rom_size >= 28 ? 0x800 : 0
+  rom13    : ORIGIN = 0x010db000, LENGTH = __cart_rom_size >= 30 ? 0x800 : 0
+  rom14    : ORIGIN = 0x010ed000, LENGTH = __cart_rom_size >= 32 ? 0x800 : 0
 
-  perm (rx)     : ORIGIN = 0x0000f800, LENGTH = 0x800
+  perm     : ORIGIN = 0x0000f800, LENGTH = 0x800
 }
 
 REGION_ALIAS("c_readonly", perm)
 
 MEMORY {
-  xram0_read (rwxa)  : ORIGIN = 0x02001000, LENGTH = __cart_ram_size >= 4 ? 0x400 : 0
-  xram0_write (rwxa) : ORIGIN = 0x02001400, LENGTH = __cart_ram_size >= 4 ? 0x400 : 0
-  xram1_read (rwxa)  : ORIGIN = 0x02013000, LENGTH = __cart_ram_size >= 8 ? 0x400 : 0
-  xram1_write (rwxa) : ORIGIN = 0x02013400, LENGTH = __cart_ram_size >= 8 ? 0x400 : 0
-  xram2_read (rwxa)  : ORIGIN = 0x02025000, LENGTH = __cart_ram_size >= 12 ? 0x400 : 0
-  xram2_write (rwxa) : ORIGIN = 0x02025400, LENGTH = __cart_ram_size >= 12 ? 0x400 : 0
-  xram3_read (rwxa)  : ORIGIN = 0x02037000, LENGTH = __cart_ram_size >= 16 ? 0x400 : 0
-  xram3_write (rwxa) : ORIGIN = 0x02037400, LENGTH = __cart_ram_size >= 16 ? 0x400 : 0
-  xram4_read (rwxa)  : ORIGIN = 0x02049000, LENGTH = __cart_ram_size >= 20 ? 0x400 : 0
-  xram4_write (rwxa) : ORIGIN = 0x02049400, LENGTH = __cart_ram_size >= 20 ? 0x400 : 0
-  xram5_read (rwxa)  : ORIGIN = 0x0205b000, LENGTH = __cart_ram_size >= 24 ? 0x400 : 0
-  xram5_write (rwxa) : ORIGIN = 0x0205b400, LENGTH = __cart_ram_size >= 24 ? 0x400 : 0
-  xram6_read (rwxa)  : ORIGIN = 0x0206d000, LENGTH = __cart_ram_size >= 28 ? 0x400 : 0
-  xram6_write (rwxa) : ORIGIN = 0x0206d400, LENGTH = __cart_ram_size >= 28 ? 0x400 : 0
-  xram7_read (rwxa)  : ORIGIN = 0x0207f000, LENGTH = __cart_ram_size >= 32 ? 0x400 : 0
-  xram7_write (rwxa) : ORIGIN = 0x0207f400, LENGTH = __cart_ram_size >= 32 ? 0x400 : 0
+  xram0_read  : ORIGIN = 0x02001000, LENGTH = __cart_ram_size >= 4 ? 0x400 : 0
+  xram0_write : ORIGIN = 0x02001400, LENGTH = __cart_ram_size >= 4 ? 0x400 : 0
+  xram1_read  : ORIGIN = 0x02013000, LENGTH = __cart_ram_size >= 8 ? 0x400 : 0
+  xram1_write : ORIGIN = 0x02013400, LENGTH = __cart_ram_size >= 8 ? 0x400 : 0
+  xram2_read  : ORIGIN = 0x02025000, LENGTH = __cart_ram_size >= 12 ? 0x400 : 0
+  xram2_write : ORIGIN = 0x02025400, LENGTH = __cart_ram_size >= 12 ? 0x400 : 0
+  xram3_read  : ORIGIN = 0x02037000, LENGTH = __cart_ram_size >= 16 ? 0x400 : 0
+  xram3_write : ORIGIN = 0x02037400, LENGTH = __cart_ram_size >= 16 ? 0x400 : 0
+  xram4_read  : ORIGIN = 0x02049000, LENGTH = __cart_ram_size >= 20 ? 0x400 : 0
+  xram4_write : ORIGIN = 0x02049400, LENGTH = __cart_ram_size >= 20 ? 0x400 : 0
+  xram5_read  : ORIGIN = 0x0205b000, LENGTH = __cart_ram_size >= 24 ? 0x400 : 0
+  xram5_write : ORIGIN = 0x0205b400, LENGTH = __cart_ram_size >= 24 ? 0x400 : 0
+  xram6_read  : ORIGIN = 0x0206d000, LENGTH = __cart_ram_size >= 28 ? 0x400 : 0
+  xram6_write : ORIGIN = 0x0206d400, LENGTH = __cart_ram_size >= 28 ? 0x400 : 0
+  xram7_read  : ORIGIN = 0x0207f000, LENGTH = __cart_ram_size >= 32 ? 0x400 : 0
+  xram7_write : ORIGIN = 0x0207f400, LENGTH = __cart_ram_size >= 32 ? 0x400 : 0
 }
+
 
 SECTIONS {
   INCLUDE c.ld
-
+  
   .rom0  : { *(.rom0 .rom0.*) } >rom0
   .rom1  : { *(.rom1 .rom1.*) } >rom1
   .rom2  : { *(.rom2 .rom2.*) } >rom2

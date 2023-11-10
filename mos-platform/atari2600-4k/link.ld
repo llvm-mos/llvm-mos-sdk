@@ -7,7 +7,7 @@ ASSERT(__cart_rom_size == 4 || __cart_rom_size == 2,
        "ROM size must be 4 KiB or 2 KiB");
 
 MEMORY {
-  perm (rx) : ORIGIN = 0xF000, LENGTH = __cart_rom_size * 1024
+  perm : ORIGIN = 0xF000, LENGTH = __cart_rom_size * 1024
 }
 
 REGION_ALIAS("c_readonly", perm)

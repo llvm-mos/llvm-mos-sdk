@@ -5,7 +5,10 @@
 #include <mapper.h>
 
 #ifdef __ATARI2600_MAPPER_3E__
-asm(".globl __cart_rom_size\n__cart_rom_size=8\n");
+MAPPER_CART_ROM_KB(8); // 8K ROM (3 * 2 KB + 2 KB)
+#endif
+#ifdef __ATARI2600_MAPPER_4K__
+MAPPER_CART_ROM_KB(4); // 4K ROM
 #endif
 
 #if !defined(__ATARI2600__)

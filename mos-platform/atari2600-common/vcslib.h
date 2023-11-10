@@ -21,10 +21,10 @@ typedef unsigned short word;  // 16-bit unsigned data type
 
 // Atari 2600 kernel helpers, called in a sequence every frame
 
-__attribute__((leaf)) void kernel_1(void);	// before preframe
-__attribute__((leaf)) void kernel_2(void);	// before kernel
-__attribute__((leaf)) void kernel_3(void);	// after kernel
-__attribute__((leaf)) void kernel_4(void);	// after postframe
+void kernel_1(void);	// before preframe
+void kernel_2(void);	// before kernel
+void kernel_3(void);	// after kernel
+void kernel_4(void);	// after postframe
 
 // Function to set horizontal position of a game object.
 
@@ -32,18 +32,18 @@ typedef enum { PLAYER_0=0, PLAYER_1, MISSILE_0, MISSILE_1, BALL } TIAObject;
 
 // A = X coordinate
 // X = object index
-__attribute__((leaf)) void _set_horiz_pos(byte xpos, byte objindex);
+void _set_horiz_pos(byte xpos, byte objindex);
+
 // swap order of call
-#define set_horiz_pos(objindex,xpos) _set_horiz_pos(xpos,objindex);
+#define set_horiz_pos(objindex,xpos) _set_horiz_pos(xpos,objindex)
 
 // Waits for next scanline start
 #define do_wsync() \
-        asm("sta $42 ; WSYNC");
+        asm("sta $42 /* WSYNC */");
 
 // Applies horizontal motion to sprite(s) after set_horiz_pos()
 #define apply_hmove() \
-        asm("sta $42 ; WSYNC"); \
-        asm("sta $6a ; HMOVE");
+        asm("sta $42 /* WSYNC */" "\n" "sta $6a /* HMOVE */");
 
 // Macros
 
@@ -59,8 +59,16 @@ __attribute__((leaf)) void _set_horiz_pos(byte xpos, byte objindex);
 #define SW_P0_PRO()	((RIOT.swchb & P0_DIFF_MASK) != 0)
 #define SW_P1_PRO()	((RIOT.swchb & P1_DIFF_MASK) != 0)
 
+#define JOY_UP(plyr)    (!(RIOT.swcha & ((plyr) ? 0x1 : ~MOVE_UP)))
+#define JOY_DOWN(plyr)  (!(RIOT.swcha & ((plyr) ? 0x2 : ~MOVE_DOWN)))
+#define JOY_LEFT(plyr)  (!(RIOT.swcha & ((plyr) ? 0x4 : ~MOVE_LEFT)))
+#define JOY_RIGHT(plyr) (!(RIOT.swcha & ((plyr) ? 0x8 : ~MOVE_RIGHT)))
+#define JOY_FIRE(plyr)  !(((plyr) ? TIA.inpt5 : TIA.inpt4) & 0x80)
+
+// make color greyscale if black and white switch is set
 #define COLOR_CONV(color) (SW_COLOR() ? color : color & 0x0f)
 
+// macros for setting PIA timers
 #define _CYCLES(lines) (((lines) * 76) - 13)
 #define _TIM64(cycles) (((cycles) >> 6) - (((cycles) & 63) < 12))
 #define _T1024(cycles) ((cycles) >> 10)
@@ -74,11 +82,5 @@ __attribute__((leaf)) void _set_horiz_pos(byte xpos, byte objindex);
 #define KERNAL_TIM64 _TIM64(_CYCLES(194))
 #define OVERSCAN_TIM64 _TIM64(_CYCLES(32))
 #endif
-
-#define JOY_UP(plyr)    (!(RIOT.swcha & ((plyr) ? 0x1 : ~MOVE_UP)))
-#define JOY_DOWN(plyr)  (!(RIOT.swcha & ((plyr) ? 0x2 : ~MOVE_DOWN)))
-#define JOY_LEFT(plyr)  (!(RIOT.swcha & ((plyr) ? 0x4 : ~MOVE_LEFT)))
-#define JOY_RIGHT(plyr) (!(RIOT.swcha & ((plyr) ? 0x8 : ~MOVE_RIGHT)))
-#define JOY_FIRE(plyr)  !(((plyr) ? TIA.inpt5 : TIA.inpt4) & 0x80)
 
 #endif

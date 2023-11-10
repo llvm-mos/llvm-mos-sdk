@@ -18,9 +18,7 @@ typedef unsigned char rom_bank_t;
 typedef unsigned char banked_area_t;
 
 // Switch in a ROM bank into a given area.
-__attribute__((weak, leaf)) void bank_select(
-    banked_area_t area,
-    rom_bank_t bank_id);
+void bank_select(banked_area_t area, rom_bank_t bank_id);
 
 #ifdef __cplusplus
 }

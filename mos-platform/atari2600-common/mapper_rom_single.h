@@ -17,14 +17,14 @@ extern "C" {
 typedef unsigned char rom_bank_t;
 
 // Switch in a ROM bank.
-__attribute__((weak, leaf)) void bank_select(rom_bank_t bank_id);
+void bank_select(rom_bank_t bank_id);
 
 // Switch in a ROM or RAM bank, depending on the high bit (if set, it's RAM)
-__attribute__((weak, leaf)) void set_current_bank(rom_bank_t bank_id);
+void set_current_bank(rom_bank_t bank_id);
 
 // Get the currently switched bank index.
 // If the high bit is set, it's a RAM bank, otherwise it's a ROM bank.
-__attribute__((weak, leaf)) rom_bank_t get_current_bank(void);
+rom_bank_t get_current_bank(void);
 
 // Switch to another ROM bank and call this function.  Note: Using banked_call to
 // call a second function from within another banked_call is safe. This function

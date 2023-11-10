@@ -8,24 +8,24 @@
 
 __attribute__((section(".zp.bss"))) bank_index_t __current_bank;
 
-__attribute__((weak)) void set_current_bank(bank_index_t bank_id) {
-  if (bank_select && !(bank_id & 0x80)) {
-    bank_select(bank_id);
-  } else if (ram_select) {
+__attribute__((leaf)) void set_current_bank(bank_index_t bank_id) {
+  if (bank_id & 0x80) {
     ram_select(bank_id & 0x7f);
+  } else {
+    bank_select(bank_id);
   }
 }
 
-__attribute__((always_inline, leaf)) bank_index_t get_current_bank(void) {
+__attribute__((leaf)) bank_index_t get_current_bank(void) {
   return __current_bank;
 }
 
-__attribute__((always_inline, leaf)) void bank_select(bank_index_t bank_id) {
+__attribute__((leaf)) void bank_select(bank_index_t bank_id) {
   POKE(0x3f, bank_id);
   __current_bank = bank_id;
 }
 
-__attribute__((always_inline, leaf)) void ram_select(bank_index_t bank_id) {
+__attribute__((leaf)) void ram_select(bank_index_t bank_id) {
   POKE(0x3e, bank_id);
   __current_bank = bank_id | 0x80;
 }
@@ -38,16 +38,16 @@ __attribute__((leaf)) unsigned char xram_read(int offset) {
   return PEEK(MAPPER_XRAM_READ | offset);
 }
 
-__attribute__((weak, callback(2))) void banked_call_rom(bank_index_t bankId,
-                                                        void (*method)(void)) {
+__attribute__((callback(2))) void banked_call_rom(bank_index_t bankId,
+                                                  void (*method)(void)) {
   bank_index_t previous_bank_id = get_current_bank();
   bank_select(bankId);
   method();
   set_current_bank(previous_bank_id);
 }
 
-__attribute__((weak, callback(2))) void banked_call_ram(bank_index_t bankId,
-                                                        void (*method)(void)) {
+__attribute__((callback(2))) void banked_call_ram(bank_index_t bankId,
+                                                  void (*method)(void)) {
   bank_index_t previous_bank_id = get_current_bank();
   ram_select(bankId);
   method();

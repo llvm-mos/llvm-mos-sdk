@@ -17,17 +17,18 @@ extern "C" {
 typedef unsigned char ram_bank_t;
 
 // Macro to declare a variable in XRAM.
-// - index = bank index
+// - index = XRAM bank index
 // - declaration = variable declaration
 // This will declare two variables, one read-only and one write-only.
 // For example, DECLARE_XRAM_VARIABLE(0, int my_var)
 // creates two variables: my_var_read and my_var_write.
+// NOTE: These variables are not initialized by default.
 #define DECLARE_XRAM_VARIABLE(index, declaration) \
     __attribute__((section(".xram" #index "_read"))) volatile const declaration##_read; \
     __attribute__((section(".xram" #index "_write"))) volatile declaration##_write;
 
 // Switch in a RAM bank.
-__attribute__((weak, leaf)) void ram_select(ram_bank_t bank_id);
+void ram_select(ram_bank_t bank_id);
 
 // Switch to another RAM bank and call this function.
 __attribute__((callback(2))) void banked_call_ram(ram_bank_t bank_id,
@@ -35,11 +36,11 @@ __attribute__((callback(2))) void banked_call_ram(ram_bank_t bank_id,
 
 // Write a byte to extended RAM at set offset
 // RAM must be selected first, or use banked_call_ram
-__attribute__((leaf)) void xram_write(int offset, unsigned char value);
+void xram_write(int offset, unsigned char value);
 
 // Read a byte from extended RAM at set offset
 // RAM must be selected first, or use banked_call_ram
-__attribute__((leaf)) unsigned char xram_read(int offset);
+unsigned char xram_read(int offset);
 
 #ifdef __cplusplus
 }

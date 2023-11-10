@@ -11,4 +11,3 @@ INCLUDE imag-regs.ld
 ASSERT(__rc31 == 0x9f, "Inconsistent zero page map.")
 
 REGION_ALIAS("c_writeable", pia_ram)
-

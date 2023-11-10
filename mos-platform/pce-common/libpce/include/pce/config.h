@@ -27,7 +27,7 @@ extern "C" {
 
 #define __PCE_ROM_BANK_USE(id, offset)                                         \
   static inline void pce_rom_bank##id##_map(void) {                            \
-    __attribute__((leaf)) asm volatile("lda #mos8(__rom_bank" #id "_bank)\n"   \
+    __attribute__((leaf)) asm volatile("lda #__rom_bank" #id "_bank\n"         \
                                        "tam #(1 << " #offset ")\n"             \
                                        :                                       \
                                        :                                       \

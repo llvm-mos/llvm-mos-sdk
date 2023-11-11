@@ -5,7 +5,7 @@
 
 #include "vcslib.h"
 
-__attribute__((leaf)) void kernel_1(void) {
+void kernel_1(void) {
   // Vertical Sync signal
   TIA.vsync = START_VERT_SYNC;
   TIA.wsync = 0x00;
@@ -21,7 +21,7 @@ __attribute__((leaf)) void kernel_1(void) {
   RIOT.tim64t = VBLANK_TIM64;
 }
 
-__attribute__((leaf)) void kernel_2(void) {
+void kernel_2(void) {
   while (RIOT.intim != 0) {}
 
   // Turn on beam
@@ -36,7 +36,7 @@ __attribute__((leaf)) void kernel_2(void) {
   #endif
 }
 
-__attribute__((leaf)) void kernel_3(void) {
+void kernel_3(void) {
   while (RIOT.intim != 0) {}
 
   // Turn off beam
@@ -47,6 +47,6 @@ __attribute__((leaf)) void kernel_3(void) {
   RIOT.tim64t = OVERSCAN_TIM64;
 }
 
-__attribute__((leaf)) void kernel_4(void) {
+void kernel_4(void) {
   while (RIOT.intim != 0) {}
 }

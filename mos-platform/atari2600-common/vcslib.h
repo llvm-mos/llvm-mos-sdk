@@ -32,18 +32,18 @@ typedef enum { PLAYER_0=0, PLAYER_1, MISSILE_0, MISSILE_1, BALL } TIAObject;
 
 // A = X coordinate
 // X = object index
-void _set_horiz_pos(byte xpos, byte objindex);
+__attribute__((leaf)) void _set_horiz_pos(byte xpos, byte objindex);
 
 // swap order of call
 #define set_horiz_pos(objindex,xpos) _set_horiz_pos(xpos,objindex)
 
 // Waits for next scanline start
 #define do_wsync() \
-        asm("sta $42 /* WSYNC */");
+__attribute__((leaf)) asm volatile("sta $42 /* WSYNC */");
 
 // Applies horizontal motion to sprite(s) after set_horiz_pos()
 #define apply_hmove() \
-        asm("sta $42 /* WSYNC */" "\n" "sta $6a /* HMOVE */");
+__attribute__((leaf)) asm volatile("sta $42 /* WSYNC */" "\n" "sta $6a /* HMOVE */");
 
 // Macros
 

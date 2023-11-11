@@ -6,6 +6,9 @@ The LLVM-MOS compiler toolchain and platform libraries.
 
 ## Supported platforms
 
+- Atari 2600
+  - 4K cartridge
+  - TigerVision 3E (2-KiB fixed, 2-KiB banked ROM or RAM)
 - Atari 8-bit
   - XEX file
   - 8-KiB or 16-KiB standard cartridge
@@ -139,6 +142,8 @@ executables and libraries for that target.
 
 | Platform                         | Command                   |
 | -------------------------------- | ------------------------- |
+| Atari 2600 (4K)                  | `mos-atari2600-4k-clang`  |
+| Atari 2600 (TigerVision 3E)      | `mos-atari2600-3e-clang`  |
 | Atari 8-bit (.XEX)               | `mos-atari8-clang`        |
 | Atari 8-bit (Standard cartridge) | `mos-atari8-stdcart`      |
 | Ben Eater's 6502 Breadboard Kit  | `mos-eater-clang`         |

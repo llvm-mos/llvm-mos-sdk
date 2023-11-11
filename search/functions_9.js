@@ -1,16 +1,14 @@
 var searchData=
 [
-  ['make_5fpair_2816',['make_pair',['../namespacestd.html#aefb7bf85c53d823c1d44a3ad32142767',1,'std']]],
-  ['malloc_2817',['malloc',['../common_2include_2stdlib_8h.html#a7ac38fce3243a7dcf448301ee9ffd392',1,'stdlib.h']]],
-  ['max_2818',['max',['../structstd_1_1__numeric__limits__helper.html#afcfbe101e4c14b363a3889a8d705cd3d',1,'std::_numeric_limits_helper::max()'],['../structstd_1_1__numeric__limits__helper_3_01T_00_01true_01_4.html#a822f16699f5466cb3d53ca28a263a797',1,'std::_numeric_limits_helper&lt; T, true &gt;::max()']]],
-  ['max_5felement_2819',['max_element',['../namespacestd.html#ad5229a6629cfc698970f5c1c189f4585',1,'std::max_element(ForwardIt first, ForwardIt last)'],['../namespacestd.html#a9529471df233af474de512ac78edd83b',1,'std::max_element(ForwardIt first, ForwardIt last, Compare comp)']]],
-  ['max_5fsize_2820',['max_size',['../structstd_1_1array.html#a3f681218b03968e74400b11b09cfcbc2',1,'std::array']]],
-  ['memchr_2821',['memchr',['../string_8h.html#a16d6b0bd660cc3f9910924c6b6f4af8e',1,'string.h']]],
-  ['memcmp_2822',['memcmp',['../string_8h.html#a9e6df54ee04e18a3772335580e2ed872',1,'string.h']]],
-  ['memcpy_2823',['memcpy',['../string_8h.html#a82c26cd350df88414f825bca40183ec2',1,'string.h']]],
-  ['memmove_2824',['memmove',['../string_8h.html#ae8628c986b70205d34a160d2fb740680',1,'string.h']]],
-  ['memset_2825',['memset',['../string_8h.html#a4cb469bec7b722064b97a406346acb61',1,'string.h']]],
-  ['millis_2826',['millis',['../eater_8h.html#a1871228c14c912ca1479cf826ddcb07f',1,'eater.h']]],
-  ['min_2827',['min',['../structstd_1_1__numeric__limits__helper.html#acd0133ddffa0ccddd84645850cc29411',1,'std::_numeric_limits_helper::min()'],['../structstd_1_1__numeric__limits__helper_3_01T_00_01true_01_4.html#acf4e3f981050372804e1e34ea0856b43',1,'std::_numeric_limits_helper&lt; T, true &gt;::min()']]],
-  ['min_5felement_2828',['min_element',['../namespacestd.html#ab3312ce85bc1ec79af248f4cd5390c80',1,'std::min_element(ForwardIt first, ForwardIt last)'],['../namespacestd.html#ada92b504bb1de2151d8056d8c5f2b9c1',1,'std::min_element(ForwardIt first, ForwardIt last, Compare comp)']]]
+  ['labs_2951',['labs',['../common_2include_2stdlib_8h.html#ac39409d0077cf980e4e6419bc6014d10',1,'stdlib.h']]],
+  ['lcd_5finit_2952',['lcd_init',['../eater_8h.html#a6842775ba83d166f02b8fef8bb63b1e6',1,'eater.h']]],
+  ['lcd_5finstruction_2953',['lcd_instruction',['../eater_8h.html#a072949065dfbb6f86e5451ef2a897e0d',1,'eater.h']]],
+  ['lcd_5fputchar_2954',['lcd_putchar',['../eater_8h.html#a676aaa8686639199f2ce10535590781f',1,'eater.h']]],
+  ['lcd_5fputs_2955',['lcd_puts',['../eater_8h.html#af5f233f52895c4cf19d6bca46ef88e6c',1,'eater.h']]],
+  ['ldiv_2956',['ldiv',['../common_2include_2stdlib_8h.html#a66fb11dc4734db57fdda6f32f3977935',1,'stdlib.h']]],
+  ['license_2957',['License',['../famitone2_2LICENSE.html#a406cb974dd0e1ff418e4fa5af04c91b9',1,'License(MIT):&#160;LICENSE'],['../neslib_2LICENSE.html#a406cb974dd0e1ff418e4fa5af04c91b9',1,'License(MIT):&#160;LICENSE']]],
+  ['llabs_2958',['llabs',['../common_2include_2stdlib_8h.html#a7251caa2dd32261e7768d824c0a532c6',1,'stdlib.h']]],
+  ['lldiv_2959',['lldiv',['../common_2include_2stdlib_8h.html#abe38f453a5be2eff9faa5591de8cf8e4',1,'stdlib.h']]],
+  ['longjmp_2960',['longjmp',['../setjmp_8h.html#abca8bbfed32ab95dd694dddf12096dc5',1,'setjmp.h']]],
+  ['lowest_2961',['lowest',['../structstd_1_1__numeric__limits__helper.html#a586a1842deb0a00555b153ae7f7334e4',1,'std::_numeric_limits_helper::lowest()'],['../structstd_1_1__numeric__limits__helper_3_01T_00_01true_01_4.html#ab96cfd3deb3682bf0ca1bdf11f5023ef',1,'std::_numeric_limits_helper&lt; T, true &gt;::lowest()']]]
 ];

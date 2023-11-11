@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['weof_4740',['WEOF',['../wchar_8h.html#a00d21696ad5bdb60d9aec03e3e5d9086',1,'wchar.h']]],
-  ['wram_5foff_4741',['WRAM_OFF',['../nes-mmc3_2mapper_8h.html#a258223195fde096e3f202498a3722c9d',1,'mapper.h']]],
-  ['wram_5fon_4742',['WRAM_ON',['../nes-mmc3_2mapper_8h.html#a6d471844d2443c9090f919bde76fc4fe',1,'mapper.h']]],
-  ['wram_5fread_5fonly_4743',['WRAM_READ_ONLY',['../nes-mmc3_2mapper_8h.html#ac06f8206b17296047089d0b8e4de7d87',1,'mapper.h']]]
+  ['unlock_5fmissile_4853',['UNLOCK_MISSILE',['../atari2600__constants_8h.html#a875f60de490e22bd71d1c58c234ebae2',1,'atari2600_constants.h']]]
 ];

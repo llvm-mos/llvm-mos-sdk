@@ -4,6 +4,7 @@ project(test-nes-gtrom LANGUAGES C)
 
 include(../test.cmake)
 
+# NESTopia has trouble with the GTROM mapper
 add_mesen_test(minimal)
 add_mesen_test(prg-rom-512)
 add_mesen_test(prg-rom-banked-call)

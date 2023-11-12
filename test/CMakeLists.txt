@@ -17,6 +17,7 @@ function(add_test_target target)
       -DMESEN_COMMAND=${MESEN_COMMAND}
       -DEMUTEST_COMMAND=${EMUTEST_COMMAND}
       -DLIBRETRO_STELLA_CORE=${LIBRETRO_STELLA_CORE}
+      -DLIBRETRO_NESTOPIA_CORE=${LIBRETRO_NESTOPIA_CORE}
       -DCMAKE_C_FLAGS=${config_flag}
       -DCMAKE_CXX_FLAGS=${config_flag}
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_SOURCE_DIR}/cmake/llvm-mos-toolchain.cmake

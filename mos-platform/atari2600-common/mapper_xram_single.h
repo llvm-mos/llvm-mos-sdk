@@ -9,6 +9,8 @@
 #ifndef _MAPPER_XRAM_H_
 #define _MAPPER_XRAM_H_
 
+#include <mapper.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -23,9 +25,11 @@ typedef unsigned char ram_bank_t;
 // For example, DECLARE_XRAM_VARIABLE(0, int my_var)
 // creates two variables: my_var_read and my_var_write.
 // NOTE: These variables are not initialized by default.
-#define DECLARE_XRAM_VARIABLE(index, declaration) \
+#define _DECLARE_XRAM_VARIABLE(index, declaration) \
     __attribute__((section(".xram" #index "_read"))) volatile const declaration##_read; \
     __attribute__((section(".xram" #index "_write"))) volatile declaration##_write;
+
+#define DECLARE_XRAM_VARIABLE(index, declaration) _DECLARE_XRAM_VARIABLE(index, declaration)
 
 // Switch in a RAM bank.
 void ram_select(ram_bank_t bank_id);

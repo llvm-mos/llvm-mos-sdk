@@ -74,7 +74,17 @@ $(function() {
 <div class="title">mapper_xram_single.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;mapper.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for mapper_xram_single.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="mapper__xram__single_8h__incl.png" border="0" usemap="#atari2600-common_2mapper__xram__single_8h" alt=""/></div>
+<map name="atari2600-common_2mapper__xram__single_8h" id="atari2600-common_2mapper__xram__single_8h">
+<area shape="rect" title=" " alt="" coords="5,5,205,47"/>
+<area shape="rect" title=" " alt="" coords="64,95,147,121"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="mapper__xram__single_8h__dep__incl.png" border="0" usemap="#atari2600-common_2mapper__xram__single_8hdep" alt=""/></div>
@@ -88,7 +98,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:afa88e5a6282a24eda759f8e58121a4bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mapper__xram__single_8h.html#afa88e5a6282a24eda759f8e58121a4bf">DECLARE_XRAM_VARIABLE</a>(<a class="el" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>,  declaration)</td></tr>
+<tr class="memitem:acf10b6d9ab003816ee44406e29c7519c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mapper__xram__single_8h.html#acf10b6d9ab003816ee44406e29c7519c">_DECLARE_XRAM_VARIABLE</a>(<a class="el" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>,  declaration)</td></tr>
+<tr class="separator:acf10b6d9ab003816ee44406e29c7519c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa88e5a6282a24eda759f8e58121a4bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mapper__xram__single_8h.html#afa88e5a6282a24eda759f8e58121a4bf">DECLARE_XRAM_VARIABLE</a>(<a class="el" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>,  declaration)&#160;&#160;&#160;<a class="el" href="mapper__xram__single_8h.html#acf10b6d9ab003816ee44406e29c7519c">_DECLARE_XRAM_VARIABLE</a>(<a class="el" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>, declaration)</td></tr>
 <tr class="separator:afa88e5a6282a24eda759f8e58121a4bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -111,6 +123,36 @@ Variables</h2></td></tr>
 <tr class="separator:a3c7086d577e56891127c05fc2f7cd43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="acf10b6d9ab003816ee44406e29c7519c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf10b6d9ab003816ee44406e29c7519c">&#9670;&nbsp;</a></span>_DECLARE_XRAM_VARIABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _DECLARE_XRAM_VARIABLE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><a class="el" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">declaration&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    __attribute__((section(<span class="stringliteral">&quot;.xram&quot;</span> #<a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a> <span class="stringliteral">&quot;_read&quot;</span>))) <span class="keyword">volatile</span> <span class="keyword">const</span> declaration##_read; \</div>
+<div class="line">    __attribute__((section(<span class="stringliteral">&quot;.xram&quot;</span> #<a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a> <span class="stringliteral">&quot;_write&quot;</span>))) <span class="keyword">volatile</span> declaration##_write;</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="afa88e5a6282a24eda759f8e58121a4bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa88e5a6282a24eda759f8e58121a4bf">&#9670;&nbsp;</a></span>DECLARE_XRAM_VARIABLE</h2>
 
@@ -132,13 +174,11 @@ Variables</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="mapper__xram__single_8h.html#acf10b6d9ab003816ee44406e29c7519c">_DECLARE_XRAM_VARIABLE</a>(<a class="el" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a>, declaration)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    __attribute__((section(<span class="stringliteral">&quot;.xram&quot;</span> #<a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a> <span class="stringliteral">&quot;_read&quot;</span>))) <span class="keyword">volatile</span> <span class="keyword">const</span> declaration##_read; \</div>
-<div class="line">    __attribute__((section(<span class="stringliteral">&quot;.xram&quot;</span> #<a class="code" href="nesdoug_8h.html#a8f564a8b3781dfabef60c05915da85f8">index</a> <span class="stringliteral">&quot;_write&quot;</span>))) <span class="keyword">volatile</span> declaration##_write;</div>
-</div><!-- fragment -->
+
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>

@@ -1,0 +1,7 @@
+<map id="nes&#45;unrom&#45;512/mapper.h" name="nes&#45;unrom&#45;512/mapper.h">
+<area shape="rect" id="node1" title=" " alt="" coords="124,5,311,32"/>
+<area shape="rect" id="node2" href="$mapper__macros_8h.html" title=" " alt="" coords="229,80,429,121"/>
+<area shape="rect" id="node5" href="$mapper__xram__single_8h.html" title=" " alt="" coords="5,80,205,121"/>
+<area shape="rect" id="node3" href="$atari2600-3e_2mapper_8h.html" title=" " alt="" coords="35,169,205,196"/>
+<area shape="rect" id="node4" href="$atari2600-4k_2mapper_8h.html" title=" " alt="" coords="244,169,415,196"/>
+</map>

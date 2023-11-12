@@ -72,16 +72,19 @@ $(function() {
 <div class="title">mapper.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="mapper__rom__single_8h_source.html">mapper_rom_single.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="mapper__macros_8h_source.html">mapper_macros.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="mapper__rom__single_8h_source.html">mapper_rom_single.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="mapper__xram__single_8h_source.html">mapper_xram_single.h</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for mapper.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="atari2600-3e_2mapper_8h__incl.png" border="0" usemap="#atari2600-3e_2mapper_8h" alt=""/></div>
 <map name="atari2600-3e_2mapper_8h" id="atari2600-3e_2mapper_8h">
-<area shape="rect" title=" " alt="" coords="96,5,267,32"/>
-<area shape="rect" href="mapper__rom__single_8h.html" title=" " alt="" coords="5,80,168,107"/>
-<area shape="rect" href="mapper__xram__single_8h.html" title=" " alt="" coords="192,80,363,107"/>
+<area shape="rect" title=" " alt="" coords="164,5,335,32"/>
+<area shape="rect" href="mapper__macros_8h.html" title=" " alt="" coords="5,80,144,107"/>
+<area shape="rect" href="mapper__rom__single_8h.html" title=" " alt="" coords="168,80,331,107"/>
+<area shape="rect" href="mapper__xram__single_8h.html" title=" " alt="" coords="355,80,525,107"/>
+<area shape="rect" title=" " alt="" coords="216,155,299,181"/>
 </map>
 </div>
 </div>
@@ -103,8 +106,6 @@ Macros</h2></td></tr>
 <tr class="separator:a5da09537971c90a129e946dc25625a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32f2ed39d3bf9fed27909904ead044f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="atari2600-3e_2mapper_8h.html#a32f2ed39d3bf9fed27909904ead044f4">MAPPER_XRAM_WRITE</a>&#160;&#160;&#160;0x1400</td></tr>
 <tr class="separator:a32f2ed39d3bf9fed27909904ead044f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d2530037526c897027704b0009857cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="atari2600-3e_2mapper_8h.html#a3d2530037526c897027704b0009857cc">MAPPER_CART_ROM_KB</a>(kb)&#160;&#160;&#160;asm(&quot;.globl __cart_rom_size\n__cart_rom_size = &quot; #kb)</td></tr>
-<tr class="separator:a3d2530037526c897027704b0009857cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -134,24 +135,6 @@ Typedefs</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define MAPPER_BANKED_ROM_SIZE&#160;&#160;&#160;0x800</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3d2530037526c897027704b0009857cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d2530037526c897027704b0009857cc">&#9670;&nbsp;</a></span>MAPPER_CART_ROM_KB</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MAPPER_CART_ROM_KB</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">kb</td><td>)</td>
-          <td>&#160;&#160;&#160;asm(&quot;.globl __cart_rom_size\n__cart_rom_size = &quot; #kb)</td>
         </tr>
       </table>
 </div><div class="memdoc">

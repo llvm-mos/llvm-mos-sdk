@@ -14,6 +14,7 @@ install(FILES
   atari2600.h
   atari2600_constants.h
   vcslib.h
+  mapper_macros.h
   mapper_rom_single.h
   mapper_rom_multi.h
   mapper_xram_single.h

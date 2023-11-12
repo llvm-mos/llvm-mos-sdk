@@ -13,9 +13,7 @@
 #define MAPPER_XRAM_READ 0x1000
 #define MAPPER_XRAM_WRITE 0x1400
 
-#define MAPPER_CART_ROM_KB(kb) \
-    asm(".globl __cart_rom_size\n__cart_rom_size = " #kb)
-
+#include <mapper_macros.h>
 #include <mapper_rom_single.h>
 #include <mapper_xram_single.h>
 

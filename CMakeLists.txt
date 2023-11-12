@@ -51,6 +51,14 @@ if(NOT CMAKE_CROSSCOMPILING)
   find_program(MESEN_COMMAND NAMES mesen Mesen.exe)
   message(STATUS "Mesen NES emulator: ${MESEN_COMMAND}")
 
+  find_program(EMUTEST_COMMAND NAMES emutest emutest.exe)
+  message(STATUS "Emutest test runner: ${EMUTEST_COMMAND}")
+
+  find_library(LIBRETRO_STELLA_CORE
+    NAMES stella2014_libretro.so stella2014_libretro.dylib stella2014_libretro.dll
+    PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
+  message(STATUS "Libretro Stella core: ${LIBRETRO_STELLA_CORE}")
+
   # Install toolchain and config file for users of find_package(llvm-mos-sdk).
   # CMake's find_package logic will discover
   # `$PATH/../lib/cmake/llvm-mos-sdk/llvm-mos-sdk-config.cmake` which in turn

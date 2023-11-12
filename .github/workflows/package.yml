@@ -12,13 +12,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2019, macos-latest, ubuntu-20.04]
+        os: [windows-2019, macos-latest, ubuntu-22.04]
     steps:
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard libgtk2.0-0 xvfb
+          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard libgtk2.0-0 xvfb alien git
           MESEN_DIR=$(mktemp -d)
           echo "MESEN_DIR=$MESEN_DIR" >> $GITHUB_ENV
           cd $MESEN_DIR
@@ -28,6 +32,17 @@ jobs:
           echo '#!/bin/sh' > mesen
           echo "xvfb-run -a /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
           chmod +x mesen
+          # Install Libretro Stella2014 core
+          LIBRETRO_DIR=$(mktemp -d)
+          echo "LIBRETRO_DIR=$LIBRETRO_DIR" >> $GITHUB_ENV
+          cd $LIBRETRO_DIR
+          curl -O https://rpmfind.net/linux/fedora/linux/releases/37/Everything/x86_64/os/Packages/l/libretro-stella2014-0-0.7.20220409git1351a4f.12.fc37.x86_64.rpm
+          sudo alien libretro-stella2014*.rpm
+          sudo dpkg -i libretro-stella2014*.deb
+          # Install emutest test runner
+          git clone https://github.com/sehugg/emutest $LIBRETRO_DIR/emutest
+          cd $LIBRETRO_DIR/emutest
+          go install
 
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')

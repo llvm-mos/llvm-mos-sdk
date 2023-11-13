@@ -45,6 +45,9 @@
 #ifndef _CBM_H
 #define _CBM_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 /* Check for errors */
@@ -326,6 +329,10 @@ unsigned char __fastcall__ cbm_readdir (unsigned char lfn,
 void __fastcall__ cbm_closedir (unsigned char lfn);
 /* Closes directory by cbm_close(lfn) */
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 /* End of cbm.h */

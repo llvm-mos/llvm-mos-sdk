@@ -1,18 +1,21 @@
 include(CTest)
 
-add_library(test-lib ${CMAKE_CURRENT_SOURCE_DIR}/../test-lib.c)
-target_include_directories(test-lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)
+add_library(test-lib-mesen ${CMAKE_CURRENT_SOURCE_DIR}/../test-lib-mesen.c)
+target_include_directories(test-lib-mesen PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)
+
+add_library(test-lib-emutest ${CMAKE_CURRENT_SOURCE_DIR}/../test-lib-emutest.c)
+target_include_directories(test-lib-emutest PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)
 
 function(add_mesen_test name)
   add_executable(${name} ${name}.c)
-  target_link_libraries(${name} test-lib)
+  target_link_libraries(${name} test-lib-mesen)
   add_test(NAME test-${name} COMMAND ${MESEN_COMMAND} --testrunner
            $<TARGET_FILE:${name}> ${CMAKE_CURRENT_SOURCE_DIR}/../mesen.lua)
 endfunction()
 
 function(add_emutest_test name binext source_dir libretro_core)
   add_executable(${name}.${binext} ${source_dir}/${name}.c)
-  target_link_libraries(${name}.${binext} test-lib)
+  target_link_libraries(${name}.${binext} test-lib-emutest)
   get_property(libretro_shared_lib VARIABLE PROPERTY ${libretro_core})
   add_test(NAME test-${name} COMMAND ${EMUTEST_COMMAND} -T
     -L ${libretro_shared_lib}

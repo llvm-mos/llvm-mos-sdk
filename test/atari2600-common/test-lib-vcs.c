@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "test-lib.h"
+#include "test-lib-emutest.h"
 
 // show a nice message on the CRT so that the emulators are happy
 

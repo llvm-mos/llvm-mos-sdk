@@ -12,37 +12,41 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2019, macos-latest, ubuntu-22.04]
+        os: [windows-2019, macos-latest, ubuntu-20.04]
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.21'
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard libgtk2.0-0 xvfb alien git
-          MESEN_DIR=$(mktemp -d)
-          echo "MESEN_DIR=$MESEN_DIR" >> $GITHUB_ENV
-          cd $MESEN_DIR
+          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard libgtk2.0-0 xvfb git
+          TESTTOOLS_DIR=$(mktemp -d)
+          echo "TESTTOOLS_DIR=$TESTTOOLS_DIR" >> $GITHUB_ENV
+          cd ${TESTTOOLS_DIR}
+          #curl -Lo Mesen.exe https://github.com/NovaSquirrel/Mesen-X/releases/download/1.0.2/Mesen.exe
           curl -Lo mesen.zip https://github.com/NovaSquirrel/Mesen-X/releases/download/1.0.1/Mesen-Linux.2022-05-14.zip
           unzip mesen.zip
           chmod +x Mesen.exe
           echo '#!/bin/sh' > mesen
           echo "xvfb-run -a /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
           chmod +x mesen
-          # Install Libretro Stella2014 core
-          LIBRETRO_DIR=$(mktemp -d)
-          echo "LIBRETRO_DIR=$LIBRETRO_DIR" >> $GITHUB_ENV
-          cd $LIBRETRO_DIR
-          curl -O https://rpmfind.net/linux/fedora/linux/releases/37/Everything/x86_64/os/Packages/l/libretro-stella2014-0-0.7.20220409git1351a4f.12.fc37.x86_64.rpm
-          sudo alien libretro-stella2014*.rpm
-          sudo dpkg -i libretro-stella2014*.deb
-          # Install emutest test runner
-          git clone https://github.com/sehugg/emutest $LIBRETRO_DIR/emutest
-          cd $LIBRETRO_DIR/emutest
-          go install
+      - name: Set up Go
+        if: startsWith(matrix.os, 'ubuntu')
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+      - name: Install Libretro cores and Emutest test runner.
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          LIBRETRO_DIR=$TESTTOOLS_DIR/libretro
+          mkdir -p $LIBRETRO_DIR
+          cd $TESTTOOLS_DIR
+          git clone https://github.com/libretro/stella2014-libretro
+          cd stella2014-libretro
+          make --silent -j 4
+          mv stella2014_libretro.so $LIBRETRO_DIR
+          git clone https://github.com/sehugg/emutest $TESTTOOLS_DIR/emutest
+          cd $TESTTOOLS_DIR/emutest
+          go install    # can't "go install <url>" b/c module is forked
 
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
@@ -56,7 +60,7 @@ jobs:
 
       - name: Copy Mesen settings file.
         if: startsWith(matrix.os, 'ubuntu')
-        run: cp test/mesen_settings.xml ${{ env.MESEN_DIR }}/settings.xml
+        run: cp test/mesen_settings.xml ${{ env.TESTTOOLS_DIR }}/settings.xml
 
       - name: Fetch the latest Ubuntu llvm-mos release.
         if: startsWith(matrix.os, 'ubuntu')
@@ -75,10 +79,14 @@ jobs:
           tar -xvf llvm-mos-darwin-main.tar.xz
 
       - name: Build the SDK.
+        env:
+          CMAKE_INSTALL_PREFIX: ${{ github.workspace }}/llvm-mos
+          MESEN_DIR: ${{ env.TESTTOOLS_DIR }}
+          LIBRETRO_CORES_DIR: ${{ env.TESTTOOLS_DIR }}/libretro
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DMESEN_COMMAND=${{ env.MESEN_DIR }}/mesen -G "Ninja" ..
+          cmake -DCMAKE_INSTALL_PREFIX=${{ env.CMAKE_INSTALL_PREFIX }} -DMESEN_COMMAND=${{ env.MESEN_DIR }}/mesen -G "Ninja" ..
           ninja install
 
       - name: Test the SDK.

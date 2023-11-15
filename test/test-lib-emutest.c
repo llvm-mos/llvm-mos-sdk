@@ -8,9 +8,15 @@
 const char signature_pass[SIGNATURE_SIZE] = "TestPass";
 const char signature_fail[SIGNATURE_SIZE] = "TestFail";
 
+#ifdef __NES__
+// NES tests currently can't spare a byte
+// so we'll just write wherever
+#define test_result ((char*)0x180)
+#else
 // this array will contain the test signature
 // (use macro because clang requires extension for constant array size?)
 char test_result[SIGNATURE_SIZE];
+#endif
 
 // set pass/fail manually, if you can't use exit() 
 void test_set_result(bool passed) {

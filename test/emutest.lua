@@ -26,15 +26,27 @@ for i=1,1000 do
 
     local ram = get_ram()
 
+    -- look for env var "EMUTEST_FB_CRC_PASS"
+    if os.getenv("EMUTEST_FB_CRC_PASS") then
+        -- if found, check for CRC match
+        if get_fb_crc() == tonumber(os.getenv("EMUTEST_FB_CRC_PASS")) then
+            print("Test passed via get_fb_crc.")
+            screenshot(romname .. "-pass.png")
+            os.exit(0)
+        end
+    end
+
+    -- look for RAM signature
     if string.find(ram, 'TestPass') then
-        print("Test passed.")
-        print("CRC", get_fb_crc())
+        print("Test passed via RAM signature.")
         run()
+        print("FB_CRC=", get_fb_crc())
         screenshot(romname .. "-pass.png")
         os.exit(0)
     elseif string.find(ram, 'TestFail') then
-        print("Test failed.")
+        print("Test failed via RAM signature.")
         run()
+        print("FB_CRC=", get_fb_crc())
         screenshot(romname .. "-fail.png")
         os.exit(1)
     end
@@ -42,5 +54,6 @@ for i=1,1000 do
 end
 
 print("Test indeterminate.")
+print("FB_CRC=", get_fb_crc())
 screenshot(romname .. "-unknown.png")
 os.exit(2)

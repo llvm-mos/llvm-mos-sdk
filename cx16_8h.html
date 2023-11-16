@@ -376,6 +376,8 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a91c3b8e432173b045f1d8216b9c011a5"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cx16_8h.html#a91c3b8e432173b045f1d8216b9c011a5">cx16_k_bsave</a> (void *startaddr, void *endaddr_plusone) __attribute__((leaf))</td></tr>
+<tr class="separator:a91c3b8e432173b045f1d8216b9c011a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3174ed036c7285bd4213c8186ece76d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cx16_8h.html#aa3174ed036c7285bd4213c8186ece76d">cx16_k_clock_get_date_time</a> (<a class="el" href="structcx16__date__time__t.html">cx16_date_time_t</a> *datetime_ptr) __attribute__((leaf))</td></tr>
 <tr class="separator:aa3174ed036c7285bd4213c8186ece76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3676fe4a492fb7491fb4d09467d4ea90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cx16_8h.html#a3676fe4a492fb7491fb4d09467d4ea90">cx16_k_clock_set_date_time</a> (unsigned char year, unsigned char mon, unsigned char day, unsigned char hour, unsigned char min, unsigned char sec, unsigned char jif) __attribute__((leaf))</td></tr>
@@ -480,8 +482,6 @@ Functions</h2></td></tr>
 <tr class="separator:a85dd5f140a62dcb97f567fc32fb3a22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a215456a8b437560880e4df6912c6045e"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cx16_8h.html#a215456a8b437560880e4df6912c6045e">cx16_k_rdtim</a> (void) __attribute__((leaf))</td></tr>
 <tr class="separator:a215456a8b437560880e4df6912c6045e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dba208f37b981a8d497e78070cdd4a2"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cx16_8h.html#a7dba208f37b981a8d497e78070cdd4a2">cx16_k_savehl</a> (void *startaddr, void *endaddr_plusone) __attribute__((leaf))</td></tr>
-<tr class="separator:a7dba208f37b981a8d497e78070cdd4a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b667e4ad7c3cc6b43767c83fd255014"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cx16_8h.html#a2b667e4ad7c3cc6b43767c83fd255014">cx16_k_screen_mode_get</a> (<a class="el" href="structscreen__mode__info__t.html">screen_mode_info_t</a> *info_ptr) __attribute__((leaf))</td></tr>
 <tr class="separator:a2b667e4ad7c3cc6b43767c83fd255014"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fd62ac9a846cdd924f05042e46e800e"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cx16_8h.html#a6fd62ac9a846cdd924f05042e46e800e">cx16_k_screen_mode_set</a> (unsigned char <a class="el" href="memory_8h.html#a2797713f0e84f822af4da1688cc1501c">mode</a>) __attribute__((leaf))</td></tr>
@@ -2016,6 +2016,34 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a91c3b8e432173b045f1d8216b9c011a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91c3b8e432173b045f1d8216b9c011a5">&#9670;&nbsp;</a></span>cx16_k_bsave()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char cx16_k_bsave </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>startaddr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>endaddr_plusone</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa3174ed036c7285bd4213c8186ece76d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa3174ed036c7285bd4213c8186ece76d">&#9670;&nbsp;</a></span>cx16_k_clock_get_date_time()</h2>
 
@@ -3458,34 +3486,6 @@ Functions</h2></td></tr>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7dba208f37b981a8d497e78070cdd4a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dba208f37b981a8d497e78070cdd4a2">&#9670;&nbsp;</a></span>cx16_k_savehl()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned char cx16_k_savehl </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>startaddr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>endaddr_plusone</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -44,6 +44,16 @@ jobs:
           cd stella2014-libretro
           make --silent -j 4
           mv stella2014_libretro.so $LIBRETRO_DIR
+          cd $TESTTOOLS_DIR
+          git clone https://github.com/libretro/nestopia
+          cd nestopia/libretro
+          make --silent -j 4
+          mv nestopia_libretro.so $LIBRETRO_DIR
+          cd $TESTTOOLS_DIR
+          git clone https://github.com/libretro/libretro-fceumm
+          cd libretro-fceumm
+          make --silent -j 4
+          mv fceumm_libretro.so $LIBRETRO_DIR
           git clone https://github.com/sehugg/emutest $TESTTOOLS_DIR/emutest
           cd $TESTTOOLS_DIR/emutest
           go install    # can't "go install <url>" b/c module is forked

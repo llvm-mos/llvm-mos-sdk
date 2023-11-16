@@ -20,7 +20,7 @@ add_nes_test(prg-rom-64)
 add_nes_test(prg-rom-128)
 add_nes_test(prg-rom-256)
 
-add_nes_test(prg-ram)
+add_fceumm_test(prg-ram)
 
 add_nes_test(prg-ram-c)
 target_link_options(prg-ram-c.nes PRIVATE -Tcommon.ld -Tprg-rom-banked.ld -Tc-in-prg-ram-0.ld)

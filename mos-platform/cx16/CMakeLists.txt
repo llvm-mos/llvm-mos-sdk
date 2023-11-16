@@ -21,6 +21,7 @@ install(FILES cx16.inc DESTINATION ${ASMINCDIR})
 add_platform_object_file(cx16-basic-header basic-header.o basic-header.S)
 
 add_platform_library(cx16-c
+ cx16_k_bsave.s
  cx16_k_clock_get_date_time.s
  cx16_k_clock_set_date_time.s
  cx16_k_console_get_char.s
@@ -73,7 +74,6 @@ add_platform_library(cx16-c
  cx16_k_mouse_get.s
  cx16_k_mouse_scan.s
  cx16_k_rdtim.s
- cx16_k_savehl.s
  cx16_k_screen_mode_get.s
  cx16_k_screen_mode_set.s
  cx16_k_screen_set_charset.s

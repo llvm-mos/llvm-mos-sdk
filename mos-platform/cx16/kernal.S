@@ -19,7 +19,7 @@
   .global __\name
 .endm
 
-weakdef SAVEHL
+weakdef BSAVE
 weakdef KBDBUF_PEEK
 weakdef KBDBUF_GET_MODIFIERS
 weakdef KBDBUF_PUT

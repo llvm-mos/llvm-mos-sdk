@@ -5,8 +5,10 @@
 
 // The emutest runner expects to find one of two
 // signatures in main RAM.
-const char signature_pass[SIGNATURE_SIZE] = "TestPass";
-const char signature_fail[SIGNATURE_SIZE] = "TestFail";
+// These are encoded to avoid false positives: encoded_char = plain_char + 1
+// the section attribute is because clang still wants to put it into the data section (TODO?)
+__attribute__((section(".rodata"))) static const char signature_pass[SIGNATURE_SIZE] = "UftuQbtt"; // "TestPass";
+__attribute__((section(".rodata"))) static const char signature_fail[SIGNATURE_SIZE] = "UftuGbjm"; // "TestFail";
 
 // this array will contain the test signature
 // (use macro because clang requires extension for constant array size?)
@@ -14,11 +16,19 @@ char test_result[SIGNATURE_SIZE];
 
 // set pass/fail manually, if you can't use exit() 
 void test_set_result(bool passed) {
-  if (passed) {
-    memcpy(test_result, signature_pass, SIGNATURE_SIZE);
-  } else {
-    memcpy(test_result, signature_fail, SIGNATURE_SIZE);
+  const char* const sig = passed ? signature_pass : signature_fail;
+  for (int i=0; i<SIGNATURE_SIZE; i++) {
+    test_result[i] = sig[i] - 1;
   }
+}
+
+bool test_has_result(bool passed) {
+  const char* const sig = passed ? signature_pass : signature_fail;
+  for (int i=0; i<SIGNATURE_SIZE; i++) {
+    if (test_result[i] != sig[i] - 1)
+      return false;
+  }
+  return true;
 }
 
 __attribute__((noreturn)) void _exit(int status) {

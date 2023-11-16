@@ -40,8 +40,8 @@ CODE_BANK(KERNEL_BANK) static void testlib_doframe(void) {
   char bgcolor;
   const char* pfmap;
   // Pass or fail?
-  bool pass = !strncmp(test_result, signature_pass, SIGNATURE_SIZE);
-  bool fail = !strncmp(test_result, signature_fail, SIGNATURE_SIZE);
+  bool pass = test_has_result(true);
+  bool fail = test_has_result(false);
   // Set color
   if (pass) {
     bgcolor = 0xc8;

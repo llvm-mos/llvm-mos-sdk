@@ -48,10 +48,10 @@ if(NOT CMAKE_CROSSCOMPILING)
     endif()
   endif()
 
-  find_program(MESEN_COMMAND NAMES mesen Mesen.exe)
+  find_program(MESEN_COMMAND NAMES mesen Mesen.exe ENV MESEN_DIR)
   message(STATUS "Mesen NES emulator: ${MESEN_COMMAND}")
 
-  find_program(EMUTEST_COMMAND NAMES emutest emutest.exe)
+  find_program(EMUTEST_COMMAND NAMES emutest emutest.exe ENV EMUTEST_DIR)
   message(STATUS "Emutest test runner: ${EMUTEST_COMMAND}")
 
   find_library(LIBRETRO_STELLA_CORE

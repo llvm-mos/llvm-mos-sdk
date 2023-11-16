@@ -14,7 +14,7 @@
 
 #ifdef __CX16__
   ; CX16 extended jump table
-  SAVEHL                        = $FEBA
+  BSAVE                         = $FEBA
   KBDBUF_PEEK                   = $FEBD
   KBDBUF_GET_MODIFIERS          = $FEC0
   KBDBUF_PUT                    = $FEC3

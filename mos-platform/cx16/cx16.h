@@ -397,6 +397,7 @@ typedef struct
 } screen_mode_info_t;   /* cx16_k_screen_mode_get() */
 
 /* Kernal-level functions */
+unsigned char cx16_k_bsave(void *startaddr, void *endaddr_plusone) __attribute__((leaf)); // returns 0 on success
 void cx16_k_clock_get_date_time(cx16_date_time_t *datetime_ptr) __attribute__((leaf));
 void cx16_k_clock_set_date_time(unsigned char year, unsigned char mon, unsigned char day, unsigned char hour, unsigned char min, unsigned char sec, unsigned char jif) __attribute__((leaf));
 unsigned char cx16_k_console_get_char(void) __attribute__((leaf));
@@ -449,7 +450,6 @@ void cx16_k_mouse_config(unsigned char showmouse, unsigned char xsize8, unsigned
 unsigned char cx16_k_mouse_get(mouse_pos_t *mouse_pos_ptr) __attribute__((leaf));	// returns mouse button byte
 void cx16_k_mouse_scan(void) __attribute__((leaf));
 unsigned long cx16_k_rdtim(void) __attribute__((leaf));
-unsigned char cx16_k_savehl(void *startaddr, void *endaddr_plusone) __attribute__((leaf)); // returns 0 on success
 unsigned char cx16_k_screen_mode_get(screen_mode_info_t *info_ptr) __attribute__((leaf)); // returns 0 on success
 unsigned char cx16_k_screen_mode_set(unsigned char mode) __attribute__((leaf)); // returns 0 on success
 void cx16_k_screen_set_charset(unsigned char charset_type, void *charsetaddr) __attribute__((leaf));

@@ -209,6 +209,7 @@ unsigned char cbm_k_acptr (void);
 unsigned char cbm_k_basin (void);
 void cbm_k_bsout (unsigned char C);
 unsigned char cbm_k_chkin (unsigned char FN) __attribute__((leaf));
+unsigned char cbm_k_chkout (unsigned char FN) __attribute__((leaf));
 unsigned char cbm_k_chrin (void);
 void cbm_k_chrout (unsigned char C);
 void cbm_k_cint (void);

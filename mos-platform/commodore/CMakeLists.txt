@@ -27,6 +27,7 @@ add_platform_library(commodore-c
   cbm_k_basin.c
   cbm_k_bsout.c
   cbm_k_chkin.s
+  cbm_k_chkout.s
   cbm_k_chrin.c
   cbm_k_chrout.c
   cbm_k_cint.c

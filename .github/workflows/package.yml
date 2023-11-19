@@ -1,5 +1,10 @@
 name: Package
 concurrency: sdk-package
+env:
+  TEST_TOOLS_DIR: ${{ github.workspace }}/tt
+  MESEN_DIR: ${{ github.workspace }}/tt/mesen
+  EMUTEST_DIR: ${{ github.workspace }}/tt/emutest
+  LIBRETRO_CORES_DIR: ${{ github.workspace }}/tt/libretro
 on:
   push:
     branches: [ main ]
@@ -8,8 +13,68 @@ on:
   workflow_dispatch:
   repository_dispatch:
 jobs:
+  build-test-tools:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cache test tools
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.TEST_TOOLS_DIR }}
+          key: ${{ runner.os }}-test-tools-${{ github.workflow_sha }}
+      - name: Set up Go
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+      - name: Build Emutest binary
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/sehugg/emutest
+          cd emutest
+          go install
+          mkdir -p ${{ env.EMUTEST_DIR }}
+          GOPATH=$(go env GOPATH)
+          cp $GOPATH/bin/emutest ${{ env.EMUTEST_DIR }}
+      - name: Fetch Mesen-X (Mono version)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ${{ env.MESEN_DIR }}
+          cd ${{ env.MESEN_DIR }}
+          curl -Lo mesen.zip https://github.com/NovaSquirrel/Mesen-X/releases/download/1.0.1/Mesen-Linux.2022-05-14.zip
+          unzip mesen.zip
+          chmod +x Mesen.exe
+          echo '#!/bin/sh' > mesen
+          echo "xvfb-run -a /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
+          chmod +x mesen
+      - name: Build Stella2014 core
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/libretro/stella2014-libretro
+          cd stella2014-libretro
+          make --silent -j 4
+          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
+          mv stella2014_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+      - name: Build FCEUmm core
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/libretro/libretro-fceumm
+          cd libretro-fceumm
+          make --silent -j 4
+          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
+          mv fceumm_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+      - name: Build Mesen-X core
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/NovaSquirrel/Mesen-X
+          cd Mesen-X/Libretro
+          make --silent -j 4
+          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
+          mv mesen_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+
   package:
     runs-on: ${{ matrix.os }}
+    needs: build-test-tools
     strategy:
       matrix:
         os: [windows-2019, macos-latest, ubuntu-20.04]
@@ -18,20 +83,12 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard libgtk2.0-0 xvfb
-          MESEN_DIR=$(mktemp -d)
-          echo "MESEN_DIR=$MESEN_DIR" >> $GITHUB_ENV
-          cd $MESEN_DIR
-          curl -Lo mesen.zip https://github.com/NovaSquirrel/Mesen-X/releases/download/1.0.1/Mesen-Linux.2022-05-14.zip
-          unzip mesen.zip
-          chmod +x Mesen.exe
-          echo '#!/bin/sh' > mesen
-          echo "xvfb-run -a /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
-          chmod +x mesen
+          sudo apt-get -y install doxygen graphviz ninja-build mono-complete libsdl2-2.0 gnome-themes-standard libgtk2.0-0 xvfb git
 
       - name: Install Windows build dependencies.
         if: startsWith(matrix.os, 'windows')
         run: choco install curl ninja
+
       - name: Install MacOS tools
         if: startsWith(matrix.os, 'macos')
         run: brew update && brew install ninja
@@ -39,9 +96,17 @@ jobs:
       - name: Check out the SDK.
         uses: actions/checkout@v2
 
+      - name: Restore test tools
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.TEST_TOOLS_DIR }}
+          key: ${{ runner.os }}-test-tools-${{ github.workflow_sha }}
+          restore-keys: |
+            ${{ runner.os }}-test-tools-
+
       - name: Copy Mesen settings file.
         if: startsWith(matrix.os, 'ubuntu')
-        run: cp test/mesen_settings.xml ${{ env.MESEN_DIR }}/settings.xml
+        run: cp test/mesen_settings.xml ${{ env.TEST_TOOLS_DIR }}/mesen/settings.xml
 
       - name: Fetch the latest Ubuntu llvm-mos release.
         if: startsWith(matrix.os, 'ubuntu')

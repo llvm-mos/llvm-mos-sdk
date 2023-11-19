@@ -6,7 +6,7 @@ target_include_directories(test-lib-mesen PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../
 add_library(test-lib-emutest ${CMAKE_CURRENT_SOURCE_DIR}/../test-lib-emutest.c)
 target_include_directories(test-lib-emutest PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)
 
-function(add_mesen_test name)
+function(add_mesen_mono_test name)
   add_executable(${name} ${name}.c)
   target_link_libraries(${name} test-lib-mesen)
   add_test(NAME test-${name} COMMAND ${MESEN_COMMAND} --testrunner
@@ -54,13 +54,5 @@ function(add_nes_test name)
   if(ARGC GREATER 1)
     set(source_dir ${ARGV1})
   endif()
-  add_emutest_test(${name} nes ${source_dir} LIBRETRO_NESTOPIA_CORE)
-endfunction()
-
-function(add_fceumm_test name)
-  set(source_dir ".")
-  if(ARGC GREATER 1)
-    set(source_dir ${ARGV1})
-  endif()
-  add_emutest_test(${name} nes ${source_dir} LIBRETRO_FCEUMM_CORE)
+  add_emutest_test(${name} nes ${source_dir} LIBRETRO_MESEN_CORE)
 endfunction()

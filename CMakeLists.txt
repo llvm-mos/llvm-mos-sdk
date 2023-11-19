@@ -60,13 +60,13 @@ if(NOT CMAKE_CROSSCOMPILING)
     PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
   message(STATUS "Libretro Stella core: ${LIBRETRO_STELLA_CORE}")
 
-  find_library(LIBRETRO_NESTOPIA_CORE
-    NAMES nestopia_libretro.so nestopia_libretro.dylib nestopia_libretro.dll
-    PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
-  message(STATUS "Libretro Nestopia core: ${LIBRETRO_NESTOPIA_CORE}")
-
   find_library(LIBRETRO_FCEUMM_CORE
     NAMES fceumm_libretro.so fceumm_libretro.dylib fceumm_libretro.dll
+    PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
+  message(STATUS "Libretro FCEUMM core: ${LIBRETRO_FCEUMM_CORE}")
+
+  find_library(LIBRETRO_MESEN_CORE
+    NAMES mesen_libretro.so mesen_libretro.dylib mesen_libretro.dll
     PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
   message(STATUS "Libretro FCEUMM core: ${LIBRETRO_FCEUMM_CORE}")
 

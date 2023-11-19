@@ -36,12 +36,11 @@ jobs:
           mkdir -p ${{ env.EMUTEST_DIR }}
           GOPATH=$(go env GOPATH)
           cp $GOPATH/bin/emutest ${{ env.EMUTEST_DIR }}
-      - name: Fetch Mesen
+      - name: Fetch Mesen-X (Mono version)
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p ${{ env.MESEN_DIR }}
           cd ${{ env.MESEN_DIR }}
-          #curl -Lo Mesen.exe https://github.com/NovaSquirrel/Mesen-X/releases/download/1.0.2/Mesen.exe
           curl -Lo mesen.zip https://github.com/NovaSquirrel/Mesen-X/releases/download/1.0.1/Mesen-Linux.2022-05-14.zip
           unzip mesen.zip
           chmod +x Mesen.exe
@@ -56,14 +55,6 @@ jobs:
           make --silent -j 4
           mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
           mv stella2014_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
-      - name: Build Nestopia core
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          git clone https://github.com/libretro/nestopia
-          cd nestopia/libretro
-          make --silent -j 4
-          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
-          mv nestopia_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
       - name: Build FCEUmm core
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -72,6 +63,14 @@ jobs:
           make --silent -j 4
           mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
           mv fceumm_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+      - name: Build Mesen-X core
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/NovaSquirrel/Mesen-X
+          cd Mesen-X/Libretro
+          make --silent -j 4
+          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
+          mv mesen_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
 
   package:
     runs-on: ${{ matrix.os }}

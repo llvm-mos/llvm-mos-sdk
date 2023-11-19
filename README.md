@@ -290,3 +290,36 @@ $ ninja install
 ```
 
 The complete SDK will now be present in the install prefix.
+
+### Run Unit Tests
+
+#### NES (legacy Mesen Mono version tests)
+
+Install [Mesen-X](https://github.com/NovaSquirrel/Mesen-X/releases) and its dependencies.
+
+Set the `MESEN_DIR` environment variable to the folder containing the Mesen.exe executable before running CMake for the first time.
+Copy `test/mesen_settings.xml` to this folder.
+
+#### Libretro tests (Atari 2600, etc.)
+
+Install emutest (requires Go 1.21):
+```console
+$ go install https://github.com/kivutar/emutest
+```
+
+Make sure `$GOBIN` (usually `~/go/bin`) is included in your PATH environment variable so that CMake can find the binary, or set the `EMUTEST_DIR` environment variable to point to this directory before running `cmake -G` for the first time.
+
+Build Libretro cores for desired target(s):
+
+* Atari 2600 - https://github.com/libretro/stella2014-libretro
+* NES - https://github.com/NovaSquirrel/Mesen-X
+
+Copy the output Libretro core library files (they have extensions .so | .dylib | .dll) to a shared directory, maybe `$HOME/libretro`.
+Set the `LIBRETRO_CORES_DIR` environment variable to this folder before running `cmake -G` for the first time.
+
+#### Run a test project
+
+```console
+$ ninja test            # run all test projects
+$ ninja test-nes-nrom   # run a specific test project, e.g. nes-nrom
+```

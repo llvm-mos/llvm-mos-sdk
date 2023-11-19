@@ -1,5 +1,4 @@
 #include <peekpoke.h>
-#include <string.h>
 
 __attribute__((noreturn)) void _exit(int status) {
   // This is an unused APU test register, so it should be safe to use writing to

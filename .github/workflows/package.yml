@@ -128,7 +128,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DMESEN_COMMAND=${{ env.MESEN_DIR }}/mesen -G "Ninja" ..
+          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DMESEN_COMMAND=${{ env.MESEN_DIR }}/mesen -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -G "Ninja" ..
           ninja install
 
       - name: Test the SDK.

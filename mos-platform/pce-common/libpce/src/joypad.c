@@ -17,8 +17,8 @@ uint8_t pce_joypad_wr(uint8_t value) {
 }
 
 __attribute__((noinline)) uint8_t pce_joypad_next(void) {
-  uint8_t low = pce_joypad_wr(0);
   uint8_t high = pce_joypad_wr(JOYPAD_SEL);
+  uint8_t low = pce_joypad_wr(0);
   return (low & 0xF) | (high << 4);
 }
 

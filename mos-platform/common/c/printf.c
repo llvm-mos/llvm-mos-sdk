@@ -941,8 +941,7 @@ static int _vsnprintf(out_fct_type out, char *buffer, const size_t maxlen,
 int printf(const char *format, ...) {
   va_list va;
   va_start(va, format);
-  char buffer[1];
-  const int ret = _vsnprintf(_out_char, buffer, (size_t)-1, format, va);
+  const int ret = vprintf(format, va);
   va_end(va);
   return ret;
 }
@@ -950,7 +949,7 @@ int printf(const char *format, ...) {
 int sprintf(char *buffer, const char *format, ...) {
   va_list va;
   va_start(va, format);
-  const int ret = _vsnprintf(_out_buffer, buffer, (size_t)-1, format, va);
+  const int ret = vsnprintf(buffer, (size_t)-1, format, va);
   va_end(va);
   return ret;
 }
@@ -958,7 +957,7 @@ int sprintf(char *buffer, const char *format, ...) {
 int snprintf(char *buffer, size_t count, const char *format, ...) {
   va_list va;
   va_start(va, format);
-  const int ret = _vsnprintf(_out_buffer, buffer, count, format, va);
+  const int ret = vsnprintf(buffer, count, format, va);
   va_end(va);
   return ret;
 }

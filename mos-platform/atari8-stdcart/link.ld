@@ -6,7 +6,7 @@ ASSERT(__cart_rom_size == 8 || __cart_rom_size == 16,
 MEMORY {
   zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
 
-  /* 0x700 works w/o DOS. */
+  /* Memory as low as 0x700 works when not using DOS. */
   ram (w) : ORIGIN = 0x700, LENGTH = 0x2000 - 0x700
 
   cart_rom (rx) : ORIGIN = __cart_rom_size == 16 ? 0x8000 : 0xA000,

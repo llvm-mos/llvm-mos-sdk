@@ -146,6 +146,7 @@ executables and libraries for that target.
 | Atari 2600 (TigerVision 3E)      | `mos-atari2600-3e-clang`  |
 | Atari 8-bit (.XEX)               | `mos-atari8-clang`        |
 | Atari 8-bit (Standard cartridge) | `mos-atari8-stdcart`      |
+| Atari 8-bit (XEGS cartridge)     | `mos-atari8-xegs`         |
 | Ben Eater's 6502 Breadboard Kit  | `mos-eater-clang`         |
 | Commander X16                    | `mos-cx16-clang`          |
 | Commodore 64                     | `mos-c64-clang`           |

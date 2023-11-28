@@ -248,14 +248,6 @@ SECTIONS {
   .bank61    : { *(.bank61    .bank61.*)    } >bank61
   .bank62    : { *(.bank62    .bank62.*)    } >bank62
 
- /* "SIZE=nnn"; used when testing linker scripts, makes hexdump useful */
- .vector 0xbff0 : {
-    BYTE(0x53); BYTE(0x49); BYTE(0x5a); BYTE(0x45); BYTE(0x3d);
-    BYTE(48 + __cart_rom_size / 100)
-    BYTE(48 + (__cart_rom_size % 100) / 10)
-    BYTE(48 + __cart_rom_size % 10)
-  } >fixed
-
   .vector 0xbffa : {
     SHORT(_start)      /* START entrypoint (after OS setup)   */
     BYTE(0x0)          /* "Inserted"                          */

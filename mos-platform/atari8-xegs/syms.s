@@ -4,8 +4,10 @@
 ; default to 256K
 __cart_rom_size = 256
 
-; explicitly select bank 0, allows for override of INIT
+; the default INIT (which can be overriden) selects bank 0; this is
+; because on real hardware the bank selection is typically random
 .text
+.weak __cart_init
 	.global _cart_init
 _cart_init:
 	lda #0

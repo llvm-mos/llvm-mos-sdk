@@ -8,7 +8,6 @@ install(FILES link.ld TYPE LIB)
 
 add_platform_library(atari8-xegs-crt0 syms.s)
 merge_libraries(atari8-xegs-crt0
-  common-copy-zp-data
   common-copy-data
   common-zero-bss
   common-exit-loop

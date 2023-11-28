@@ -7,8 +7,7 @@ __cart_rom_size = 256
 ; the default INIT (which can be overriden) selects bank 0; this is
 ; because on real hardware the bank selection is typically random
 .text
-.weak __cart_init
-	.global _cart_init
+.weak _cart_init
 _cart_init:
 	lda #0
 	sta $d500

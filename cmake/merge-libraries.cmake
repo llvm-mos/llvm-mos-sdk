@@ -4,10 +4,6 @@ define_property(TARGET PROPERTY MERGED_TARGETS
 
 # Merge all of the provided static libraries into the given static library.
 function(merge_libraries target)
-  if(NOT ARGV)
-    return()
-  endif()
-
   get_target_property(type ${target} TYPE)
   if(NOT type STREQUAL STATIC_LIBRARY)
     message(FATAL_ERROR "merge_libraries called on unsupported target ${target} of type ${type}")
@@ -23,16 +19,23 @@ function(merge_libraries target)
 
   target_link_libraries(${target} PUBLIC ${ARGN})
   foreach(merged ${ARGN})
-    set_property(TARGET ${target}
-      APPEND PROPERTY MERGED_TARGETS $<TARGET_FILE:${merged}>)
+    if (TARGET ${merged})
+      set(merged_file $<TARGET_FILE:${merged}>)
+    else()
+      set(merged_file ${merged})
+    endif()
 
-    # Generate a dummy file from the merged librar and include it in the build
-    # of the target library. That way, when the dependency changes, the
-    # dependent library will be rebuilt.
-    set(dummy_file ${target}-${merged}-dummy.c)
-    add_custom_command(OUTPUT ${dummy_file}
-                       COMMAND ${CMAKE_COMMAND} -E touch ${dummy_file}
-                       DEPENDS ${merged})
-    target_sources(${target} PRIVATE ${dummy_file})
+    set_property(TARGET ${target} APPEND PROPERTY MERGED_TARGETS ${merged_file})
+
+    if (TARGET ${merged})
+      # Generate a dummy file from the merged library and include it in the build
+      # of the target library. That way, when the dependency changes, the
+      # dependent library will be rebuilt.
+      set(dummy_file ${target}-${merged}-dummy.c)
+      add_custom_command(OUTPUT ${dummy_file}
+                         COMMAND ${CMAKE_COMMAND} -E touch ${dummy_file}
+                         DEPENDS ${merged})
+      target_sources(${target} PRIVATE ${dummy_file})
+    endif()
   endforeach()
 endfunction()

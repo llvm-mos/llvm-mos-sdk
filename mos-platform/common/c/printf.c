@@ -80,9 +80,9 @@
 #endif
 
 // define the largest float suitable to print with %f
-// default: 1e9
+// default: 1e18
 #ifndef PRINTF_MAX_FLOAT
-#define PRINTF_MAX_FLOAT 1e9
+#define PRINTF_MAX_FLOAT 1e18
 #endif
 
 // support for the long long types (%llu or %p)
@@ -420,7 +420,7 @@ static size_t _ftoa(out_fct_type out, char *buffer, size_t idx, size_t maxlen,
 
   // test for negative
   bool negative = false;
-  if (value < 0) {
+  if (__builtin_signbit(value)) {
     negative = true;
     value = 0 - value;
   }
@@ -435,7 +435,7 @@ static size_t _ftoa(out_fct_type out, char *buffer, size_t idx, size_t maxlen,
     prec--;
   }
 
-  int whole = (int)value;
+  long long whole = (long long)value;
   double tmp = (value - whole) * pow10[prec];
   unsigned long frac = (unsigned long)tmp;
   diff = tmp - frac;
@@ -750,6 +750,10 @@ static int _vsnprintf(out_fct_type out, char *buffer, const size_t maxlen,
       break;
     case 'z':
       flags |= (sizeof(size_t) == sizeof(long) ? FLAGS_LONG : FLAGS_LONG_LONG);
+      format++;
+      break;
+    case 'L':
+      // Long double is double.
       format++;
       break;
     default:

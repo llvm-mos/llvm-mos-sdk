@@ -17,7 +17,4 @@ unsigned __mulhi3(unsigned a, unsigned b) { return mul(a, b); }
 
 unsigned long __mulsi3(unsigned long a, unsigned long b) { return mul(a, b); }
 
-unsigned long long __muldi3(unsigned long long a, unsigned long long b) {
-  return mul(a, b);
-}
 }

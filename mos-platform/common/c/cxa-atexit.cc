@@ -109,4 +109,9 @@ int __cxa_atexit(void (*f)(void *), void *p, void * /* dso_handle */) {
   return !RegistrationList::push_front(ExitFunctionStorage{f, p});
 }
 
+int atexit(void (*function)(void)) {
+  return __cxa_atexit(reinterpret_cast<void (*)(void *)>(function), nullptr,
+                      nullptr);
+}
+
 } // extern "C"

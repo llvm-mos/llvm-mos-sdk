@@ -53,7 +53,9 @@ if(NOT CMAKE_CROSSCOMPILING)
   message(STATUS "Emutest test runner: ${EMUTEST_COMMAND}")
 
   find_library(LIBRETRO_STELLA_CORE
-    NAMES stella2014_libretro.so stella2014_libretro.dylib stella2014_libretro.dll
+    NAMES
+    stella2014_libretro.so stella2014_libretro.dylib stella2014_libretro.dll
+    stella_libretro.so stella_libretro.dylib stella_libretro.dll
     PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
   message(STATUS "Libretro Stella core: ${LIBRETRO_STELLA_CORE}")
 

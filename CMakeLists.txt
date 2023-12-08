@@ -48,9 +48,6 @@ if(NOT CMAKE_CROSSCOMPILING)
     endif()
   endif()
 
-  find_program(MESEN_COMMAND NAMES mesen Mesen.exe ENV MESEN_DIR)
-  message(STATUS "Mesen NES emulator: ${MESEN_COMMAND}")
-
   find_program(EMUTEST_COMMAND NAMES emutest emutest.exe
     PATHS ENV EMUTEST_DIR)
   message(STATUS "Emutest test runner: ${EMUTEST_COMMAND}")
@@ -60,15 +57,10 @@ if(NOT CMAKE_CROSSCOMPILING)
     PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
   message(STATUS "Libretro Stella core: ${LIBRETRO_STELLA_CORE}")
 
-  find_library(LIBRETRO_FCEUMM_CORE
-    NAMES fceumm_libretro.so fceumm_libretro.dylib fceumm_libretro.dll
-    PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
-  message(STATUS "Libretro FCEUMM core: ${LIBRETRO_FCEUMM_CORE}")
-
   find_library(LIBRETRO_MESEN_CORE
     NAMES mesen_libretro.so mesen_libretro.dylib mesen_libretro.dll
     PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
-  message(STATUS "Libretro FCEUMM core: ${LIBRETRO_FCEUMM_CORE}")
+  message(STATUS "Libretro MESEN core: ${LIBRETRO_MESEN_CORE}")
 
   # Install toolchain and config file for users of find_package(llvm-mos-sdk).
   # CMake's find_package logic will discover

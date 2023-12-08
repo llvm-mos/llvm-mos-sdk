@@ -1,8 +1,5 @@
 include(CTest)
 
-add_library(test-lib-mesen ${CMAKE_CURRENT_SOURCE_DIR}/../test-lib-mesen.c)
-target_include_directories(test-lib-mesen PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)
-
 add_library(test-lib-emutest ${CMAKE_CURRENT_SOURCE_DIR}/../test-lib-emutest.c)
 target_include_directories(test-lib-emutest PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)
 

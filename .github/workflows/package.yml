@@ -137,6 +137,13 @@ jobs:
           cd build
           CTEST_OUTPUT_ON_FAILURE=1 ninja test
 
+      - name: Upload test screenshots.
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-screenshots
+          path: build/**/*.png
+
       - name: Build the docs.
         if: startsWith(matrix.os, 'ubuntu')
         run: |

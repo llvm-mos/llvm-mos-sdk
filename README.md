@@ -79,7 +79,6 @@ The LLVM-MOS compiler toolchain and platform libraries.
 ## Notably missing features
 
 - A hosted C with all the standard library bells and whistles.
-- Float/double
 - C++ Exceptions
 
 

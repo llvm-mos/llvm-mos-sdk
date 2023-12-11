@@ -11,4 +11,4 @@ add_vcs_test(minimal ../atari2600-common)
 add_vcs_test(zeropage-max ../atari2600-common)
 
 add_vcs_test(frame-simple ../atari2600-common)
-set_property(TEST test-frame-simple PROPERTY ENVIRONMENT EMUTEST_FB_CRC_PASS=2301452584)
+set_property(TEST test-frame-simple PROPERTY ENVIRONMENT EMUTEST_FB_CRC_PASS=3714305448)

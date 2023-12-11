@@ -5,7 +5,6 @@ project(test-nes-gtrom LANGUAGES C)
 include(../test.cmake)
 
 add_nes_test(chr-ram)
-add_nes_test(chr-rom)
 add_nes_test(chr-swap-split)
 add_nes_test(minimal)
 add_nes_test(prg-rom-512)

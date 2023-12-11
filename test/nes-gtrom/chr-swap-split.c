@@ -3,14 +3,6 @@
 #include <peekpoke.h>
 #include <stdlib.h>
 
-MAPPER_CHR_ROM_KB(16);
-MAPPER_CHR_RAM_KB(0);
-
-__attribute__((used, section(".chr_rom_0")))
-const char cr0[8192] = {1, [8191] = 2};
-__attribute__((used, section(".chr_rom_1")))
-const char cr1[8192] = {3, [8191] = 4};
-
 volatile char frame_count;
 
 asm(".section .nmi,\"axR\",@progbits\n"
@@ -22,6 +14,12 @@ void ppu_wait_vblank(void) {
     ;
 }
 
+char write_ppu(unsigned addr, char val) {
+  PPU.vram.address = addr >> 8;
+  PPU.vram.address = (char)addr;
+  PPU.vram.data = val;
+}
+
 char read_ppu(unsigned ppu_addr) {
   (void)PPU.status;
   PPU.vram.address = (unsigned)ppu_addr >> 8;
@@ -31,6 +29,13 @@ char read_ppu(unsigned ppu_addr) {
 }
 
 int main(void) {
+  set_chr_bank(0);
+  write_ppu(0, 1);
+  write_ppu(8191, 2);
+  set_chr_bank(3);
+  write_ppu(0, 3);
+  write_ppu(8191, 4);
+
   // Enable NMI generation.
   PPU.control = 0x80;
   

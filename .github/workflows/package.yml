@@ -52,6 +52,11 @@ jobs:
           make --silent -j 4
           mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
           mv mesen_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+      - name: Upload test tools
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-tools
+          path: ${{env.TEST_TOOLS_DIR }}
 
   package:
     runs-on: ${{ matrix.os }}

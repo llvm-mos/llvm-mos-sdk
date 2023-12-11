@@ -11,8 +11,14 @@ const char cr0[8192] = {1, [8191] = 2};
 __attribute__((used, section(".chr_rom_1")))
 const char cr1[8192] = {3, [8191] = 4};
 
+volatile char frame_count;
+
+asm(".section .nmi,\"axR\",@progbits\n"
+    "inc frame_count\n");
+
 void ppu_wait_vblank(void) {
-  while (!(PPU.status & 0x80))
+  char next_frame_count = frame_count + 1;
+  while (frame_count != next_frame_count)
     ;
 }
 

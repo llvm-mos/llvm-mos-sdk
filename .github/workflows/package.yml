@@ -13,6 +13,46 @@ on:
   workflow_dispatch:
   repository_dispatch:
 jobs:
+  build-test-tools:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cache test tools
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.TEST_TOOLS_DIR }}
+          key: ${{ runner.os }}-test-tools-${{ github.workflow_sha }}
+      - name: Set up Go
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+      - name: Build Emutest binary
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/sehugg/emutest
+          cd emutest
+          go install
+          mkdir -p ${{ env.EMUTEST_DIR }}
+          GOPATH=$(go env GOPATH)
+          cp $GOPATH/bin/emutest ${{ env.EMUTEST_DIR }}
+      - name: Build Stella2014 core
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/libretro/stella2014-libretro
+          cd stella2014-libretro
+          make --silent -j 4
+          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
+          mv stella2014_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+      - name: Build Mesen-X core
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/NovaSquirrel/Mesen-X
+          cd Mesen-X/Libretro
+          make --silent -j 4
+          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
+          mv mesen_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+
   package:
     runs-on: ${{ matrix.os }}
     needs: build-test-tools
@@ -32,58 +72,18 @@ jobs:
 
       - name: Install MacOS tools
         if: startsWith(matrix.os, 'macos')
-        run: brew update && brew install ninja-build
-
-      - name: Cache test tools
-        if: startsWith(matrix.os, 'ubuntu')
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.TEST_TOOLS_DIR }}
-          key: ${{ runner.os }}-test-tools-${{ github.workflow_sha }}
-
-      - name: Set up Go
-        if: startsWith(matrix.os, 'ubuntu') && steps.cache.outputs.cache-hit != 'true'
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.21'
-
-      - name: Build Emutest binary
-        if: startsWith(matrix.os, 'ubuntu') && steps.cache.outputs.cache-hit != 'true'
-        run: |
-          git clone https://github.com/sehugg/emutest
-          cd emutest
-          go install
-          mkdir -p ${{ env.EMUTEST_DIR }}
-          GOPATH=$(go env GOPATH)
-          cp $GOPATH/bin/emutest ${{ env.EMUTEST_DIR }}
-
-      - name: Build Emutest binary
-        if: startsWith(matrix.os, 'ubuntu') && steps.cache.outputs.cache-hit != 'true'
-        run: |
-          git clone https://github.com/sehugg/emutest
-          cd emutest
-          go install
-          mkdir -p ${{ env.EMUTEST_DIR }}
-          GOPATH=$(go env GOPATH)
-          cp $GOPATH/bin/emutest ${{ env.EMUTEST_DIR }}
-
-      - name: Fetch libretro corees
-        if: startsWith(matrix.os, 'ubuntu') && steps.cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
-          cd ${{ env.LIBRETRO_CORES_DIR }}
-          curl -LO http://buildbot.libretro.com/nightly/linux/x86_64/latest/stella2014_libretro.so.zip
-          unzip stella2014_libretro.so.zip
-          curl -LO http://buildbot.libretro.com/nightly/linux/x86_64/latest/mesen_libretro.so.zip
-          unzip mesen_libretro.so.zip
+        run: brew update && brew install ninja
 
       - name: Check out the SDK.
         uses: actions/checkout@v2
 
-      - name: Copy Mesen settings file.
-        if: startsWith(matrix.os, 'ubuntu')
-        run: cp test/mesen_settings.xml ${{ env.TEST_TOOLS_DIR }}/mesen/settings.xml
+      - name: Restore test tools
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.TEST_TOOLS_DIR }}
+          key: ${{ runner.os }}-test-tools-${{ github.workflow_sha }}
+          restore-keys: |
+            ${{ runner.os }}-test-tools-
 
       - name: Fetch the latest Ubuntu llvm-mos release.
         if: startsWith(matrix.os, 'ubuntu')
@@ -105,7 +105,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DMESEN_COMMAND=${{ env.MESEN_DIR }}/mesen -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -G "Ninja" ..
+          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -G "Ninja" ..
           ninja install
 
       - name: Test the SDK.

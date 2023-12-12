@@ -60,6 +60,8 @@ PROVIDE(__prg_rom_58 = 0x8000);
 PROVIDE(__prg_rom_59 = 0xa000);
 PROVIDE(__prg_rom_60 = 0x8000);
 
+__prg_rom_total_fixed_size = 0x4000;
+
 INCLUDE _prg-rom-banked.ld
 
 INPUT(reset-banked-mode-0.o)
@@ -72,7 +74,7 @@ __prg_rom_fixed_offset = __prg_rom_size * 1024 - 0x4000;
 
 MEMORY {
   prg_rom_61    : ORIGIN = __prg_rom_61_lma,    LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_fixed : ORIGIN = __prg_rom_fixed_lma, LENGTH = 0x4000
+  prg_rom_fixed : ORIGIN = __prg_rom_fixed_lma, LENGTH = __prg_rom_total_fixed_size
 }
 REGION_ALIAS("c_readonly", prg_rom_fixed)
 

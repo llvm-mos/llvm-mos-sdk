@@ -306,14 +306,21 @@ Copy `test/mesen_settings.xml` to this folder.
 
 Install emutest (requires Go 1.21):
 ```console
-$ go install https://github.com/kivutar/emutest
+$ go install github.com/kivutar/emutest@latest
 ```
 
-Make sure `$GOBIN` (usually `~/go/bin`) is included in your PATH environment variable so that CMake can find the binary, or set the `EMUTEST_DIR` environment variable to point to this directory before running `cmake -G` for the first time.
+Make sure `$GOBIN` (usually `~/go/bin`) is included in your `PATH`
+environment variable so that CMake can find the binary, or set the
+`EMUTEST_DIR` environment variable to point to this directory before
+running `cmake -G` for the first time.
+
+You can verify emutest with `emutest -h < /dev/null` on the
+command-line.
 
 Build Libretro cores for desired target(s):
 
 * Atari 2600 - https://github.com/libretro/stella2014-libretro
+* Atari 800 - https://github.com/libretro/libretro-atari800
 * NES - https://github.com/NovaSquirrel/Mesen-X
 
 Copy the output Libretro core library files (they have extensions .so | .dylib | .dll) to a shared directory, maybe `$HOME/libretro`.

@@ -44,6 +44,14 @@ jobs:
           make --silent -j 4
           mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
           mv stella2014_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+      - name: 'Build "atari800" core'
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          git clone https://github.com/libretro/libretro-atari800
+          cd libretro-atari800/
+          make --silent -j 4
+          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
+          mv atari800_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
       - name: Build Mesen-X core
         if: steps.cache.outputs.cache-hit != 'true'
         run: |

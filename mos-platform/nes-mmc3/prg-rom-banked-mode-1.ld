@@ -60,6 +60,8 @@ PROVIDE(__prg_rom_58 = 0xc000);
 PROVIDE(__prg_rom_59 = 0xa000);
 PROVIDE(__prg_rom_60 = 0xc000);
 
+__prg_rom_total_fixed_size = 0x4000;
+
 INCLUDE _prg-rom-banked.ld
 
 INPUT(reset-banked-mode-1.o)

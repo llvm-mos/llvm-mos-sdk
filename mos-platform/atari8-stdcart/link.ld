@@ -1,4 +1,5 @@
-/* Atari800 cartridge linker scripts. */
+/* Atari800 8 KiB and 16 KiB "standard" (no bank-switching) cartridge
+   linker script. */
 
 ASSERT(__cart_rom_size == 8 || __cart_rom_size == 16,
        "ATARI 800 STDCART: Only 8 KiB and 16 KiB ROM supported")
@@ -6,11 +7,13 @@ ASSERT(__cart_rom_size == 8 || __cart_rom_size == 16,
 MEMORY {
   zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
 
-  /* Memory as low as 0x700 works when not using DOS. */
-  ram (w) : ORIGIN = 0x700, LENGTH = 0x2000 - 0x700
-
   cart_rom (rx) : ORIGIN = __cart_rom_size == 16 ? 0x8000 : 0xA000,
                   LENGTH = __cart_rom_size * 1024
+
+  /* Memory as low as 0x700 works when not using DOS.  Assume we have
+     at most 16 KiB of RAM to maximize compatabilty with the Atari 400
+     and Atari 600XL models. */
+  ram (w) : ORIGIN = 0x700, LENGTH = 0x4000 - 0x700
 }
 
 /* Provide imaginary (zero page) registers. */

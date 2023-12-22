@@ -1,23 +1,39 @@
-/* Atari 8-bit DOS / .XEX file linker script. */
+/* Atari 8-bit DOS (.XEX file) linker script. */
 
 /* Provide 16 imaginary (zero page) registers located in 0xcb - 0xea range. */
 __rc0 = 0x80;
 INCLUDE imag-regs.ld
 ASSERT(__rc31 == 0x9f, "Inconsistent zero page map.")
 
-/*
-Target compatability with ATARI DOS 2.0 and newer, as well as later
-version of SpartaDOS.
+/* Target compatability with ATARI DOS 2.5 and later (including latest
+   SpartaDOS).
 
-ATARI DOS 1.0 (1979) puts MEMLO at 0x2A08.
-ATARI DOS 2.0D (1980) puts MEMLO at 0x1DFC.
-ATARI DOS 2.0S (1980), 2.5 (1984), XE 1.0 (1988) all put MEMLO at 0x1CFC.
-SpartaDOS 1.1 HS (1984) puts MEMLO at 0x2557.
-SpartaDOS X 4.2 (1988) puts MEMLO at 0x1B2D.
-SpartaDOS X 4.49 (2020) puts MEMLO at 0x1DBA.
-*/
+   MEMLOW at 0x2000 is considered safe in most cases.  A quick survey:
+
+   +-------------------------+--------+--------------+
+   | DOS Version             | MEMLOW | Usable       |
+   +-------------------------+--------+--------------+
+   | ATARI DOS 1.0    (1979) | 0x2A08 | No, uncommon |
+   | ATARI DOS 2.0D   (1980) | 0x1DFC | Yes          |
+   +-------------------------+--------+--------------+
+   | ATARI DOS 2.0S   (1980) | 0x1CFC | Yes, common  |
+   |           2.5    (1984) |        |              |
+   |           XE 1.0 (1988) |        |              |
+   +-------------------------+--------+--------------+
+   | SpartaDOS 1.1 HS (1984) | 0x2557 | No, uncommon |
+   | SpartaDOS X 4.2  (1988) | 0x1B2D | Yes          |
+   | SpartaDOS X 4.49 (2020) | 0x1DBA | Yes, common  |
+   +-------------------------+--------+--------------+ */
+
 MEMORY {
     zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
+
+    /* Allow RAM to be used upwards of 0xa000 where BASIC (and an 8KiB
+       cartridge) will reside.
+
+       We can go higher to 0xc000 if that is disabled, though speaking
+       we need to remove remove 993 bytes for the default text mode &
+       display list, and then some more for the C stack. */
     ram (rw) : ORIGIN = 0x2000, LENGTH = 0xa000
 }
 

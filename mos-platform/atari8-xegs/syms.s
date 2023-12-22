@@ -1,11 +1,6 @@
-; xegs ROM size, only 32, 64, 128 and 256 are valid sizes (in KiB)
-
-.weak __cart_rom_size
-; default to 256K
-__cart_rom_size = 256
 
 ; the default INIT (which can be overriden) selects bank 0; this is
-; because on real hardware the bank selection is typically random
+; because on real hardware the XEGS bank selection is random
 .text
 .weak _cart_init
 _cart_init:

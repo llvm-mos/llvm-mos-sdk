@@ -6,6 +6,7 @@ endif()
 
 install(FILES link.ld TYPE LIB)
 
+add_platform_object_file(atari8-mega-tail0-o tail0.o tail0.s)
 add_platform_library(atari8-mega-crt0 syms.s)
 merge_libraries(atari8-mega-crt0
   common-copy-data

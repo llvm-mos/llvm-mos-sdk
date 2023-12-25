@@ -14,6 +14,8 @@
   https://github.com/atari800/atari800/blob/ATARI800_5_0_0/DOC/cart.txt
   has details. */
 
+INPUT(tail0.o)
+
 /* Default cartridge size */
 PROVIDE(__cart_rom_size = 128);
 
@@ -73,7 +75,10 @@ __bank30_lma    = 0x011e8000;
 __bank31_lma    = 0x011f8000;
 
 MEMORY {
-  bank0         : ORIGIN = __bank0_lma,  LENGTH = __cart_rom_size >=  16 ? 0x4000 : 0
+  /* bank0 is truncated by 20 bytes so we can add a tail */
+  bank0         : ORIGIN = __bank0_lma,  LENGTH = 0x4000 - 20
+  tail0        : ORIGIN = __bank0_lma + 0x4000 - 20, LENGTH = 20
+
   bank1         : ORIGIN = __bank1_lma,  LENGTH = __cart_rom_size >=  32 ? 0x4000 : 0
   bank2         : ORIGIN = __bank2_lma,  LENGTH = __cart_rom_size >=  64 ? 0x4000 : 0
   bank3         : ORIGIN = __bank3_lma,  LENGTH = __cart_rom_size >=  64 ? 0x4000 : 0
@@ -116,6 +121,7 @@ SECTIONS {
   INCLUDE c.ld
 
   .bank0     : { *(.bank0     .bank0.*)     } >bank0
+  .tail0     : { KEEP(*(.tail0))            } >tail0
   .bank1     : { *(.bank1     .bank1.*)     } >bank1
   .bank2     : { *(.bank2     .bank2.*)     } >bank2
   .bank3     : { *(.bank3     .bank3.*)     } >bank3
@@ -148,33 +154,11 @@ SECTIONS {
   .bank30    : { *(.bank30    .bank30.*)    } >bank30
   .bank31    : { *(.bank31    .bank31.*)    } >bank31
 
-  /* This isn't pretty.  SIC! cartridges start with bank0 selected but
-    the lower 8 KiB unmapped.  The entire 16 KiB is needed, use
-    _cart_init to enable the lower-bank and optionally adjust
-    RAMTOP. */
-  .vector __bank0_lma + 0x3ffa - 14 : {
-    /* Lower RAMTOP (if needed) */
-    BYTE(0xA6) BYTE(0x6A)               /* ldx $6a */
-    BYTE(0x10) BYTE(0x04)               /* bpl .noshrink */
-    BYTE(0xa2) BYTE(0x80)               /* lda #$80 */
-    BYTE(0x86) BYTE(0x6a)               /* sta 0x6a */
-                                        /* .noshrink: */
-    /* Enable lower-bank */
-    BYTE(0xA9) BYTE(0x20)               /* lda #$20 */
-    BYTE(0x8D) BYTE(0x00) BYTE(0xD5)    /* sta $d500  */
-    BYTE(0x60)                          /* rts */
-  } >bank0
-
-  .vector __bank0_lma + 0x3ffa : {
-    SHORT(_start)      /* START entrypoint (after OS setup)   */
-    BYTE(0x0)          /* "Inserted"                          */
-    BYTE(0x04)         /* Bits: 7=diag, 2=start, 0=Enable_DOS */
-    SHORT(_cart_init)  /* INIT entrpoint (before OS setup)    */
-  } >bank0
 }
 
 OUTPUT_FORMAT {
   FULL(bank0)
+  FULL(tail0)
   FULL(bank1)
   FULL(bank2)
   FULL(bank3)

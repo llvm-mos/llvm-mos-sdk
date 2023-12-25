@@ -1,11 +1,11 @@
 /* Atari800 MegaCart and SIC! (bank-switched) cartridge linker script.
 
-  Support 16 KiB to 512 KiB MegaCart and SIC! cartridges.  These bank
-  the entire 16 KiB address space and also allow for disabling the
-  cartridge to access underlying RAM.
+  Support for 16 KiB to 512 KiB MegaCart and SIC! cartridges.
 
-  There are log2(__cart_rom_size) switchable banks of 16 KiB size
-  switchabled into 0x8000.
+  There are be "__cart_rom_size / 16 KiB" banks, mapped one at a time
+  over the entire 16 KiB cartridge address space from 0x8000 through
+  0xBFFF.  It is also possible to disable the cartridge to access
+  underlying RAM.
 
   On power-up the bank0 is selected, however, SIC! cartridges-up will
   not have the lower 8 KiB enabled.  We use INIT to fix this and

@@ -1,33 +1,38 @@
-/* Atari800 XEGS cartridge linker script.
+/* Atari800 XEGS (bank-switched) cartridge linker script.
 
-  Right now we support 32, 64, 128, 256 and 512 KiB sized XEGS
-  cartridges.
+   Support 32 KiB through 512 KiB XEGS cartridges, compatible with
+   "Switchable XEGS" cartridges.
 
-  There are log2(__cart_rom_size)-1 switchable banks of 8KiB size
-  switchabled into 0x8000, the last bank will always be mapped. it's
-  the "fixed" bank mapped at 0xa000.
+   The fixed region is always mapped at 0xa000.
 
-   32 has banks  0..2 + fixed
-   64 has banks  0..6 + fixed
-  128 has banks 0..14 + fixed
-  256 has banks 0..30 + fixed
-  512 has banks 0..62 + fixed
-*/
+   There are log2(__cart_rom_size)-1 switchable banks of 8KiB size
+   switchabled into 0x8000:
 
+    32: banks  0..2 + fixed
+    64: banks  0..6 + fixed
+   128: banks 0..14 + fixed
+   256: banks 0..30 + fixed
+   512: banks 0..62 + fixed
 
-/* PROVIDE(__cart_rom_size = 256); */
+   https://github.com/atari800/atari800/blob/ATARI800_5_0_0/DOC/cart.txt
+   has details. */
+
+/* Default cartridges size */
+PROVIDE(__cart_rom_size = 128);
 
 ASSERT(__cart_rom_size == 1 << LOG2CEIL(__cart_rom_size),
        "ATARI 800 XEGS cartridge: __cart_rom_size size must be a power of 2.")
 ASSERT(__cart_rom_size >= 32,
-       "ATARI 800 XEGS cartridge: __cart_rom_size size must be >= 32.")
+       "ATARI 800 XEGS cartridge: __cart_rom_size size must be >= 32 KiB.")
 ASSERT(__cart_rom_size <= 512,
-       "ATARI 800 XEGS cartridge: __cart_rom_size size must be <= 512.")
+       "ATARI 800 XEGS cartridge: __cart_rom_size size must be <= 512 KiB.")
 
 MEMORY {
   zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
-  /* Memory as low as 0x700 works when not using DOS. */
-  ram (w) : ORIGIN = 0x700, LENGTH = 0x2000 - 0x700
+  /* Memory as low as 0x700 works when not using DOS.  Assume we have
+     at most 16 KiB of RAM to maximize compatabilty with the Atari 400
+     and Atari 600XL models. */
+  ram (w) : ORIGIN = 0x700, LENGTH = 0x4000 - 0x700
 }
 
 /* Provide imaginary (zero page) registers. */
@@ -256,7 +261,6 @@ SECTIONS {
   } >fixed
 }
 
-/* OUTPUT_FORMAT { FULL(cart_rom) } */
 OUTPUT_FORMAT {
   FULL(bank0)
   FULL(bank1)

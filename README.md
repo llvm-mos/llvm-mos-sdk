@@ -13,7 +13,6 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - DOS ".XEX" file
   - 8-KiB or 16-KiB standard cartridge
   - XEGS bank-switched cartridge from 32 KiB to 512 KiB (8 KiB banks)
-  - MegaCart bank-switched cartridge from 16 KiB to 512 KiB (16 KiB banks)
 - [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
 - Commodore 64

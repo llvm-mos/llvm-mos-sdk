@@ -5,7 +5,7 @@
 
    The fixed region is always mapped at 0xa000.
 
-   There are log2(__cart_rom_size)-1 switchable banks of 8KiB size
+   There are `__cart_rom_size / 8 - 1` switchable banks of 8KiB size
    switchabled into 0x8000:
 
     32: banks  0..2 + fixed

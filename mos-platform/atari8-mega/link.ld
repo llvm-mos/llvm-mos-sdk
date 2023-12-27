@@ -77,7 +77,7 @@ __bank31_lma    = 0x011f8000;
 MEMORY {
   /* bank0 is truncated by 20 bytes so we can add a tail */
   bank0         : ORIGIN = __bank0_lma,  LENGTH = 0x4000 - 20
-  tail0        : ORIGIN = __bank0_lma + 0x4000 - 20, LENGTH = 20
+  tail0         : ORIGIN = __bank0_lma + 0x4000 - 20, LENGTH = 20
 
   bank1         : ORIGIN = __bank1_lma,  LENGTH = __cart_rom_size >=  32 ? 0x4000 : 0
   bank2         : ORIGIN = __bank2_lma,  LENGTH = __cart_rom_size >=  64 ? 0x4000 : 0
@@ -120,6 +120,142 @@ REGION_ALIAS("c_readonly", bank0)
 SECTIONS {
   INCLUDE c.ld
 
+  /* Define a fixed section at the beginning of bank0. */
+  .bank0_fixed : {
+    *(.bank0_fixed .bank0_fixed.*)
+    __bank0_fixed_end = .;
+    __bank0_fixed_size = __bank0_fixed_end - __bank0_lma;
+  } >bank0
+
+  /* Offset everything */
+  .bank0 __bank0_lma + __bank0_fixed_size : {
+    *(.bank0 .bank0.*)
+  } >bank0
+
+  .bank1 __bank1_lma + __bank0_fixed_size : {
+    *(.bank1 .bank1.*)
+  } >bank1
+
+  .bank2 __bank2_lma + __bank0_fixed_size : {
+    *(.bank2 .bank2.*)
+  } >bank2
+
+  .bank3 __bank3_lma + __bank0_fixed_size : {
+    *(.bank3 .bank3.*)
+  } >bank3
+
+  .bank4 __bank4_lma + __bank0_fixed_size : {
+    *(.bank4 .bank4.*)
+  } >bank4
+
+  .bank5 __bank5_lma + __bank0_fixed_size : {
+    *(.bank5 .bank5.*)
+  } >bank5
+
+  .bank6 __bank6_lma + __bank0_fixed_size : {
+    *(.bank6 .bank6.*)
+  } >bank6
+
+  .bank7 __bank7_lma + __bank0_fixed_size : {
+    *(.bank7 .bank7.*)
+  } >bank7
+
+  .bank8 __bank8_lma + __bank0_fixed_size : {
+    *(.bank8 .bank8.*)
+  } >bank8
+
+  .bank9 __bank9_lma + __bank0_fixed_size : {
+    *(.bank9 .bank9.*)
+  } >bank9
+
+  .bank10 __bank10_lma + __bank0_fixed_size : {
+    *(.bank10 .bank10.*)
+  } >bank10
+
+  .bank11 __bank11_lma + __bank0_fixed_size : {
+    *(.bank11 .bank11.*)
+  } >bank11
+
+  .bank12 __bank12_lma + __bank0_fixed_size : {
+    *(.bank12 .bank12.*)
+  } >bank12
+
+  .bank13 __bank13_lma + __bank0_fixed_size : {
+    *(.bank13 .bank13.*)
+  } >bank13
+
+  .bank14 __bank14_lma + __bank0_fixed_size : {
+    *(.bank14 .bank14.*)
+  } >bank14
+
+  .bank15 __bank15_lma + __bank0_fixed_size : {
+    *(.bank15 .bank15.*)
+  } >bank15
+
+  .bank16 __bank16_lma + __bank0_fixed_size : {
+    *(.bank16 .bank16.*)
+  } >bank16
+
+  .bank17 __bank17_lma + __bank0_fixed_size : {
+    *(.bank17 .bank17.*)
+  } >bank17
+
+  .bank18 __bank18_lma + __bank0_fixed_size : {
+    *(.bank18 .bank18.*)
+  } >bank18
+
+  .bank19 __bank19_lma + __bank0_fixed_size : {
+    *(.bank19 .bank19.*)
+  } >bank19
+
+  .bank20 __bank20_lma + __bank0_fixed_size : {
+    *(.bank20 .bank20.*)
+  } >bank20
+
+  .bank21 __bank21_lma + __bank0_fixed_size : {
+    *(.bank21 .bank21.*)
+  } >bank21
+
+  .bank22 __bank22_lma + __bank0_fixed_size : {
+    *(.bank22 .bank22.*)
+  } >bank22
+
+  .bank23 __bank23_lma + __bank0_fixed_size : {
+    *(.bank23 .bank23.*)
+  } >bank23
+
+  .bank24 __bank24_lma + __bank0_fixed_size : {
+    *(.bank24 .bank24.*)
+  } >bank24
+
+  .bank25 __bank25_lma + __bank0_fixed_size : {
+    *(.bank25 .bank25.*)
+  } >bank25
+
+  .bank26 __bank26_lma + __bank0_fixed_size : {
+    *(.bank26 .bank26.*)
+  } >bank26
+
+  .bank27 __bank27_lma + __bank0_fixed_size : {
+    *(.bank27 .bank27.*)
+  } >bank27
+
+  .bank28 __bank28_lma + __bank0_fixed_size : {
+    *(.bank28 .bank28.*)
+  } >bank28
+
+  .bank29 __bank29_lma + __bank0_fixed_size : {
+    *(.bank29 .bank29.*)
+  } >bank29
+
+  .bank30 __bank30_lma + __bank0_fixed_size : {
+    *(.bank30 .bank30.*)
+  } >bank30
+
+  .bank31 __bank31_lma + __bank0_fixed_size : {
+    *(.bank31 .bank31.*)
+  } >bank31
+
   .bank0     : { *(.bank0     .bank0.*)     } >bank0
   .tail0     : { KEEP(*(.tail0))            } >tail0
   .bank1     : { *(.bank1     .bank1.*)     } >bank1
@@ -156,38 +292,39 @@ SECTIONS {
 
 }
 
+/* Each bank has a copy of the fixed section from bank0, bank0 has a
+ * tail for the cartridge metadata */
 OUTPUT_FORMAT {
-  FULL(bank0)
-  FULL(tail0)
-  FULL(bank1)
-  FULL(bank2)
-  FULL(bank3)
-  FULL(bank4)
-  FULL(bank5)
-  FULL(bank6)
-  FULL(bank7)
-  FULL(bank8)
-  FULL(bank9)
-  FULL(bank10)
-  FULL(bank11)
-  FULL(bank12)
-  FULL(bank13)
-  FULL(bank14)
-  FULL(bank15)
-  FULL(bank16)
-  FULL(bank17)
-  FULL(bank18)
-  FULL(bank19)
-  FULL(bank20)
-  FULL(bank21)
-  FULL(bank22)
-  FULL(bank23)
-  FULL(bank24)
-  FULL(bank25)
-  FULL(bank26)
-  FULL(bank27)
-  FULL(bank28)
-  FULL(bank29)
-  FULL(bank30)
-  FULL(bank31)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank0, __bank0_fixed_size)   FULL(tail0)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank1, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank2, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank3, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank4, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank5, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank6, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank7, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank8, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank9, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank10, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank11, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank12, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank13, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank14, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank15, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank16, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank17, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank18, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank19, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank20, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank21, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank22, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank23, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank24, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank25, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank26, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank27, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank28, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank29, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank30, __bank0_fixed_size)
+  FULL(bank0, 0, __bank0_fixed_size) FULL(bank31, __bank0_fixed_size)
 }

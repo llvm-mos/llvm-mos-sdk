@@ -16,7 +16,8 @@
 
 INPUT(tail0.o)
 
-/* Default cartridge size */
+/* Default cartridge size.  This isn't the largest possible size to
+   avoid masking alignment/fixup bugs. */
 PROVIDE(__cart_rom_size = 128);
 
 ASSERT(__cart_rom_size == 1 << LOG2CEIL(__cart_rom_size),
@@ -127,132 +128,168 @@ SECTIONS {
     __bank0_fixed_size = __bank0_fixed_end - __bank0_lma;
   } >bank0
 
-  /* Offset everything */
+  /* Offset other banks. */
+  __bank1_fixed_size = __cart_rom_size >= 32 ? __bank0_fixed_size : 0;
+
+  __bank2_fixed_size = __cart_rom_size >= 64 ? __bank0_fixed_size : 0;
+  __bank3_fixed_size = __cart_rom_size >= 64 ? __bank0_fixed_size : 0;
+
+  __bank4_fixed_size = __cart_rom_size >= 128 ? __bank0_fixed_size : 0;
+  __bank5_fixed_size = __cart_rom_size >= 128 ? __bank0_fixed_size : 0;
+  __bank6_fixed_size = __cart_rom_size >= 128 ? __bank0_fixed_size : 0;
+  __bank7_fixed_size = __cart_rom_size >= 128 ? __bank0_fixed_size : 0;
+
+  __bank8_fixed_size = __cart_rom_size >= 256 ? __bank0_fixed_size : 0;
+  __bank9_fixed_size = __cart_rom_size >= 256 ? __bank0_fixed_size : 0;
+  __bank10_fixed_size = __cart_rom_size >= 256 ? __bank0_fixed_size : 0;
+  __bank11_fixed_size = __cart_rom_size >= 256 ? __bank0_fixed_size : 0;
+  __bank12_fixed_size = __cart_rom_size >= 256 ? __bank0_fixed_size : 0;
+  __bank13_fixed_size = __cart_rom_size >= 256 ? __bank0_fixed_size : 0;
+  __bank14_fixed_size = __cart_rom_size >= 256 ? __bank0_fixed_size : 0;
+  __bank15_fixed_size = __cart_rom_size >= 256 ? __bank0_fixed_size : 0;
+
+  __bank16_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank17_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank18_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank19_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank20_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank21_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank22_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank23_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank24_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank25_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank26_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank27_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank28_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank29_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank30_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+  __bank31_fixed_size = __cart_rom_size >= 512 ? __bank0_fixed_size : 0;
+
   .bank0 __bank0_lma + __bank0_fixed_size : {
     *(.bank0 .bank0.*)
   } >bank0
 
-  .bank1 __bank1_lma + __bank0_fixed_size : {
+  .bank1 __bank1_lma + __bank1_fixed_size : {
     *(.bank1 .bank1.*)
   } >bank1
 
-  .bank2 __bank2_lma + __bank0_fixed_size : {
+  .bank2 __bank2_lma + __bank2_fixed_size : {
     *(.bank2 .bank2.*)
   } >bank2
 
-  .bank3 __bank3_lma + __bank0_fixed_size : {
+  .bank3 __bank3_lma + __bank3_fixed_size : {
     *(.bank3 .bank3.*)
   } >bank3
 
-  .bank4 __bank4_lma + __bank0_fixed_size : {
+  .bank4 __bank4_lma + __bank4_fixed_size : {
     *(.bank4 .bank4.*)
   } >bank4
 
-  .bank5 __bank5_lma + __bank0_fixed_size : {
+  .bank5 __bank5_lma + __bank5_fixed_size : {
     *(.bank5 .bank5.*)
   } >bank5
 
-  .bank6 __bank6_lma + __bank0_fixed_size : {
+  .bank6 __bank6_lma + __bank6_fixed_size : {
     *(.bank6 .bank6.*)
   } >bank6
 
-  .bank7 __bank7_lma + __bank0_fixed_size : {
+  .bank7 __bank7_lma + __bank7_fixed_size : {
     *(.bank7 .bank7.*)
   } >bank7
 
-  .bank8 __bank8_lma + __bank0_fixed_size : {
+  .bank8 __bank8_lma + __bank8_fixed_size : {
     *(.bank8 .bank8.*)
   } >bank8
 
-  .bank9 __bank9_lma + __bank0_fixed_size : {
+  .bank9 __bank9_lma + __bank9_fixed_size : {
     *(.bank9 .bank9.*)
   } >bank9
 
-  .bank10 __bank10_lma + __bank0_fixed_size : {
+  .bank10 __bank10_lma + __bank10_fixed_size : {
     *(.bank10 .bank10.*)
   } >bank10
 
-  .bank11 __bank11_lma + __bank0_fixed_size : {
+  .bank11 __bank11_lma + __bank11_fixed_size : {
     *(.bank11 .bank11.*)
   } >bank11
 
-  .bank12 __bank12_lma + __bank0_fixed_size : {
+  .bank12 __bank12_lma + __bank12_fixed_size : {
     *(.bank12 .bank12.*)
   } >bank12
 
-  .bank13 __bank13_lma + __bank0_fixed_size : {
+  .bank13 __bank13_lma + __bank13_fixed_size : {
     *(.bank13 .bank13.*)
   } >bank13
 
-  .bank14 __bank14_lma + __bank0_fixed_size : {
+  .bank14 __bank14_lma + __bank14_fixed_size : {
     *(.bank14 .bank14.*)
   } >bank14
 
-  .bank15 __bank15_lma + __bank0_fixed_size : {
+  .bank15 __bank15_lma + __bank15_fixed_size : {
     *(.bank15 .bank15.*)
   } >bank15
 
-  .bank16 __bank16_lma + __bank0_fixed_size : {
+  .bank16 __bank16_lma + __bank16_fixed_size : {
     *(.bank16 .bank16.*)
   } >bank16
 
-  .bank17 __bank17_lma + __bank0_fixed_size : {
+  .bank17 __bank17_lma + __bank17_fixed_size : {
     *(.bank17 .bank17.*)
   } >bank17
 
-  .bank18 __bank18_lma + __bank0_fixed_size : {
+  .bank18 __bank18_lma + __bank17_fixed_size : {
     *(.bank18 .bank18.*)
   } >bank18
 
-  .bank19 __bank19_lma + __bank0_fixed_size : {
+  .bank19 __bank19_lma + __bank19_fixed_size : {
     *(.bank19 .bank19.*)
   } >bank19
 
-  .bank20 __bank20_lma + __bank0_fixed_size : {
+  .bank20 __bank20_lma + __bank20_fixed_size : {
     *(.bank20 .bank20.*)
   } >bank20
 
-  .bank21 __bank21_lma + __bank0_fixed_size : {
+  .bank21 __bank21_lma + __bank21_fixed_size : {
     *(.bank21 .bank21.*)
   } >bank21
 
-  .bank22 __bank22_lma + __bank0_fixed_size : {
+  .bank22 __bank22_lma + __bank22_fixed_size : {
     *(.bank22 .bank22.*)
   } >bank22
 
-  .bank23 __bank23_lma + __bank0_fixed_size : {
+  .bank23 __bank23_lma + __bank23_fixed_size : {
     *(.bank23 .bank23.*)
   } >bank23
 
-  .bank24 __bank24_lma + __bank0_fixed_size : {
+  .bank24 __bank24_lma + __bank24_fixed_size : {
     *(.bank24 .bank24.*)
   } >bank24
 
-  .bank25 __bank25_lma + __bank0_fixed_size : {
+  .bank25 __bank25_lma + __bank25_fixed_size : {
     *(.bank25 .bank25.*)
   } >bank25
 
-  .bank26 __bank26_lma + __bank0_fixed_size : {
+  .bank26 __bank26_lma + __bank26_fixed_size : {
     *(.bank26 .bank26.*)
   } >bank26
 
-  .bank27 __bank27_lma + __bank0_fixed_size : {
+  .bank27 __bank27_lma + __bank27_fixed_size : {
     *(.bank27 .bank27.*)
   } >bank27
 
-  .bank28 __bank28_lma + __bank0_fixed_size : {
+  .bank28 __bank28_lma + __bank28_fixed_size : {
     *(.bank28 .bank28.*)
   } >bank28
 
-  .bank29 __bank29_lma + __bank0_fixed_size : {
+  .bank29 __bank29_lma + __bank29_fixed_size : {
     *(.bank29 .bank29.*)
   } >bank29
 
-  .bank30 __bank30_lma + __bank0_fixed_size : {
+  .bank30 __bank30_lma + __bank30_fixed_size : {
     *(.bank30 .bank30.*)
   } >bank30
 
-  .bank31 __bank31_lma + __bank0_fixed_size : {
+  .bank31 __bank31_lma + __bank31_fixed_size : {
     *(.bank31 .bank31.*)
   } >bank31
 
@@ -296,35 +333,40 @@ SECTIONS {
  * tail for the cartridge metadata */
 OUTPUT_FORMAT {
   FULL(bank0, 0, __bank0_fixed_size) FULL(bank0, __bank0_fixed_size)   FULL(tail0)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank1, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank2, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank3, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank4, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank5, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank6, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank7, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank8, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank9, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank10, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank11, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank12, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank13, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank14, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank15, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank16, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank17, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank18, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank19, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank20, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank21, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank22, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank23, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank24, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank25, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank26, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank27, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank28, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank29, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank30, __bank0_fixed_size)
-  FULL(bank0, 0, __bank0_fixed_size) FULL(bank31, __bank0_fixed_size)
+
+  FULL(bank0, 0, __bank1_fixed_size) FULL(bank1, __bank1_fixed_size)
+
+  FULL(bank0, 0, __bank2_fixed_size) FULL(bank2, __bank2_fixed_size)
+  FULL(bank0, 0, __bank3_fixed_size) FULL(bank3, __bank3_fixed_size)
+
+  FULL(bank0, 0, __bank4_fixed_size) FULL(bank4, __bank4_fixed_size)
+  FULL(bank0, 0, __bank5_fixed_size) FULL(bank5, __bank5_fixed_size)
+  FULL(bank0, 0, __bank6_fixed_size) FULL(bank6, __bank6_fixed_size)
+  FULL(bank0, 0, __bank7_fixed_size) FULL(bank7, __bank7_fixed_size)
+
+  FULL(bank0, 0, __bank8_fixed_size) FULL(bank8, __bank8_fixed_size)
+  FULL(bank0, 0, __bank9_fixed_size) FULL(bank9, __bank9_fixed_size)
+  FULL(bank0, 0, __bank10_fixed_size) FULL(bank10, __bank10_fixed_size)
+  FULL(bank0, 0, __bank11_fixed_size) FULL(bank11, __bank11_fixed_size)
+  FULL(bank0, 0, __bank12_fixed_size) FULL(bank12, __bank12_fixed_size)
+  FULL(bank0, 0, __bank13_fixed_size) FULL(bank13, __bank13_fixed_size)
+  FULL(bank0, 0, __bank14_fixed_size) FULL(bank14, __bank14_fixed_size)
+  FULL(bank0, 0, __bank15_fixed_size) FULL(bank15, __bank15_fixed_size)
+
+  FULL(bank0, 0, __bank16_fixed_size) FULL(bank16, __bank16_fixed_size)
+  FULL(bank0, 0, __bank17_fixed_size) FULL(bank17, __bank17_fixed_size)
+  FULL(bank0, 0, __bank18_fixed_size) FULL(bank18, __bank18_fixed_size)
+  FULL(bank0, 0, __bank19_fixed_size) FULL(bank19, __bank19_fixed_size)
+  FULL(bank0, 0, __bank20_fixed_size) FULL(bank20, __bank20_fixed_size)
+  FULL(bank0, 0, __bank21_fixed_size) FULL(bank21, __bank21_fixed_size)
+  FULL(bank0, 0, __bank22_fixed_size) FULL(bank22, __bank22_fixed_size)
+  FULL(bank0, 0, __bank23_fixed_size) FULL(bank23, __bank23_fixed_size)
+  FULL(bank0, 0, __bank24_fixed_size) FULL(bank24, __bank24_fixed_size)
+  FULL(bank0, 0, __bank25_fixed_size) FULL(bank25, __bank25_fixed_size)
+  FULL(bank0, 0, __bank26_fixed_size) FULL(bank26, __bank26_fixed_size)
+  FULL(bank0, 0, __bank27_fixed_size) FULL(bank27, __bank27_fixed_size)
+  FULL(bank0, 0, __bank28_fixed_size) FULL(bank28, __bank28_fixed_size)
+  FULL(bank0, 0, __bank29_fixed_size) FULL(bank29, __bank29_fixed_size)
+  FULL(bank0, 0, __bank30_fixed_size) FULL(bank30, __bank30_fixed_size)
+  FULL(bank0, 0, __bank31_fixed_size) FULL(bank31, __bank31_fixed_size)
 }

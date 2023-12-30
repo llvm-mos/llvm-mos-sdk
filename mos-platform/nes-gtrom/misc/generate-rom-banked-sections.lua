@@ -77,16 +77,23 @@ SECTIONS {
 
   /* Offset each non-fixed bank section's LMA by the fixed section. */
   /* This is accounted for in the custom output format. */]])
+
 for i=0,BANK_MAX do
-    printf([[  .prg_rom_%d __prg_rom_%d_lma + __prg_rom_fixed_size : {
+   local rom_size_kb = next_power_of_two(i + 1) * 32
+   printf([[  __prg_rom%d_fixed_size = __prg_rom_size >= %d ? __prg_rom_fixed_size : 0;]], i, rom_size_kb);
+end
+print("")
+
+for i=0,BANK_MAX do
+    printf([[  .prg_rom_%d __prg_rom_%d_lma + __prg_rom%d_fixed_size : {
     *(.prg_rom_%d .prg_rom_%d.*)
-  } >prg_rom_%d]], i, i, i, i, i)
+  } >prg_rom_%d]], i, i, i, i, i, i)
     print("")
-    printf([[  .dpcm_%d ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_%d_lma + 0x4000 : ALIGN(64)) : {
+    printf([[  .dpcm_%d ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_%d_lma + (__prg_rom_size >= %d ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_%d_start = .;
     KEEP(*(.dpcm_%d .dpcm_%d.*))
   } >prg_rom_%d
-  PROVIDE(__dpcm_%d_offset = ((__dpcm_%d_start & 0xffff) - 0xc000) >> 6);]], i, i, i, i, i, i, i, i)
+  PROVIDE(__dpcm_%d_offset = ((__dpcm_%d_start & 0xffff) - 0xc000) >> 6);]], i, i, next_power_of_two(i + 1) * 32, i, i, i, i, i, i)
   print("")
 end
 print([[

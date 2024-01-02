@@ -2,8 +2,6 @@
 #include <peekpoke.h>
 #include <stdlib.h>
 
-asm(".weak __prg_rom_size \n __prg_rom_size = 512 \n");
-
 volatile char return_value;
 
 __attribute__((noinline, section(".prg_rom_0.text"))) void bank_0_fn(void) {

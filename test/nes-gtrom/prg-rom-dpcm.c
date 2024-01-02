@@ -2,8 +2,6 @@
 #include <peekpoke.h>
 #include <stdlib.h>
 
-asm(".weak __prg_rom_size \n __prg_rom_size = 512 \n");
-
 volatile const char pad_fixed[5000] = {1, [4999] = 2};
 
 __attribute__((section(".prg_rom_0.rodata"))) volatile const char pad_0[15000] = {

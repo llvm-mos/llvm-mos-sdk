@@ -1,8 +1,6 @@
 INCLUDE _prg-rom-banked.ld
 
-/* Default to something smaller than the maximum size to avoid masking
-   linker script offset calculation problems. */
-PROVIDE(__prg_rom_size = 128);
+PROVIDE(__prg_rom_size = 512);
 
 OUTPUT_FORMAT {
   INCLUDE ines-header.ld

@@ -52,6 +52,12 @@ if(NOT CMAKE_CROSSCOMPILING)
     PATHS ENV EMUTEST_DIR)
   message(STATUS "Emutest test runner: ${EMUTEST_COMMAND}")
 
+  find_library(LIBRETRO_ATARI800_CORE
+    NAMES
+    atari800_libretro.so atari800_libretro.dylib atari800_libretro.dll
+    PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
+  message(STATUS "Libretro Atari800 core: ${LIBRETRO_ATARI800_CORE}")
+
   find_library(LIBRETRO_STELLA_CORE
     NAMES
     stella2014_libretro.so stella2014_libretro.dylib stella2014_libretro.dll

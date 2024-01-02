@@ -81,161 +81,178 @@ SECTIONS {
 
   /* Offset each non-fixed bank section's LMA by the fixed section. */
   /* This is accounted for in the custom output format. */
-  .prg_rom_0 __prg_rom_0_lma + __prg_rom_fixed_size : {
+  __prg_rom0_fixed_size = __prg_rom_size >= 32 ? __prg_rom_fixed_size : 0;
+  __prg_rom1_fixed_size = __prg_rom_size >= 64 ? __prg_rom_fixed_size : 0;
+  __prg_rom2_fixed_size = __prg_rom_size >= 128 ? __prg_rom_fixed_size : 0;
+  __prg_rom3_fixed_size = __prg_rom_size >= 128 ? __prg_rom_fixed_size : 0;
+  __prg_rom4_fixed_size = __prg_rom_size >= 256 ? __prg_rom_fixed_size : 0;
+  __prg_rom5_fixed_size = __prg_rom_size >= 256 ? __prg_rom_fixed_size : 0;
+  __prg_rom6_fixed_size = __prg_rom_size >= 256 ? __prg_rom_fixed_size : 0;
+  __prg_rom7_fixed_size = __prg_rom_size >= 256 ? __prg_rom_fixed_size : 0;
+  __prg_rom8_fixed_size = __prg_rom_size >= 512 ? __prg_rom_fixed_size : 0;
+  __prg_rom9_fixed_size = __prg_rom_size >= 512 ? __prg_rom_fixed_size : 0;
+  __prg_rom10_fixed_size = __prg_rom_size >= 512 ? __prg_rom_fixed_size : 0;
+  __prg_rom11_fixed_size = __prg_rom_size >= 512 ? __prg_rom_fixed_size : 0;
+  __prg_rom12_fixed_size = __prg_rom_size >= 512 ? __prg_rom_fixed_size : 0;
+  __prg_rom13_fixed_size = __prg_rom_size >= 512 ? __prg_rom_fixed_size : 0;
+  __prg_rom14_fixed_size = __prg_rom_size >= 512 ? __prg_rom_fixed_size : 0;
+  __prg_rom15_fixed_size = __prg_rom_size >= 512 ? __prg_rom_fixed_size : 0;
+
+  .prg_rom_0 __prg_rom_0_lma + __prg_rom0_fixed_size : {
     *(.prg_rom_0 .prg_rom_0.*)
   } >prg_rom_0
 
-  .dpcm_0 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_0_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_0 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_0_lma + (__prg_rom_size >= 32 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_0_start = .;
     KEEP(*(.dpcm_0 .dpcm_0.*))
   } >prg_rom_0
   PROVIDE(__dpcm_0_offset = ((__dpcm_0_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_1 __prg_rom_1_lma + __prg_rom_fixed_size : {
+  .prg_rom_1 __prg_rom_1_lma + __prg_rom1_fixed_size : {
     *(.prg_rom_1 .prg_rom_1.*)
   } >prg_rom_1
 
-  .dpcm_1 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_1_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_1 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_1_lma + (__prg_rom_size >= 64 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_1_start = .;
     KEEP(*(.dpcm_1 .dpcm_1.*))
   } >prg_rom_1
   PROVIDE(__dpcm_1_offset = ((__dpcm_1_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_2 __prg_rom_2_lma + __prg_rom_fixed_size : {
+  .prg_rom_2 __prg_rom_2_lma + __prg_rom2_fixed_size : {
     *(.prg_rom_2 .prg_rom_2.*)
   } >prg_rom_2
 
-  .dpcm_2 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_2_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_2 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_2_lma + (__prg_rom_size >= 128 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_2_start = .;
     KEEP(*(.dpcm_2 .dpcm_2.*))
   } >prg_rom_2
   PROVIDE(__dpcm_2_offset = ((__dpcm_2_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_3 __prg_rom_3_lma + __prg_rom_fixed_size : {
+  .prg_rom_3 __prg_rom_3_lma + __prg_rom3_fixed_size : {
     *(.prg_rom_3 .prg_rom_3.*)
   } >prg_rom_3
 
-  .dpcm_3 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_3_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_3 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_3_lma + (__prg_rom_size >= 128 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_3_start = .;
     KEEP(*(.dpcm_3 .dpcm_3.*))
   } >prg_rom_3
   PROVIDE(__dpcm_3_offset = ((__dpcm_3_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_4 __prg_rom_4_lma + __prg_rom_fixed_size : {
+  .prg_rom_4 __prg_rom_4_lma + __prg_rom4_fixed_size : {
     *(.prg_rom_4 .prg_rom_4.*)
   } >prg_rom_4
 
-  .dpcm_4 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_4_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_4 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_4_lma + (__prg_rom_size >= 256 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_4_start = .;
     KEEP(*(.dpcm_4 .dpcm_4.*))
   } >prg_rom_4
   PROVIDE(__dpcm_4_offset = ((__dpcm_4_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_5 __prg_rom_5_lma + __prg_rom_fixed_size : {
+  .prg_rom_5 __prg_rom_5_lma + __prg_rom5_fixed_size : {
     *(.prg_rom_5 .prg_rom_5.*)
   } >prg_rom_5
 
-  .dpcm_5 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_5_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_5 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_5_lma + (__prg_rom_size >= 256 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_5_start = .;
     KEEP(*(.dpcm_5 .dpcm_5.*))
   } >prg_rom_5
   PROVIDE(__dpcm_5_offset = ((__dpcm_5_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_6 __prg_rom_6_lma + __prg_rom_fixed_size : {
+  .prg_rom_6 __prg_rom_6_lma + __prg_rom6_fixed_size : {
     *(.prg_rom_6 .prg_rom_6.*)
   } >prg_rom_6
 
-  .dpcm_6 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_6_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_6 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_6_lma + (__prg_rom_size >= 256 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_6_start = .;
     KEEP(*(.dpcm_6 .dpcm_6.*))
   } >prg_rom_6
   PROVIDE(__dpcm_6_offset = ((__dpcm_6_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_7 __prg_rom_7_lma + __prg_rom_fixed_size : {
+  .prg_rom_7 __prg_rom_7_lma + __prg_rom7_fixed_size : {
     *(.prg_rom_7 .prg_rom_7.*)
   } >prg_rom_7
 
-  .dpcm_7 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_7_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_7 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_7_lma + (__prg_rom_size >= 256 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_7_start = .;
     KEEP(*(.dpcm_7 .dpcm_7.*))
   } >prg_rom_7
   PROVIDE(__dpcm_7_offset = ((__dpcm_7_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_8 __prg_rom_8_lma + __prg_rom_fixed_size : {
+  .prg_rom_8 __prg_rom_8_lma + __prg_rom8_fixed_size : {
     *(.prg_rom_8 .prg_rom_8.*)
   } >prg_rom_8
 
-  .dpcm_8 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_8_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_8 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_8_lma + (__prg_rom_size >= 512 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_8_start = .;
     KEEP(*(.dpcm_8 .dpcm_8.*))
   } >prg_rom_8
   PROVIDE(__dpcm_8_offset = ((__dpcm_8_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_9 __prg_rom_9_lma + __prg_rom_fixed_size : {
+  .prg_rom_9 __prg_rom_9_lma + __prg_rom9_fixed_size : {
     *(.prg_rom_9 .prg_rom_9.*)
   } >prg_rom_9
 
-  .dpcm_9 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_9_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_9 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_9_lma + (__prg_rom_size >= 512 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_9_start = .;
     KEEP(*(.dpcm_9 .dpcm_9.*))
   } >prg_rom_9
   PROVIDE(__dpcm_9_offset = ((__dpcm_9_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_10 __prg_rom_10_lma + __prg_rom_fixed_size : {
+  .prg_rom_10 __prg_rom_10_lma + __prg_rom10_fixed_size : {
     *(.prg_rom_10 .prg_rom_10.*)
   } >prg_rom_10
 
-  .dpcm_10 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_10_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_10 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_10_lma + (__prg_rom_size >= 512 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_10_start = .;
     KEEP(*(.dpcm_10 .dpcm_10.*))
   } >prg_rom_10
   PROVIDE(__dpcm_10_offset = ((__dpcm_10_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_11 __prg_rom_11_lma + __prg_rom_fixed_size : {
+  .prg_rom_11 __prg_rom_11_lma + __prg_rom11_fixed_size : {
     *(.prg_rom_11 .prg_rom_11.*)
   } >prg_rom_11
 
-  .dpcm_11 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_11_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_11 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_11_lma + (__prg_rom_size >= 512 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_11_start = .;
     KEEP(*(.dpcm_11 .dpcm_11.*))
   } >prg_rom_11
   PROVIDE(__dpcm_11_offset = ((__dpcm_11_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_12 __prg_rom_12_lma + __prg_rom_fixed_size : {
+  .prg_rom_12 __prg_rom_12_lma + __prg_rom12_fixed_size : {
     *(.prg_rom_12 .prg_rom_12.*)
   } >prg_rom_12
 
-  .dpcm_12 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_12_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_12 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_12_lma + (__prg_rom_size >= 512 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_12_start = .;
     KEEP(*(.dpcm_12 .dpcm_12.*))
   } >prg_rom_12
   PROVIDE(__dpcm_12_offset = ((__dpcm_12_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_13 __prg_rom_13_lma + __prg_rom_fixed_size : {
+  .prg_rom_13 __prg_rom_13_lma + __prg_rom13_fixed_size : {
     *(.prg_rom_13 .prg_rom_13.*)
   } >prg_rom_13
 
-  .dpcm_13 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_13_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_13 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_13_lma + (__prg_rom_size >= 512 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_13_start = .;
     KEEP(*(.dpcm_13 .dpcm_13.*))
   } >prg_rom_13
   PROVIDE(__dpcm_13_offset = ((__dpcm_13_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_14 __prg_rom_14_lma + __prg_rom_fixed_size : {
+  .prg_rom_14 __prg_rom_14_lma + __prg_rom14_fixed_size : {
     *(.prg_rom_14 .prg_rom_14.*)
   } >prg_rom_14
 
-  .dpcm_14 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_14_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_14 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_14_lma + (__prg_rom_size >= 512 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_14_start = .;
     KEEP(*(.dpcm_14 .dpcm_14.*))
   } >prg_rom_14
   PROVIDE(__dpcm_14_offset = ((__dpcm_14_start & 0xffff) - 0xc000) >> 6);
 
-  .prg_rom_15 __prg_rom_15_lma + __prg_rom_fixed_size : {
+  .prg_rom_15 __prg_rom_15_lma + __prg_rom15_fixed_size : {
     *(.prg_rom_15 .prg_rom_15.*)
   } >prg_rom_15
 
-  .dpcm_15 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_15_lma + 0x4000 : ALIGN(64)) : {
+  .dpcm_15 ((ABSOLUTE(.) & 0xffff) < 0xc000 ? __prg_rom_15_lma + (__prg_rom_size >= 512 ? 0x4000 : 0) : ALIGN(64)) : {
     __dpcm_15_start = .;
     KEEP(*(.dpcm_15 .dpcm_15.*))
   } >prg_rom_15

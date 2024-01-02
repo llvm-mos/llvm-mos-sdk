@@ -1,5 +1,3 @@
-# We are NOT using atari8-common as it's sufficiently at present,
-# zero-page, stack setup, hardware offsets and minimalist IO
 
 platform(atari5200-super HOSTED PARENT common)
 

@@ -306,10 +306,18 @@ Copy `test/mesen_settings.xml` to this folder.
 
 Install emutest (requires Go 1.21):
 ```console
-$ go install https://github.com/kivutar/emutest
+$ go install github.com/kivutar/emutest@latest
 ```
 
-Make sure `$GOBIN` (usually `~/go/bin`) is included in your PATH environment variable so that CMake can find the binary, or set the `EMUTEST_DIR` environment variable to point to this directory before running `cmake -G` for the first time.
+Make sure `$GOBIN` (usually `~/go/bin`) is included in your `PATH`
+environment variable so that CMake can find the binary, or set the
+`EMUTEST_DIR` environment variable to point to this directory before
+running `cmake -G` for the first time.
+
+You can verify emutest with `emutest -h` on the command-line.
+
+You should see `-T Test runner mode (script must call os.exit)` in the
+output.
 
 Build Libretro cores for desired target(s):
 

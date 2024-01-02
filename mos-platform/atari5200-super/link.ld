@@ -11,6 +11,8 @@
 
 PROVIDE(__cart_rom_size = 512);
 
+PROVIDE(__stack = 0x3c00);
+
 ASSERT(__cart_rom_size == 1 << LOG2CEIL(__cart_rom_size),
        "ATARI 5200: __cart_rom_size size must be a power of 2.")
 ASSERT(__cart_rom_size >= 32,

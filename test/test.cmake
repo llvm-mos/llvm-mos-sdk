@@ -36,7 +36,7 @@ function(add_a8_test name)
   if(ARGC GREATER 1)
     set(source_dir ${ARGV1})
   endif()
-  add_emutest_test(${name} a8 ${source_dir} LIBRETRO_ATARI800_CORE)
+  add_emutest_test(${name} xex ${source_dir} LIBRETRO_ATARI800_CORE)
 endfunction()
 
 function(add_vcs_test name)

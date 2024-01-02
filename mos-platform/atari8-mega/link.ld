@@ -16,9 +16,7 @@
 
 INPUT(tail0.o)
 
-/* Default cartridge size.  This isn't the largest possible size to
-   avoid masking alignment/fixup bugs. */
-PROVIDE(__cart_rom_size = 128);
+PROVIDE(__cart_rom_size = 512);
 
 ASSERT(__cart_rom_size == 1 << LOG2CEIL(__cart_rom_size),
        "ATARI 800 MegaCart cartridge: __cart_rom_size size must be a power of 2.")

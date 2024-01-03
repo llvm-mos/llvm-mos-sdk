@@ -10,8 +10,21 @@
 */
 
 PROVIDE(__cart_rom_size = 512);
-
 PROVIDE(__stack = 0x3c00);
+
+/* ATASCII bytes for the year in 19xx.
+
+   __cart_5200_year1 == 0xff indicates a diagnostic cartridge.
+
+   An ATASCII '0' is 0x50.
+   An ATASCII 'A' is 0x61.
+
+   We have a y2k problem; embrace it, and overflow the first digit:
+     'C', decade 12
+     '4', year 4 ... 1900+12*10+4=2024
+*/
+PROVIDE(__cart_5200_year0 = 0x63);
+PROVIDE(__cart_5200_year1 = 0x54);
 
 ASSERT(__cart_rom_size == 1 << LOG2CEIL(__cart_rom_size),
        "ATARI 5200: __cart_rom_size size must be a power of 2.")
@@ -215,11 +228,8 @@ SECTIONS {
      Cartridge Metadata: 24 bytes
 
      20 bytes of title at bfe8 (ATASCII)
-     2 year 19xx at bffc - if bffd is 0xff this means diag cart - TODO
-     init at bffe
-
-     TODO: We might want to juse use things in diag cart mode (some
-     games do this) and ignore the above.  */
+     2 year 19xx at bffc - if bffd
+     is 0xff this means diag cart */
   .vector __tail_lma + (64 - 24) : {
     BYTE(0x40) // space
     BYTE(0x2c) // "llvm-mos" (shifted to lower 32 where colors rotate)
@@ -242,10 +252,8 @@ SECTIONS {
     BYTE(0x40) // space
     BYTE(0x40) // space
 
-    /* year in 19xx, y2k problem issue so pick something, the internet
-       says this was the best year in the 1900s.  Moon landing! */
-    BYTE(0x56)
-    BYTE(0x59)
+    BYTE(__cart_5200_year0)
+    BYTE(__cart_5200_year1)
 
     SHORT(_start)
   } >tail

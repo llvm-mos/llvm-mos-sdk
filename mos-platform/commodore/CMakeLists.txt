@@ -54,8 +54,5 @@ add_platform_library(commodore-c
   cbm_k_untlk.c
 )
 
-# abort is preemptively included if LTO is used, which pulls in _exit support
-# unneccessarily. It can also be called in an interrupt.
-set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)
 target_include_directories(commodore-c BEFORE PUBLIC .)
 target_link_libraries(commodore-c PRIVATE common-asminc)

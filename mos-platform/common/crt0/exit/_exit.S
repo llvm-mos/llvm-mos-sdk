@@ -7,11 +7,11 @@
 
 ; On init, save the hardware stack pointer. Since _start is just _init, this
 ; will be its value at entry.
-.section .init.100,"axR",@progbits
+.section .init.100,"axG",@progbits,_exit
   tsx
   stx __save_s
 
-.text
+.section .text._exit,"axG",@progbits,_exit
 _exit:
 _Exit:
   ; Restore the hard stack pointer to its value on entry.

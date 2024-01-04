@@ -124,6 +124,7 @@ __attribute__((weak)) char *strtok(char *string, const char *separators) {
 __attribute__((weak)) char *strcat(char *restrict s1, const char *restrict s2) {
   size_t len = strlen(s1);
   strcpy(s1 + len, s2);
+  return s1;
 }
 
 __attribute__((weak)) char *strncat(char *restrict s1, const char *restrict s2,

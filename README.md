@@ -8,7 +8,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
 
 - Atari 2600
   - 4K cartridge
-  - TigerVision 3E (2-KiB fixed, 2-KiB banked ROM or RAM)
+  - [TigerVision 3E (2-KiB fixed, 2-KiB banked ROM or RAM)](https://www.taswegian.com/WoodgrainWizard/tiki-index.php?page=3E)
 - Atari 8-bit
   - DOS ".XEX" file
   - 8-KiB or 16-KiB standard cartridge
@@ -23,14 +23,14 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - [Dodo 6502 Game System](https://github.com/peternoyes/dodo)
 - [MEGA65](https://mega65.org/)
 - NES
-  - Action 53
-  - CNROM
-  - GTROM
-  - NROM
-  - UNROM
-  - UNROM-512
-  - MMC1
-  - MMC3
+  - [Action 53](https://www.nesdev.org/wiki/Action_53)
+  - [CNROM](https://www.nesdev.org/wiki/CNROM)
+  - [GTROM](https://www.nesdev.org/wiki/GTROM)
+  - [NROM](https://www.nesdev.org/wiki/NROM)
+  - [UNROM](https://www.nesdev.org/wiki/UxROM)
+  - [UNROM-512](https://www.nesdev.org/wiki/UNROM_512)
+  - [MMC1](https://www.nesdev.org/wiki/MMC1)
+  - [MMC3](https://www.nesdev.org/wiki/MMC3)
 - Ohio Scientific Challenger 1P
 - PC Engine
   - PC Engine CD

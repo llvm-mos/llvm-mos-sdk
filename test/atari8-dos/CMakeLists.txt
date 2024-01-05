@@ -4,4 +4,5 @@ project(test-atari8-dos LANGUAGES C)
 
 include(../test.cmake)
 
+add_subdirectory(compile)
 add_subdirectory(no-compile)

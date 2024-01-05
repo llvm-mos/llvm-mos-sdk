@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 // atari8-stdcart; we have 14.25 KiB of RAM from 0x700 to 0x4000
-__attribute__((used)) uint8_t ram_too_big[15 * 1024];
+uint8_t ram_too_big[15 * 1024];
 
 int main(void) {
   asm volatile(

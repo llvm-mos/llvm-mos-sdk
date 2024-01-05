@@ -634,6 +634,10 @@ template <size_t N> struct AtasciiVideoString {
     default:
       throw "Unsupported";
 
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
+
       // Name: Map from Atari 8-bit series (video) graphics character set to
       // Unicode
 
@@ -948,6 +952,10 @@ template <size_t N> struct AtasciiReverseVideoString {
     default:
       throw "Unsupported";
 
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
+
       // Name: Map from Atari 8-bit series (video) graphics character set to
       // Unicode
 
@@ -1225,6 +1233,10 @@ template <size_t N> struct AtasciiInternationalVideoString {
     switch (C) {
     default:
       throw "Unsupported";
+
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
 
       // Name: Map from Atari 8-bit series (video) international character set
       // to Unicode
@@ -1521,6 +1533,10 @@ template <size_t N> struct AtasciiInternationalReverseVideoString {
     switch (C) {
     default:
       throw "Unsupported";
+
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
 
       // Name: Map from Atari 8-bit series (video) international character set
       // to Unicode

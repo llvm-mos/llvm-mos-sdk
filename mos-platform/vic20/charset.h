@@ -904,6 +904,10 @@ template <size_t N> struct UnshiftedVideoString {
     default:
       throw "Unsupported";
 
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
+
       // Name: Map from Commodore VIC-20 (video) primary character set to
       // Unicode
 
@@ -1254,6 +1258,10 @@ template <size_t N> struct UnshiftedReverseVideoString {
     default:
       throw "Unsupported";
 
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
+
       // Name: Map from Commodore VIC-20 (video) primary character set to
       // Unicode
 
@@ -1495,6 +1503,10 @@ template <size_t N> struct ShiftedVideoString {
     switch (C) {
     default:
       throw "Unsupported";
+
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
 
       // Name: Map from Commodore VIC-20 (video) alternate character set to
       // Unicode
@@ -1841,6 +1853,10 @@ template <size_t N> struct ShiftedReverseVideoString {
     switch (C) {
     default:
       throw "Unsupported";
+
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
 
       // Name: Map from Commodore VIC-20 (video) alternate character set to
       // Unicode

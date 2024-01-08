@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>llvm-mos-sdk: sim/assert.h File Reference</title>
+<title>llvm-mos-sdk: common/include/assert.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4fedf3bc7458de691f44ea68a2cf9143.html">sim</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_bdd9a5d540de89e9fe90efdfc6973a4f.html">common</a></li><li class="navelem"><a class="el" href="dir_11fbc4217d50ab21044e5ad6614aede5.html">include</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -71,33 +71,43 @@ $(function() {
 <div class="title">assert.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;__internal.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for assert.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="assert_8h__incl.png" border="0" usemap="#common_2include_2assert_8h" alt=""/></div>
+<map name="common_2include_2assert_8h" id="common_2include_2assert_8h">
+<area shape="rect" title=" " alt="" coords="5,5,192,32"/>
+<area shape="rect" title=" " alt="" coords="49,80,148,107"/>
+</map>
+</div>
+</div>
 <p><a href="assert_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a57746d21d4a6af829cea4da476ab76dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a57746d21d4a6af829cea4da476ab76dc">_ASSERT_H_</a></td></tr>
-<tr class="separator:a57746d21d4a6af829cea4da476ab76dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53022762464514790477ba81ce0ab36a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a53022762464514790477ba81ce0ab36a">assert</a>(expr)&#160;&#160;&#160;((expr) ? (void)0 : __assert(__FILE__, __LINE__, __PRETTY_FUNCTION__, #expr))</td></tr>
-<tr class="separator:a53022762464514790477ba81ce0ab36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad35494954801755650b56732e41fec8c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#ad35494954801755650b56732e41fec8c">_ASSERT_H</a></td></tr>
+<tr class="separator:ad35494954801755650b56732e41fec8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0041af519e0e7d47c9bcc83760c4669e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8h.html#a0041af519e0e7d47c9bcc83760c4669e">assert</a>(expression)</td></tr>
+<tr class="separator:a0041af519e0e7d47c9bcc83760c4669e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a57746d21d4a6af829cea4da476ab76dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57746d21d4a6af829cea4da476ab76dc">&#9670;&nbsp;</a></span>_ASSERT_H_</h2>
+<a id="ad35494954801755650b56732e41fec8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad35494954801755650b56732e41fec8c">&#9670;&nbsp;</a></span>_ASSERT_H</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _ASSERT_H_</td>
+          <td class="memname">#define _ASSERT_H</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a53022762464514790477ba81ce0ab36a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53022762464514790477ba81ce0ab36a">&#9670;&nbsp;</a></span>assert</h2>
+<a id="a0041af519e0e7d47c9bcc83760c4669e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0041af519e0e7d47c9bcc83760c4669e">&#9670;&nbsp;</a></span>assert</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -106,12 +116,15 @@ Macros</h2></td></tr>
           <td class="memname">#define assert</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">expr</td><td>)</td>
-          <td>&#160;&#160;&#160;((expr) ? (void)0 : __assert(__FILE__, __LINE__, __PRETTY_FUNCTION__, #expr))</td>
+          <td class="paramname">expression</td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">  ((expression) ? (<span class="keywordtype">void</span>)0                                                      \</div>
+<div class="line">                : __assert(__FILE__, _VALUE_TO_STRING(__LINE__), __func__,     \</div>
+<div class="line">                           #expression))</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

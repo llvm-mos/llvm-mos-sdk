@@ -67,7 +67,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">stdio.h File Reference</div>  </div>
 </div><!--header-->
@@ -101,6 +103,11 @@ Macros</h2></td></tr>
 <tr class="memitem:a59adc4c82490d23754cd39c2fb99b0da"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a59adc4c82490d23754cd39c2fb99b0da">EOF</a>&#160;&#160;&#160;(-1)</td></tr>
 <tr class="separator:a59adc4c82490d23754cd39c2fb99b0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a175abb747ea3b78aa8da87355dcec473"><td class="memItemLeft" align="right" valign="top">typedef struct _FILE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a></td></tr>
+<tr class="separator:a175abb747ea3b78aa8da87355dcec473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a98631211a4a8aee62f572375d5b637be"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a98631211a4a8aee62f572375d5b637be">printf</a> (const char *format,...)</td></tr>
@@ -119,6 +126,19 @@ Functions</h2></td></tr>
 <tr class="separator:ad41876f99f190c7488e64ef39c50a23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e29caa20f7cffe18f410f01278905a8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8">getchar</a> (void)</td></tr>
 <tr class="separator:a3e29caa20f7cffe18f410f01278905a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6299d5823dd023e610aaa619735a3f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#abe6299d5823dd023e610aaa619735a3f">fputc</a> (int <a class="el" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream)</td></tr>
+<tr class="separator:abe6299d5823dd023e610aaa619735a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee2fee618a56350c584e3f9fcf75f20e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#aee2fee618a56350c584e3f9fcf75f20e">fputs</a> (const char *__restrict__ s, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream)</td></tr>
+<tr class="separator:aee2fee618a56350c584e3f9fcf75f20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:acab9c1fe2a80b10e01858bda28a04244"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#acab9c1fe2a80b10e01858bda28a04244">stdin</a></td></tr>
+<tr class="separator:acab9c1fe2a80b10e01858bda28a04244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac80f4484175bf6c48d7b7ca4e9897ae6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#ac80f4484175bf6c48d7b7ca4e9897ae6">stdout</a></td></tr>
+<tr class="separator:ac80f4484175bf6c48d7b7ca4e9897ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9e47c346a25e2e7edd2c9b4ca5d0262"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#ac9e47c346a25e2e7edd2c9b4ca5d0262">stderr</a></td></tr>
+<tr class="separator:ac9e47c346a25e2e7edd2c9b4ca5d0262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a59adc4c82490d23754cd39c2fb99b0da"></a>
@@ -135,7 +155,80 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a175abb747ea3b78aa8da87355dcec473"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a175abb747ea3b78aa8da87355dcec473">&#9670;&nbsp;</a></span>FILE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct _FILE <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="abe6299d5823dd023e610aaa619735a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6299d5823dd023e610aaa619735a3f">&#9670;&nbsp;</a></span>fputc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fputc </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *&#160;</td>
+          <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Write the value c (cast to unsigned char) to the given stream. </p><dl class="section return"><dt>Returns</dt><dd>c if successful, EOF otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aee2fee618a56350c584e3f9fcf75f20e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee2fee618a56350c584e3f9fcf75f20e">&#9670;&nbsp;</a></span>fputs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fputs </td>
+          <td>(</td>
+          <td class="paramtype">const char *__restrict__&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__&#160;</td>
+          <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Write the string s (not including the terminating \0) to the given stream. </p><dl class="section return"><dt>Returns</dt><dd>A value &gt;=0 if successful, EOF otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="a3e29caa20f7cffe18f410f01278905a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3e29caa20f7cffe18f410f01278905a8">&#9670;&nbsp;</a></span>getchar()</h2>
 
@@ -387,6 +480,49 @@ Functions</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ac9e47c346a25e2e7edd2c9b4ca5d0262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9e47c346a25e2e7edd2c9b4ca5d0262">&#9670;&nbsp;</a></span>stderr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a>* stderr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acab9c1fe2a80b10e01858bda28a04244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acab9c1fe2a80b10e01858bda28a04244">&#9670;&nbsp;</a></span>stdin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a>* stdin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac80f4484175bf6c48d7b7ca4e9897ae6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac80f4484175bf6c48d7b7ca4e9897ae6">&#9670;&nbsp;</a></span>stdout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a>* stdout</td>
         </tr>
       </table>
 </div><div class="memdoc">

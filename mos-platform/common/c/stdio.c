@@ -5,9 +5,7 @@ int putchar(int c) {
   return c;
 }
 
-// This can be called by abort(), which can be called in a signal and is not
-// included in LTO.
-__attribute((interrupt, no_isr)) int puts(const char *s) {
+int puts(const char *s) {
   for (; *s; ++s)
     putchar(*s);
   putchar('\n');

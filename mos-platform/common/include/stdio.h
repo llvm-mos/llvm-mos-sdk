@@ -97,6 +97,27 @@ int getchar(void);
 // To be defined by platform.
 void __putchar(char c);
 
+// Originally from the Public Domain C Library (PDCLib).
+
+struct _FILE;
+typedef struct _FILE FILE;
+
+extern FILE *stdin;
+extern FILE *stdout;
+extern FILE *stderr;
+
+/**
+ * Write the value c (cast to unsigned char) to the given stream.
+ * \return c if successful, EOF otherwise.
+ */
+int fputc(int c, FILE *stream);
+
+/**
+ * Write the string s (not including the terminating \0) to the given stream.
+ * \return A value >=0 if successful, EOF otherwise.
+ */
+int fputs(const char *__restrict__ s, FILE *__restrict__ stream);
+
 #ifdef __cplusplus
 }
 #endif

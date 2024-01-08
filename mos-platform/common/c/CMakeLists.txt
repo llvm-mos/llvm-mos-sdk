@@ -1,5 +1,8 @@
 # C standard library and C++ abi.
 add_platform_library(common-c
+  # assert.h
+  assert.c
+
   # ctype.h
   ctype.c
 

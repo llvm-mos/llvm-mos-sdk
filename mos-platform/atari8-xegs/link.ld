@@ -30,9 +30,8 @@ ASSERT(__cart_rom_size <= 512,
 MEMORY {
   zp : ORIGIN = __rc31 + 1, LENGTH = 0x100 - (__rc31 + 1)
   /* Memory as low as 0x700 works when not using DOS.  Assume we have
-     at most 16 KiB of RAM to maximize compatabilty with the Atari 400
-     and Atari 600XL models. */
-  ram (w) : ORIGIN = 0x700, LENGTH = 0x4000 - 0x700
+     at most 8k KiB of RAM to maximize compatabilty. */
+  ram (w) : ORIGIN = 0x700, LENGTH = 0x2000 - 0x700
 }
 
 /* Provide imaginary (zero page) registers. */

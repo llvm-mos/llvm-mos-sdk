@@ -18,7 +18,7 @@
    has details. */
 
 /* Default cartridges size */
-PROVIDE(__cart_rom_size = 128);
+PROVIDE(__cart_rom_size = 256);
 
 ASSERT(__cart_rom_size == 1 << LOG2CEIL(__cart_rom_size),
        "ATARI 800 XEGS cartridge: __cart_rom_size size must be a power of 2.")

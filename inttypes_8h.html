@@ -66,7 +66,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">inttypes.h File Reference</div>  </div>
 </div><!--header-->
@@ -86,6 +88,11 @@ Include dependency graph for inttypes.h:</div>
 </div>
 <p><a href="inttypes_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structimaxdiv__t.html">imaxdiv_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ae53c45f590033ad1f2f517faf3ab2f1b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inttypes_8h.html#ae53c45f590033ad1f2f517faf3ab2f1b">PRId8</a>&#160;&#160;&#160;__INT8_FMTd__</td></tr>
@@ -396,6 +403,13 @@ Macros</h2></td></tr>
 <tr class="separator:acdb85fa86d6d76bc7a2e16ec0cc3ae58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa58d290d968643862aec7a8a56e1c8e9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inttypes_8h.html#aa58d290d968643862aec7a8a56e1c8e9">SCNxPTR</a>&#160;&#160;&#160;__UINTPTR_FMTx__</td></tr>
 <tr class="separator:aa58d290d968643862aec7a8a56e1c8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad9e8a565a34b6981f500d88773ec7bcd"><td class="memItemLeft" align="right" valign="top">intmax_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inttypes_8h.html#ad9e8a565a34b6981f500d88773ec7bcd">imaxabs</a> (intmax_t j)</td></tr>
+<tr class="separator:ad9e8a565a34b6981f500d88773ec7bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdaff0aa6f40596b90b84a7ad63d2299"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structimaxdiv__t.html">imaxdiv_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inttypes_8h.html#abdaff0aa6f40596b90b84a7ad63d2299">imaxdiv</a> (intmax_t numer, intmax_t denom)</td></tr>
+<tr class="separator:abdaff0aa6f40596b90b84a7ad63d2299"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a087e50fe0283aacc71d7138d13e91939"></a>
@@ -2548,6 +2562,53 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define SCNxPTR&#160;&#160;&#160;__UINTPTR_FMTx__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad9e8a565a34b6981f500d88773ec7bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e8a565a34b6981f500d88773ec7bcd">&#9670;&nbsp;</a></span>imaxabs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">intmax_t imaxabs </td>
+          <td>(</td>
+          <td class="paramtype">intmax_t&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abdaff0aa6f40596b90b84a7ad63d2299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdaff0aa6f40596b90b84a7ad63d2299">&#9670;&nbsp;</a></span>imaxdiv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structimaxdiv__t.html">imaxdiv_t</a> imaxdiv </td>
+          <td>(</td>
+          <td class="paramtype">intmax_t&#160;</td>
+          <td class="paramname"><em>numer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">intmax_t&#160;</td>
+          <td class="paramname"><em>denom</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

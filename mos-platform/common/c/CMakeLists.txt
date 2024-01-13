@@ -9,6 +9,9 @@ add_platform_library(common-c
   # errno.h
   errno.c
 
+  # inttypes.h
+  inttypes.c
+
   # setjmp.h
   setjmp.S
 

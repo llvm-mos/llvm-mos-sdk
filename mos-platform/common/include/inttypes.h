@@ -169,4 +169,12 @@
 #define SCNxMAX __UINTMAX_FMTx__
 #define SCNxPTR __UINTPTR_FMTx__
 
+intmax_t imaxabs(intmax_t j);
+
+typedef struct {
+  intmax_t quot, rem;
+} imaxdiv_t;
+
+imaxdiv_t imaxdiv(intmax_t numer, intmax_t denom);
+
 #endif // not _INTTYPES_H_

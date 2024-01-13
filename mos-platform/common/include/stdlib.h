@@ -46,6 +46,23 @@ typedef struct {
 } lldiv_t;
 lldiv_t lldiv(long long numer, long long denom);
 
+long strtol(const char *__restrict__ nptr, char **__restrict endptr, int base);
+long long strtoll(const char *__restrict__ nptr, char **__restrict endptr,
+                  int base);
+unsigned long strtoul(const char *__restrict__ nptr, char **__restrict endptr,
+                      int base);
+unsigned long long strtoull(const char *__restrict__ nptr,
+                            char **__restrict endptr, int base);
+
+// Non-standard strtox functions for smaller types.
+signed char strtosc(const char *__restrict__ nptr, char **__restrict endptr,
+                    int base);
+unsigned char strtouc(const char *__restrict__ nptr, char **__restrict endptr,
+                      int base);
+int strtoi(const char *__restrict__ nptr, char **__restrict endptr, int base);
+unsigned int strtoui(const char *__restrict__ nptr, char **__restrict endptr,
+                     int base);
+
 // clang-format off
 /**
 Simple malloc/free implementation.

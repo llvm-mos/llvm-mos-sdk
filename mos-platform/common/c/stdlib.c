@@ -479,3 +479,19 @@ strtoui(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
 
   return (sign == '+' || is_error) ? rc : -rc;
 }
+
+// A 16-bit xorshift generator with constants well suited to 8-bit systems.
+// Values found by George Marsaglia for the Z80:
+//   http://www.retroprogramming.com/2017/07/xorshift-pseudorandom-numbers-in-z80.html
+
+static unsigned seed = 1;
+
+__attribute__((weak)) int rand(void) {
+  unsigned x = seed;
+  x ^= x << 7;
+  x ^= x >> 9;
+  x ^= x << 8;
+  return seed = x;
+}
+
+__attribute__((weak)) void srand(unsigned s) { seed = s; }

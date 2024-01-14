@@ -71,6 +71,9 @@ int strtoi(const char *__restrict__ nptr, char **__restrict endptr, int base);
 unsigned int strtoui(const char *__restrict__ nptr, char **__restrict endptr,
                      int base);
 
+int rand(void);
+void srand(unsigned seed);
+
 // clang-format off
 /**
 Simple malloc/free implementation.

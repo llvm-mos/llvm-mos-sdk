@@ -487,7 +487,7 @@ var searchData=
   ['prixleast32_1976',['PRIxLEAST32',['../inttypes_8h.html#a1d766603a3524c9e03effbbece9c2118',1,'PRIxLEAST32():&#160;inttypes.h'],['../inttypes_8h.html#aaf100a10f9cd73d46294fd0e8db5246d',1,'PRIXLEAST32():&#160;inttypes.h']]],
   ['prixleast64_1977',['PRIxLEAST64',['../inttypes_8h.html#a4df46377b2a3292ce6c7fd6724a045ab',1,'PRIxLEAST64():&#160;inttypes.h'],['../inttypes_8h.html#a4d1806a4ea59b88a7bd00d88b7e1747d',1,'PRIXLEAST64():&#160;inttypes.h']]],
   ['prixleast8_1978',['PRIXLEAST8',['../inttypes_8h.html#a70aa3faf72084587fb18d03aa033a212',1,'PRIXLEAST8():&#160;inttypes.h'],['../inttypes_8h.html#a45d80a42b6cd25f3ed57b0e800e6e398',1,'PRIxLEAST8():&#160;inttypes.h']]],
-  ['prixmax_1979',['PRIxMAX',['../inttypes_8h.html#a1cb5f16ab28d09fa5fe07068bb8e2cea',1,'PRIxMAX():&#160;inttypes.h'],['../inttypes_8h.html#aa7e1f0c8df36d801c81f6db762ec67ec',1,'PRIXMAX():&#160;inttypes.h']]],
+  ['prixmax_1979',['PRIXMAX',['../inttypes_8h.html#aa7e1f0c8df36d801c81f6db762ec67ec',1,'PRIXMAX():&#160;inttypes.h'],['../inttypes_8h.html#a1cb5f16ab28d09fa5fe07068bb8e2cea',1,'PRIxMAX():&#160;inttypes.h']]],
   ['prixptr_1980',['PRIxPTR',['../inttypes_8h.html#a9c3c25e6145e629e4c9fabddc6061c30',1,'PRIxPTR():&#160;inttypes.h'],['../inttypes_8h.html#a65d9856517198cfc21558c0d6df64207',1,'PRIXPTR():&#160;inttypes.h']]],
   ['project_1981',['Project',['../famitone2_2LICENSE.html#abd395ffefac6eeefe0afc96b11cc2a4a',1,'Project():&#160;LICENSE'],['../neslib_2LICENSE.html#abd395ffefac6eeefe0afc96b11cc2a4a',1,'Project():&#160;LICENSE']]],
   ['psg_2eh_1982',['psg.h',['../psg_8h.html',1,'']]],

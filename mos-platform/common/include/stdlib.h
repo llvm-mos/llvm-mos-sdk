@@ -50,6 +50,10 @@ typedef struct {
 } lldiv_t;
 lldiv_t lldiv(long long numer, long long denom);
 
+int atoi(const char *nptr);
+long atol(const char *nptr);
+long long atoll(const char *nptr);
+
 long strtol(const char *__restrict__ nptr, char **__restrict endptr, int base);
 long long strtoll(const char *__restrict__ nptr, char **__restrict endptr,
                   int base);

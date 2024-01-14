@@ -12,66 +12,6 @@
 #include <stdint.h>
 #include <stdio.h>
 
-// Originally from the Public Domain C Library (PDCLib).
-
-static bool is_hex_digit(char c) {
-  return isdigit(c) || 'a' <= c && c <= 'f' || 'A' <= c && c <= 'F';
-}
-
-static signed char strtox_parse_digit(char c, char base) {
-  if (!isalnum(c))
-    return -1;
-  if (isdigit(c)) {
-    signed char val = c - '0';
-    return val < base ? val : -1;
-  }
-  signed char val = tolower(c) - 'a' + 10;
-  return val < base ? val : -1;
-}
-
-static const char *strtox_prelim(const char *p, char *sign, char *base) {
-  /* skipping leading whitespace */
-  while (isspace(*p))
-    ++p;
-
-  /* determining / skipping sign */
-  if (*p != '+' && *p != '-')
-    *sign = '+';
-  else
-    *sign = *(p++);
-
-  /* determining base */
-  if (*p == '0') {
-    ++p;
-
-    if ((*base == 0 || *base == 16) && (*p == 'x' || *p == 'X')) {
-      *base = 16;
-      ++p;
-
-      /* catching a border case here: "0x" followed by a non-digit should
-         be parsed as the unprefixed zero.
-         We have to "rewind" the parsing; having the base set to 16 if it
-         was zero previously does not hurt, as the result is zero anyway.
-      */
-      if (!is_hex_digit(*p))
-        p -= 2;
-    } else if (*base == 0) {
-      *base = 8;
-      /* back up one digit, so that a plain zero is decoded correctly
-         (and endptr is set correctly as well).
-         (2019-01-15, Giovanni Mascellani)
-      */
-      --p;
-    } else {
-      --p;
-    }
-  } else if (!*base) {
-    *base = 10;
-  }
-
-  return p;
-}
-
 typedef struct {
   char *bytes;
   char sz;
@@ -154,6 +94,116 @@ static void vintptr_mul(vintptr l, char r) {
   }
 
   vintptr_set(l, p);
+}
+
+static void vintptr_neg(vintptr v) {
+  unsigned char carry = 0;
+  v.bytes[0] = __builtin_subcb(0, v.bytes[0], carry, &carry);
+  for (char i = 1; i < v.sz; ++i)
+    v.bytes[i] = __builtin_subcb(0, v.bytes[i], carry, &carry);
+}
+
+// Originally from the Public Domain C Library (PDCLib).
+
+void atox(const char *s, vintptr rc) {
+  vintptr_zero(rc);
+  char sign = '+';
+  const char *x;
+
+  while (isspace(*s))
+    ++s;
+
+  if (*s == '+')
+    ++s;
+  else if (*s == '-')
+    sign = *(s++);
+
+  while (isdigit(*s)) {
+    vintptr_mul(rc, 10);
+    vintptr_addc(rc, *s - '0');
+    ++s;
+  }
+  if (sign != '+')
+    vintptr_neg(rc);
+}
+
+__attribute__((weak)) int atoi(const char *nptr) {
+  int rc;
+  vintptr vrc = MAKE_VINTPTR(rc);
+  atox(nptr, vrc);
+  return rc;
+}
+
+__attribute__((weak)) long atol(const char *nptr) {
+  long rc;
+  vintptr vrc = MAKE_VINTPTR(rc);
+  atox(nptr, vrc);
+  return rc;
+}
+
+__attribute__((weak)) long long atoll(const char *nptr) {
+  long long rc;
+  vintptr vrc = MAKE_VINTPTR(rc);
+  atox(nptr, vrc);
+  return rc;
+}
+
+static bool is_hex_digit(char c) {
+  return isdigit(c) || 'a' <= c && c <= 'f' || 'A' <= c && c <= 'F';
+}
+
+static signed char strtox_parse_digit(char c, char base) {
+  if (!isalnum(c))
+    return -1;
+  if (isdigit(c)) {
+    signed char val = c - '0';
+    return val < base ? val : -1;
+  }
+  signed char val = tolower(c) - 'a' + 10;
+  return val < base ? val : -1;
+}
+
+static const char *strtox_prelim(const char *p, char *sign, char *base) {
+  /* skipping leading whitespace */
+  while (isspace(*p))
+    ++p;
+
+  /* determining / skipping sign */
+  if (*p != '+' && *p != '-')
+    *sign = '+';
+  else
+    *sign = *(p++);
+
+  /* determining base */
+  if (*p == '0') {
+    ++p;
+
+    if ((*base == 0 || *base == 16) && (*p == 'x' || *p == 'X')) {
+      *base = 16;
+      ++p;
+
+      /* catching a border case here: "0x" followed by a non-digit should
+         be parsed as the unprefixed zero.
+         We have to "rewind" the parsing; having the base set to 16 if it
+         was zero previously does not hurt, as the result is zero anyway.
+      */
+      if (!is_hex_digit(*p))
+        p -= 2;
+    } else if (*base == 0) {
+      *base = 8;
+      /* back up one digit, so that a plain zero is decoded correctly
+         (and endptr is set correctly as well).
+         (2019-01-15, Giovanni Mascellani)
+      */
+      --p;
+    } else {
+      --p;
+    }
+  } else if (!*base) {
+    *base = 10;
+  }
+
+  return p;
 }
 
 static bool strtox_main(const char **p, char base, vintptr error,

@@ -44,7 +44,7 @@ var searchData=
   ['reset_5fclock_2051',['reset_clock',['../sim_2stdlib_8h.html#aed6302ce618bfaeb676c37dd9f895a70',1,'stdlib.h']]],
   ['reset_5fmask_2052',['RESET_MASK',['../atari2600__constants_8h.html#aa8285c4cc28cba5c201b76b25d02a9bf',1,'atari2600_constants.h']]],
   ['restriction_2053',['restriction',['../famitone2_2LICENSE.html#a58aca9081b0d67005433fe1652556625',1,'restriction():&#160;LICENSE'],['../nesdoug_2LICENSE.html#ad5f959ac4e93d224d9a9541f3b1e2321',1,'restriction():&#160;LICENSE'],['../neslib_2LICENSE.html#a58aca9081b0d67005433fe1652556625',1,'restriction():&#160;LICENSE']]],
-  ['revision_2054',['revision',['../api_8h.html#a21bd7001aad1a8ada9cf0c17c1f5d5ee',1,'revision():&#160;api.h'],['../api_8h.html#ad526597ab378f3faff87123d7742c79a',1,'REVISION():&#160;api.h']]],
+  ['revision_2054',['REVISION',['../api_8h.html#ad526597ab378f3faff87123d7742c79a',1,'REVISION():&#160;api.h'],['../api_8h.html#a21bd7001aad1a8ada9cf0c17c1f5d5ee',1,'revision():&#160;api.h']]],
   ['rights_2055',['rights',['../famitone2_2LICENSE.html#aca38431b9d429760b25688437f759aa7',1,'rights():&#160;LICENSE'],['../neslib_2LICENSE.html#aca38431b9d429760b25688437f759aa7',1,'rights():&#160;LICENSE']]],
   ['riot_2056',['RIOT',['../atari2600_8h.html#ab5edc0a292226aa974f311fe8d2cc0d5',1,'atari2600.h']]],
   ['rodata_5fbank_2057',['RODATA_BANK',['../mapper__macros_8h.html#a3f3d8203c283b1424b1a2242b3f294c6',1,'mapper_macros.h']]],

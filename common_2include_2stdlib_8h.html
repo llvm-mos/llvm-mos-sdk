@@ -110,6 +110,10 @@ Macros</h2></td></tr>
 <tr class="separator:a687984f47d8cce148d1b914d2b79612a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73efe787c131b385070f25d18b7c9aa4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a73efe787c131b385070f25d18b7c9aa4">EXIT_FAILURE</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a73efe787c131b385070f25d18b7c9aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a690f251553b39fd4f31894826141b61a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a690f251553b39fd4f31894826141b61a">RAND_MAX</a>&#160;&#160;&#160;32767</td></tr>
+<tr class="separator:a690f251553b39fd4f31894826141b61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5455b7a60d7e3087ec55dfe37a088bd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a5455b7a60d7e3087ec55dfe37a088bd1">MB_CUR_MAX</a>&#160;&#160;&#160;((size_t)1)</td></tr>
+<tr class="separator:a5455b7a60d7e3087ec55dfe37a088bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -133,6 +137,8 @@ Functions</h2></td></tr>
 <tr class="separator:a66fb11dc4734db57fdda6f32f3977935"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe38f453a5be2eff9faa5591de8cf8e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlldiv__t.html">lldiv_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#abe38f453a5be2eff9faa5591de8cf8e4">lldiv</a> (long long numer, long long denom)</td></tr>
 <tr class="separator:abe38f453a5be2eff9faa5591de8cf8e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d0555f6ac42472671281e5903244b7b"><td class="memItemLeft" align="right" valign="top">long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a5d0555f6ac42472671281e5903244b7b">atoll</a> (const char *nptr)</td></tr>
+<tr class="separator:a5d0555f6ac42472671281e5903244b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cb70fa81973f865da80a92cbfa9d34b"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a8cb70fa81973f865da80a92cbfa9d34b">strtol</a> (const char *__restrict__ nptr, char **__restrict endptr, int base)</td></tr>
 <tr class="separator:a8cb70fa81973f865da80a92cbfa9d34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af49fee1088520e01978713a1c50c80b4"><td class="memItemLeft" align="right" valign="top">long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#af49fee1088520e01978713a1c50c80b4">strtoll</a> (const char *__restrict__ nptr, char **__restrict endptr, int base)</td></tr>
@@ -181,6 +187,34 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define EXIT_SUCCESS&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5455b7a60d7e3087ec55dfe37a088bd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5455b7a60d7e3087ec55dfe37a088bd1">&#9670;&nbsp;</a></span>MB_CUR_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MB_CUR_MAX&#160;&#160;&#160;((size_t)1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a690f251553b39fd4f31894826141b61a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a690f251553b39fd4f31894826141b61a">&#9670;&nbsp;</a></span>RAND_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RAND_MAX&#160;&#160;&#160;32767</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -253,6 +287,24 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d0555f6ac42472671281e5903244b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d0555f6ac42472671281e5903244b7b">&#9670;&nbsp;</a></span>atoll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long long atoll </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>nptr</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

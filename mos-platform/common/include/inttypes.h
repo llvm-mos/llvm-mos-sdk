@@ -169,6 +169,10 @@
 #define SCNxMAX __UINTMAX_FMTx__
 #define SCNxPTR __UINTPTR_FMTx__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 intmax_t imaxabs(intmax_t j);
 
 typedef struct {
@@ -176,5 +180,14 @@ typedef struct {
 } imaxdiv_t;
 
 imaxdiv_t imaxdiv(intmax_t numer, intmax_t denom);
+
+intmax_t strtoimax(const char *__restrict__ nptr, char **__restrict__ endptr,
+                   int base);
+uintmax_t strtoumax(const char *__restrict__ nptr, char **__restrict__ endptr,
+                    int base);
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
 
 #endif // not _INTTYPES_H_

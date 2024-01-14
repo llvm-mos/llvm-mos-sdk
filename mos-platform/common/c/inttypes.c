@@ -9,3 +9,13 @@ imaxdiv_t imaxdiv(intmax_t numer, intmax_t denom) {
   imaxdiv_t r = {llr.quot, llr.rem};
   return r;
 }
+
+__attribute__((weak)) intmax_t strtoimax(const char *__restrict__ nptr,
+                                         char **__restrict__ endptr, int base) {
+  return strtoll(nptr, endptr, base);
+}
+
+__attribute__((weak)) uintmax_t
+strtoumax(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
+  return strtoull(nptr, endptr, base);
+}

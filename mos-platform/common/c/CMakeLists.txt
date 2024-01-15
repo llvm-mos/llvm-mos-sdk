@@ -25,6 +25,7 @@ add_platform_library(common-c
   div.cc
   stdlib.c
   stdlib.cc
+  malloc.cc
   new.cc
 
   # string.h

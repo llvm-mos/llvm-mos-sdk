@@ -82,8 +82,7 @@ Note: if your program does not need to use the heap, then do not call
 any of these functions. The entire heap implementation is only allocated
 in your program if you actually call the allocation functions.
 
-Currently the heap is implemented using a first-fit free list. The heap
-segment is placed directly after BSS in your program.  The heap can
+The heap segment is placed directly after BSS in your program. The heap can
 utilize any of the memory between the base heap address and the top of the
 software-defined stack.
 
@@ -131,9 +130,10 @@ Typical memory map, for a target that loads programs into RAM:
 */
 // clang-format on
 
-void *malloc(size_t size);
+void *aligned_alloc(size_t alignment, size_t size);
+void *calloc(size_t nmemb, size_t size);
 void free(void *ptr);
-void *calloc(size_t num, size_t size);
+void *malloc(size_t size);
 void *realloc(void *ptr, size_t size);
 
 /* The maximum heap size can be limited in the following ways:
@@ -142,8 +142,8 @@ void *realloc(void *ptr, size_t size);
    minimum is only a few bytes, but for practical purposes if you are using the
    heap, you should at least plan on using 100's or 1000's of bytes.
 2. If an allocation is made prior to setting the heap limit, the initial limit
-   is set to an implementation-defined default. The actual limit may depend
-   on the available address space of the target platform.
+   is set to the value of the symbol `__heap_default_limit`. The actual limit
+   may depend on the available address space of the target platform.
 3. After the first allocation has been made, the heap may only increase in size.
    Any attempt to decrease the size of the heap limit will be ignored.
 
@@ -158,7 +158,7 @@ size_t __heap_limit();
 /* Set the maximum size of the heap.  Note the limitations above. */
 /* Setting the heap limit implicitly allocates the heap.  Don't call this
    function if you aren't going to use the heap. */
-void __set_heap_limit(size_t new_size);
+void __set_heap_limit(size_t limit);
 
 /* Return heap bytes in use, including overhead for heap data structures in
    the existing allocations. */

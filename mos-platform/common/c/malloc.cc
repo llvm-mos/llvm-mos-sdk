@@ -1,412 +1,521 @@
-#include <new>
+#include <stdlib.h>
+
+#include <stdalign.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
+#define MALLOC_TRACE 0
+
+#define TRACE(fmt, ...)                                                        \
+  if (MALLOC_TRACE)                                                            \
+  printf(fmt __VA_OPT__(, ) __VA_ARGS__)
+
 extern char __heap_start;
+extern char __heap_default_limit;
 
 namespace {
 
-// An arbitrary block of memory. This struct only holds the size of the block,
-// and the data in the block directly follows.
-struct block {
-  block(size_t size) : m_size{size} {}
+class FreeChunk;
 
-  static block *get_block(char *data) {
-    return reinterpret_cast<block *>(data - sizeof(m_size));
-  }
-
-  size_t m_size;
-
-  char *data() { return static_cast<char *>(m_data); }
-
-  char m_data[];
-};
-
-static_assert(sizeof(block) == sizeof(size_t), "!!!");
-
-// This is a first fit free list allocator.
-// It is initialized with a single element; and only increases in size if the
-// heap becomes fragmented.  So; even though it's operations are linear with
-// respect to the number of "holes" made in the heap through fragmentation.
-
-// This allocator is suitable for 8-bit systems with 16-bit, 64kbyte address
-// spaces.  In that scenario the worst case scenario would be the maximum amount
-// of allcations where each allocation is the smallest allocation, which is 2
-// bytes. The maximum number of allocations is 64kbyte / 8 bytes = 8 k allocs:
-//   6 bytes per block + 2 byte minimum allocation.
-// In order to have holes, each allocation would have to be separated from an
-// adjacent allocation by some free memory.  So the maximum number of holes is
-// half the maximum number of allocs: 8k / 2 = 4k. In that scenario; randomly
-// freeing or allocing, there would be, at most, 4096 entries to traverse.
-
-// A doubly-linked list of blocks of memory.
-// The next node pointer, the previous node pointer, and the size of the block
-// are stored at the beginning of the block.
-class blocklist {
-  // pointers to next and previous.
-  struct list_node {
-    list_node *m_next = nullptr;
-    list_node *m_prev = nullptr;
-  };
-
-  // The entire block node pointer, which is embedded in the block itself.
-  struct block_node : public list_node {
-    block_node(size_t initsz) : m_block{initsz - sizeof(block_node)} {}
-
-    block m_block;
-
-    static block_node *get_node(block &blk) {
-      return reinterpret_cast<block_node *>(reinterpret_cast<char *>(&blk) -
-                                            sizeof(list_node));
-    }
-  };
-
+class Chunk {
 public:
-  static constexpr uint8_t MIN_ALLOC_SIZE = sizeof(block_node) + 2;
-
-  blocklist() {
-    m_heap_limit = m_heap_limit == SIZE_MAX ? HEAP_DEFAULT_LIMIT : m_heap_limit;
-    m_head = new (&__heap_start) block_node{m_heap_limit};
-    m_used = sizeof(block_node);
-    m_free = m_head->m_block.m_size;
-  }
-
-  struct iterator {
-  public:
-    iterator() = default;
-    iterator(block_node *ptr) : m_ptr{ptr} {}
-
-    block &operator*() const { return m_ptr->m_block; }
-
-    iterator &operator++() {
-      m_ptr = static_cast<block_node *>(m_ptr->m_next);
-      return *this;
-    }
-
-    bool operator==(const iterator &rhs) const { return m_ptr == rhs.m_ptr; }
-
-    bool operator!=(const iterator &rhs) const {
-      return !this->operator==(rhs);
-    }
-
-  private:
-    block_node *m_ptr = nullptr;
-  };
-
-  iterator begin() { return m_head; }
-
-  iterator end() { return iterator{}; }
-
-  static_assert(sizeof(list_node) ==
-                    sizeof(list_node::m_next) + sizeof(list_node::m_prev),
-                "unexpected padding");
-  static_assert(sizeof(block_node) == sizeof(list_node) + sizeof(size_t),
-                "unexpected padding");
-
-  char *split_block(block *freeblock, size_t size) {
-    if (!freeblock)
-      return nullptr;
-
-    if (freeblock->m_size - size >= blocklist::MIN_ALLOC_SIZE) {
-      const auto new_blk =
-          new (freeblock->data() + size) block_node{freeblock->m_size - size};
-      freeblock->m_size = size;
-
-      const auto freeblock_node_ptr = block_node::get_node(*freeblock);
-      {
-        const auto next_block_ptr = new_blk->m_next =
-            freeblock_node_ptr->m_next;
-        if (next_block_ptr)
-          next_block_ptr->m_prev = new_blk;
-      }
-
-      const auto prev_block_ptr = new_blk->m_prev = freeblock_node_ptr->m_prev;
-      if (prev_block_ptr)
-        prev_block_ptr->m_next = new_blk;
-      else
-        m_head = new_blk;
-
-      // A new node in free list was allocated. Remove it from the total bytes
-      // free.
-      m_used += sizeof(block_node);
-      m_free -= sizeof(block_node);
-    } else {
-      // Drop the block from the free list entirely.
-      const auto freeblock_node_ptr = block_node::get_node(*freeblock);
-      const auto prev_block_ptr = freeblock_node_ptr->m_prev;
-      const auto next_block_ptr = freeblock_node_ptr->m_next;
-
-      if (prev_block_ptr)
-        prev_block_ptr->m_next = next_block_ptr;
-      else
-        m_head = static_cast<block_node *>(next_block_ptr);
-
-      if (next_block_ptr)
-        next_block_ptr->m_prev = prev_block_ptr;
-    }
-
-    // Update stats for actual size allocated.
-    m_used += freeblock->m_size;
-    m_free -= freeblock->m_size;
-    return freeblock->data();
-  }
-
-  // Traverse the free block list to find the first one big enough to handle
-  // the requested allocation.  This is O(n) terms of free blocks.
-  block *find_first_fit(size_t sz) {
-    for (auto &block : *this)
-      if (block.m_size >= (sz + sizeof(block_node)))
-        return &block;
-
-    return nullptr;
-  }
-
-  // Traverse the free block list to find the free block after the given block.
-  // If the block is
-  // 1. directly following the given block
-  // 2. large enough to hold the given size request
-  // then the the block is returned.
-  block *find_adjacent_fit(block *base_blk_ptr, size_t sz) {
-    const auto adjacent_ptr =
-        static_cast<void *>(base_blk_ptr->data() + base_blk_ptr->m_size);
-
-    for (auto &free_blk : *this) {
-      const auto free_node_ptr = block_node::get_node(free_blk);
-      if (block_node::get_node(free_blk) == adjacent_ptr) {
-        // Adjacent block is free.
-        // See if there is enough spce free to realloc. We do not need
-        // to account for creating another block, since the free_blk m_size
-        // member already excludes the bytes for the free block node, and that
-        // block node will just get moved further into the free block.
-        if (free_blk.m_size >= sz) {
-          // Adjacent block is free and large enough.
-          return &free_blk;
-        } else {
-          // Adjacent block is not large enough.
-          return nullptr;
-        }
-      } else if (&free_blk > adjacent_ptr) {
-        // Adjacent block not found in free list.  Early exit.
-        return nullptr;
-      }
-      // Continue to next block.
-    }
-    return nullptr;
-  }
-
-  // Free a block by re-inserting it in the free list.
-  // Freeing blocks is O(n) in terms of number of free segments that have to be
-  // traversed to find the place in the free list to restore the block.  In
-  // cases of low fragmentation, the size of this list will be low.
-  void free_block(block *const block) {
-    block_node *last_block_node = nullptr;
-    for (auto &free_blk : *this) {
-      if (&free_blk > block) {
-        const auto freed_block_ptr = block_node::get_node(*block);
-        const auto next_block_ptr = block_node::get_node(free_blk);
-        const auto prev_block_ptr = next_block_ptr->m_prev;
-
-        freed_block_ptr->m_next = next_block_ptr;
-        next_block_ptr->m_prev = freed_block_ptr;
-        freed_block_ptr->m_prev = prev_block_ptr;
-
-        if (prev_block_ptr)
-          prev_block_ptr->m_next = freed_block_ptr;
-        else
-          m_head = freed_block_ptr;
-
-        m_free += block->m_size;
-        m_used -= block->m_size;
-        return;
-      }
-
-      last_block_node = block_node::get_node(free_blk);
-    }
-
-    const auto freed_block_ptr = block_node::get_node(*block);
-    last_block_node->m_next = freed_block_ptr;
-    freed_block_ptr->m_prev = last_block_node;
-    freed_block_ptr->m_next = nullptr;
-    m_free += block->m_size;
-    m_used -= block->m_size;
-  }
-
-  // Run a linear scan through the free list to find adjacent free blocks,
-  // and join adjacent blocks.  This is linear in terms of the number of
-  // blocks. Coallescing is run after every free_block operation in order
-  // to keep the size of the free list small.
-  void coalesce_blocks() {
-    block *last_block = nullptr;
-
-    for (auto &block : *this) {
-      if (last_block) {
-        const auto block_node_ptr = block_node::get_node(block);
-        if (static_cast<void *>(last_block->data() + last_block->m_size) ==
-            static_cast<void *>(block_node_ptr)) {
-          // two free sequential blocks.
-          last_block->m_size += sizeof(*block_node_ptr) + block.m_size;
-          const auto last_block_node = block_node::get_node(*last_block);
-          last_block_node->m_next = block_node_ptr->m_next;
-          if (last_block_node->m_next) {
-            last_block_node->m_next->m_prev = last_block_node;
-          }
-          m_used -= sizeof(block_node);
-          m_free += sizeof(block_node);
-          continue;
-        }
-      }
-
-      last_block = &block;
-    }
-  }
-
-  void set_new_limit(size_t new_limit) {
-    if (new_limit >= (m_heap_limit + MIN_ALLOC_SIZE)) {
-      add_block(
-          // New block address will be directly after the region defined by the
-          // previous limit.
-          &__heap_start + m_heap_limit, new_limit - m_heap_limit);
-
-      m_heap_limit = new_limit;
-
-      // Coalesce blocks so the new memory joins with the last free block,
-      // which is likely to be at the end of previous heap limit.
-      coalesce_blocks();
-    }
-  }
-
-  void merge_adjacent_allocated(block &left, block &right) {
-    // Merging two allocations makes the left allocation larger
-    // by the size of the right allocation, plus the size of the right
-    // allocations node.
-    left.m_size += (right.m_size + sizeof(block_node));
-  }
+  char prev_free : 1;
 
 private:
-  // Nodes are added at the end of the list.
-  block_node *add_node(block_node *node) {
-    list_node *node_last = m_head;
-    for (; node_last->m_next; node_last = node_last->m_next)
-      ;
-
-    node_last->m_next = node;
-    node->m_prev = node_last;
-    return node;
-  }
-
-  void add_block(char *address, size_t size) {
-    // Assume zero alignment padding.
-    m_free += add_node(new (address) block_node{size})->m_block.m_size;
-    m_used += sizeof(block_node);
-  }
-
-  block_node *m_head = nullptr;
+  size_t size_hi : 15;
 
 public:
-  // Heap limit is essentially a global var.  It can
-  // be set prior to ctor of blocklist.
-  static constexpr size_t HEAP_DEFAULT_LIMIT = 4096;
-  static size_t m_heap_limit;
+  size_t size() const { return size_hi << 1; }
+  void set_size(size_t size) { size_hi = size >> 1; }
 
-  // accounting.
-  size_t m_free = 0;
-  size_t m_used = 0;
+  void *end() const { return (char *)this + size(); }
+
+  // Returns the previous free chunk or nullptr.
+  FreeChunk *prev_free_chunk() const;
+  Chunk *next() const;
+
+  // Slow; prefer prev_free where possible.
+  bool free() const;
 };
 
-blocklist &get_free_list() {
-  static blocklist free_list;
-  return free_list;
+class FreeChunk : public Chunk {
+public:
+  struct FreeChunk *free_list_next;
+  struct FreeChunk *free_list_prev;
+  // char filler[...];
+  // size_t trailing_size;
+
+  // Initialize a region of memory as a free chunk, add it to the free list, and
+  // return it.
+  static FreeChunk *insert(void *begin, size_t size);
+
+  size_t &trailing_size() {
+    return *(size_t *)((char *)end() - sizeof(size_t));
+  }
+
+  size_t avail_size() const { return size() - sizeof(Chunk); }
+
+  // Remove from the free list.
+  void remove();
+};
+
+// Free chunks smaller than this cannot be allocated, and in-use chunks smaller
+// than this cannot be freed if surrounded by in-use chunks. Accordingly, this
+// acts as a global minimum chunk size.
+constexpr size_t MIN_CHUNK_SIZE = sizeof(FreeChunk) + sizeof(size_t);
+
+size_t heap_limit = (size_t)&__heap_default_limit;
+
+void *heap_end() { return &__heap_start + heap_limit; }
+
+// The sum total available size on the free list.
+size_t free_size;
+
+// A circularly-linked list of free chunks ordered by decreasing age. NULL if
+// empty.
+FreeChunk *free_list;
+
+// Free-ness is tracked by the next chunk's prev_free field, but the last chunk
+// has no next chunk.
+bool last_free;
+
+bool initialized;
+
+Chunk *Chunk::next() const {
+  Chunk *next = reinterpret_cast<Chunk *>(end());
+  return next != heap_end() ? next : nullptr;
 }
 
-// Implement a reallocation by allocating a new region and copying
-// old data to new.
-void *realloc_copy(void *orig, size_t sz) {
-  const auto new_alloc = malloc(sz);
-  if (!new_alloc)
-    return nullptr;
+FreeChunk *Chunk::prev_free_chunk() const {
+  if (!prev_free)
+    return NULL;
 
-  const auto orig_sz = block::get_block(static_cast<char *>(orig))->m_size;
-  memmove(new_alloc, orig, sz < orig_sz ? sz : orig_sz);
-  free(orig);
-  return new_alloc;
+  size_t prev_size = *reinterpret_cast<size_t *>((char *)this - sizeof(size_t));
+  return reinterpret_cast<FreeChunk *>((char *)this - prev_size);
+}
+
+bool Chunk::free() const {
+  Chunk *n = next();
+  return n ? n->prev_free : last_free;
+}
+
+// Remove a free chunk from the free list.
+void FreeChunk::remove() {
+  TRACE("FreeChunk(%p)::remove\n", this);
+
+  free_size -= avail_size();
+
+  if (free_list_next == this) {
+    TRACE("Free list emptied.\n");
+    free_list = NULL;
+    return;
+  }
+
+  free_list_prev->free_list_next = free_list_next;
+  free_list_next->free_list_prev = free_list_prev;
+  if (free_list == this)
+    free_list = free_list_next;
+}
+
+// Initialize a region of memory as a free chunk and add it to the free list.
+FreeChunk *FreeChunk::insert(void *begin, size_t size) {
+  TRACE("FreeChunk::insert(%p, %u)\n", begin, size);
+  FreeChunk *chunk = (FreeChunk *)begin;
+  chunk->set_size(size);
+  chunk->trailing_size() = size;
+  free_size += chunk->avail_size();
+
+  if (!free_list) {
+    free_list = chunk->free_list_next = chunk->free_list_prev = chunk;
+    return chunk;
+  }
+
+  // Insert to the end of the free list, so that allocations from the front
+  // occur in FIFO order (first fit FIFO in Wilson et al).
+  chunk->free_list_next = free_list;
+  chunk->free_list_prev = free_list->free_list_prev;
+  chunk->free_list_prev->free_list_next = chunk;
+  chunk->free_list_next->free_list_prev = chunk;
+  return chunk;
+}
+
+// Find the first chunk in the free list that can successfully fit a new chunk
+// of the given size and alignment. If alignment is not 2, offset is set to the
+// offset of the new chunk that would cause the point after the header to be at
+// the correct alignment.
+FreeChunk *find_fit(size_t size, size_t alignment, size_t *offset) {
+  TRACE("find_fit(%u, %u)\n", size, alignment);
+
+  if (!free_list) {
+    TRACE("Free list empty.\n");
+    return NULL;
+  }
+
+  bool first = true;
+  for (FreeChunk *chunk = free_list; first || chunk != free_list;
+       chunk = chunk->free_list_next, first = false) {
+    TRACE("Considering free chunk @ %p size %u\n", chunk, chunk->size());
+
+    if (size > chunk->size())
+      continue;
+
+    if (alignment == 2) {
+      TRACE("Selected.\n");
+      return chunk;
+    }
+
+    // Offsets must always leave room for a free chunk; otherwise there's no way
+    // to track the space.
+    *offset = MIN_CHUNK_SIZE;
+
+    // Align the point immediately after the chunk header. Since the alignment
+    // is guaranteed to be a multiple of two, this also leaves the chunk start
+    // aligned to two.
+    uintptr_t offset_point;
+    if (__builtin_add_overflow((uintptr_t)chunk, *offset + sizeof(Chunk),
+                               &offset_point))
+      continue;
+
+    // Alignment is always a power of two.
+    size_t misaligned_bits_mask = alignment - 1;
+
+    size_t offset_past_alignment = offset_point & misaligned_bits_mask;
+    if (offset_past_alignment) {
+      // Move backwards to the nearest aligned point.
+      *offset &= ~misaligned_bits_mask;
+      // Move forwards by the alignment.
+      if (__builtin_add_overflow(*offset, alignment, offset))
+        continue;
+    }
+
+    TRACE("Offset: %u\n", *offset);
+
+    // if (*offset + size <= chunk->size()) (may overflow)
+    if (*offset <= chunk->size() - size) {
+      TRACE("Selected.\n");
+      return chunk;
+    }
+  }
+
+  TRACE("None found.\n");
+  return NULL;
+}
+
+// Allocate at chunk of size bytes from a free chunk such that the new chunk
+// begins at the given offset. The pointer returned points after the chunk
+// header.
+void *allocate_free_chunk(FreeChunk *free_chunk, size_t size, size_t offset) {
+  TRACE("allocate_free_chunk(%p,%u,%u)\n", free_chunk, size, offset);
+  free_chunk->remove();
+
+  // From this point on the chunk is no longer free.
+  Chunk *chunk = free_chunk;
+
+  if (offset) {
+    TRACE("Inserting aligned offset free chunk.\n");
+
+    // Offset is guaranteed to be large enough for a free chunk. prev_free
+    // retains its value from chunk.
+    FreeChunk::insert(chunk, offset);
+
+    // Advance the chunk pointer forward and establish a new one.
+    size_t csize = chunk->size();
+    chunk = (Chunk *)((char *)chunk + offset);
+    chunk->set_size(csize - offset);
+    chunk->prev_free = true;
+    TRACE("Advanced chunk to %p, remaining size %u\n", chunk, chunk->size());
+  }
+
+  size_t remainder = chunk->size() - size;
+  if (remainder < MIN_CHUNK_SIZE) {
+    TRACE("Remainder %u too small; allocating whole chunk\n", remainder);
+  } else {
+    TRACE("Inserting remainder chunk\n");
+    // The prev_free (or last_free) referencing the current chunk is guaranteed
+    // true, and it can remain true now that it refers to the remainder.
+    FreeChunk::insert((char *)chunk + size, remainder);
+    chunk->set_size(size);
+  }
+
+  Chunk *next = chunk->next();
+  if (next)
+    next->prev_free = false;
+  else
+    last_free = false;
+
+  TRACE("Allocated size: %u\n", size);
+
+  char *ptr = (char *)chunk + sizeof(Chunk);
+  TRACE("Allocated ptr: %p\n", ptr);
+  return ptr;
+}
+
+void init() {
+  TRACE("Initialized heap. Start: %p Limit: %u\n", &__heap_start, heap_limit);
+  FreeChunk::insert(&__heap_start, heap_limit)->prev_free = false;
+  last_free = true;
+  initialized = true;
 }
 
 } // namespace
 
-// Heap limit is set to SIZE_MAX at initialization to indicate that
-// the size limit has not been set.  If, at the time the heap is initialized,
-// the m_heap_limit is still SIZE_MAX, the m_heap_limit will be reset to
-// the default limit value.  If the m_heap_limit is not SIZE_MAX when the
-// heap is intialized, the user-requsted limit is used.
-size_t blocklist::m_heap_limit = SIZE_MAX;
-
 extern "C" {
 
-// Weakly-defined malloc and free symbols serve as a call gate
-// for default operator new and delete.
-__attribute__((weak)) void *malloc(size_t count) {
-  auto &free_list = get_free_list();
-  return free_list.split_block(free_list.find_first_fit(count), count);
+size_t __heap_limit() { return heap_limit; }
+
+void __set_heap_limit(size_t new_limit) {
+  TRACE("__set_heap_limit(%u)\n", new_limit);
+
+  // Chunk sizes must be a multiple of two.
+  if (new_limit & 1)
+    --new_limit;
+
+  if (!initialized) {
+    heap_limit = (new_limit < MIN_CHUNK_SIZE) ? MIN_CHUNK_SIZE : new_limit;
+    TRACE("Heap not yet initialized. Set limit to %u.\n", heap_limit);
+    return;
+  }
+
+  // TODO: We can make this actually shrink the heap too...
+  if (new_limit <= heap_limit) {
+    TRACE("New limit %u smaller than current %u; returning.", new_limit,
+          heap_limit);
+    return;
+  }
+
+  size_t grow = new_limit - heap_limit;
+  TRACE("Growing heap by %u\n", grow);
+  if (last_free) {
+    FreeChunk *last = free_list->free_list_prev;
+    TRACE("Last chunk free; size %u\n", last->size());
+    size_t new_size = last->size() + grow;
+    last->set_size(new_size);
+    last->trailing_size() = new_size;
+    TRACE("Expanded to %u\n", new_size);
+    free_size += grow;
+  } else {
+    TRACE("Last chunk not free.\n");
+    if (grow < MIN_CHUNK_SIZE) {
+      TRACE("Not enough new size for a chunk; returning.\n");
+      return;
+    }
+    TRACE("Inserting new chunk.\n");
+    FreeChunk::insert(heap_end(), grow);
+    last_free = true;
+  }
+
+  heap_limit = new_limit;
 }
 
-__attribute__((weak)) void *realloc(void *orig, size_t count) {
-  if (!orig)
-    return malloc(count);
+size_t __heap_bytes_used() { return heap_limit - free_size; }
 
-  const auto orig_block_ptr = block::get_block(static_cast<char *>(orig));
-  if (count <= orig_block_ptr->m_size) {
-    // No reallocation occurs if the requested size isn't increasing. The
-    // original allocation is returned.
-    return orig;
+size_t __heap_bytes_free() { return free_size; }
+
+__attribute__((weak)) void *aligned_alloc(size_t alignment, size_t size) {
+  TRACE("aligned_alloc(%u,%u)\n", alignment, size);
+
+  if (alignment <= 2)
+    return malloc(size);
+
+  if (!size)
+    return NULL;
+
+  // Only power of two alignments are valid.
+  if (alignment & (alignment - 1))
+    return NULL;
+
+  if (!initialized)
+    init();
+
+  if (__builtin_add_overflow(size, sizeof(Chunk), &size))
+    return NULL;
+  TRACE("Increased size to %u to account for chunk header.\n", size);
+
+  if (size < MIN_CHUNK_SIZE) {
+    size = MIN_CHUNK_SIZE;
+    TRACE("Increased size to minimum chunk size %u\n", size);
+  } else if (size & 1) {
+    if (__builtin_add_overflow(size, 1, &size))
+      return NULL;
+    TRACE("Increased size to %u to ensure sizes aligned to 2.\n", size);
   }
 
-  auto &free_list = get_free_list();
-  const auto grow_sz = count - orig_block_ptr->m_size;
+  size_t offset;
+  FreeChunk *chunk = find_fit(size, alignment, &offset);
+  if (!chunk)
+    return NULL;
 
-  // Find the adjacent block, and if found split it.
-  const auto adjacent_block =
-      free_list.find_adjacent_fit(orig_block_ptr, grow_sz);
-  if (!adjacent_block) {
-    // There was no free space after the current allocation.
-    return realloc_copy(orig, count);
-  }
-
-  free_list.merge_adjacent_allocated(
-      *orig_block_ptr,
-      *block::get_block(free_list.split_block(adjacent_block, grow_sz)));
-  return orig;
+  return allocate_free_chunk(chunk, size, offset);
 }
 
 __attribute__((weak)) void free(void *ptr) {
+  TRACE("free(%p)\n", ptr);
   if (!ptr)
     return;
 
-  auto &free_list = get_free_list();
-  free_list.free_block(block::get_block(static_cast<char *>(ptr)));
-  free_list.coalesce_blocks();
-}
+  Chunk *chunk = (Chunk *)((char *)ptr - sizeof(Chunk));
+  size_t size = chunk->size();
 
-size_t __heap_limit() {
-  return blocklist::m_heap_limit == SIZE_MAX ? blocklist::HEAP_DEFAULT_LIMIT
-                                             : blocklist::m_heap_limit;
-}
+  TRACE("Freeing chunk %p of size %u\n", chunk, size);
 
-void __set_heap_limit(size_t new_size) {
-  if (blocklist::m_heap_limit == SIZE_MAX) {
-    // Heap is uninitialized... set it up for the first call
-    blocklist::m_heap_limit = (new_size < blocklist::MIN_ALLOC_SIZE)
-                                  ? blocklist::MIN_ALLOC_SIZE
-                                  : new_size;
-  } else {
-    // Heap is initialized.
-    get_free_list().set_new_limit(new_size);
+  // Coalesce with prev and next if possible, replacing chunk.
+  FreeChunk *prev = chunk->prev_free_chunk();
+  Chunk *next = chunk->next();
+
+  if (prev) {
+    size_t prev_size = prev->size();
+    TRACE("Coalescing with previous free chunk %p of size %u\n", prev,
+          prev_size);
+    prev->remove();
+    size += prev_size;
+    chunk = prev;
+    TRACE("New chunk %p of size %u\n", chunk, size);
   }
+  if (next) {
+    size_t next_size = next->size();
+    TRACE("Next chunk: %p size %u\n", next, next_size);
+    if (next->free()) {
+      TRACE("Coalescing with next free chunk %p of size %u\n", next, next_size);
+      static_cast<FreeChunk *>(next)->remove();
+      size += next_size;
+      TRACE("New chunk size %u\n", size);
+    } else {
+      TRACE("Next chunk not free.\n");
+      next->prev_free = true;
+    }
+  } else {
+    TRACE("No next chunk; last chunk now free.\n");
+    last_free = true;
+  }
+
+  FreeChunk::insert(chunk, size);
 }
 
-size_t __heap_bytes_used() { return get_free_list().m_used; }
+__attribute__((weak)) void *malloc(size_t size) {
+  if (!size)
+    return NULL;
 
-size_t __heap_bytes_free() { return get_free_list().m_free; }
+  TRACE("malloc(%u)\n", size);
+
+  if (!initialized)
+    init();
+
+  if (__builtin_add_overflow(size, sizeof(Chunk), &size))
+    return NULL;
+  TRACE("Increased size to %u to account for chunk header.\n", size);
+
+  if (size < MIN_CHUNK_SIZE) {
+    size = MIN_CHUNK_SIZE;
+    TRACE("Increased size to minimum chunk size %u\n", size);
+  } else if (size & 1) {
+    if (__builtin_add_overflow(size, 1, &size))
+      return NULL;
+    TRACE("Increased size to %u to ensure sizes aligned to 2.\n", size);
+  }
+
+  FreeChunk *chunk = find_fit(size, /*alignment=*/2, /*offset=*/NULL);
+  if (!chunk)
+    return NULL;
+
+  return allocate_free_chunk(chunk, size, /*offset=*/0);
+}
+
+__attribute__((weak)) void *realloc(void *ptr, size_t size) {
+  TRACE("realloc(%p, %u)\n", ptr, size);
+
+  if (!size)
+    return NULL;
+  if (!ptr)
+    return malloc(size);
+
+  // Keep original size around for malloc fallback.
+  size_t malloc_size = size;
+
+  if (__builtin_add_overflow(size, sizeof(Chunk), &size))
+    return NULL;
+  TRACE("Increased size to %u to account for chunk header.\n", size);
+
+  if (size < MIN_CHUNK_SIZE) {
+    size = MIN_CHUNK_SIZE;
+    TRACE("Increased size to minimum chunk size %u\n", size);
+  } else if (size & 1) {
+    if (__builtin_add_overflow(size, 1, &size))
+      return NULL;
+    TRACE("Increased size to %u to ensure sizes aligned to 2.\n", size);
+  }
+
+  Chunk *chunk = (Chunk *)((char *)ptr - sizeof(Chunk));
+  size_t old_size = chunk->size();
+  TRACE("Old size: %u\n", old_size);
+
+  if (size < old_size) {
+    size_t shrink = size - old_size;
+    TRACE("Shrinking by %u\n", shrink);
+    Chunk *next = chunk->next();
+    chunk->set_size(size);
+
+    if (next && next->free()) {
+      size_t next_size = next->size();
+      TRACE("Next free chunk %p size %u\n", next, next_size);
+      // Coalesce.
+      static_cast<FreeChunk *>(next)->remove();
+      FreeChunk::insert(chunk->end(), shrink + next_size)->prev_free = false;
+      return ptr;
+    }
+
+    // Insert a new free chunk for the shrink if possible.
+    if (shrink < MIN_CHUNK_SIZE) {
+      TRACE("Remainder too small.");
+      return ptr;
+    }
+
+    FreeChunk *after = FreeChunk::insert(chunk->end(), shrink);
+    TRACE("Allocated remainder %p of size %u\n", after, after->size());
+    after->prev_free = false;
+    Chunk *after_next = after->next();
+    if (after_next)
+      after_next->prev_free = true;
+    else
+      last_free = true;
+    return ptr;
+  }
+
+  if (size == old_size) {
+    TRACE("Destination size the same as current; done.\n");
+    return ptr;
+  }
+
+  size_t grow = size - old_size;
+  TRACE("Growing by %u\n", grow);
+  Chunk *next = chunk->next();
+  if (next) {
+    size_t next_size = next->size();
+    if (next->free() && grow <= next_size) {
+      TRACE("Stealing from next chunk %p free w/ size %u\n", next, next_size);
+      chunk->set_size(size);
+      static_cast<FreeChunk *>(next)->remove();
+
+      if (next_size - grow < MIN_CHUNK_SIZE) {
+        chunk->set_size(old_size + next_size);
+        TRACE("Not enough remainder, so size now %u\n", chunk->size());
+      } else {
+        TRACE("Inserting remainder of next chunk.\n");
+        FreeChunk::insert(chunk->end(), next_size - grow)->prev_free = false;
+      }
+
+      return ptr;
+    }
+  }
+
+  TRACE("Reallocating by copy.\n");
+  void *new_ptr = malloc(malloc_size);
+  if (!new_ptr)
+    return NULL;
+  memcpy(new_ptr, ptr, old_size);
+  free(ptr);
+  return new_ptr;
+}
 
 } // extern "C"

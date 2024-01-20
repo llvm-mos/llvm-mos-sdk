@@ -26,6 +26,7 @@ add_platform_library(common-c
   stdlib.c
   stdlib.cc
   malloc.cc
+  malloc.s
   new.cc
 
   # string.h

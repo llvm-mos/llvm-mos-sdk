@@ -14,7 +14,7 @@ void ppu_wait_vblank(void) {
     ;
 }
 
-char write_ppu(unsigned addr, char val) {
+void write_ppu(unsigned addr, char val) {
   PPU.vram.address = addr >> 8;
   PPU.vram.address = (char)addr;
   PPU.vram.data = val;

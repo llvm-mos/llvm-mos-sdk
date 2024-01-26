@@ -313,6 +313,24 @@ size_t __heap_bytes_used() { return heap_limit - free_size; }
 
 size_t __heap_bytes_free() { return free_size; }
 
+// Return the size of chunk needed to hold a malloc request, or zero if
+// impossible.
+size_t chunk_size_for_malloc(size_t size) {
+  if (size <= MIN_CHUNK_SIZE - sizeof(Chunk)) {
+    TRACE("Increased size to minimum chunk size %u\n", MIN_CHUNK_SIZE);
+    return MIN_CHUNK_SIZE;
+  }
+
+  char overhead = sizeof(Chunk);
+  if (size & 1)
+    overhead++;
+
+  if (__builtin_add_overflow(size, overhead, &size))
+    return 0;
+  TRACE("Increased size to %u to account for overhead.\n", size);
+  return size;
+}
+
 __attribute__((weak)) void *aligned_alloc(size_t alignment, size_t size) {
   TRACE("aligned_alloc(%u,%u)\n", alignment, size);
 
@@ -329,18 +347,9 @@ __attribute__((weak)) void *aligned_alloc(size_t alignment, size_t size) {
   if (!initialized)
     init();
 
-  if (__builtin_add_overflow(size, sizeof(Chunk), &size))
+  size = chunk_size_for_malloc(size);
+  if (!size)
     return NULL;
-  TRACE("Increased size to %u to account for chunk header.\n", size);
-
-  if (size < MIN_CHUNK_SIZE) {
-    size = MIN_CHUNK_SIZE;
-    TRACE("Increased size to minimum chunk size %u\n", size);
-  } else if (size & 1) {
-    if (__builtin_add_overflow(size, 1, &size))
-      return NULL;
-    TRACE("Increased size to %u to ensure sizes aligned to 2.\n", size);
-  }
 
   size_t offset;
   FreeChunk *chunk = find_fit(size, alignment, &offset);
@@ -402,18 +411,9 @@ __attribute__((weak)) void *malloc(size_t size) {
   if (!initialized)
     init();
 
-  if (__builtin_add_overflow(size, sizeof(Chunk), &size))
+  size = chunk_size_for_malloc(size);
+  if (!size)
     return NULL;
-  TRACE("Increased size to %u to account for chunk header.\n", size);
-
-  if (size < MIN_CHUNK_SIZE) {
-    size = MIN_CHUNK_SIZE;
-    TRACE("Increased size to minimum chunk size %u\n", size);
-  } else if (size & 1) {
-    if (__builtin_add_overflow(size, 1, &size))
-      return NULL;
-    TRACE("Increased size to %u to ensure sizes aligned to 2.\n", size);
-  }
 
   FreeChunk *chunk = find_fit(size, /*alignment=*/2, /*offset=*/NULL);
   if (!chunk)
@@ -433,18 +433,9 @@ __attribute__((weak)) void *realloc(void *ptr, size_t size) {
   // Keep original size around for malloc fallback.
   size_t malloc_size = size;
 
-  if (__builtin_add_overflow(size, sizeof(Chunk), &size))
+  size = chunk_size_for_malloc(size);
+  if (!size)
     return NULL;
-  TRACE("Increased size to %u to account for chunk header.\n", size);
-
-  if (size < MIN_CHUNK_SIZE) {
-    size = MIN_CHUNK_SIZE;
-    TRACE("Increased size to minimum chunk size %u\n", size);
-  } else if (size & 1) {
-    if (__builtin_add_overflow(size, 1, &size))
-      return NULL;
-    TRACE("Increased size to %u to ensure sizes aligned to 2.\n", size);
-  }
 
   Chunk *chunk = (Chunk *)((char *)ptr - sizeof(Chunk));
   size_t old_size = chunk->size();

@@ -159,12 +159,14 @@ Functions</h2></td></tr>
 <tr class="separator:ae23144bcbb8e3742b00eb687c36654d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a210f1bb7dc29a87394a25027e4231004"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a210f1bb7dc29a87394a25027e4231004">srand</a> (unsigned seed)</td></tr>
 <tr class="separator:a210f1bb7dc29a87394a25027e4231004"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ac38fce3243a7dcf448301ee9ffd392"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a7ac38fce3243a7dcf448301ee9ffd392">malloc</a> (size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
-<tr class="separator:a7ac38fce3243a7dcf448301ee9ffd392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7c32811d7d24557ba92cd3d9dae7ddd"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#af7c32811d7d24557ba92cd3d9dae7ddd">aligned_alloc</a> (size_t alignment, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
+<tr class="separator:af7c32811d7d24557ba92cd3d9dae7ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62b7798461bd461da64c5f9d35feddf7"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a62b7798461bd461da64c5f9d35feddf7">calloc</a> (size_t nmemb, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
+<tr class="separator:a62b7798461bd461da64c5f9d35feddf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbedc913aa4651b3c3b4b3aecd9b4711"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#afbedc913aa4651b3c3b4b3aecd9b4711">free</a> (void *ptr)</td></tr>
 <tr class="separator:afbedc913aa4651b3c3b4b3aecd9b4711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b3d8b7cea59b137b167878ec88eb8d6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a7b3d8b7cea59b137b167878ec88eb8d6">calloc</a> (size_t num, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
-<tr class="separator:a7b3d8b7cea59b137b167878ec88eb8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac38fce3243a7dcf448301ee9ffd392"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a7ac38fce3243a7dcf448301ee9ffd392">malloc</a> (size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
+<tr class="separator:a7ac38fce3243a7dcf448301ee9ffd392"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a6b5e8d2f1c37e5b43e4345586075be"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a1a6b5e8d2f1c37e5b43e4345586075be">realloc</a> (void *ptr, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
 <tr class="separator:a1a6b5e8d2f1c37e5b43e4345586075be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -244,6 +246,40 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="af7c32811d7d24557ba92cd3d9dae7ddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7c32811d7d24557ba92cd3d9dae7ddd">&#9670;&nbsp;</a></span>aligned_alloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* aligned_alloc </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>alignment</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Simple malloc/free implementation.</p>
+<p>Note: if your program does not need to use the heap, then do not call any of these functions. The entire heap implementation is only allocated in your program if you actually call the allocation functions.</p>
+<p>The heap segment is placed directly after BSS in your program. The heap can utilize any of the memory between the base heap address and the top of the software-defined stack.</p>
+<p>Typical memory map, for a target that loads programs into RAM: </p><pre class="fragment">                                     ┌─────────────────────────────────┐
+                                     │Reserved or otherwise unavailable│
+</pre><p> 0xFFFF┌────────────────────────────┐ ┌──│ memory. Ex: ROM or I/O │ │ │◀─┘ └─────────────────────────────────┘ │ │ ├────────────────────────────┤◀┐ │ │ │ │ ┌───────────────────────────────────────┐ │ Stack │ │ │ │Stack base. As stack usage grows, more│ │ │ │ └──│memory below this address is utilized. │ │ ▼ │ └───────────────────────────────────────┘ │ │ ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│◀─┐ ┌────────────────────────────────────────┐ │ │ │ │Actual lower limit for stack depends on │ │ │ │ │how much stack space your code actually │ │ │ └──│needs. Generally it can't be determined│ │ │ │ ahead of time. │ │ │ └────────────────────────────────────────┘ ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│◀┐ │ │ │ │ │ │ │ │ │ │ │ │ ┌───────────────────────────────────────┐ │ │ │ │Heap limit. You can set this from │ │ ▲ │ └──│within your program. │ │ Heap │ │ └───────────────────────────────────────┘ │ │ │ ├────────────────────────────┤◀┐ │ │ │ ┌───────────────────────────────────────┐ │ Your program is loaded │ │ │ Heap base pointer. It's location │ │ here. │ │ │depends on how big your program is and │ │ │ └──│how much memory it allocated in global │ ├────────────────────────────┤ │ and static variables. │ │ │ └───────────────────────────────────────┘ │ Reserved lower memory: │ │ zero-page, │ │ hardware stack, etc. │ │ │ │ │ 0x0000└────────────────────────────┘ </p>
+
+</div>
+</div>
 <a id="abafa702ca312dee5f5ece5fb4a97d7ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abafa702ca312dee5f5ece5fb4a97d7ff">&#9670;&nbsp;</a></span>atexit()</h2>
 
@@ -316,8 +352,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7b3d8b7cea59b137b167878ec88eb8d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b3d8b7cea59b137b167878ec88eb8d6">&#9670;&nbsp;</a></span>calloc()</h2>
+<a id="a62b7798461bd461da64c5f9d35feddf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b7798461bd461da64c5f9d35feddf7">&#9670;&nbsp;</a></span>calloc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -326,7 +362,7 @@ Functions</h2></td></tr>
           <td class="memname">void* calloc </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>num</em>, </td>
+          <td class="paramname"><em>nmemb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -515,12 +551,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Simple malloc/free implementation.</p>
-<p>Note: if your program does not need to use the heap, then do not call any of these functions. The entire heap implementation is only allocated in your program if you actually call the allocation functions.</p>
-<p>Currently the heap is implemented using a first-fit free list. The heap segment is placed directly after BSS in your program. The heap can utilize any of the memory between the base heap address and the top of the software-defined stack.</p>
-<p>Typical memory map, for a target that loads programs into RAM: </p><pre class="fragment">                                     ┌─────────────────────────────────┐
-                                     │Reserved or otherwise unavailable│
-</pre><p> 0xFFFF┌────────────────────────────┐ ┌──│ memory. Ex: ROM or I/O │ │ │◀─┘ └─────────────────────────────────┘ │ │ ├────────────────────────────┤◀┐ │ │ │ │ ┌───────────────────────────────────────┐ │ Stack │ │ │ │Stack base. As stack usage grows, more│ │ │ │ └──│memory below this address is utilized. │ │ ▼ │ └───────────────────────────────────────┘ │ │ ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│◀─┐ ┌────────────────────────────────────────┐ │ │ │ │Actual lower limit for stack depends on │ │ │ │ │how much stack space your code actually │ │ │ └──│needs. Generally it can't be determined│ │ │ │ ahead of time. │ │ │ └────────────────────────────────────────┘ ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│◀┐ │ │ │ │ │ │ │ │ │ │ │ │ ┌───────────────────────────────────────┐ │ │ │ │Heap limit. You can set this from │ │ ▲ │ └──│within your program. │ │ Heap │ │ └───────────────────────────────────────┘ │ │ │ ├────────────────────────────┤◀┐ │ │ │ ┌───────────────────────────────────────┐ │ Your program is loaded │ │ │ Heap base pointer. It's location │ │ here. │ │ │depends on how big your program is and │ │ │ └──│how much memory it allocated in global │ ├────────────────────────────┤ │ and static variables. │ │ │ └───────────────────────────────────────┘ │ Reserved lower memory: │ │ zero-page, │ │ hardware stack, etc. │ │ │ │ │ 0x0000└────────────────────────────┘ </p>
 
 </div>
 </div>

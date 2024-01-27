@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MALLOC_TRACE 1
+#define MALLOC_TRACE 0
 
 #define TRACE(fmt, ...)                                                        \
   if (MALLOC_TRACE)                                                            \

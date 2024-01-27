@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MALLOC_TRACE 0
+#define MALLOC_TRACE 1
 
 #define TRACE(fmt, ...)                                                        \
   if (MALLOC_TRACE)                                                            \
@@ -73,7 +73,7 @@ void *heap_end() { return &__heap_start + heap_limit; }
 // The sum total available size on the free list.
 size_t free_size;
 
-// A circularly-linked list of free chunks ordered by decreasing age. NULL if
+// A circularly-linked list of free chunks ordered by decreasing age. nullptr if
 // empty.
 FreeChunk *free_list;
 
@@ -90,7 +90,7 @@ Chunk *Chunk::next() const {
 
 FreeChunk *Chunk::prev_free_chunk() const {
   if (!prev_free)
-    return NULL;
+    return nullptr;
 
   size_t prev_size = *reinterpret_cast<size_t *>((char *)this - sizeof(size_t));
   return reinterpret_cast<FreeChunk *>((char *)this - prev_size);
@@ -109,7 +109,7 @@ void FreeChunk::remove() {
 
   if (free_list_next == this) {
     TRACE("Free list emptied.\n");
-    free_list = NULL;
+    free_list = nullptr;
     return;
   }
 
@@ -142,15 +142,13 @@ FreeChunk *FreeChunk::insert(void *begin, size_t size) {
 }
 
 // Find the first chunk in the free list that can successfully fit a new chunk
-// of the given size and alignment. If alignment is not 2, offset is set to the
-// offset of the new chunk that would cause the point after the header to be at
-// the correct alignment.
-FreeChunk *find_fit(size_t size, size_t alignment, size_t *offset) {
-  TRACE("find_fit(%u, %u)\n", size, alignment);
+// of the given size.
+FreeChunk *find_fit(size_t size) {
+  TRACE("find_fit(%u)\n", size);
 
   if (!free_list) {
     TRACE("Free list empty.\n");
-    return NULL;
+    return nullptr;
   }
 
   bool first = true;
@@ -158,75 +156,24 @@ FreeChunk *find_fit(size_t size, size_t alignment, size_t *offset) {
        chunk = chunk->free_list_next, first = false) {
     TRACE("Considering free chunk @ %p size %u\n", chunk, chunk->size());
 
-    if (size > chunk->size())
-      continue;
-
-    if (alignment == 2) {
-      TRACE("Selected.\n");
-      return chunk;
-    }
-
-    // Offsets must always leave room for a free chunk; otherwise there's no way
-    // to track the space.
-    *offset = MIN_CHUNK_SIZE;
-
-    // Align the point immediately after the chunk header. Since the alignment
-    // is guaranteed to be a multiple of two, this also leaves the chunk start
-    // aligned to two.
-    uintptr_t offset_point;
-    if (__builtin_add_overflow((uintptr_t)chunk, *offset + sizeof(Chunk),
-                               &offset_point))
-      continue;
-
-    // Alignment is always a power of two.
-    size_t misaligned_bits_mask = alignment - 1;
-
-    size_t offset_past_alignment = offset_point & misaligned_bits_mask;
-    if (offset_past_alignment) {
-      // Move backwards to the nearest aligned point.
-      *offset &= ~misaligned_bits_mask;
-      // Move forwards by the alignment.
-      if (__builtin_add_overflow(*offset, alignment, offset))
-        continue;
-    }
-
-    TRACE("Offset: %u\n", *offset);
-
-    // if (*offset + size <= chunk->size()) (may overflow)
-    if (*offset <= chunk->size() - size) {
+    if (size <= chunk->size()) {
       TRACE("Selected.\n");
       return chunk;
     }
   }
 
   TRACE("None found.\n");
-  return NULL;
+  return nullptr;
 }
 
-// Allocate at chunk of size bytes from a free chunk such that the new chunk
-// begins at the given offset. The pointer returned points after the chunk
-// header.
-void *allocate_free_chunk(FreeChunk *free_chunk, size_t size, size_t offset) {
-  TRACE("allocate_free_chunk(%p,%u,%u)\n", free_chunk, size, offset);
+// Allocate at chunk of size bytes from a free chunk. The pointer returned
+// points to the contents (past the chunk header).
+void *allocate_free_chunk(FreeChunk *free_chunk, size_t size) {
+  TRACE("allocate_free_chunk(%p,%u)\n", free_chunk, size);
   free_chunk->remove();
 
   // From this point on the chunk is no longer free.
   Chunk *chunk = free_chunk;
-
-  if (offset) {
-    TRACE("Inserting aligned offset free chunk.\n");
-
-    // Offset is guaranteed to be large enough for a free chunk. prev_free
-    // retains its value from chunk.
-    FreeChunk::insert(chunk, offset);
-
-    // Advance the chunk pointer forward and establish a new one.
-    size_t csize = chunk->size();
-    chunk = (Chunk *)((char *)chunk + offset);
-    chunk->set_size(csize - offset);
-    chunk->prev_free = true;
-    TRACE("Advanced chunk to %p, remaining size %u\n", chunk, chunk->size());
-  }
 
   size_t remainder = chunk->size() - size;
   if (remainder < MIN_CHUNK_SIZE) {
@@ -338,25 +285,61 @@ __attribute__((weak)) void *aligned_alloc(size_t alignment, size_t size) {
     return malloc(size);
 
   if (!size)
-    return NULL;
+    return nullptr;
 
   // Only power of two alignments are valid.
   if (alignment & (alignment - 1))
-    return NULL;
+    return nullptr;
+
+  size = chunk_size_for_malloc(size);
+  if (!size)
+    return nullptr;
 
   if (!initialized)
     init();
 
-  size = chunk_size_for_malloc(size);
-  if (!size)
-    return NULL;
+  // The region before the aligned chunk needs to be large enough to fit a free
+  // chunk.
+  if (__builtin_add_overflow(size, MIN_CHUNK_SIZE, &size))
+    return nullptr;
 
-  size_t offset;
-  FreeChunk *chunk = find_fit(size, alignment, &offset);
+  // Up to alignment-1 additional bytes may be needed to align the chunk start.
+  if (__builtin_add_overflow(size, alignment - 1, &size))
+    return nullptr;
+
+  FreeChunk *chunk = find_fit(size);
   if (!chunk)
-    return NULL;
+    return nullptr;
 
-  return allocate_free_chunk(chunk, size, offset);
+  void *aligned_ptr = (char *)chunk + MIN_CHUNK_SIZE;
+  TRACE("Initial alignment point: %p\n", aligned_ptr);
+
+  // alignment is a power of two, so alignment-1 is a mask that selects the
+  // misaligned bits.
+  size_t past_alignment = (uintptr_t)aligned_ptr & (alignment - 1);
+  if (past_alignment) {
+    TRACE("%u bytes past aligned point.\n", past_alignment);
+    aligned_ptr = (void *)((uintptr_t)aligned_ptr & ~(alignment - 1));
+    TRACE("Moved pointer backwards to aligned point %p.\n", aligned_ptr);
+    aligned_ptr = (char *)aligned_ptr + alignment;
+    TRACE("Moved pointer one alignment unit forwards to %p.\n", aligned_ptr);
+  }
+
+  size_t chunk_size = chunk->size();
+
+  auto *aligned_chunk_begin = (Chunk *)((char *)aligned_ptr - sizeof(Chunk));
+  size_t prev_chunk_size = (char *)aligned_chunk_begin - (char *)chunk;
+
+  TRACE("Inserting free chunk before aligned.\n");
+  FreeChunk::insert(chunk, prev_chunk_size); // prev_free remains unchanged.
+
+  TRACE("Temporarily inserting aligned free chunk.\n");
+  FreeChunk *aligned_chunk =
+      FreeChunk::insert(aligned_chunk_begin, chunk_size - prev_chunk_size);
+  aligned_chunk->prev_free = true;
+
+  TRACE("Allocating from aligned free chunk.\n");
+  return allocate_free_chunk(aligned_chunk, size);
 }
 
 __attribute__((weak)) void free(void *ptr) {
@@ -404,29 +387,29 @@ __attribute__((weak)) void free(void *ptr) {
 
 __attribute__((weak)) void *malloc(size_t size) {
   if (!size)
-    return NULL;
+    return nullptr;
 
   TRACE("malloc(%u)\n", size);
+
+  size = chunk_size_for_malloc(size);
+  if (!size)
+    return nullptr;
 
   if (!initialized)
     init();
 
-  size = chunk_size_for_malloc(size);
-  if (!size)
-    return NULL;
-
-  FreeChunk *chunk = find_fit(size, /*alignment=*/2, /*offset=*/NULL);
+  FreeChunk *chunk = find_fit(size);
   if (!chunk)
-    return NULL;
+    return nullptr;
 
-  return allocate_free_chunk(chunk, size, /*offset=*/0);
+  return allocate_free_chunk(chunk, size);
 }
 
 __attribute__((weak)) void *realloc(void *ptr, size_t size) {
   TRACE("realloc(%p, %u)\n", ptr, size);
 
   if (!size)
-    return NULL;
+    return nullptr;
   if (!ptr)
     return malloc(size);
 
@@ -435,7 +418,7 @@ __attribute__((weak)) void *realloc(void *ptr, size_t size) {
 
   size = chunk_size_for_malloc(size);
   if (!size)
-    return NULL;
+    return nullptr;
 
   Chunk *chunk = (Chunk *)((char *)ptr - sizeof(Chunk));
   size_t old_size = chunk->size();
@@ -503,7 +486,7 @@ __attribute__((weak)) void *realloc(void *ptr, size_t size) {
   TRACE("Reallocating by copy.\n");
   void *new_ptr = malloc(malloc_size);
   if (!new_ptr)
-    return NULL;
+    return nullptr;
   memcpy(new_ptr, ptr, old_size);
   free(ptr);
   return new_ptr;

@@ -1,38 +1,31 @@
 #ifndef _RP6502_H
 #define _RP6502_H
 
-/* RP6502 VIA $FFD0-$FFDF */
-
-// #include <_6522.h>
-// #define VIA (*(volatile struct __6522 *)0xFFD0)
-
 /* RP6502 RIA $FFE0-$FFF9 */
-
-struct __RP6502
-{
-    const unsigned char ready;
-    unsigned char tx;
-    const unsigned char rx;
-    const unsigned char vsync;
-    unsigned char rw0;
-    unsigned char step0;
-    unsigned int addr0;
-    unsigned char rw1;
-    unsigned char step1;
-    unsigned int addr1;
-    unsigned char xstack;
-    unsigned char errno_lo;
-    unsigned char errno_hi;
-    unsigned char op;
-    unsigned char irq;
-    const unsigned char spin;
-    const unsigned char busy;
-    const unsigned char lda;
-    unsigned char a;
-    const unsigned char ldx;
-    unsigned char x;
-    const unsigned char rts;
-    unsigned int sreg;
+struct __RP6502 {
+  const unsigned char ready;
+  unsigned char tx;
+  const unsigned char rx;
+  const unsigned char vsync;
+  unsigned char rw0;
+  unsigned char step0;
+  unsigned int addr0;
+  unsigned char rw1;
+  unsigned char step1;
+  unsigned int addr1;
+  unsigned char xstack;
+  unsigned char errno_lo;
+  unsigned char errno_hi;
+  unsigned char op;
+  unsigned char irq;
+  const unsigned char spin;
+  const unsigned char busy;
+  const unsigned char lda;
+  unsigned char a;
+  const unsigned char ldx;
+  unsigned char x;
+  const unsigned char rts;
+  unsigned int sreg;
 };
 #define RIA (*(volatile struct __RP6502 *)0xFFE0)
 
@@ -66,15 +59,12 @@ struct __RP6502
 
 /* C API for the operating system. */
 
-// int xreg (char device, char channel, unsigned char address, ...);
-// int phi2 (void);
-// int codepage (void);
-// long lrand (void);
-// int stdin_opt (unsigned long ctrl_bits, unsigned char str_length);
-// int read_xstack (void* buf, unsigned count, int fildes);
-// int read_xram (unsigned buf, unsigned count, int fildes);
-// int write_xstack (const void* buf, unsigned count, int fildes);
-// int write_xram (unsigned buf, unsigned count, int fildes);
+int xregn(char device, char channel, unsigned char address, unsigned char count,
+          ...);
+int phi2 (void);
+int codepage (void);
+long lrand (void);
+int stdin_opt (unsigned long ctrl_bits, unsigned char str_length);
 
 /* XREG location helpers */
 
@@ -85,129 +75,123 @@ struct __RP6502
 
 /* XRAM structure helpers */
 
-#define xram0_struct_set(addr, type, member, val)                  \
-    RIA.addr0 = (unsigned)(&((type *)0)->member) + (unsigned)addr; \
-    switch (sizeof(((type *)0)->member))                           \
-    {                                                              \
-    case 1:                                                        \
-        RIA.rw0 = val;                                             \
-        break;                                                     \
-    case 2:                                                        \
-        RIA.step0 = 1;                                             \
-        RIA.rw0 = val & 0xff;                                      \
-        RIA.rw0 = (val >> 8) & 0xff;                               \
-        break;                                                     \
-    case 4:                                                        \
-        RIA.step0 = 1;                                             \
-        RIA.rw0 = (unsigned long)val & 0xff;                       \
-        RIA.rw0 = ((unsigned long)val >> 8) & 0xff;                \
-        RIA.rw0 = ((unsigned long)val >> 16) & 0xff;               \
-        RIA.rw0 = ((unsigned long)val >> 24) & 0xff;               \
-        break;                                                     \
-    }
+#define xram0_struct_set(addr, type, member, val)                              \
+  RIA.addr0 = (unsigned)(&((type *)0)->member) + (unsigned)addr;               \
+  switch (sizeof(((type *)0)->member)) {                                       \
+  case 1:                                                                      \
+    RIA.rw0 = val;                                                             \
+    break;                                                                     \
+  case 2:                                                                      \
+    RIA.step0 = 1;                                                             \
+    RIA.rw0 = val & 0xff;                                                      \
+    RIA.rw0 = (val >> 8) & 0xff;                                               \
+    break;                                                                     \
+  case 4:                                                                      \
+    RIA.step0 = 1;                                                             \
+    RIA.rw0 = (unsigned long)val & 0xff;                                       \
+    RIA.rw0 = ((unsigned long)val >> 8) & 0xff;                                \
+    RIA.rw0 = ((unsigned long)val >> 16) & 0xff;                               \
+    RIA.rw0 = ((unsigned long)val >> 24) & 0xff;                               \
+    break;                                                                     \
+  }
 
-#define xram1_struct_set(addr, type, member, val)                  \
-    RIA.addr1 = (unsigned)(&((type *)0)->member) + (unsigned)addr; \
-    switch (sizeof(((type *)0)->member))                           \
-    {                                                              \
-    case 1:                                                        \
-        RIA.rw1 = val;                                             \
-        break;                                                     \
-    case 2:                                                        \
-        RIA.step1 = 1;                                             \
-        RIA.rw1 = val & 0xff;                                      \
-        RIA.rw1 = (val >> 8) & 0xff;                               \
-        break;                                                     \
-    case 4:                                                        \
-        RIA.step1 = 1;                                             \
-        RIA.rw1 = (unsigned long)val & 0xff;                       \
-        RIA.rw1 = ((unsigned long)val >> 8) & 0xff;                \
-        RIA.rw1 = ((unsigned long)val >> 16) & 0xff;               \
-        RIA.rw1 = ((unsigned long)val >> 24) & 0xff;               \
-        break;                                                     \
-    }
+#define xram1_struct_set(addr, type, member, val)                              \
+  RIA.addr1 = (unsigned)(&((type *)0)->member) + (unsigned)addr;               \
+  switch (sizeof(((type *)0)->member)) {                                       \
+  case 1:                                                                      \
+    RIA.rw1 = val;                                                             \
+    break;                                                                     \
+  case 2:                                                                      \
+    RIA.step1 = 1;                                                             \
+    RIA.rw1 = val & 0xff;                                                      \
+    RIA.rw1 = (val >> 8) & 0xff;                                               \
+    break;                                                                     \
+  case 4:                                                                      \
+    RIA.step1 = 1;                                                             \
+    RIA.rw1 = (unsigned long)val & 0xff;                                       \
+    RIA.rw1 = ((unsigned long)val >> 8) & 0xff;                                \
+    RIA.rw1 = ((unsigned long)val >> 16) & 0xff;                               \
+    RIA.rw1 = ((unsigned long)val >> 24) & 0xff;                               \
+    break;                                                                     \
+  }
 
-typedef struct
-{
-    unsigned char x_wrap; // bool
-    unsigned char y_wrap; // bool
-    int x_pos_px;
-    int y_pos_px;
-    int width_chars;
-    int height_chars;
-    unsigned xram_data_ptr;
-    unsigned xram_palette_ptr;
-    unsigned xram_font_ptr;
+typedef struct {
+  unsigned char x_wrap; // bool
+  unsigned char y_wrap; // bool
+  int x_pos_px;
+  int y_pos_px;
+  int width_chars;
+  int height_chars;
+  unsigned xram_data_ptr;
+  unsigned xram_palette_ptr;
+  unsigned xram_font_ptr;
 } vga_mode1_config_t;
 
-typedef struct
-{
-    unsigned char x_wrap; // bool
-    unsigned char y_wrap; // bool
-    int x_pos_px;
-    int y_pos_px;
-    int width_tiles;
-    int height_tiles;
-    unsigned xram_data_ptr;
-    unsigned xram_palette_ptr;
-    unsigned xram_tile_ptr;
+typedef struct {
+  unsigned char x_wrap; // bool
+  unsigned char y_wrap; // bool
+  int x_pos_px;
+  int y_pos_px;
+  int width_tiles;
+  int height_tiles;
+  unsigned xram_data_ptr;
+  unsigned xram_palette_ptr;
+  unsigned xram_tile_ptr;
 } vga_mode2_config_t;
 
-typedef struct
-{
-    unsigned char x_wrap; // bool
-    unsigned char y_wrap; // bool
-    int x_pos_px;
-    int y_pos_px;
-    int width_px;
-    int height_px;
-    unsigned xram_data_ptr;
-    unsigned xram_palette_ptr;
+typedef struct {
+  unsigned char x_wrap; // bool
+  unsigned char y_wrap; // bool
+  int x_pos_px;
+  int y_pos_px;
+  int width_px;
+  int height_px;
+  unsigned xram_data_ptr;
+  unsigned xram_palette_ptr;
 } vga_mode3_config_t;
 
-typedef struct
-{
-    int x_pos_px;
-    int y_pos_px;
-    unsigned xram_sprite_ptr;
-    unsigned char log_size;
-    unsigned char has_opacity_metadata; // bool
+typedef struct {
+  int x_pos_px;
+  int y_pos_px;
+  unsigned xram_sprite_ptr;
+  unsigned char log_size;
+  unsigned char has_opacity_metadata; // bool
 } vga_mode4_sprite_t;
 
-typedef struct
-{
-    int transform[6];
-    int x_pos_px;
-    int y_pos_px;
-    unsigned xram_sprite_ptr;
-    unsigned char log_size;
-    unsigned char has_opacity_metadata; // bool
+typedef struct {
+  int transform[6];
+  int x_pos_px;
+  int y_pos_px;
+  unsigned xram_sprite_ptr;
+  unsigned char log_size;
+  unsigned char has_opacity_metadata; // bool
 } vga_mode4_asprite_t;
 
 /* Values in __oserror are the union of these FatFs errors and errno.h */
 
-typedef enum
-{
-    FR_OK = 32,             /* Succeeded */
-    FR_DISK_ERR,            /* A hard error occurred in the low level disk I/O layer */
-    FR_INT_ERR,             /* Assertion failed */
-    FR_NOT_READY,           /* The physical drive cannot work */
-    FR_NO_FILE,             /* Could not find the file */
-    FR_NO_PATH,             /* Could not find the path */
-    FR_INVALID_NAME,        /* The path name format is invalid */
-    FR_DENIED,              /* Access denied due to prohibited access or directory full */
-    FR_EXIST,               /* Access denied due to prohibited access */
-    FR_INVALID_OBJECT,      /* The file/directory object is invalid */
-    FR_WRITE_PROTECTED,     /* The physical drive is write protected */
-    FR_INVALID_DRIVE,       /* The logical drive number is invalid */
-    FR_NOT_ENABLED,         /* The volume has no work area */
-    FR_NO_FILESYSTEM,       /* There is no valid FAT volume */
-    FR_MKFS_ABORTED,        /* The f_mkfs() aborted due to any problem */
-    FR_TIMEOUT,             /* Could not get a grant to access the volume within defined period */
-    FR_LOCKED,              /* The operation is rejected according to the file sharing policy */
-    FR_NOT_ENOUGH_CORE,     /* LFN working buffer could not be allocated */
-    FR_TOO_MANY_OPEN_FILES, /* Number of open files > FF_FS_LOCK */
-    FR_INVALID_PARAMETER    /* Given parameter is invalid */
+typedef enum {
+  FR_OK = 32,      /* Succeeded */
+  FR_DISK_ERR,     /* A hard error occurred in the low level disk I/O layer */
+  FR_INT_ERR,      /* Assertion failed */
+  FR_NOT_READY,    /* The physical drive cannot work */
+  FR_NO_FILE,      /* Could not find the file */
+  FR_NO_PATH,      /* Could not find the path */
+  FR_INVALID_NAME, /* The path name format is invalid */
+  FR_DENIED, /* Access denied due to prohibited access or directory full */
+  FR_EXIST,  /* Access denied due to prohibited access */
+  FR_INVALID_OBJECT,  /* The file/directory object is invalid */
+  FR_WRITE_PROTECTED, /* The physical drive is write protected */
+  FR_INVALID_DRIVE,   /* The logical drive number is invalid */
+  FR_NOT_ENABLED,     /* The volume has no work area */
+  FR_NO_FILESYSTEM,   /* There is no valid FAT volume */
+  FR_MKFS_ABORTED,    /* The f_mkfs() aborted due to any problem */
+  FR_TIMEOUT, /* Could not get a grant to access the volume within defined
+                 period */
+  FR_LOCKED,  /* The operation is rejected according to the file sharing policy
+               */
+  FR_NOT_ENOUGH_CORE,     /* LFN working buffer could not be allocated */
+  FR_TOO_MANY_OPEN_FILES, /* Number of open files > FF_FS_LOCK */
+  FR_INVALID_PARAMETER    /* Given parameter is invalid */
 } FRESULT;
 
 #endif /* _RP6502_H */

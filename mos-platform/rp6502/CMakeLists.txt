@@ -26,8 +26,13 @@ merge_libraries(rp6502-crt0
 
 add_platform_library(rp6502-c
   abort.c
+  codepage.c
   getchar.c
+  lrand.c
+  phi2.c
   putchar.c
+  stdin_opt.c
+  xregn.c
 )
 
 target_compile_options(rp6502-crt0 PUBLIC -mcpu=mosw65c02)

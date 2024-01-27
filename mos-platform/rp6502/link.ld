@@ -19,7 +19,7 @@ REGION_ALIAS("c_writeable", ram)
 SECTIONS { INCLUDE c.ld }
 
 /* Set initial soft stack address to just above last memory address. (It grows down.) */
-__stack = 0xFFF0;
+__stack = 0xFF00;
 
 OUTPUT_FORMAT {
     TRIM(ram)

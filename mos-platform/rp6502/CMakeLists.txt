@@ -13,7 +13,9 @@ add_platform_object_file(rp6502-crt0-o crt0.o
   init-cpu.s
 )
 
-add_platform_library(rp6502-crt0)
+add_platform_library(rp6502-crt0
+  exit.c
+)
 merge_libraries(rp6502-crt0
   common-crt0
   common-init-stack

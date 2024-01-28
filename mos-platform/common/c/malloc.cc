@@ -32,8 +32,10 @@ public:
 
   void *end() const { return (char *)this + size(); }
 
-  // Returns the previous free chunk or nullptr.
-  FreeChunk *prev_free_chunk() const;
+  // Returns the previous chunk. Undefined behavior if the previous chunk is not
+  // free. Legal to call on a pointer to heap end.
+  FreeChunk *prev() const;
+
   Chunk *next() const;
 
   // Slow; prefer prev_free where possible.
@@ -68,7 +70,9 @@ constexpr size_t MIN_CHUNK_SIZE = sizeof(FreeChunk) + sizeof(size_t);
 
 size_t heap_limit = (size_t)&__heap_default_limit;
 
-void *heap_end() { return &__heap_start + heap_limit; }
+Chunk *heap_end() {
+  return reinterpret_cast<Chunk *>(&__heap_start + heap_limit);
+}
 
 // The sum total available size on the free list.
 size_t free_size;
@@ -88,10 +92,7 @@ Chunk *Chunk::next() const {
   return next != heap_end() ? next : nullptr;
 }
 
-FreeChunk *Chunk::prev_free_chunk() const {
-  if (!prev_free)
-    return nullptr;
-
+FreeChunk *Chunk::prev() const {
   size_t prev_size = *reinterpret_cast<size_t *>((char *)this - sizeof(size_t));
   return reinterpret_cast<FreeChunk *>((char *)this - prev_size);
 }
@@ -235,8 +236,7 @@ void __set_heap_limit(size_t new_limit) {
   size_t grow = new_limit - heap_limit;
   TRACE("Growing heap by %u\n", grow);
   if (last_free) {
-    size_t last_size = *(size_t *)((char *)heap_end() - sizeof(size_t));
-    auto *last = (FreeChunk *)((char *)heap_end() - last_size);
+    FreeChunk *last = heap_end()->prev();
     TRACE("Last chunk free; size %u\n", last->size());
     size_t new_size = last->size() + grow;
     last->set_size(new_size);
@@ -354,10 +354,9 @@ void free(void *ptr) {
   TRACE("Freeing chunk %p of size %u\n", chunk, size);
 
   // Coalesce with prev and next if possible, replacing chunk.
-  FreeChunk *prev = chunk->prev_free_chunk();
   Chunk *next = chunk->next();
-
-  if (prev) {
+  if (chunk->prev_free) {
+    FreeChunk *prev = chunk->prev();
     size_t prev_size = prev->size();
     TRACE("Coalescing with previous free chunk %p of size %u\n", prev,
           prev_size);

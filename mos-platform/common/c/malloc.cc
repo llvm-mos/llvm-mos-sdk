@@ -235,7 +235,8 @@ void __set_heap_limit(size_t new_limit) {
   size_t grow = new_limit - heap_limit;
   TRACE("Growing heap by %u\n", grow);
   if (last_free) {
-    FreeChunk *last = free_list->free_list_prev;
+    size_t last_size = *(size_t *)((char *)heap_end() - sizeof(size_t));
+    auto *last = (FreeChunk *)((char *)heap_end() - last_size);
     TRACE("Last chunk free; size %u\n", last->size());
     size_t new_size = last->size() + grow;
     last->set_size(new_size);

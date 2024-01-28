@@ -23,7 +23,6 @@ __attribute__((leaf)) _Noreturn void abort(void);
 int atexit(void (*func)(void));
 int at_quick_exit(void (*func)(void));
 _Noreturn void exit(int status);
-__attribute__((leaf)) _Noreturn void _exit(int status);
 __attribute__((leaf)) _Noreturn void _Exit(int status);
 _Noreturn void quick_exit(int status);
 

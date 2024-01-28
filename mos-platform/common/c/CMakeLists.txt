@@ -24,7 +24,6 @@ add_platform_library(common-c
   atoi.cc
   div.cc
   stdlib.c
-  stdlib.cc
   malloc.cc
   malloc.s
   new.cc

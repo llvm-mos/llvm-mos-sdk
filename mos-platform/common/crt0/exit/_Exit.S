@@ -1,18 +1,15 @@
 ; Immediately exit the program by returning from _start.
 
-; Provides an implementation of C's _exit and _Exit; finalization (_fini) is not
-; run.
-.global _exit
+; Provides an implementation of C's _Exit; finalization (_fini) is not run.
 .global _Exit
 
 ; On init, save the hardware stack pointer. Since _start is just _init, this
 ; will be its value at entry.
-.section .init.100,"axG",@progbits,_exit
+.section .init.100,"axG",@progbits,_Exit
   tsx
   stx __save_s
 
-.section .text._exit,"axG",@progbits,_exit
-_exit:
+.section .text._Exit,"axG",@progbits,_Exit
 _Exit:
   ; Restore the hard stack pointer to its value on entry.
   tay

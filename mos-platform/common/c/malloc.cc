@@ -296,9 +296,6 @@ void *aligned_alloc(size_t alignment, size_t size) {
   if (!size)
     return nullptr;
 
-  if (!initialized)
-    init();
-
   // The region before the aligned chunk needs to be large enough to fit a free
   // chunk.
   if (__builtin_add_overflow(size, MIN_CHUNK_SIZE, &size))
@@ -307,6 +304,9 @@ void *aligned_alloc(size_t alignment, size_t size) {
   // Up to alignment-1 additional bytes may be needed to align the chunk start.
   if (__builtin_add_overflow(size, alignment - 1, &size))
     return nullptr;
+
+  if (!initialized)
+    init();
 
   FreeChunk *chunk = find_fit(size);
   if (!chunk)

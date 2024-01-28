@@ -278,7 +278,7 @@ size_t chunk_size_for_malloc(size_t size) {
   return size;
 }
 
-__attribute__((weak)) void *aligned_alloc(size_t alignment, size_t size) {
+void *aligned_alloc(size_t alignment, size_t size) {
   TRACE("aligned_alloc(%u,%u)\n", alignment, size);
 
   if (alignment <= 2)
@@ -342,7 +342,7 @@ __attribute__((weak)) void *aligned_alloc(size_t alignment, size_t size) {
   return allocate_free_chunk(aligned_chunk, size);
 }
 
-__attribute__((weak)) void free(void *ptr) {
+void free(void *ptr) {
   TRACE("free(%p)\n", ptr);
   if (!ptr)
     return;
@@ -385,7 +385,7 @@ __attribute__((weak)) void free(void *ptr) {
   FreeChunk::insert(chunk, size);
 }
 
-__attribute__((weak)) void *malloc(size_t size) {
+void *malloc(size_t size) {
   if (!size)
     return nullptr;
 
@@ -405,7 +405,7 @@ __attribute__((weak)) void *malloc(size_t size) {
   return allocate_free_chunk(chunk, size);
 }
 
-__attribute__((weak)) void *realloc(void *ptr, size_t size) {
+void *realloc(void *ptr, size_t size) {
   TRACE("realloc(%p, %u)\n", ptr, size);
 
   if (!size)

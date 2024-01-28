@@ -344,7 +344,10 @@ void *aligned_alloc(size_t alignment, size_t size) {
 }
 
 void *calloc(size_t num, size_t size) {
-  const auto sz = num * size;
+  const auto long_sz = (long)num * size;
+  if (long_sz >> 16)
+    return 0;
+  const auto sz = (size_t)long_sz;
   const auto block = malloc(sz);
 
   if (!block)

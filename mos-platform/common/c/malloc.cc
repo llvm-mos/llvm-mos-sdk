@@ -343,6 +343,17 @@ void *aligned_alloc(size_t alignment, size_t size) {
   return allocate_free_chunk(aligned_chunk, size);
 }
 
+void *calloc(size_t num, size_t size) {
+  const auto sz = num * size;
+  const auto block = malloc(sz);
+
+  if (!block)
+    return nullptr;
+
+  __memset(static_cast<char *>(block), 0, sz);
+  return block;
+}
+
 void free(void *ptr) {
   TRACE("free(%p)\n", ptr);
   if (!ptr)

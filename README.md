@@ -32,6 +32,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - [MMC1](https://www.nesdev.org/wiki/MMC1)
   - [MMC3](https://www.nesdev.org/wiki/MMC3)
 - Ohio Scientific Challenger 1P
+- [Picocomputer 6502](https://picocomputer.github.io) (RP6502)
 - PC Engine
   - PC Engine CD
 - [RPC/8e](http://www.eloraam.com/blog/2012/04/22/rp-control-internals/) (RedPower 2)
@@ -165,6 +166,7 @@ executables and libraries for that target.
 | NES                             | UNROM mapper       | `mos-nes-unrom-clang`      |
 | NES                             | UNROM-512 mapper   | `mos-nes-unrom-512-clang`  |
 | Ohio Scientific Challenger 1P   | -                  | `mos-osi-c1p-clang`        |
+| Picocomputer 6502               | -                  | `mos-rp6502-clang`         |
 | PC Engine                       | Standard           | `mos-pce-clang`            |
 | PC Engine                       | CD                 | `mos-pce-cd-clang`         |
 | RPC/8e (RedPower 2)             | -                  | `mos-rpc8e-clang`          |

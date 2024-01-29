@@ -117,10 +117,14 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a55e99c539cf7723ec15e856b7e0a8cee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a55e99c539cf7723ec15e856b7e0a8cee">exit</a> (int status)</td></tr>
-<tr class="separator:a55e99c539cf7723ec15e856b7e0a8cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abafa702ca312dee5f5ece5fb4a97d7ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#abafa702ca312dee5f5ece5fb4a97d7ff">atexit</a> (void(*function)(void))</td></tr>
-<tr class="separator:abafa702ca312dee5f5ece5fb4a97d7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd89c82095df80e5e12d6b2834a2acc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a7fd89c82095df80e5e12d6b2834a2acc">atexit</a> (void(*func)(void))</td></tr>
+<tr class="separator:a7fd89c82095df80e5e12d6b2834a2acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb1bb1aba8db8ce38b4a2d796b50d260"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#adb1bb1aba8db8ce38b4a2d796b50d260">at_quick_exit</a> (void(*func)(void))</td></tr>
+<tr class="separator:adb1bb1aba8db8ce38b4a2d796b50d260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8aae2f9644656ab06bc71984784e8e9"><td class="memItemLeft" align="right" valign="top">_Noreturn void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#aa8aae2f9644656ab06bc71984784e8e9">exit</a> (int status)</td></tr>
+<tr class="separator:aa8aae2f9644656ab06bc71984784e8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cbe15503c359688a4c6b09a7000c2d6"><td class="memItemLeft" align="right" valign="top">_Noreturn void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a9cbe15503c359688a4c6b09a7000c2d6">quick_exit</a> (int status)</td></tr>
+<tr class="separator:a9cbe15503c359688a4c6b09a7000c2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af15d7205d8d10c4820f997ce5c526279"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#af15d7205d8d10c4820f997ce5c526279">abs</a> (int i)</td></tr>
 <tr class="separator:af15d7205d8d10c4820f997ce5c526279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac39409d0077cf980e4e6419bc6014d10"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#ac39409d0077cf980e4e6419bc6014d10">labs</a> (long i)</td></tr>
@@ -280,8 +284,26 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abafa702ca312dee5f5ece5fb4a97d7ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abafa702ca312dee5f5ece5fb4a97d7ff">&#9670;&nbsp;</a></span>atexit()</h2>
+<a id="adb1bb1aba8db8ce38b4a2d796b50d260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb1bb1aba8db8ce38b4a2d796b50d260">&#9670;&nbsp;</a></span>at_quick_exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int at_quick_exit </td>
+          <td>(</td>
+          <td class="paramtype">void(*)(void)&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7fd89c82095df80e5e12d6b2834a2acc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd89c82095df80e5e12d6b2834a2acc">&#9670;&nbsp;</a></span>atexit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,7 +312,7 @@ Functions</h2></td></tr>
           <td class="memname">int atexit </td>
           <td>(</td>
           <td class="paramtype">void(*)(void)&#160;</td>
-          <td class="paramname"><em>function</em></td><td>)</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -408,14 +430,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a55e99c539cf7723ec15e856b7e0a8cee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55e99c539cf7723ec15e856b7e0a8cee">&#9670;&nbsp;</a></span>exit()</h2>
+<a id="aa8aae2f9644656ab06bc71984784e8e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8aae2f9644656ab06bc71984784e8e9">&#9670;&nbsp;</a></span>exit()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void exit </td>
+          <td class="memname">_Noreturn void exit </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>status</em></td><td>)</td>
@@ -547,6 +569,24 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9cbe15503c359688a4c6b09a7000c2d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cbe15503c359688a4c6b09a7000c2d6">&#9670;&nbsp;</a></span>quick_exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">_Noreturn void quick_exit </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

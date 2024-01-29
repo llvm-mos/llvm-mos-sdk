@@ -24,10 +24,10 @@ add_platform_library(common-c
   atoi.cc
   div.cc
   stdlib.c
-  stdlib.cc
   malloc.cc
   malloc.s
   new.cc
+  quick-exit.cc
 
   # string.h
   mem.c
@@ -38,8 +38,9 @@ add_platform_library(common-c
   exception.cc
 
   # Itanium ABI implementation
-  cxa-abi.cc
+  atexit-impl.cc
   cxa-atexit.cc
+  cxa-abi.cc
   private-typeinfo.cc
 )
 # Prevent the implementation of libcalls from being reduced to a call of those libcalls.

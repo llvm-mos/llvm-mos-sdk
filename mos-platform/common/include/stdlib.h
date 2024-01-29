@@ -18,12 +18,13 @@ extern "C" {
 
 #define MB_CUR_MAX ((size_t)1)
 
-void exit(int status);
-__attribute__((leaf)) void abort(void);
-__attribute__((leaf)) void _exit(int status);
-__attribute__((leaf)) void _Exit(int status);
-
-int atexit(void (*function)(void));
+// Communication with the environment
+__attribute__((leaf)) _Noreturn void abort(void);
+int atexit(void (*func)(void));
+int at_quick_exit(void (*func)(void));
+_Noreturn void exit(int status);
+__attribute__((leaf)) _Noreturn void _Exit(int status);
+_Noreturn void quick_exit(int status);
 
 int abs(int i);
 long labs(long i);

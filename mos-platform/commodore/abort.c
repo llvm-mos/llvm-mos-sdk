@@ -3,5 +3,5 @@
 
 void abort(void) {
   puts("ABORTED");
-  _exit(134); // 128 + SIGABRT
+  _Exit(134); // 128 + SIGABRT
 }

@@ -106,7 +106,7 @@ void test_failed() {
 }
 
 // TODO: this would be nice but we can't spare two 2 RAM bytes for "jsr main"
-// but maybe we can jmp _exit (vs jsr _exit)
+// but maybe we can jmp _Exit (vs jsr _Exit)
 /*
 __attribute__((noreturn)) void _exit(int status) {
   test_failed();

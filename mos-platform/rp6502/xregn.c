@@ -9,7 +9,7 @@ int xregn(char device, char channel, unsigned char address, unsigned char count,
   RIA.xstack = channel;
   RIA.xstack = address;
   for (unsigned char i = 0; i < count; i++)
-    RIA.xstack = va_arg(args, unsigned char);
+    RIA.xstack = (char)va_arg(args, unsigned);
   va_end(args);
   RIA.op = RIA_OP_XREG;
   while (RIA.busy & RIA_BUSY_BIT)

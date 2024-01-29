@@ -503,3 +503,9 @@ __attribute__((weak)) char *getenv(const char *name) {
   // report that the given name could not be found.
   return NULL;
 }
+
+__attribute__((weak)) int system(const char *string) {
+  // In the absence of a target-specific meaning for "command processor", report
+  // that none is present.
+  return 0;
+}

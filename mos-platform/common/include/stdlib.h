@@ -180,6 +180,7 @@ _Noreturn void exit(int status);
 __attribute__((leaf)) _Noreturn void _Exit(int status);
 char *getenv(const char *name);
 _Noreturn void quick_exit(int status);
+int system(const char *string);
 
 #ifdef __cplusplus
 }

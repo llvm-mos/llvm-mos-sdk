@@ -18,14 +18,6 @@ extern "C" {
 
 #define MB_CUR_MAX ((size_t)1)
 
-// Communication with the environment
-__attribute__((leaf)) _Noreturn void abort(void);
-int atexit(void (*func)(void));
-int at_quick_exit(void (*func)(void));
-_Noreturn void exit(int status);
-__attribute__((leaf)) _Noreturn void _Exit(int status);
-_Noreturn void quick_exit(int status);
-
 int abs(int i);
 long labs(long i);
 long long llabs(long long i);
@@ -178,6 +170,16 @@ size_t __heap_bytes_free();
 #define heap_bytes_free __heap_bytes_free
 
 #endif // _MOS_SOURCE
+
+// Communication with the environment
+
+__attribute__((leaf)) _Noreturn void abort(void);
+int atexit(void (*func)(void));
+int at_quick_exit(void (*func)(void));
+_Noreturn void exit(int status);
+__attribute__((leaf)) _Noreturn void _Exit(int status);
+char *getenv(const char *name);
+_Noreturn void quick_exit(int status);
 
 #ifdef __cplusplus
 }

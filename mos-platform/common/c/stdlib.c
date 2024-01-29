@@ -495,3 +495,11 @@ __attribute__((weak)) int rand(void) {
 }
 
 __attribute__((weak)) void srand(unsigned s) { seed = s; }
+
+// Communication with the environment
+
+__attribute__((weak)) char *getenv(const char *name) {
+  // In the absence of a target-specific meaning for "environment list", always
+  // report that the given name could not be found.
+  return NULL;
+}

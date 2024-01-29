@@ -21,7 +21,7 @@ merge_libraries(rp6502-crt0
   common-init-stack
   common-copy-zp-data
   common-zero-bss
-  common-exit-loop
+  common-exit-custom
 )
 
 add_platform_library(rp6502-c

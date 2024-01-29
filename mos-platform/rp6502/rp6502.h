@@ -61,10 +61,10 @@ struct __RP6502 {
 
 int xregn(char device, char channel, unsigned char address, unsigned char count,
           ...);
-int phi2 (void);
-int codepage (void);
-long lrand (void);
-int stdin_opt (unsigned long ctrl_bits, unsigned char str_length);
+int phi2(void);
+int codepage(void);
+long lrand(void);
+int stdin_opt(unsigned long ctrl_bits, unsigned char str_length);
 
 /* XREG location helpers */
 

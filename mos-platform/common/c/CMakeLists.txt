@@ -15,6 +15,10 @@ add_platform_library(common-c
   # setjmp.h
   setjmp.S
 
+  # signal.h
+  signal.c
+  signal-handlers.c
+
   # stdio.h
   printf.c
   stdio.c

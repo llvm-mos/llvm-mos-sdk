@@ -1,7 +1,5 @@
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-void abort(void) {
-  puts("ABORTED");
-  _Exit(134); // 128 + SIGABRT
-}
+void __sigabrt(void) { puts("ABORTED"); }

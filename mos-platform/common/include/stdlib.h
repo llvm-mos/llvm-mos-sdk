@@ -173,7 +173,7 @@ size_t __heap_bytes_free();
 
 // Communication with the environment
 
-__attribute__((leaf)) _Noreturn void abort(void);
+_Noreturn void abort(void);
 int atexit(void (*func)(void));
 int at_quick_exit(void (*func)(void));
 _Noreturn void exit(int status);

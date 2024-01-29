@@ -24,7 +24,6 @@ target_compile_options(rpc8e-crt0 PUBLIC -mcpu=mos65el02)
 # librpc8e build code
 
 add_platform_library(rpc8e-c
-  librpc8e/src/abort.c
   librpc8e/src/display.c
   librpc8e/src/drive.c
   librpc8e/src/mmu.c

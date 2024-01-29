@@ -25,7 +25,6 @@ merge_libraries(eater-crt0
 )
 
 add_platform_library(eater-c
-  abort.c
   delay.c
   getchar.c
   lcd.c

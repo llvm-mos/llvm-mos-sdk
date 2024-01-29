@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <limits.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -497,6 +498,13 @@ __attribute__((weak)) int rand(void) {
 __attribute__((weak)) void srand(unsigned s) { seed = s; }
 
 // Communication with the environment
+
+__attribute__((weak)) _Noreturn void abort(void) {
+  raise(SIGABRT);
+  // A SIGABRT handler may have returned, but abort must terminate the program
+  // regardless.
+  _Exit(128 + SIGABRT);
+}
 
 __attribute__((weak)) char *getenv(const char *name) {
   // In the absence of a target-specific meaning for "environment list", always

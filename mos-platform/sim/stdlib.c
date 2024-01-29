@@ -2,7 +2,7 @@
 
 #include "sim-io.h"
 
-void abort(void) {
+void __sigabrt(void) {
   // Writing to this IO register causes the simulator to abort.
   sim_reg_iface->abort = 1;
 

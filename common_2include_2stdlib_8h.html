@@ -179,6 +179,10 @@ Functions</h2></td></tr>
 <tr class="separator:a9cbe15503c359688a4c6b09a7000c2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b0abd498c08f782b325e8532254e962"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a8b0abd498c08f782b325e8532254e962">system</a> (const char *string)</td></tr>
 <tr class="separator:a8b0abd498c08f782b325e8532254e962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4deacd9ee0025cb05ba0fc764e9cdab1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a4deacd9ee0025cb05ba0fc764e9cdab1">bsearch</a> (const void *key, const void *base, size_t nmemb, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, int(*compar)(const void *, const void *))</td></tr>
+<tr class="separator:a4deacd9ee0025cb05ba0fc764e9cdab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a216aaec88b41d3e2f8502a5b3365ea81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a216aaec88b41d3e2f8502a5b3365ea81">qsort</a> (void *base, size_t nmemb, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, int(*compar)(const void *, const void *))</td></tr>
+<tr class="separator:a216aaec88b41d3e2f8502a5b3365ea81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a73efe787c131b385070f25d18b7c9aa4"></a>
@@ -392,6 +396,52 @@ Functions</h2></td></tr>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>nptr</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4deacd9ee0025cb05ba0fc764e9cdab1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4deacd9ee0025cb05ba0fc764e9cdab1">&#9670;&nbsp;</a></span>bsearch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* bsearch </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nmemb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int(*)(const void *, const void *)&#160;</td>
+          <td class="paramname"><em>compar</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -612,6 +662,46 @@ Functions</h2></td></tr>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a216aaec88b41d3e2f8502a5b3365ea81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a216aaec88b41d3e2f8502a5b3365ea81">&#9670;&nbsp;</a></span>qsort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qsort </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>base</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nmemb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int(*)(const void *, const void *)&#160;</td>
+          <td class="paramname"><em>compar</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

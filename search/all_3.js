@@ -17,7 +17,8 @@ var searchData=
   ['boot_5fdisplay_5fid_137',['boot_display_id',['../mmu_8h.html#a017bebe2284616c55e5abdd1a0a8e02c',1,'mmu.h']]],
   ['boot_5fdrive_5fid_138',['boot_drive_id',['../mmu_8h.html#a818f2bfc46c8332dbb90a7c8bf16f189',1,'mmu.h']]],
   ['brk_139',['BRK',['../6502_8h.html#a9ffc8ca76bf32ffcf146f600077018ad',1,'6502.h']]],
-  ['bw_5fmask_140',['BW_MASK',['../atari2600__constants_8h.html#af19e62137e2b72c3aa9cc7b5d059356b',1,'atari2600_constants.h']]],
-  ['byte_141',['byte',['../api_8h.html#a71809484a26cd96c6abe839a0a8a289d',1,'byte():&#160;api.h'],['../namespacestd.html#ac12aa221abdc74499988eed2a8e1626d',1,'std::byte()'],['../vcslib_8h.html#a0c8186d9b9b7880309c27230bbb5e69d',1,'byte():&#160;vcslib.h']]],
-  ['byteptrs_142',['BytePtrs',['../classsoa_1_1BasePtr.html#a7c08d7dd81ded0774d0aa246a1f148f8',1,'soa::BasePtr']]]
+  ['bsearch_140',['bsearch',['../common_2include_2stdlib_8h.html#a4deacd9ee0025cb05ba0fc764e9cdab1',1,'stdlib.h']]],
+  ['bw_5fmask_141',['BW_MASK',['../atari2600__constants_8h.html#af19e62137e2b72c3aa9cc7b5d059356b',1,'atari2600_constants.h']]],
+  ['byte_142',['byte',['../api_8h.html#a71809484a26cd96c6abe839a0a8a289d',1,'byte():&#160;api.h'],['../namespacestd.html#ac12aa221abdc74499988eed2a8e1626d',1,'std::byte()'],['../vcslib_8h.html#a0c8186d9b9b7880309c27230bbb5e69d',1,'byte():&#160;vcslib.h']]],
+  ['byteptrs_143',['BytePtrs',['../classsoa_1_1BasePtr.html#a7c08d7dd81ded0774d0aa246a1f148f8',1,'soa::BasePtr']]]
 ];

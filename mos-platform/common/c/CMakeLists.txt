@@ -31,6 +31,7 @@ add_platform_library(common-c
   malloc.cc
   malloc.s
   new.cc
+  qsort.c
   quick-exit.cc
 
   # string.h

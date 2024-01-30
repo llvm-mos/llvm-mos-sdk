@@ -127,30 +127,39 @@ $(function() {
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">int</span> <a class="code" href="stdio_8h.html#ad41876f99f190c7488e64ef39c50a23f">puts</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="stdio_8h.html#a59adc4c82490d23754cd39c2fb99b0da">   93</a></span>&#160;<span class="preprocessor">#define EOF (-1)</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">// To be defined by platform.</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">int</span> <a class="code" href="stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8">getchar</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">// Begin platform-specific backend.</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">// To be defined by platform.</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> __putchar(<span class="keywordtype">char</span> <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">// Originally from the Public Domain C Library (PDCLib).</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">struct </span>_FILE;</div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">  103</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>_FILE <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">extern</span> <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *<a class="code" href="stdio_8h.html#acab9c1fe2a80b10e01858bda28a04244">stdin</a>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">extern</span> <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *<a class="code" href="stdio_8h.html#ac80f4484175bf6c48d7b7ca4e9897ae6">stdout</a>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">extern</span> <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *<a class="code" href="stdio_8h.html#ac9e47c346a25e2e7edd2c9b4ca5d0262">stderr</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">int</span> <a class="code" href="stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8">getchar</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">// Emit a sequence of characters in the target&#39;s character set that</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">// correspond to the given ASCII character.</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="stdio_8h.html#a3052b4a0ce04bfd4461a2e5e9c5e1134">  101</a></span>&#160;__attribute__((always_inline)) <span class="keywordtype">void</span> __char_conv(<span class="keywordtype">char</span> <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>, <span class="keywordtype">void</span> (*<a class="code" href="stdio_8h.html#a3052b4a0ce04bfd4461a2e5e9c5e1134">emit</a>)(<span class="keywordtype">char</span> <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>));</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">// Put a character already in the target&#39;s character set out to the target&#39;s</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">// equivalent of file descriptor 0.</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keywordtype">void</span> __putchar(<span class="keywordtype">char</span> <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">// End platform-specific backend.</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordtype">int</span> <a class="code" href="stdio_8h.html#abe6299d5823dd023e610aaa619735a3f">fputc</a>(<span class="keywordtype">int</span> <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>, <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">int</span> <a class="code" href="stdio_8h.html#aee2fee618a56350c584e3f9fcf75f20e">fputs</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *__restrict__ s, <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;}</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif // not _STDIO_H_</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">// Originally from the Public Domain C Library (PDCLib).</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">struct </span>_FILE;</div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">  112</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>_FILE <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">extern</span> <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *<a class="code" href="stdio_8h.html#acab9c1fe2a80b10e01858bda28a04244">stdin</a>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">extern</span> <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *<a class="code" href="stdio_8h.html#ac80f4484175bf6c48d7b7ca4e9897ae6">stdout</a>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">extern</span> <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *<a class="code" href="stdio_8h.html#ac9e47c346a25e2e7edd2c9b4ca5d0262">stderr</a>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">int</span> <a class="code" href="stdio_8h.html#abe6299d5823dd023e610aaa619735a3f">fputc</a>(<span class="keywordtype">int</span> <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>, <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keywordtype">int</span> <a class="code" href="stdio_8h.html#aee2fee618a56350c584e3f9fcf75f20e">fputs</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *__restrict__ s, <a class="code" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#endif // not _STDIO_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astdio_8h_html_af4de2514b7778805db3815e8dd6cf09a"><div class="ttname"><a href="stdio_8h.html#af4de2514b7778805db3815e8dd6cf09a">putchar</a></div><div class="ttdeci">int putchar(int c)</div></div>
 <div class="ttc" id="astdio_8h_html_aee2fee618a56350c584e3f9fcf75f20e"><div class="ttname"><a href="stdio_8h.html#aee2fee618a56350c584e3f9fcf75f20e">fputs</a></div><div class="ttdeci">int fputs(const char *__restrict__ s, FILE *__restrict__ stream)</div></div>
@@ -160,7 +169,8 @@ $(function() {
 <div class="ttc" id="astdio_8h_html_ad41876f99f190c7488e64ef39c50a23f"><div class="ttname"><a href="stdio_8h.html#ad41876f99f190c7488e64ef39c50a23f">puts</a></div><div class="ttdeci">int puts(const char *s)</div></div>
 <div class="ttc" id="astdio_8h_html_a212e2f1c2162f8a24b156191be16b6cd"><div class="ttname"><a href="stdio_8h.html#a212e2f1c2162f8a24b156191be16b6cd">snprintf</a></div><div class="ttdeci">int snprintf(char *buffer, size_t count, const char *format,...)</div></div>
 <div class="ttc" id="amemory_8h_html_ab5f5eef872ec5f049b302678d546b79f"><div class="ttname"><a href="memory_8h.html#ab5f5eef872ec5f049b302678d546b79f">count</a></div><div class="ttdeci">const void uint16_t count</div><div class="ttdef"><b>Definition:</b> memory.h:58</div></div>
-<div class="ttc" id="astdio_8h_html_a175abb747ea3b78aa8da87355dcec473"><div class="ttname"><a href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a></div><div class="ttdeci">struct _FILE FILE</div><div class="ttdef"><b>Definition:</b> stdio.h:103</div></div>
+<div class="ttc" id="astdio_8h_html_a175abb747ea3b78aa8da87355dcec473"><div class="ttname"><a href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a></div><div class="ttdeci">struct _FILE FILE</div><div class="ttdef"><b>Definition:</b> stdio.h:112</div></div>
+<div class="ttc" id="astdio_8h_html_a3052b4a0ce04bfd4461a2e5e9c5e1134"><div class="ttname"><a href="stdio_8h.html#a3052b4a0ce04bfd4461a2e5e9c5e1134">emit</a></div><div class="ttdeci">void(* emit)(char c))</div><div class="ttdef"><b>Definition:</b> stdio.h:101</div></div>
 <div class="ttc" id="astdio_8h_html_a07bb8b97d4180b8f8b67de90890bafdf"><div class="ttname"><a href="stdio_8h.html#a07bb8b97d4180b8f8b67de90890bafdf">sprintf</a></div><div class="ttdeci">int sprintf(char *buffer, const char *format,...)</div></div>
 <div class="ttc" id="astdio_8h_html_ac80f4484175bf6c48d7b7ca4e9897ae6"><div class="ttname"><a href="stdio_8h.html#ac80f4484175bf6c48d7b7ca4e9897ae6">stdout</a></div><div class="ttdeci">FILE * stdout</div></div>
 <div class="ttc" id="astdio_8h_html_a3e29caa20f7cffe18f410f01278905a8"><div class="ttname"><a href="stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8">getchar</a></div><div class="ttdeci">int getchar(void)</div></div>

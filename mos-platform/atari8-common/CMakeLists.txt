@@ -13,7 +13,6 @@ install(FILES
   _pokey.h
   atari.h
   charset.h
-  chrout.h
 TYPE INCLUDE)
 
 install(FILES
@@ -27,7 +26,6 @@ add_platform_library(atari8-common-crt0 init-stack.S)
 target_link_libraries(atari8-common-crt0 PRIVATE common-asminc)
 
 add_platform_library(atari8-common-c
-  chrout.c
   putchar.c
   getchar.c
 )

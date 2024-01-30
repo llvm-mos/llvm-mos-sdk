@@ -6,7 +6,6 @@ endif()
 
 install(FILES
   chrin.h
-  chrout.h
   eater.h
 TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)

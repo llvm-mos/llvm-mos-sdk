@@ -16,6 +16,20 @@ unsigned char
 
 using __osic1p_screen = __osi_screen<>;
 
+extern "C" {
+
+__attribute__((always_inline)) void __char_conv(char c, void (*emit)(char c)) {
+  /*
+   * The low-level character output function implements LF as line feed
+   * without CR, e.g. the active position stays in the same column. Here we
+   * implement the C standard semantics where \n moves the active position
+   * to the initial position of the next line.
+   */
+  if (c == '\n')
+    emit('\r');
+  emit(c);
+}
+
 /**
  * @brief __putchar implementation for Challenger 1P
  *
@@ -23,21 +37,11 @@ using __osic1p_screen = __osi_screen<>;
  *
  * @param c
  */
-extern "C" void __putchar(char c) {
-  /*
-   * The low-level character output function implements LF as line feed
-   * without CR, e.g. the active position stays in the same column. Here we
-   * implement the C standard semantics where \n moves the active position
-   * to the initial position of the next line.
-   */
-  if (c == '\n') {
-    __osic1p_screen::cputc('\r');
-  }
-
-  __osic1p_screen::cputc(c);
-}
+void __putchar(char c) { __osic1p_screen::cputc(c); }
 
 /**
  * @brief __clrscr clear the screen
  */
-extern "C" void __clrscr(void) { __osic1p_screen::clrscr(); }
+void __clrscr(void) { __osic1p_screen::clrscr(); }
+
+} // extern "C"

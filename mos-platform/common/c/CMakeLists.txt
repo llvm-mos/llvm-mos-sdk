@@ -26,6 +26,7 @@ add_platform_library(common-c
   # stdlib.h
   abs.cc
   atoi.cc
+  bsearch.c
   div.cc
   stdlib.c
   malloc.cc

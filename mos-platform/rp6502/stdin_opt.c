@@ -10,5 +10,5 @@ int stdin_opt(unsigned long ctrl_bits, unsigned char str_length) {
   RIA.op = RIA_OP_STDIN_OPT;
   while (RIA.busy & RIA_BUSY_BIT)
     ;
-  return RIA.a + (RIA.x << 8);
+  return RIA.a | (RIA.x << 8);
 }

@@ -14,8 +14,7 @@ struct __RP6502 {
   unsigned char step1;
   unsigned int addr1;
   unsigned char xstack;
-  unsigned char errno_lo;
-  unsigned char errno_hi;
+  unsigned int errno;
   unsigned char op;
   unsigned char irq;
   const unsigned char spin;
@@ -65,6 +64,10 @@ int phi2(void);
 int codepage(void);
 long lrand(void);
 int stdin_opt(unsigned long ctrl_bits, unsigned char str_length);
+int read_xstack(void *buf, unsigned count, int fildes);
+int read_xram(unsigned buf, unsigned count, int fildes);
+int write_xstack(const void *buf, unsigned count, int fildes);
+int write_xram(unsigned buf, unsigned count, int fildes);
 
 /* XREG location helpers */
 

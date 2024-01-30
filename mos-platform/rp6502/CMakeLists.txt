@@ -5,6 +5,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
+  clock.h
   rp6502.h
 TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)
@@ -26,12 +27,27 @@ merge_libraries(rp6502-crt0
 
 add_platform_library(rp6502-c
   abort.c
+  clock_getres.c
+  clock_gettime.c
+  clock_settime.c
+  clock.c
+  close.c
   codepage.c
   getchar.c
   lrand.c
+  lseek.c
+  open.c
   phi2.c
   putchar.c
+  read_xram.c
+  read_xstack.c
+  read.c
   stdin_opt.c
+  sysremove.c
+  sysrename.c
+  write_xram.c
+  write_xstack.c
+  write.c
   xregn.c
 )
 

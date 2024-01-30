@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['fast_3134',['fast',['../c128_8h.html#a95fc60406e0f6798e65864a60b027a4a',1,'c128.h']]],
-  ['fb_5fget_5fpixel_3135',['fb_get_pixel',['../cx16_8h.html#a993c4d2f30b861d585f9244cfdac1295',1,'cx16.h']]],
-  ['files_3136',['files',['../famitone2_2LICENSE.html#a17b028437d0e0f2acf1a46abd2f6b56e',1,'files(the &quot;Software&quot;):&#160;LICENSE'],['../nesdoug_2LICENSE.html#a57109d5f02e82589eb08193749d05025',1,'files(the &quot;Software&quot;):&#160;LICENSE'],['../neslib_2LICENSE.html#a17b028437d0e0f2acf1a46abd2f6b56e',1,'files(the &quot;Software&quot;):&#160;LICENSE']]],
-  ['forward_3137',['forward',['../namespacestd.html#a75b1f1f265a7de2e02ce6dc26ec8ee15',1,'std::forward(std::remove_reference_t&lt; T &gt; &amp;t) noexcept'],['../namespacestd.html#ae5fc9a6136c399ccb9e338011181e3f6',1,'std::forward(std::remove_reference_t&lt; T &gt; &amp;&amp;t) noexcept']]],
-  ['fputc_3138',['fputc',['../stdio_8h.html#abe6299d5823dd023e610aaa619735a3f',1,'stdio.h']]],
-  ['fputs_3139',['fputs',['../stdio_8h.html#aee2fee618a56350c584e3f9fcf75f20e',1,'stdio.h']]],
-  ['free_3140',['free',['../common_2include_2stdlib_8h.html#afbedc913aa4651b3c3b4b3aecd9b4711',1,'stdlib.h']]],
-  ['front_3141',['front',['../structstd_1_1array.html#ae42ae6d02646ab094c47d58da244230b',1,'std::array::front()'],['../structstd_1_1array.html#a5ad2eafcc5e3eb41bfe960dbea0a7ead',1,'std::array::front() const']]]
+  ['empty_3133',['empty',['../structstd_1_1array.html#a7a28048e7cdff7df7ba194aa67e9b1aa',1,'std::array']]],
+  ['end_3134',['end',['../structstd_1_1array.html#ab30bfaf502370bfb073ad10af69e723b',1,'std::array::end() noexcept'],['../structstd_1_1array.html#a9051a49aeef595339ad4564a129ad98d',1,'std::array::end() const noexcept'],['../classstd_1_1initializer__list.html#abd1d0fd2c35074ce0b51ba1c39173ee0',1,'std::initializer_list::end()'],['../classsoa_1_1Array.html#a1c563fe0bd77e571254459bcc4a76d1e',1,'soa::Array::end() const'],['../classsoa_1_1Array.html#a43e823def3b5f27befc30fd75ccb26e0',1,'soa::Array::end()'],['../namespacestd.html#a32e349e93114238d72333a08f7ac044d',1,'std::end(initializer_list&lt; E &gt; il) noexcept'],['../namespacestd.html#a6a638e542526e81b0cba174c9030728e',1,'std::end(C &amp;c) -&gt; decltype(c.end())'],['../namespacestd.html#a6e15df76e81604c9d66a72f6d7f56121',1,'std::end(const C &amp;c) -&gt; decltype(c.end())'],['../namespacestd.html#a0538599442cc08d0edc001c6f3705003',1,'std::end(T(&amp;array)[_N]) noexcept']]],
+  ['epsilon_3135',['epsilon',['../classstd_1_1numeric__limits.html#ad67f8f13fb9f7f7114727a1bb582f657',1,'std::numeric_limits']]],
+  ['exit_3136',['exit',['../common_2include_2stdlib_8h.html#aa8aae2f9644656ab06bc71984784e8e9',1,'stdlib.h']]]
 ];

@@ -1,20 +1,16 @@
 var searchData=
 [
-  ['imaxabs_3155',['imaxabs',['../inttypes_8h.html#ad9e8a565a34b6981f500d88773ec7bcd',1,'inttypes.h']]],
-  ['imaxdiv_3156',['imaxdiv',['../inttypes_8h.html#abdaff0aa6f40596b90b84a7ad63d2299',1,'inttypes.h']]],
-  ['infinity_3157',['infinity',['../classstd_1_1numeric__limits.html#a76ab877ccae51785f63818e9a1718676',1,'std::numeric_limits']]],
-  ['initializer_5flist_3158',['initializer_list',['../classstd_1_1initializer__list.html#abe1e36129986ffbe5dfb19b34ceebdb6',1,'std::initializer_list']]],
-  ['isalnum_3159',['isalnum',['../ctype_8h.html#adf38e126f73a010f30af76db2a28c6e1',1,'ctype.h']]],
-  ['isalpha_3160',['isalpha',['../ctype_8h.html#a25908ae63aac2df990634e1ae5bd14d9',1,'ctype.h']]],
-  ['isblank_3161',['isblank',['../ctype_8h.html#aea4929b1b41f1a6d723e0312b1f050ed',1,'ctype.h']]],
-  ['iscntrl_3162',['iscntrl',['../ctype_8h.html#a0008a4e8e7889734dc1d83297de07158',1,'ctype.h']]],
-  ['isdigit_3163',['isdigit',['../ctype_8h.html#a3fa45b35c8abf67a950b6d3d4063dede',1,'ctype.h']]],
-  ['isfast_3164',['isfast',['../c128_8h.html#a24e23fad956a479fbe8a51e1f7defa82',1,'c128.h']]],
-  ['isgraph_3165',['isgraph',['../ctype_8h.html#a49f40fd869fd0c90e4497fda08c89561',1,'ctype.h']]],
-  ['islower_3166',['islower',['../ctype_8h.html#a7b8f652a0423a80922dd89d8829db5f2',1,'ctype.h']]],
-  ['isprint_3167',['isprint',['../ctype_8h.html#a99355d8f0fb41ec43effb95189db0ed4',1,'ctype.h']]],
-  ['ispunct_3168',['ispunct',['../ctype_8h.html#af29554b3ec04ea7684482bffed5dbce6',1,'ctype.h']]],
-  ['isspace_3169',['isspace',['../ctype_8h.html#a56be4166e4673843042a548a7f513dbc',1,'ctype.h']]],
-  ['isupper_3170',['isupper',['../ctype_8h.html#adadd6582d46775aab6a51e29d16d9f77',1,'ctype.h']]],
-  ['isxdigit_3171',['isxdigit',['../ctype_8h.html#adaf3aadefe3fc4fb07b6be0d7b880f53',1,'ctype.h']]]
+  ['get_3145',['get',['../classsoa_1_1BasePtr.html#a639f50c999144f84394ff5534ef80665',1,'soa::BasePtr']]],
+  ['get_5fcurrent_5fbank_3146',['get_current_bank',['../mapper__rom__single_8h.html#acdcb17c559c4bfa87acc602805616b0e',1,'mapper_rom_single.h']]],
+  ['get_5fframe_5fcount_3147',['get_frame_count',['../nesdoug_8h.html#a87e74bea686801a5940c71e00fbe9a8e',1,'nesdoug.h']]],
+  ['get_5fnew_5fhandler_3148',['get_new_handler',['../namespacestd.html#a2aab280c9a87214e453f8f598827d13b',1,'std']]],
+  ['get_5fnumbanks_3149',['get_numbanks',['../cx16_8h.html#acfca2e091ae11745d1ba1abacb9d15f8',1,'cx16.h']]],
+  ['get_5fostype_3150',['get_ostype',['../cx16_8h.html#af56db1a36238a88f91512f034f96e0f6',1,'cx16.h']]],
+  ['get_5fpad_5fnew_3151',['get_pad_new',['../nesdoug_8h.html#ac38ed7645e9658f43ec2e042fa5b97fa',1,'nesdoug.h']]],
+  ['get_5fprg_5f8000_3152',['get_prg_8000',['../nes-mmc3_2mapper_8h.html#a8188f3c29e6a016f646b45951f1a6dbb',1,'mapper.h']]],
+  ['get_5fprg_5fa000_3153',['get_prg_a000',['../nes-mmc3_2mapper_8h.html#ad0bb7615120f68dd4456eff08ac3c1d7',1,'mapper.h']]],
+  ['get_5fterminate_3154',['get_terminate',['../namespacestd.html#a5427b4061db7ec519fbd7ded55c38226',1,'std']]],
+  ['get_5ftv_3155',['get_tv',['../cx16_8h.html#aed9504e60597aa96638a3c1f5721d360',1,'cx16.h']]],
+  ['getchar_3156',['getchar',['../stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8',1,'stdio.h']]],
+  ['getenv_3157',['getenv',['../common_2include_2stdlib_8h.html#abc6595dbf6880c71628fecf0dbb23d66',1,'stdlib.h']]]
 ];

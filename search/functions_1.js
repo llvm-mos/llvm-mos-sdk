@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['back_2999',['back',['../structstd_1_1array.html#ad546e3037ba8f7928f91368d654ab063',1,'std::array::back()'],['../structstd_1_1array.html#ae27789071edbce0734a054ea81bba188',1,'std::array::back() const']]],
-  ['bank_5fselect_3000',['bank_select',['../mapper__rom__multi_8h.html#ad72320ef77d63316e65c4a2ea2005cf2',1,'bank_select(banked_area_t area, rom_bank_t bank_id):&#160;mapper_rom_multi.h'],['../mapper__rom__single_8h.html#a059d36f84ce786ae48c050734dd99c60',1,'bank_select(rom_bank_t bank_id):&#160;mapper_rom_single.h']]],
-  ['baseptr_3001',['BasePtr',['../classsoa_1_1BasePtr.html#ababbf19256dd50cda4df8296106298d1',1,'soa::BasePtr::BasePtr(const uint8_t ByteArrays[][N], uint8_t Idx)'],['../classsoa_1_1BasePtr.html#af4d3b5f45f0517d202311d71169df4a1',1,'soa::BasePtr::BasePtr(uint8_t ByteArrays[][N], uint8_t Idx)']]],
-  ['before_3002',['before',['../classstd_1_1type__info.html#afe3eb2bd6a6e6d976a969d03ad24936b',1,'std::type_info']]],
-  ['begin_3003',['begin',['../structstd_1_1array.html#a7b8533c18ec50cd9a26ed3b56fcba9c7',1,'std::array::begin() noexcept'],['../structstd_1_1array.html#a65de28964bcd70204a24c99e5d92da38',1,'std::array::begin() const noexcept'],['../classstd_1_1initializer__list.html#ac763ad3c10144402b0c8d8f9995dcc47',1,'std::initializer_list::begin()'],['../classsoa_1_1Array.html#a73e88c0ae3e9699c457fcfa955de5ca8',1,'soa::Array::begin() const'],['../classsoa_1_1Array.html#a9c1de7c1149b246ccdded028c38cd4a2',1,'soa::Array::begin()'],['../namespacestd.html#a4ab7f7f2b2e2fa159979042a25bbc911',1,'std::begin(initializer_list&lt; E &gt; il) noexcept'],['../namespacestd.html#a17d91933312f23b22fbdc18aef9a89ed',1,'std::begin(C &amp;c) -&gt; decltype(c.begin())'],['../namespacestd.html#ae9729a382b470cbbd2ffd431b55e9754',1,'std::begin(const C &amp;c) -&gt; decltype(c.begin())'],['../namespacestd.html#a9af921c551758b373e8db698fd424d99',1,'std::begin(T(&amp;array)[_N]) noexcept']]],
-  ['bsearch_3004',['bsearch',['../common_2include_2stdlib_8h.html#a4deacd9ee0025cb05ba0fc764e9cdab1',1,'stdlib.h']]]
+  ['abort_2992',['abort',['../common_2include_2stdlib_8h.html#a7d78319026a43c0a5f942436ad3f09a1',1,'stdlib.h']]],
+  ['abs_2993',['abs',['../common_2include_2stdlib_8h.html#af15d7205d8d10c4820f997ce5c526279',1,'stdlib.h']]],
+  ['aligned_5falloc_2994',['aligned_alloc',['../common_2include_2stdlib_8h.html#af7c32811d7d24557ba92cd3d9dae7ddd',1,'stdlib.h']]],
+  ['array_2995',['Array',['../classsoa_1_1Array.html#aeb93ca55436d2407a8e33d31233e2d62',1,'soa::Array::Array(std::initializer_list&lt; T &gt; Entries)'],['../classsoa_1_1Array.html#a13c4acc5709d612454da0adcf42aa1ed',1,'soa::Array::Array()=default'],['../classsoa_1_1Array.html#ab2db6428f749572e4aff70c3d5cbbc87',1,'soa::Array::Array(const Array&lt; T, M &gt; &amp;Other)']]],
+  ['arrayconstiterator_2996',['ArrayConstIterator',['../classsoa_1_1ArrayConstIterator.html#a9221be96a79d3231a8bfa2873f896b7a',1,'soa::ArrayConstIterator']]],
+  ['at_5fquick_5fexit_2997',['at_quick_exit',['../common_2include_2stdlib_8h.html#adb1bb1aba8db8ce38b4a2d796b50d260',1,'stdlib.h']]],
+  ['atexit_2998',['atexit',['../common_2include_2stdlib_8h.html#a7fd89c82095df80e5e12d6b2834a2acc',1,'stdlib.h']]],
+  ['atoi_2999',['atoi',['../common_2include_2stdlib_8h.html#a30670a60464f77af17dfb353353d6df8',1,'stdlib.h']]],
+  ['atol_3000',['atol',['../common_2include_2stdlib_8h.html#a825c37450147a643edbcb1a435518307',1,'stdlib.h']]],
+  ['atoll_3001',['atoll',['../common_2include_2stdlib_8h.html#a5d0555f6ac42472671281e5903244b7b',1,'stdlib.h']]]
 ];

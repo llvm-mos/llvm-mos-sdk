@@ -1,16 +1,11 @@
 var searchData=
 [
-  ['get_3142',['get',['../classsoa_1_1BasePtr.html#a639f50c999144f84394ff5534ef80665',1,'soa::BasePtr']]],
-  ['get_5fcurrent_5fbank_3143',['get_current_bank',['../mapper__rom__single_8h.html#acdcb17c559c4bfa87acc602805616b0e',1,'mapper_rom_single.h']]],
-  ['get_5fframe_5fcount_3144',['get_frame_count',['../nesdoug_8h.html#a87e74bea686801a5940c71e00fbe9a8e',1,'nesdoug.h']]],
-  ['get_5fnew_5fhandler_3145',['get_new_handler',['../namespacestd.html#a2aab280c9a87214e453f8f598827d13b',1,'std']]],
-  ['get_5fnumbanks_3146',['get_numbanks',['../cx16_8h.html#acfca2e091ae11745d1ba1abacb9d15f8',1,'cx16.h']]],
-  ['get_5fostype_3147',['get_ostype',['../cx16_8h.html#af56db1a36238a88f91512f034f96e0f6',1,'cx16.h']]],
-  ['get_5fpad_5fnew_3148',['get_pad_new',['../nesdoug_8h.html#ac38ed7645e9658f43ec2e042fa5b97fa',1,'nesdoug.h']]],
-  ['get_5fprg_5f8000_3149',['get_prg_8000',['../nes-mmc3_2mapper_8h.html#a8188f3c29e6a016f646b45951f1a6dbb',1,'mapper.h']]],
-  ['get_5fprg_5fa000_3150',['get_prg_a000',['../nes-mmc3_2mapper_8h.html#ad0bb7615120f68dd4456eff08ac3c1d7',1,'mapper.h']]],
-  ['get_5fterminate_3151',['get_terminate',['../namespacestd.html#a5427b4061db7ec519fbd7ded55c38226',1,'std']]],
-  ['get_5ftv_3152',['get_tv',['../cx16_8h.html#aed9504e60597aa96638a3c1f5721d360',1,'cx16.h']]],
-  ['getchar_3153',['getchar',['../stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8',1,'stdio.h']]],
-  ['getenv_3154',['getenv',['../common_2include_2stdlib_8h.html#abc6595dbf6880c71628fecf0dbb23d66',1,'stdlib.h']]]
+  ['fast_3137',['fast',['../c128_8h.html#a95fc60406e0f6798e65864a60b027a4a',1,'c128.h']]],
+  ['fb_5fget_5fpixel_3138',['fb_get_pixel',['../cx16_8h.html#a993c4d2f30b861d585f9244cfdac1295',1,'cx16.h']]],
+  ['files_3139',['files',['../famitone2_2LICENSE.html#a17b028437d0e0f2acf1a46abd2f6b56e',1,'files(the &quot;Software&quot;):&#160;LICENSE'],['../nesdoug_2LICENSE.html#a57109d5f02e82589eb08193749d05025',1,'files(the &quot;Software&quot;):&#160;LICENSE'],['../neslib_2LICENSE.html#a17b028437d0e0f2acf1a46abd2f6b56e',1,'files(the &quot;Software&quot;):&#160;LICENSE']]],
+  ['forward_3140',['forward',['../namespacestd.html#a75b1f1f265a7de2e02ce6dc26ec8ee15',1,'std::forward(std::remove_reference_t&lt; T &gt; &amp;t) noexcept'],['../namespacestd.html#ae5fc9a6136c399ccb9e338011181e3f6',1,'std::forward(std::remove_reference_t&lt; T &gt; &amp;&amp;t) noexcept']]],
+  ['fputc_3141',['fputc',['../stdio_8h.html#abe6299d5823dd023e610aaa619735a3f',1,'stdio.h']]],
+  ['fputs_3142',['fputs',['../stdio_8h.html#aee2fee618a56350c584e3f9fcf75f20e',1,'stdio.h']]],
+  ['free_3143',['free',['../common_2include_2stdlib_8h.html#afbedc913aa4651b3c3b4b3aecd9b4711',1,'stdlib.h']]],
+  ['front_3144',['front',['../structstd_1_1array.html#ae42ae6d02646ab094c47d58da244230b',1,'std::array::front()'],['../structstd_1_1array.html#a5ad2eafcc5e3eb41bfe960dbea0a7ead',1,'std::array::front() const']]]
 ];

@@ -24,7 +24,7 @@ add_platform_library(common-c
 
   # stdio.h
   char-conv.c
-  printf.c
+  printf.cc
   stdio.c
 
   # stdlib.h
@@ -58,13 +58,12 @@ add_platform_library(common-c
 )
 # Prevent the implementation of libcalls from being reduced to a call of those libcalls.
 set_property(SOURCE mem.c PROPERTY COMPILE_OPTIONS -fno-builtin-memset)
-set_property(TARGET common-c PROPERTY COMPILE_DEFINITIONS
-  PRINTF_DISABLE_SUPPORT_FLOAT
-  PRINTF_DISABLE_SUPPORT_EXPONENTIAL
-  PRINTF_WEAK
-)
 target_include_directories(common-c SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
 target_link_libraries(common-c PRIVATE common-asminc)
 
-add_platform_library(common-printf_flt printf.c)
+add_platform_library(common-printf_flt printf.cc)
 target_include_directories(common-printf_flt SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
+set_property(TARGET common-printf_flt PROPERTY COMPILE_DEFINITIONS
+  _PRINTF_FLOAT
+  _PRINTF_LONG_DOUBLE
+)

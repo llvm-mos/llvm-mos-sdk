@@ -69,6 +69,32 @@ int read_xram(unsigned buf, unsigned count, int fildes);
 int write_xstack(const void *buf, unsigned count, int fildes);
 int write_xram(unsigned buf, unsigned count, int fildes);
 
+/* Temporary home for standard library headers. */
+
+#define STDIN_FILENO 0
+#define STDOUT_FILENO 1
+#define STDERR_FILENO 2
+
+#define O_RDONLY 0x01
+#define O_WRONLY 0x02
+#define O_RDWR 0x03
+#define O_CREAT 0x10
+#define O_TRUNC 0x20
+#define O_APPEND 0x40
+#define O_EXCL 0x80
+
+#define SEEK_CUR 0
+#define SEEK_END 1
+#define SEEK_SET 2
+
+int open(const char *name, int flags, ...);
+int read(int fildes, void *buf, unsigned count);
+int write(int fildes, const void *buf, unsigned count);
+int close(int fd);
+long lseek(int fd, long offset, int whence);
+unsigned char _sysremove(const char *name);
+unsigned char _sysrename(const char *oldpath, const char *newpath);
+
 /* XREG location helpers */
 
 #define xreg_ria_keyboard(...) xreg(0, 0, 0, __VA_ARGS__)

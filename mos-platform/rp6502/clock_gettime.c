@@ -1,5 +1,5 @@
-#include <clock.h>
 #include <rp6502.h>
+#include <time.h>
 
 int clock_gettime(clockid_t clock_id, struct timespec *res) {
   RIA.a = clock_id;

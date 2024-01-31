@@ -1,5 +1,5 @@
-#include <clock.h>
 #include <rp6502.h>
+#include <time.h>
 
 long clock(void) {
   RIA.op = RIA_OP_CLOCK;

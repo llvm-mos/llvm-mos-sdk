@@ -5,7 +5,6 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
-  clock.h
   rp6502.h
 TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)

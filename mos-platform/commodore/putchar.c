@@ -2,7 +2,8 @@
 #include <cbm.h>
 #include <stdio.h>
 
-__attribute__((always_inline)) void __char_conv(char c, void (*emit)(char c)) {
+__attribute__((always_inline, weak)) void __char_conv(char c,
+                                                      void (*emit)(char c)) {
   if (__builtin_expect(c == '\n', 0))
     emit('\r');
   else

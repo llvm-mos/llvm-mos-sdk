@@ -180,7 +180,7 @@ $ cat <install_dir>/examples/hello-putchar.c
 int main(void) {
   const char *cur = "HELLO, PUTCHAR!\n";
   while (*cur)
-    __putchar(*cur++);
+    putchar(*cur++);
   return 0;
 }
 

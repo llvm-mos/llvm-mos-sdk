@@ -4,10 +4,7 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-install(FILES
-  cbm.h
-  chrout.h
-TYPE INCLUDE)
+install(FILES cbm.h TYPE INCLUDE)
 install(FILES cbm_kernal.inc DESTINATION ${ASMINCDIR})
 install(FILES commodore.ld TYPE LIB)
 
@@ -20,7 +17,6 @@ merge_libraries(commodore-crt0
 
 add_platform_library(commodore-c
   abort.c
-  chrout.c
   getchar.c
   putchar.c
   cbm_k_acptr.c

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int putchar(int c) {
-  __putchar((char)c);
+  __char_conv(c, __putchar);
   return c;
 }
 

@@ -2,6 +2,6 @@
 #include <stdlib.h>
 
 void abort(void) {
-  puts("Aborted");
+  fputs("Aborted\n", stderr);
   _Exit(134); // 128 + SIGABRT
 }

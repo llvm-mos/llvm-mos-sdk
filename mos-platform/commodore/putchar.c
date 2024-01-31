@@ -1,8 +1,12 @@
-#include <chrout.h>
+#define __CBM__
+#include <cbm.h>
 #include <stdio.h>
 
-void __putchar(char c) {
+__attribute__((always_inline)) void __char_conv(char c, void (*emit)(char c)) {
   if (__builtin_expect(c == '\n', 0))
-    c = '\r';
-  __chrout(c);
+    emit('\r');
+  else
+    emit(c);
 }
+
+void __putchar(char c) { cbm_k_chrout(c); }

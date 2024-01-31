@@ -20,17 +20,20 @@ add_platform_library(common-c
   signal-handlers.c
 
   # stdio.h
+  char-conv.c
   printf.c
   stdio.c
 
   # stdlib.h
   abs.cc
   atoi.cc
+  bsearch.c
   div.cc
   stdlib.c
   malloc.cc
   malloc.s
   new.cc
+  qsort.c
   quick-exit.cc
 
   # string.h

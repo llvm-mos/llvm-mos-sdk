@@ -80,15 +80,37 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="time_8h.html#a824afaa48b313f905546cf45822800fc">   12</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">long</span> <a class="code" href="time_8h.html#a824afaa48b313f905546cf45822800fc">time_t</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">   12</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">time_t</a>;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif // not _TIME_H_</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structtimespec.html">   14</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structtimespec.html">timespec</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structtimespec.html#afc3302668d7cb5952f590da69fdd4955">   15</a></span>&#160;  <a class="code" href="time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">time_t</a> <a class="code" href="structtimespec.html#afc3302668d7cb5952f590da69fdd4955">tv_sec</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structtimespec.html#ae3c7510dafa8cbcaede866ed13c99683">   16</a></span>&#160;  <span class="keywordtype">long</span> <a class="code" href="structtimespec.html#ae3c7510dafa8cbcaede866ed13c99683">tv_nsec</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;};</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">   19</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code" href="time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="time_8h.html#a922ce1ae64374c9410c8a999e25e82af">   21</a></span>&#160;<span class="preprocessor">#define CLOCK_REALTIME ((clockid_t)0)</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">long</span> <a class="code" href="time_8h.html#af6087dd4b7d4dbb747448dbf122811aa">clock</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">int</span> <a class="code" href="time_8h.html#a463c567de23a4f064b415a959fe2a96b">clock_getres</a>(<a class="code" href="time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a> clock_id, <span class="keyword">struct</span> <a class="code" href="structtimespec.html">timespec</a> *res);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">int</span> <a class="code" href="time_8h.html#a10b73e75d375e5c244e32ea46be775bf">clock_gettime</a>(<a class="code" href="time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a> clock_id, <span class="keyword">struct</span> <a class="code" href="structtimespec.html">timespec</a> *tp);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">int</span> <a class="code" href="time_8h.html#ab0dbabb3e47efe9483b81235fdd0c297">clock_settime</a>(<a class="code" href="time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a> clock_id, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structtimespec.html">timespec</a> *tp);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif // not _TIME_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="atime_8h_html_a824afaa48b313f905546cf45822800fc"><div class="ttname"><a href="time_8h.html#a824afaa48b313f905546cf45822800fc">time_t</a></div><div class="ttdeci">long time_t</div><div class="ttdef"><b>Definition:</b> time.h:12</div></div>
+<div class="ttc" id="atime_8h_html_a6dcac6a5cea7d9c842145e1444d91e22"><div class="ttname"><a href="time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a></div><div class="ttdeci">int clockid_t</div><div class="ttdef"><b>Definition:</b> time.h:19</div></div>
+<div class="ttc" id="atime_8h_html_ab0dbabb3e47efe9483b81235fdd0c297"><div class="ttname"><a href="time_8h.html#ab0dbabb3e47efe9483b81235fdd0c297">clock_settime</a></div><div class="ttdeci">int clock_settime(clockid_t clock_id, const struct timespec *tp)</div></div>
+<div class="ttc" id="atime_8h_html_af6087dd4b7d4dbb747448dbf122811aa"><div class="ttname"><a href="time_8h.html#af6087dd4b7d4dbb747448dbf122811aa">clock</a></div><div class="ttdeci">long clock(void)</div></div>
+<div class="ttc" id="atime_8h_html_a10b73e75d375e5c244e32ea46be775bf"><div class="ttname"><a href="time_8h.html#a10b73e75d375e5c244e32ea46be775bf">clock_gettime</a></div><div class="ttdeci">int clock_gettime(clockid_t clock_id, struct timespec *tp)</div></div>
+<div class="ttc" id="astructtimespec_html_ae3c7510dafa8cbcaede866ed13c99683"><div class="ttname"><a href="structtimespec.html#ae3c7510dafa8cbcaede866ed13c99683">timespec::tv_nsec</a></div><div class="ttdeci">long tv_nsec</div><div class="ttdef"><b>Definition:</b> time.h:16</div></div>
+<div class="ttc" id="astructtimespec_html_afc3302668d7cb5952f590da69fdd4955"><div class="ttname"><a href="structtimespec.html#afc3302668d7cb5952f590da69fdd4955">timespec::tv_sec</a></div><div class="ttdeci">time_t tv_sec</div><div class="ttdef"><b>Definition:</b> time.h:15</div></div>
+<div class="ttc" id="atime_8h_html_ad7eee6f9a9b5e8009dd578fb5be9fe90"><div class="ttname"><a href="time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">time_t</a></div><div class="ttdeci">long long time_t</div><div class="ttdef"><b>Definition:</b> time.h:12</div></div>
+<div class="ttc" id="atime_8h_html_a463c567de23a4f064b415a959fe2a96b"><div class="ttname"><a href="time_8h.html#a463c567de23a4f064b415a959fe2a96b">clock_getres</a></div><div class="ttdeci">int clock_getres(clockid_t clock_id, struct timespec *res)</div></div>
+<div class="ttc" id="astructtimespec_html"><div class="ttname"><a href="structtimespec.html">timespec</a></div><div class="ttdef"><b>Definition:</b> time.h:14</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

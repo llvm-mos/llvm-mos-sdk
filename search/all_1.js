@@ -30,12 +30,14 @@ var searchData=
   ['_5fsim_5freg_28',['_sim_reg',['../struct__sim__reg.html',1,'']]],
   ['_5fstringify_29',['_STRINGIFY',['../mapper__macros_8h.html#a9466bf92a0218030cd2dd54cca715e87',1,'mapper_macros.h']]],
   ['_5fstrrev_30',['_strrev',['../string_8h.html#a5806abdb570d1f705d11cdf54766d0a2',1,'string.h']]],
-  ['_5ft1024_31',['_T1024',['../vcslib_8h.html#a3f8985509d387d96ae95190761d1efe1',1,'vcslib.h']]],
-  ['_5ftextcolor_32',['_textcolor',['../atari_8h.html#a68c8bbdd79ee6320b7e1dcdf0b34bb83',1,'atari.h']]],
-  ['_5ftia_2eh_33',['_tia.h',['../__tia_8h.html',1,'']]],
-  ['_5ftim64_34',['_TIM64',['../vcslib_8h.html#a9c9a1d6aa087c186f8fe0130e0ac65f0',1,'vcslib.h']]],
-  ['_5ftype_5ftraits_5f_35',['_TYPE_TRAITS_',['../type__traits.html#a6f3e620ffc12213dc6135bad13769689',1,'type_traits']]],
-  ['_5fvdc_2eh_36',['_vdc.h',['../__vdc_8h.html',1,'']]],
-  ['_5fvic_2eh_37',['_vic.h',['../__vic_8h.html',1,'']]],
-  ['_5fvic2_2eh_38',['_vic2.h',['../__vic2_8h.html',1,'']]]
+  ['_5fsysremove_31',['_sysremove',['../rp6502_8h.html#a99f91a1050599cd8b09316acebfc032e',1,'rp6502.h']]],
+  ['_5fsysrename_32',['_sysrename',['../rp6502_8h.html#ad4825a561677529c89cea05bc367c8a0',1,'rp6502.h']]],
+  ['_5ft1024_33',['_T1024',['../vcslib_8h.html#a3f8985509d387d96ae95190761d1efe1',1,'vcslib.h']]],
+  ['_5ftextcolor_34',['_textcolor',['../atari_8h.html#a68c8bbdd79ee6320b7e1dcdf0b34bb83',1,'atari.h']]],
+  ['_5ftia_2eh_35',['_tia.h',['../__tia_8h.html',1,'']]],
+  ['_5ftim64_36',['_TIM64',['../vcslib_8h.html#a9c9a1d6aa087c186f8fe0130e0ac65f0',1,'vcslib.h']]],
+  ['_5ftype_5ftraits_5f_37',['_TYPE_TRAITS_',['../type__traits.html#a6f3e620ffc12213dc6135bad13769689',1,'type_traits']]],
+  ['_5fvdc_2eh_38',['_vdc.h',['../__vdc_8h.html',1,'']]],
+  ['_5fvic_2eh_39',['_vic.h',['../__vic_8h.html',1,'']]],
+  ['_5fvic2_2eh_40',['_vic2.h',['../__vic2_8h.html',1,'']]]
 ];

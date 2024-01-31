@@ -13,9 +13,5 @@ var searchData=
   ['xram_5fsprite_5fptr_2708',['xram_sprite_ptr',['../structvga__mode4__sprite__t.html#aa34b20959e601d087eaf8275aad2fd41',1,'vga_mode4_sprite_t::xram_sprite_ptr()'],['../structvga__mode4__asprite__t.html#ae716a1f0e4270589cf1ae376bef7441a',1,'vga_mode4_asprite_t::xram_sprite_ptr()']]],
   ['xram_5ftile_5fptr_2709',['xram_tile_ptr',['../structvga__mode2__config__t.html#a1a1980c1ff6ca3287ccc4abe7b7a9614',1,'vga_mode2_config_t']]],
   ['xram_5fwrite_2710',['xram_write',['../mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f',1,'mapper_xram_single.h']]],
-  ['xreg_5fria_5fkeyboard_2711',['xreg_ria_keyboard',['../rp6502_8h.html#af1434fb22ea69fe3b2927f46636a6dfe',1,'rp6502.h']]],
-  ['xreg_5fria_5fmouse_2712',['xreg_ria_mouse',['../rp6502_8h.html#a9ed6b04c45b9a41edd32e76577156ff7',1,'rp6502.h']]],
-  ['xreg_5fvga_5fcanvas_2713',['xreg_vga_canvas',['../rp6502_8h.html#a3db9cfce0243094bbbda8c9e857c5699',1,'rp6502.h']]],
-  ['xreg_5fvga_5fmode_2714',['xreg_vga_mode',['../rp6502_8h.html#a2a89bdb0924667f97e51f3cd474075e3',1,'rp6502.h']]],
-  ['xregn_2715',['xregn',['../rp6502_8h.html#abe95d0ec7ed35f7c362f212a83b213a2',1,'rp6502.h']]]
+  ['xregn_2711',['xregn',['../rp6502_8h.html#a2e230e46483dd9062996f95f50946cfe',1,'rp6502.h']]]
 ];

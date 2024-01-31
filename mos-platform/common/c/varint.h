@@ -9,12 +9,11 @@ namespace __impl {
 // An unsigned variable-length integer. Must be implemented by a specific
 // instantiation of BigInt.
 class VarInt {
-  char size;
-
-  char *bytes() { return &size + 1; };
-  const char *bytes() const { return &size + 1; };
+  char size_;
 
 public:
+  static VarInt &make(void *space, char size);
+
   VarInt() = delete;
   VarInt(const VarInt &other) = delete;
 
@@ -25,6 +24,11 @@ public:
   }
 
   VarInt &operator=(const VarInt &other);
+
+  char *bytes() { return &size_ + 1; };
+  const char *bytes() const { return &size_ + 1; };
+
+  char size() const { return size_; }
 
   template <typename T, typename = std::enable_if_t<std::is_integral_v<T>>>
   operator T() const {
@@ -38,6 +42,10 @@ public:
   bool operator<=(const VarInt &other) const;
   bool operator>(const VarInt &other) const;
   bool operator>=(const VarInt &other) const;
+
+  bool high_bit() const;
+
+  bool negative() const;
 
   // True if larger than the largest signed value.
   bool too_positive() const;
@@ -66,7 +74,7 @@ public:
   void dump() const;
 
 protected:
-  VarInt(char size) : size(size) {}
+  VarInt(char size) : size_(size) {}
 };
 
 // A variable-sized integer with compile-time constant size. Provides a way to
@@ -107,14 +115,14 @@ template <typename T> bool VarInt::add_overflow(T other) {
   const auto *r_bytes = reinterpret_cast<const char *>(&other);
   for (i = 0; i < sizeof(T); ++i)
     bytes()[i] = __builtin_addcb(bytes()[0], r_bytes[i], carry, &carry);
-  for (; i < size; ++i)
+  for (; i < size_; ++i)
     bytes()[i] = __builtin_addcb(bytes()[i], 0, carry, &carry);
   return carry;
 }
 
 template <typename T> bool VarInt::mul_overflow(T other) {
-  char space[sizeof(VarInt) + size]; // VLA
-  auto &p = *new (space) VarInt(size);
+  char space[sizeof(VarInt) + size_]; // VLA
+  auto &p = *new (space) VarInt(size_);
   p.zero();
   bool overflow = false;
   while (true) {

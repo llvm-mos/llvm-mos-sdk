@@ -17,6 +17,7 @@ merge_libraries(commodore-crt0
 
 add_platform_library(commodore-c
   abort.c
+  char-conv.c
   getchar.c
   putchar.c
   cbm_k_acptr.c

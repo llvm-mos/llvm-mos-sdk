@@ -58,7 +58,7 @@ struct __RP6502 {
 
 /* C API for the operating system. */
 
-int xregn(char device, char channel, unsigned char address, unsigned char count,
+int xregn(char device, char channel, unsigned char address, unsigned count,
           ...);
 int phi2(void);
 int codepage(void);
@@ -94,13 +94,6 @@ int close(int fd);
 long lseek(int fd, long offset, int whence);
 unsigned char _sysremove(const char *name);
 unsigned char _sysrename(const char *oldpath, const char *newpath);
-
-/* XREG location helpers */
-
-#define xreg_ria_keyboard(...) xreg(0, 0, 0, __VA_ARGS__)
-#define xreg_ria_mouse(...) xreg(0, 0, 1, __VA_ARGS__)
-#define xreg_vga_canvas(...) xreg(1, 0, 0, __VA_ARGS__)
-#define xreg_vga_mode(...) xreg(1, 0, 1, __VA_ARGS__)
 
 /* XRAM structure helpers */
 

@@ -56,13 +56,13 @@ unsigned long long strtoull(const char *__restrict__ nptr,
                             char **__restrict endptr, int base);
 
 // Non-standard strtox functions for smaller types.
-signed char strtosc(const char *__restrict__ nptr, char **__restrict endptr,
-                    int base);
-unsigned char strtouc(const char *__restrict__ nptr, char **__restrict endptr,
-                      int base);
-int strtoi(const char *__restrict__ nptr, char **__restrict endptr, int base);
-unsigned int strtoui(const char *__restrict__ nptr, char **__restrict endptr,
+signed char _strtosc(const char *__restrict__ nptr, char **__restrict endptr,
                      int base);
+unsigned char _strtouc(const char *__restrict__ nptr, char **__restrict endptr,
+                       int base);
+int _strtoi(const char *__restrict__ nptr, char **__restrict endptr, int base);
+unsigned int _strtoui(const char *__restrict__ nptr, char **__restrict endptr,
+                      int base);
 
 int rand(void);
 void srand(unsigned seed);

@@ -359,8 +359,8 @@ strtoull(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
   return (sign == '+' || is_error) ? rc : -rc;
 }
 
-__attribute__((weak)) signed char strtosc(const char *__restrict__ nptr,
-                                          char **__restrict endptr, int base) {
+__attribute__((weak)) signed char _strtosc(const char *__restrict__ nptr,
+                                           char **__restrict endptr, int base) {
   if (base && (base < 2 || base > 36))
     return 0;
 
@@ -395,7 +395,7 @@ __attribute__((weak)) signed char strtosc(const char *__restrict__ nptr,
 }
 
 __attribute__((weak)) unsigned char
-strtouc(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
+_strtouc(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
   if (base && (base < 2 || base > 36))
     return 0;
 
@@ -420,8 +420,8 @@ strtouc(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
   return (sign == '+' || is_error) ? rc : -rc;
 }
 
-__attribute__((weak)) int strtoi(const char *__restrict__ nptr,
-                                 char **__restrict endptr, int base) {
+__attribute__((weak)) int _strtoi(const char *__restrict__ nptr,
+                                  char **__restrict endptr, int base) {
   if (base && (base < 2 || base > 36))
     return 0;
 
@@ -456,7 +456,7 @@ __attribute__((weak)) int strtoi(const char *__restrict__ nptr,
 }
 
 __attribute__((weak)) unsigned int
-strtoui(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
+_strtoui(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
   if (base && (base < 2 || base > 36))
     return 0;
 

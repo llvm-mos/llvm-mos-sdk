@@ -29,7 +29,7 @@ add_platform_library(common-c
   atoi.cc
   bsearch.c
   div.cc
-  stdlib.c
+  stdlib.cc
   malloc.cc
   malloc.s
   new.cc
@@ -49,6 +49,9 @@ add_platform_library(common-c
   cxa-atexit.cc
   cxa-abi.cc
   private-typeinfo.cc
+
+  # Internal libraries
+  varint.cc
 )
 # Prevent the implementation of libcalls from being reduced to a call of those libcalls.
 set_property(SOURCE mem.c PROPERTY COMPILE_OPTIONS -fno-builtin-memset)

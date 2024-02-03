@@ -11,6 +11,7 @@
 #include <limits>
 #include <signal.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #include "varint.h"
 
@@ -130,8 +131,8 @@ const char *strtox_prelim(const char *p, char *sign, char *base) {
   return p;
 }
 
-bool strtox_main(const char **p, char base, const VarInt &error,
-                 const VarInt &limval, char limdigit, VarInt &rc) {
+bool strtox_main(const char **p, char base, bool is_signed, bool negative,
+                 VarInt &rc) {
   rc.zero();
 
   signed char digit = strtox_parse_digit(**p, base);
@@ -141,85 +142,64 @@ bool strtox_main(const char **p, char base, const VarInt &error,
   }
 
   do {
-    if (rc < limval || (rc == limval && digit <= limdigit)) {
-      rc *= base;
-      rc += digit;
-      ++(*p);
-    } else {
-      errno = ERANGE;
-
-      while (strtox_parse_digit(**p, base) != -1)
-        ++(*p);
-
-      rc = error;
-      return true;
+    if (rc.mul_overflow(base))
+      goto overflow;
+    if (rc.add_overflow(digit))
+      goto overflow;
+    if (is_signed) {
+      if (negative) {
+        if (rc.too_negative())
+          goto overflow;
+      } else {
+        if (rc.too_positive())
+          goto overflow;
+      }
     }
+    ++(*p);
   } while ((digit = strtox_parse_digit(**p, base)) >= 0);
 
   return false;
+
+overflow:
+  errno = ERANGE;
+
+  while (strtox_parse_digit(**p, base) != -1)
+    ++(*p);
+
+  if (is_signed) {
+    if (negative)
+      rc.negative_limit();
+    else
+      rc.positive_limit();
+  } else {
+    rc.unsigned_limit();
+  }
+  return true;
 }
 
-template <typename T,
-          typename std::enable_if_t<std::is_signed_v<T>, bool> = true>
-T strto(const char *__restrict__ nptr, char **__restrict endptr, int base) {
-  if (base && (base < 2 || base > 36))
-    return 0;
-
-  BigInt<sizeof(T)> rc;
-  char sign = '+';
-  char cbase = base;
-  const char *p = strtox_prelim(nptr, &sign, &cbase);
-  if (!cbase)
-    return 0;
-
-  BigInt<sizeof(T)> error;
-  BigInt<sizeof(T)> limval;
-  char limdigit;
-  if (sign == '+') {
-    error = std::numeric_limits<T>::max();
-    limval = static_cast<T>(std::numeric_limits<T>::max() / cbase);
-    limdigit = std::numeric_limits<T>::max() % cbase;
-  } else {
-    error = std::numeric_limits<T>::min();
-    limval = static_cast<T>(std::numeric_limits<T>::min() / -cbase);
-    limdigit = -(std::numeric_limits<T>::min() % cbase);
+void strtox(const char *__restrict__ nptr, char **__restrict endptr, int base,
+            bool is_signed, VarInt &rc) {
+  if (base && (base < 2 || base > 36)) {
+    rc.zero();
+    return;
   }
 
-  bool is_error = strtox_main(&p, cbase, error, limval, limdigit, rc);
-
-  if (endptr != NULL)
-    *endptr = (p != NULL) ? (char *)p : (char *)nptr;
-
-  if (sign != '+' && !is_error)
-    rc.negate();
-  return rc;
-}
-
-template <typename T,
-          typename std::enable_if_t<std::is_unsigned_v<T>, bool> = true>
-T strto(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
-  if (base && (base < 2 || base > 36))
-    return 0;
-
-  BigInt<sizeof(T)> rc;
   char sign = '+';
   char cbase = base;
   const char *p = strtox_prelim(nptr, &sign, &cbase);
-  if (!cbase)
-    return 0;
+  if (!cbase) {
+    rc.zero();
+    return;
+  }
 
-  BigInt<sizeof(T)> error = std::numeric_limits<T>::max();
-  BigInt<sizeof(T)> limval =
-      static_cast<T>(std::numeric_limits<T>::max() / cbase);
-  char limdigit = static_cast<T>(std::numeric_limits<T>::max() % cbase);
-  bool is_error = strtox_main(&p, cbase, error, limval, limdigit, rc);
+  bool is_error = strtox_main(&p, cbase, is_signed, sign == '-', rc);
 
   if (endptr != NULL)
     *endptr = (p != NULL) ? (char *)p : (char *)nptr;
 
-  if (sign != '+' && !is_error)
+  if (sign == '-' && !is_error)
     rc.negate();
-  return rc;
+  return;
 }
 
 } // namespace
@@ -228,42 +208,58 @@ extern "C" {
 
 __attribute__((weak)) long strtol(const char *__restrict__ nptr,
                                   char **__restrict endptr, int base) {
-  return strto<long>(nptr, endptr, base);
+  BigInt<sizeof(long)> rc;
+  strtox(nptr, endptr, base, /*is_signed=*/true, rc);
+  return rc;
 }
 
 __attribute__((weak)) long long strtoll(const char *__restrict__ nptr,
                                         char **__restrict__ endptr, int base) {
-  return strto<long long>(nptr, endptr, base);
+  BigInt<sizeof(long long)> rc;
+  strtox(nptr, endptr, base, /*is_signed=*/true, rc);
+  return rc;
 }
 
 __attribute__((weak)) unsigned long
 strtoul(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
-  return strto<unsigned long>(nptr, endptr, base);
+  BigInt<sizeof(unsigned long)> rc;
+  strtox(nptr, endptr, base, /*is_signed=*/false, rc);
+  return rc;
 }
 
 __attribute__((weak)) unsigned long long
 strtoull(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
-  return strto<unsigned long long>(nptr, endptr, base);
+  BigInt<sizeof(unsigned long long)> rc;
+  strtox(nptr, endptr, base, /*is_signed=*/false, rc);
+  return rc;
 }
 
 __attribute__((weak)) signed char _strtosc(const char *__restrict__ nptr,
                                            char **__restrict endptr, int base) {
-  return strto<signed char>(nptr, endptr, base);
+  BigInt<sizeof(signed char)> rc;
+  strtox(nptr, endptr, base, /*is_signed=*/true, rc);
+  return rc;
 }
 
 __attribute__((weak)) unsigned char
 _strtouc(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
-  return strto<unsigned char>(nptr, endptr, base);
+  BigInt<sizeof(unsigned char)> rc;
+  strtox(nptr, endptr, base, /*is_signed=*/false, rc);
+  return rc;
 }
 
 __attribute__((weak)) int _strtoi(const char *__restrict__ nptr,
                                   char **__restrict endptr, int base) {
-  return strto<int>(nptr, endptr, base);
+  BigInt<sizeof(int)> rc;
+  strtox(nptr, endptr, base, /*is_signed=*/true, rc);
+  return rc;
 }
 
 __attribute__((weak)) unsigned int
 _strtoui(const char *__restrict__ nptr, char **__restrict__ endptr, int base) {
-  return strto<unsigned int>(nptr, endptr, base);
+  BigInt<sizeof(unsigned int)> rc;
+  strtox(nptr, endptr, base, /*is_signed=*/false, rc);
+  return rc;
 }
 
 } // extern "C"

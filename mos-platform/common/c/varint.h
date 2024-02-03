@@ -39,14 +39,29 @@ public:
   bool operator>(const VarInt &other) const;
   bool operator>=(const VarInt &other) const;
 
+  // True if larger than the largest signed value.
+  bool too_positive() const;
+
+  // True if larger than the absolute value of the smallest signed value.
+  bool too_negative() const;
+
   VarInt &operator+=(const VarInt &other);
+  bool add_overflow(const VarInt &other);
 
   template <typename T> VarInt &operator+=(T other);
   template <typename T> VarInt &operator*=(T other);
 
+  template <typename T> bool add_overflow(T other);
+  template <typename T> bool mul_overflow(T other);
+  bool shl_overflow();
+
   void negate();
-  void zero();
   void shl();
+
+  void zero();
+  void positive_limit();
+  void negative_limit();
+  void unsigned_limit();
 
   void dump() const;
 
@@ -77,6 +92,16 @@ public:
 };
 
 template <typename T> VarInt &VarInt::operator+=(T other) {
+  add_overflow(other);
+  return *this;
+}
+
+template <typename T> VarInt &VarInt::operator*=(T other) {
+  mul_overflow(other);
+  return *this;
+}
+
+template <typename T> bool VarInt::add_overflow(T other) {
   unsigned char carry = 0;
   char i;
   const auto *r_bytes = reinterpret_cast<const char *>(&other);
@@ -84,26 +109,26 @@ template <typename T> VarInt &VarInt::operator+=(T other) {
     bytes()[i] = __builtin_addcb(bytes()[0], r_bytes[i], carry, &carry);
   for (; i < size; ++i)
     bytes()[i] = __builtin_addcb(bytes()[i], 0, carry, &carry);
-  return *this;
+  return carry;
 }
 
-template <typename T> VarInt &VarInt::operator*=(T other) {
+template <typename T> bool VarInt::mul_overflow(T other) {
   char space[sizeof(VarInt) + size]; // VLA
   auto &p = *new (space) VarInt(size);
   p.zero();
+  bool overflow = false;
   while (true) {
     if (other & 1) {
       --other;
-      p += *this;
+      overflow |= p.add_overflow(*this);
     }
     if (!other)
       break;
     other >>= 1;
-    shl();
+    overflow |= shl_overflow();
   }
-
   *this = p;
-  return *this;
+  return overflow;
 }
 
 } // namespace __impl

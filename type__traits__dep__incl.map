@@ -1,5 +1,6 @@
 <map id="common/include/type_traits" name="common/include/type_traits">
-<area shape="rect" id="node1" title=" " alt="" coords="9,5,171,47"/>
-<area shape="rect" id="node2" href="$soa_8h.html" title=" " alt="" coords="5,169,175,196"/>
-<area shape="rect" id="node3" href="$utility.html" title=" " alt="" coords="67,95,239,121"/>
+<area shape="rect" id="node1" title=" " alt="" coords="105,5,268,47"/>
+<area shape="rect" id="node2" href="$varint_8h.html" title=" " alt="" coords="5,95,149,121"/>
+<area shape="rect" id="node3" href="$soa_8h.html" title=" " alt="" coords="163,169,333,196"/>
+<area shape="rect" id="node4" href="$utility.html" title=" " alt="" coords="225,95,397,121"/>
 </map>

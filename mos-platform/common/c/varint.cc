@@ -95,7 +95,7 @@ void VarInt::negative_limit() {
 }
 
 void VarInt::unsigned_limit() {
-  for (char i = 0; i < size++; ++i)
+  for (char i = 0; i < size; ++i)
     bytes()[i] = 0xff;
 }
 

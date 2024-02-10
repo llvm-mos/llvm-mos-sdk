@@ -13,6 +13,10 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - DOS ".XEX" file
   - 8-KiB or 16-KiB standard cartridge
   - XEGS bank-switched cartridge from 32 KiB to 512 KiB (8 KiB banks)
+  - MegaCart (16 KiB fully-banked) cartridge from [16 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L60)
+    to [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L65)
+	- Compatible with SIC! [128 KiB](https://github.com/atari800/atari800/blob/master/DOC/cart.txt#L88) to
+	  [512 KiB](https://github.com/atari800/atari800/blob/master/DOC/cart.txt#L90)
 - [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
 - Commodore 64

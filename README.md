@@ -9,6 +9,8 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - Atari 2600
   - 4K cartridge
   - [TigerVision 3E (2-KiB fixed, 2-KiB banked ROM or RAM)](https://www.taswegian.com/WoodgrainWizard/tiki-index.php?page=3E)
+- [Atari 5200](https://en.wikipedia.org/wiki/Atari_5200) Super Cart from [32 KiB](https://github.com/atari800/atari800/blob/master/DOC/cart.txt#L105)
+  to [512 KiB](https://github.com/atari800/atari800/blob/master/DOC/cart.txt#L108)
 - Atari 8-bit
   - DOS ".XEX" file
   - 8-KiB or 16-KiB standard cartridge

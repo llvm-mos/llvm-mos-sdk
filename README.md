@@ -194,61 +194,11 @@ int main(void) {
 
 $ mos-c64-clang -Os -o hello.prg <install_dir>/examples/hello-putchar.c
 
-$ ls -l hello.prg
-... 77 ... hello.prg
-
-$ hexdump -C hello.prg
-00000000  01 08 0b 08 5d 1e 9e 32  30 36 31 00 00 00 20 1e  |....]..2061... .|
-00000010  08 4c 14 08 60 8d 4c 08  20 13 08 ad 4c 08 60 a2  |.L..`.L. ...L.`.|
-00000020  01 a9 48 c9 0a f0 10 20  d2 ff bd 3b 08 e8 e0 11  |..H.... ...;....|
-00000030  d0 f1 a2 00 a9 00 60 a9  0d 4c 26 08 48 45 4c 4c  |......`..L&.HELL|
-00000040  4f 2c 20 50 55 54 43 48  41 52 21 0a 00           |O, PUTCHAR!..|
-0000004d
+$ llvm-objdump -d hello.elf
+...
 
 $ mos-c64-clang -Os -o hello.s -Wl,--lto-emit-asm <install_dir>/examples/hello-putchar.c
-
-$ cat hello.s
-        .text
-        .file   "ld-temp.o"
-        .section        .text.main,"ax",@progbits
-        .globl  main
-        .type   main,@function
-main:
-        ldx     #1
-        lda     #72
-.LBB0_1:
-        cmp     #10
-        beq     .LBB0_4
-.LBB0_2:
-        ;APP
-        jsr     __CHROUT
-        ;NO_APP
-        lda     .L.str,x
-        inx
-        cpx     #17
-        bne     .LBB0_1
-        ldx     #0
-        lda     #0
-        rts
-.LBB0_4:
-        lda     #13
-        jmp     .LBB0_2
-.Lfunc_end0:
-        .size   main, .Lfunc_end0-main
-
-...Superfluous ASM...
-
-        .type   .L.str,@object
-        .section        .rodata.str1.1,"aMS",@progbits,1
-.L.str:
-        .asciz  "HELLO, PUTCHAR!\n"
-        .size   .L.str, 17
-
 ```
-
-Note that the generated ASM output will contain more than actually ends up in
-the binary.  This is because this assembly is emitted before a link-time garbage
-collection pass discards functions that aren't actually referenced.
 
 ### Developing for 6502 with CMake
 

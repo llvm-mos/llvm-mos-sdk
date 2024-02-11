@@ -1,10 +1,16 @@
-#include <stdlib.h>
+#include <math.h>
+
+template <typename T> static inline bool _is_nan(const T x) { return x != x; }
 
 template <typename T> static inline T _fmax(const T x, const T y) {
+  if (_is_nan(x)) return y;
+  if (_is_nan(y)) return x;
   return x > y ? x : y;
 }
 
 template <typename T> static inline T _fmin(const T x, const T y) {
+  if (_is_nan(x)) return y;
+  if (_is_nan(y)) return x;
   return x < y ? x : y;
 }
 

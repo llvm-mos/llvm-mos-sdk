@@ -50,15 +50,8 @@ The LLVM-MOS compiler toolchain and platform libraries.
 ## Notable features
 
 - Broad C99 and C++11 freestanding standards compatibility
-  - Interrupt handling
-  - C++ templates
-  - C++ virtual functions
-  - C++ new/delete
-  - C++ Run-Time Type Information (dynamic_cast,  typeid)
-  - C++ static constructors/destructors (run before and after main)
-  - C++ "magic" function local static constructors/destructors
 - The high and low-level optimizations expected of a young-ish LLVM backend
-  - Sophisticated register allocation over A, X, Y, and a field of 16 2-byte zero-page (imaginary) registers
+  - Fairly good register allocation over A, X, Y, and a field of 16 2-byte zero-page (imaginary) registers
   - The imaginary registers can be placed anywhere and need not be contiguous.
   - The calling convention passes through registers whenever possible.
   - Loop optimizations to select 6502 addressing modes
@@ -66,6 +59,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
     - Automatically identifies non-reentrant functions and allocates their frames as static globals
     - Programs without recursion or complex function pointers may not need a soft stack at all.
     - No manual annotations required
+  - Whole program zero page allocation
   - Link time inlining and optimization across the whole program
     - Includes SDK libraries. Library calls can be often optimized away completely!
 - Excellent compiler usability

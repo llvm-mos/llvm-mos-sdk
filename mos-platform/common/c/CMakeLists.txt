@@ -6,6 +6,9 @@ add_platform_library(common-c
   # errno.h
   errno.c
 
+  # math.h
+  math.cc
+
   # setjmp.h
   setjmp.S
 

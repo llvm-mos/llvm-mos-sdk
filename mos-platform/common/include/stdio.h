@@ -91,11 +91,41 @@ int putchar(int c);
 int puts(const char *s);
 
 #define EOF (-1)
-// To be defined by platform.
+
+// Begin platform-specific backend.
+
 int getchar(void);
 
-// To be defined by platform.
+// Emit a sequence of characters in the target's character set that
+// correspond to the given ASCII character.
+__attribute__((always_inline)) void __char_conv(char c, void (*emit)(char c));
+
+// Put a character already in the target's character set out to the target's
+// equivalent of file descriptor 0.
 void __putchar(char c);
+
+// End platform-specific backend.
+
+// Originally from the Public Domain C Library (PDCLib).
+
+struct _FILE;
+typedef struct _FILE FILE;
+
+extern FILE *stdin;
+extern FILE *stdout;
+extern FILE *stderr;
+
+/**
+ * Write the value c (cast to unsigned char) to the given stream.
+ * \return c if successful, EOF otherwise.
+ */
+int fputc(int c, FILE *stream);
+
+/**
+ * Write the string s (not including the terminating \0) to the given stream.
+ * \return A value >=0 if successful, EOF otherwise.
+ */
+int fputs(const char *__restrict__ s, FILE *__restrict__ stream);
 
 #ifdef __cplusplus
 }

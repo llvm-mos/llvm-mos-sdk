@@ -18,7 +18,7 @@
 
 void putstr(const char *s) {
   for (; *s; ++s)
-    __putchar(*s);
+    putchar(*s);
 }
 
 int main(void) {

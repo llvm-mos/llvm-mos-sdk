@@ -1,8 +1,6 @@
-#include <chrout.h>
 #include <stdio.h>
 
-void __putchar(char c) {
-  if (__builtin_expect(c == '\n', 0))
-    c = '\r';
-  __chrout(c);
-}
+#define __CBM__
+#include <cbm.h>
+
+void __putchar(char c) { cbm_k_chrout(c); }

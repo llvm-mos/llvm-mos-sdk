@@ -2,7 +2,7 @@
 
 #include "sim-io.h"
 
-void abort(void) {
+void __sigabrt(void) {
   // Writing to this IO register causes the simulator to abort.
   sim_reg_iface->abort = 1;
 
@@ -12,7 +12,7 @@ void abort(void) {
   __builtin_unreachable();
 }
 
-void _exit(int status) {
+void _Exit(int status) {
   // Writing to this IO register causes the simulator to exit with the given
   // status.
   sim_reg_iface->exit = (uint8_t)status;
@@ -22,7 +22,6 @@ void _exit(int status) {
 
   __builtin_unreachable();
 }
-__attribute__((alias("_exit"))) void _Exit(int status);
 
 unsigned long clock() {
   // reading first byte latches whole 32-bit value

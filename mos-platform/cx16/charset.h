@@ -31,7 +31,7 @@ template <size_t N> struct UnshiftedString {
       Str[I] = TranslateUnicode(Src[I]);
     }
   }
-  
+
   constexpr UnshiftedString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -338,7 +338,7 @@ template <size_t N> struct ShiftedString {
       Str[I] = TranslateUnicode(Src[I]);
     }
   }
-  
+
   constexpr ShiftedString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -641,7 +641,7 @@ template <size_t N> struct UnshiftedVideoString {
       Str[I] = TranslateUnicode(Src[I]);
     }
   }
-  
+
   constexpr UnshiftedVideoString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -651,6 +651,10 @@ template <size_t N> struct UnshiftedVideoString {
     switch (C) {
     default:
       throw "Unsupported";
+
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
 
       // Name: Map from Commodore 64/128 (video) primary character set to
       // Unicode
@@ -993,7 +997,7 @@ template <size_t N> struct UnshiftedReverseVideoString {
       Str[I] = TranslateUnicode(Src[I]);
     }
   }
-  
+
   constexpr UnshiftedReverseVideoString(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);
@@ -1003,6 +1007,10 @@ template <size_t N> struct UnshiftedReverseVideoString {
     switch (C) {
     default:
       throw "Unsupported";
+
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
 
       // Name: Map from Commodore 64/128 (video) primary character set to
       // Unicode
@@ -1356,6 +1364,10 @@ template <size_t N> struct ShiftedVideoString {
     default:
       throw "Unsupported";
 
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
+
       // Name: Map from Commodore 64/128 (video) alternate character set to
       // Unicode
 
@@ -1702,6 +1714,10 @@ template <size_t N> struct ShiftedReverseVideoString {
     default:
       throw "Unsupported";
 
+    // Preserve NUL
+    case 0x0000:
+      return 0x00;
+
       // Name: Map from Commodore 64/128 (video) alternate character set to
       // Unicode
 
@@ -2037,7 +2053,7 @@ template <size_t N> struct ISO885915String {
       Str[I] = TranslateUnicode(Src[I]);
     }
   }
-  
+
   constexpr ISO885915String(char32_t const (&Src)[N]) {
     for (size_t I = 0; I < N; ++I)
       Str[I] = TranslateUnicode(Src[I]);

@@ -6,7 +6,7 @@ endif()
 
 include_directories(BEFORE SYSTEM .)
 
-install(FILES assert.h stdlib.h TYPE INCLUDE)
+install(FILES stdlib.h TYPE INCLUDE)
 
 add_platform_library(sim-crt0)
 merge_libraries(sim-crt0
@@ -16,7 +16,6 @@ merge_libraries(sim-crt0
 )
 
 add_platform_library(sim-c
-  assert.c
   putchar.c
   stdlib.c
   sim-io.c

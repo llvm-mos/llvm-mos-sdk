@@ -3,9 +3,6 @@
 #include <peekpoke.h>
 #include <stdlib.h>
 
-MAPPER_CHR_ROM_KB(0);
-MAPPER_CHR_RAM_KB(16);
-
 void poke_ppu(unsigned addr, char val) {
   PPU.vram.address = addr >> 8;
   PPU.vram.address = (char)addr;

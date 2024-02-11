@@ -1,3 +1,5 @@
+#define __CBM__
+#include <cbm.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -6,10 +8,6 @@
 static char input_buffer[80];
 static uint8_t buf_begin = 0;
 static uint8_t buf_end = 0;
-
-// Defined in kernal.S.  Calling convention of Kernal CHRIN matches
-// C calling convention.
-char __CHRIN() __attribute__((leaf));
 
 // Default input from the keyboard device has 80 char edit buffer.
 // When you call CHRIN, it waits for the user to input something and does not
@@ -32,11 +30,11 @@ static void __fill_buffer() {
   buf_end = 0;
 
   for (;;) {
-    const char currentchar = __CHRIN();
+    const char currentchar = cbm_k_chrin();
 
     if (currentchar == '\r') {
       /* echo carriage return */
-      __putchar('\n');
+      cbm_k_chrout('\n');
       input_buffer[buf_end++] = '\n';
       break;
     }

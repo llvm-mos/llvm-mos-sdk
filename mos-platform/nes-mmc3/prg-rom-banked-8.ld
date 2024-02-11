@@ -60,6 +60,8 @@ PROVIDE(__prg_rom_58 = 0x8000);
 PROVIDE(__prg_rom_59 = 0x8000);
 PROVIDE(__prg_rom_60 = 0x8000);
 
+__prg_rom_total_fixed_size = 0x6000;
+
 INCLUDE _prg-rom-banked.ld
 
 /* This bank must be switched to on reset to establish a 24KiB fixed region. */
@@ -70,7 +72,10 @@ INPUT(reset-banked-8.o)
 __prg_rom_fixed_lma = 0xa000;
 __prg_rom_fixed_offset = __prg_rom_size * 1024 - 0x6000;
 
-MEMORY { prg_rom_fixed : ORIGIN = __prg_rom_fixed_lma, LENGTH = 0x6000 }
+MEMORY {
+  prg_rom_fixed : ORIGIN = __prg_rom_fixed_lma,
+                  LENGTH = __prg_rom_total_fixed_size
+}
 REGION_ALIAS("c_readonly", prg_rom_fixed)
 
 INCLUDE dpcm.ld

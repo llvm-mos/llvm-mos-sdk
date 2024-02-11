@@ -80,9 +80,9 @@
 #endif
 
 // define the largest float suitable to print with %f
-// default: 1e9
+// default: 1e18
 #ifndef PRINTF_MAX_FLOAT
-#define PRINTF_MAX_FLOAT 1e9
+#define PRINTF_MAX_FLOAT 1e18
 #endif
 
 // support for the long long types (%llu or %p)
@@ -96,6 +96,12 @@
 // default: activated
 #ifndef PRINTF_DISABLE_SUPPORT_PTRDIFF_T
 #define PRINTF_SUPPORT_PTRDIFF_T
+#endif
+
+#if PRINTF_WEAK
+#define PRINTF_ATTR __attribute__((weak))
+#else
+#define PRINTF_ATTR
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -153,7 +159,7 @@ static inline void _out_char(char character, void *buffer, size_t idx,
   (void)idx;
   (void)maxlen;
   if (character) {
-    __putchar(character);
+    putchar(character);
   }
 }
 
@@ -414,7 +420,7 @@ static size_t _ftoa(out_fct_type out, char *buffer, size_t idx, size_t maxlen,
 
   // test for negative
   bool negative = false;
-  if (value < 0) {
+  if (__builtin_signbit(value)) {
     negative = true;
     value = 0 - value;
   }
@@ -429,7 +435,7 @@ static size_t _ftoa(out_fct_type out, char *buffer, size_t idx, size_t maxlen,
     prec--;
   }
 
-  int whole = (int)value;
+  long long whole = (long long)value;
   double tmp = (value - whole) * pow10[prec];
   unsigned long frac = (unsigned long)tmp;
   diff = tmp - frac;
@@ -746,6 +752,10 @@ static int _vsnprintf(out_fct_type out, char *buffer, const size_t maxlen,
       flags |= (sizeof(size_t) == sizeof(long) ? FLAGS_LONG : FLAGS_LONG_LONG);
       format++;
       break;
+    case 'L':
+      // Long double is double.
+      format++;
+      break;
     default:
       break;
     }
@@ -938,7 +948,7 @@ static int _vsnprintf(out_fct_type out, char *buffer, const size_t maxlen,
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int printf(const char *format, ...) {
+PRINTF_ATTR int printf(const char *format, ...) {
   va_list va;
   va_start(va, format);
   const int ret = vprintf(format, va);
@@ -946,7 +956,7 @@ int printf(const char *format, ...) {
   return ret;
 }
 
-int sprintf(char *buffer, const char *format, ...) {
+PRINTF_ATTR int sprintf(char *buffer, const char *format, ...) {
   va_list va;
   va_start(va, format);
   const int ret = vsnprintf(buffer, (size_t)-1, format, va);
@@ -954,7 +964,7 @@ int sprintf(char *buffer, const char *format, ...) {
   return ret;
 }
 
-int snprintf(char *buffer, size_t count, const char *format, ...) {
+PRINTF_ATTR int snprintf(char *buffer, size_t count, const char *format, ...) {
   va_list va;
   va_start(va, format);
   const int ret = vsnprintf(buffer, count, format, va);
@@ -962,11 +972,11 @@ int snprintf(char *buffer, size_t count, const char *format, ...) {
   return ret;
 }
 
-int vprintf(const char *format, va_list va) {
+PRINTF_ATTR int vprintf(const char *format, va_list va) {
   char buffer[1];
   return _vsnprintf(_out_char, buffer, (size_t)-1, format, va);
 }
 
-int vsnprintf(char *buffer, size_t count, const char *format, va_list va) {
+PRINTF_ATTR int vsnprintf(char *buffer, size_t count, const char *format, va_list va) {
   return _vsnprintf(_out_buffer, buffer, count, format, va);
 }

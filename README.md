@@ -8,10 +8,19 @@ The LLVM-MOS compiler toolchain and platform libraries.
 
 - Atari 2600
   - 4K cartridge
-  - TigerVision 3E (2-KiB fixed, 2-KiB banked ROM or RAM)
+  - [TigerVision 3E (2-KiB fixed, 2-KiB banked ROM or RAM)](https://www.taswegian.com/WoodgrainWizard/tiki-index.php?page=3E)
+- [Atari 5200](https://en.wikipedia.org/wiki/Atari_5200) Super Cart from [32 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L105)
+  to [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L108)
 - Atari 8-bit
-  - XEX file
+  - DOS ".XEX" file
   - 8-KiB or 16-KiB standard cartridge
+  - XEGS (lower 8 KiB bank-switched) cartridge from [32 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L46) to
+    [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L58)
+	- Compatible with [S/XEGS (switchable XEGS)](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L67)
+  - MegaCart (16 KiB fully-banked) cartridge from [16 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L60)
+    to [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L65)
+	- Compatible with SIC! [128 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L88) to
+	  [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L90)
 - [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
 - Commodore 64
@@ -22,15 +31,16 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - [Dodo 6502 Game System](https://github.com/peternoyes/dodo)
 - [MEGA65](https://mega65.org/)
 - NES
-  - Action 53
-  - CNROM
-  - GTROM
-  - NROM
-  - UNROM
-  - UNROM-512
-  - MMC1
-  - MMC3
+  - [Action 53](https://www.nesdev.org/wiki/Action_53)
+  - [CNROM](https://www.nesdev.org/wiki/CNROM)
+  - [GTROM](https://www.nesdev.org/wiki/GTROM)
+  - [NROM](https://www.nesdev.org/wiki/NROM)
+  - [UNROM](https://www.nesdev.org/wiki/UxROM)
+  - [UNROM-512](https://www.nesdev.org/wiki/UNROM_512)
+  - [MMC1](https://www.nesdev.org/wiki/MMC1)
+  - [MMC3](https://www.nesdev.org/wiki/MMC3)
 - Ohio Scientific Challenger 1P
+- [Picocomputer 6502](https://picocomputer.github.io) (RP6502)
 - PC Engine
   - PC Engine CD
 - [RPC/8e](http://www.eloraam.com/blog/2012/04/22/rp-control-internals/) (RedPower 2)
@@ -78,7 +88,6 @@ The LLVM-MOS compiler toolchain and platform libraries.
 ## Notably missing features
 
 - A hosted C with all the standard library bells and whistles.
-- Float/double
 - C++ Exceptions
 
 
@@ -140,35 +149,37 @@ need to prefix `clang` (or `clang++`) with a specific MOS platform provided by
 the SDK. This will ensure clang loads the correct configuration to generate
 executables and libraries for that target.
 
-| Platform                         | Command                   |
-| -------------------------------- | ------------------------- |
-| Atari 2600 (4K)                  | `mos-atari2600-4k-clang`  |
-| Atari 2600 (TigerVision 3E)      | `mos-atari2600-3e-clang`  |
-| Atari 8-bit (.XEX)               | `mos-atari8-clang`        |
-| Atari 8-bit (Standard cartridge) | `mos-atari8-stdcart`      |
-| Atari 8-bit (XEGS cartridge)     | `mos-atari8-xegs`         |
-| Ben Eater's 6502 Breadboard Kit  | `mos-eater-clang`         |
-| Commander X16                    | `mos-cx16-clang`          |
-| Commodore 64                     | `mos-c64-clang`           |
-| Commodore 128                    | `mos-c128-clang`          |
-| Commodore PET                    | `mos-pet-clang`           |
-| Commodore VIC-20                 | `mos-vic20-clang`         |
-| CP/M-65                          | `mos-cpm65-clang`         |
-| Dodo 6502 Game System            | `mos-dodo-clang`          |
-| MEGA65                           | `mos-mega65-clang`        |
-| NES (Action53 mapper)            | `mos-nes-action53-clang`  |
-| NES (CNROM mapper)               | `mos-nes-cnrom-clang`     |
-| NES (GTROM mapper)               | `mos-nes-gtrom-clang`     |
-| NES (MMC1 mapper)                | `mos-nes-mmc1-clang`      |
-| NES (MMC3 mapper)                | `mos-nes-mmc3-clang`      |
-| NES (NROM mapper)                | `mos-nes-nrom-clang`      |
-| NES (UNROM mapper)               | `mos-nes-unrom-clang`     |
-| NES (UNROM-512 mapper)           | `mos-nes-unrom-512-clang` |
-| Ohio Scientific Challenger 1P    | `mos-osi-c1p-clang`       |
-| PC Engine                        | `mos-pce-clang`           |
-| PC Engine CD                     | `mos-pce-cd-clang`        |
-| RPC/8e (RedPower 2)              | `mos-rpc8e-clang`         |
-| 6502 simulator                   | `mos-sim-clang`           |
+| Platform                        | Variant            | Command                    |
+|---------------------------------|--------------------|----------------------------|
+| Atari 2600                      | 4K                 | `mos-atari2600-4k-clang`   |
+| Atari 2600                      | TigerVision 3E     | `mos-atari2600-3e-clang`   |
+| Atari 8-bit                     | DOS                | `mos-atari8-dos-clang`     |
+| Atari 8-bit                     | Standard cartridge | `mos-atari8-stdcart-clang` |
+| Atari 8-bit                     | XEGS cartridge     | `mos-atari8-xegs-clang`    |
+| Ben Eater's 6502 Breadboard Kit | -                  | `mos-eater-clang`          |
+| Commander X16                   | -                  | `mos-cx16-clang`           |
+| Commodore                       | 64                 | `mos-c64-clang`            |
+| Commodore                       | 128                | `mos-c128-clang`           |
+| Commodore                       | PET                | `mos-pet-clang`            |
+| Commodore                       | VIC-20             | `mos-vic20-clang`          |
+| CP/M-65                         | -                  | `mos-cpm65-clang`          |
+| Dodo 6502 Game System           | -                  | `mos-dodo-clang`           |
+| MEGA65                          | -                  | `mos-mega65-clang`         |
+| NES                             | Action53 mapper    | `mos-nes-action53-clang`   |
+| NES                             | CNROM mapper       | `mos-nes-cnrom-clang`      |
+| NES                             | GTROM mapper       | `mos-nes-gtrom-clang`      |
+| NES                             | MMC1 mapper        | `mos-nes-mmc1-clang`       |
+| NES                             | MMC3 mapper        | `mos-nes-mmc3-clang`       |
+| NES                             | NROM mapper        | `mos-nes-nrom-clang`       |
+| NES                             | UNROM mapper       | `mos-nes-unrom-clang`      |
+| NES                             | UNROM-512 mapper   | `mos-nes-unrom-512-clang`  |
+| Ohio Scientific Challenger 1P   | -                  | `mos-osi-c1p-clang`        |
+| Picocomputer 6502               | -                  | `mos-rp6502-clang`         |
+| PC Engine                       | Standard           | `mos-pce-clang`            |
+| PC Engine                       | CD                 | `mos-pce-cd-clang`         |
+| RPC/8e (RedPower 2)             | -                  | `mos-rpc8e-clang`          |
+| 6502 simulator                  | -                  | `mos-sim-clang`            |
+
 
 ```console
 $ cat <install_dir>/examples/hello-putchar.c
@@ -177,67 +188,17 @@ $ cat <install_dir>/examples/hello-putchar.c
 int main(void) {
   const char *cur = "HELLO, PUTCHAR!\n";
   while (*cur)
-    __putchar(*cur++);
+    putchar(*cur++);
   return 0;
 }
 
 $ mos-c64-clang -Os -o hello.prg <install_dir>/examples/hello-putchar.c
 
-$ ls -l hello.prg
-... 77 ... hello.prg
-
-$ hexdump -C hello.prg
-00000000  01 08 0b 08 5d 1e 9e 32  30 36 31 00 00 00 20 1e  |....]..2061... .|
-00000010  08 4c 14 08 60 8d 4c 08  20 13 08 ad 4c 08 60 a2  |.L..`.L. ...L.`.|
-00000020  01 a9 48 c9 0a f0 10 20  d2 ff bd 3b 08 e8 e0 11  |..H.... ...;....|
-00000030  d0 f1 a2 00 a9 00 60 a9  0d 4c 26 08 48 45 4c 4c  |......`..L&.HELL|
-00000040  4f 2c 20 50 55 54 43 48  41 52 21 0a 00           |O, PUTCHAR!..|
-0000004d
+$ llvm-objdump -d hello.elf
+...
 
 $ mos-c64-clang -Os -o hello.s -Wl,--lto-emit-asm <install_dir>/examples/hello-putchar.c
-
-$ cat hello.s
-        .text
-        .file   "ld-temp.o"
-        .section        .text.main,"ax",@progbits
-        .globl  main
-        .type   main,@function
-main:
-        ldx     #1
-        lda     #72
-.LBB0_1:
-        cmp     #10
-        beq     .LBB0_4
-.LBB0_2:
-        ;APP
-        jsr     __CHROUT
-        ;NO_APP
-        lda     .L.str,x
-        inx
-        cpx     #17
-        bne     .LBB0_1
-        ldx     #0
-        lda     #0
-        rts
-.LBB0_4:
-        lda     #13
-        jmp     .LBB0_2
-.Lfunc_end0:
-        .size   main, .Lfunc_end0-main
-
-...Superfluous ASM...
-
-        .type   .L.str,@object
-        .section        .rodata.str1.1,"aMS",@progbits,1
-.L.str:
-        .asciz  "HELLO, PUTCHAR!\n"
-        .size   .L.str, 17
-
 ```
-
-Note that the generated ASM output will contain more than actually ends up in
-the binary.  This is because this assembly is emitted before a link-time garbage
-collection pass discards functions that aren't actually referenced.
 
 ### Developing for 6502 with CMake
 
@@ -305,10 +266,18 @@ Copy `test/mesen_settings.xml` to this folder.
 
 Install emutest (requires Go 1.21):
 ```console
-$ go install https://github.com/kivutar/emutest
+$ go install github.com/kivutar/emutest@latest
 ```
 
-Make sure `$GOBIN` (usually `~/go/bin`) is included in your PATH environment variable so that CMake can find the binary, or set the `EMUTEST_DIR` environment variable to point to this directory before running `cmake -G` for the first time.
+Make sure `$GOBIN` (usually `~/go/bin`) is included in your `PATH`
+environment variable so that CMake can find the binary, or set the
+`EMUTEST_DIR` environment variable to point to this directory before
+running `cmake -G` for the first time.
+
+You can verify emutest with `emutest -h` on the command-line.
+
+You should see `-T Test runner mode (script must call os.exit)` in the
+output.
 
 Build Libretro cores for desired target(s):
 

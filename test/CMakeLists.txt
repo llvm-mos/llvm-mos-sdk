@@ -18,7 +18,6 @@ function(add_test_target target)
       -DEMUTEST_COMMAND=${EMUTEST_COMMAND}
       -DLIBRETRO_STELLA_CORE=${LIBRETRO_STELLA_CORE}
       -DLIBRETRO_MESEN_CORE=${LIBRETRO_MESEN_CORE}
-      -DLIBRETRO_FCEUMM_CORE=${LIBRETRO_FCEUMM_CORE}
       -DCMAKE_C_FLAGS=${config_flag}
       -DCMAKE_CXX_FLAGS=${config_flag}
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_SOURCE_DIR}/cmake/llvm-mos-toolchain.cmake
@@ -42,3 +41,5 @@ add_test_target(nes-unrom)
 add_test_target(nes-unrom-512)
 add_test_target(atari2600-4k)
 add_test_target(atari2600-3e)
+add_test_target(atari8-dos)
+add_test_target(atari8-cart-std)

@@ -36,17 +36,6 @@ jobs:
           mkdir -p ${{ env.EMUTEST_DIR }}
           GOPATH=$(go env GOPATH)
           cp $GOPATH/bin/emutest ${{ env.EMUTEST_DIR }}
-      - name: Fetch Mesen-X (Mono version)
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p ${{ env.MESEN_DIR }}
-          cd ${{ env.MESEN_DIR }}
-          curl -Lo mesen.zip https://github.com/NovaSquirrel/Mesen-X/releases/download/1.0.1/Mesen-Linux.2022-05-14.zip
-          unzip mesen.zip
-          chmod +x Mesen.exe
-          echo '#!/bin/sh' > mesen
-          echo "xvfb-run -a /usr/bin/mono $(pwd)/Mesen.exe \"\$@\"" >> mesen
-          chmod +x mesen
       - name: Build Stella2014 core
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -55,14 +44,6 @@ jobs:
           make --silent -j 4
           mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
           mv stella2014_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
-      - name: Build FCEUmm core
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          git clone https://github.com/libretro/libretro-fceumm
-          cd libretro-fceumm
-          make --silent -j 4
-          mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
-          mv fceumm_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
       - name: Build Mesen-X core
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -71,6 +52,11 @@ jobs:
           make --silent -j 4
           mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
           mv mesen_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
+      - name: Upload test tools
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-tools
+          path: ${{env.TEST_TOOLS_DIR }}
 
   package:
     runs-on: ${{ matrix.os }}
@@ -104,10 +90,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-test-tools-
 
-      - name: Copy Mesen settings file.
-        if: startsWith(matrix.os, 'ubuntu')
-        run: cp test/mesen_settings.xml ${{ env.TEST_TOOLS_DIR }}/mesen/settings.xml
-
       - name: Fetch the latest Ubuntu llvm-mos release.
         if: startsWith(matrix.os, 'ubuntu')
         run: |
@@ -128,7 +110,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DMESEN_COMMAND=${{ env.MESEN_DIR }}/mesen -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -G "Ninja" ..
+          cmake -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -G "Ninja" ..
           ninja install
 
       - name: Test the SDK.
@@ -136,6 +118,13 @@ jobs:
         run: |
           cd build
           CTEST_OUTPUT_ON_FAILURE=1 ninja test
+
+      - name: Upload test screenshots.
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-screenshots
+          path: build/**/*.png
 
       - name: Build the docs.
         if: startsWith(matrix.os, 'ubuntu')

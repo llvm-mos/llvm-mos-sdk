@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 extern int _errno;
-#define errno (_errno)
+#define errno _errno
 
 #define ERANGE 1
 #define EDOM 2

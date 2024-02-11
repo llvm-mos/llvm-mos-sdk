@@ -4,10 +4,7 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-install(FILES
-  cbm.h
-  chrout.h
-TYPE INCLUDE)
+install(FILES cbm.h TYPE INCLUDE)
 install(FILES cbm_kernal.inc DESTINATION ${ASMINCDIR})
 install(FILES commodore.ld TYPE LIB)
 
@@ -20,7 +17,7 @@ merge_libraries(commodore-crt0
 
 add_platform_library(commodore-c
   abort.c
-  chrout.c
+  char-conv.c
   getchar.c
   putchar.c
   cbm_k_acptr.c
@@ -54,8 +51,5 @@ add_platform_library(commodore-c
   cbm_k_untlk.c
 )
 
-# abort is preemptively included if LTO is used, which pulls in _exit support
-# unneccessarily. It can also be called in an interrupt.
-set_property(SOURCE abort.c PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)
 target_include_directories(commodore-c BEFORE PUBLIC .)
 target_link_libraries(commodore-c PRIVATE common-asminc)

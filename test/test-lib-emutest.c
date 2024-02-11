@@ -37,7 +37,7 @@ bool test_has_result(bool passed) {
   return true;
 }
 
-__attribute__((noreturn)) void _exit(int status) {
+_Noreturn void _Exit(int status) {
   // For emutest, we put a pass/fail signature into the main RAM area.
   test_set_result(status == 0);
   // emutest needs us to hang here, so it can read the signature.

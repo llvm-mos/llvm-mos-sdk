@@ -1010,16 +1010,6 @@ CASETV  = $E440         ;cassette handler vector table
 
 DISKIV  = $E450         ;vector to initialize DIO
 DSKINV  = $E453         ;vector to DIO
-.ifdef __ATARIXL__
-.ifndef SHRAM_HANDLERS
-.endif
-CIOV   = CIO_handler
-SIOV   = SIO_handler
-SETVBV = SETVBV_handler
-CIOV_org    = $E456     ;vector to CIO
-SIOV_org    = $E459     ;vector to SIO
-SETVBV_org  = $E45C     ;vector to set VBLANK parameters
-.else
 CIOV    = $E456         ;vector to CIO
 SIOV    = $E459         ;vector to SIO
 SETVBV  = $E45C         ;vector to set VBLANK parameters
@@ -1027,7 +1017,6 @@ SETVBV  = $E45C         ;vector to set VBLANK parameters
 CIOV_org    = CIOV
 SIOV_org    = SIOV
 SETVBV_org  = SETVBV
-.endif
 SYSVBV  = $E45F         ;vector to process immediate VBLANK
 XITVBV  = $E462         ;vector to process deferred VBLANK
 SIOINV  = $E465         ;vector to initialize SIO
@@ -1159,12 +1148,7 @@ XFILE        = $087D    ; XDOS filename buffer
 XLINE        = $0880    ; XDOS DUP input line
 XGLIN        = $0871    ; get line
 XSKIP        = $0874    ; skip parameter
-.ifdef __ATARIXL__
-XMOVE = XMOVE_handler
-XMOVE_org    = $0877    ; move filename
-.else
 XMOVE        = $0877    ; move filename
-.endif
 XGNUM        = $087A    ; get number
 
 ;-------------------------------------------------------------------------

@@ -9,10 +9,18 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - Atari 2600
   - 4K cartridge
   - [TigerVision 3E (2-KiB fixed, 2-KiB banked ROM or RAM)](https://www.taswegian.com/WoodgrainWizard/tiki-index.php?page=3E)
+- [Atari 5200](https://en.wikipedia.org/wiki/Atari_5200) Super Cart from [32 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L105)
+  to [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L108)
 - Atari 8-bit
   - DOS ".XEX" file
   - 8-KiB or 16-KiB standard cartridge
-  - XEGS bank-switched cartridge from 32 KiB to 512 KiB (8 KiB banks)
+  - XEGS (lower 8 KiB bank-switched) cartridge from [32 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L46) to
+    [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L58)
+	- Compatible with [S/XEGS (switchable XEGS)](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L67)
+  - MegaCart (16 KiB fully-banked) cartridge from [16 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L60)
+    to [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L65)
+	- Compatible with SIC! [128 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L88) to
+	  [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L90)
 - [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
 - Commodore 64

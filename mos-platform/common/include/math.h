@@ -17,7 +17,7 @@ extern "C" {
 
 #define INFINITY (1.0f / 0.0f)
 
-#define isnan(arg) __builtin_isfpclass(arg, __FPCLASS_SNAN | __FPCLASS_QNAN)
+#define isnan(arg) __builtin_isnan(arg)
 
 double fmin(double x, double y);
 double fmax(double x, double y);

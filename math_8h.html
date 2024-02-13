@@ -66,7 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">math.h File Reference</div>  </div>
 </div><!--header-->
@@ -98,6 +99,19 @@ Macros</h2></td></tr>
 <tr class="separator:a1d481cc6e6a8ff729147ed46e61a4c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a956e2723d559858d08644ac99146e910"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8h.html#a956e2723d559858d08644ac99146e910">INFINITY</a>&#160;&#160;&#160;(1.0f / 0.0f)</td></tr>
 <tr class="separator:a956e2723d559858d08644ac99146e910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa80675cbca4f7f711d7763f9eb9052b0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8h.html#aa80675cbca4f7f711d7763f9eb9052b0">isnan</a>(arg)&#160;&#160;&#160;__builtin_isnan(arg)</td></tr>
+<tr class="separator:aa80675cbca4f7f711d7763f9eb9052b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af0a18b3ac9e461ac48b4cfffb4945a84"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8h.html#af0a18b3ac9e461ac48b4cfffb4945a84">fmin</a> (double <a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, double <a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>)</td></tr>
+<tr class="separator:af0a18b3ac9e461ac48b4cfffb4945a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35e041615ac931b4d848a7b173049301"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8h.html#a35e041615ac931b4d848a7b173049301">fmax</a> (double <a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, double <a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>)</td></tr>
+<tr class="separator:a35e041615ac931b4d848a7b173049301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4132c27f31d39c91c3c6063f378103"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8h.html#a9b4132c27f31d39c91c3c6063f378103">fminf</a> (float <a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, float <a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>)</td></tr>
+<tr class="separator:a9b4132c27f31d39c91c3c6063f378103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8849bfdbec18ded429fad4772cf60f4b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8h.html#a8849bfdbec18ded429fad4772cf60f4b">fmaxf</a> (float <a class="el" href="nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4">x</a>, float <a class="el" href="neslib_8h.html#ac38a342729250f8b4b5dd7239e4930f1">y</a>)</td></tr>
+<tr class="separator:a8849bfdbec18ded429fad4772cf60f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a4f64bcc64f8b84dd9daf5a4e56abf0ca"></a>
@@ -178,6 +192,137 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define INFINITY&#160;&#160;&#160;(1.0f / 0.0f)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa80675cbca4f7f711d7763f9eb9052b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa80675cbca4f7f711d7763f9eb9052b0">&#9670;&nbsp;</a></span>isnan</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define isnan</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">arg</td><td>)</td>
+          <td>&#160;&#160;&#160;__builtin_isnan(arg)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a35e041615ac931b4d848a7b173049301"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35e041615ac931b4d848a7b173049301">&#9670;&nbsp;</a></span>fmax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fmax </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8849bfdbec18ded429fad4772cf60f4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8849bfdbec18ded429fad4772cf60f4b">&#9670;&nbsp;</a></span>fmaxf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float fmaxf </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0a18b3ac9e461ac48b4cfffb4945a84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0a18b3ac9e461ac48b4cfffb4945a84">&#9670;&nbsp;</a></span>fmin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double fmin </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b4132c27f31d39c91c3c6063f378103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b4132c27f31d39c91c3c6063f378103">&#9670;&nbsp;</a></span>fminf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float fminf </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

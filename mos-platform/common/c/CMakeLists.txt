@@ -12,6 +12,9 @@ add_platform_library(common-c
   # inttypes.h
   inttypes.c
 
+  # math.h
+  math.cc
+
   # setjmp.h
   setjmp.S
 

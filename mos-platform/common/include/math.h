@@ -17,6 +17,13 @@ extern "C" {
 
 #define INFINITY (1.0f / 0.0f)
 
+#define isnan(arg) __builtin_isnan(arg)
+
+double fmin(double x, double y);
+double fmax(double x, double y);
+float fminf(float x, float y);
+float fmaxf(float x, float y);
+
 #ifdef __cplusplus
 }
 #endif

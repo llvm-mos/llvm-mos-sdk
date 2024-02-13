@@ -1,6 +1,10 @@
 #ifndef _RP6502_H
 #define _RP6502_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* RP6502 RIA $FFE0-$FFF9 */
 struct __RP6502 {
   const unsigned char ready;
@@ -215,5 +219,9 @@ typedef enum {
   FR_TOO_MANY_OPEN_FILES, /* Number of open files > FF_FS_LOCK */
   FR_INVALID_PARAMETER    /* Given parameter is invalid */
 } FRESULT;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _RP6502_H */

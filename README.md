@@ -6,14 +6,15 @@ The LLVM-MOS compiler toolchain and platform libraries.
 
 ## Supported platforms
 
-- Atari 2600
+- [Atari 2600](https://en.wikipedia.org/wiki/Atari_2600)
   - 4K cartridge
   - [TigerVision 3E (2-KiB fixed, 2-KiB banked ROM or RAM)](https://www.taswegian.com/WoodgrainWizard/tiki-index.php?page=3E)
 - [Atari 5200](https://en.wikipedia.org/wiki/Atari_5200) Super Cart from [32 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L105)
   to [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L108)
-- Atari 8-bit
-  - DOS ".XEX" file
-  - 8-KiB or 16-KiB standard cartridge
+- [Atari 8-bit](https://en.wikipedia.org/wiki/Atari_8-bit_family)
+  - [DOS](https://en.wikipedia.org/wiki/Atari_DOS) ".XEX" file
+  - Standard cartridge ([8 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L35)
+    or [16 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L36))
   - XEGS (lower 8 KiB bank-switched) cartridge from [32 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L46) to
     [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L58)
 	- Compatible with [S/XEGS (switchable XEGS)](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L67)
@@ -23,14 +24,14 @@ The LLVM-MOS compiler toolchain and platform libraries.
 	  [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L90)
 - [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
-- Commodore 64
-- Commodore 128
-- Commodore PET
-- Commodore VIC-20
+- [Commodore 64](https://en.wikipedia.org/wiki/Commodore_64)
+- [Commodore 128](https://en.wikipedia.org/wiki/Commodore_128)
+- [Commodore PET](https://en.wikipedia.org/wiki/Commodore_PET)
+- [Commodore VIC-20](https://en.wikipedia.org/wiki/VIC-20)
 - [CP/M-65](https://github.com/davidgiven/cpm65)
 - [Dodo 6502 Game System](https://github.com/peternoyes/dodo)
 - [MEGA65](https://mega65.org/)
-- NES
+- [NES (Nintendo Entertainment System)](https://en.wikipedia.org/wiki/Nintendo_Entertainment_System)
   - [Action 53](https://www.nesdev.org/wiki/Action_53)
   - [CNROM](https://www.nesdev.org/wiki/CNROM)
   - [GTROM](https://www.nesdev.org/wiki/GTROM)
@@ -39,38 +40,32 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - [UNROM-512](https://www.nesdev.org/wiki/UNROM_512)
   - [MMC1](https://www.nesdev.org/wiki/MMC1)
   - [MMC3](https://www.nesdev.org/wiki/MMC3)
-- Ohio Scientific Challenger 1P
+- [Ohio Scientific Challenger 1P](https://en.wikipedia.org/wiki/Ohio_Scientific#Superboard_II,_Challenger_1P_(1978))
 - [Picocomputer 6502](https://picocomputer.github.io) (RP6502)
-- PC Engine
-  - PC Engine CD
+- [PC Engine / TurboGrafx-16](https://en.wikipedia.org/wiki/TurboGrafx-16)
+  - [PC Engine CD](https://en.wikipedia.org/wiki/TurboGrafx-16#TurboGrafx-CD/CD-ROM%C2%B2)
 - [RPC/8e](http://www.eloraam.com/blog/2012/04/22/rp-control-internals/) (RedPower 2)
 - 6502 simulator (included)
 
 ## Notable features
 
 - Broad C99 and C++11 freestanding standards compatibility
-  - Interrupt handling
-  - C++ templates
-  - C++ virtual functions
-  - C++ new/delete
-  - C++ Run-Time Type Information (dynamic_cast,  typeid)
-  - C++ static constructors/destructors (run before and after main)
-  - C++ "magic" function local static constructors/destructors
-- The high and low-level optimizations expected of a young-ish LLVM backend 
-  - Sophisticated register allocation over A, X, Y, and a field of 16 2-byte zero-page (imaginary) registers
+- The high and low-level optimizations expected of a young-ish LLVM backend
+  - Fairly good register allocation over A, X, Y, and a field of 16 2-byte zero-page (imaginary) registers
   - The imaginary registers can be placed anywhere and need not be contiguous.
-  - The calling convention passes through registers whenever possible. 
+  - The calling convention passes through registers whenever possible.
   - Loop optimizations to select 6502 addressing modes
   - Whole program "static stack" optimization
     - Automatically identifies non-reentrant functions and allocates their frames as static globals
     - Programs without recursion or complex function pointers may not need a soft stack at all.
     - No manual annotations required
+  - Whole program zero page allocation
   - Link time inlining and optimization across the whole program
     - Includes SDK libraries. Library calls can be often optimized away completely!
 - Excellent compiler usability
   - Clang's world-class error messages
   - IDE integration through the included custom clangd's Language Server Protocol
-  - Straightforward invocations to compile for various targets: `mos-c64-clang++ -Os -o game.prg game.cc` 
+  - Straightforward invocations to compile for various targets: `mos-c64-clang++ -Os -o game.prg game.cc`
 - A small standard library sufficient to provide the above and a few extras
   - Simple printf
   - Simple malloc/free
@@ -149,36 +144,38 @@ need to prefix `clang` (or `clang++`) with a specific MOS platform provided by
 the SDK. This will ensure clang loads the correct configuration to generate
 executables and libraries for that target.
 
-| Platform                        | Variant            | Command                    |
-|---------------------------------|--------------------|----------------------------|
-| Atari 2600                      | 4K                 | `mos-atari2600-4k-clang`   |
-| Atari 2600                      | TigerVision 3E     | `mos-atari2600-3e-clang`   |
-| Atari 8-bit                     | DOS                | `mos-atari8-dos-clang`     |
-| Atari 8-bit                     | Standard cartridge | `mos-atari8-stdcart-clang` |
-| Atari 8-bit                     | XEGS cartridge     | `mos-atari8-xegs-clang`    |
-| Ben Eater's 6502 Breadboard Kit | -                  | `mos-eater-clang`          |
-| Commander X16                   | -                  | `mos-cx16-clang`           |
-| Commodore                       | 64                 | `mos-c64-clang`            |
-| Commodore                       | 128                | `mos-c128-clang`           |
-| Commodore                       | PET                | `mos-pet-clang`            |
-| Commodore                       | VIC-20             | `mos-vic20-clang`          |
-| CP/M-65                         | -                  | `mos-cpm65-clang`          |
-| Dodo 6502 Game System           | -                  | `mos-dodo-clang`           |
-| MEGA65                          | -                  | `mos-mega65-clang`         |
-| NES                             | Action53 mapper    | `mos-nes-action53-clang`   |
-| NES                             | CNROM mapper       | `mos-nes-cnrom-clang`      |
-| NES                             | GTROM mapper       | `mos-nes-gtrom-clang`      |
-| NES                             | MMC1 mapper        | `mos-nes-mmc1-clang`       |
-| NES                             | MMC3 mapper        | `mos-nes-mmc3-clang`       |
-| NES                             | NROM mapper        | `mos-nes-nrom-clang`       |
-| NES                             | UNROM mapper       | `mos-nes-unrom-clang`      |
-| NES                             | UNROM-512 mapper   | `mos-nes-unrom-512-clang`  |
-| Ohio Scientific Challenger 1P   | -                  | `mos-osi-c1p-clang`        |
-| Picocomputer 6502               | -                  | `mos-rp6502-clang`         |
-| PC Engine                       | Standard           | `mos-pce-clang`            |
-| PC Engine                       | CD                 | `mos-pce-cd-clang`         |
-| RPC/8e (RedPower 2)             | -                  | `mos-rpc8e-clang`          |
-| 6502 simulator                  | -                  | `mos-sim-clang`            |
+| Platform                        | Variant            | Command                          |
+|---------------------------------|--------------------|----------------------------------|
+| Atari 2600                      | 4K                 | `mos-atari2600-4k-clang`         |
+| Atari 2600                      | TigerVision 3E     | `mos-atari2600-3e-clang`         |
+| Atari 5200                      | Super Cart         | `mos-atari5200-supercart-clang`  |
+| Atari 8-bit                     | DOS                | `mos-atari8-dos-clang`           |
+| Atari 8-bit                     | MegaCart cartridge | `mos-atari8-cart-megacart-clang` |
+| Atari 8-bit                     | Standard cartridge | `mos-atari8-cart-std-clang`      |
+| Atari 8-bit                     | XEGS cartridge     | `mos-atari8-cart-xegs-clang`     |
+| Ben Eater's 6502 Breadboard Kit | -                  | `mos-eater-clang`                |
+| Commander X16                   | -                  | `mos-cx16-clang`                 |
+| Commodore                       | 64                 | `mos-c64-clang`                  |
+| Commodore                       | 128                | `mos-c128-clang`                 |
+| Commodore                       | PET                | `mos-pet-clang`                  |
+| Commodore                       | VIC-20             | `mos-vic20-clang`                |
+| CP/M-65                         | -                  | `mos-cpm65-clang`                |
+| Dodo 6502 Game System           | -                  | `mos-dodo-clang`                 |
+| MEGA65                          | -                  | `mos-mega65-clang`               |
+| NES                             | Action53 mapper    | `mos-nes-action53-clang`         |
+| NES                             | CNROM mapper       | `mos-nes-cnrom-clang`            |
+| NES                             | GTROM mapper       | `mos-nes-gtrom-clang`            |
+| NES                             | MMC1 mapper        | `mos-nes-mmc1-clang`             |
+| NES                             | MMC3 mapper        | `mos-nes-mmc3-clang`             |
+| NES                             | NROM mapper        | `mos-nes-nrom-clang`             |
+| NES                             | UNROM mapper       | `mos-nes-unrom-clang`            |
+| NES                             | UNROM-512 mapper   | `mos-nes-unrom-512-clang`        |
+| Ohio Scientific Challenger 1P   | -                  | `mos-osi-c1p-clang`              |
+| Picocomputer 6502               | -                  | `mos-rp6502-clang`               |
+| PC Engine                       | Standard           | `mos-pce-clang`                  |
+| PC Engine                       | CD                 | `mos-pce-cd-clang`               |
+| RPC/8e (RedPower 2)             | -                  | `mos-rpc8e-clang`                |
+| 6502 simulator                  | -                  | `mos-sim-clang`                  |
 
 
 ```console

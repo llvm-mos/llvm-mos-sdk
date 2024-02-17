@@ -5,7 +5,7 @@
 unsigned char _sysrename(const char *oldpath, const char *newpath) {
   size_t oldpathlen = strlen(oldpath);
   size_t newpathlen = strlen(newpath);
-  if (oldpathlen + newpathlen > 254) {
+  if (oldpathlen + newpathlen > 510) {
     RIA.errno = EINVAL;
     return -1;
   }

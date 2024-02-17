@@ -2,7 +2,7 @@
 #include <rp6502.h>
 
 int write_xstack(const void *buf, unsigned count, int fildes) {
-  if (count > 256) {
+  if (count > 512) {
     RIA.errno = EINVAL;
     return -1;
   }

@@ -17,8 +17,14 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#define SCREEN 0x0400
-#define CHARSET 0x2000
+enum {
+  SCREEN = 0x0400,
+  CHARSET = 0x2000,
+  SID_NOISE_BIT = 0x80,
+  SINE_REPEAT = 8,
+  COLS = 40,
+  ROWS = 25
+};
 
 /* Cyclic sine lookup table */
 static const uint8_t sine_table[0x100] = {
@@ -51,8 +57,8 @@ static const uint8_t sine_table[0x100] = {
  */
 void start_sid_random_generator(void) {
   struct __sid_voice voice;
-  voice.freq = 0xffff;
-  voice.ctrl = 0x80;
+  voice.freq = UINT16_MAX;
+  voice.ctrl = SID_NOISE_BIT;
   SID.v3 = voice;
 }
 
@@ -66,7 +72,7 @@ void make_charset(void) {
 
   for (size_t c = 0; c < sizeof(sine_table); ++c) {
     const uint8_t sine = sine_table[c];
-    for (size_t i = 0; i < 8; ++i) {
+    for (size_t i = 0; i < SINE_REPEAT; ++i) {
       uint8_t pattern = 0;
       for (size_t j = 0; j < sizeof(bits); ++j) {
         if (rand8() > sine) {
@@ -81,8 +87,8 @@ void make_charset(void) {
 
 /* Plasma effect */
 static void do_plasma(volatile uint8_t *screen_address) {
-  static uint8_t xdata[40];
-  static uint8_t ydata[25];
+  static uint8_t xdata[COLS];
+  static uint8_t ydata[ROWS];
   static uint8_t x_cnt1 = 0;
   static uint8_t x_cnt2 = 0;
   static uint8_t y_cnt1 = 0;
@@ -116,7 +122,7 @@ static void do_plasma(volatile uint8_t *screen_address) {
 int main(void) {
   start_sid_random_generator();
   make_charset();
-  VIC.addr = ((SCREEN >> 6) & 0xF0) | ((CHARSET >> 10) & 0x0E);
+  VIC.addr = ((SCREEN >> 6U) & 0xF0U) | ((CHARSET >> 10U) & 0x0EU);
   while (1) {
     do_plasma((uint8_t *)SCREEN);
   }

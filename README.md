@@ -150,9 +150,9 @@ executables and libraries for that target.
 | Atari 2600                      | TigerVision 3E     | `mos-atari2600-3e-clang`         |
 | Atari 5200                      | Super Cart         | `mos-atari5200-supercart-clang`  |
 | Atari 8-bit                     | DOS                | `mos-atari8-dos-clang`           |
-| Atari 8-bit                     | MegaCart cartridge | `mos-atari8-cart-megacart-clang` |
-| Atari 8-bit                     | Standard cartridge | `mos-atari8-cart-std-clang`      |
-| Atari 8-bit                     | XEGS cartridge     | `mos-atari8-cart-xegs-clang`     |
+| Atari 8-bit                     | MegaCart cartridge | `mos-atari8-megacart-clang` |
+| Atari 8-bit                     | Standard cartridge | `mos-atari8-stdcart-clang`      |
+| Atari 8-bit                     | XEGS cartridge     | `mos-atari8-xegscart-clang`     |
 | Ben Eater's 6502 Breadboard Kit | -                  | `mos-eater-clang`                |
 | Commander X16                   | -                  | `mos-cx16-clang`                 |
 | Commodore                       | 64                 | `mos-c64-clang`                  |

@@ -13,8 +13,8 @@
  */
 
 #include <array>
-#include <cstdint>
 #include <c64.h>
+#include <cstdint>
 #include <peekpoke.h>
 
 constexpr uint16_t DEFAULT_SCREEN = 0x0400;
@@ -50,18 +50,19 @@ constexpr uint8_t sine_table[UINT8_MAX + 1] = {
 /*
  * Simple pseudo-random number generator
  * https://en.wikipedia.org/wiki/Xorshift
+ *
+ * We could also have used the SID noise generator, which is significantly
+ * faster; see the C version of this program.
  */
 class RandomXORS {
 private:
-  uint32_t state = 7;
+  uint8_t state = 7;
 
 public:
-  inline uint8_t rand8() { return static_cast<uint8_t>(rand32() & 0xff); }
-  inline uint32_t rand32() {
-    state ^= state << 13;
-    state ^= state >> 17;
-    state ^= state << 5;
-    return state;
+  inline uint8_t rand8() {
+    state ^= (state << 7);
+    state ^= (state >> 5);
+    return state ^= (state << 3);
   }
 };
 
@@ -71,8 +72,10 @@ public:
 void make_charset(const uint16_t charset_address, RandomXORS &rng) {
   // Lambda function to generate a single 8x8 pixels pattern
   auto make_char = [&](const uint8_t sine) {
+    static const uint8_t bits[8] = {0b00000001, 0b00000010, 0b00000100,
+                                    0b00001000, 0b00010000, 0b00100000,
+                                    0b01000000, 0b10000000};
     uint8_t pattern = 0;
-    constexpr uint8_t bits[8] = {1, 2, 4, 8, 16, 32, 64, 128};
     for (const auto bit : bits) {
       if (rng.rand8() > sine) {
         pattern |= bit;
@@ -83,7 +86,7 @@ void make_charset(const uint16_t charset_address, RandomXORS &rng) {
 
   auto charset_ptr = reinterpret_cast<volatile uint8_t *>(charset_address);
   for (const auto sine : sine_table) {
-    for (int _i = 0; _i < 8; ++_i) {
+    for (int i = 0; i < 8; ++i) {
       *(charset_ptr++) = make_char(sine);
       VIC.bordercolor++;
     }
@@ -160,4 +163,5 @@ int main() {
   while (true) {
     plasma.update();
   }
+  return 0;
 }

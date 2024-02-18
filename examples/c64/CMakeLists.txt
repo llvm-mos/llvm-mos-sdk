@@ -1,3 +1,5 @@
-add_executable(plasma plasma.cc)
-set_target_properties(plasma PROPERTIES OUTPUT_NAME plasma.prg)
-install_example(plasma)
+add_executable(plasma-cc plasma.cc)
+install_example(plasma-cc)
+
+add_executable(plasma-c plasma.c)
+install_example(plasma-c)

@@ -120,5 +120,4 @@ int main(void) {
   while (1) {
     do_plasma((uint8_t *)SCREEN);
   }
-  return 0;
 }

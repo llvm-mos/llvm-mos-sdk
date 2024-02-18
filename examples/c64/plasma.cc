@@ -163,5 +163,4 @@ int main() {
   while (true) {
     plasma.update();
   }
-  return 0;
 }

@@ -59,10 +59,10 @@ private:
   uint8_t state = 7;
 
 public:
-  inline uint8_t rand8() {
-    state ^= (state << 7);
-    state ^= (state >> 5);
-    return state ^= (state << 3);
+  uint8_t rand8() {
+    state ^= (state << 7U);
+    state ^= (state >> 5U);
+    return state ^= (state << 3U);
   }
 };
 
@@ -84,11 +84,12 @@ void make_charset(const uint16_t charset_address, RandomXORS &rng) {
     return pattern;
   };
 
-  auto charset_ptr = reinterpret_cast<volatile uint8_t *>(charset_address);
+  auto *charset_ptr = reinterpret_cast<volatile uint8_t *>(charset_address);
+  constexpr int SINE_REPEAT = 8;
   for (const auto sine : sine_table) {
-    for (int i = 0; i < 8; ++i) {
+    for (int i = 0; i < SINE_REPEAT; ++i) {
       *(charset_ptr++) = make_char(sine);
-      VIC.bordercolor++;
+      VIC.bordercolor += 1;
     }
   }
 }
@@ -109,15 +110,15 @@ public:
   /*
    * Generate and activate charset at given address
    */
-  Plasma(RandomXORS &rng) {
+  explicit Plasma(RandomXORS &rng) {
     make_charset(CHARSET, rng);
-    VIC.addr = ((DEFAULT_SCREEN >> 6) & 0xF0) | ((CHARSET >> 10) & 0x0E);
+    VIC.addr = ((DEFAULT_SCREEN >> 6U) & 0xf0U) | ((CHARSET >> 10U) & 0x0eU);
   }
 
   /*
    * Draw frame
    */
-  inline void update() {
+  void update() {
     auto i = y_cnt1;
     auto j = y_cnt2;
     for (auto &y : ydata) {
@@ -143,8 +144,8 @@ public:
   /*
    * Write summed buffers to screen memory
    */
-  inline void write_to_screen() const {
-    auto screen_ptr = reinterpret_cast<volatile uint8_t *>(DEFAULT_SCREEN);
+  void write_to_screen() const {
+    auto *screen_ptr = reinterpret_cast<volatile uint8_t *>(DEFAULT_SCREEN);
     for (const auto y : ydata) {
 #pragma unroll
       for (const auto x : xdata) {
@@ -154,7 +155,7 @@ public:
   }
 };
 
-int main() {
+auto main() -> int {
   constexpr size_t COLS = 40;
   constexpr size_t ROWS = 25;
 

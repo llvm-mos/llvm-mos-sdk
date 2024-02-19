@@ -1,16 +1,18 @@
 #include <stdlib.h>
 
+#include <assert.h>
 #include <stdalign.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
-#define MALLOC_TRACE 0
-
+#ifndef NDEBUG
 #define TRACE(fmt, ...)                                                        \
-  if (MALLOC_TRACE)                                                            \
   printf(fmt __VA_OPT__(, ) __VA_ARGS__)
+#else
+#define TRACE(fmt, ...) (void)0
+#endif
 
 extern char __heap_start;
 extern char __heap_default_limit;
@@ -40,6 +42,8 @@ public:
 
   // Slow; prefer prev_free where possible.
   bool free() const;
+
+  void set_free(bool free);
 };
 
 class FreeChunk : public Chunk {
@@ -100,6 +104,14 @@ FreeChunk *Chunk::prev() const {
 bool Chunk::free() const {
   Chunk *n = next();
   return n ? n->prev_free : last_free;
+}
+
+void Chunk::set_free(bool free) {
+  Chunk *n = next();
+  if (n)
+    n->prev_free = free;
+  else
+    last_free = free;
 }
 
 // Remove a free chunk from the free list.
@@ -187,11 +199,7 @@ void *allocate_free_chunk(FreeChunk *free_chunk, size_t size) {
     chunk->set_size(size);
   }
 
-  Chunk *next = chunk->next();
-  if (next)
-    next->prev_free = false;
-  else
-    last_free = false;
+  chunk->set_free(false);
 
   TRACE("Allocated size: %u\n", size);
 
@@ -296,7 +304,7 @@ void *aligned_alloc(size_t alignment, size_t size) {
   if (!size)
     return nullptr;
 
-  // The region before the aligned chunk needs to be large enough to fit a free
+  // The region before the aligned chunk needs to be large enough to fit a freereallocated chunk should not be free");
   // chunk.
   if (__builtin_add_overflow(size, MIN_CHUNK_SIZE, &size))
     return nullptr;
@@ -462,11 +470,7 @@ void *realloc(void *ptr, size_t size) {
     FreeChunk *after = FreeChunk::insert(chunk->end(), shrink);
     TRACE("Allocated remainder %p of size %u\n", after, after->size());
     after->prev_free = false;
-    Chunk *after_next = after->next();
-    if (after_next)
-      after_next->prev_free = true;
-    else
-      last_free = true;
+    after->set_free(true);
     return ptr;
   }
 
@@ -493,6 +497,7 @@ void *realloc(void *ptr, size_t size) {
         FreeChunk::insert(chunk->end(), next_size - grow)->prev_free = false;
       }
 
+      assert(!chunk->free() && "newly reallocated chunk should not be free");
       return ptr;
     }
   }

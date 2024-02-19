@@ -494,10 +494,9 @@ void *realloc(void *ptr, size_t size) {
         TRACE("Not enough remainder, so size now %u\n", chunk->size());
       } else {
         TRACE("Inserting remainder of next chunk.\n");
-        FreeChunk::insert(chunk->end(), next_size - grow)->prev_free = false;
+        FreeChunk::insert(chunk->end(), next_size - grow);
       }
-
-      assert(!chunk->free() && "newly reallocated chunk should not be free");
+      chunk->set_free(false);
       return ptr;
     }
   }

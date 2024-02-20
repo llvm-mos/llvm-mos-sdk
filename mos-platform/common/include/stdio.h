@@ -41,11 +41,19 @@ int vsprintf(char *__restrict__ s, const char *__restrict__ format,
 
 // Character input/output functions
 
+int fgetc(FILE *stream);
+char *fgets(char *__restrict__ s, int n, FILE *__restrict__ stream);
 int fputc(int c, FILE *stream);
 int fputs(const char *__restrict__ s, FILE *__restrict__ stream);
+int getc(FILE *stream);
 int getchar(void);
 int putchar(int c);
 int puts(const char *s);
+
+// Error-handling functions
+
+int feof(FILE *stream);
+int ferror(FILE *stream);
 
 // Platform-specific backend
 

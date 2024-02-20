@@ -38,6 +38,7 @@ add_platform_library(common-c
   new.cc
   qsort.c
   quick-exit.cc
+  scanf.cc
 
   # string.h
   mem.c
@@ -54,6 +55,7 @@ add_platform_library(common-c
   private-typeinfo.cc
 
   # Internal libraries
+  util.c
   varint.cc
 
   # Provides a ungetc-aware getchar that is bigger than the one in stdio.c

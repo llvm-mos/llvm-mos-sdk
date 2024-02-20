@@ -34,17 +34,25 @@ extern FILE *stderr;
 // Formated input/output functions
 
 int fprintf(FILE *__restrict__ stream, const char *__restrict__ format, ...);
+int fscanf(FILE *__restrict__ stream, const char *__restrict__ format, ...);
 int printf(const char *__restrict__ format, ...);
+int scanf(const char *__restrict__ format, ...);
 int snprintf(char *__restrict__ s, size_t n, const char *__restrict__ format,
              ...);
 int sprintf(char *__restrict__ s, const char *__restrict__ format, ...);
+int sscanf(const char *__restrict__ s, const char *__restrict__ format, ...);
 int vfprintf(FILE *__restrict__ stream, const char *__restrict__ format,
              va_list arg);
+int vfscanf(FILE *__restrict__ stream, const char *__restrict__ format,
+            va_list arg);
 int vprintf(const char *__restrict__ format, va_list arg);
+int vscanf(const char *__restrict__ format, va_list arg);
 int vsnprintf(char *__restrict__ s, size_t n, const char *__restrict__ format,
               va_list arg);
 int vsprintf(char *__restrict__ s, const char *__restrict__ format,
              va_list arg);
+int vsscanf(const char *__restrict__ s, const char *__restrict__ format,
+            va_list arg);
 
 // Character input/output functions
 

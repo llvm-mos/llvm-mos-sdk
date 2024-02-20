@@ -7,28 +7,15 @@
 
 #include <ctype.h>
 #include <inttypes.h>
-#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
+#include "util.h"
 #include "varint.h"
 
 // Originally from the Public Domain C Library (PDCLib)
 
 namespace {
-
-struct Status {
-  int base;       // base to which the value shall be converted
-  uint16_t flags; // flags and length modifiers
-  size_t n;       // print: maximum characters to be written
-                  // scan:  number matched conversion specifiers
-  size_t i;       // number of characters read/written
-  char *s;        // *sprintf(): target buffer
-                  // *sscanf():  source string
-  size_t width;   // specified field width
-  int prec;       // specified field precision
-  va_list arg;    // argument stack
-};
 
 void put(char c, Status *status) {
   if (status->i < status->n) {
@@ -539,19 +526,6 @@ void print_ldouble(long double value, Status *status) {
 
 #endif
 
-unsigned simple_strtoui(const char *__restrict__ nptr,
-                        char **__restrict endptr) {
-  unsigned result = 0;
-
-  for (*endptr = (char *)nptr; **endptr && '0' <= **endptr && **endptr <= '9';
-       ++*endptr) {
-    result *= 10;
-    result += **endptr - '0';
-  }
-
-  return result;
-}
-
 const char *print(const char *spec, Status *status) {
   const char *orig_spec = spec;
 
@@ -624,7 +598,7 @@ flags_done:;
     // If a width is given, simple_strtoui() will return its value. If not
     // given, simple_strtoui() will return zero. In both cases, endptr will
     // point to the rest of the conversion specifier - just what we need.
-    status->width = simple_strtoui(spec, (char **)&spec);
+    status->width = __simple_strtoui(spec, (char **)&spec);
   }
 
   /* Optional precision */
@@ -638,7 +612,7 @@ flags_done:;
       ++spec;
     } else {
       char *endptr;
-      status->prec = simple_strtoui(spec, &endptr);
+      status->prec = __simple_strtoui(spec, &endptr);
 
       if (spec == endptr) {
         /* Decimal point but no number - equals zero */

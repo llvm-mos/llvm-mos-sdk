@@ -65,5 +65,4 @@ add_platform_library(common-printf_flt printf.cc)
 target_include_directories(common-printf_flt SYSTEM BEFORE PUBLIC ${INCLUDE_DIR})
 set_property(TARGET common-printf_flt PROPERTY COMPILE_DEFINITIONS
   _PRINTF_FLOAT
-  _PRINTF_LONG_DOUBLE
 )

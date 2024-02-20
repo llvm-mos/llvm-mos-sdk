@@ -533,11 +533,9 @@ void print_double(double value, Status *status) {
       put(' ', status);
 }
 
-#ifdef _PRINTF_LONG_DOUBLE
 void print_ldouble(long double value, Status *status) {
   print_double(value, status);
 }
-#endif
 
 #endif
 
@@ -704,12 +702,10 @@ flags_done:;
     src_size = sizeof(ptrdiff_t);
     break;
 
-#ifdef _PRINTF_LONG_DOUBLE
   case 'L':
     /* L -> long double */
     status->flags |= E_ldouble;
     break;
-#endif // _PRINTF_LONG_DOUBLE
 
   default:
     --spec;
@@ -822,14 +818,11 @@ flags_done:;
 #ifdef _PRINTF_FLOAT
     /* TODO: Check for invalid flag combinations. */
     if (status->flags & E_double) {
-#ifdef _PRINTF_LONG_DOUBLE
       /* Floating Point conversions */
       if (status->flags & E_ldouble) {
         long double value = va_arg(status->arg, long double);
         print_ldouble(value, status);
-      } else
-#endif // _PRINTF_LONG_DOUBLE
-      {
+      } else {
         double value = va_arg(status->arg, double);
         print_double(value, status);
       }

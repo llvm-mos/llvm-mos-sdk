@@ -90,6 +90,8 @@ add_platform_library(cx16-c
  vpoke.s
  waitvsync.s
  kernal.S
+
+ char-conv.c
 )
 
 target_include_directories(cx16-c BEFORE PUBLIC .)

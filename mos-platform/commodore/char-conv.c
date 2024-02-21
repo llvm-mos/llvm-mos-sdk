@@ -13,11 +13,11 @@ asm(".section .init.250,\"axR\",@progbits\n"
 
 __attribute__((always_inline, weak)) void __char_conv(char c,
                                                       void (*emit)(char c)) {
-  if (__builtin_expect(c == '\n', 0)) {
+  if (__builtin_expect(c == '\n', 0))
     emit('\r');
-    return;
-  }
-  if ('a' <= c && c <= 'z')
+  else if (__builtin_expect(c == '\b', 0))
+    emit('\x9d'); // CURSOR LEFT
+  else if ('a' <= c && c <= 'z')
     emit(c & ~0x20);
   else if ('A' <= c && c <= 'Z')
     emit(c | 0x80);

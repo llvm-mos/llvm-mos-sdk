@@ -76,14 +76,16 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdarg.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for stdio.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="stdio_8h__incl.png" border="0" usemap="#common_2include_2stdio_8h" alt=""/></div>
 <map name="common_2include_2stdio_8h" id="common_2include_2stdio_8h">
-<area shape="rect" title=" " alt="" coords="5,5,184,32"/>
-<area shape="rect" title=" " alt="" coords="8,80,83,107"/>
-<area shape="rect" title=" " alt="" coords="107,80,181,107"/>
+<area shape="rect" title=" " alt="" coords="52,5,231,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,80,107"/>
+<area shape="rect" title=" " alt="" coords="104,80,179,107"/>
+<area shape="rect" title=" " alt="" coords="203,80,274,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -107,6 +109,8 @@ Macros</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a175abb747ea3b78aa8da87355dcec473"><td class="memItemLeft" align="right" valign="top">typedef struct _FILE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a></td></tr>
 <tr class="separator:a175abb747ea3b78aa8da87355dcec473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6848528c8f78a5c9e399fa881c5a893f"><td class="memItemLeft" align="right" valign="top">typedef uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a></td></tr>
+<tr class="separator:a6848528c8f78a5c9e399fa881c5a893f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -146,6 +150,8 @@ Functions</h2></td></tr>
 <tr class="separator:a56ad21113b20c2163c3d1af1f8e28621"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a849f7b752ccd18ea2d5bdae42b11f48d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a849f7b752ccd18ea2d5bdae42b11f48d">fwrite</a> (const void *__restrict ptr, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, size_t nmemb, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream)</td></tr>
 <tr class="separator:a849f7b752ccd18ea2d5bdae42b11f48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4700e47684c5e43000501cff7eb2ca8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a4700e47684c5e43000501cff7eb2ca8f">fgetpos</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, <a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a> *__restrict__ pos)</td></tr>
+<tr class="separator:a4700e47684c5e43000501cff7eb2ca8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e71f513ad2496acb5361aedc065e3d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a9e71f513ad2496acb5361aedc065e3d8">feof</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream)</td></tr>
 <tr class="separator:a9e71f513ad2496acb5361aedc065e3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a98383bb54291c2abede7aa28acf597"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a4a98383bb54291c2abede7aa28acf597">ferror</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream)</td></tr>
@@ -186,6 +192,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">typedef struct _FILE <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6848528c8f78a5c9e399fa881c5a893f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6848528c8f78a5c9e399fa881c5a893f">&#9670;&nbsp;</a></span>fpos_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint64_t <a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -241,6 +261,34 @@ Variables</h2></td></tr>
           <td class="paramtype"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *&#160;</td>
           <td class="paramname"><em>stream</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4700e47684c5e43000501cff7eb2ca8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4700e47684c5e43000501cff7eb2ca8f">&#9670;&nbsp;</a></span>fgetpos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fgetpos </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a> *__restrict__&#160;</td>
+          <td class="paramname"><em>pos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

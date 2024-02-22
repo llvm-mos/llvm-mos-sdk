@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['screen_5fmode_5finfo_5ft_2888',['screen_mode_info_t',['../structscreen__mode__info__t.html',1,'']]]
+  ['screen_5fmode_5finfo_5ft_2893',['screen_mode_info_t',['../structscreen__mode__info__t.html',1,'']]]
 ];

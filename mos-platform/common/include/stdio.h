@@ -27,6 +27,10 @@ extern FILE *stdin;
 extern FILE *stdout;
 extern FILE *stderr;
 
+#define SEEK_SET 0
+#define SEEK_CUR 1
+#define SEEK_END 2
+
 // Formated input/output functions
 
 int fprintf(FILE *__restrict__ stream, const char *__restrict__ format, ...);
@@ -64,6 +68,7 @@ size_t fwrite(const void *__restrict ptr, size_t size, size_t nmemb,
 // File positioning functions
 
 int fgetpos(FILE *__restrict__ stream, fpos_t *__restrict__ pos);
+int fseek(FILE *stream, long int offset, int whence);
 
 // Error-handling functions
 

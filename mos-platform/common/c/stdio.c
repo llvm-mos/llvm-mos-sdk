@@ -62,6 +62,19 @@ size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
   return n;
 }
 
+size_t fwrite(const void *__restrict ptr, size_t size, size_t nmemb,
+              FILE *__restrict__ stream) {
+  if (!size)
+    return 0;
+
+  const unsigned char *cptr = (const unsigned char *)ptr;
+  size_t n;
+  for (n = 0; n < nmemb; ++n)
+    for (size_t s = size; s; --s)
+      fputc(*cptr++, stream);
+  return n;
+}
+
 // Error-handling functions
 
 int feof(FILE *stream) { return 0; }

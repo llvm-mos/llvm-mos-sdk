@@ -55,6 +55,9 @@ int puts(const char *s);
 size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
              FILE *__restrict__ stream);
 
+size_t fwrite(const void *__restrict ptr, size_t size, size_t nmemb,
+              FILE *__restrict__ stream);
+
 // Error-handling functions
 
 int feof(FILE *stream);

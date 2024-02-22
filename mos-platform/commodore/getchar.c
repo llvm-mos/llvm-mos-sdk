@@ -33,11 +33,8 @@ static void __fill_buffer() {
     const char c = cbm_k_chrin();
 
     input_buffer[buf_end++] = c;
-    if (c == '\r') {
-      /* echo carriage return */
-      __putchar('\n');
+    if (c == '\r')
       break;
-    }
   }
 }
 

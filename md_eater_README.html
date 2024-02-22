@@ -79,7 +79,7 @@ Features of the port</h2>
 </ul>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Serial console</h2>
-<p>The W65C51N Asynchronous Communications Interface Adapter (ACIA) at address $5000 in the breadboard's memory map is used to implement the __putchar() and <a class="el" href="stdio_8h.html#a3e29caa20f7cffe18f410f01278905a8">getchar()</a> functions for the C library.</p>
+<p>The W65C51N Asynchronous Communications Interface Adapter (ACIA) at address $5000 in the breadboard's memory map is used to implement the __putchar() and __getchar() functions for the C library.</p>
 <p>The ACIA is configured for 19200 bps N-8-1 communications and RTS handshaking. The handshaking lines on the W65C51N should be hooked up as follows:</p>
 <ul>
 <li>Connect pin 8 (RTS) of the W65C51N to pin 10 (T2IN) of the MAX232.</li>

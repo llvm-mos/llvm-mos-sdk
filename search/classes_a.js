@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['make_5funsigned_2855',['make_unsigned',['../structmake__unsigned.html',1,'']]],
-  ['make_5funsigned_3c_20int_20_3e_2856',['make_unsigned&lt; int &gt;',['../structmake__unsigned_3_01int_01_4.html',1,'']]],
-  ['make_5funsigned_3c_20long_20_3e_2857',['make_unsigned&lt; long &gt;',['../structmake__unsigned_3_01long_01_4.html',1,'']]],
-  ['make_5funsigned_3c_20long_20long_20_3e_2858',['make_unsigned&lt; long long &gt;',['../structmake__unsigned_3_01long_01long_01_4.html',1,'']]],
-  ['make_5funsigned_3c_20signed_20char_20_3e_2859',['make_unsigned&lt; signed char &gt;',['../structmake__unsigned_3_01signed_01char_01_4.html',1,'']]],
-  ['mouse_5fpos_5ft_2860',['mouse_pos_t',['../structmouse__pos__t.html',1,'']]]
+  ['make_5funsigned_2856',['make_unsigned',['../structmake__unsigned.html',1,'']]],
+  ['make_5funsigned_3c_20int_20_3e_2857',['make_unsigned&lt; int &gt;',['../structmake__unsigned_3_01int_01_4.html',1,'']]],
+  ['make_5funsigned_3c_20long_20_3e_2858',['make_unsigned&lt; long &gt;',['../structmake__unsigned_3_01long_01_4.html',1,'']]],
+  ['make_5funsigned_3c_20long_20long_20_3e_2859',['make_unsigned&lt; long long &gt;',['../structmake__unsigned_3_01long_01long_01_4.html',1,'']]],
+  ['make_5funsigned_3c_20signed_20char_20_3e_2860',['make_unsigned&lt; signed char &gt;',['../structmake__unsigned_3_01signed_01char_01_4.html',1,'']]],
+  ['mouse_5fpos_5ft_2861',['mouse_pos_t',['../structmouse__pos__t.html',1,'']]]
 ];

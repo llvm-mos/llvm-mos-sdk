@@ -8,6 +8,7 @@
 
 #include <stdarg.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,6 +20,8 @@ struct _FILE;
 typedef struct _FILE FILE;
 
 #define EOF (-1)
+
+typedef uint64_t fpos_t;
 
 extern FILE *stdin;
 extern FILE *stdout;
@@ -57,6 +60,10 @@ size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
 
 size_t fwrite(const void *__restrict ptr, size_t size, size_t nmemb,
               FILE *__restrict__ stream);
+
+// File positioning functions
+
+int fgetpos(FILE *__restrict__ stream, fpos_t *__restrict__ pos);
 
 // Error-handling functions
 

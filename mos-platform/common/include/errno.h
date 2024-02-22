@@ -15,6 +15,8 @@ extern int _errno;
 #define ENOMEM 5
 #define ELAST 5
 
+#define ESPIPE 29
+
 #ifdef __cplusplus
 }
 #endif

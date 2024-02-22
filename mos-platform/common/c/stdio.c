@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#include <errno.h>
 #include <stdint.h>
 
 FILE *stdin;
@@ -73,6 +74,13 @@ size_t fwrite(const void *__restrict ptr, size_t size, size_t nmemb,
     for (size_t s = size; s; --s)
       fputc(*cptr++, stream);
   return n;
+}
+
+// File positioning functions
+
+int fgetpos(FILE *__restrict__ stream, fpos_t *__restrict__ pos) {
+  errno = ESPIPE;
+  return EOF;
 }
 
 // Error-handling functions

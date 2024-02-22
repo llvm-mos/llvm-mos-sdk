@@ -69,8 +69,9 @@ var searchData=
   ['fr_5ftoo_5fmany_5fopen_5ffiles_699',['FR_TOO_MANY_OPEN_FILES',['../rp6502_8h.html#a49d0171ecbd362cda5680a0d360db44ca50dd3c3c274ccebb2cfbddde9d065bb9',1,'rp6502.h']]],
   ['fr_5fwrite_5fprotected_700',['FR_WRITE_PROTECTED',['../rp6502_8h.html#a49d0171ecbd362cda5680a0d360db44cac3afbb423b1d4497229416812aff383b',1,'rp6502.h']]],
   ['frame_701',['frame',['../structpce__cdb__toc__data.html#aa849f9cc4d23e1c75741d186cdd1a08e',1,'pce_cdb_toc_data::frame()'],['../structpce__sector.html#a6c468561c3d58c45efe1aba9530365b9',1,'pce_sector::frame()']]],
-  ['free_702',['free',['../common_2include_2stdlib_8h.html#afbedc913aa4651b3c3b4b3aecd9b4711',1,'stdlib.h']]],
-  ['fresult_703',['FRESULT',['../rp6502_8h.html#a49d0171ecbd362cda5680a0d360db44c',1,'rp6502.h']]],
-  ['from_704',['FROM',['../famitone2_2LICENSE.html#a04b607378cba50550c6d47c105d95ed1',1,'FROM():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a54b4d04e10c91d4910abea0c1596291d',1,'FROM():&#160;LICENSE'],['../neslib_2LICENSE.html#a04b607378cba50550c6d47c105d95ed1',1,'FROM():&#160;LICENSE']]],
-  ['front_705',['front',['../structstd_1_1array.html#ae42ae6d02646ab094c47d58da244230b',1,'std::array::front()'],['../structstd_1_1array.html#a5ad2eafcc5e3eb41bfe960dbea0a7ead',1,'std::array::front() const']]]
+  ['fread_702',['fread',['../stdio_8h.html#a56ad21113b20c2163c3d1af1f8e28621',1,'stdio.h']]],
+  ['free_703',['free',['../common_2include_2stdlib_8h.html#afbedc913aa4651b3c3b4b3aecd9b4711',1,'stdlib.h']]],
+  ['fresult_704',['FRESULT',['../rp6502_8h.html#a49d0171ecbd362cda5680a0d360db44c',1,'rp6502.h']]],
+  ['from_705',['FROM',['../famitone2_2LICENSE.html#a04b607378cba50550c6d47c105d95ed1',1,'FROM():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a54b4d04e10c91d4910abea0c1596291d',1,'FROM():&#160;LICENSE'],['../neslib_2LICENSE.html#a04b607378cba50550c6d47c105d95ed1',1,'FROM():&#160;LICENSE']]],
+  ['front_706',['front',['../structstd_1_1array.html#ae42ae6d02646ab094c47d58da244230b',1,'std::array::front()'],['../structstd_1_1array.html#a5ad2eafcc5e3eb41bfe960dbea0a7ead',1,'std::array::front() const']]]
 ];

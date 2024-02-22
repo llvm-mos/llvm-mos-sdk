@@ -104,6 +104,12 @@ This graph shows which files directly or indirectly include this file:</div>
 Macros</h2></td></tr>
 <tr class="memitem:a59adc4c82490d23754cd39c2fb99b0da"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a59adc4c82490d23754cd39c2fb99b0da">EOF</a>&#160;&#160;&#160;(-1)</td></tr>
 <tr class="separator:a59adc4c82490d23754cd39c2fb99b0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d112bae8fd35be772185b6ec6bcbe64"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a0d112bae8fd35be772185b6ec6bcbe64">SEEK_SET</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a0d112bae8fd35be772185b6ec6bcbe64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c8d0b76b470ba65a43ca46a88320f39"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a4c8d0b76b470ba65a43ca46a88320f39">SEEK_CUR</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a4c8d0b76b470ba65a43ca46a88320f39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2a2e6c114780c3071efd24f16c7f7d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#ad2a2e6c114780c3071efd24f16c7f7d8">SEEK_END</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ad2a2e6c114780c3071efd24f16c7f7d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -152,6 +158,8 @@ Functions</h2></td></tr>
 <tr class="separator:a849f7b752ccd18ea2d5bdae42b11f48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4700e47684c5e43000501cff7eb2ca8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a4700e47684c5e43000501cff7eb2ca8f">fgetpos</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, <a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a> *__restrict__ pos)</td></tr>
 <tr class="separator:a4700e47684c5e43000501cff7eb2ca8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a800ee8381f5cce368abe5df835aa107c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a800ee8381f5cce368abe5df835aa107c">fseek</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream, long int offset, int whence)</td></tr>
+<tr class="separator:a800ee8381f5cce368abe5df835aa107c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e71f513ad2496acb5361aedc065e3d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a9e71f513ad2496acb5361aedc065e3d8">feof</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream)</td></tr>
 <tr class="separator:a9e71f513ad2496acb5361aedc065e3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a98383bb54291c2abede7aa28acf597"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a4a98383bb54291c2abede7aa28acf597">ferror</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream)</td></tr>
@@ -177,6 +185,48 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define EOF&#160;&#160;&#160;(-1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c8d0b76b470ba65a43ca46a88320f39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c8d0b76b470ba65a43ca46a88320f39">&#9670;&nbsp;</a></span>SEEK_CUR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEEK_CUR&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad2a2e6c114780c3071efd24f16c7f7d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2a2e6c114780c3071efd24f16c7f7d8">&#9670;&nbsp;</a></span>SEEK_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEEK_END&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d112bae8fd35be772185b6ec6bcbe64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d112bae8fd35be772185b6ec6bcbe64">&#9670;&nbsp;</a></span>SEEK_SET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEEK_SET&#160;&#160;&#160;0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -448,6 +498,40 @@ Variables</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__&#160;</td>
           <td class="paramname"><em>stream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a800ee8381f5cce368abe5df835aa107c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a800ee8381f5cce368abe5df835aa107c">&#9670;&nbsp;</a></span>fseek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fseek </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long int&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>whence</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

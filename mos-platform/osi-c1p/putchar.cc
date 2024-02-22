@@ -18,8 +18,8 @@ using __osic1p_screen = __osi_screen<>;
 
 extern "C" {
 
-__attribute__((always_inline, weak)) void __char_conv(char c,
-                                                      void (*emit)(char c)) {
+__attribute__((always_inline, weak)) void __from_ascii(char c,
+                                                       void (*emit)(char c)) {
   /*
    * The low-level character output function implements LF as line feed
    * without CR, e.g. the active position stays in the same column. Here we

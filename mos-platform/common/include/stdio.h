@@ -59,7 +59,7 @@ int ferror(FILE *stream);
 
 // Emit a sequence of characters in the target's character set that
 // correspond to the given ASCII character.
-__attribute__((always_inline)) void __char_conv(char c, void (*emit)(char c));
+__attribute__((always_inline)) void __from_ascii(char c, void (*emit)(char c));
 
 // Put a character already in the target's character set out to the target's
 // equivalent of file descriptor 0.

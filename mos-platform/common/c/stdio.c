@@ -34,7 +34,7 @@ int getc(FILE *stream) { return fgetc(stream); }
 int putc(int c, FILE *stream) { return fputc(c, stream); }
 
 int putchar(int c) {
-  __char_conv(c, __putchar);
+  __from_ascii(c, __putchar);
   return c;
 }
 

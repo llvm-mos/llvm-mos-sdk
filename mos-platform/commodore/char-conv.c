@@ -12,15 +12,29 @@ asm(".section .init.250,\"axR\",@progbits\n"
     "  jsr __CHROUT\n");
 
 __attribute__((always_inline, weak)) void __from_ascii(char c,
-                                                       void (*emit)(char c)) {
+                                                       void (*write)(char c)) {
   if (__builtin_expect(c == '\n', 0))
-    emit('\r');
+    write('\r');
   else if (__builtin_expect(c == '\b', 0))
-    emit('\x9d'); // CURSOR LEFT
+    write('\x9d'); // CURSOR LEFT
   else if ('a' <= c && c <= 'z')
-    emit(c & ~0x20);
+    write(c & ~0x20);
   else if ('A' <= c && c <= 'Z')
-    emit(c | 0x80);
+    write(c | 0x80);
   else
-    emit(c);
+    write(c);
+}
+
+__attribute__((always_inline, weak)) int __to_ascii(int (*read)(void)) {
+  int c = read();
+  if (__builtin_expect(c == '\r', 0))
+    return '\n';
+  else if (__builtin_expect(c == '\x9d', 0)) // CURSOR LEFT
+    return '\b';
+  else if ('A' <= c && c <= 'Z') // lowercase
+    return c | 0x20;
+  else if (0xc1 <= c && c <= 0xda) // uppercase
+    return c & ~0x80;
+  else
+    return c;
 }

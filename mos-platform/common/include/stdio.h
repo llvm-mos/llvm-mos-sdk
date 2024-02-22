@@ -57,13 +57,21 @@ int ferror(FILE *stream);
 
 // Platform-specific backend
 
-// Emit a sequence of characters in the target's character set that
+// Write a sequence of characters in the target's character set that
 // correspond to the given ASCII character.
-__attribute__((always_inline)) void __from_ascii(char c, void (*emit)(char c));
+__attribute__((always_inline)) void __from_ascii(char c, void (*write)(char c));
 
-// Put a character already in the target's character set out to the target's
-// equivalent of file descriptor 0.
+// Read a sequence of characters in the target's character set and return the
+// corrsponding ASCII character.
+__attribute__((always_inline)) int __to_ascii(int (*read)(void));
+
+// Put a character in the target's character set out to the target's
+// equivalent of file descriptor 1 (stdout).
 void __putchar(char c);
+
+// Get a character in the target's character set from to the target's
+// equivalent of file descriptor 0 (stdin).
+int __getchar(void);
 
 #ifdef __cplusplus
 }

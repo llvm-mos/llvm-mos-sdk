@@ -109,7 +109,7 @@ int rpc8e_display_key_read(void) {
   return key;
 }
 
-int getchar(void) {
+int __getchar(void) {
   uint8_t old_device = rpc8e_redbus_map(boot_display_id);
 
   while (!rpc8e_display_key_pressed()) {

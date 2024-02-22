@@ -10,11 +10,23 @@ asm(".section .init.250,\"axR\",@progbits\n"
     "  jsr __CHROUT\n");
 
 __attribute__((always_inline, weak)) void __from_ascii(char c,
-                                                       void (*emit)(char c)) {
+                                                       void (*write)(char c)) {
   if (__builtin_expect(c == '\n', 0))
-    emit('\r');
+    write('\r');
   else if (__builtin_expect(c == '\b', 0))
-    emit('\x9d'); // CURSOR LEFT
+    write('\x9d'); // CURSOR LEFT
   else
-    emit(c);
+    write(c);
+}
+
+__attribute__((always_inline, weak)) int __to_ascii(int (*read)(void)) {
+  int c = read();
+  switch (c) {
+  case '\r':
+    return '\n';
+  case '\x9d': // CURSOR LEFT
+    return '\b';
+  default:
+    return c;
+  }
 }

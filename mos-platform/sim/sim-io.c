@@ -5,7 +5,7 @@
 volatile struct _sim_reg *const sim_reg_iface =
     ((volatile struct _sim_reg *)0xFFF0);
 
-int getchar() {
+int __getchar() {
   // fetch char (may block)
   const char c = sim_reg_iface->getchar;
 

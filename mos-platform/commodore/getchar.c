@@ -6,8 +6,8 @@
 // Kernal line buffer is 80 bytes. It appears that if 80 chars are input, the
 // buffer is reset.
 static char input_buffer[80];
-static uint8_t buf_begin = 0;
-static uint8_t buf_end = 0;
+static uint8_t buf_begin;
+static uint8_t buf_end;
 
 // Default input from the keyboard device has 80 char edit buffer.
 // When you call CHRIN, it waits for the user to input something and does not
@@ -30,25 +30,19 @@ static void __fill_buffer() {
   buf_end = 0;
 
   for (;;) {
-    const char currentchar = cbm_k_chrin();
+    const char c = cbm_k_chrin();
 
-    if (currentchar == '\r') {
+    input_buffer[buf_end++] = c;
+    if (c == '\r') {
       /* echo carriage return */
-      cbm_k_chrout('\n');
-      input_buffer[buf_end++] = '\n';
+      __putchar('\n');
       break;
     }
-
-    input_buffer[buf_end++] = currentchar;
   }
 }
 
-int getchar() {
-
-  // While the input buffer is not empty, return characters from it.
-  if (buf_begin == buf_end) {
+int __getchar() {
+  if (buf_begin == buf_end)
     __fill_buffer();
-  }
-
   return input_buffer[buf_begin++];
 }

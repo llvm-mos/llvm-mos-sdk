@@ -47,6 +47,21 @@ int puts(const char *s) {
   return 0;
 }
 
+// Direct input/output functions
+
+size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
+             FILE *__restrict__ stream) {
+  if (!size)
+    return 0;
+
+  unsigned char *cptr = (unsigned char *)ptr;
+  size_t n;
+  for (n = 0; n < nmemb; ++n)
+    for (size_t s = size; s; --s)
+      *cptr++ = fgetc(stream);
+  return n;
+}
+
 // Error-handling functions
 
 int feof(FILE *stream) { return 0; }

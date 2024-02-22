@@ -8,13 +8,11 @@ extern "C" {
 extern int _errno;
 #define errno _errno
 
-#define ERANGE 1
-#define EDOM 2
-#define EILSEQ 3
-#define EINVAL 4
-#define ENOMEM 5
-#define ELAST 5
-
+#define ERANGE 34
+#define EDOM 33
+#define EILSEQ 84
+#define EINVAL 22
+#define ENOMEM 12
 #define ESPIPE 29
 
 #ifdef __cplusplus

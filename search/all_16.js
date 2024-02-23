@@ -15,7 +15,8 @@ var searchData=
   ['uintmax_5ft_2497',['uintmax_t',['../namespacestd.html#a525190b45afaf4bfb46a82965a182488',1,'std']]],
   ['uintptr_5ft_2498',['uintptr_t',['../namespacestd.html#aaf043140c8126b986960273ff02e1220',1,'std']]],
   ['unclaimed_2499',['unclaimed',['../struct__sim__reg.html#ab3a5e278b65999beb7b26b1e46494c19',1,'_sim_reg']]],
-  ['unlock_5fmissile_2500',['UNLOCK_MISSILE',['../atari2600__constants_8h.html#a875f60de490e22bd71d1c58c234ebae2',1,'atari2600_constants.h']]],
-  ['use_2501',['use',['../famitone2_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a37d51c2d1e9296bc4cd1ad1eb80d3096',1,'use():&#160;LICENSE'],['../neslib_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE']]],
-  ['utility_2502',['utility',['../utility.html',1,'']]]
+  ['ungetc_2500',['ungetc',['../stdio_8h.html#a54efa95b6d5b41adec98e5b8a1a9f27b',1,'stdio.h']]],
+  ['unlock_5fmissile_2501',['UNLOCK_MISSILE',['../atari2600__constants_8h.html#a875f60de490e22bd71d1c58c234ebae2',1,'atari2600_constants.h']]],
+  ['use_2502',['use',['../famitone2_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a37d51c2d1e9296bc4cd1ad1eb80d3096',1,'use():&#160;LICENSE'],['../neslib_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE']]],
+  ['utility_2503',['utility',['../utility.html',1,'']]]
 ];

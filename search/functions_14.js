@@ -1,7 +1,14 @@
 var searchData=
 [
-  ['waitvsync_3579',['waitvsync',['../cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0',1,'cx16.h']]],
-  ['write_3580',['write',['../rp6502_8h.html#a93055c9dde9027a0dcaff29f093bc9ee',1,'rp6502.h']]],
-  ['write_5fxram_3581',['write_xram',['../rp6502_8h.html#ad0baac61b7bb736e237c57e4f4e520e1',1,'rp6502.h']]],
-  ['write_5fxstack_3582',['write_xstack',['../rp6502_8h.html#a17e0c0b3782baba78870716c63577b6d',1,'rp6502.h']]]
+  ['vera_5flayer_5fenable_3570',['vera_layer_enable',['../cx16_8h.html#a5858aa4b14df2b02f0100f33a588baa2',1,'cx16.h']]],
+  ['vera_5fsprites_5fenable_3571',['vera_sprites_enable',['../cx16_8h.html#aaf115703e890719c1666d5bda2897c50',1,'cx16.h']]],
+  ['vfprintf_3572',['vfprintf',['../stdio_8h.html#a3c30ad8abcdcfec5b935dfd30ddad1fa',1,'stdio.h']]],
+  ['videomode_3573',['videomode',['../c128_8h.html#a6b383e3e735451959fbb1f655a72e55b',1,'videomode(unsigned char mode):&#160;c128.h'],['../cx16_8h.html#a3717f98d8e7fedf291cb6d372e49f7ca',1,'videomode(signed char mode) __attribute__((leaf)):&#160;cx16.h']]],
+  ['vpeek_3574',['vpeek',['../cx16_8h.html#af9881c814f2b40278c6f104ff3a171d0',1,'cx16.h']]],
+  ['vpoke_3575',['vpoke',['../cx16_8h.html#a932344999f2d172264c938eaa65f81fc',1,'cx16.h']]],
+  ['vprintf_3576',['vprintf',['../stdio_8h.html#a469695a1085801623e0a0e62bd09b5fc',1,'stdio.h']]],
+  ['vram_5fadr_3577',['vram_adr',['../neslib_8h.html#ab435b344bc9ef4b60f84c1357d171c8a',1,'neslib.h']]],
+  ['vram_5fput_3578',['vram_put',['../neslib_8h.html#a43abedc1019b177c9baeeffd4402ccb2',1,'neslib.h']]],
+  ['vsnprintf_3579',['vsnprintf',['../stdio_8h.html#a5c35ed7416b6b1ce06ded7627fc5ecf5',1,'stdio.h']]],
+  ['vsprintf_3580',['vsprintf',['../stdio_8h.html#a22080e8fc6f594282b027c1dd57a3009',1,'stdio.h']]]
 ];

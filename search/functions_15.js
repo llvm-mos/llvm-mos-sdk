@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['xram_5fread_3583',['xram_read',['../mapper__xram__single_8h.html#a66c05a3456c22c6fc517e6787fa84203',1,'mapper_xram_single.h']]],
-  ['xram_5fwrite_3584',['xram_write',['../mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f',1,'mapper_xram_single.h']]],
-  ['xregn_3585',['xregn',['../rp6502_8h.html#a2e230e46483dd9062996f95f50946cfe',1,'rp6502.h']]]
+  ['waitvsync_3581',['waitvsync',['../cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0',1,'cx16.h']]],
+  ['write_3582',['write',['../rp6502_8h.html#a93055c9dde9027a0dcaff29f093bc9ee',1,'rp6502.h']]],
+  ['write_5fxram_3583',['write_xram',['../rp6502_8h.html#ad0baac61b7bb736e237c57e4f4e520e1',1,'rp6502.h']]],
+  ['write_5fxstack_3584',['write_xstack',['../rp6502_8h.html#a17e0c0b3782baba78870716c63577b6d',1,'rp6502.h']]]
 ];

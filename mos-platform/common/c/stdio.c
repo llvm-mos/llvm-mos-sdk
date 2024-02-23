@@ -90,6 +90,11 @@ int fsetpos(FILE *stream, const fpos_t *pos) {
   return EOF;
 }
 
+long int ftell(FILE *stream) {
+  errno = ESPIPE;
+  return -1L;
+}
+
 // Error-handling functions
 
 int feof(FILE *stream) { return 0; }

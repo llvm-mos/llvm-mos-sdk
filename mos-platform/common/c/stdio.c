@@ -2,6 +2,7 @@
 
 #include <errno.h>
 #include <stdint.h>
+#include <string.h>
 
 FILE *stdin;
 FILE *stdout;
@@ -104,3 +105,13 @@ void clearerr(FILE *stream) {}
 int feof(FILE *stream) { return 0; }
 
 int ferror(FILE *stream) { return 0; }
+
+void perror(const char *s) {
+  if (s && *s) {
+    fputs(s, stderr);
+    putc(':', stderr);
+    putc(' ', stderr);
+  }
+  fputs(strerror(errno), stderr);
+  putc('\n', stderr);
+}

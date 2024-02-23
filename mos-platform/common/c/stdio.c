@@ -99,6 +99,8 @@ void rewind(FILE *stream) {}
 
 // Error-handling functions
 
+void clearerr(FILE *stream) {}
+
 int feof(FILE *stream) { return 0; }
 
 int ferror(FILE *stream) { return 0; }

@@ -75,6 +75,7 @@ void rewind(FILE *stream);
 
 // Error-handling functions
 
+void clearerr(FILE *stream);
 int feof(FILE *stream);
 int ferror(FILE *stream);
 

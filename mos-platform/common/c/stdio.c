@@ -33,7 +33,7 @@ int fputs(const char *__restrict__ s, FILE *__restrict__ stream) {
 
 int getc(FILE *stream) { return fgetc(stream); }
 
-int getchar(void) { return __to_ascii(__getchar); }
+__attribute__((weak)) int getchar(void) { return __to_ascii(__getchar); }
 
 int putc(int c, FILE *stream) { return fputc(c, stream); }
 

@@ -55,6 +55,9 @@ add_platform_library(common-c
 
   # Internal libraries
   varint.cc
+
+  # Provides a ungetc-aware getchar that is bigger than the one in stdio.c
+  ungetc.c
 )
 # Prevent the implementation of libcalls from being reduced to a call of those libcalls.
 set_property(SOURCE mem.c PROPERTY COMPILE_OPTIONS -fno-builtin-memset)

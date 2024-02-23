@@ -56,6 +56,7 @@ int getc(FILE *stream);
 int getchar(void);
 int putchar(int c);
 int puts(const char *s);
+int ungetc(int c, FILE *stream);
 
 // Direct input/output functions
 

@@ -71,6 +71,7 @@ int fgetpos(FILE *__restrict__ stream, fpos_t *__restrict__ pos);
 int fseek(FILE *stream, long int offset, int whence);
 int fsetpos(FILE *stream, const fpos_t *pos);
 long int ftell(FILE *stream);
+void rewind(FILE *stream);
 
 // Error-handling functions
 

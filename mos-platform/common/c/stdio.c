@@ -95,6 +95,8 @@ long int ftell(FILE *stream) {
   return -1L;
 }
 
+void rewind(FILE *stream) {}
+
 // Error-handling functions
 
 int feof(FILE *stream) { return 0; }

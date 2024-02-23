@@ -85,6 +85,11 @@ int fgetpos(FILE *__restrict__ stream, fpos_t *__restrict__ pos) {
 
 int fseek(FILE *stream, long int offset, int whence) { return EOF; }
 
+int fsetpos(FILE *stream, const fpos_t *pos) {
+  errno = ESPIPE;
+  return EOF;
+}
+
 // Error-handling functions
 
 int feof(FILE *stream) { return 0; }

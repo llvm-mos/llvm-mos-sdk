@@ -69,6 +69,7 @@ size_t fwrite(const void *__restrict ptr, size_t size, size_t nmemb,
 
 int fgetpos(FILE *__restrict__ stream, fpos_t *__restrict__ pos);
 int fseek(FILE *stream, long int offset, int whence);
+int fsetpos(FILE *stream, const fpos_t *pos);
 
 // Error-handling functions
 

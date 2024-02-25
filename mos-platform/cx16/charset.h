@@ -51,10 +51,7 @@ template <size_t N> struct UnshiftedString {
 
       // Date: 2018 April 20
 
-      // Author: Rebecca Bettencourt <support@kreativekorp.com>
-
-      // UNICODE LICENSE V3
-      // Copyright © 1991-2023 Unicode, Inc.
+      // Original Author: Rebecca Bettencourt <support@kreativekorp.com>
 
     case 0x0020:
       return 0x20; // SPACE
@@ -358,10 +355,7 @@ template <size_t N> struct ShiftedString {
 
       // Date: 2018 October 11
 
-      // Author: Rebecca Bettencourt <support@kreativekorp.com>
-
-      // UNICODE LICENSE V3
-      // Copyright © 1991-2023 Unicode, Inc.
+      // Original Author: Rebecca Bettencourt <support@kreativekorp.com>
 
     case 0x0020:
       return 0x20; // SPACE
@@ -2073,11 +2067,9 @@ template <size_t N> struct ISO885915String {
 
       // Date: 1999 July 27
 
-      // Authors: Markus Kuhn <http://www.cl.cam.ac.uk/~mgk25/>
-      //          Ken Whistler <ken@unicode.org>
+      // Original Authors: Markus Kuhn <http://www.cl.cam.ac.uk/~mgk25/>
+      //                   Ken Whistler <ken@unicode.org>
 
-      // UNICODE LICENSE V3
-      // Copyright © 1991-2023 Unicode, Inc.
     case 0x0020:
       return 0x20; // SPACE
     case 0x0021:

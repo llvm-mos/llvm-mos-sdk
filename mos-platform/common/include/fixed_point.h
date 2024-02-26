@@ -1,18 +1,15 @@
-
-
-#ifndef _FIXED_POINT_H
-#define _FIXED_POINT_H
-
 // Copyright 2024 LLVM-MOS Project
 // Licensed under the Apache License, Version 2.0 with LLVM Exceptions.
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
+#ifndef _FIXED_POINT_H
+#define _FIXED_POINT_H
+
 #include <cstdint>
 #include <limits.h>
 #include <type_traits>
-
-namespace fixedpoint {
+#include <stdio.h>
 
 /// Numeric Wrapper for Fixed Point math
 ///
@@ -39,220 +36,276 @@ namespace fixedpoint {
 /// yields `0x50` with a remainder of `0x60`. This class makes that divider a
 /// part of the type of the class, allowing seamless math operations as if its a
 /// normal integer, but with the correct shifting when combining with other values.
-template<uint8_t ISize, uint8_t FSize, bool Signed = true> class Value;
+template<uint8_t ISize, uint8_t FSize, bool Signed = true> class FixedPoint;
 
 template<uint8_t ISize, uint8_t FSize, bool Signed>
-class Value {
-protected:
-
-  // Used to calculate the bitmasks for both the integer part and fractional part
+class FixedPoint {
+private:
   template <typename R>
-  static constexpr R BitMask(unsigned int const onecount) {
+  static constexpr R bitMask(uint64_t onecount) {
     return static_cast<R>(-(onecount != 0))
       & (static_cast<R>(-1) >> ((sizeof(R) * CHAR_BIT) - onecount));
   }
 
+  template<uint8_t LeftISize, uint8_t RightISize>
+  static constexpr _BitInt(RightISize) signExtensionMask(_BitInt(LeftISize) in) {
+    if constexpr (LeftISize < RightISize) {
+      // Need to sign extend since the new size is greater than old size
+      return (in & (1 << LeftISize)) != 0 ? bitMask(RightISize - LeftISize) << LeftISize : 0;
+    } else {
+      // We are truncating or not changing size, so don't do sign extension
+      return 0;
+    }
+  }
+
   // Size of the underlying storage for the different views of the data.
   // The total combined storage will be used for representing the actual value.
-  using IntType = std::conditional_t<Signed, 
-                                     signed _BitInt(((ISize + 7) / 8) * 8),
-                                     unsigned _BitInt(((ISize + 7) / 8) * 8)>;
-  using FracType = std::conditional_t<Signed,
-                                      signed _BitInt(((FSize + 7) / 8) * 8),
-                                      unsigned _BitInt(((FSize + 7) / 8) * 8)>;
-  using StorageType = std::conditional_t<Signed,
-                                         signed _BitInt((((ISize + FSize) + 7) / 8) * 8),
-                                         unsigned _BitInt((((ISize + FSize) + 7) / 8) * 8)>;
-  StorageType val;
-  static constexpr unsigned long INT_MASK = BitMask<unsigned long>(ISize) << FSize;
-  static constexpr unsigned long FRAC_MASK = BitMask<unsigned long>(FSize);
+  static constexpr auto roundSizeUp(uint64_t v) {
+    return ((v + 7) / 8) * 8;
+  }
+  using StorageSizeT = _BitInt(roundSizeUp(ISize + FSize));
+  using StorageType = std::conditional_t<Signed, StorageSizeT, std::make_unsigned_t<StorageSizeT>>;
+
+  // Underlying storage for the type
+  union {
+    StorageType val;
+    struct {
+      StorageType i : ISize;
+      StorageType f : FSize;
+    };
+  };
 
 public:
 
   // Constructors
 
   /// Common constructor for creating a fixed point value from an integer value
-  [[clang::always_inline]] constexpr explicit Value(IntType i) {
-    SetI(i); 
+  [[clang::always_inline]] constexpr FixedPoint(StorageType i) {
+    set_i(i); 
   }
   
-  /// Copy constructor for a fixed point value with different sizes of Int/Frac
-  template<uint8_t OI, uint8_t OF, bool S>
-  [[clang::always_inline]] constexpr Value(const Value<OI, OF, S>& o) {
-    val = Value<ISize, FSize>(o.AsI(), o.AsF()).Get();
+  /// Copy constructor for a fixed point value with different sizes of Int
+  /// If both of the two fixed point values are signed, the new number will be
+  /// sign extended from the old value
+  template<uint8_t OI, uint8_t OF, bool S,
+    typename std::enable_if<OI >= ISize && OF == FSize, bool>::type = true>
+  [[clang::always_inline]] constexpr FixedPoint(const FixedPoint<OI, OF, S>& o) {
+    // Perform sign extension if both of the two types are signed
+    auto intval = o.as_i();
+    if constexpr(Signed && S) {
+      intval |= signExtensionMask<OI, ISize>(intval);
+    }
+    auto floatval = o.as_f();
+    val = FixedPoint<ISize, FSize, Signed>(intval, floatval).get();
   }
+  /// Copy constructor for a fixed point value with different sizes of FracSize
+  /// This constructor will rescale the fractional value to the new size by shifting
+  /// the fractional value by the difference between the size of the two.
+  template<uint8_t OI, uint8_t OF, bool S,
+    typename std::enable_if<OI >= ISize && OF != FSize, bool>::type = true>
+  [[clang::always_inline]] constexpr explicit FixedPoint(const FixedPoint<OI, OF, S>& o) {
+    // Perform sign extension if both of the two types are signed
+    auto intval = o.as_i();
+    if constexpr(Signed && S) {
+      intval |= signExtensionMask<OI, ISize>(intval);
+    }
+    // Recalculate the fractional value since the bases are different
+    constexpr auto shift = FSize > OF ? (FSize - OF) : (OF - FSize);
+    auto floatval = FSize > OF ? o.as_f() << shift : o.as_f() >> shift;
+    val = FixedPoint<ISize, FSize, Signed>(intval, floatval).get();
+  }
+  /// Copy constructor for a fixed point value with a smaller sized integer field.
+  /// This constructor will TRUNCATE the integer value to fit the new size,
+  /// and rescale the fractional value to the new size by shifting the fractional value
+  /// by the difference between the size of the two.
+  template<uint8_t OI, uint8_t OF, bool S,
+    typename std::enable_if<OI < ISize, bool>::type = true>
+  [[clang::always_inline]] constexpr explicit FixedPoint(const FixedPoint<OI, OF, S>& o) {
+    // Recalculate the decimal value if the bases are different
+    auto floatval = o.as_f();
+    if constexpr (OF != FSize) {
+      constexpr auto shift = FSize > OF ? (FSize - OF) : (OF - FSize);
+      floatval = FSize > OF ? floatval << shift : floatval >> shift;
+    }
+    val = FixedPoint<ISize, FSize, Signed>(o.as_i(), floatval).get();
+  }
+
   /// Copy constructor for fixed point values with the same size
-  [[clang::always_inline]] constexpr Value(const Value& o) : val(o.val) {}
+  [[clang::always_inline]] constexpr FixedPoint(const FixedPoint& o) : val(o.val) {}
   
   /// Constructor for setting both the integral and fractional part
-  [[clang::always_inline]] constexpr explicit Value(IntType i, FracType f) {
-    SetI(i);
-    SetF(f);
-  }
+  [[clang::always_inline]] constexpr FixedPoint(StorageType i, StorageType f) 
+    : i(i), f(f) {}
+#if __cplusplus >= 202002L
   /// Constructor to convert floating point values into fixed point
-  [[clang::always_inline]] constexpr Value(long double f) {
-    Set(f * (1 << FSize));
-  }
+  /// Multiplying by a power of two only increases the exponent of the 
+  /// floating point number, which is exact so long as overflow does not occur.
+  /// Rounding a floating point number to whole is always exact.
+  [[clang::always_inline]] consteval explicit FixedPoint(long double f) { set(f * (1 << FSize)); }
+  [[clang::always_inline]] consteval explicit FixedPoint(double f) { set(f * (1 << FSize)); }
+  [[clang::always_inline]] consteval explicit FixedPoint(float f) { set(f * (1 << FSize)); }
+#else
+  [[clang::always_inline]] constexpr explicit FixedPoint(long double f) { set(f * (1 << FSize)); }
+  [[clang::always_inline]] constexpr explicit FixedPoint(double f) { set(f * (1 << FSize)); }
+  [[clang::always_inline]] constexpr explicit FixedPoint(float f) { set(f * (1 << FSize)); }
+#endif
 
   // Direct value accessor and setter methods
 
   /// Returns just the integral portion
-  [[clang::always_inline]] constexpr IntType AsI() const { return (val & INT_MASK) >> FSize; }
+  [[clang::always_inline]] constexpr StorageType as_i() const { return i; }
   /// Returns just the fractional portion
-  [[clang::always_inline]] constexpr FracType AsF() const { return (val & FRAC_MASK); }
+  [[clang::always_inline]] constexpr StorageType as_f() const { return f; }
   /// Returns the entire value
-  [[clang::always_inline]] constexpr StorageType Get() const { return val; }
+  [[clang::always_inline]] constexpr StorageType get() const { return val; }
   /// Update just the integral portion
-  [[clang::always_inline]] constexpr void SetI(IntType v) { 
-    val = (val & ~INT_MASK) | static_cast<StorageType>((v) & (INT_MASK >> FSize)) << FSize;
+  [[clang::always_inline]] constexpr void set_i(StorageType value) { 
+    i = value;
   }
   /// Update just the fractional portion
-  [[clang::always_inline]] constexpr void SetF(FracType v) { 
-    val = (val & ~FRAC_MASK) | (v & FRAC_MASK);
+  [[clang::always_inline]] constexpr void set_f(StorageType value) { 
+    f = value;
   }
   /// Update the entire value
-  [[clang::always_inline]] constexpr void Set(StorageType v) { val = v; }
+  [[clang::always_inline]] constexpr void set(StorageType value) { val = value; }
+
+  /// Conversion to another fixed point type can be done losslessly if the new type
+  template<uint8_t OI, uint8_t OF, bool S = true>
+  [[clang::always_inline]] constexpr FixedPoint<OI, OF, S> as() {
+    return FixedPoint<OI, OF, S>(*this);
+  }
 
   // Operator overloads
-  [[clang::always_inline]] constexpr Value& operator=(Value o) {
+  [[clang::always_inline]] constexpr FixedPoint& operator=(FixedPoint o) {
     val = o.val;
     return *this;
   }
 
-  [[clang::always_inline]] constexpr Value operator +(const Value& o) const {
-    Value<ISize, FSize> n = val;
+  [[clang::always_inline]] constexpr FixedPoint operator +(FixedPoint o) const {
+    FixedPoint n = *this;
     n += o;
     return n;
   }
-  [[clang::always_inline]] constexpr Value& operator +=(const Value& o) {
+  [[clang::always_inline]] constexpr FixedPoint& operator +=(FixedPoint o) {
     val += o.val;
     return *this;
   }
 
-  [[clang::always_inline]] constexpr Value operator -(const Value& o) const {
-    Value<ISize, FSize> n = val;
+  [[clang::always_inline]] constexpr FixedPoint operator -(FixedPoint o) const {
+    FixedPoint n = *this;
     n -= o;
     return n;
   }
-  [[clang::always_inline]] constexpr Value& operator -=(const Value& o) {
+  [[clang::always_inline]] constexpr FixedPoint& operator -=(FixedPoint o) {
     val -= o.val;
     return *this;
   }
 
-  template<typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-  [[clang::always_inline]] constexpr Value operator/(T i) {
-    Value<ISize, FSize> n{val};
+  [[clang::always_inline]] constexpr FixedPoint operator/(StorageType i) {
+    FixedPoint n = *this;
     n /= i;
     return n;
   }
-  template<typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-  [[clang::always_inline]] constexpr Value& operator/=(T i) {
+  [[clang::always_inline]] constexpr FixedPoint& operator/=(StorageType i) {
     val /= i;
     return *this;
   }
 
-  template<typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-  [[clang::always_inline]] constexpr Value operator*(T i) {
-    Value<ISize, FSize> n{val};
+  [[clang::always_inline]] constexpr FixedPoint operator*(StorageType i) {
+    FixedPoint n = *this;
     n *= i;
     return n;
   }
-  template<typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-  [[clang::always_inline]] constexpr Value& operator*=(T i) {
+  [[clang::always_inline]] constexpr FixedPoint& operator*=(StorageType i) {
     val *= i;
     return *this;
   }
 
-  template<typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-  [[clang::always_inline]] constexpr Value operator >>(T v) const {
-    Value<ISize, FSize> n = *this;
+  [[clang::always_inline]] constexpr FixedPoint operator >>(StorageType v) const {
+    FixedPoint n = *this;
     n >>= v;
     return n;
   }
-  template<typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-  [[clang::always_inline]] constexpr Value& operator >>=(T v) {
+  [[clang::always_inline]] constexpr FixedPoint& operator >>=(StorageType v) {
     val >>= v;
     return *this;
   }
   
-  template<typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-  [[clang::always_inline]] constexpr Value operator <<(T v) const {
-    Value<ISize, FSize> n = *this;
+  [[clang::always_inline]] constexpr FixedPoint operator <<(StorageType v) const {
+    FixedPoint n = *this;
     n <<= v;
     return n;
   }
-  template<typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-  [[clang::always_inline]] constexpr Value& operator <<=(T v) {
+  [[clang::always_inline]] constexpr FixedPoint& operator <<=(StorageType v) {
     val <<= v;
     return *this;
   }
 
-  [[clang::always_inline]] Value &operator++() {
-    val += 1;
+  [[clang::always_inline]] FixedPoint &operator++() {
+    i += 1;
     return *this;
   }
-  [[clang::always_inline]] Value operator++(int) {
-    Value old = *this;
+  [[clang::always_inline]] FixedPoint operator++(int) {
+    FixedPoint old = *this;
     ++*this;
     return old;
   }
 
   // Comparison overloads
-
-  [[clang::always_inline]] constexpr friend bool operator==(const Value& a, const Value& b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator==(const FixedPoint& a, const FixedPoint& b) noexcept {
     return a.val == b.val;
   }
-  [[clang::always_inline]] constexpr friend bool operator< (const Value& a, const Value& b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator< (const FixedPoint& a, const FixedPoint& b) noexcept {
     return a.val < b.val;
   }
-  [[clang::always_inline]] constexpr friend bool operator!=(const Value& a, const Value& b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator!=(const FixedPoint& a, const FixedPoint& b) noexcept {
     return !(a == b);
   }
-  [[clang::always_inline]] constexpr friend bool operator> (const Value& a, const Value& b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator> (const FixedPoint& a, const FixedPoint& b) noexcept {
     return b < a;
   }
-  [[clang::always_inline]] constexpr friend bool operator>=(const Value& a, const Value& b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator>=(const FixedPoint& a, const FixedPoint& b) noexcept {
     return !(a < b);
   }
-  [[clang::always_inline]] constexpr friend bool operator<=(const Value& a, const Value& b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator<=(const FixedPoint& a, const FixedPoint& b) noexcept {
     return !(b < a);
   }
 
-  [[clang::always_inline]] constexpr friend bool operator==(const Value& a, IntType b) noexcept {
-    return a.val == b;
+  [[clang::always_inline]] constexpr friend bool operator==(const FixedPoint& a, StorageType b) noexcept {
+    return a.i == b && a.f == 0;
   }
-  [[clang::always_inline]] constexpr friend bool operator< (const Value& a, IntType b) noexcept {
-    return a.val < b;
+  [[clang::always_inline]] constexpr friend bool operator< (const FixedPoint& a, StorageType b) noexcept {
+    return a.i < b;
   }
-  [[clang::always_inline]] constexpr friend bool operator!=(const Value& a, IntType b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator!=(const FixedPoint& a, StorageType b) noexcept {
     return !(a == b);
   }
-  [[clang::always_inline]] constexpr friend bool operator> (const Value& a, IntType b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator> (const FixedPoint& a, StorageType b) noexcept {
     return b < a;
   }
-  [[clang::always_inline]] constexpr friend bool operator>=(const Value& a, IntType b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator>=(const FixedPoint& a, StorageType b) noexcept {
     return !(a < b);
   }
-  [[clang::always_inline]] constexpr friend bool operator<=(const Value& a, IntType b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator<=(const FixedPoint& a, StorageType b) noexcept {
     return !(b < a);
   }
 
-  [[clang::always_inline]] constexpr friend bool operator==(IntType a, const Value& b) noexcept {
-    return a == b.val;
+  [[clang::always_inline]] constexpr friend bool operator==(StorageType a, const FixedPoint& b) noexcept {
+    return a == b.i && b.f == 0;
   }
-  [[clang::always_inline]] constexpr friend bool operator< (IntType a, const Value& b) noexcept {
-    return a < b.val;
-  }
-  [[clang::always_inline]] constexpr friend bool operator!=(IntType a, const Value& b) noexcept {
-    return !(a == b);
-  }
-  [[clang::always_inline]] constexpr friend bool operator> (IntType a, const Value& b) noexcept {
-    return b < a;
-  }
-  [[clang::always_inline]] constexpr friend bool operator>=(IntType a, const Value& b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator< (StorageType a, const FixedPoint& b) noexcept {
     return !(a < b);
   }
-  [[clang::always_inline]] constexpr friend bool operator<=(IntType a, const Value& b) noexcept {
+  [[clang::always_inline]] constexpr friend bool operator!=(StorageType a, const FixedPoint& b) noexcept {
+    return !(a == b);
+  }
+  [[clang::always_inline]] constexpr friend bool operator> (StorageType a, const FixedPoint& b) noexcept {
+    return a.i < b;
+  }
+  [[clang::always_inline]] constexpr friend bool operator>=(StorageType a, const FixedPoint& b) noexcept {
+    return !(a < b);
+  }
+  [[clang::always_inline]] constexpr friend bool operator<=(StorageType a, const FixedPoint& b) noexcept {
     return !(b < a);
   }
 };
@@ -266,36 +319,54 @@ public:
 /// FP_U8_8 number = 180.44_u8_8; // creates a number at compile-time == 0xb4e1
 /// FP_S8_8 value = -60.89_s8_8;  // values can be signed or unsigned
 /// auto inferred = 107.3_12_4;   // default is signed just like other int types
-namespace literals {
+namespace fixedpoint_literals {
 
-using FP_S8_8 = Value<8, 8, true>;
-using FP_S12_4 = Value<12, 4, true>;
-using FP_U8_8 = Value<8, 8, false>;
-using FP_U12_4 = Value<12, 4, false>;
+using FP_S8_8 = FixedPoint<8, 8, true>;
+using FP_S12_4 = FixedPoint<12, 4, true>;
+using FP_U8_8 = FixedPoint<8, 8, false>;
+using FP_U12_4 = FixedPoint<12, 4, false>;
 using FP_8_8 = FP_S8_8;
 using FP_12_4 = FP_S12_4;
 
+#if __cplusplus >= 202002L
+[[clang::always_inline]] consteval FP_S8_8 operator ""_s8_8(long double fixed) {
+  return FixedPoint<8,8,true>{fixed};
+}
+[[clang::always_inline]] consteval FP_S12_4 operator ""_s12_4(long double fixed) {
+  return FixedPoint<12,4,true>{fixed};
+}
+[[clang::always_inline]] consteval FP_U8_8 operator ""_u8_8(long double fixed) {
+  return FixedPoint<8,8,false>{fixed};
+}
+[[clang::always_inline]] consteval FP_U12_4 operator ""_u12_4(long double fixed) {
+  return FixedPoint<12,4,true>{fixed};
+}
+[[clang::always_inline]] consteval FP_8_8 operator ""_8_8(long double fixed) {
+  return FixedPoint<8,8,true>{fixed};
+}
+[[clang::always_inline]] consteval FP_12_4 operator ""_12_4(long double fixed) {
+  return FixedPoint<12,4,true>{fixed};
+}
+#else
 [[clang::always_inline]] constexpr FP_S8_8 operator ""_s8_8(long double fixed) {
-  return {fixed};
+  return FixedPoint<8,8,true>{fixed};
 }
 [[clang::always_inline]] constexpr FP_S12_4 operator ""_s12_4(long double fixed) {
-  return {fixed};
+  return FixedPoint<12,4,true>{fixed};
 }
 [[clang::always_inline]] constexpr FP_U8_8 operator ""_u8_8(long double fixed) {
-  return {fixed};
+  return FixedPoint<8,8,false>{fixed};
 }
 [[clang::always_inline]] constexpr FP_U12_4 operator ""_u12_4(long double fixed) {
-  return {fixed};
+  return FixedPoint<12,4,true>{fixed};
 }
 [[clang::always_inline]] constexpr FP_8_8 operator ""_8_8(long double fixed) {
-  return {fixed};
+  return FixedPoint<8,8,true>{fixed};
 }
 [[clang::always_inline]] constexpr FP_12_4 operator ""_12_4(long double fixed) {
-  return {fixed};
+  return FixedPoint<12,4,true>{fixed};
 }
-} // namespace literals
-
-} // namespace fixedpoint
+#endif
+} // namespace fixedpoint_literals
 
 #endif // _FIXED_POINT_H
-

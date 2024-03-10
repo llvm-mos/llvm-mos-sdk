@@ -13,6 +13,14 @@ extern "C" {
 #endif
 
 /**
+ * @brief Kernel call: Write a character to the current console, inlined.
+ *
+ * @param c The character to write.
+ */
+#define KWriteCharacterInline(c) \
+	__attribute__((leaf)) asm volatile("jsr 0xFFF5\n.byte %0\n" : : "i"(c) : "p")
+
+/**
  * @brief Kernel call: Read line from the current console.
  *
  * @param s String location.
@@ -25,7 +33,7 @@ static inline void KReadLine(char *s) {
 }
 
 /**
- * @brief Kernel call: Read A from the current console.
+ * @brief Kernel call: Read a character from the current console.
  *
  * @return char Character.
  */
@@ -37,7 +45,7 @@ static inline char KReadCharacter(void) {
 }
 
 /**
- * @brief Kernel call: Write A to the current console.
+ * @brief Kernel call: Write a character to the current console.
  *
  * @param c Character.
  */

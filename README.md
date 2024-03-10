@@ -175,6 +175,7 @@ executables and libraries for that target.
 | PC Engine                       | Standard           | `mos-pce-clang`                  |
 | PC Engine                       | CD                 | `mos-pce-cd-clang`               |
 | RPC/8e (RedPower 2)             | -                  | `mos-rpc8e-clang`                |
+| Watara Supervision              | -                  | `mos-supervision-clang`          |
 | 6502 simulator                  | -                  | `mos-sim-clang`                  |
 
 

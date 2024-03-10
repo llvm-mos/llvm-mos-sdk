@@ -171,6 +171,7 @@ executables and libraries for that target.
 | NES                             | UNROM mapper       | `mos-nes-unrom-clang`            |
 | NES                             | UNROM-512 mapper   | `mos-nes-unrom-512-clang`        |
 | Ohio Scientific Challenger 1P   | -                  | `mos-osi-c1p-clang`              |
+| OLIMEX Neo6502                  | -                  | `mos-neo6502-clang`              |
 | Picocomputer 6502               | -                  | `mos-rp6502-clang`               |
 | PC Engine                       | Standard           | `mos-pce-clang`                  |
 | PC Engine                       | CD                 | `mos-pce-cd-clang`               |

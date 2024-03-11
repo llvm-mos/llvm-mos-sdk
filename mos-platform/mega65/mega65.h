@@ -3,30 +3,6 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-/*
-MIT License
-
-Copyright (c) 2023 Mikael Lund aka Wombat
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
 #ifndef _MEGA65_H
 #define _MEGA65_H
 
@@ -195,7 +171,7 @@ struct __color_palette {
 /// The CIA 2
 #define CIA2 (*(volatile struct __6526 *)0xdd00)
 
-// C64 colors
+/// Default color palette
 enum
 #ifdef __clang__
     : uint8_t
@@ -212,11 +188,27 @@ enum
   COLOR_ORANGE = 0x08,
   COLOR_BROWN = 0x09,
   COLOR_LIGHTRED = 0x0A,
-  COLOR_GRAY1 = 0x0B,
-  COLOR_GRAY2 = 0x0C,
+  COLOR_DARKGREY = 0x0B,
+  COLOR_MIDGREY = 0x0C,
   COLOR_LIGHTGREEN = 0x0D,
   COLOR_LIGHTBLUE = 0x0E,
-  COLOR_GRAY3 = 0x0F
+  COLOR_LIGHTGREY = 0x0F
+  COLOR_GURUMEDITATION = 0x10,
+  COLOR_RAMBUTAN = 0x11,
+  COLOR_CARROT = 0x12,
+  COLOR_LEMONTART = 0x13,
+  COLOR_PANDAN = 0x14,
+  COLOR_SEASICKGREEN = 0x15,
+  COLOR_SOYLENTGREEN = 0x16,
+  COLOR_SLIMERGREEN = 0x17,
+  COLOR_THEOTHERCYAN = 0x18,
+  COLOR_SEASKY = 0x19,
+  COLOR_SMURFBLUE = 0x1A,
+  COLOR_SCREENOFDEATH = 0x1B,
+  COLOR_PLUMSAUCE = 0x1C,
+  COLOR_SOURGRAPE = 0x1D,
+  COLOR_BUBBLEGUM = 0x1E,
+  COLOR_HOTTAMALES = 0x1F
 };
 
 #ifdef __clang__

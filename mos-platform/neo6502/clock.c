@@ -4,11 +4,8 @@
 // information.
 
 #include <time.h>
-#include <neo6502.h>
+#include "api/neo/system.h"
 
 long clock(void) {
-	ControlPort.function = API_FN_TIMER;
-	ControlPort.command = API_GROUP_SYSTEM;
-	while (ControlPort.command);
-	return *((long*) ControlPort.params);
+	return neo_system_timer();
 }

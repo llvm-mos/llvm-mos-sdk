@@ -441,6 +441,7 @@ API_FN_SET_PORT_DIR = $04 ; API function
 API_FN_I2C_WRITE    = $05 ; API function
 API_FN_I2C_READ     = $06 ; API function
 API_FN_ANALOG_READ  = $07 ; API function
+API_FN_I2C_STATUs   = $08 ; API function
 
 
 ;--------;

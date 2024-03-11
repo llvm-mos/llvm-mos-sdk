@@ -10,6 +10,7 @@ install(FILES
   kernel.h
   neo6502.h
 TYPE INCLUDE)
+install(DIRECTORY api/neo TYPE INCLUDE)
 
 install(FILES
   neo6502.inc
@@ -23,6 +24,14 @@ merge_libraries(neo6502-crt0
 )
 
 add_platform_library(neo6502-c
+  api/console.c
+  api/controller.c
+  api/graphics.c
+  api/sound.c
+  api/sprites.c
+  api/system.c
+  api/turtle.c
+  api/uext.c
   char-conv.c
   clock.c
   getchar.c

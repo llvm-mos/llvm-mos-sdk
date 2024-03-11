@@ -46,8 +46,6 @@ struct __ControlPort {
 #define API_FN_DEFINE_HOTKEY  0x04
 #define API_FN_DEFINE_CHAR    0x05
 #define API_FN_WRITE_CHAR     0x06
-#define API_FN_CURSOR_POS     0x07
-#define API_FN_LIST_HOTKEYS   0x08
 #define API_FN_SET_CURSOR_POS 0x07
 #define API_FN_LIST_HOTKEYS   0x08
 #define API_FN_SCREEN_SIZE    0x09
@@ -433,6 +431,7 @@ struct __ControlPort {
 #define API_FN_I2C_WRITE    0x05
 #define API_FN_I2C_READ     0x06
 #define API_FN_ANALOG_READ  0x07
+#define API_FN_I2C_STATUS   0x08
 
 // Colors
 #define COLOR_BLACK       0x80

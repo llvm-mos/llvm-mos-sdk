@@ -25,11 +25,14 @@ void sv_lcd_clear(void) {
 	memset(SV_VRAM, 0, SV_VRAM_PITCH * SV_VRAM_HEIGHT);
 }
 
-void sv_lcd_enable(void) {
+void sv_lcd_init(void) {
 	SV_LCD.width = SV_LCD_WIDTH;
 	SV_LCD.height = SV_LCD_HEIGHT;
 	SV_LCD.x = 0;
 	SV_LCD.y = 0;
+}
+
+void sv_lcd_enable(void) {
 	sv_sys_control_set(sv_sys_control_get() | SV_SYS_LCD_ENABLE);
 }
 

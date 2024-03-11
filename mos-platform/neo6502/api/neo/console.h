@@ -30,8 +30,43 @@ char neo_console_read_char(void);
 __attribute__((leaf))
 uint8_t neo_console_status(void);
 
-// FIXME: neo_console_read_line
-// FIXME: neo_console_define_hotkey
+/**
+ * @brief Read the current line below the cursor, and move the cursor by one line. The line is stored in Pascal string format.
+ *
+ * Multi-line input is supported.
+ *
+ * @param line Buffer for the line to be read.
+ */
+__attribute__((leaf))
+void neo_console_read_line_p(void *line);
+
+/**
+ * @brief Read the current line below the cursor, and move the cursor by one line. The line is stored in C string format.
+ *
+ * Multi-line input is supported.
+ *
+ * @param line Buffer for the line to be read.
+ */
+__attribute__((leaf))
+void neo_console_read_line(char *line);
+
+/**
+ * @brief Define a hotkey which emits a Pascal-style string when pressed.
+ *
+ * @param hotkey Function key to act as a hotkey (F1-F10 => 1-10)
+ * @param str String to emit when pressed.
+ */
+__attribute__((leaf))
+void neo_console_define_hotkey_p(uint8_t hotkey, const void *str);
+
+/**
+ * @brief Define a hotkey which emits a C-style string when pressed.
+ *
+ * @param hotkey Function key to act as a hotkey (F1-F10 => 1-10)
+ * @param str String to emit when pressed.
+ */
+__attribute__((leaf))
+void neo_console_define_hotkey(uint8_t hotkey, const char *str);
 
 /**
  * @brief Define a font character.

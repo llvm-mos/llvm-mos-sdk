@@ -6,6 +6,7 @@
 #include <string.h>
 #include "../neo6502.h"
 #include "../kernel.h"
+#include "api-internal.h"
 
 __attribute__((leaf))
 char neo_console_read_char(void) {
@@ -19,8 +20,33 @@ uint8_t neo_console_status(void) {
     return ControlPort.params[0];
 }
 
-// FIXME: neo_console_read_line
-// FIXME: neo_console_define_hotkey
+__attribute__((leaf))
+void neo_console_read_line_p(void *line) {
+    *((volatile uint16_t*) (ControlPort.params)) = (uint16_t) line;
+    KSendMessageSync(API_GROUP_CONSOLE, API_FN_READ_LINE);
+}
+
+__attribute__((leaf))
+void neo_console_read_line(char *line) {
+    line[0] = 0;
+    neo_console_read_line_p(line);
+    __neo_depascalize_output(line);
+}
+
+__attribute__((leaf))
+void neo_console_define_hotkey_p(uint8_t hotkey, const void *str) {
+    ControlPort.params[0] = hotkey;
+    *((volatile uint16_t*) (ControlPort.params + 2)) = (uint16_t) str;
+    KSendMessage(API_GROUP_CONSOLE, API_FN_DEFINE_HOTKEY);
+}
+
+__attribute__((leaf))
+void neo_console_define_hotkey(uint8_t hotkey, const char *str) {
+    PASCALIZE_INPUT(str);
+    neo_console_define_hotkey_p(hotkey, str_p);
+    // Wait for message to finish before deallocating VLA.
+    KWaitMessage();
+}
 
 __attribute__((leaf))
 void neo_console_define_char(char ch, const uint8_t *bitmap) {

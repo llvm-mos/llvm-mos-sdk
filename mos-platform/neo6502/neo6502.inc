@@ -86,13 +86,14 @@ API_FN_FILE_SIZE      = $0A ; API function
 API_FN_FILE_SET_SIZE  = $0B ; API function
 API_FN_FILE_RENAME    = $0C ; API function
 API_FN_FILE_DELETE    = $0D ; API function
-API_FN_DIR_CHDIR      = $0E ; API function
-API_FN_DIR_MKDIR      = $0F ; API function
+API_FN_DIR_MKDIR      = $0E ; API function
+API_FN_DIR_CHDIR      = $0F ; API function
 API_FN_FILE_STAT      = $10 ; API function
 API_FN_DIR_OPEN       = $11 ; API function
 API_FN_DIR_READ       = $12 ; API function
 API_FN_DIR_CLOSE      = $13 ; API function
 API_FN_FILE_COPY      = $14 ; API function
+API_FN_FILE_SET_ATTR  = $15 ; API function
 API_FN_LIST_FILTERED  = $20 ; API function
 
 ; File I/O parameters (Group 3 Function 2)

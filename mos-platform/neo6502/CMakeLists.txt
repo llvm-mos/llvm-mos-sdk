@@ -24,8 +24,10 @@ merge_libraries(neo6502-crt0
 )
 
 add_platform_library(neo6502-c
+  api/api-internal.c
   api/console.c
   api/controller.c
+  api/file.c
   api/graphics.c
   api/sound.c
   api/sprites.c

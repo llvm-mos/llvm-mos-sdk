@@ -62,7 +62,25 @@ void neo_graphics_draw_ellipse(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y
 __attribute__((leaf))
 void neo_graphics_draw_pixel(uint16_t x, uint16_t y);
 
-// FIXME: neo_graphics_draw_text
+/**
+ * @brief Draw a Pascal text string.
+ *
+ * @param x X
+ * @param y Y
+ * @param text Text string (Pascal).
+ */
+__attribute__((leaf))
+void neo_graphics_draw_text_p(uint16_t x, uint16_t y, const void *text);
+
+/**
+ * @brief Draw a C text string.
+ *
+ * @param x X
+ * @param y Y
+ * @param text Text string (C).
+ */
+__attribute__((leaf))
+void neo_graphics_draw_text(uint16_t x, uint16_t y, const char *text);
 
 /**
  * @brief Draw an image.

@@ -75,13 +75,14 @@ struct __ControlPort {
 #define API_FN_FILE_SET_SIZE  0x0B
 #define API_FN_FILE_RENAME    0x0C
 #define API_FN_FILE_DELETE    0x0D
-#define API_FN_DIR_CHDIR      0x0E
-#define API_FN_DIR_MKDIR      0x0F
+#define API_FN_DIR_MKDIR      0x0E
+#define API_FN_DIR_CHDIR      0x0F
 #define API_FN_FILE_STAT      0x10
 #define API_FN_DIR_OPEN       0x11
 #define API_FN_DIR_READ       0x12
 #define API_FN_DIR_CLOSE      0x13
 #define API_FN_FILE_COPY      0x14
+#define API_FN_FILE_SET_ATTR  0x15
 #define API_FN_LIST_FILTERED  0x20
 
 // File I/O parameters (Group 3 Function 2)

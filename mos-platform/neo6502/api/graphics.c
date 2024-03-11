@@ -6,6 +6,7 @@
 #include <string.h>
 #include "../neo6502.h"
 #include "../kernel.h"
+#include "api-internal.h"
 
 __attribute__((leaf))
 void neo_graphics_set_defaults(uint8_t color_mask, uint8_t color_xor, uint8_t fill, uint8_t extent, uint8_t flip) {
@@ -51,7 +52,19 @@ void neo_graphics_draw_pixel(uint16_t x, uint16_t y) {
     KSendMessage(API_GROUP_GRAPHICS, API_FN_DRAW_PIXEL);
 }
 
-// FIXME: neo_graphics_draw_text
+__attribute__((leaf))
+void neo_graphics_draw_text_p(uint16_t x, uint16_t y, const void *text) {
+    ((volatile uint16_t*) ControlPort.params)[0] = x;
+    ((volatile uint16_t*) ControlPort.params)[1] = y;
+    ((volatile uint16_t*) ControlPort.params)[2] = (uint16_t) text;
+    KSendMessage(API_GROUP_GRAPHICS, API_FN_DRAW_TEXT);
+}
+
+__attribute__((leaf))
+void neo_graphics_draw_text(uint16_t x, uint16_t y, const char *text) {
+    PASCALIZE_INPUT(text);
+    neo_graphics_draw_text_p(x, y, text_p);
+}
 
 __attribute__((leaf))
 void neo_graphics_draw_image(uint16_t x, uint16_t y, uint8_t id) {

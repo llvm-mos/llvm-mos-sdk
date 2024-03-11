@@ -13,6 +13,7 @@
 #include <neo6502.h>
 #include "system.h"
 #include "console.h"
+#include "file.h"
 #include "graphics.h"
 #include "sprites.h"
 #include "controller.h"

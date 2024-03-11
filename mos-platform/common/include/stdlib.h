@@ -14,12 +14,9 @@ extern "C" {
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 
-void exit(int status);
-__attribute__((leaf)) void abort(void);
-__attribute__((leaf)) void _exit(int status);
-__attribute__((leaf)) void _Exit(int status);
+#define RAND_MAX 32767
 
-int atexit(void (*function)(void));
+#define MB_CUR_MAX ((size_t)1)
 
 int abs(int i);
 long labs(long i);
@@ -46,6 +43,30 @@ typedef struct {
 } lldiv_t;
 lldiv_t lldiv(long long numer, long long denom);
 
+int atoi(const char *nptr);
+long atol(const char *nptr);
+long long atoll(const char *nptr);
+
+long strtol(const char *__restrict__ nptr, char **__restrict endptr, int base);
+long long strtoll(const char *__restrict__ nptr, char **__restrict endptr,
+                  int base);
+unsigned long strtoul(const char *__restrict__ nptr, char **__restrict endptr,
+                      int base);
+unsigned long long strtoull(const char *__restrict__ nptr,
+                            char **__restrict endptr, int base);
+
+// Non-standard strtox functions for smaller types.
+signed char _strtosc(const char *__restrict__ nptr, char **__restrict endptr,
+                     int base);
+unsigned char _strtouc(const char *__restrict__ nptr, char **__restrict endptr,
+                       int base);
+int _strtoi(const char *__restrict__ nptr, char **__restrict endptr, int base);
+unsigned int _strtoui(const char *__restrict__ nptr, char **__restrict endptr,
+                      int base);
+
+int rand(void);
+void srand(unsigned seed);
+
 // clang-format off
 /**
 Simple malloc/free implementation.
@@ -54,8 +75,7 @@ Note: if your program does not need to use the heap, then do not call
 any of these functions. The entire heap implementation is only allocated
 in your program if you actually call the allocation functions.
 
-Currently the heap is implemented using a first-fit free list. The heap
-segment is placed directly after BSS in your program.  The heap can
+The heap segment is placed directly after BSS in your program. The heap can
 utilize any of the memory between the base heap address and the top of the
 software-defined stack.
 
@@ -103,9 +123,10 @@ Typical memory map, for a target that loads programs into RAM:
 */
 // clang-format on
 
-void *malloc(size_t size);
+void *aligned_alloc(size_t alignment, size_t size);
+void *calloc(size_t nmemb, size_t size);
 void free(void *ptr);
-void *calloc(size_t num, size_t size);
+void *malloc(size_t size);
 void *realloc(void *ptr, size_t size);
 
 /* The maximum heap size can be limited in the following ways:
@@ -114,8 +135,8 @@ void *realloc(void *ptr, size_t size);
    minimum is only a few bytes, but for practical purposes if you are using the
    heap, you should at least plan on using 100's or 1000's of bytes.
 2. If an allocation is made prior to setting the heap limit, the initial limit
-   is set to an implementation-defined default. The actual limit may depend
-   on the available address space of the target platform.
+   is set to the value of the symbol `__heap_default_limit`. The actual limit
+   may depend on the available address space of the target platform.
 3. After the first allocation has been made, the heap may only increase in size.
    Any attempt to decrease the size of the heap limit will be ignored.
 
@@ -130,7 +151,7 @@ size_t __heap_limit();
 /* Set the maximum size of the heap.  Note the limitations above. */
 /* Setting the heap limit implicitly allocates the heap.  Don't call this
    function if you aren't going to use the heap. */
-void __set_heap_limit(size_t new_size);
+void __set_heap_limit(size_t limit);
 
 /* Return heap bytes in use, including overhead for heap data structures in
    the existing allocations. */
@@ -149,6 +170,24 @@ size_t __heap_bytes_free();
 #define heap_bytes_free __heap_bytes_free
 
 #endif // _MOS_SOURCE
+
+// Communication with the environment
+
+_Noreturn void abort(void);
+int atexit(void (*func)(void));
+int at_quick_exit(void (*func)(void));
+_Noreturn void exit(int status);
+__attribute__((leaf)) _Noreturn void _Exit(int status);
+char *getenv(const char *name);
+_Noreturn void quick_exit(int status);
+int system(const char *string);
+
+// Sorting and searching utilities
+
+void *bsearch(const void *key, const void *base, size_t nmemb, size_t size,
+              int (*compar)(const void *, const void *));
+void qsort(void *base, size_t nmemb, size_t size,
+           int (*compar)(const void *, const void *));
 
 #ifdef __cplusplus
 }

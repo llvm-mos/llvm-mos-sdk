@@ -255,6 +255,42 @@ struct __vera {
             unsigned char vstart;       /* Vertical start position */
             unsigned char vstop;        /* Vertical stop position */
         };
+        struct {                        /* Visible when DCSEL flag = 2 */
+            unsigned char fxctrl;
+            unsigned char fxtilebase;
+            unsigned char fxmapbase;
+            unsigned char fxmult;
+        };
+        struct {                        /* Visible when DCSEL flag = 3 */
+            unsigned char fxxincrl;
+            unsigned char fxxincrh;
+            unsigned char fxyincrl;
+            unsigned char fxyincrh;
+        };
+        struct {                        /* Visible when DCSEL flag = 4 */
+            unsigned char fxxposl;
+            unsigned char fxxposh;
+            unsigned char fxyposl;
+            unsigned char fxyposh;
+        };
+        struct {                        /* Visible when DCSEL flag = 5 */
+            unsigned char fxxposs;
+            unsigned char fxyposs;
+            unsigned char fxpolyfilll;
+            unsigned char fxpolyfillh;
+        };
+        struct {                        /* Visible when DCSEL flag = 6 */
+            unsigned char fxcachel;
+            unsigned char fxcachem;
+            unsigned char fxcacheh;
+            unsigned char fxcacheu;
+        };
+        struct {                        /* Visible when DCSEL flag = 63 */
+            unsigned char dcver0;
+            unsigned char dcver1;
+            unsigned char dcver2;
+            unsigned char dcver3;
+        };
     } display;
     struct {
         unsigned char   config;         /* Layer map geometry */
@@ -361,6 +397,7 @@ typedef struct
 } screen_mode_info_t;   /* cx16_k_screen_mode_get() */
 
 /* Kernal-level functions */
+unsigned char cx16_k_bsave(void *startaddr, void *endaddr_plusone) __attribute__((leaf)); // returns 0 on success
 void cx16_k_clock_get_date_time(cx16_date_time_t *datetime_ptr) __attribute__((leaf));
 void cx16_k_clock_set_date_time(unsigned char year, unsigned char mon, unsigned char day, unsigned char hour, unsigned char min, unsigned char sec, unsigned char jif) __attribute__((leaf));
 unsigned char cx16_k_console_get_char(void) __attribute__((leaf));
@@ -413,7 +450,6 @@ void cx16_k_mouse_config(unsigned char showmouse, unsigned char xsize8, unsigned
 unsigned char cx16_k_mouse_get(mouse_pos_t *mouse_pos_ptr) __attribute__((leaf));	// returns mouse button byte
 void cx16_k_mouse_scan(void) __attribute__((leaf));
 unsigned long cx16_k_rdtim(void) __attribute__((leaf));
-unsigned char cx16_k_savehl(void *startaddr, void *endaddr_plusone) __attribute__((leaf)); // returns 0 on success
 unsigned char cx16_k_screen_mode_get(screen_mode_info_t *info_ptr) __attribute__((leaf)); // returns 0 on success
 unsigned char cx16_k_screen_mode_set(unsigned char mode) __attribute__((leaf)); // returns 0 on success
 void cx16_k_screen_set_charset(unsigned char charset_type, void *charsetaddr) __attribute__((leaf));
@@ -475,4 +511,3 @@ void waitvsync(void);  // wait for the vertical blank interrupt
 }
 #endif
 #endif  // _CX16_H
-

@@ -45,6 +45,9 @@
 #ifndef _CBM_H
 #define _CBM_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 /* Check for errors */
@@ -206,6 +209,7 @@ unsigned char cbm_k_acptr (void);
 unsigned char cbm_k_basin (void);
 void cbm_k_bsout (unsigned char C);
 unsigned char cbm_k_chkin (unsigned char FN) __attribute__((leaf));
+unsigned char cbm_k_chkout (unsigned char FN) __attribute__((leaf));
 unsigned char cbm_k_chrin (void);
 void cbm_k_chrout (unsigned char C);
 void cbm_k_cint (void);
@@ -326,6 +330,10 @@ unsigned char __fastcall__ cbm_readdir (unsigned char lfn,
 void __fastcall__ cbm_closedir (unsigned char lfn);
 /* Closes directory by cbm_close(lfn) */
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 /* End of cbm.h */

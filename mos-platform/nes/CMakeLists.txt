@@ -5,6 +5,7 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
+  ines.h
   nes.h
 TYPE INCLUDE)
 install(FILES
@@ -31,6 +32,7 @@ merge_libraries(nes-crt0
 
 add_platform_library(nes-c
   rompoke/rompoke.c
+  putchar.c
 )
 install(FILES rompoke/rompoke.h TYPE INCLUDE)
 target_link_libraries(nes-c PRIVATE common-asminc)

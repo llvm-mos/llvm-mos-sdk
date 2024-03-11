@@ -22,6 +22,7 @@ else()
       -DCMAKE_C_FLAGS=${LLVM_MOS_ARCH_FLAGS}
       -DCMAKE_CXX_FLAGS=${LLVM_MOS_ARCH_FLAGS}
       -DCMAKE_ASM_FLAGS=${LLVM_MOS_ARCH_FLAGS}
+      -DCMAKE_EXPORT_COMPILE_COMMANDS=${CMAKE_EXPORT_COMPILE_COMMANDS}
     USES_TERMINAL_CONFIGURE On
     USES_TERMINAL_BUILD On
     USES_TERMINAL_INSTALL On
@@ -45,11 +46,18 @@ else()
 endif()
 
 add_subdirectory(common)
+add_subdirectory(atari2600-common)
+add_subdirectory(atari2600-4k)
+add_subdirectory(atari2600-3e)
+add_subdirectory(atari5200-supercart)
 add_subdirectory(atari8-common)
-add_subdirectory(atari8)
-add_subdirectory(atari8-stdcart)
+add_subdirectory(atari8-dos)
+add_subdirectory(atari8-cart-std)
+add_subdirectory(atari8-cart-xegs)
+add_subdirectory(atari8-cart-megacart)
 add_subdirectory(commodore)
 add_subdirectory(c64)
+add_subdirectory(c128)
 add_subdirectory(cpm65)
 add_subdirectory(cx16)
 add_subdirectory(eater)
@@ -58,6 +66,7 @@ add_subdirectory(sim)
 add_subdirectory(nes)
 add_subdirectory(nes-action53)
 add_subdirectory(nes-cnrom)
+add_subdirectory(nes-gtrom)
 add_subdirectory(nes-nrom)
 add_subdirectory(nes-mmc1)
 add_subdirectory(nes-mmc3)
@@ -70,3 +79,6 @@ add_subdirectory(rpc8e)
 add_subdirectory(pce-common)
 add_subdirectory(pce)
 add_subdirectory(pce-cd)
+add_subdirectory(rp6502)
+add_subdirectory(supervision)
+add_subdirectory(vic20)

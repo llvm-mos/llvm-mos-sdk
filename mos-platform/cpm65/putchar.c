@@ -9,8 +9,11 @@
 #include <cpm.h>
 #include <stdio.h>
 
-void __putchar(char c) {
+__attribute__((always_inline, weak)) void __from_ascii(char c,
+                                                       void (*emit)(char c)) {
   if (__builtin_expect(c == '\n', 0))
-    cpm_conout('\r');
-  cpm_conout(c);
+    emit('\r');
+  emit(c);
 }
+
+void __putchar(char c) { cpm_conout(c); }

@@ -20,7 +20,7 @@ Serial console
 
 The W65C51N Asynchronous Communications Interface Adapter (ACIA)
 at address $5000 in the breadboard's memory map is used to implement the
-\_\_putchar() and getchar() functions for the C library.
+\_\_putchar() and \_\_getchar() functions for the C library.
 
 The ACIA is configured for 19200 bps N-8-1 communications and RTS
 handshaking.  The handshaking lines on the W65C51N should be hooked

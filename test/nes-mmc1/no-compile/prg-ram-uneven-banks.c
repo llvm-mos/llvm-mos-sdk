@@ -1,2 +1,3 @@
-asm(".globl __prg_ram_size\n__prg_ram_size=2");
+#include <mapper.h>
+MAPPER_PRG_RAM_KB(2);
 int main(void) { return 0; }

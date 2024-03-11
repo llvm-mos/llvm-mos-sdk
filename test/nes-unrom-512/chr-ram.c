@@ -1,10 +1,10 @@
 #include <nes.h>
-#include <bank.h>
+#include <mapper.h>
 #include <peekpoke.h>
 #include <stdlib.h>
 
-asm(".globl __chr_ram_size\n"
-    "__chr_ram_size = 32\n");
+MAPPER_CHR_ROM_KB(0);
+MAPPER_CHR_RAM_KB(32);
 
 void poke_ppu(unsigned addr, char val) {
   PPU.vram.address = addr >> 8;

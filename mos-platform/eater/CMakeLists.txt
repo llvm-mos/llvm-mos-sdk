@@ -6,7 +6,6 @@ endif()
 
 install(FILES
   chrin.h
-  chrout.h
   eater.h
 TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)
@@ -25,7 +24,6 @@ merge_libraries(eater-crt0
 )
 
 add_platform_library(eater-c
-  abort.c
   delay.c
   getchar.c
   lcd.c

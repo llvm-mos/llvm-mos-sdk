@@ -13,6 +13,11 @@ install(FILES
 TYPE INCLUDE)
 install(FILES link.ld TYPE LIB)
 
+add_platform_library(c64-crt0)
+merge_libraries(c64-crt0
+  common-init-stack
+)
+
 install(FILES c64.inc DESTINATION ${ASMINCDIR})
 
 add_platform_object_file(c64-basic-header basic-header.o basic-header.S)

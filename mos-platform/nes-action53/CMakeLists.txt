@@ -9,10 +9,11 @@ install(FILES
   common.ld
   prg-rom.ld
 TYPE LIB)
-install(FILES bank.h TYPE INCLUDE)
+install(FILES mapper.h TYPE INCLUDE)
 
 add_platform_object_file(nes-action53-crt0-o crt0.o ines.s)
 add_platform_object_file(nes-action53-reset-o reset.o reset.s)
 
-add_platform_library(nes-action53-c bank.c bank.s)
+add_platform_library(nes-action53-c mapper.c mapper.s)
+target_include_directories(nes-action53-c PRIVATE ../nes)
 target_link_libraries(nes-action53-c PRIVATE common-asminc)

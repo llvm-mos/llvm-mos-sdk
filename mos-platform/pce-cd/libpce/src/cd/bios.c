@@ -224,9 +224,9 @@ bool pce_cdb_cd_read_subcode_bits(uint8_t *buffer) {
 uint16_t pce_cdb_cdda_read_sample(uint8_t channel) {
   uint8_t x, y;
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x0E)
-                                     : "=x"(x), "=y"(y)
-                                     : "a"(channel)
-                                     : "a", "p");
+                                     : "=x"(x), "=y"(y), "+a"(channel)
+                                     :
+                                     : "p");
   return (y << 8) | x;
 }
 
@@ -375,9 +375,9 @@ void pce_cdb_irq_set(uint8_t type, void (*irq_handler)(void)) {
   uint8_t x = irq_handler_address;
   uint8_t y = irq_handler_address >> 8;
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x1F)
+                                     : "+a"(type), "+x"(x), "+y"(y)
                                      :
-                                     : "a"(type), "x"(x), "y"(y)
-                                     : "a", "x", "y", "p");
+                                     : "p");
 }
 
 void pce_cdb_irq_enable(uint8_t mask) { *__irq_flags |= mask; }
@@ -390,27 +390,27 @@ void pce_cdb_irq_disable(uint8_t mask) { *__irq_flags &= ~mask; }
 
 void pce_cdb_vdc_bg_set_size(uint8_t size) {
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x23)
+                                     : "+a"(size)
                                      :
-                                     : "a"(size)
-                                     : "a", "x", "y", "p");
+                                     : "x", "y", "p");
 }
 
 bool pce_cdb_vdc_set_resolution(uint8_t clock, uint8_t width_tiles,
                                 uint8_t height_tiles) {
   bool result;
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x25)
-                                     : "=c"(result)
-                                     : "a"(clock), "x"(width_tiles),
-                                       "y"(height_tiles)
-                                     : "a", "x", "y", "p");
+                                     : "=c"(result), "+a"(clock),
+                                       "+x"(width_tiles), "+y"(height_tiles)
+                                     :
+                                     : "p");
   return !result;
 }
 
 void pce_cdb_vdc_set_copy(uint8_t mode) {
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x26)
+                                     : "+a"(mode)
                                      :
-                                     : "a"(mode)
-                                     : "a", "x", "y", "p");
+                                     : "x", "y", "p");
 }
 
 void pce_cdb_vdc_set_bg_column_copy(void) {
@@ -506,9 +506,9 @@ void pce_cdb_vdc_bg_sprite_disable(void) {
 
 void pce_cdb_vdc_vram_configure_dma(uint8_t value) {
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x34)
+                                     : "+a"(value)
                                      :
-                                     : "a"(value)
-                                     : "a", "x", "y", "p");
+                                     : "x", "y", "p");
 }
 
 void pce_cdb_vdc_sprite_table_set_vram_addr(uint16_t address) {
@@ -536,25 +536,25 @@ void pce_cdb_vdc_sprite_table_put(void) {
 void pce_cdb_vdc_irq_scanline_set(uint16_t line) {
   uint8_t a = line, x = line >> 8;
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x38)
+                                     : "+a"(a), "+x"(x)
                                      :
-                                     : "a"(a), "x"(x)
-                                     : "a", "x", "y", "p");
+                                     : "y", "p");
 }
 
 void pce_cdb_vdc_vram_read_at(uint16_t addr) {
   uint8_t a = addr, x = addr >> 8;
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x38)
+                                     : "+a"(a), "+x"(x)
                                      :
-                                     : "a"(a), "x"(x)
-                                     : "a", "x", "y", "p");
+                                     : "y", "p");
 }
 
 void pce_cdb_vdc_vram_write_at(uint16_t addr) {
   uint8_t a = addr, x = addr >> 8;
   __attribute__((leaf)) asm volatile(ASM_BIOSCALL(0x38)
+                                     : "+a"(a), "+x"(x)
                                      :
-                                     : "a"(a), "x"(x)
-                                     : "a", "x", "y", "p");
+                                     : "y", "p");
 }
 
 uint8_t pce_cdb_bin_to_bcd(uint8_t value) {

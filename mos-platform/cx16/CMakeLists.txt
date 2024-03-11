@@ -4,14 +4,24 @@ if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
 
-install(FILES _6522.h cx16.h TYPE INCLUDE)
+install(FILES
+  ../commodore/_6522.h
+  charset.h
+  cx16.h
+TYPE INCLUDE)
 install(FILES imag-regs.ld link.ld TYPE LIB)
+
+add_platform_library(cx16-crt0)
+merge_libraries(cx16-crt0
+  common-init-stack
+)
 
 install(FILES cx16.inc DESTINATION ${ASMINCDIR})
 
 add_platform_object_file(cx16-basic-header basic-header.o basic-header.S)
 
 add_platform_library(cx16-c
+ cx16_k_bsave.s
  cx16_k_clock_get_date_time.s
  cx16_k_clock_set_date_time.s
  cx16_k_console_get_char.s
@@ -64,7 +74,6 @@ add_platform_library(cx16-c
  cx16_k_mouse_get.s
  cx16_k_mouse_scan.s
  cx16_k_rdtim.s
- cx16_k_savehl.s
  cx16_k_screen_mode_get.s
  cx16_k_screen_mode_set.s
  cx16_k_screen_set_charset.s
@@ -81,6 +90,8 @@ add_platform_library(cx16-c
  vpoke.s
  waitvsync.s
  kernal.S
+
+ char-conv.c
 )
 
 target_include_directories(cx16-c BEFORE PUBLIC .)

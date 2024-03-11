@@ -1,4 +1,4 @@
-#include <bank.h>
+#include <mapper.h>
 #include <peekpoke.h>
 #include <stdlib.h>
 

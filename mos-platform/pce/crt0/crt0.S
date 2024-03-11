@@ -23,15 +23,15 @@ _early_start:
 	txs
 	lda #$f8 ; bank 1 = 0xF8 (RAM)
 	tam #$02
-	lda #mos8(__start_bank_2)
+	lda #__start_bank_2
 	tam #$04
-	lda #mos8(__start_bank_3)
+	lda #__start_bank_3
 	tam #$08
-	lda #mos8(__start_bank_4)
+	lda #__start_bank_4
 	tam #$10
-	lda #mos8(__start_bank_5)
+	lda #__start_bank_5
 	tam #$20
-	lda #mos8(__start_bank_6)
+	lda #__start_bank_6
 	tam #$40
 ; Jump to the real start routine, now that banks are set up.
 	jmp _start

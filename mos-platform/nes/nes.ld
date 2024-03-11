@@ -37,10 +37,15 @@ SECTIONS {
        *(.nmi_end)
   } >c_readonly
   INCLUDE rodata.ld
+  /* A naturally page-aligned place (0x200) to place noinit buffers with high
+   * alignment requirement (e.g. OAM) */
+  .aligned (NOLOAD) : { *(.aligned .aligned.*) } >ram
   INCLUDE data.ld
   INCLUDE zp.ld
   INCLUDE bss.ld
   INCLUDE noinit.ld
+
+  .ram (NOLOAD) : { *(.ram .ram.*) } > ram
 
   .chr_rom : { KEEP(*(.chr_rom .chr_rom.*)) } >chr_rom
 }

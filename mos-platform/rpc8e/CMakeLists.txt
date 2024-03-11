@@ -24,7 +24,6 @@ target_compile_options(rpc8e-crt0 PUBLIC -mcpu=mos65el02)
 # librpc8e build code
 
 add_platform_library(rpc8e-c
-  librpc8e/src/abort.c
   librpc8e/src/display.c
   librpc8e/src/drive.c
   librpc8e/src/mmu.c
@@ -32,10 +31,6 @@ add_platform_library(rpc8e-c
 )
 target_include_directories(rpc8e-c SYSTEM BEFORE PUBLIC librpc8e/include)
 target_compile_options(rpc8e-c PUBLIC -mcpu=mos65el02)
-
-# abort is preemptively included if LTO is used, which pulls in _exit support
-# unneccessarily. It can be called in an interrupt.
-set_property(SOURCE librpc8e/src/abort.c PROPERTY COMPILE_OPTIONS -fno-lto -fno-static-stack)
 
 install(DIRECTORY librpc8e/include/rpc8e TYPE INCLUDE)
 install(FILES librpc8e/include/rpc8e.h TYPE INCLUDE)

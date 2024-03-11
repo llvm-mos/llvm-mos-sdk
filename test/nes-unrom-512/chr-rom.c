@@ -1,12 +1,10 @@
 #include <nes.h>
-#include <bank.h>
+#include <mapper.h>
 #include <peekpoke.h>
 #include <stdlib.h>
 
-asm(".globl __chr_ram_size\n"
-    "__chr_ram_size = 0\n"
-    ".globl __chr_rom_size\n"
-    "__chr_rom_size = 32\n");
+MAPPER_CHR_ROM_KB(32);
+MAPPER_CHR_RAM_KB(0);
 
 __attribute__((used, section(".chr_rom_0")))
 const char cr0[8192] = {1, [8191] = 2};

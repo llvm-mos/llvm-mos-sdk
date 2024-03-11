@@ -15,6 +15,9 @@ function(add_test_target target)
       -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
       -DLLVM_MOS=${llvm_mos}
       -DMESEN_COMMAND=${MESEN_COMMAND}
+      -DEMUTEST_COMMAND=${EMUTEST_COMMAND}
+      -DLIBRETRO_STELLA_CORE=${LIBRETRO_STELLA_CORE}
+      -DLIBRETRO_MESEN_CORE=${LIBRETRO_MESEN_CORE}
       -DCMAKE_C_FLAGS=${config_flag}
       -DCMAKE_CXX_FLAGS=${config_flag}
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_SOURCE_DIR}/cmake/llvm-mos-toolchain.cmake
@@ -31,7 +34,12 @@ endfunction()
 add_custom_target(test)
 add_test_target(nes-nrom)
 add_test_target(nes-cnrom)
+add_test_target(nes-gtrom)
 add_test_target(nes-mmc1)
 add_test_target(nes-mmc3)
 add_test_target(nes-unrom)
 add_test_target(nes-unrom-512)
+add_test_target(atari2600-4k)
+add_test_target(atari2600-3e)
+add_test_target(atari8-dos)
+add_test_target(atari8-cart-std)

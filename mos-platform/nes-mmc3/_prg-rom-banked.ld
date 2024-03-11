@@ -1,4 +1,3 @@
-
 PROVIDE(__prg_rom_size = 512);
 
 ASSERT(__prg_rom_size > 32,
@@ -134,17 +133,23 @@ MEMORY {
   prg_rom_2     : ORIGIN = __prg_rom_2_lma,  LENGTH = 0x2000
   prg_rom_3     : ORIGIN = __prg_rom_3_lma,  LENGTH = 0x2000
   prg_rom_4     : ORIGIN = __prg_rom_4_lma,  LENGTH = 0x2000
-  prg_rom_5     : ORIGIN = __prg_rom_5_lma,  LENGTH = 0x2000
-  prg_rom_6     : ORIGIN = __prg_rom_6_lma,  LENGTH = __prg_rom_size >  64  ? 0x2000 : 0
-  prg_rom_7     : ORIGIN = __prg_rom_7_lma,  LENGTH = __prg_rom_size >  64  ? 0x2000 : 0
+  prg_rom_5     : ORIGIN = __prg_rom_5_lma,
+                  /* The fixed region may take either two or three banks. */
+                  LENGTH =
+                    __prg_rom_size >= 128 || __prg_rom_total_fixed_size == 0x4000 ? 0x2000 : 0
+  prg_rom_6     : ORIGIN = __prg_rom_6_lma,  LENGTH = __prg_rom_size >= 128  ? 0x2000 : 0
+  prg_rom_7     : ORIGIN = __prg_rom_7_lma,  LENGTH = __prg_rom_size >= 128 ? 0x2000 : 0
   prg_rom_8     : ORIGIN = __prg_rom_8_lma,  LENGTH = __prg_rom_size >= 128 ? 0x2000 : 0
   prg_rom_9     : ORIGIN = __prg_rom_9_lma,  LENGTH = __prg_rom_size >= 128 ? 0x2000 : 0
   prg_rom_10    : ORIGIN = __prg_rom_10_lma, LENGTH = __prg_rom_size >= 128 ? 0x2000 : 0
   prg_rom_11    : ORIGIN = __prg_rom_11_lma, LENGTH = __prg_rom_size >= 128 ? 0x2000 : 0
   prg_rom_12    : ORIGIN = __prg_rom_12_lma, LENGTH = __prg_rom_size >= 128 ? 0x2000 : 0
-  prg_rom_13    : ORIGIN = __prg_rom_13_lma, LENGTH = __prg_rom_size >= 128 ? 0x2000 : 0
-  prg_rom_14    : ORIGIN = __prg_rom_14_lma, LENGTH = __prg_rom_size >  128 ? 0x2000 : 0
-  prg_rom_15    : ORIGIN = __prg_rom_15_lma, LENGTH = __prg_rom_size >  128 ? 0x2000 : 0
+  prg_rom_13    : ORIGIN = __prg_rom_13_lma,
+                  LENGTH = (__prg_rom_size >= 128 &&
+                             (__prg_rom_size >= 256 ||
+                              __prg_rom_total_fixed_size == 0x4000)) ? 0x2000 : 0
+  prg_rom_14    : ORIGIN = __prg_rom_14_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
+  prg_rom_15    : ORIGIN = __prg_rom_15_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
   prg_rom_16    : ORIGIN = __prg_rom_16_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
   prg_rom_17    : ORIGIN = __prg_rom_17_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
   prg_rom_18    : ORIGIN = __prg_rom_18_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
@@ -158,38 +163,41 @@ MEMORY {
   prg_rom_26    : ORIGIN = __prg_rom_26_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
   prg_rom_27    : ORIGIN = __prg_rom_27_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
   prg_rom_28    : ORIGIN = __prg_rom_28_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
-  prg_rom_29    : ORIGIN = __prg_rom_29_lma, LENGTH = __prg_rom_size >= 256 ? 0x2000 : 0
-  prg_rom_30    : ORIGIN = __prg_rom_30_lma, LENGTH = __prg_rom_size >  256 ? 0x2000 : 0
-  prg_rom_31    : ORIGIN = __prg_rom_31_lma, LENGTH = __prg_rom_size >  256 ? 0x2000 : 0
-  prg_rom_32    : ORIGIN = __prg_rom_32_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_33    : ORIGIN = __prg_rom_33_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_34    : ORIGIN = __prg_rom_34_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_35    : ORIGIN = __prg_rom_35_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_36    : ORIGIN = __prg_rom_36_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_37    : ORIGIN = __prg_rom_37_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_38    : ORIGIN = __prg_rom_38_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_39    : ORIGIN = __prg_rom_39_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_40    : ORIGIN = __prg_rom_40_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_41    : ORIGIN = __prg_rom_41_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_42    : ORIGIN = __prg_rom_42_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_43    : ORIGIN = __prg_rom_43_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_44    : ORIGIN = __prg_rom_44_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_45    : ORIGIN = __prg_rom_45_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_46    : ORIGIN = __prg_rom_46_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_47    : ORIGIN = __prg_rom_47_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_48    : ORIGIN = __prg_rom_48_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_49    : ORIGIN = __prg_rom_49_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_50    : ORIGIN = __prg_rom_50_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_51    : ORIGIN = __prg_rom_51_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_52    : ORIGIN = __prg_rom_52_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_53    : ORIGIN = __prg_rom_53_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_54    : ORIGIN = __prg_rom_54_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_55    : ORIGIN = __prg_rom_55_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_56    : ORIGIN = __prg_rom_56_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_57    : ORIGIN = __prg_rom_57_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_58    : ORIGIN = __prg_rom_58_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_59    : ORIGIN = __prg_rom_59_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
-  prg_rom_60    : ORIGIN = __prg_rom_60_lma, LENGTH = __prg_rom_size == 512 ? 0x2000 : 0
+  prg_rom_29    : ORIGIN = __prg_rom_29_lma,
+                  LENGTH = (__prg_rom_size >= 256 &&
+                             (__prg_rom_size >= 512 ||
+                              __prg_rom_total_fixed_size == 0x4000)) ? 0x2000 : 0
+  prg_rom_30    : ORIGIN = __prg_rom_30_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_31    : ORIGIN = __prg_rom_31_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_32    : ORIGIN = __prg_rom_32_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_33    : ORIGIN = __prg_rom_33_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_34    : ORIGIN = __prg_rom_34_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_35    : ORIGIN = __prg_rom_35_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_36    : ORIGIN = __prg_rom_36_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_37    : ORIGIN = __prg_rom_37_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_38    : ORIGIN = __prg_rom_38_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_39    : ORIGIN = __prg_rom_39_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_40    : ORIGIN = __prg_rom_40_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_41    : ORIGIN = __prg_rom_41_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_42    : ORIGIN = __prg_rom_42_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_43    : ORIGIN = __prg_rom_43_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_44    : ORIGIN = __prg_rom_44_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_45    : ORIGIN = __prg_rom_45_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_46    : ORIGIN = __prg_rom_46_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_47    : ORIGIN = __prg_rom_47_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_48    : ORIGIN = __prg_rom_48_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_49    : ORIGIN = __prg_rom_49_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_50    : ORIGIN = __prg_rom_50_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_51    : ORIGIN = __prg_rom_51_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_52    : ORIGIN = __prg_rom_52_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_53    : ORIGIN = __prg_rom_53_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_54    : ORIGIN = __prg_rom_54_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_55    : ORIGIN = __prg_rom_55_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_56    : ORIGIN = __prg_rom_56_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_57    : ORIGIN = __prg_rom_57_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_58    : ORIGIN = __prg_rom_58_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_59    : ORIGIN = __prg_rom_59_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
+  prg_rom_60    : ORIGIN = __prg_rom_60_lma, LENGTH = __prg_rom_size >= 512 ? 0x2000 : 0
 }
 
 SECTIONS {

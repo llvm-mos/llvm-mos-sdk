@@ -1,6 +1,8 @@
-#include <bank.h>
+#include <mapper.h>
 #include <peekpoke.h>
 #include <stdlib.h>
+
+MAPPER_PRG_ROM_KB(256);
 
 volatile const char c[15000] = {1, [14999] = 2};
 

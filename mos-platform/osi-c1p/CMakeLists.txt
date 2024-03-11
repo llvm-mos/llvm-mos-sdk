@@ -21,7 +21,3 @@ add_platform_library(osi-c1p-c
   kbhit.s
 )
 target_include_directories(osi-c1p-c SYSTEM BEFORE PUBLIC .)
-
-# abort is preemptively included if LTO is used, which pulls in _exit support
-# unneccessarily.
-set_property(SOURCE abort.c PROPERTY COMPILE_FLAGS -fno-lto)

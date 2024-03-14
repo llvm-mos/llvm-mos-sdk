@@ -162,6 +162,7 @@ struct __sv_sys {
 
 uint8_t sv_sys_control_get(void);
 void sv_sys_control_set(uint8_t value);
+void sv_lcd_init(void);
 void sv_lcd_clear(void);
 void sv_lcd_enable(void);
 void sv_lcd_disable(void);

@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['nes_2eh_3113',['nes.h',['../nes_8h.html',1,'']]],
-  ['nes_2einc_3114',['nes.inc',['../nes_8inc.html',1,'']]],
-  ['nesdoug_2eh_3115',['nesdoug.h',['../nesdoug_8h.html',1,'']]],
-  ['neslib_2eh_3116',['neslib.h',['../neslib_8h.html',1,'']]],
-  ['neslib_2einc_3117',['neslib.inc',['../neslib_8inc.html',1,'']]],
-  ['new_3118',['new',['../new.html',1,'']]],
-  ['notes_2emd_3119',['NOTES.md',['../NOTES_8md.html',1,'']]],
-  ['ntsc_2einc_3120',['ntsc.inc',['../ntsc_8inc.html',1,'']]]
+  ['mapper_2eh_3622',['mapper.h',['../atari2600-3e_2mapper_8h.html',1,'(Global Namespace)'],['../atari2600-4k_2mapper_8h.html',1,'(Global Namespace)'],['../nes-action53_2mapper_8h.html',1,'(Global Namespace)'],['../nes-cnrom_2mapper_8h.html',1,'(Global Namespace)'],['../nes-gtrom_2mapper_8h.html',1,'(Global Namespace)'],['../nes-mmc1_2mapper_8h.html',1,'(Global Namespace)'],['../nes-mmc3_2mapper_8h.html',1,'(Global Namespace)'],['../nes-unrom_2mapper_8h.html',1,'(Global Namespace)'],['../nes-unrom-512_2mapper_8h.html',1,'(Global Namespace)']]],
+  ['mapper_5fmacros_2eh_3623',['mapper_macros.h',['../mapper__macros_8h.html',1,'']]],
+  ['mapper_5from_5fmulti_2eh_3624',['mapper_rom_multi.h',['../mapper__rom__multi_8h.html',1,'']]],
+  ['mapper_5from_5fsingle_2eh_3625',['mapper_rom_single.h',['../mapper__rom__single_8h.html',1,'']]],
+  ['mapper_5fxram_5fsingle_2eh_3626',['mapper_xram_single.h',['../mapper__xram__single_8h.html',1,'']]],
+  ['math_2eh_3627',['math.h',['../math_8h.html',1,'']]],
+  ['memory_2eh_3628',['memory.h',['../memory_8h.html',1,'']]],
+  ['mmu_2eh_3629',['mmu.h',['../mmu_8h.html',1,'']]]
 ];

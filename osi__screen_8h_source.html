@@ -125,14 +125,14 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    cursor_x = cursor_y = 0;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  }</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> cputc(<span class="keywordtype">char</span> <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a> == <span class="charliteral">&#39;\n&#39;</span>) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> cputc(<span class="keywordtype">char</span> <a class="code" href="dodo_2api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="dodo_2api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a> == <span class="charliteral">&#39;\n&#39;</span>) {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      newline();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a> == <span class="charliteral">&#39;\r&#39;</span>) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="dodo_2api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a> == <span class="charliteral">&#39;\r&#39;</span>) {</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      cursor_x = 0;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordtype">char</span> *<span class="keyword">const</span> dest = cursor_pos_mem();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      *dest = <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      *dest = <a class="code" href="dodo_2api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="keywordflow">if</span> (cursor_x &gt;= screen_width - 1) {</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        newline();</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        cursor_x = 0;</div>
@@ -143,14 +143,14 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> <span class="keywordtype">void</span> __putchar(<span class="keywordtype">char</span> <a class="code" href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> <span class="keywordtype">void</span> __putchar(<span class="keywordtype">char</span> <a class="code" href="dodo_2api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif // _OSI_SCREEN_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astring_8h_html"><div class="ttname"><a href="string_8h.html">string.h</a></div></div>
 <div class="ttc" id="astring_8h_html_a58192c61ac6e501fb1cbcf913834fbd3"><div class="ttname"><a href="string_8h.html#a58192c61ac6e501fb1cbcf913834fbd3">memmove</a></div><div class="ttdeci">void * memmove(void *s1, const void *s2, size_t n)</div></div>
-<div class="ttc" id="aapi_8h_html_a8d4cf0a552cf0437a3cc208b0e065952"><div class="ttname"><a href="api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a></div><div class="ttdeci">byte byte c</div><div class="ttdef"><b>Definition:</b> api.h:59</div></div>
 <div class="ttc" id="astring_8h_html_a4cb469bec7b722064b97a406346acb61"><div class="ttname"><a href="string_8h.html#a4cb469bec7b722064b97a406346acb61">memset</a></div><div class="ttdeci">void * memset(void *ptr, int value, size_t num)</div></div>
+<div class="ttc" id="adodo_2api_8h_html_a8d4cf0a552cf0437a3cc208b0e065952"><div class="ttname"><a href="dodo_2api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a></div><div class="ttdeci">byte byte c</div><div class="ttdef"><b>Definition:</b> api.h:59</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

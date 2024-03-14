@@ -41,6 +41,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - [MMC1](https://www.nesdev.org/wiki/MMC1)
   - [MMC3](https://www.nesdev.org/wiki/MMC3)
 - [Ohio Scientific Challenger 1P](https://en.wikipedia.org/wiki/Ohio_Scientific#Superboard_II,_Challenger_1P_(1978))
+- [OLIMEX Neo6502](https://www.olimex.com/Products/Retro-Computers/Neo6502/open-source-hardware)
 - [Picocomputer 6502](https://picocomputer.github.io) (RP6502)
 - [PC Engine / TurboGrafx-16](https://en.wikipedia.org/wiki/TurboGrafx-16)
   - [PC Engine CD](https://en.wikipedia.org/wiki/TurboGrafx-16#TurboGrafx-CD/CD-ROM%C2%B2)

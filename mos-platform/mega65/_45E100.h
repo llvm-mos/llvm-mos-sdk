@@ -34,7 +34,7 @@ struct __45E100 {
   uint8_t macaddr[6]; //!< MAC address (offset 0x09)
 };
 #ifdef __cplusplus
-static_assert(sizeof(struct __45E100) == 15);
+static_assert(sizeof(struct __45E100) == 16);
 #endif
 
 /// 45E100 Fast Ethernet controller commands

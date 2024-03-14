@@ -18,7 +18,6 @@ extern "C" {
 /**
  * @brief Reset the sprite system.
  */
-__attribute__((leaf))
 void neo_sprite_reset(void);
 
 /**
@@ -31,7 +30,6 @@ void neo_sprite_reset(void);
  * @param flip Flip axis
  * @param anchor Anchor value
  */
-__attribute__((leaf))
 void neo_sprite_set(uint8_t id, uint16_t x, uint16_t y, uint8_t img, uint8_t flip, uint8_t anchor);
 
 /**
@@ -39,7 +37,6 @@ void neo_sprite_set(uint8_t id, uint16_t x, uint16_t y, uint8_t img, uint8_t fli
  *
  * @param id Sprite ID
  */
-__attribute__((leaf))
 void neo_sprite_hide(uint8_t id);
 
 /**
@@ -49,7 +46,6 @@ void neo_sprite_hide(uint8_t id);
  * @param second Second sprite ID
  * @param distance Maximum distance between sprites
  */
-__attribute__((leaf))
 bool neo_sprite_collision(uint8_t first, uint8_t second, uint8_t distance);
 
 /**
@@ -59,7 +55,6 @@ bool neo_sprite_collision(uint8_t first, uint8_t second, uint8_t distance);
  * @param x X position
  * @param y Y position
  */
-__attribute__((leaf))
 void neo_sprite_position(uint8_t id, uint16_t *x, uint16_t *y);
 
 #ifdef __cplusplus

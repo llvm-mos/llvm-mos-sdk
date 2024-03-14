@@ -19,7 +19,6 @@ extern "C" {
  *
  * @return Non-zero if an error has occured.
  */
-__attribute__((leaf))
 uint8_t neo_api_error(void);
 
 /**
@@ -27,7 +26,6 @@ uint8_t neo_api_error(void);
  *
  * @return Current system timer value.
  */
-__attribute__((leaf))
 long neo_system_timer(void);
 
 /**
@@ -36,19 +34,16 @@ long neo_system_timer(void);
  * @param key Key to query.
  * @return Key status.
  */
-__attribute__((leaf))
 uint8_t neo_system_key_status(char key);
 
 /**
  * @brief Print the Neo6502 project contributors.
  */
-__attribute__((leaf))
 void neo_system_credits(void);
 
 /**
  * @brief Update the serial command handler.
  */
-__attribute__((leaf))
 void neo_system_serial_update(void);
 
 /**
@@ -56,7 +51,6 @@ void neo_system_serial_update(void);
  *
  * @param locale Locale code, for example "EN" or "FR".
  */
-__attribute__((leaf))
 void neo_system_locale(const char *locale);
 
 /**

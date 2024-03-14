@@ -19,7 +19,6 @@ extern "C" {
  *
  * @param idx Sprite index to use for the turtle.
  */
-__attribute__((leaf))
 void neo_turtle_init(uint8_t idx);
 
 /**
@@ -27,7 +26,6 @@ void neo_turtle_init(uint8_t idx);
  *
  * @param deg Degrees.
  */
-__attribute__((leaf))
 void neo_turtle_turn(int16_t deg);
 
 /**
@@ -37,19 +35,16 @@ void neo_turtle_turn(int16_t deg);
  * @param color Color to draw.
  * @param pen Pen down flag.
  */
-__attribute__((leaf))
 void neo_turtle_move(int16_t len, uint8_t color, uint8_t pen);
 
 /**
  * @brief Hide the turtle.
  */
-__attribute__((leaf))
 void neo_turtle_hide(void);
 
 /**
  * @brief Move the turtle to the home position - centered, facing upward.
  */
-__attribute__((leaf))
 void neo_turtle_home(void);
 
 #ifdef __cplusplus

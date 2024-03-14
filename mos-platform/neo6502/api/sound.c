@@ -6,23 +6,19 @@
 #include "../neo6502.h"
 #include "../kernel.h"
 
-__attribute__((leaf))
 void neo_sound_reset(void) {
     KSendMessage(API_GROUP_SOUND, API_FN_RESET_SOUND);
 }
 
-__attribute__((leaf))
 void neo_sound_reset_channel(uint8_t channel) {
     ControlPort.params[0] = channel;
     KSendMessage(API_GROUP_SOUND, API_FN_RESET_CHANNEL);
 }
 
-__attribute__((leaf))
 void neo_sound_beep(void) {
     KSendMessage(API_GROUP_SOUND, API_FN_BEEP);
 }
 
-__attribute__((leaf))
 void neo_sound_queue(uint8_t channel, uint16_t frequency, uint16_t duration, uint16_t slide, uint8_t target) {
     ControlPort.params[0] = channel;
     *((volatile uint16_t*) (ControlPort.params + 1)) = frequency;
@@ -32,14 +28,12 @@ void neo_sound_queue(uint8_t channel, uint16_t frequency, uint16_t duration, uin
     KSendMessage(API_GROUP_SOUND, API_FN_QUEUE_SOUND);
 }
 
-__attribute__((leaf))
 void neo_sound_play_effect(uint8_t channel, uint8_t id) {
     ControlPort.params[0] = channel;
     ControlPort.params[1] = id;
     KSendMessage(API_GROUP_SOUND, API_FN_PLAY_SOUND);
 }
 
-__attribute__((leaf))
 uint8_t neo_sound_status(uint8_t channel) {
     ControlPort.params[0] = channel;
     KSendMessageSync(API_GROUP_SOUND, API_FN_SOUND_STATUS);

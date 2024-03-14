@@ -7,12 +7,10 @@
 #include "../neo6502.h"
 #include "../kernel.h"
 
-__attribute__((leaf))
 void neo_sprite_reset(void) {
     KSendMessage(API_GROUP_SPRITES, API_FN_SPRITE_RESET);
 }
 
-__attribute__((leaf))
 void neo_sprite_set(uint8_t id, uint16_t x, uint16_t y, uint8_t img, uint8_t flip, uint8_t anchor) {
     ControlPort.params[0] = id;
     *((volatile uint16_t*) (ControlPort.params + 1)) = x;
@@ -23,13 +21,11 @@ void neo_sprite_set(uint8_t id, uint16_t x, uint16_t y, uint8_t img, uint8_t fli
     KSendMessage(API_GROUP_SPRITES, API_FN_SPRITE_SET);
 }
 
-__attribute__((leaf))
 void neo_sprite_hide(uint8_t id) {
     ControlPort.params[0] = id;
     KSendMessage(API_GROUP_SPRITES, API_FN_SPRITE_HIDE);
 }
 
-__attribute__((leaf))
 bool neo_sprite_collision(uint8_t first, uint8_t second, uint8_t distance) {
     ControlPort.params[0] = first;
     ControlPort.params[1] = second;
@@ -38,7 +34,6 @@ bool neo_sprite_collision(uint8_t first, uint8_t second, uint8_t distance) {
     return ControlPort.params[0];
 }
 
-__attribute__((leaf))
 void neo_sprite_position(uint8_t id, uint16_t *x, uint16_t *y) {
     ControlPort.params[0] = id;
     KSendMessageSync(API_GROUP_SPRITES, API_FN_SPRITE_POS);

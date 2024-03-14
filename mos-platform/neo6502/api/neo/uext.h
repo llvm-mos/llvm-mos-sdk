@@ -25,7 +25,6 @@ typedef enum neo_uext_direction {
  *
  * Set all UEXT pins to I/O pins, inputs and enabled.
  */
-__attribute__((leaf))
 void neo_uext_init(void);
 
 /**
@@ -35,7 +34,6 @@ void neo_uext_init(void);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_uext_gpio_write(uint8_t pin, uint8_t value);
 
 /**
@@ -46,7 +44,6 @@ void neo_uext_gpio_write(uint8_t pin, uint8_t value);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 uint8_t neo_uext_gpio_read(uint8_t pin);
 
 /**
@@ -56,7 +53,6 @@ uint8_t neo_uext_gpio_read(uint8_t pin);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_uext_gpio_set_direction(uint8_t pin, uint8_t direction);
 
 /**
@@ -64,7 +60,6 @@ void neo_uext_gpio_set_direction(uint8_t pin, uint8_t direction);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_uext_i2c_write(uint8_t device, uint8_t reg, uint8_t value);
 
 /**
@@ -72,7 +67,6 @@ void neo_uext_i2c_write(uint8_t device, uint8_t reg, uint8_t value);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 uint8_t neo_uext_i2c_read(uint8_t device, uint8_t reg);
 
 /**
@@ -80,7 +74,6 @@ uint8_t neo_uext_i2c_read(uint8_t device, uint8_t reg);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 uint16_t neo_uext_analogue_read(uint8_t pin);
 
 /**
@@ -90,7 +83,6 @@ uint16_t neo_uext_analogue_read(uint8_t pin);
  *
  * @return Non-zero if present.
  */
-__attribute__((leaf))
 uint8_t neo_uext_i2c_status(uint8_t device);
 
 /**
@@ -98,7 +90,6 @@ uint8_t neo_uext_i2c_status(uint8_t device);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_uext_i2c_block_read(uint8_t device, void *dest, uint16_t len);
 
 /**
@@ -106,7 +97,6 @@ void neo_uext_i2c_block_read(uint8_t device, void *dest, uint16_t len);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_uext_i2c_block_write(uint8_t device, const void *src, uint16_t len);
 
 /**
@@ -114,7 +104,6 @@ void neo_uext_i2c_block_write(uint8_t device, const void *src, uint16_t len);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_uext_spi_block_read(uint8_t device, void *dest, uint16_t len);
 
 /**
@@ -122,7 +111,6 @@ void neo_uext_spi_block_read(uint8_t device, void *dest, uint16_t len);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_uext_spi_block_write(uint8_t device, const void *src, uint16_t len);
 
 #ifdef __cplusplus

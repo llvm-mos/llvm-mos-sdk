@@ -18,25 +18,21 @@ extern "C" {
 /**
  * @brief Reset the sound system.
  */
-__attribute__((leaf))
 void neo_sound_reset(void);
 
 /**
  * @brief Reset the specified sound channel.
  */
-__attribute__((leaf))
 void neo_sound_reset_channel(uint8_t channel);
 
 /**
  * @brief Play the startup beep.
  */
-__attribute__((leaf))
 void neo_sound_beep(void);
 
 /**
  * @brief Queue a sound.
  */
-__attribute__((leaf))
 void neo_sound_queue(uint8_t channel, uint16_t frequency, uint16_t duration, uint16_t slide, uint8_t target);
 
 /**
@@ -47,7 +43,6 @@ void neo_sound_queue(uint8_t channel, uint16_t frequency, uint16_t duration, uin
  * @param channel Channel
  * @param id Sound effect ID
  */
-__attribute__((leaf))
 void neo_sound_play_effect(uint8_t channel, uint8_t id);
 
 /**
@@ -56,7 +51,6 @@ void neo_sound_play_effect(uint8_t channel, uint8_t id);
  * @param channel Channel
  * @return Number of remaining notes in the queue, including the currently played one if any.
  */
-__attribute__((leaf))
 uint8_t neo_sound_status(uint8_t channel);
 
 #ifdef __cplusplus

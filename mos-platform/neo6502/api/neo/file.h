@@ -9,6 +9,7 @@
 #define _NEO_FILE_H
 
 #include <neo6502.h>
+#include "types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,7 +38,6 @@ typedef struct neo_file_stat {
 /**
  * @brief Display the listing of files in the current directory.
  */
-__attribute__((leaf))
 void neo_file_list_directory(void);
 
 /**
@@ -50,8 +50,7 @@ void neo_file_list_directory(void);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_load_p(const void *filename, void *dest);
+void neo_file_load_p(const neo_pstring_t *filename, void *dest);
 
 /**
  * @brief Load a file into memory, using a C string for the filename.
@@ -63,7 +62,6 @@ void neo_file_load_p(const void *filename, void *dest);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_load(const char *filename, void *dest);
 
 /**
@@ -75,8 +73,7 @@ void neo_file_load(const char *filename, void *dest);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_store_p(const void *filename, const void *src, uint16_t len);
+void neo_file_store_p(const neo_pstring_t *filename, const void *src, uint16_t len);
 
 /**
  * @brief Store a file from memory, using a C string for the filename.
@@ -87,8 +84,7 @@ void neo_file_store_p(const void *filename, const void *src, uint16_t len);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_store(const void *filename, const void *src, uint16_t len);
+void neo_file_store(const char *filename, const void *src, uint16_t len);
 
 /**
  * @brief Open a file channel, using a Pascal string for the filename.
@@ -99,8 +95,7 @@ void neo_file_store(const void *filename, const void *src, uint16_t len);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_open_p(uint8_t channel, const void *filename, uint8_t mode);
+void neo_file_open_p(uint8_t channel, const neo_pstring_t *filename, uint8_t mode);
 
 /**
  * @brief Open a file channel, using a C string for the filename.
@@ -111,8 +106,7 @@ void neo_file_open_p(uint8_t channel, const void *filename, uint8_t mode);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_open(uint8_t channel, const void *filename, uint8_t mode);
+void neo_file_open(uint8_t channel, const char *filename, uint8_t mode);
 
 /**
  * @brief Close a file channel.
@@ -121,7 +115,6 @@ void neo_file_open(uint8_t channel, const void *filename, uint8_t mode);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_close(uint8_t channel);
 
 /**
@@ -132,7 +125,6 @@ void neo_file_close(uint8_t channel);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_seek(uint8_t channel, uint32_t pos);
 
 /**
@@ -143,7 +135,6 @@ void neo_file_seek(uint8_t channel, uint32_t pos);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 uint32_t neo_file_tell(uint8_t channel);
 
 /**
@@ -158,7 +149,6 @@ uint32_t neo_file_tell(uint8_t channel);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 uint16_t neo_file_read(uint8_t channel, void *dest, uint16_t len);
 
 /**
@@ -171,7 +161,6 @@ uint16_t neo_file_read(uint8_t channel, void *dest, uint16_t len);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 uint32_t neo_file_write(uint8_t channel, const void *src, uint16_t len);
 
 /**
@@ -182,7 +171,6 @@ uint32_t neo_file_write(uint8_t channel, const void *src, uint16_t len);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 uint32_t neo_file_size(uint8_t channel);
 
 /**
@@ -193,7 +181,6 @@ uint32_t neo_file_size(uint8_t channel);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_set_size(uint8_t channel, uint32_t size);
 
 /**
@@ -204,8 +191,7 @@ void neo_file_set_size(uint8_t channel, uint32_t size);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_rename_p(const void *from, const void *to);
+void neo_file_rename_p(const neo_pstring_t *from, const neo_pstring_t *to);
 
 /**
  * @brief Rename file, using C strings for the filenames.
@@ -215,7 +201,6 @@ void neo_file_rename_p(const void *from, const void *to);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_rename(const char *from, const char *to);
 
 /**
@@ -228,8 +213,7 @@ void neo_file_rename(const char *from, const char *to);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_delete_p(const void *filename);
+void neo_file_delete_p(const neo_pstring_t *filename);
 
 /**
  * @brief Delete file, using C strings for the filename.
@@ -241,7 +225,6 @@ void neo_file_delete_p(const void *filename);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_delete(const char *filename);
 
 /**
@@ -251,8 +234,7 @@ void neo_file_delete(const char *filename);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_chdir_p(const void *path);
+void neo_file_chdir_p(const neo_pstring_t *path);
 
 /**
  * @brief Change current working directory, using a C string for the path.
@@ -261,7 +243,6 @@ void neo_file_chdir_p(const void *path);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_chdir(const char *path);
 
 /**
@@ -271,8 +252,7 @@ void neo_file_chdir(const char *path);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_mkdir_p(const void *path);
+void neo_file_mkdir_p(const neo_pstring_t *path);
 
 /**
  * @brief Create directory, using a C string for the path.
@@ -281,7 +261,6 @@ void neo_file_mkdir_p(const void *path);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_mkdir(const char *path);
 
 /**
@@ -292,8 +271,7 @@ void neo_file_mkdir(const char *path);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_stat_p(const void *path, neo_file_stat_t *st);
+void neo_file_stat_p(const neo_pstring_t *path, neo_file_stat_t *st);
 
 /**
  * @brief Retrieve file information, using a C string for the path.
@@ -303,7 +281,6 @@ void neo_file_stat_p(const void *path, neo_file_stat_t *st);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_stat(const char *path, neo_file_stat_t *st);
 
 /**
@@ -313,8 +290,7 @@ void neo_file_stat(const char *path, neo_file_stat_t *st);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_opendir_p(const void *path);
+void neo_file_opendir_p(const neo_pstring_t *path);
 
 /**
  * @brief Open a directory for enumeration, using a C string for the path.
@@ -323,7 +299,6 @@ void neo_file_opendir_p(const void *path);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_opendir(const char *path);
 
 /**
@@ -334,8 +309,7 @@ void neo_file_opendir(const char *path);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_readdir_p(void *path, neo_file_stat_t *st);
+void neo_file_readdir_p(neo_pstring_t *path, neo_file_stat_t *st);
 
 /**
  * @brief Read the next file item from the directory, returning a C string for the path.
@@ -345,7 +319,6 @@ void neo_file_readdir_p(void *path, neo_file_stat_t *st);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_readdir(char *path, neo_file_stat_t *st);
 
 /**
@@ -353,7 +326,6 @@ void neo_file_readdir(char *path, neo_file_stat_t *st);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_closedir(void);
 
 /**
@@ -364,8 +336,7 @@ void neo_file_closedir(void);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_copy_p(const void *from, const void *to);
+void neo_file_copy_p(const neo_pstring_t *from, const neo_pstring_t *to);
 
 /**
  * @brief Copy file, using C strings for the filenames.
@@ -375,7 +346,6 @@ void neo_file_copy_p(const void *from, const void *to);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_copy(const char *from, const char *to);
 
 /**
@@ -386,8 +356,7 @@ void neo_file_copy(const char *from, const char *to);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
-void neo_file_set_attr_p(const void *path, uint8_t attr);
+void neo_file_set_attr_p(const neo_pstring_t *path, uint8_t attr);
 
 /**
  * @brief Set file attributes, using a C string for the filename.
@@ -397,7 +366,6 @@ void neo_file_set_attr_p(const void *path, uint8_t attr);
  *
  * Check errors with @see neo_api_error
  */
-__attribute__((leaf))
 void neo_file_set_attr(const char *path, uint8_t attr);
 
 /**
@@ -405,16 +373,14 @@ void neo_file_set_attr(const char *path, uint8_t attr);
  *
  * @param filter Filename search needle (Pascal string)
  */
-__attribute__((leaf))
-void neo_file_list_filtered_p(const void *filter);
+void neo_file_list_filtered_p(const neo_pstring_t *filter);
 
 /**
  * @brief Display a filtered listing of files in the current directory, using a C string for the needle.
  *
  * @param filter Filename search needle (C string)
  */
-__attribute__((leaf))
-void neo_file_list_filtered(const void *filter);
+void neo_file_list_filtered(const char *filter);
 
 #ifdef __cplusplus
 }

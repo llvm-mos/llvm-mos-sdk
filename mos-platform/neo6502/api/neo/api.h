@@ -11,6 +11,7 @@
 #define _NEO_API_H
 
 #include <neo6502.h>
+#include "types.h"
 #include "system.h"
 #include "console.h"
 #include "file.h"

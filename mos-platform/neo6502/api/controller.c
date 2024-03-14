@@ -6,7 +6,6 @@
 #include "../neo6502.h"
 #include "../kernel.h"
 
-__attribute__((leaf))
 uint8_t neo_controller_read(void) {
     KSendMessageSync(API_GROUP_CONTROLLER, API_FN_READ_CONTROLLER);
     return ControlPort.params[0];

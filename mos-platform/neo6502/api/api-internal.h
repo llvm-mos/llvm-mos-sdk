@@ -5,18 +5,21 @@
 
 #include <stdint.h>
 #include <string.h>
+#include "neo/types.h"
 
 #ifndef _NEO_API_INTERNAL_H
 #define _NEO_API_INTERNAL_H
 
+typedef struct neo_pstring neo_pstring_t;
+
 /**
  * @brief Given an input C-format string FROM, provide a Pascal-format string FROM_p using VLAs.
  */
-#define PASCALIZE_INPUT(FROM) \
+#define PASCALIZE_INPUT(FROM, TO) \
     uint8_t FROM ## _len = strlen(FROM); \
-    char FROM ## _p[FROM ## _len+1]; \
-    FROM ## _p[0] = FROM ## _len; \
-    memcpy(FROM ## _p + 1, FROM, FROM ## _len)
+    char TO[FROM ## _len+1]; \
+    TO[0] = FROM ## _len; \
+    memcpy(TO + 1, FROM, FROM ## _len)
 
 /**
  * @brief Given an input Pascal-format string to, convert it in place to a C-format string.

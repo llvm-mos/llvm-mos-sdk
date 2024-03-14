@@ -9,6 +9,7 @@
 #define _NEO_GRAPHICS_H
 
 #include <neo6502.h>
+#include "types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,7 +18,6 @@ extern "C" {
 /**
  * @brief Reset the global graphics system settings.
  */
-__attribute__((leaf))
 void neo_graphics_set_defaults(uint8_t color_mask, uint8_t color_xor, uint8_t fill, uint8_t extent, uint8_t flip);
 
 /**
@@ -28,7 +28,6 @@ void neo_graphics_set_defaults(uint8_t color_mask, uint8_t color_xor, uint8_t fi
  * @param x2 End X
  * @param y2 End Y
  */
-__attribute__((leaf))
 void neo_graphics_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 
 /**
@@ -39,7 +38,6 @@ void neo_graphics_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
  * @param x2 End X
  * @param y2 End Y
  */
-__attribute__((leaf))
 void neo_graphics_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 
 /**
@@ -50,7 +48,6 @@ void neo_graphics_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t
  * @param x2 End X
  * @param y2 End Y
  */
-__attribute__((leaf))
 void neo_graphics_draw_ellipse(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 
 /**
@@ -59,7 +56,6 @@ void neo_graphics_draw_ellipse(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y
  * @param x X
  * @param y Y
  */
-__attribute__((leaf))
 void neo_graphics_draw_pixel(uint16_t x, uint16_t y);
 
 /**
@@ -69,8 +65,7 @@ void neo_graphics_draw_pixel(uint16_t x, uint16_t y);
  * @param y Y
  * @param text Text string (Pascal).
  */
-__attribute__((leaf))
-void neo_graphics_draw_text_p(uint16_t x, uint16_t y, const void *text);
+void neo_graphics_draw_text_p(uint16_t x, uint16_t y, const neo_pstring_t *text);
 
 /**
  * @brief Draw a C text string.
@@ -79,7 +74,6 @@ void neo_graphics_draw_text_p(uint16_t x, uint16_t y, const void *text);
  * @param y Y
  * @param text Text string (C).
  */
-__attribute__((leaf))
 void neo_graphics_draw_text(uint16_t x, uint16_t y, const char *text);
 
 /**
@@ -89,7 +83,6 @@ void neo_graphics_draw_text(uint16_t x, uint16_t y, const char *text);
  * @param y Y
  * @param id Image ID
  */
-__attribute__((leaf))
 void neo_graphics_draw_image(uint16_t x, uint16_t y, uint8_t id);
 
 /**
@@ -100,7 +93,6 @@ void neo_graphics_draw_image(uint16_t x, uint16_t y, uint8_t id);
  * @param x2 End X
  * @param y2 End Y
  */
-__attribute__((leaf))
 void neo_graphics_draw_tilemap(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 
 /**
@@ -111,7 +103,6 @@ void neo_graphics_draw_tilemap(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y
  * @param g Green component.
  * @param b Blue component.
  */
-__attribute__((leaf))
 void neo_graphics_set_palette(uint8_t idx, uint8_t r, uint8_t g, uint8_t b);
 
 /**
@@ -121,13 +112,11 @@ void neo_graphics_set_palette(uint8_t idx, uint8_t r, uint8_t g, uint8_t b);
  * @param y Y
  * @return The pixel palette index.
  */
-__attribute__((leaf))
 uint8_t neo_graphics_read_pixel(uint16_t x, uint16_t y);
 
 /**
  * @brief Reset palette.
  */
-__attribute__((leaf))
 void neo_graphics_reset_palette(void);
 
 /**
@@ -137,13 +126,11 @@ void neo_graphics_reset_palette(void);
  * @param x X offset into tilemap.
  * @param y Y offset into tilemap.
  */
-__attribute__((leaf))
 void neo_graphics_set_tilemap(const void *src, uint16_t x, uint16_t y);
 
 /**
  * @brief Read the number of vertical blanks since power-on.
  */
-__attribute__((leaf))
 long neo_graphics_frame_count(void);
 
 /**
@@ -151,7 +138,6 @@ long neo_graphics_frame_count(void);
  *
  * @param idx Palette index.
  */
-__attribute__((leaf))
 void neo_graphics_set_color(uint8_t idx);
 
 /**
@@ -159,7 +145,6 @@ void neo_graphics_set_color(uint8_t idx);
  *
  * @param value Value.
  */
-__attribute__((leaf))
 void neo_graphics_set_solid_flag(uint8_t value);
 
 /**
@@ -167,7 +152,6 @@ void neo_graphics_set_solid_flag(uint8_t value);
  *
  * @param value Value.
  */
-__attribute__((leaf))
 void neo_graphics_set_draw_size(uint8_t value);
 
 /**
@@ -175,7 +159,6 @@ void neo_graphics_set_draw_size(uint8_t value);
  *
  * @param value Value.
  */
-__attribute__((leaf))
 void neo_graphics_set_flip_bits(uint8_t value);
 
 #ifdef __cplusplus

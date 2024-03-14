@@ -9,6 +9,7 @@
 #define _NEO_CONSOLE_H
 
 #include <neo6502.h>
+#include "types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,7 +20,6 @@ extern "C" {
  *
  * @return ASCII key value; 0 if no key presses queued.
  */
-__attribute__((leaf))
 char neo_console_read_char(void);
 
 /**
@@ -27,7 +27,6 @@ char neo_console_read_char(void);
  *
  * @return 0xFF if the queue is empty, 0 otherwise.
  */
-__attribute__((leaf))
 uint8_t neo_console_status(void);
 
 /**
@@ -37,8 +36,7 @@ uint8_t neo_console_status(void);
  *
  * @param line Buffer for the line to be read.
  */
-__attribute__((leaf))
-void neo_console_read_line_p(void *line);
+void neo_console_read_line_p(neo_pstring_t *line);
 
 /**
  * @brief Read the current line below the cursor, and move the cursor by one line. The line is stored in C string format.
@@ -47,7 +45,6 @@ void neo_console_read_line_p(void *line);
  *
  * @param line Buffer for the line to be read.
  */
-__attribute__((leaf))
 void neo_console_read_line(char *line);
 
 /**
@@ -56,8 +53,7 @@ void neo_console_read_line(char *line);
  * @param hotkey Function key to act as a hotkey (F1-F10 => 1-10)
  * @param str String to emit when pressed.
  */
-__attribute__((leaf))
-void neo_console_define_hotkey_p(uint8_t hotkey, const void *str);
+void neo_console_define_hotkey_p(uint8_t hotkey, const neo_pstring_t *str);
 
 /**
  * @brief Define a hotkey which emits a C-style string when pressed.
@@ -65,7 +61,6 @@ void neo_console_define_hotkey_p(uint8_t hotkey, const void *str);
  * @param hotkey Function key to act as a hotkey (F1-F10 => 1-10)
  * @param str String to emit when pressed.
  */
-__attribute__((leaf))
 void neo_console_define_hotkey(uint8_t hotkey, const char *str);
 
 /**
@@ -74,7 +69,6 @@ void neo_console_define_hotkey(uint8_t hotkey, const char *str);
  * @param ch Character (192-255)
  * @param bitmap 7-byte (bits 0..5 => 6x7) character bitmap.
  */
-__attribute__((leaf))
 void neo_console_define_char(char ch, const uint8_t *bitmap);
 
 /**
@@ -82,7 +76,6 @@ void neo_console_define_char(char ch, const uint8_t *bitmap);
  *
  * @param ch Character
  */
-__attribute__((leaf))
 void neo_console_write_char(char ch);
 
 /**
@@ -91,13 +84,11 @@ void neo_console_write_char(char ch);
  * @param x X
  * @param y Y
  */
-__attribute__((leaf))
 void neo_console_set_cursor_pos(uint8_t x, uint8_t y);
 
 /**
  * @brief Display the current function key definitions.
  */
-__attribute__((leaf))
 void neo_console_list_hotkeys(void);
 
 /**
@@ -106,13 +97,11 @@ void neo_console_list_hotkeys(void);
  * @param width Width
  * @param height Height
  */
-__attribute__((leaf))
 void neo_console_screen_size(uint8_t *width, uint8_t *height);
 
 /**
  * @brief Clear the console screen.
  */
-__attribute__((leaf))
 void neo_console_clear_screen(void);
 
 /**
@@ -121,7 +110,6 @@ void neo_console_clear_screen(void);
  * @param x X
  * @param y Y
  */
-__attribute__((leaf))
 void neo_console_cursor_pos(uint8_t *x, uint8_t *y);
 
 /**
@@ -132,7 +120,6 @@ void neo_console_cursor_pos(uint8_t *x, uint8_t *y);
  * @param x2 End X
  * @param y2 End Y
  */
-__attribute__((leaf))
 void neo_console_clear_region(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
 
 /**
@@ -141,7 +128,6 @@ void neo_console_clear_region(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
  * @param fg Foreground color.
  * @param bg Background color.
  */
-__attribute__((leaf))
 void neo_console_set_text_color(uint8_t fg, uint8_t bg);
 
 #ifdef __cplusplus

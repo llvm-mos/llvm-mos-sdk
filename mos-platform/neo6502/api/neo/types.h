@@ -5,19 +5,17 @@
 
 #include <stdint.h>
 
-#ifndef _NEO_CONTROLLER_H
-#define _NEO_CONTROLLER_H
-
-#include <neo6502.h>
+#ifndef _NEO_TYPES_H
+#define _NEO_TYPES_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/**
- * @brief Read the default controller's status.'
- */
-uint8_t neo_controller_read(void);
+typedef struct neo_pstring {
+    uint8_t length;
+    char data[];
+} neo_pstring_t;
 
 #ifdef __cplusplus
 }

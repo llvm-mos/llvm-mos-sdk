@@ -13,7 +13,7 @@ char DW[8];
 char LL[8];
 
 unsigned char memory[65536];
-bool log;
+bool should_log;
 bool change;
 int wait_;
 int duration;
@@ -90,7 +90,7 @@ static inline void mem_wr(int adr, unsigned char data) {
 
   if (adr < 0x4018) // APU registers
   {
-    if (!log)
+    if (!should_log)
       return;
 
     if (adr == 0x4001 || adr == 0x4005) {
@@ -201,7 +201,7 @@ void convert_effects(void) {
       memory[0x01FE] = 0x01; // return address 0x01FF-1
       memory[0x01FD] = 0xFE;
 
-      log = false;
+      should_log = false;
 
       for (i = 0; i < 2000; ++i)
         cpu_tick(); // 2000 is enough for FT init
@@ -211,7 +211,7 @@ void convert_effects(void) {
       effect_ptr = 0;
       effect_last_zero_volume_ptr = 0;
 
-      log = true;
+      should_log = true;
       cnt = 0;
       wait_ = -1;
       duration = 0;

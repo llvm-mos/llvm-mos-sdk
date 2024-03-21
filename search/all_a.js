@@ -271,7 +271,7 @@ var searchData=
   ['is_5ffinal_1460',['is_final',['../structstd_1_1is__final.html',1,'std']]],
   ['is_5ffinal_5fv_1461',['is_final_v',['../namespacestd.html#a778f0a7dd537d743e88c142b5cdbf9d4',1,'std']]],
   ['is_5ffloating_5fpoint_1462',['is_floating_point',['../structstd_1_1is__floating__point.html',1,'std']]],
-  ['is_5ffloating_5fpointr_5fv_1463',['is_floating_pointr_v',['../namespacestd.html#a45485b90ff0760579e251f139e5e533f',1,'std']]],
+  ['is_5ffloating_5fpoint_5fv_1463',['is_floating_point_v',['../namespacestd.html#a0ca540ea861bd1112bcc7c4c293ef4e3',1,'std']]],
   ['is_5ffunction_1464',['is_function',['../structstd_1_1is__function.html',1,'std']]],
   ['is_5ffunction_5fv_1465',['is_function_v',['../namespacestd.html#aaed253857cfc067d5217f05558d6cf67',1,'std']]],
   ['is_5ffundamental_1466',['is_fundamental',['../structstd_1_1is__fundamental.html',1,'std']]],

@@ -28,7 +28,7 @@ var searchData=
   ['is_5fenum_5fv_4462',['is_enum_v',['../namespacestd.html#a67cc4da72d08bd1c476ea3d0c34c3031',1,'std']]],
   ['is_5fexact_4463',['is_exact',['../structstd_1_1__numeric__limits__helper.html#aff6d354c7f7cf9e9462ac2d21e8cb670',1,'std::_numeric_limits_helper::is_exact()'],['../structstd_1_1__numeric__limits__helper_3_01T_00_01true_01_4.html#a2cb322ea0823e3ef5bd909a417cbdb2c',1,'std::_numeric_limits_helper&lt; T, true &gt;::is_exact()']]],
   ['is_5ffinal_5fv_4464',['is_final_v',['../namespacestd.html#a778f0a7dd537d743e88c142b5cdbf9d4',1,'std']]],
-  ['is_5ffloating_5fpointr_5fv_4465',['is_floating_pointr_v',['../namespacestd.html#a45485b90ff0760579e251f139e5e533f',1,'std']]],
+  ['is_5ffloating_5fpoint_5fv_4465',['is_floating_point_v',['../namespacestd.html#a0ca540ea861bd1112bcc7c4c293ef4e3',1,'std']]],
   ['is_5ffunction_5fv_4466',['is_function_v',['../namespacestd.html#aaed253857cfc067d5217f05558d6cf67',1,'std']]],
   ['is_5ffundamental_5fv_4467',['is_fundamental_v',['../namespacestd.html#a9b9f82025d1c94072a1ae87af2b187d6',1,'std']]],
   ['is_5fiec559_4468',['is_iec559',['../classstd_1_1numeric__limits.html#aa8c43af85d984951870cbab059f37a37',1,'std::numeric_limits']]],

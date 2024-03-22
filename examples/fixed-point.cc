@@ -29,7 +29,7 @@ int main() {
   // The new basic_number integral part is now 117 (since we subtracted a fraction part)
   assert( basic_number.as_i() == 117 );
   // The fractional part is 
-  assert( basic_number.as_f() == 0xe0 );
+  assert( basic_number.as_f() == 0xf0 );
 
   // Now that the basics are out of the way, let's start using the helper methods
   // in the literals namespace
@@ -37,17 +37,14 @@ int main() {
 
   // For the common 8.8 and 12.4 fixed point numbers, user defined literals are
   // provided for converting from floating point numbers at compile time.
-  // This converts 9.87 into an 8.8 number (0x09de)
+  // This converts 9.87 into an 12.4 number (0x009e)
   auto third_number = 9.87_12_4;
 
   // Comparisons work between fixed point numbers or integer numbers
   // Additionally fixed point numbers will be converted to other fixed point
   // numbers automatically when performing math operations.
-  if (third_number + second_number > first_number) {
-    assert( false );
-  } else if (first_number < 119) {
-    assert( true );
-  }
+  assert(third_number + second_number <= basic_number);
+  assert(basic_number < 119);
 
   // fixed point numbers can be signed or unsigned as well with the optional
   // third parameter. They are signed by default like other integer types

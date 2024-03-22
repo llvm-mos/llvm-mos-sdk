@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['x_4609',['x',['../structgraph__pos__t.html#aa1b082739c4f1ce03f0ce4079630d823',1,'graph_pos_t::x()'],['../structmouse__pos__t.html#a5b4219b9bc978fef6ef43a5a45bcbe85',1,'mouse_pos_t::x()'],['../structvdc__sprite__t.html#afd93fe7537bc95ea9885ddf486fba1e4',1,'vdc_sprite_t::x()'],['../dodo_2api_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4',1,'x():&#160;api.h'],['../nesdoug_8h.html#ab06e9aa782b61ccfb42f7c48996f6ed4',1,'x():&#160;nesdoug.h']]],
-  ['x1_4610',['x1',['../dodo_2api_8h.html#a4b42eab59214a45e66d15cb15ae6571a',1,'api.h']]],
-  ['x_5fpos_5fpx_4611',['x_pos_px',['../structvga__mode1__config__t.html#a56c7524b23ec42b294e1ae632e1922db',1,'vga_mode1_config_t::x_pos_px()'],['../structvga__mode2__config__t.html#a099651741da5545da4afb6dd40b731c1',1,'vga_mode2_config_t::x_pos_px()'],['../structvga__mode3__config__t.html#aab0abb93ce65c54623732407544004c8',1,'vga_mode3_config_t::x_pos_px()'],['../structvga__mode4__sprite__t.html#a7198db315e76322b5e6462eba4d35a93',1,'vga_mode4_sprite_t::x_pos_px()'],['../structvga__mode4__asprite__t.html#ae0ccb406af17ada2f184b35ca14fdb97',1,'vga_mode4_asprite_t::x_pos_px()']]],
-  ['x_5fwrap_4612',['x_wrap',['../structvga__mode1__config__t.html#a880f3462d08790bdfc916ae621b86b74',1,'vga_mode1_config_t::x_wrap()'],['../structvga__mode2__config__t.html#ad960f6d5ce51ac8c6843ce8aedbbbb47',1,'vga_mode2_config_t::x_wrap()'],['../structvga__mode3__config__t.html#a7dcbd1d4cfc41d4a09c50246870c0f8a',1,'vga_mode3_config_t::x_wrap()']]],
-  ['xram_5fdata_5fptr_4613',['xram_data_ptr',['../structvga__mode1__config__t.html#a01f80597143488f5e139e71ca41a8c0e',1,'vga_mode1_config_t::xram_data_ptr()'],['../structvga__mode2__config__t.html#a43f7bc394d9576f6b27157948d8b98f8',1,'vga_mode2_config_t::xram_data_ptr()'],['../structvga__mode3__config__t.html#a2e13f14748baed78553bf5638f4a6062',1,'vga_mode3_config_t::xram_data_ptr()']]],
-  ['xram_5ffont_5fptr_4614',['xram_font_ptr',['../structvga__mode1__config__t.html#ad070ebeaacf4980be53a8758a250e3f5',1,'vga_mode1_config_t']]],
-  ['xram_5fpalette_5fptr_4615',['xram_palette_ptr',['../structvga__mode1__config__t.html#aaa1737a56a5933f99b30a0fa8d82e6ee',1,'vga_mode1_config_t::xram_palette_ptr()'],['../structvga__mode2__config__t.html#a2d530d7f3bb5ab2163c7c4ae7761cfa1',1,'vga_mode2_config_t::xram_palette_ptr()'],['../structvga__mode3__config__t.html#ad8394a0b6dff447d6cb8270876a5b804',1,'vga_mode3_config_t::xram_palette_ptr()']]],
-  ['xram_5fsprite_5fptr_4616',['xram_sprite_ptr',['../structvga__mode4__sprite__t.html#aa34b20959e601d087eaf8275aad2fd41',1,'vga_mode4_sprite_t::xram_sprite_ptr()'],['../structvga__mode4__asprite__t.html#ae716a1f0e4270589cf1ae376bef7441a',1,'vga_mode4_asprite_t::xram_sprite_ptr()']]],
-  ['xram_5ftile_5fptr_4617',['xram_tile_ptr',['../structvga__mode2__config__t.html#a1a1980c1ff6ca3287ccc4abe7b7a9614',1,'vga_mode2_config_t']]]
+  ['w_4713',['w',['../dodo_2api_8h.html#a84259e58d5ffeb55767613f3341f11e2',1,'api.h']]],
+  ['width_4714',['width',['../structStatus.html#a3a5e31f94b659394c44acfdf4ddedaa4',1,'Status::width()'],['../structcx16__fb__info__t.html#a139636c309e36d26d72845a2127f4b3f',1,'cx16_fb_info_t::width()']]],
+  ['width_5fchars_4715',['width_chars',['../structvga__mode1__config__t.html#a27fca5a38ec952db45d774bd29d0979d',1,'vga_mode1_config_t']]],
+  ['width_5fpx_4716',['width_px',['../structvga__mode3__config__t.html#adca9368987e48f0b95202c9bf1878b7a',1,'vga_mode3_config_t']]],
+  ['width_5ftiles_4717',['width_tiles',['../structvga__mode2__config__t.html#af404e6c555e3cc8beece5b22e22e1c33',1,'vga_mode2_config_t']]],
+  ['write_4718',['write',['../stdio_8h.html#a81c0a8e618534e5fceaa813c290ca70b',1,'stdio.h']]]
 ];

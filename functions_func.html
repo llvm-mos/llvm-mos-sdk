@@ -70,6 +70,15 @@ $(function() {
 <li>ArrayConstIterator()
 : <a class="el" href="classsoa_1_1ArrayConstIterator.html#a9221be96a79d3231a8bfa2873f896b7a">soa::ArrayConstIterator&lt; T, N &gt;</a>
 </li>
+<li>as()
+: <a class="el" href="classFixedPoint.html#acea2f0870d6bb5b22c9933bca303db13">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>as_f()
+: <a class="el" href="classFixedPoint.html#a94db5ee3f78a03f7bc220eab718bef3a">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>as_i()
+: <a class="el" href="classFixedPoint.html#a22a63290108629279ad0839df16ca4d8">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
 </ul>
 
 
@@ -84,9 +93,12 @@ $(function() {
 : <a class="el" href="classstd_1_1type__info.html#afe3eb2bd6a6e6d976a969d03ad24936b">std::type_info</a>
 </li>
 <li>begin()
-: <a class="el" href="classsoa_1_1Array.html#a73e88c0ae3e9699c457fcfa955de5ca8">soa::Array&lt; T, N &gt;</a>
+: <a class="el" href="classsoa_1_1Array.html#a9c1de7c1149b246ccdded028c38cd4a2">soa::Array&lt; T, N &gt;</a>
 , <a class="el" href="structstd_1_1array.html#a65de28964bcd70204a24c99e5d92da38">std::array&lt; T, _N &gt;</a>
 , <a class="el" href="classstd_1_1initializer__list.html#ac763ad3c10144402b0c8d8f9995dcc47">std::initializer_list&lt; E &gt;</a>
+</li>
+<li>bitcount()
+: <a class="el" href="classFixedPoint.html#aa28ccf1b3b25ded344450877c47c1505">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 </ul>
 
@@ -127,6 +139,12 @@ $(function() {
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
+<li>FixedPoint()
+: <a class="el" href="classFixedPoint.html#a9a8eb67c23c572d4c51d0dad58a906fc">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>frac_bitcount()
+: <a class="el" href="classFixedPoint.html#a92c71d2e71a2d1f36985fc1739fa5a35">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
 <li>front()
 : <a class="el" href="structstd_1_1array.html#ae42ae6d02646ab094c47d58da244230b">std::array&lt; T, _N &gt;</a>
 </li>
@@ -135,7 +153,8 @@ $(function() {
 
 <h3><a id="index_g"></a>- g -</h3><ul>
 <li>get()
-: <a class="el" href="classsoa_1_1BasePtr.html#a639f50c999144f84394ff5534ef80665">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#abe6e5169c110e750632dc38bd6f58ef7">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a639f50c999144f84394ff5534ef80665">soa::BasePtr&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -146,6 +165,12 @@ $(function() {
 </li>
 <li>initializer_list()
 : <a class="el" href="classstd_1_1initializer__list.html#abe1e36129986ffbe5dfb19b34ceebdb6">std::initializer_list&lt; E &gt;</a>
+</li>
+<li>int_bitcount()
+: <a class="el" href="classFixedPoint.html#adb7b9546d631f99f6c1262de252be11d">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>is_signed()
+: <a class="el" href="classFixedPoint.html#ab97aff86811e8b96048deeff0cd50776">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 </ul>
 
@@ -188,69 +213,126 @@ $(function() {
 : <a class="el" href="classsoa_1_1BasePtr.html#aa33b29c73c29c835684362cbfd6e0e01">soa::BasePtr&lt; T &gt;</a>
 </li>
 <li>operator!=()
-: <a class="el" href="classsoa_1_1ArrayConstIterator.html#a7e64307a27b941a92239bea3b5f98af8">soa::ArrayConstIterator&lt; T, N &gt;</a>
+: <a class="el" href="classFixedPoint.html#a4969b605545dd8054fdd41b3d778829c">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1ArrayConstIterator.html#a7e64307a27b941a92239bea3b5f98af8">soa::ArrayConstIterator&lt; T, N &gt;</a>
 , <a class="el" href="classstd_1_1type__info.html#adbdb787b3efd714b40bbd40001c0bb10">std::type_info</a>
 </li>
+<li>operator%()
+: <a class="el" href="classFixedPoint.html#a585a84cfb4c701f1d283da1f19ba29cb">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
 <li>operator%=()
-: <a class="el" href="classsoa_1_1BasePtr.html#a391b4e8b5708a1d57dc55c44957a1722">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#a1a3b2a021be441b41b0c749d8580e278">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a391b4e8b5708a1d57dc55c44957a1722">soa::BasePtr&lt; T &gt;</a>
+</li>
+<li>operator&amp;()
+: <a class="el" href="classFixedPoint.html#abe409e46f3ac26f433dcb98fcdc172a2">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 <li>operator&amp;=()
-: <a class="el" href="classsoa_1_1BasePtr.html#aa8defc0686ad3709635ff17e0a6e6776">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#a14320a057d8a6662a149e501754bbf7a">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#aa8defc0686ad3709635ff17e0a6e6776">soa::BasePtr&lt; T &gt;</a>
 </li>
 <li>operator()()
 : <a class="el" href="classsoa_1_1BasePtr.html#aa90fbd10e93e1cc18caee1ca079c77de">soa::BasePtr&lt; T &gt;</a>
 </li>
 <li>operator*()
-: <a class="el" href="classsoa_1_1ArrayConstIterator.html#aef695eed2a264bf58b090d4f13a4309b">soa::ArrayConstIterator&lt; T, N &gt;</a>
+: <a class="el" href="classFixedPoint.html#a37144e8e510ad41db5fc76c2d50e32ab">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1ArrayConstIterator.html#aef695eed2a264bf58b090d4f13a4309b">soa::ArrayConstIterator&lt; T, N &gt;</a>
 , <a class="el" href="classsoa_1_1ArrayIterator.html#ae5c21d0ff4c763ae05e747e11d048e24">soa::ArrayIterator&lt; T, N &gt;</a>
 </li>
 <li>operator*=()
-: <a class="el" href="classsoa_1_1BasePtr.html#aaa5d83b12827760312637b8715c3ac7d">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#a55e3fe147af658b55053a01c8c8a4c8c">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#aaa5d83b12827760312637b8715c3ac7d">soa::BasePtr&lt; T &gt;</a>
+</li>
+<li>operator+()
+: <a class="el" href="classFixedPoint.html#a7bedc61fdb2292c332ea06fa6bb27326">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 <li>operator++()
-: <a class="el" href="classsoa_1_1ArrayConstIterator.html#acf83bf5f59de8969a28c1e93d0133971">soa::ArrayConstIterator&lt; T, N &gt;</a>
+: <a class="el" href="classFixedPoint.html#ab7fac4812dbefe29b5fa84a2bbc85da7">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1ArrayConstIterator.html#acf83bf5f59de8969a28c1e93d0133971">soa::ArrayConstIterator&lt; T, N &gt;</a>
 , <a class="el" href="classsoa_1_1ArrayIterator.html#a6aad6ecd89edc57108544a4183262d41">soa::ArrayIterator&lt; T, N &gt;</a>
 , <a class="el" href="classsoa_1_1BasePtr.html#a84b06388664fc03dd85d7650879bcb31">soa::BasePtr&lt; T &gt;</a>
 </li>
 <li>operator+=()
-: <a class="el" href="classsoa_1_1BasePtr.html#a5196ed1e6dee494708539e96a5efce02">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#a2b75e75331d02bfab82057ad7ed8f14f">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a5196ed1e6dee494708539e96a5efce02">soa::BasePtr&lt; T &gt;</a>
+</li>
+<li>operator-()
+: <a class="el" href="classFixedPoint.html#ace975751b7a226655c7fee80619ae498">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 <li>operator--()
 : <a class="el" href="classsoa_1_1BasePtr.html#aa61fda6dba37abe384b572d12c22c7b6">soa::BasePtr&lt; T &gt;</a>
 </li>
 <li>operator-=()
-: <a class="el" href="classsoa_1_1BasePtr.html#a76e6ff23daf945a4b802b7b69d4da1fd">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#ae377facc80c394499b2eec22b66e14c8">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a76e6ff23daf945a4b802b7b69d4da1fd">soa::BasePtr&lt; T &gt;</a>
 </li>
 <li>operator-&gt;()
 : <a class="el" href="classsoa_1_1BasePtr.html#abbdb745681ad215862ce3d7cf8af4b37">soa::BasePtr&lt; T &gt;</a>
 </li>
+<li>operator/()
+: <a class="el" href="classFixedPoint.html#aa11531983fbdab4ed81f14e19f52ba1c">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
 <li>operator/=()
-: <a class="el" href="classsoa_1_1BasePtr.html#ac4c15ef606d16f00b39f3aac5fa84130">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#ac2505cbaaeb4dedf9c0b5066c7d933d3">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#ac4c15ef606d16f00b39f3aac5fa84130">soa::BasePtr&lt; T &gt;</a>
+</li>
+<li>operator&lt;()
+: <a class="el" href="classFixedPoint.html#a7c719f528c8c13b4f4cc738e1b702f7e">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>operator&lt;&lt;()
+: <a class="el" href="classFixedPoint.html#a484f4c1125558883c122c4a07119866e">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 <li>operator&lt;&lt;=()
-: <a class="el" href="classsoa_1_1BasePtr.html#a28709f9c2ddf584c59a8929b92d1e1bd">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#abf9d7641a976ec6c22bb0f6079d18ccd">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a28709f9c2ddf584c59a8929b92d1e1bd">soa::BasePtr&lt; T &gt;</a>
+</li>
+<li>operator&lt;=()
+: <a class="el" href="classFixedPoint.html#a9296454c60d5875e1d6507c6744dcdf5">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 <li>operator=()
-: <a class="el" href="classsoa_1_1BasePtr.html#a1b6bdd1c9172e9f3396a5d9643c432f2">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#ab63a715a8e8a95144005083290582c74">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a1b6bdd1c9172e9f3396a5d9643c432f2">soa::BasePtr&lt; T &gt;</a>
 , <a class="el" href="structstd_1_1pair.html#ae3e10e6387300678d983b4ea8c28f061">std::pair&lt; T1, T2 &gt;</a>
 </li>
 <li>operator==()
-: <a class="el" href="classsoa_1_1ArrayConstIterator.html#a7136e748c2a31c8c0d662b0a97869eaf">soa::ArrayConstIterator&lt; T, N &gt;</a>
+: <a class="el" href="classFixedPoint.html#a3bcbdb274488cdad95b74d189d5810c3">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1ArrayConstIterator.html#a7136e748c2a31c8c0d662b0a97869eaf">soa::ArrayConstIterator&lt; T, N &gt;</a>
 , <a class="el" href="classstd_1_1type__info.html#a489d59b6f82e21a7665e515b2e5e4507">std::type_info</a>
 </li>
+<li>operator&gt;()
+: <a class="el" href="classFixedPoint.html#a62958e9450462d053f736b66f25c91d0">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>operator&gt;=()
+: <a class="el" href="classFixedPoint.html#aa5db9e36ced981ca49853a15dc1e92f5">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>operator&gt;&gt;()
+: <a class="el" href="classFixedPoint.html#a83cb870341a98160e23f3c6a2b7cf2bc">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
 <li>operator&gt;&gt;=()
-: <a class="el" href="classsoa_1_1BasePtr.html#a1fbdb92f2b1cea0ebf34ef3dda22e6ed">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#a7e71505a954b9d7b71c71b5a24adedb4">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a1fbdb92f2b1cea0ebf34ef3dda22e6ed">soa::BasePtr&lt; T &gt;</a>
 </li>
 <li>operator[]()
 : <a class="el" href="classsoa_1_1Array.html#ab242dd718ff7b9afbad4278cf12c9ee6">soa::Array&lt; T, N &gt;</a>
 , <a class="el" href="classsoa_1_1Ptr_3_01T_0fN_0e_4.html#a864f4c4629e27e507704db9452fd708c">soa::Ptr&lt; T[N]&gt;</a>
 , <a class="el" href="structstd_1_1array.html#a951075cc107418d2548742a15de29c6a">std::array&lt; T, _N &gt;</a>
 </li>
+<li>operator^()
+: <a class="el" href="classFixedPoint.html#aad948d5ed64804400276487445a56479">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
 <li>operator^=()
-: <a class="el" href="classsoa_1_1BasePtr.html#a048fb3cb9b7256ebe21e3080d3879ddd">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#aea3da5662308b11970186e47d67f01a4">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a048fb3cb9b7256ebe21e3080d3879ddd">soa::BasePtr&lt; T &gt;</a>
+</li>
+<li>operator|()
+: <a class="el" href="classFixedPoint.html#a2e7ea61ec23242af209d6a6c8f27f970">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 <li>operator|=()
-: <a class="el" href="classsoa_1_1BasePtr.html#a6e91224e05f1f88387bd9398541a6f9b">soa::BasePtr&lt; T &gt;</a>
+: <a class="el" href="classFixedPoint.html#a3dcf638482c91fa89115a3a57fd2ce6b">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+, <a class="el" href="classsoa_1_1BasePtr.html#a6e91224e05f1f88387bd9398541a6f9b">soa::BasePtr&lt; T &gt;</a>
+</li>
+<li>operator~()
+: <a class="el" href="classFixedPoint.html#a0759c550afa0d6091c81175d10b3960d">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
 </li>
 </ul>
 
@@ -280,6 +362,15 @@ $(function() {
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
+<li>set()
+: <a class="el" href="classFixedPoint.html#a2d781d54d792f5076c37b573341ae3fa">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>set_f()
+: <a class="el" href="classFixedPoint.html#a160b3a36c390acb7edeb1e8d5fd4c49d">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
+<li>set_i()
+: <a class="el" href="classFixedPoint.html#a84b9e1412c2d7eb0320d7d3480d220a3">FixedPoint&lt; IntSize, FracSize, Signed &gt;</a>
+</li>
 <li>signaling_NaN()
 : <a class="el" href="classstd_1_1numeric__limits.html#a2ab956bb27d4d97e27ef60b7ada9c82f">std::numeric_limits&lt; T &gt;</a>
 </li>

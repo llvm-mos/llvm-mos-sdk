@@ -1,5 +1,6 @@
 <map id="common/include/cstdint" name="common/include/cstdint">
-<area shape="rect" id="node1" title=" " alt="" coords="104,5,283,32"/>
-<area shape="rect" id="node2" href="$atexit-impl_8h.html" title=" " alt="" coords="5,80,184,107"/>
-<area shape="rect" id="node3" href="$soa_8h.html" title=" " alt="" coords="209,80,378,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="201,5,380,32"/>
+<area shape="rect" id="node2" href="$atexit-impl_8h.html" title=" " alt="" coords="5,87,184,114"/>
+<area shape="rect" id="node3" href="$fixed__point_8h.html" title=" " alt="" coords="208,80,373,121"/>
+<area shape="rect" id="node4" href="$soa_8h.html" title=" " alt="" coords="398,87,567,114"/>
 </map>

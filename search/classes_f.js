@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['timespec_3528',['timespec',['../structtimespec.html',1,'']]],
-  ['type_5fidentity_3529',['type_identity',['../structstd_1_1type__identity.html',1,'std']]],
-  ['type_5finfo_3530',['type_info',['../classstd_1_1type__info.html',1,'std']]]
+  ['screen_5fmode_5finfo_5ft_3593',['screen_mode_info_t',['../structscreen__mode__info__t.html',1,'']]],
+  ['status_3594',['Status',['../structStatus.html',1,'']]]
 ];

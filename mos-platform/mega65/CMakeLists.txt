@@ -3,6 +3,12 @@ platform(mega65 COMPLETE HOSTED PARENT commodore)
 if(NOT CMAKE_CROSSCOMPILING)
   return()
 endif()
+install(FILES
+    _45E100.h
+    _vic3.h
+    _vic4.h
+    mega65.h
+TYPE INCLUDE)
 
 install(FILES link.ld TYPE LIB)
 

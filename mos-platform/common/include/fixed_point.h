@@ -74,8 +74,8 @@ private:
   union {
     StorageType val;
     struct {
-      StorageType f : FracSize;
-      StorageType i : IntSize;
+      FracType f : FracSize;
+      IntType i : IntSize;
     };
   };
 
@@ -86,8 +86,11 @@ public:
     set_i(i);
   }
   /// Constructor for setting both the integral and fractional part
-  [[clang::always_inline]] constexpr FixedPoint(StorageType i, StorageType f)
-      : i(i), f(f) {}
+  [[clang::always_inline]] constexpr FixedPoint(IntType i, FracType f) {
+    val = 0;
+    set_i(i);
+    set_f(f);
+  }
 
   [[clang::always_inline]] constexpr FixedPoint(const FixedPoint &o)
       : val(o.val) {}
@@ -108,12 +111,12 @@ public:
 
   // Implicit conversion. Like C/C++ integers, silently truncate on conversion
   // to a smaller type.
-  template <intmax_t I, intmax_t F, bool S>
-  [[clang::always_inline]] constexpr FixedPoint(FixedPoint<I, F, S> o) {
-    if constexpr (FracSize > F)
-      *this = FixedPoint(o.as_i(), o.as_f() << (FracSize - F));
+  template <intmax_t OI, intmax_t OF, bool S>
+  [[clang::always_inline]] constexpr FixedPoint(FixedPoint<OI, OF, S> o) {
+    if constexpr (FracSize > OF)
+      *this = FixedPoint(o.as_i(), o.as_f() << (FracSize - OF));
     else
-      *this = FixedPoint(o.as_i(), o.as_f() >> (F - FracSize));
+      *this = FixedPoint(o.as_i(), o.as_f() >> (OF - FracSize));
   }
 
   // Direct value accessor and setter methods
@@ -125,11 +128,11 @@ public:
   /// Returns the entire value
   [[clang::always_inline]] constexpr StorageType get() const { return val; }
   /// Update just the integral portion
-  [[clang::always_inline]] constexpr void set_i(StorageType value) {
+  [[clang::always_inline]] constexpr void set_i(IntType value) {
     i = value;
   }
   /// Update just the fractional portion
-  [[clang::always_inline]] constexpr void set_f(StorageType value) {
+  [[clang::always_inline]] constexpr void set_f(FracType value) {
     f = value;
   }
   /// Update the entire value

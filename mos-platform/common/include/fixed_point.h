@@ -82,15 +82,12 @@ private:
 public:
   // Constructors
   template <typename T, std::enable_if_t<std::is_integral_v<T>, bool> = true>
-  [[clang::always_inline]] constexpr FixedPoint(T i) {
-    set_i(i);
-  }
+  [[clang::always_inline]] constexpr FixedPoint(T i)
+      : val((StorageType)i << FracSize) {}
+
   /// Constructor for setting both the integral and fractional part
-  [[clang::always_inline]] constexpr FixedPoint(IntType i, FracType f) {
-    val = 0;
-    set_i(i);
-    set_f(f);
-  }
+  [[clang::always_inline]] constexpr FixedPoint(IntType i, FracType f)
+      : val((StorageType)i << FracSize | f) {}
 
   [[clang::always_inline]] constexpr FixedPoint(const FixedPoint &o)
       : val(o.val) {}
@@ -114,7 +111,7 @@ public:
   template <intmax_t OI, intmax_t OF, bool S>
   [[clang::always_inline]] constexpr FixedPoint(FixedPoint<OI, OF, S> o) {
     if constexpr (FracSize > OF)
-      *this = FixedPoint(o.as_i(), o.as_f() << (FracSize - OF));
+      *this = FixedPoint(o.as_i(), (FracType)o.as_f() << (FracSize - OF));
     else
       *this = FixedPoint(o.as_i(), o.as_f() >> (OF - FracSize));
   }
@@ -128,13 +125,9 @@ public:
   /// Returns the entire value
   [[clang::always_inline]] constexpr StorageType get() const { return val; }
   /// Update just the integral portion
-  [[clang::always_inline]] constexpr void set_i(IntType value) {
-    i = value;
-  }
+  [[clang::always_inline]] constexpr void set_i(IntType value) { i = value; }
   /// Update just the fractional portion
-  [[clang::always_inline]] constexpr void set_f(FracType value) {
-    f = value;
-  }
+  [[clang::always_inline]] constexpr void set_f(FracType value) { f = value; }
   /// Update the entire value
   [[clang::always_inline]] constexpr void set(StorageType value) {
     val = value;

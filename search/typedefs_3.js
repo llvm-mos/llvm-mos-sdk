@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['dcb_5ft_4749',['dcb_t',['../__atarios_8h.html#ab494a3577027763e8c1b4ff4e30809f3',1,'_atarios.h']]],
-  ['decay_5ft_4750',['decay_t',['../namespacestd.html#a7b5147d7ef175e67131bbc636b223fd4',1,'std']]],
-  ['devhdl_5ft_4751',['devhdl_t',['../__atarios_8h.html#a8814da3a70abf1cd53b3b909a5f5a0b9',1,'_atarios.h']]],
-  ['difference_5ftype_4752',['difference_type',['../structstd_1_1array.html#a5589e6383d4d5f146ac78acf38e3d034',1,'std::array']]],
-  ['dos2x_5ft_4753',['dos2x_t',['../__atarios_8h.html#a46e318ae87b1d516f469b22d4ac3f708',1,'_atarios.h']]]
+  ['clockid_5ft_4897',['clockid_t',['../time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22',1,'time.h']]],
+  ['conditional_5ft_4898',['conditional_t',['../namespacestd.html#ad26ec97015bece931ea3eeaa99d72a7d',1,'std']]],
+  ['const_5fiterator_4899',['const_iterator',['../structstd_1_1array.html#a10d5352fd09426df824b0ebfc648a43b',1,'std::array::const_iterator()'],['../classstd_1_1initializer__list.html#ac85d47e670cf0511e1bb857b69971b70',1,'std::initializer_list::const_iterator()']]],
+  ['const_5fpointer_4900',['const_pointer',['../structstd_1_1array.html#acf7d5416a0a827c3fc87e7714465b264',1,'std::array']]],
+  ['const_5freference_4901',['const_reference',['../structstd_1_1array.html#a065407c36ec085c45addbe397e58fcf2',1,'std::array::const_reference()'],['../classstd_1_1initializer__list.html#a4a67866454f44b1160a7c6baba01a3da',1,'std::initializer_list::const_reference()']]]
 ];

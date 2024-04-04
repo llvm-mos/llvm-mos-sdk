@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['waitvsync_4445',['waitvsync',['../cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0',1,'cx16.h']]],
-  ['write_4446',['write',['../rp6502_8h.html#a93055c9dde9027a0dcaff29f093bc9ee',1,'rp6502.h']]],
-  ['write_5fxram_4447',['write_xram',['../rp6502_8h.html#ad0baac61b7bb736e237c57e4f4e520e1',1,'rp6502.h']]],
-  ['write_5fxstack_4448',['write_xstack',['../rp6502_8h.html#a17e0c0b3782baba78870716c63577b6d',1,'rp6502.h']]]
+  ['waitvsync_4577',['waitvsync',['../cx16_8h.html#aaf15b34f75b159dacf4c7460ae8f79e0',1,'cx16.h']]],
+  ['write_4578',['write',['../rp6502_8h.html#a93055c9dde9027a0dcaff29f093bc9ee',1,'rp6502.h']]],
+  ['write_5fxram_4579',['write_xram',['../rp6502_8h.html#ad0baac61b7bb736e237c57e4f4e520e1',1,'rp6502.h']]],
+  ['write_5fxstack_4580',['write_xstack',['../rp6502_8h.html#a17e0c0b3782baba78870716c63577b6d',1,'rp6502.h']]]
 ];

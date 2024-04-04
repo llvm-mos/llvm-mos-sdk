@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['bank_5findex_5ft_4740',['bank_index_t',['../atari2600-3e_2mapper_8h.html#a2d3bdbf79a046e550271431c6b7cf826',1,'mapper.h']]],
-  ['banked_5farea_5ft_4741',['banked_area_t',['../mapper__rom__multi_8h.html#a1a64988832a46fa4c094819399816798',1,'mapper_rom_multi.h']]],
-  ['bool_5fconstant_4742',['bool_constant',['../namespacestd.html#a01adabed80282631f7195c347f5f5836',1,'std']]],
-  ['byte_4743',['byte',['../vcslib_8h.html#a0c8186d9b9b7880309c27230bbb5e69d',1,'vcslib.h']]]
+  ['add_5fconst_5ft_4887',['add_const_t',['../namespacestd.html#a01607018b118ebfcda97f9679de91f10',1,'std']]],
+  ['add_5fcv_5ft_4888',['add_cv_t',['../namespacestd.html#aaad61c0571ebe15dae47febbfaa301c3',1,'std']]],
+  ['add_5flvalue_5freference_5ft_4889',['add_lvalue_reference_t',['../namespacestd.html#ab9f60c2fbdbd44ecf40776544173f8ff',1,'std']]],
+  ['add_5fpointer_5ft_4890',['add_pointer_t',['../namespacestd.html#a7153edf68f9f3af4d0cfa44d3e449f72',1,'std']]],
+  ['add_5frvalue_5freference_5ft_4891',['add_rvalue_reference_t',['../namespacestd.html#a20672aa271b8e0a3ea345014a90fbbeb',1,'std']]],
+  ['add_5fvolatile_5ft_4892',['add_volatile_t',['../namespacestd.html#a12b9e18e256d28d364a86e5abe7d6544',1,'std']]]
 ];

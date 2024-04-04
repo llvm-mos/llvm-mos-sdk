@@ -22,6 +22,8 @@ The LLVM-MOS compiler toolchain and platform libraries.
     to [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L65)
 	- Compatible with SIC! [128 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L88) to
 	  [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L90)
+- [Atari Lynx](https://en.wikipedia.org/wiki/Atari_Lynx)
+  - BLL format ".o" executable file
 - [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
 - [Commodore 64](https://en.wikipedia.org/wiki/Commodore_64)
@@ -154,6 +156,7 @@ executables and libraries for that target.
 | Atari 8-bit                     | MegaCart cartridge | `mos-atari8-cart-megacart-clang` |
 | Atari 8-bit                     | Standard cartridge | `mos-atari8-cart-std-clang`      |
 | Atari 8-bit                     | XEGS cartridge     | `mos-atari8-cart-xegs-clang`     |
+| Atari Lynx                      | BLL executable     | `mos-lynx-bll-clang`             |
 | Ben Eater's 6502 Breadboard Kit | -                  | `mos-eater-clang`                |
 | Commander X16                   | -                  | `mos-cx16-clang`                 |
 | Commodore                       | 64                 | `mos-c64-clang`                  |

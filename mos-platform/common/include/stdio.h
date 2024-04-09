@@ -19,7 +19,14 @@ extern "C" {
 struct _FILE;
 typedef struct _FILE FILE;
 
+#define BUFSIZ 256
 #define EOF (-1)
+#define FOPEN_MAX 8
+
+/* See setvbuf(), third argument */
+#define _IOFBF (1u<<0)
+#define _IOLBF (1u<<1)
+#define _IONBF (1u<<2)
 
 typedef uint64_t fpos_t;
 
@@ -30,6 +37,10 @@ extern FILE *stderr;
 #define SEEK_SET 0
 #define SEEK_CUR 1
 #define SEEK_END 2
+
+// File access functions
+
+FILE *fopen(const char *__restrict__ filename, const char *__restrict__ mode);
 
 // Formated input/output functions
 

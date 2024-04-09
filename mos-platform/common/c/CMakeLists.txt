@@ -25,7 +25,8 @@ add_platform_library(common-c
   # stdio.h
   char-conv.c
   printf.cc
-  stdio.c
+  stdio-minimal.c
+  stdio-full.c
 
   # stdlib.h
   abs.cc
@@ -60,6 +61,12 @@ add_platform_library(common-c
 
   # Provides a ungetc-aware getchar that is bigger than the one in stdio.c
   ungetc.c
+
+  # cc65 low level I/O
+  _directerrno.s
+  _mappederrno.s
+  _oserror.s
+  _seterrno.s
 )
 # Prevent the implementation of libcalls from being reduced to a call of those libcalls.
 set_property(SOURCE mem.c PROPERTY COMPILE_OPTIONS -fno-builtin-memset)

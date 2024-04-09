@@ -1,5 +1,6 @@
 <map id="c64/_sid.h" name="c64/_sid.h">
-<area shape="rect" id="node1" title=" " alt="" coords="69,5,156,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="128,5,215,32"/>
 <area shape="rect" id="node2" href="$c128_8h.html" title=" " alt="" coords="5,80,105,107"/>
 <area shape="rect" id="node3" href="$c64_8h.html" title=" " alt="" coords="129,80,213,107"/>
+<area shape="rect" id="node4" href="$mega65_8h.html" title=" " alt="" coords="238,80,382,107"/>
 </map>

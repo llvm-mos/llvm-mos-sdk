@@ -1,19 +1,8 @@
 var searchData=
 [
-  ['tv_5fnone_5208',['TV_NONE',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a35a45da323c03c7ece28d4db0a3d3765',1,'cx16.h']]],
-  ['tv_5fnone2_5209',['TV_NONE2',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a425b2543d12dfd6dc95675bc8d0a0185',1,'cx16.h']]],
-  ['tv_5fnone2_5f240p_5210',['TV_NONE2_240P',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24abb7eef52bf378be0fc72cf46eb393555',1,'cx16.h']]],
-  ['tv_5fnone_5f240p_5211',['TV_NONE_240P',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a6f234685cf4fe6b29cb5d7b2e20a1a41',1,'cx16.h']]],
-  ['tv_5fntsc_5fcolor_5212',['TV_NTSC_COLOR',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24ac10def66e61fd0235d5ed13e98c49ce8',1,'cx16.h']]],
-  ['tv_5fntsc_5fcolor_5f240p_5213',['TV_NTSC_COLOR_240P',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a50fa8c5b069cc67608f9c60beac65220',1,'cx16.h']]],
-  ['tv_5fntsc_5fmono_5214',['TV_NTSC_MONO',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a51bcb9a3a7ded8624c9d77716681687b',1,'cx16.h']]],
-  ['tv_5fntsc_5fmono_5f240p_5215',['TV_NTSC_MONO_240P',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a896c74f6784a1b5617fb6cad15ab95cc',1,'cx16.h']]],
-  ['tv_5frgb_5216',['TV_RGB',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24afced6453a89dda45b9081014285c4851',1,'cx16.h']]],
-  ['tv_5frgb2_5217',['TV_RGB2',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a03aef7f2ffbb4cceb78a4477e70577fc',1,'cx16.h']]],
-  ['tv_5frgb2_5f240p_5218',['TV_RGB2_240P',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24ad9834f3623444e79f83d4d0ff06386a3',1,'cx16.h']]],
-  ['tv_5frgb_5f240p_5219',['TV_RGB_240P',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a2b18b06541f10d706b813899e2a96909',1,'cx16.h']]],
-  ['tv_5fvga_5220',['TV_VGA',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24afc86db0b8a4a3b06e6f204782703889c',1,'cx16.h']]],
-  ['tv_5fvga2_5221',['TV_VGA2',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24ab4801a7bd26fa4788255586808cbc9f3',1,'cx16.h']]],
-  ['tv_5fvga2_5f240p_5222',['TV_VGA2_240P',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a66b31dded26933d6971ca59949ca85f9',1,'cx16.h']]],
-  ['tv_5fvga_5f240p_5223',['TV_VGA_240P',['../cx16_8h.html#a5a77d65f4abba81d4456fa6ba8136e24a80a9565b2e0c9085a94b46293c46937b',1,'cx16.h']]]
+  ['round_5findeterminate_5425',['round_indeterminate',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a9aa7e9f8d978fbe044c24a67da2d0464',1,'std']]],
+  ['round_5fto_5fnearest_5426',['round_to_nearest',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a43219e58bf0b1438dce779ae47760772',1,'std']]],
+  ['round_5ftoward_5finfinity_5427',['round_toward_infinity',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a39c9297336599616c46f98eaf73c6191',1,'std']]],
+  ['round_5ftoward_5fneg_5finfinity_5428',['round_toward_neg_infinity',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a5e57d9d7178fe199cfd05b67e9d3c69d',1,'std']]],
+  ['round_5ftoward_5fzero_5429',['round_toward_zero',['../namespacestd.html#a53dbc8572a84ca50272f9e55a1e23e18a16cd490308c5bcba330c09f844f92f1d',1,'std']]]
 ];

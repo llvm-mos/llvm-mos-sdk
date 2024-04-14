@@ -38,6 +38,9 @@ extern FILE *stderr;
 #define SEEK_CUR 1
 #define SEEK_END 2
 
+// Operations on files
+int remove(const char *filename);
+
 // File access functions
 
 FILE *fopen(const char *__restrict__ filename, const char *__restrict__ mode);

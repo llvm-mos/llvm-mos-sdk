@@ -27,6 +27,7 @@ add_platform_library(common-c
   printf.cc
   stdio-minimal.c
   stdio-full.c
+  remove.s
 
   # stdlib.h
   abs.cc

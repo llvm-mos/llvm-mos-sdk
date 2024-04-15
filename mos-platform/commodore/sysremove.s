@@ -18,6 +18,7 @@
 
 __sysremove:
 
+        jsr     _translate_filename
         jsr     fnparse         ; Parse the given file name
         bne     err             ; Jump if yes
         jmp     scratch         ; Scratch the file, return an error code

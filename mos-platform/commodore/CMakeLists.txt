@@ -63,6 +63,7 @@ add_platform_library(commodore-c
   oserror.s
   scratch.s
   sysremove.s
+  translate-filename.cc
 )
 
 target_include_directories(commodore-c BEFORE PUBLIC .)

@@ -45,8 +45,17 @@ next:   dex
 .globl open
 open:
 
+; Push the flags
+
+        pha
+
+; Translate the filename to PETSCII
+
+        jsr _translate_filename
+
 ; Save the flags into __rc12
 
+        pla
         sta     __rc12
 
 ; Parse the filename. Bail out if is not ok

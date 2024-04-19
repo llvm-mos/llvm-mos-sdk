@@ -160,3 +160,68 @@ FILE *fopen(const char *restrict filename, const char *restrict mode) {
 
   return rc;
 }
+
+// Character input/output functions
+
+// Produce a link error if these are used.
+__attribute__((noreturn)) void __stdio_not_yet_implemented(void);
+
+int fgetc(FILE *stream) { __stdio_not_yet_implemented(); }
+
+char *fgets(char *__restrict__ s, int n, FILE *__restrict__ stream) {
+  __stdio_not_yet_implemented();
+}
+
+int fputc(int c, FILE *stream) { __stdio_not_yet_implemented(); }
+
+int fputs(const char *__restrict__ s, FILE *__restrict__ stream) {
+  __stdio_not_yet_implemented();
+}
+
+int getc(FILE *stream) { __stdio_not_yet_implemented(); }
+
+int getchar(void) { __stdio_not_yet_implemented(); }
+
+int putc(int c, FILE *stream) { __stdio_not_yet_implemented(); }
+
+int putchar(int c) { __stdio_not_yet_implemented(); }
+
+int puts(const char *s) { __stdio_not_yet_implemented(); }
+
+// Direct input/output functions
+
+size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
+             FILE *__restrict__ stream) {
+  __stdio_not_yet_implemented();
+}
+
+size_t fwrite(const void *__restrict ptr, size_t size, size_t nmemb,
+              FILE *__restrict__ stream) {
+  __stdio_not_yet_implemented();
+}
+
+// File positioning functions
+
+int fgetpos(FILE *__restrict__ stream, fpos_t *__restrict__ pos) {
+  __stdio_not_yet_implemented();
+}
+
+int fseek(FILE *stream, long int offset, int whence) {
+  __stdio_not_yet_implemented();
+}
+
+int fsetpos(FILE *stream, const fpos_t *pos) { __stdio_not_yet_implemented(); }
+
+long int ftell(FILE *stream) { __stdio_not_yet_implemented(); }
+
+void rewind(FILE *stream) { __stdio_not_yet_implemented(); }
+
+// Error-handling functions
+
+void clearerr(FILE *stream) { __stdio_not_yet_implemented(); }
+
+int feof(FILE *stream) { __stdio_not_yet_implemented(); }
+
+int ferror(FILE *stream) { __stdio_not_yet_implemented(); }
+
+void perror(const char *s) { __stdio_not_yet_implemented(); }

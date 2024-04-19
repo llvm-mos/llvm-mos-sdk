@@ -63,6 +63,7 @@ add_platform_library(commodore-c
   oserror.s
   scratch.s
   sysremove.s
+  sysrename.s
   translate-filename.cc
 )
 

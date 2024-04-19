@@ -40,6 +40,7 @@ extern FILE *stderr;
 
 // Operations on files
 int remove(const char *filename);
+int rename(const char *old, const char *_new);
 
 // File access functions
 

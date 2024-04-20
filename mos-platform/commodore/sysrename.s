@@ -55,8 +55,8 @@ __sysrename:
         sta     fncmd
         jsr     writefndiskcmd
 
-;       ldx     fnunit
-;       jsr     readdiskerror
+        ldx     fnunit
+        jsr     readdiskerror
 
         pha
         ldx     fnunit

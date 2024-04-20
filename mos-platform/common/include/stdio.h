@@ -34,16 +34,23 @@ extern FILE *stdin;
 extern FILE *stdout;
 extern FILE *stderr;
 
+#define L_tmpnam 6
+
 #define SEEK_SET 0
 #define SEEK_CUR 1
 #define SEEK_END 2
 
+#define TMP_MAX 25
+
 // Operations on files
 int remove(const char *filename);
 int rename(const char *old, const char *_new);
+FILE *tmpfile(void);
+char *tmpnam(char *s);
 
 // File access functions
 
+int fclose(FILE *stream);
 FILE *fopen(const char *__restrict__ filename, const char *__restrict__ mode);
 
 // Formated input/output functions

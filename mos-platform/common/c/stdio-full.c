@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Flags for representing mode (see fopen()). Note these must fit the same
 // status field as the _IO?BF flags in <stdio.h> and the internal flags below.
@@ -44,7 +45,27 @@ struct _FILE {
   char ungetc_buf;      // ungetc() buffer
   bool ungetc_buf_full; // Number of ungetc()'ed characters
   unsigned status;      // Status flags; see above
+  char *filename;       // Name the current stream has been opened with
+  FILE *next;           // Pointer to next struct (internal)
 };
+
+static FILE serr = {.handle = 2, .status = _IONBF | FWRITE};
+static FILE sout = {.handle = 1, .status = _IONBF | FWRITE, .next = &serr};
+static FILE sin = {.handle = 0, .status = _IONBF | FREAD, .next = &sout};
+
+FILE *stdin = &sin;
+FILE *stdout = &sout;
+FILE *stderr = &serr;
+
+static FILE *filelist = &sin;
+
+asm(".section .fini,\"axR\",@progbits\n"
+    "  jsr _stdio_closeall\n");
+
+void _stdio_closeall(void) {
+  for (FILE *f = filelist; f; f = f->next)
+    fclose(f);
+}
 
 // Helper function that parses the C-style mode string passed to fopen() into
 // the PDCLib flags FREAD, FWRITE, FAPPEND, FRW (read-write) and FBIN (binary
@@ -138,12 +159,128 @@ static signed char stdio_open(const char *const filename, unsigned int mode) {
   return open(filename, osmode);
 }
 
+// Operations on files
+
+FILE *tmpfile(void) {
+  char name[L_tmpnam];
+  tmpnam(name);
+  FILE *f = fopen(name, "wb+");
+  f->status |= DELONCLOSE;
+  return f;
+}
+
+char *tmpnam(char *s) {
+  static char filename[L_tmpnam];
+  if (s == NULL)
+    s = filename;
+
+  strcpy(s, "tmp00");
+  while (s[4] != '2' || s[3] != '4') {
+    FILE *f = fopen(s, "rb");
+    if (!f)
+      break;
+    fclose(f);
+    if (s[3] == '9') {
+      s[3] = '0';
+      ++s[4];
+    } else {
+      ++s[3];
+    }
+  }
+
+  return s;
+}
+
 // File access functions
+
+int write(int fildes, const void *buf, size_t nbyte) {
+  // Not yet implemented
+  if (nbyte)
+    return -1;
+  return 0;
+}
+
+/* A system call that writes a stream's buffer.
+   Returns 0 on success, EOF on write error.
+   Sets stream error flags and errno appropriately on error.
+*/
+static int flush_buffer(FILE *stream) {
+  // No need to handle buffers > INT_MAX, as PDCLib doesn't allow them */
+  size_t written = 0;
+  int rc;
+
+  if (!(stream->status & FBIN)) {
+    /* TODO: Text stream conversion here */
+  }
+
+  // Keep trying to write data until everything is written or an error occurs.
+  for (;;) {
+    rc = write(stream->handle, stream->buffer + written,
+               stream->bufidx - written);
+
+    if (rc < 0) {
+      /* Flag the stream */
+      stream->status |= ERRORFLAG;
+      /* Move unwritten remains to begin of buffer. */
+      stream->bufidx -= written;
+      memmove(stream->buffer, stream->buffer + written, stream->bufidx);
+      return EOF;
+    }
+
+    written += (size_t)rc;
+    stream->pos += rc;
+
+    if (written == stream->bufidx) {
+      /* Buffer written completely. */
+      stream->bufidx = 0;
+      return 0;
+    }
+  }
+}
+
+// Removes the given stream from the internal list of open files.
+void remove_stream(FILE *stream) {
+  for (FILE *f; f; f = f->next) {
+    if (f->next == stream) {
+      f->next = f->next->next;
+      break;
+    }
+  }
+}
+
+int fclose(FILE *stream) {
+  /* Flush buffer */
+  if (stream->status & FWRITE && flush_buffer(stream) == EOF)
+    return EOF;
+
+  /* Close handle */
+  close(stream->handle);
+
+  /* Remove stream from list */
+  remove_stream(stream);
+
+  /* Delete tmpfile() */
+  if (stream->status & DELONCLOSE)
+    remove(stream->filename);
+
+  /* Free buffer */
+  if (stream->status & FREEBUFFER)
+    free(stream->buffer);
+
+  /* Free filename (standard streams do not have one, but free( NULL )
+     is a valid no-op)
+  */
+  free(stream->filename);
+
+  /* Free stream */
+  if (stream != stdin && stream != stdout && stream != stderr)
+    free(stream);
+
+  return 0;
+}
 
 FILE *fopen(const char *restrict filename, const char *restrict mode) {
   unsigned int fmode = filemode(mode);
-
-  // See tmpfile(), which does much of the same.
 
   // Initializing FILE structure failed.
   FILE *rc;
@@ -157,6 +294,12 @@ FILE *fopen(const char *restrict filename, const char *restrict mode) {
 
   if ((rc->handle = stdio_open(filename, rc->status)) == -1)
     return NULL;
+
+  rc->filename = malloc(strlen(filename));
+  strcpy(rc->filename, filename);
+
+  rc->next = filelist;
+  filelist = rc;
 
   return rc;
 }

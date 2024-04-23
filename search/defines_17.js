@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['weof_7516',['WEOF',['../wchar_8h.html#a00d21696ad5bdb60d9aec03e3e5d9086',1,'wchar.h']]],
-  ['wram_5foff_7517',['WRAM_OFF',['../nes-mmc3_2mapper_8h.html#a258223195fde096e3f202498a3722c9d',1,'mapper.h']]],
-  ['wram_5fon_7518',['WRAM_ON',['../nes-mmc3_2mapper_8h.html#a6d471844d2443c9090f919bde76fc4fe',1,'mapper.h']]],
-  ['wram_5fread_5fonly_7519',['WRAM_READ_ONLY',['../nes-mmc3_2mapper_8h.html#ac06f8206b17296047089d0b8e4de7d87',1,'mapper.h']]]
+  ['weof_7526',['WEOF',['../wchar_8h.html#a00d21696ad5bdb60d9aec03e3e5d9086',1,'wchar.h']]],
+  ['wram_5foff_7527',['WRAM_OFF',['../nes-mmc3_2mapper_8h.html#a258223195fde096e3f202498a3722c9d',1,'mapper.h']]],
+  ['wram_5fon_7528',['WRAM_ON',['../nes-mmc3_2mapper_8h.html#a6d471844d2443c9090f919bde76fc4fe',1,'mapper.h']]],
+  ['wram_5fread_5fonly_7529',['WRAM_READ_ONLY',['../nes-mmc3_2mapper_8h.html#ac06f8206b17296047089d0b8e4de7d87',1,'mapper.h']]]
 ];

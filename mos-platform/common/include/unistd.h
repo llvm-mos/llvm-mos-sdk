@@ -1,3 +1,10 @@
+// Copyright 2024 LLVM-MOS Project
+// Licensed under the Apache License, Version 2.0 with LLVM Exceptions.
+// See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
+// information.
+
+// Originally from cc65. Modified from original version.
+
 /*****************************************************************************/
 /*                                                                           */
 /*                                 unistd.h                                  */
@@ -50,22 +57,10 @@
 #define STDERR_FILENO   2
 
 /* WE need size_t */
-#ifndef _HAVE_size_t
-#define _HAVE_size_t
 typedef unsigned size_t;
-#endif
 
 /* We need off_t if sys/types is not included */
-#ifndef _HAVE_off_t
-#define _HAVE_off_t
 typedef long int off_t;
-#endif
-
-/* Stuff for getopt */
-extern char *optarg;
-extern int optind, opterr, optopt;
-
-
 
 /*****************************************************************************/
 /*                                   Code                                    */
@@ -74,27 +69,19 @@ extern int optind, opterr, optopt;
 
 
 /* Files */
-int __fastcall__ write (int fd, const void* buf, unsigned count);
-int __fastcall__ read (int fd, void* buf, unsigned count);
-off_t __fastcall__ lseek (int fd, off_t offset, int whence);
-int __fastcall__ unlink (const char* name);     /* Same as remove() */
+int write(int fd, const void* buf, unsigned count);
+int read(int fd, void* buf, unsigned count);
+off_t lseek(int fd, off_t offset, int whence);
+int unlink(const char* name);     /* Same as remove() */
 
 /* Directories */
-int __fastcall__ chdir (const char* name);
-char* __fastcall__ getcwd (char* buf, size_t size);
-int mkdir (const char* name, ...);              /* May take a mode argument */
-int __fastcall__ rmdir (const char* name);
+int chdir(const char* name);
+char* getcwd(char* buf, size_t size);
+int mkdir(const char* name, ...);              /* May take a mode argument */
+int rmdir(const char* name);
 
 /* Others */
-unsigned __fastcall__ sleep (unsigned seconds);
-int __fastcall__ getopt (int argc, char* const* argv, const char* optstring);
-
-/* Non standard: */
-#if __CC65_STD__ == __CC65_STD_CC65__
-int __fastcall__ exec (const char* progname, const char* cmdline);
-#endif
-
-
+unsigned sleep(unsigned seconds);
 
 /* End of unistd.h */
 #endif

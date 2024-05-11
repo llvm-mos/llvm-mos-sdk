@@ -11,41 +11,36 @@
 ; int write (int fd, const void* buf, unsigned count);
 ;
 
-        .export         _write
-        .constructor    initstdout
-
-        .import         rwcommon
-        .importzp       sp, ptr1, ptr2, ptr3
+        .globl          write
 
         .include        "cbm.inc"
         .include        "errno.inc"
         .include        "fcntl.inc"
         .include        "filedes.inc"
+        .include        "imag.inc"
 
 
 ;--------------------------------------------------------------------------
 ; initstdout: Open the stdout and stderr file descriptors for the screen.
 
-.segment        "ONCE"
-
-.proc   initstdout
+.section .init,"aR",@progbits
+initstdout:
 
         lda     #STDOUT_FILENO + LFN_OFFS
-        jsr     @L1
+        jsr     1f
         lda     #STDERR_FILENO + LFN_OFFS
-@L1:    ldx     #CBMDEV_SCREEN
+1:      ldx     #CBMDEV_SCREEN
         ldy     #$FF
         jsr     SETLFS
         jmp     OPEN            ; Will always succeed
 
-.endproc
-
 ;--------------------------------------------------------------------------
-; _write
+; write
 
-.code
+.text
 
-.proc   _write
+.globl write
+write:
 
         jsr     rwcommon        ; Pop params, check handle
         bcs     invalidfd       ; Invalid handle
@@ -61,17 +56,18 @@
 ; Valid lfn. Make it the output file
 
         jsr     CKOUT
-        bcc     @L2
-@error: jmp     ___mappederrno  ; Store into ___oserror, map to errno, return -1
+        bcc     3f
+.Lerror:
+        jmp     __mappederrno   ; Store into __oserror, map to errno, return -1
 
 ; Output the next character from the buffer
 
-@L0:    ldy     #0
-        lda     (ptr1),y
-        inc     ptr1
-        bne     @L1
-        inc     ptr1+1          ; A = *buf++;
-@L1:    jsr     BSOUT
+1:      ldy     #0
+        lda     (__rc2),y
+        inc     __rc2
+        bne     2f
+        inc     __rc3           ; A = *buf++;
+2:      jsr     BSOUT
 
 ; Check the status
 
@@ -80,31 +76,31 @@
         lsr     a               ; Bit zero is write timeout
         bne     devnotpresent2
         pla
-        bcs     @L3
+        bcs     4f
 
 ; Count characters written
 
-        inc     ptr3
-        bne     @L2
-        inc     ptr3+1
+        inc     __rc6
+        bne     3f
+        inc     __rc7
 
 ; Decrement count
 
-@L2:    dec     ptr2
-        bne     @L0
-        dec     ptr2+1
-        bne     @L0
+3:      dec     __rc4
+        bne     1b
+        dec     __rc5
+        bne     1b
 
 ; Wrote all chars or disk full. Close the output channel
 
-@L3:    jsr     CLRCH
+4:      jsr     CLRCH
 
 ; Clear __oserror and return the number of chars written
 
         lda     #0
-        sta     ___oserror
-        lda     ptr3
-        ldx     ptr3+1
+        sta     __oserror
+        lda     __rc6
+        ldx     __rc7
         rts
 
 ; Error entry: Device not present
@@ -119,6 +115,4 @@ devnotpresent:
 
 invalidfd:
         lda     #EBADF
-        jmp     ___directerrno  ; Sets _errno, clears __oserror, returns -1
-
-.endproc
+        jmp     __directerrno   ; Sets _errno, clears __oserror, returns -1

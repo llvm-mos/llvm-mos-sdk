@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 // Flags for representing mode (see fopen()). Note these must fit the same
 // status field as the _IO?BF flags in <stdio.h> and the internal flags below.

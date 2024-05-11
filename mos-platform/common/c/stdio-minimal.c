@@ -4,9 +4,9 @@
 #include <stdint.h>
 #include <string.h>
 
-FILE *stdin;
-FILE *stdout;
-FILE *stderr;
+__attribute__((weak)) FILE *stdin;
+__attribute__((weak)) FILE *stdout;
+__attribute__((weak)) FILE *stderr;
 
 // Character input/output functions
 

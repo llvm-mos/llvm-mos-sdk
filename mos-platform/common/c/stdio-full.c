@@ -6,6 +6,7 @@
 
 // Originally from the Public Domain C Library (PDCLib)
 
+#include <errno.h>
 #include <fcntl.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -336,6 +337,20 @@ int puts(const char *s) { __stdio_not_yet_implemented(); }
 size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
              FILE *__restrict__ stream) {
   __stdio_not_yet_implemented();
+}
+
+static int prepwrite(FILE *stream) {
+  if ((stream->bufidx < stream->bufend) || stream->ungetc_buf_full ||
+      (stream->status & (FREAD | ERRORFLAG | WIDESTREAM | EOFFLAG)) ||
+      !(stream->status & (FWRITE | FAPPEND | FRW))) {
+    /* Function called on illegal (e.g. input) stream. */
+    errno = EBADF;
+    stream->status |= ERRORFLAG;
+    return EOF;
+  }
+
+  stream->status |= FWRITE | BYTESTREAM;
+  return 0;
 }
 
 size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,

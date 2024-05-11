@@ -24,6 +24,9 @@
 ; initstdout: Open the stdout and stderr file descriptors for the screen.
 
 .section .init,"aR",@progbits
+  jsr initstdout
+
+.text
 initstdout:
 
         lda     #STDOUT_FILENO + LFN_OFFS
@@ -36,8 +39,6 @@ initstdout:
 
 ;--------------------------------------------------------------------------
 ; write
-
-.text
 
 .globl write
 write:

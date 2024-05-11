@@ -155,7 +155,7 @@ Functions</h2></td></tr>
 <tr class="separator:a2c84ff46a36768e85d31f798a72d107e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21bbec8c985a7954aebd82b38d52b622"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a21bbec8c985a7954aebd82b38d52b622">scanf</a> (const char *__restrict__ format,...)</td></tr>
 <tr class="separator:a21bbec8c985a7954aebd82b38d52b622"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63316e700a4bd33b2c1a2b821402fad9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a63316e700a4bd33b2c1a2b821402fad9">snprintf</a> (char *__restrict__ s, size_t n, const char *__restrict__ format,...)</td></tr>
+<tr class="memitem:a63316e700a4bd33b2c1a2b821402fad9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a63316e700a4bd33b2c1a2b821402fad9">snprintf</a> (char *__restrict__ s, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> n, const char *__restrict__ format,...)</td></tr>
 <tr class="separator:a63316e700a4bd33b2c1a2b821402fad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6898db85f1ce9ea2def47a7a55668ee3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a6898db85f1ce9ea2def47a7a55668ee3">sprintf</a> (char *__restrict__ s, const char *__restrict__ format,...)</td></tr>
 <tr class="separator:a6898db85f1ce9ea2def47a7a55668ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,7 +169,7 @@ Functions</h2></td></tr>
 <tr class="separator:a469695a1085801623e0a0e62bd09b5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7c3d20e8397fc139898332141cba468"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#ac7c3d20e8397fc139898332141cba468">vscanf</a> (const char *__restrict__ format, va_list arg)</td></tr>
 <tr class="separator:ac7c3d20e8397fc139898332141cba468"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c35ed7416b6b1ce06ded7627fc5ecf5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a5c35ed7416b6b1ce06ded7627fc5ecf5">vsnprintf</a> (char *__restrict__ s, size_t n, const char *__restrict__ format, va_list arg)</td></tr>
+<tr class="memitem:a5c35ed7416b6b1ce06ded7627fc5ecf5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a5c35ed7416b6b1ce06ded7627fc5ecf5">vsnprintf</a> (char *__restrict__ s, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> n, const char *__restrict__ format, va_list arg)</td></tr>
 <tr class="separator:a5c35ed7416b6b1ce06ded7627fc5ecf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22080e8fc6f594282b027c1dd57a3009"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a22080e8fc6f594282b027c1dd57a3009">vsprintf</a> (char *__restrict__ s, const char *__restrict__ format, va_list arg)</td></tr>
 <tr class="separator:a22080e8fc6f594282b027c1dd57a3009"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,9 +193,9 @@ Functions</h2></td></tr>
 <tr class="separator:ad41876f99f190c7488e64ef39c50a23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54efa95b6d5b41adec98e5b8a1a9f27b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a54efa95b6d5b41adec98e5b8a1a9f27b">ungetc</a> (int <a class="el" href="dodo_2api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a>, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream)</td></tr>
 <tr class="separator:a54efa95b6d5b41adec98e5b8a1a9f27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56ad21113b20c2163c3d1af1f8e28621"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a56ad21113b20c2163c3d1af1f8e28621">fread</a> (void *__restrict ptr, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, size_t nmemb, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream)</td></tr>
+<tr class="memitem:a56ad21113b20c2163c3d1af1f8e28621"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a56ad21113b20c2163c3d1af1f8e28621">fread</a> (void *__restrict ptr, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> nmemb, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream)</td></tr>
 <tr class="separator:a56ad21113b20c2163c3d1af1f8e28621"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a849f7b752ccd18ea2d5bdae42b11f48d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a849f7b752ccd18ea2d5bdae42b11f48d">fwrite</a> (const void *__restrict ptr, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, size_t nmemb, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream)</td></tr>
+<tr class="memitem:a849f7b752ccd18ea2d5bdae42b11f48d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a849f7b752ccd18ea2d5bdae42b11f48d">fwrite</a> (const void *__restrict ptr, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> nmemb, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream)</td></tr>
 <tr class="separator:a849f7b752ccd18ea2d5bdae42b11f48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4700e47684c5e43000501cff7eb2ca8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a4700e47684c5e43000501cff7eb2ca8f">fgetpos</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, <a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a> *__restrict__ pos)</td></tr>
 <tr class="separator:a4700e47684c5e43000501cff7eb2ca8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -689,7 +689,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t fread </td>
+          <td class="memname"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> fread </td>
           <td>(</td>
           <td class="paramtype">void *__restrict&#160;</td>
           <td class="paramname"><em>ptr</em>, </td>
@@ -697,13 +697,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>nmemb</em>, </td>
         </tr>
         <tr>
@@ -843,7 +843,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t fwrite </td>
+          <td class="memname"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> fwrite </td>
           <td>(</td>
           <td class="paramtype">const void *__restrict&#160;</td>
           <td class="paramname"><em>ptr</em>, </td>
@@ -851,13 +851,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>nmemb</em>, </td>
         </tr>
         <tr>
@@ -1101,7 +1101,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>
@@ -1397,7 +1397,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>n</em>, </td>
         </tr>
         <tr>

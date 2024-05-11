@@ -190,7 +190,7 @@ $(function() {
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">// Read a sequence of characters in the target&#39;s character set and return the</span></div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">// corrsponding ASCII character.</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;__attribute__((always_inline)) <span class="keywordtype">int</span> __to_ascii(<span class="keywordtype">int</span> (*<a class="code" href="rp6502_8h.html#ac32a49e005ec67629aaf23cabbf07f74">read</a>)(<span class="keywordtype">void</span>));</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;__attribute__((always_inline)) <span class="keywordtype">int</span> __to_ascii(<span class="keywordtype">int</span> (*<a class="code" href="unistd_8h.html#a492f462c1a7e79bfed1f98cf8983cf0a">read</a>)(<span class="keywordtype">void</span>));</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">// Put a character in the target&#39;s character set out to the target&#39;s</span></div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">// equivalent of file descriptor 1 (stdout).</span></div>
@@ -231,7 +231,7 @@ $(function() {
 <div class="ttc" id="astdio_8h_html_ac7c3d20e8397fc139898332141cba468"><div class="ttname"><a href="stdio_8h.html#ac7c3d20e8397fc139898332141cba468">vscanf</a></div><div class="ttdeci">int vscanf(const char *__restrict__ format, va_list arg)</div></div>
 <div class="ttc" id="astdio_8h_html_a63316e700a4bd33b2c1a2b821402fad9"><div class="ttname"><a href="stdio_8h.html#a63316e700a4bd33b2c1a2b821402fad9">snprintf</a></div><div class="ttdeci">int snprintf(char *__restrict__ s, size_t n, const char *__restrict__ format,...)</div></div>
 <div class="ttc" id="astdio_8h_html_a175abb747ea3b78aa8da87355dcec473"><div class="ttname"><a href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a></div><div class="ttdeci">struct _FILE FILE</div><div class="ttdef"><b>Definition:</b> stdio.h:20</div></div>
-<div class="ttc" id="arp6502_8h_html_ac32a49e005ec67629aaf23cabbf07f74"><div class="ttname"><a href="rp6502_8h.html#ac32a49e005ec67629aaf23cabbf07f74">read</a></div><div class="ttdeci">int read(int fildes, void *buf, unsigned count)</div></div>
+<div class="ttc" id="aunistd_8h_html_a492f462c1a7e79bfed1f98cf8983cf0a"><div class="ttname"><a href="unistd_8h.html#a492f462c1a7e79bfed1f98cf8983cf0a">read</a></div><div class="ttdeci">int read(int fd, void *buf, unsigned count)</div></div>
 <div class="ttc" id="astdio_8h_html_a76eb887fc5fbc842c2fb977dd926848c"><div class="ttname"><a href="stdio_8h.html#a76eb887fc5fbc842c2fb977dd926848c">fsetpos</a></div><div class="ttdeci">int fsetpos(FILE *stream, const fpos_t *pos)</div></div>
 <div class="ttc" id="astdio_8h_html_ac80f4484175bf6c48d7b7ca4e9897ae6"><div class="ttname"><a href="stdio_8h.html#ac80f4484175bf6c48d7b7ca4e9897ae6">stdout</a></div><div class="ttdeci">FILE * stdout</div></div>
 <div class="ttc" id="astdio_8h_html_ad5a0ea2c21a23a380b7c30fe35fa9456"><div class="ttname"><a href="stdio_8h.html#ad5a0ea2c21a23a380b7c30fe35fa9456">getc</a></div><div class="ttdeci">int getc(FILE *stream)</div></div>

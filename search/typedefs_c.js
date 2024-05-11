@@ -1,11 +1,14 @@
 var searchData=
 [
-  ['ram_5fbank_5ft_5176',['ram_bank_t',['../mapper__xram__single_8h.html#adc9e6be37ac5ea45f7402037c7ce3414',1,'mapper_xram_single.h']]],
-  ['reference_5177',['reference',['../structstd_1_1array.html#ad2e9f12969f9dac0650de0433989fcc3',1,'std::array::reference()'],['../classstd_1_1initializer__list.html#a775fc04f6ee0e915f5c029f85f71266f',1,'std::initializer_list::reference()']]],
-  ['remove_5fall_5fextents_5ft_5178',['remove_all_extents_t',['../namespacestd.html#a55046082e4fa2eb1d3e810751041dbe0',1,'std']]],
-  ['remove_5fcv_5ft_5179',['remove_cv_t',['../namespacestd.html#a564f6a3442d7b383953bc92d40bd2582',1,'std']]],
-  ['remove_5fextent_5ft_5180',['remove_extent_t',['../namespacestd.html#a7a5ae620376127f6c97b28b6ca8bc7df',1,'std']]],
-  ['remove_5fpointer_5ft_5181',['remove_pointer_t',['../namespacestd.html#a3850b3a5231dd47669c98920d8d42596',1,'std']]],
-  ['remove_5freference_5ft_5182',['remove_reference_t',['../namespacestd.html#a1de5d405966c0d4f9d72f2c89f82c960',1,'std']]],
-  ['rom_5fbank_5ft_5183',['rom_bank_t',['../mapper__rom__multi_8h.html#a0fb1073c41765cbe87ea4e21cb5ea61b',1,'rom_bank_t():&#160;mapper_rom_multi.h'],['../mapper__rom__single_8h.html#a0fb1073c41765cbe87ea4e21cb5ea61b',1,'rom_bank_t():&#160;mapper_rom_single.h']]]
+  ['pce_5fcdb_5fdivmod_5fs16_5fresult_5ft_5181',['pce_cdb_divmod_s16_result_t',['../bios_8h.html#a9ed8ca8eb86797e5e2a5871eddb756bc',1,'bios.h']]],
+  ['pce_5fcdb_5fdivmod_5fu16_5fresult_5ft_5182',['pce_cdb_divmod_u16_result_t',['../bios_8h.html#a1d67d80068fe8064a672f26adfa134f6',1,'bios.h']]],
+  ['pce_5fcdb_5fsubq_5fdata_5ft_5183',['pce_cdb_subq_data_t',['../bios_8h.html#afaed01493f83f8f6b450f45c4cbc2965',1,'bios.h']]],
+  ['pce_5fcdb_5ftoc_5fdata_5ft_5184',['pce_cdb_toc_data_t',['../bios_8h.html#a0434383739fc4e81b4572f7d1e5fd013',1,'bios.h']]],
+  ['pce_5fsector_5ft_5185',['pce_sector_t',['../pce-cd_2libpce_2include_2pce_2cd_2types_8h.html#a8aefc955674285d4f533829e156a5b8e',1,'types.h']]],
+  ['penpal_5f1_5186',['PENPAL_1',['../__suzy_8h.html#a42cba1f83dfb07e00a1318195198dbfd',1,'_suzy.h']]],
+  ['penpal_5f2_5187',['PENPAL_2',['../__suzy_8h.html#aae958429d32e1f7eb1c9b8f6544f48d2',1,'_suzy.h']]],
+  ['penpal_5f3_5188',['PENPAL_3',['../__suzy_8h.html#aab022b7178bd417dbacc73928a5c31ce',1,'_suzy.h']]],
+  ['penpal_5f4_5189',['PENPAL_4',['../__suzy_8h.html#ac004324d8818a84bd835338c439775d5',1,'_suzy.h']]],
+  ['pointer_5190',['pointer',['../structstd_1_1array.html#aa3461565d5883634a8e3a3e1508c5441',1,'std::array']]],
+  ['ptrdiff_5ft_5191',['ptrdiff_t',['../namespacestd.html#a93dbc6d47dc8b32a051053cf9323ff24',1,'std']]]
 ];

@@ -112,7 +112,7 @@ Macros</h2></td></tr>
 <tr class="separator:a73efe787c131b385070f25d18b7c9aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a690f251553b39fd4f31894826141b61a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a690f251553b39fd4f31894826141b61a">RAND_MAX</a>&#160;&#160;&#160;32767</td></tr>
 <tr class="separator:a690f251553b39fd4f31894826141b61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5455b7a60d7e3087ec55dfe37a088bd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a5455b7a60d7e3087ec55dfe37a088bd1">MB_CUR_MAX</a>&#160;&#160;&#160;((size_t)1)</td></tr>
+<tr class="memitem:a5455b7a60d7e3087ec55dfe37a088bd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a5455b7a60d7e3087ec55dfe37a088bd1">MB_CUR_MAX</a>&#160;&#160;&#160;((<a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>)1)</td></tr>
 <tr class="separator:a5455b7a60d7e3087ec55dfe37a088bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -155,15 +155,15 @@ Functions</h2></td></tr>
 <tr class="separator:ae23144bcbb8e3742b00eb687c36654d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a210f1bb7dc29a87394a25027e4231004"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a210f1bb7dc29a87394a25027e4231004">srand</a> (unsigned seed)</td></tr>
 <tr class="separator:a210f1bb7dc29a87394a25027e4231004"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7c32811d7d24557ba92cd3d9dae7ddd"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#af7c32811d7d24557ba92cd3d9dae7ddd">aligned_alloc</a> (size_t alignment, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
+<tr class="memitem:af7c32811d7d24557ba92cd3d9dae7ddd"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#af7c32811d7d24557ba92cd3d9dae7ddd">aligned_alloc</a> (<a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> alignment, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
 <tr class="separator:af7c32811d7d24557ba92cd3d9dae7ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62b7798461bd461da64c5f9d35feddf7"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a62b7798461bd461da64c5f9d35feddf7">calloc</a> (size_t nmemb, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
+<tr class="memitem:a62b7798461bd461da64c5f9d35feddf7"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a62b7798461bd461da64c5f9d35feddf7">calloc</a> (<a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> nmemb, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
 <tr class="separator:a62b7798461bd461da64c5f9d35feddf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbedc913aa4651b3c3b4b3aecd9b4711"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#afbedc913aa4651b3c3b4b3aecd9b4711">free</a> (void *ptr)</td></tr>
 <tr class="separator:afbedc913aa4651b3c3b4b3aecd9b4711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ac38fce3243a7dcf448301ee9ffd392"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a7ac38fce3243a7dcf448301ee9ffd392">malloc</a> (size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
+<tr class="memitem:a7ac38fce3243a7dcf448301ee9ffd392"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a7ac38fce3243a7dcf448301ee9ffd392">malloc</a> (<a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
 <tr class="separator:a7ac38fce3243a7dcf448301ee9ffd392"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a6b5e8d2f1c37e5b43e4345586075be"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a1a6b5e8d2f1c37e5b43e4345586075be">realloc</a> (void *ptr, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
+<tr class="memitem:a1a6b5e8d2f1c37e5b43e4345586075be"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a1a6b5e8d2f1c37e5b43e4345586075be">realloc</a> (void *ptr, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
 <tr class="separator:a1a6b5e8d2f1c37e5b43e4345586075be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d78319026a43c0a5f942436ad3f09a1"><td class="memItemLeft" align="right" valign="top">_Noreturn void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a7d78319026a43c0a5f942436ad3f09a1">abort</a> (void)</td></tr>
 <tr class="separator:a7d78319026a43c0a5f942436ad3f09a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,9 +179,9 @@ Functions</h2></td></tr>
 <tr class="separator:a9cbe15503c359688a4c6b09a7000c2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b0abd498c08f782b325e8532254e962"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a8b0abd498c08f782b325e8532254e962">system</a> (const char *string)</td></tr>
 <tr class="separator:a8b0abd498c08f782b325e8532254e962"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4deacd9ee0025cb05ba0fc764e9cdab1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a4deacd9ee0025cb05ba0fc764e9cdab1">bsearch</a> (const void *key, const void *base, size_t nmemb, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, int(*compar)(const void *, const void *))</td></tr>
+<tr class="memitem:a4deacd9ee0025cb05ba0fc764e9cdab1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a4deacd9ee0025cb05ba0fc764e9cdab1">bsearch</a> (const void *key, const void *base, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> nmemb, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, int(*compar)(const void *, const void *))</td></tr>
 <tr class="separator:a4deacd9ee0025cb05ba0fc764e9cdab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a216aaec88b41d3e2f8502a5b3365ea81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a216aaec88b41d3e2f8502a5b3365ea81">qsort</a> (void *base, size_t nmemb, size_t <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, int(*compar)(const void *, const void *))</td></tr>
+<tr class="memitem:a216aaec88b41d3e2f8502a5b3365ea81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2stdlib_8h.html#a216aaec88b41d3e2f8502a5b3365ea81">qsort</a> (void *base, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> nmemb, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, int(*compar)(const void *, const void *))</td></tr>
 <tr class="separator:a216aaec88b41d3e2f8502a5b3365ea81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -220,7 +220,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MB_CUR_MAX&#160;&#160;&#160;((size_t)1)</td>
+          <td class="memname">#define MB_CUR_MAX&#160;&#160;&#160;((<a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>)1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -423,13 +423,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void* aligned_alloc </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>alignment</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
@@ -559,13 +559,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>nmemb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
@@ -593,13 +593,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void* calloc </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>nmemb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
@@ -795,7 +795,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void* malloc </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
@@ -819,13 +819,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>nmemb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
@@ -895,7 +895,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>

@@ -1,17 +1,11 @@
 var searchData=
 [
-  ['sbyte_5184',['sbyte',['../vcslib_8h.html#ae1e823357de7a263f2ed95e66b14e66c',1,'vcslib.h']]],
-  ['scb_5frehv_5185',['SCB_REHV',['../__suzy_8h.html#ae888e66ae6cd7e8dd63cef778e6e64a7',1,'_suzy.h']]],
-  ['scb_5frehv_5fpal_5186',['SCB_REHV_PAL',['../__suzy_8h.html#a9a429feacc2a9810846ee1ce03a5bedb',1,'_suzy.h']]],
-  ['scb_5frehvs_5187',['SCB_REHVS',['../__suzy_8h.html#af5e2b234b993ad21bf64149154db340e',1,'_suzy.h']]],
-  ['scb_5frehvs_5fpal_5188',['SCB_REHVS_PAL',['../__suzy_8h.html#add2ab67150a6ce015ffaa34b5982ad05',1,'_suzy.h']]],
-  ['scb_5frehvst_5189',['SCB_REHVST',['../__suzy_8h.html#a26fb893c54b6ae524d6c07bc43712171',1,'_suzy.h']]],
-  ['scb_5frehvst_5fpal_5190',['SCB_REHVST_PAL',['../__suzy_8h.html#a92d2e423661dd581d61292ddb56a4788',1,'_suzy.h']]],
-  ['scb_5frenone_5191',['SCB_RENONE',['../__suzy_8h.html#adafb267e52fb54f50dd3f3f39d97b0e1',1,'_suzy.h']]],
-  ['scb_5frenone_5fpal_5192',['SCB_RENONE_PAL',['../__suzy_8h.html#afbfeca58700374a0285c9ee8fddbf675',1,'_suzy.h']]],
-  ['second_5ftype_5193',['second_type',['../structstd_1_1pair.html#a73d3913395d3acf32aa8afa2087faab8',1,'std::pair']]],
-  ['sig_5fatomic_5ft_5194',['sig_atomic_t',['../signal_8h.html#a00bf0fda121f6e68e9395e7fb248a309',1,'signal.h']]],
-  ['size_5ft_5195',['size_t',['../namespacestd.html#ae42c45d609eacb3768b7b10c1d90eabb',1,'std']]],
-  ['size_5ftype_5196',['size_type',['../structstd_1_1array.html#a26cb234485b487e695e75640b2da6397',1,'std::array::size_type()'],['../classstd_1_1initializer__list.html#ae137630e6f4c81c399f953c348fb7d8f',1,'std::initializer_list::size_type()']]],
-  ['storagetype_5197',['StorageType',['../classFixedPoint.html#a614c1918d5f1bb867e216c180007dc7e',1,'FixedPoint']]]
+  ['ram_5fbank_5ft_5192',['ram_bank_t',['../mapper__xram__single_8h.html#adc9e6be37ac5ea45f7402037c7ce3414',1,'mapper_xram_single.h']]],
+  ['reference_5193',['reference',['../structstd_1_1array.html#ad2e9f12969f9dac0650de0433989fcc3',1,'std::array::reference()'],['../classstd_1_1initializer__list.html#a775fc04f6ee0e915f5c029f85f71266f',1,'std::initializer_list::reference()']]],
+  ['remove_5fall_5fextents_5ft_5194',['remove_all_extents_t',['../namespacestd.html#a55046082e4fa2eb1d3e810751041dbe0',1,'std']]],
+  ['remove_5fcv_5ft_5195',['remove_cv_t',['../namespacestd.html#a564f6a3442d7b383953bc92d40bd2582',1,'std']]],
+  ['remove_5fextent_5ft_5196',['remove_extent_t',['../namespacestd.html#a7a5ae620376127f6c97b28b6ca8bc7df',1,'std']]],
+  ['remove_5fpointer_5ft_5197',['remove_pointer_t',['../namespacestd.html#a3850b3a5231dd47669c98920d8d42596',1,'std']]],
+  ['remove_5freference_5ft_5198',['remove_reference_t',['../namespacestd.html#a1de5d405966c0d4f9d72f2c89f82c960',1,'std']]],
+  ['rom_5fbank_5ft_5199',['rom_bank_t',['../mapper__rom__multi_8h.html#a0fb1073c41765cbe87ea4e21cb5ea61b',1,'rom_bank_t():&#160;mapper_rom_multi.h'],['../mapper__rom__single_8h.html#a0fb1073c41765cbe87ea4e21cb5ea61b',1,'rom_bank_t():&#160;mapper_rom_single.h']]]
 ];

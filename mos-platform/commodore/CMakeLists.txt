@@ -65,6 +65,7 @@ add_platform_library(commodore-c
   sysremove.s
   sysrename.s
   translate-filename.cc
+  write.s
 )
 
 target_include_directories(commodore-c BEFORE PUBLIC .)

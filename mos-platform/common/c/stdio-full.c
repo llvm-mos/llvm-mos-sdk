@@ -194,13 +194,6 @@ char *tmpnam(char *s) {
 
 // File access functions
 
-int write(int fildes, const void *buf, size_t nbyte) {
-  // Not yet implemented
-  if (nbyte)
-    return -1;
-  return 0;
-}
-
 /* A system call that writes a stream's buffer.
    Returns 0 on success, EOF on write error.
    Sets stream error flags and errno appropriately on error.

@@ -18,7 +18,9 @@
 ;--------------------------------------------------------------------------
 ; closeallfiles: Close all open files.
 
-.section .fini,"axR",@progbits
+; This must happen after fclosing all stdio files.
+
+.section .fini.200,"axR",@progbits
 closeallfiles:
 
         ldx     #MAX_FDS-1

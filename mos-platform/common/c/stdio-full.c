@@ -61,7 +61,8 @@ FILE *stderr = &serr;
 
 static FILE *filelist = &sin;
 
-asm(".section .fini,\"axR\",@progbits\n"
+// This must happen before all POSIX open files are closed.
+asm(".section .fini.100,\"axR\",@progbits\n"
     "  jsr _stdio_closeall\n");
 
 void _stdio_closeall(void) {

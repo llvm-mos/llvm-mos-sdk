@@ -9,18 +9,19 @@ asm(".section .init.250,\"axR\",@progbits\n"
     "  lda #0x0f\n"
     "  jsr __CHROUT\n");
 
-__attribute__((always_inline, weak)) void __from_ascii(char c,
-                                                       void (*write)(char c)) {
+__attribute__((always_inline, weak)) void
+__from_ascii(char c, void *ctx, void (*write)(char c, void *ctx)) {
   if (__builtin_expect(c == '\n', 0))
-    write('\r');
+    write('\r', ctx);
   else if (__builtin_expect(c == '\b', 0))
-    write('\x9d'); // CURSOR LEFT
+    write('\x9d', ctx); // CURSOR LEFT
   else
-    write(c);
+    write(c, ctx);
 }
 
-__attribute__((always_inline, weak)) int __to_ascii(int (*read)(void)) {
-  int c = read();
+__attribute__((always_inline, weak)) int __to_ascii(void *ctx,
+                                                    int (*read)(void *ctx)) {
+  int c = read(ctx);
   switch (c) {
   case '\r':
     return '\n';

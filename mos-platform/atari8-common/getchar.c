@@ -1,19 +1,20 @@
 #include <atari.h>
 #include <stdio.h>
 
-__attribute__((always_inline, weak)) int __to_ascii(int (*read)(void)) {
-  int c = read();
+__attribute__((always_inline, weak)) int __to_ascii(void *ctx,
+                                                    int (*read)(void *ctx)) {
+  int c = read(ctx);
   switch (c) {
-    case 0x1e:
-      return '\b';
-    case 0x7f:
-      return '\t';
-    case 0x9b:
-      return '\n';
-    case 0xfd:
-      return '\a';
-    default:
-      return c;
+  case 0x1e:
+    return '\b';
+  case 0x7f:
+    return '\t';
+  case 0x9b:
+    return '\n';
+  case 0xfd:
+    return '\a';
+  default:
+    return c;
   }
 }
 

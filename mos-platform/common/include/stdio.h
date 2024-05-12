@@ -24,9 +24,9 @@ typedef struct _FILE FILE;
 #define FOPEN_MAX 8
 
 /* See setvbuf(), third argument */
-#define _IOFBF (1u<<0)
-#define _IOLBF (1u<<1)
-#define _IONBF (1u<<2)
+#define _IOFBF (1u << 0)
+#define _IOLBF (1u << 1)
+#define _IONBF (1u << 2)
 
 typedef uint64_t fpos_t;
 
@@ -115,11 +115,13 @@ void perror(const char *s);
 
 // Write a sequence of characters in the target's character set that
 // correspond to the given ASCII character.
-__attribute__((always_inline)) void __from_ascii(char c, void (*write)(char c));
+__attribute__((always_inline)) void
+__from_ascii(char c, void *ctx, void (*write)(char c, void *ctx));
 
 // Read a sequence of characters in the target's character set and return the
 // corrsponding ASCII character.
-__attribute__((always_inline)) int __to_ascii(int (*read)(void));
+__attribute__((always_inline)) int __to_ascii(void *ctx,
+                                              int (*read)(void *ctx));
 
 // Put a character in the target's character set out to the target's
 // equivalent of file descriptor 1 (stdout).

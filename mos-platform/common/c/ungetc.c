@@ -13,7 +13,7 @@ int ungetc(int c, FILE *stream) {
   return c;
 }
 
-static int ungetc_getchar(void) {
+static int ungetc_getchar(void* ctx) {
   if (full) {
     full = false;
     return ungetc_buffer;
@@ -22,4 +22,4 @@ static int ungetc_getchar(void) {
   }
 }
 
-int getchar(void) { return __to_ascii(ungetc_getchar); }
+int getchar(void) { return __to_ascii(NULL, ungetc_getchar); }

@@ -8,16 +8,17 @@
 
 // Neo6502 uses CR line endings instead of LF.
 
-__attribute__((always_inline, weak)) void __from_ascii(char c,
-                                                       void (*write)(char c)) {
+__attribute__((always_inline, weak)) void
+__from_ascii(char c, void *ctx, void (*write)(char c, void *ctx)) {
   if (__builtin_expect(c == '\n', 0))
-    write('\r');
+    write('\r', ctx);
   else
-    write(c);
+    write(c, ctx);
 }
 
-__attribute__((always_inline, weak)) int __to_ascii(int (*read)(void)) {
-  int c = read();
+__attribute__((always_inline, weak)) int __to_ascii(void *ctx,
+                                                    int (*read)(void *ctx)) {
+  int c = read(ctx);
   if (__builtin_expect(c == '\r', 0))
     return '\n';
   return c;

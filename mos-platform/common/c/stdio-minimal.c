@@ -35,12 +35,16 @@ __attribute__((weak)) int fputs(const char *__restrict__ s,
 
 __attribute__((weak)) int getc(FILE *stream) { return fgetc(stream); }
 
-__attribute__((weak)) int getchar(void) { return __to_ascii(__getchar); }
+static int getchar_wrapper(void *ctx) { return __getchar(); }
+__attribute__((weak)) int getchar(void) {
+  return __to_ascii(NULL, getchar_wrapper);
+}
 
 __attribute__((weak)) int putc(int c, FILE *stream) { return fputc(c, stream); }
 
+static void putchar_wrapper(char c, void *ctx) { __putchar(c); }
 __attribute__((weak)) int putchar(int c) {
-  __from_ascii(c, __putchar);
+  __from_ascii(c, NULL, putchar_wrapper);
   return c;
 }
 

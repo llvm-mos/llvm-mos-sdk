@@ -18,8 +18,8 @@ using __osic1p_screen = __osi_screen<>;
 
 extern "C" {
 
-__attribute__((always_inline, weak)) void __from_ascii(char c,
-                                                       void (*write)(char c)) {
+__attribute__((always_inline, weak)) void
+__from_ascii(char c, void *ctx, void (*write)(char c, void *ctx)) {
   /*
    * The low-level character output function implements LF as line feed
    * without CR, e.g. the active position stays in the same column. Here we
@@ -27,8 +27,8 @@ __attribute__((always_inline, weak)) void __from_ascii(char c,
    * to the initial position of the next line.
    */
   if (c == '\n')
-    write('\r');
-  write(c);
+    write('\r', ctx);
+  write(c, ctx);
 }
 
 /**

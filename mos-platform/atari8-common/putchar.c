@@ -1,17 +1,17 @@
 #include <stdio.h>
 
-__attribute__((always_inline, weak)) void __from_ascii(char c,
-                                                       void (*write)(char c)) {
+__attribute__((always_inline, weak)) void
+__from_ascii(char c, void *ctx, void (*write)(char c, void *ctx)) {
   if (__builtin_expect(c == '\n', 0))
-    write(0x9b);
+    write(0x9b, ctx);
   else if (__builtin_expect(c == '\t', 0))
-    write(0x7f);
+    write(0x7f, ctx);
   else if (__builtin_expect(c == '\a', 0))
-    write(0xfd);
+    write(0xfd, ctx);
   else if (__builtin_expect(c == '\b', 0))
-    write(0x1e);
+    write(0x1e, ctx);
   else
-    write(c);
+    write(c, ctx);
 }
 
 // Send character output via HATABS/IOCB0 which the OS opens to "E:"

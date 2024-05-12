@@ -1,8 +1,9 @@
-__attribute__((always_inline, weak)) void __from_ascii(char c,
-                                                       void (*write)(char c)) {
-  write(c);
+__attribute__((always_inline, weak)) void
+__from_ascii(char c, void *ctx, void (*write)(char c, void *ctx)) {
+  write(c, ctx);
 }
 
-__attribute__((always_inline, weak)) int __to_ascii(int (*read)(void)) {
-  return read();
+__attribute__((always_inline, weak)) int __to_ascii(void *ctx,
+                                                    int (*read)(void *ctx)) {
+  return read(ctx);
 }

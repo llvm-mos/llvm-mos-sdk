@@ -9,11 +9,11 @@
 #include <cpm.h>
 #include <stdio.h>
 
-__attribute__((always_inline, weak)) void __from_ascii(char c,
-                                                       void (*emit)(char c)) {
+__attribute__((always_inline, weak)) void
+__from_ascii(char c, void *ctx, void (*emit)(char c, void *ctx)) {
   if (__builtin_expect(c == '\n', 0))
-    emit('\r');
-  emit(c);
+    emit('\r', ctx);
+  emit(c, ctx);
 }
 
 void __putchar(char c) { cpm_conout(c); }

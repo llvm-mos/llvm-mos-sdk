@@ -205,9 +205,9 @@ static int flush_buffer(FILE *stream) {
   size_t written = 0;
   int rc;
 
-  if (!(stream->status & FBIN)) {
-    /* TODO: Text stream conversion here */
-  }
+  // Note: everything written to the buffer has already been converted.
+  // Otherwise, when write errors occur, it's unclear what still remains to be
+  // converted.
 
   // Keep trying to write data until everything is written or an error occurs.
   for (;;) {
@@ -348,30 +348,46 @@ static int prepwrite(FILE *stream) {
   return 0;
 }
 
+typedef struct {
+  FILE *stream;
+  bool error;
+} WriteCtx;
+
+__attribute((always_inline)) static void write_to_buffer(char c, void *vctx) {
+  WriteCtx *ctx = vctx;
+  if (ctx->error)
+    return;
+  ctx->stream->buffer[ctx->stream->bufidx++] = c;
+  if (ctx->stream->bufidx == ctx->stream->bufsize &&
+      flush_buffer(ctx->stream) == EOF)
+    ctx->error = true;
+}
+
 size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
               FILE *restrict stream) {
-  size_t offset = 0;
+  size_t last_newline_idx = 0;
   size_t nmemb_i;
 
   if (prepwrite(stream) == EOF)
     return 0;
 
+  WriteCtx ctx = {stream};
+
   for (nmemb_i = 0; nmemb_i < nmemb; ++nmemb_i) {
     for (size_t size_i = 0; size_i < size; ++size_i) {
-      if ((stream->buffer[stream->bufidx++] =
-               ((char *)ptr)[nmemb_i * size + size_i]) == '\n') {
-        /* Remember last newline, in case we have to do a partial line-buffered
-         * flush */
-        offset = stream->bufidx;
-      }
+      char c = ((char *)ptr)[nmemb_i * size + size_i];
+      if (stream->status & FBIN)
+        write_to_buffer(c, &ctx);
+      else
+        __from_ascii(c, &ctx, write_to_buffer);
+      if (!stream->bufidx)
+        last_newline_idx = 0;
+      else if (c == '\n')
+        last_newline_idx = stream->bufidx;
 
-      if (stream->bufidx == stream->bufsize) {
-        if (flush_buffer(stream) == EOF) {
-          /* Returning number of objects completely buffered */
-          return nmemb_i;
-        }
-
-        offset = 0;
+      if (ctx.error) {
+        /* Returning number of objects completely buffered */
+        return nmemb_i;
       }
     }
   }
@@ -395,9 +411,9 @@ size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
     break;
 
   case _IOLBF:
-    if (offset > 0) {
+    if (last_newline_idx > 0) {
       size_t bufidx = stream->bufidx;
-      stream->bufidx = offset;
+      stream->bufidx = last_newline_idx;
 
       if (flush_buffer(stream) == EOF) {
         /* See comment above. */
@@ -405,8 +421,9 @@ size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
         return nmemb_i - 1;
       }
 
-      stream->bufidx = bufidx - offset;
-      memmove(stream->buffer, stream->buffer + offset, stream->bufidx);
+      stream->bufidx = bufidx - last_newline_idx;
+      memmove(stream->buffer, stream->buffer + last_newline_idx,
+              stream->bufidx);
     }
   }
 

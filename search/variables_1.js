@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['a_4808',['A',['../classsoa_1_1ArrayConstIterator.html#a356fcc5e6f440f795f15479ca020c46f',1,'soa::ArrayConstIterator']]],
-  ['abort_4809',['abort',['../struct__sim__reg.html#acb5ba6272904f4e4c69580eef37bc375',1,'_sim_reg']]],
-  ['access_4810',['access',['../structcbm__dirent.html#a94cc4b7ec11936a774b70ffa197d2aa3',1,'cbm_dirent']]],
-  ['addr_5fhi_4811',['addr_hi',['../nes-mmc3_2mapper_8h.html#a4b6d5982a670e9a2c66612a5cced6f4c',1,'mapper.h']]],
-  ['address_4812',['address',['../bios_8h.html#aa137c1d2696e2763e22c44299393db13',1,'bios.h']]],
-  ['address_5ftype_4813',['address_type',['../bios_8h.html#acb6023792285d817ac4000375a09a040',1,'bios.h']]],
-  ['alignment_5fof_5fv_4814',['alignment_of_v',['../namespacestd.html#a64ccbcea1c02ee9d2a563751eb9cc60a',1,'std']]],
-  ['all_4815',['all',['../famitone2_2LICENSE.html#ac81fb3a249cb2f41e5be357e54a8679f',1,'all():&#160;LICENSE'],['../neslib_2LICENSE.html#ac81fb3a249cb2f41e5be357e54a8679f',1,'all():&#160;LICENSE']]],
-  ['arg_4816',['arg',['../structStatus.html#ab0f2dbcc9ec350267595300e71480226',1,'Status']]],
-  ['attr_4817',['attr',['../structneo__file__stat.html#aee0fbb7a2745faf90cd464a4ef3b83ef',1,'neo_file_stat::attr()'],['../structvdc__sprite__t.html#a9b5115aa71df9ffbdce3da2e6ae9a1c8',1,'vdc_sprite_t::attr()'],['../neslib_8h.html#a206b3d754a8d0963d0f74ef00a6e41d5',1,'attr():&#160;neslib.h']]]
+  ['a_4810',['A',['../classsoa_1_1ArrayConstIterator.html#a356fcc5e6f440f795f15479ca020c46f',1,'soa::ArrayConstIterator']]],
+  ['abort_4811',['abort',['../struct__sim__reg.html#acb5ba6272904f4e4c69580eef37bc375',1,'_sim_reg']]],
+  ['access_4812',['access',['../structcbm__dirent.html#a94cc4b7ec11936a774b70ffa197d2aa3',1,'cbm_dirent']]],
+  ['addr_5fhi_4813',['addr_hi',['../nes-mmc3_2mapper_8h.html#a4b6d5982a670e9a2c66612a5cced6f4c',1,'mapper.h']]],
+  ['address_4814',['address',['../bios_8h.html#aa137c1d2696e2763e22c44299393db13',1,'bios.h']]],
+  ['address_5ftype_4815',['address_type',['../bios_8h.html#acb6023792285d817ac4000375a09a040',1,'bios.h']]],
+  ['alignment_5fof_5fv_4816',['alignment_of_v',['../namespacestd.html#a64ccbcea1c02ee9d2a563751eb9cc60a',1,'std']]],
+  ['all_4817',['all',['../famitone2_2LICENSE.html#ac81fb3a249cb2f41e5be357e54a8679f',1,'all():&#160;LICENSE'],['../neslib_2LICENSE.html#ac81fb3a249cb2f41e5be357e54a8679f',1,'all():&#160;LICENSE']]],
+  ['arg_4818',['arg',['../structStatus.html#ab0f2dbcc9ec350267595300e71480226',1,'Status']]],
+  ['attr_4819',['attr',['../structneo__file__stat.html#aee0fbb7a2745faf90cd464a4ef3b83ef',1,'neo_file_stat::attr()'],['../structvdc__sprite__t.html#a9b5115aa71df9ffbdce3da2e6ae9a1c8',1,'vdc_sprite_t::attr()'],['../neslib_8h.html#a206b3d754a8d0963d0f74ef00a6e41d5',1,'attr():&#160;neslib.h']]]
 ];

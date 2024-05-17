@@ -53,6 +53,8 @@ char *tmpnam(char *s);
 int fclose(FILE *stream);
 int fflush(FILE *stream);
 FILE *fopen(const char *__restrict__ filename, const char *__restrict__ mode);
+FILE *freopen(const char *__restrict__ filename, const char *__restrict__ mode,
+              FILE *__restrict__ stream);
 
 // Formated input/output functions
 

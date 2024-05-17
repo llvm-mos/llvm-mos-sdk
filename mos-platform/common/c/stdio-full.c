@@ -317,6 +317,126 @@ FILE *fopen(const char *restrict filename, const char *restrict mode) {
   return rc;
 }
 
+FILE *freopen(const char *restrict filename, const char *restrict mode,
+              FILE *restrict stream) {
+  unsigned int filemode = filemode(mode);
+
+  if (stream == NULL) {
+    errno = EBADF;
+    return NULL;
+  }
+
+  if (_PDCLIB_isstream(stream, NULL)) {
+    /* Flush buffer */
+    if (stream->status & _PDCLIB_FWRITE) {
+      _PDCLIB_flushbuffer(stream);
+    }
+
+    if (filename == NULL) {
+      /* Attempt to change mode without closing stream */
+      switch (_PDCLIB_changemode(stream, filemode)) {
+      case INT_MIN:
+        /* fail completely */
+        return NULL;
+
+      case 0:
+        /* fail; try close / reopen */
+        filename = stream->filename;
+        /* Setting to NULL to make the free() below a non-op. */
+        stream->filename = NULL;
+        break;
+
+      default:
+        /* success */
+        return stream;
+      }
+    }
+
+    /* Close handle */
+    _PDCLIB_close(stream->handle);
+
+    /* Remove stream from list */
+    _PDCLIB_getstream(stream);
+
+    /* Delete tmpfile() */
+    if (stream->status & _PDCLIB_DELONCLOSE) {
+      /* Have to switch here; stream->filename may have moved to
+         filename after failed in-place mode change above.
+      */
+      _PDCLIB_remove((stream->filename == NULL) ? filename : stream->filename);
+      stream->status &= ~_PDCLIB_DELONCLOSE;
+    }
+
+    /* Free buffer */
+    if (stream->status & _PDCLIB_FREEBUFFER) {
+      free(stream->buffer);
+    }
+
+    if (filename == NULL) {
+      /* Input was filename NULL, stream->filename NULL.
+         No filename means there is nothing to reopen. In-place
+         mode change was already attempted (and failed) above.
+      */
+      return NULL;
+    } else {
+      /* We have a filename, either from input or (if filename
+         was NULL) from stream. We will attempt the re-open with
+         that, and will retrieve _PDCLIB_realpath() from that.
+         So stream->filename is no longer needed.
+      */
+      free(stream->filename);
+    }
+  }
+
+  /* Stream is closed, or never was open t this point.
+     Now we check if we have the whereabouts to open it.
+  */
+
+  if (filemode == 0) {
+    /* Mode invalid */
+    free(stream->filename);
+    free(stream);
+    return NULL;
+  }
+
+  if (filename == NULL || filename[0] == '\0') {
+    /* No filename available (standard stream?) */
+    free(stream->filename);
+    free(stream);
+    return NULL;
+  }
+
+  /* (Re-)initializing the structure. */
+  if (_PDCLIB_init_file_t(stream) == NULL) {
+    /* Re-init failed. */
+    free(stream->filename);
+    free(stream);
+    return NULL;
+  }
+
+  /* Resetting buffer mode and filemode */
+  stream->status |= filemode | _IOLBF;
+
+  /* Attempt open */
+  if ((stream->handle = _PDCLIB_open(filename, stream->status)) ==
+      _PDCLIB_NOHANDLE) {
+    /* OS open() failed */
+    free(stream->filename);
+    free(stream->buffer);
+    free(stream);
+    return NULL;
+  }
+
+  /* Getting absolute filename */
+  stream->filename = _PDCLIB_realpath(filename);
+
+  /* Adding to list of open files */
+  stream->next = _PDCLIB_filelist;
+  _PDCLIB_filelist = stream;
+
+  return stream;
+}
+
 // Character input/output functions
 
 // Produce a link error if these are used.

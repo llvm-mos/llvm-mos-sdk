@@ -275,6 +275,23 @@ int fclose(FILE *stream) {
   return 0;
 }
 
+int fflush(FILE *stream) {
+  int rc = 0;
+
+  if (stream == NULL) {
+    /* TODO: Check what happens when fflush( NULL ) encounters write errors, in
+     * other libs */
+    for (stream = filelist; stream != NULL; stream = stream->next)
+      if (stream->status & FWRITE)
+        if (flush_buffer(stream) == EOF)
+          rc = EOF;
+  } else {
+    rc = flush_buffer(stream);
+  }
+
+  return rc;
+}
+
 FILE *fopen(const char *restrict filename, const char *restrict mode) {
   unsigned int fmode = filemode(mode);
 

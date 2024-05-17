@@ -51,6 +51,7 @@ char *tmpnam(char *s);
 // File access functions
 
 int fclose(FILE *stream);
+int fflush(FILE *stream);
 FILE *fopen(const char *__restrict__ filename, const char *__restrict__ mode);
 
 // Formated input/output functions

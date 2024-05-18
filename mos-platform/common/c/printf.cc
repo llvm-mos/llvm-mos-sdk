@@ -19,10 +19,10 @@ namespace {
 
 void put(char c, Status *status) {
   if (status->i < status->n) {
-    if (status->s)
-      status->s[status->i] = c;
+    if (status->stream)
+      putc(c, status->stream);
     else
-      putchar(c);
+      status->s[status->i] = c;
   }
   ++status->i;
 }
@@ -883,6 +883,7 @@ __attribute__((weak)) int vfprintf(FILE *__restrict__ stream,
   status.n = SIZE_MAX;
   status.i = 0;
   status.s = NULL;
+  status.stream = stream;
 
   va_copy(status.arg, arg);
 
@@ -891,8 +892,8 @@ __attribute__((weak)) int vfprintf(FILE *__restrict__ stream,
 
     if ((*format != '%') || ((rc = print(format, &status)) == format)) {
       /* No conversion specifier, print verbatim */
-      putchar(*format);
-      ++format;
+      if (putc(*format++, stream) == EOF)
+        return EOF;
       status.i++;
     } else {
       /* Continue parsing after conversion specifier */
@@ -917,6 +918,7 @@ __attribute__((weak)) int vsnprintf(char *__restrict__ s, size_t n,
   status.n = n;
   status.i = 0;
   status.s = s;
+  status.stream = NULL;
 
   va_copy(status.arg, arg);
 

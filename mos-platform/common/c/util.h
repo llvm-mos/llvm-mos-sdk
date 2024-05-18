@@ -11,6 +11,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,6 +29,7 @@ struct Status {
                     // *sscanf():  source string
   size_t width;     // specified field width
   int prec;         // specified field precision
+  FILE *stream;     // *fprintf() / *fscanf() stream
   va_list arg;      // argument stack
 };
 

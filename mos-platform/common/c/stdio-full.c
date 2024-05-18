@@ -52,9 +52,26 @@ struct _FILE {
   FILE *next;           // Pointer to next struct (internal)
 };
 
-static FILE serr = {.handle = 2, .status = _IONBF | FWRITE};
-static FILE sout = {.handle = 1, .status = _IONBF | FWRITE, .next = &serr};
-static FILE sin = {.handle = 0, .status = _IONBF | FREAD, .next = &sout};
+// Buffer one-two lines; write() implementations have constant overhead, and
+// buffering amortizes it.
+static char serr_buf[80];
+static char sout_buf[80];
+static char sin_buf[80];
+
+static FILE serr = {.handle = 2,
+                    .buffer = serr_buf,
+                    .bufsize = sizeof(serr_buf),
+                    .status = _IONBF | FWRITE};
+static FILE sout = {.handle = 1,
+                    .buffer = sout_buf,
+                    .bufsize = sizeof(sout_buf),
+                    .status = _IONBF | FWRITE,
+                    .next = &serr};
+static FILE sin = {.handle = 0,
+                   .buffer = sin_buf,
+                   .bufsize = sizeof(sin_buf),
+                   .status = _IONBF | FREAD,
+                   .next = &sout};
 
 FILE *stdin = &sin;
 FILE *stdout = &sout;

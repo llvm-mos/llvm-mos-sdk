@@ -449,6 +449,78 @@ FILE *freopen(const char *restrict filename, const char *restrict mode,
   return stream;
 }
 
+void setbuf(FILE *restrict stream, char *restrict buf) {
+  setvbuf(stream, buf, buf ? _IOFBF : _IONBF, BUFSIZ);
+}
+
+int setvbuf(FILE *restrict stream, char *restrict buf, int mode, size_t size) {
+  switch (mode) {
+  case _IONBF:
+    /* When unbuffered I/O is requested, we keep the buffer anyway, as
+       we don't want to e.g. flush the stream for every character of a
+       stream being printed.
+    */
+    break;
+
+  case _IOFBF:
+  case _IOLBF:
+    if (size > INT_MAX || size == 0) {
+      /* PDCLib only supports buffers up to INT_MAX in size. A size
+         of zero doesn't make sense.
+      */
+      return -1;
+    }
+
+    if (buf != NULL) {
+      /* User provided buffer. Deallocate existing buffer, and mark
+         the stream so that fclose() does not try to deallocate the
+         user's buffer.
+      */
+      if (stream->status & FREEBUFFER)
+        free(stream->buffer);
+
+      stream->status &= ~FREEBUFFER;
+    } else {
+      /* User requested buffer size, but leaves it to library to
+         allocate the buffer.
+      */
+      /* If current buffer is big enough for requested size, but not
+         over twice as big (and wasting memory space), we use the
+         current buffer (i.e., do nothing), to save the malloc() /
+         free() overhead.
+      */
+
+      if ((stream->bufsize < size) || (stream->bufsize > (size << 1))) {
+        /* Buffer too small, or much too large - allocate. */
+        if ((buf = (char *)malloc(size)) == NULL) {
+          /* Out of memory error. */
+          return -1;
+        }
+
+        if (stream->status & FREEBUFFER)
+          free(stream->buffer);
+
+        /* This buffer must be free()d on fclose() */
+        stream->status |= FREEBUFFER;
+      }
+    }
+
+    stream->buffer = buf;
+    stream->bufsize = size;
+    break;
+
+  default:
+    /* If mode is something else than _IOFBF, _IOLBF or _IONBF -> exit */
+    return -1;
+  }
+
+  /* Deleting current buffer mode */
+  stream->status &= ~(_IOFBF | _IOLBF | _IONBF);
+  /* Set user-defined mode */
+  stream->status |= mode;
+  return 0;
+}
+
 // Character input/output functions
 
 // Produce a link error if these are used.

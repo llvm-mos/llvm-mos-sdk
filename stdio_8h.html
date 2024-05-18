@@ -151,6 +151,10 @@ Functions</h2></td></tr>
 <tr class="separator:a4ebb2366e83de54ac2ca2a59cfec49d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26a1772ad77b716e05381d1b96aa803c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a26a1772ad77b716e05381d1b96aa803c">freopen</a> (const char *__restrict__ filename, const char *__restrict__ <a class="el" href="memory_8h.html#a2797713f0e84f822af4da1688cc1501c">mode</a>, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream)</td></tr>
 <tr class="separator:a26a1772ad77b716e05381d1b96aa803c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f884261d7361699ede82601c77664e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a2f884261d7361699ede82601c77664e2">setbuf</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, char *__restrict__ buf)</td></tr>
+<tr class="separator:a2f884261d7361699ede82601c77664e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11d3a8c9c125030a02164d5b983d5c69"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a11d3a8c9c125030a02164d5b983d5c69">setvbuf</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, char *__restrict__ buf, int <a class="el" href="memory_8h.html#a2797713f0e84f822af4da1688cc1501c">mode</a>, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>)</td></tr>
+<tr class="separator:a11d3a8c9c125030a02164d5b983d5c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53d507bf3a3942189c7b412a43d2fb9d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a53d507bf3a3942189c7b412a43d2fb9d">fprintf</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, const char *__restrict__ format,...)</td></tr>
 <tr class="separator:a53d507bf3a3942189c7b412a43d2fb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade18c7099ff69450e2e223ab071254ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#ade18c7099ff69450e2e223ab071254ff">fscanf</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, const char *__restrict__ format,...)</td></tr>
@@ -1135,6 +1139,74 @@ Variables</h2></td></tr>
           <td></td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f884261d7361699ede82601c77664e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f884261d7361699ede82601c77664e2">&#9670;&nbsp;</a></span>setbuf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setbuf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *__restrict__&#160;</td>
+          <td class="paramname"><em>buf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11d3a8c9c125030a02164d5b983d5c69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11d3a8c9c125030a02164d5b983d5c69">&#9670;&nbsp;</a></span>setvbuf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int setvbuf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *__restrict__&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

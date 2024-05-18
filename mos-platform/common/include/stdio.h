@@ -90,6 +90,7 @@ int fputc(int c, FILE *stream);
 int fputs(const char *__restrict__ s, FILE *__restrict__ stream);
 int getc(FILE *stream);
 int getchar(void);
+int putc(int c, FILE *stream);
 int putchar(int c);
 int puts(const char *s);
 int ungetc(int c, FILE *stream);

@@ -532,30 +532,7 @@ char *fgets(char *__restrict__ s, int n, FILE *__restrict__ stream) {
   __stdio_not_yet_implemented();
 }
 
-int fputc(int c, FILE *stream) { __stdio_not_yet_implemented(); }
-
-int fputs(const char *__restrict__ s, FILE *__restrict__ stream) {
-  __stdio_not_yet_implemented();
-}
-
-int getc(FILE *stream) { __stdio_not_yet_implemented(); }
-
-int getchar(void) { __stdio_not_yet_implemented(); }
-
-int putc(int c, FILE *stream) { __stdio_not_yet_implemented(); }
-
-int putchar(int c) { __stdio_not_yet_implemented(); }
-
-int puts(const char *s) { __stdio_not_yet_implemented(); }
-
-// Direct input/output functions
-
-size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
-             FILE *__restrict__ stream) {
-  __stdio_not_yet_implemented();
-}
-
-static int prepwrite(FILE *stream) {
+static int prep_write(FILE *stream) {
   if ((stream->bufidx < stream->bufend) || stream->ungetc_buf_full ||
       (stream->status & (FREAD | ERRORFLAG | WIDESTREAM | EOFFLAG)) ||
       !(stream->status & (FWRITE | FAPPEND | FRW))) {
@@ -584,12 +561,58 @@ __attribute((always_inline)) static void write_to_buffer(char c, void *vctx) {
     ctx->error = true;
 }
 
+int fputc(int c, FILE *stream) {
+  if (prep_write(stream) == EOF)
+    return EOF;
+
+  WriteCtx ctx = {stream};
+  if (stream->status & FBIN)
+    write_to_buffer(c, &ctx);
+  else
+    __from_ascii(c, &ctx, write_to_buffer);
+
+  if (ctx.error)
+    return EOF;
+
+  if (!stream->bufidx)
+    return c;
+
+  if (((stream->status & _IOLBF) && ((char)c == '\n')) /* _IOLBF */
+      || (stream->status & _IONBF)                     /* _IONBF */
+  ) {
+    /* unbuffered stream or end-of-line. */
+    if (flush_buffer(stream) == EOF)
+      return EOF;
+  }
+
+  return c;
+}
+
+int fputs(const char *__restrict__ s, FILE *__restrict__ stream) {
+  __stdio_not_yet_implemented();
+}
+
+int getc(FILE *stream) { __stdio_not_yet_implemented(); }
+
+int getchar(void) { __stdio_not_yet_implemented(); }
+
+int putchar(int c) { return putc(c, stdout); }
+
+int puts(const char *s) { __stdio_not_yet_implemented(); }
+
+// Direct input/output functions
+
+size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
+             FILE *__restrict__ stream) {
+  __stdio_not_yet_implemented();
+}
+
 size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
               FILE *restrict stream) {
   size_t last_newline_idx = 0;
   size_t nmemb_i;
 
-  if (prepwrite(stream) == EOF)
+  if (prep_write(stream) == EOF)
     return 0;
 
   WriteCtx ctx = {stream};

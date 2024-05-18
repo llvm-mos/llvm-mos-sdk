@@ -40,7 +40,7 @@ __attribute__((weak)) int getchar(void) {
   return __to_ascii(NULL, getchar_wrapper);
 }
 
-__attribute__((weak)) int putc(int c, FILE *stream) { return fputc(c, stream); }
+int putc(int c, FILE *stream) { return fputc(c, stream); }
 
 static void putchar_wrapper(char c, void *ctx) { __putchar(c); }
 __attribute__((weak)) int putchar(int c) {

@@ -70,7 +70,7 @@ var searchData=
   ['neo_5ffile_5fstore_2112',['neo_file_store',['../file_8h.html#aa1e65285c1fb17ac97fa2b537d567a05',1,'file.h']]],
   ['neo_5ffile_5fstore_5fp_2113',['neo_file_store_p',['../file_8h.html#a3adebc22e945bc8d905bdb84dbc32461',1,'file.h']]],
   ['neo_5ffile_5ftell_2114',['neo_file_tell',['../file_8h.html#a5a52cab5af7699a4c4bc2f102a5e5ccd',1,'file.h']]],
-  ['neo_5ffile_5fwrite_2115',['NEO_FILE_WRITE',['../file_8h.html#a3e424c712cc516e19dc5d3f76a026f2ca248e0c7ac87230c361fe7f6c4b1d1def',1,'NEO_FILE_WRITE():&#160;file.h'],['../file_8h.html#a068f308784345e444c4e61d5e4fc7c50',1,'neo_file_write(uint8_t channel, const void *src, uint16_t len):&#160;file.h']]],
+  ['neo_5ffile_5fwrite_2115',['neo_file_write',['../file_8h.html#a068f308784345e444c4e61d5e4fc7c50',1,'neo_file_write(uint8_t channel, const void *src, uint16_t len):&#160;file.h'],['../file_8h.html#a3e424c712cc516e19dc5d3f76a026f2ca248e0c7ac87230c361fe7f6c4b1d1def',1,'NEO_FILE_WRITE():&#160;file.h']]],
   ['neo_5fgraphics_5fdraw_5fellipse_2116',['neo_graphics_draw_ellipse',['../graphics_8h.html#a73eabe25fd4eae04fe79332d30929eab',1,'graphics.h']]],
   ['neo_5fgraphics_5fdraw_5fimage_2117',['neo_graphics_draw_image',['../graphics_8h.html#a5ae6b66784029e2732dfbf89751440ba',1,'graphics.h']]],
   ['neo_5fgraphics_5fdraw_5fline_2118',['neo_graphics_draw_line',['../graphics_8h.html#a8c7a8855df94581f90c627cd67759f9a',1,'graphics.h']]],

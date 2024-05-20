@@ -254,7 +254,11 @@ static int flush_buffer(FILE *stream) {
 
 // Removes the given stream from the internal list of open files.
 void remove_stream(FILE *stream) {
-  for (FILE *f; f; f = f->next) {
+  if (filelist == stream) {
+    filelist = stream->next;
+    return;
+  }
+  for (FILE *f = filelist;; f = f->next) {
     if (f->next == stream) {
       f->next = f->next->next;
       break;

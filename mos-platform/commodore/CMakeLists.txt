@@ -61,6 +61,7 @@ add_platform_library(commodore-c
   filevars.s
   open.s
   oserror.s
+  read.s
   rwcommon.s
   scratch.s
   sysremove.s

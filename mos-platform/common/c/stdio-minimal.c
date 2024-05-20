@@ -33,7 +33,7 @@ __attribute__((weak)) int fputs(const char *__restrict__ s,
   return 0;
 }
 
-__attribute__((weak)) int getc(FILE *stream) { return fgetc(stream); }
+int getc(FILE *stream) { return fgetc(stream); }
 
 static int getchar_wrapper(void *ctx) { return __getchar(); }
 __attribute__((weak)) int getchar(void) {

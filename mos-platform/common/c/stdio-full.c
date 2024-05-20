@@ -543,7 +543,75 @@ int setvbuf(FILE *restrict stream, char *restrict buf, int mode, size_t size) {
 // Produce a link error if these are used.
 __attribute__((noreturn)) void __stdio_not_yet_implemented(void);
 
-int fgetc(FILE *stream) { __stdio_not_yet_implemented(); }
+static int prep_read(FILE *stream) {
+  if ((stream->bufidx > stream->bufend) ||
+      (stream->status &
+       (FWRITE | FAPPEND | ERRORFLAG | WIDESTREAM | EOFFLAG)) ||
+      !(stream->status & (FREAD | FRW))) {
+    /* Function called on illegal (e.g. output) stream. */
+    errno = EBADF;
+    stream->status |= ERRORFLAG;
+    return EOF;
+  }
+
+  stream->status |= FREAD | BYTESTREAM;
+
+  return 0;
+}
+
+static int fill_buffer(FILE *stream) {
+  /* No need to handle buffers > INT_MAX, as PDCLib doesn't allow them */
+  int rc = read(stream->handle, stream->buffer, stream->bufsize);
+
+  if (rc > 0) {
+    /* Reading successful. */
+    stream->pos += rc;
+    stream->bufend = rc;
+    stream->bufidx = 0;
+    return 0;
+  }
+
+  if (rc < 0) {
+    /* Flag the stream */
+    stream->status |= ERRORFLAG;
+    return EOF;
+  }
+
+  /* End-of-File */
+  stream->status |= EOFFLAG;
+  return EOF;
+}
+
+typedef struct {
+  FILE *stream;
+  bool error;
+} ReadCtx;
+
+__attribute__((always_inline)) static int read_from_buffer(void *vctx) {
+  ReadCtx *ctx = vctx;
+  if (ctx->error)
+    return 0;
+  if (ctx->stream->bufidx == ctx->stream->bufend) {
+    if (fill_buffer(ctx->stream) == EOF) {
+      ctx->error = true;
+      return 0;
+    }
+  }
+  return ctx->stream->buffer[ctx->stream->bufidx++];
+}
+
+int fgetc(FILE *stream) {
+  if (prep_read(stream) == EOF)
+    return EOF;
+  if (stream->ungetc_buf_full) {
+    stream->ungetc_buf_full = false;
+    return stream->ungetc_buf;
+  }
+  ReadCtx ctx = {stream};
+  char c = stream->status & FBIN ? read_from_buffer(stream)
+                                 : __to_ascii(&ctx, read_from_buffer);
+  return ctx.error ? EOF : c;
+}
 
 char *fgets(char *__restrict__ s, int n, FILE *__restrict__ stream) {
   __stdio_not_yet_implemented();
@@ -568,7 +636,7 @@ typedef struct {
   bool error;
 } WriteCtx;
 
-__attribute((always_inline)) static void write_to_buffer(char c, void *vctx) {
+__attribute__((always_inline)) static void write_to_buffer(char c, void *vctx) {
   WriteCtx *ctx = vctx;
   if (ctx->error)
     return;
@@ -609,9 +677,7 @@ int fputs(const char *__restrict__ s, FILE *__restrict__ stream) {
   __stdio_not_yet_implemented();
 }
 
-int getc(FILE *stream) { __stdio_not_yet_implemented(); }
-
-int getchar(void) { __stdio_not_yet_implemented(); }
+int getchar(void) { return getc(stdin); }
 
 int putchar(int c) { return putc(c, stdout); }
 

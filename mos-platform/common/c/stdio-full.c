@@ -635,33 +635,25 @@ static int prep_write(FILE *stream) {
   return 0;
 }
 
-typedef struct {
-  FILE *stream;
-  bool error;
-} WriteCtx;
-
-__attribute__((always_inline)) static void write_to_buffer(char c, void *vctx) {
-  WriteCtx *ctx = vctx;
-  if (ctx->error)
-    return;
-  ctx->stream->buffer[ctx->stream->bufidx++] = c;
-  if (ctx->stream->bufidx == ctx->stream->bufsize &&
-      flush_buffer(ctx->stream) == EOF)
-    ctx->error = true;
+__attribute__((always_inline)) static int write_to_buffer(char c, void *ctx) {
+  FILE *stream = ctx;
+  stream->buffer[stream->bufidx++] = c;
+  if (stream->bufidx == stream->bufsize)
+    if (flush_buffer(stream) == EOF)
+      return EOF;
+  return 0;
 }
 
 int fputc(int c, FILE *stream) {
   if (prep_write(stream) == EOF)
     return EOF;
 
-  WriteCtx ctx = {stream};
-  if (stream->status & FBIN)
-    write_to_buffer(c, &ctx);
-  else
-    __from_ascii(c, &ctx, write_to_buffer);
-
-  if (ctx.error)
+  if (stream->status & FBIN) {
+    if (write_to_buffer(c, stream) == EOF)
+      return EOF;
+  } else if (__from_ascii(c, stream, write_to_buffer) == EOF) {
     return EOF;
+  }
 
   if (!stream->bufidx)
     return c;
@@ -702,24 +694,19 @@ size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
   if (prep_write(stream) == EOF)
     return 0;
 
-  WriteCtx ctx = {stream};
-
   for (nmemb_i = 0; nmemb_i < nmemb; ++nmemb_i) {
     for (size_t size_i = 0; size_i < size; ++size_i) {
       char c = ((char *)ptr)[nmemb_i * size + size_i];
-      if (stream->status & FBIN)
-        write_to_buffer(c, &ctx);
-      else
-        __from_ascii(c, &ctx, write_to_buffer);
+      if (stream->status & FBIN) {
+        if (write_to_buffer(c, stream) == EOF)
+          return nmemb_i;
+      } else if (__from_ascii(c, stream, write_to_buffer) == EOF) {
+        return nmemb_i;
+      }
       if (!stream->bufidx)
         last_newline_idx = 0;
       else if (c == '\n')
         last_newline_idx = stream->bufidx;
-
-      if (ctx.error) {
-        /* Returning number of objects completely buffered */
-        return nmemb_i;
-      }
     }
   }
 

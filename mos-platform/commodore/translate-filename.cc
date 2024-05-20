@@ -7,6 +7,7 @@ extern "C" const char *_translate_filename(const char *filename) {
     __from_ascii(*s, &bptr, [](char c, void *ctx) {
       char *&bptr = *(char **)ctx;
       *bptr++ = c;
+      return 0;
     });
   *bptr = '\0';
   return buf;

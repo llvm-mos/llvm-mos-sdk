@@ -121,12 +121,12 @@ void perror(const char *s);
 // Platform-specific backend
 
 // Write a sequence of characters in the target's character set that
-// correspond to the given ASCII character.
-__attribute__((always_inline)) void
-__from_ascii(char c, void *ctx, void (*write)(char c, void *ctx));
+// correspond to the given ASCII character. Returns EOF on write failure.
+__attribute__((always_inline)) int
+__from_ascii(char c, void *ctx, int (*write)(char c, void *ctx));
 
 // Read a sequence of characters in the target's character set and return the
-// corrsponding ASCII character.
+// corrsponding ASCII character. Returns EOF on read failure.
 __attribute__((always_inline)) int __to_ascii(void *ctx,
                                               int (*read)(void *ctx));
 

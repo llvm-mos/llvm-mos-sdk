@@ -65,12 +65,12 @@ static FILE serr = {.handle = 2,
 static FILE sout = {.handle = 1,
                     .buffer = sout_buf,
                     .bufsize = sizeof(sout_buf),
-                    .status = _IONBF | FWRITE,
+                    .status = _IOLBF | FWRITE,
                     .next = &serr};
 static FILE sin = {.handle = 0,
                    .buffer = sin_buf,
                    .bufsize = sizeof(sin_buf),
-                   .status = _IONBF | FREAD,
+                   .status = _IOLBF | FREAD,
                    .next = &sout};
 
 FILE *stdin = &sin;

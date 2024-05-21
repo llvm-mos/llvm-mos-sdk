@@ -774,8 +774,10 @@ size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
 
 // File positioning functions
 
-int fgetpos(FILE *__restrict__ stream, fpos_t *__restrict__ pos) {
-  __stdio_not_yet_implemented();
+int fgetpos(FILE *restrict stream, fpos_t *restrict pos) {
+  *pos = (stream->pos - (((int)stream->bufend - (int)stream->bufidx) +
+                         (int)stream->ungetc_buf_full));
+  return 0;
 }
 
 int fseek(FILE *stream, long int offset, int whence) {

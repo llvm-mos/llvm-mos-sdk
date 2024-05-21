@@ -134,7 +134,7 @@ __attribute__((weak)) int feof(FILE *stream) { return 0; }
 
 __attribute__((weak)) int ferror(FILE *stream) { return 0; }
 
-__attribute__((weak)) void perror(const char *s) {
+void perror(const char *s) {
   if (s && *s) {
     fputs(s, stderr);
     putc(':', stderr);

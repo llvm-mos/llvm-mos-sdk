@@ -880,5 +880,3 @@ void clearerr(FILE *stream) { stream->status &= ~(ERRORFLAG | EOFFLAG); }
 int feof(FILE *stream) { return stream->status & EOFFLAG; }
 
 int ferror(FILE *stream) { return stream->status & ERRORFLAG; }
-
-void perror(const char *s) { __stdio_not_yet_implemented(); }

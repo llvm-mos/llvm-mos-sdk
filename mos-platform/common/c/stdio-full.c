@@ -875,7 +875,7 @@ void rewind(FILE *stream) {
 
 // Error-handling functions
 
-void clearerr(FILE *stream) { __stdio_not_yet_implemented(); }
+void clearerr(FILE *stream) { stream->status &= ~(ERRORFLAG | EOFFLAG); }
 
 int feof(FILE *stream) { return stream->status & EOFFLAG; }
 

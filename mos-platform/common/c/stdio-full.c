@@ -684,8 +684,27 @@ int fputc(int c, FILE *stream) {
   return c;
 }
 
-int fputs(const char *__restrict__ s, FILE *__restrict__ stream) {
-  __stdio_not_yet_implemented();
+int fputs(const char *restrict s, FILE *restrict stream) {
+  if (prep_write(stream) == EOF)
+    return EOF;
+
+  for (; *s; ++s) {
+    if (stream->status & FBIN) {
+      if (write_to_buffer(*s, stream) == EOF)
+        return EOF;
+    } else if (__from_ascii(*s, stream, write_to_buffer) == EOF) {
+      return EOF;
+    }
+    if ((stream->status & _IOLBF) && *s == '\n')
+      if (flush_buffer(stream) == EOF)
+        return EOF;
+  }
+
+  if (stream->status & _IONBF)
+    if (flush_buffer(stream) == EOF)
+      return EOF;
+
+  return 0;
 }
 
 int getchar(void) { return getc(stdin); }

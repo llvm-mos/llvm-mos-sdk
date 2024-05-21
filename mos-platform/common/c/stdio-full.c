@@ -829,7 +829,14 @@ int fseek(FILE *stream, long offset, int whence) {
   return 0;
 }
 
-int fsetpos(FILE *stream, const fpos_t *pos) { __stdio_not_yet_implemented(); }
+int fsetpos(FILE *stream, const fpos_t *pos) {
+  if (stream->status & FWRITE)
+    if (flush_buffer(stream) == EOF)
+      return EOF;
+  if (seek(stream, *pos, SEEK_SET) == EOF)
+    return EOF;
+  return 0;
+}
 
 long int ftell(FILE *stream) { __stdio_not_yet_implemented(); }
 

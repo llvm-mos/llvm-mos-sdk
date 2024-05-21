@@ -32,10 +32,10 @@ namespace {
 int get(Status *status) {
   int rc = EOF;
 
-  if (status->s != NULL)
-    rc = (*status->s == '\0') ? EOF : (unsigned char)*((status->s)++);
+  if (status->stream)
+    rc = getc(status->stream);
   else
-    rc = getchar();
+    rc = (*status->s == '\0') ? EOF : (unsigned char)*((status->s)++);
 
   if (rc != EOF) {
     status->i++;
@@ -49,10 +49,10 @@ int get(Status *status) {
    whatever is used for input.
 */
 void unget(int c, Status *status) {
-  if (status->s != NULL)
-    --(status->s);
+  if (status->stream)
+    ungetc(c, status->stream); /* TODO: Error? */
   else
-    ungetc(c, stdin); /* TODO: Error? */
+    --(status->s);
 
   status->i--;
   status->current--;
@@ -538,6 +538,7 @@ int vfscanf(FILE *__restrict__ stream, const char *__restrict__ format,
   status.s = NULL;
   status.width = 0;
   status.prec = EOF;
+  status.stream = stream;
 
   va_copy(status.arg, arg);
 
@@ -605,6 +606,7 @@ int vsscanf(const char *__restrict__ s, const char *__restrict__ format,
   status.s = (char *)s;
   status.width = 0;
   status.prec = EOF;
+  status.stream = NULL;
   va_copy(status.arg, arg);
 
   while (*format != '\0') {

@@ -722,9 +722,24 @@ int ungetc(int c, FILE *stream) {
 
 // Direct input/output functions
 
-size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
-             FILE *__restrict__ stream) {
-  __stdio_not_yet_implemented();
+size_t fread(void *restrict ptr, size_t size, size_t nmemb,
+             FILE *restrict stream) {
+  char *dest = (char *)ptr;
+  if (prep_read(stream) == EOF)
+    return 0;
+  size_t nmemb_i;
+  for (nmemb_i = 0; nmemb_i < nmemb; ++nmemb_i) {
+    /* TODO: For better performance, move from stream buffer
+       to destination block-wise, not byte-wise.
+    */
+    for (size_t size_i = 0; size_i < size; ++size_i) {
+      int c = read_char(stream);
+      if (c == EOF)
+        return nmemb_i;
+      dest[nmemb_i * size + size_i] = (char)c;
+    }
+  }
+  return nmemb_i;
 }
 
 size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,

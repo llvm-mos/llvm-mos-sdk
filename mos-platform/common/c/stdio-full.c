@@ -586,39 +586,54 @@ static int fill_buffer(FILE *stream) {
   return EOF;
 }
 
-typedef struct {
-  FILE *stream;
-  bool error;
-} ReadCtx;
+__attribute__((always_inline)) static int read_from_buffer(void *ctx) {
+  FILE *stream = ctx;
+  if (stream->bufidx == stream->bufend)
+    if (fill_buffer(stream) == EOF)
+      return EOF;
+  return stream->buffer[stream->bufidx++];
+}
 
-__attribute__((always_inline)) static int read_from_buffer(void *vctx) {
-  ReadCtx *ctx = vctx;
-  if (ctx->error)
-    return 0;
-  if (ctx->stream->bufidx == ctx->stream->bufend) {
-    if (fill_buffer(ctx->stream) == EOF) {
-      ctx->error = true;
-      return 0;
-    }
+static int fgetc_impl(FILE *stream) {
+  if (stream->ungetc_buf_full) {
+    stream->ungetc_buf_full = false;
+    return stream->ungetc_buf;
   }
-  return ctx->stream->buffer[ctx->stream->bufidx++];
+  return stream->status & FBIN ? read_from_buffer(stream)
+                               : __to_ascii(stream, read_from_buffer);
 }
 
 int fgetc(FILE *stream) {
   if (prep_read(stream) == EOF)
     return EOF;
-  if (stream->ungetc_buf_full) {
-    stream->ungetc_buf_full = false;
-    return stream->ungetc_buf;
-  }
-  ReadCtx ctx = {stream};
-  char c = stream->status & FBIN ? read_from_buffer(stream)
-                                 : __to_ascii(&ctx, read_from_buffer);
-  return ctx.error ? EOF : c;
+  return fgetc_impl(stream);
 }
 
-char *fgets(char *__restrict__ s, int n, FILE *__restrict__ stream) {
-  __stdio_not_yet_implemented();
+char *fgets(char *restrict s, int size, FILE *restrict stream) {
+  char *dest = s;
+  if (size == 0)
+    return NULL;
+  if (prep_read(stream) == EOF)
+    return NULL;
+
+  for (; size > 1; --size) {
+    int c = fgetc_impl(stream);
+    if (c == EOF) {
+      // Don't append '\0' if no characters have been read; just return NULL.
+      if (dest == s)
+        return NULL;
+      else
+        break;
+    }
+    *dest++ = (char)c;
+    if (c == '\n')
+      break;
+  }
+
+  if (ferror(stream))
+    return NULL;
+  *dest = '\0';
+  return s;
 }
 
 static int prep_write(FILE *stream) {

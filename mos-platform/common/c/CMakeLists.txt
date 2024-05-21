@@ -61,9 +61,6 @@ add_platform_library(common-c
   util.c
   varint.cc
 
-  # Provides a ungetc-aware getchar that is bigger than the one in stdio.c
-  ungetc.c
-
   # cc65 low level I/O
   _directerrno.s
   _mappederrno.s

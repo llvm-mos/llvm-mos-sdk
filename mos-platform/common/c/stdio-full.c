@@ -679,6 +679,14 @@ int putchar(int c) { return putc(c, stdout); }
 
 int puts(const char *s) { __stdio_not_yet_implemented(); }
 
+int ungetc(int c, FILE *stream) {
+  if (c == EOF || stream->ungetc_buf_full)
+    return -1;
+  stream->ungetc_buf = (char)c;
+  stream->ungetc_buf_full = true;
+  return c;
+}
+
 // Direct input/output functions
 
 size_t fread(void *__restrict ptr, size_t size, size_t nmemb,

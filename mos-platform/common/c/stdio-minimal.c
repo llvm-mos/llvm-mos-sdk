@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include <errno.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 
@@ -35,8 +36,15 @@ __attribute__((weak)) int fputs(const char *__restrict__ s,
 
 int getc(FILE *stream) { return fgetc(stream); }
 
+static bool ungetc_buffer;
+static char ungetc_buffer_full;
+
 static int getchar_wrapper(void *ctx) { return __getchar(); }
 __attribute__((weak)) int getchar(void) {
+  if (ungetc_buffer_full) {
+    ungetc_buffer_full = false;
+    return ungetc_buffer;
+  }
   return __to_ascii(NULL, getchar_wrapper);
 }
 
@@ -56,6 +64,14 @@ __attribute__((weak)) int puts(const char *s) {
     putchar(*s);
   putchar('\n');
   return 0;
+}
+
+__attribute__((weak)) int ungetc(int c, FILE *stream) {
+  if (c == EOF || ungetc_buffer_full)
+    return EOF;
+  ungetc_buffer_full = true;
+  ungetc_buffer = c;
+  return c;
 }
 
 // Direct input/output functions

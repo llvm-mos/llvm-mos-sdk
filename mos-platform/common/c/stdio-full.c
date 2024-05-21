@@ -711,7 +711,33 @@ int getchar(void) { return getc(stdin); }
 
 int putchar(int c) { return putc(c, stdout); }
 
-int puts(const char *s) { __stdio_not_yet_implemented(); }
+int puts(const char *s) {
+  if (prep_write(stdout) == EOF)
+    return EOF;
+
+  for (; *s; ++s) {
+    if (stdout->status & FBIN) {
+      if (write_to_buffer(*s, stdout) == EOF)
+        return EOF;
+    } else if (__from_ascii(*s, stdout, write_to_buffer) == EOF) {
+      return EOF;
+    }
+    if ((stdout->status & _IOLBF) && *s == '\n')
+      if (flush_buffer(stdout) == EOF)
+        return EOF;
+  }
+
+  if (stdout->status & FBIN) {
+    if (write_to_buffer('\n', stdout) == EOF)
+      return EOF;
+  } else if (__from_ascii('\n', stdout, write_to_buffer) == EOF) {
+    return EOF;
+  }
+
+  if (stdout->status & (_IOLBF | _IONBF))
+    return flush_buffer(stdout);
+  return 0;
+}
 
 int ungetc(int c, FILE *stream) {
   if (c == EOF || stream->ungetc_buf_full)

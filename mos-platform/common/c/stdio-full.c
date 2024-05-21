@@ -776,8 +776,8 @@ void rewind(FILE *stream) { __stdio_not_yet_implemented(); }
 
 void clearerr(FILE *stream) { __stdio_not_yet_implemented(); }
 
-int feof(FILE *stream) { __stdio_not_yet_implemented(); }
+int feof(FILE *stream) { return stream->status & EOFFLAG; }
 
-int ferror(FILE *stream) { __stdio_not_yet_implemented(); }
+int ferror(FILE *stream) { return stream->status & ERRORFLAG; }
 
 void perror(const char *s) { __stdio_not_yet_implemented(); }

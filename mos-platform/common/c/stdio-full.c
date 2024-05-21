@@ -1,4 +1,3 @@
-
 // Copyright 2024 LLVM-MOS Project
 // Licensed under the Apache License, Version 2.0 with LLVM Exceptions.
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
@@ -780,8 +779,54 @@ int fgetpos(FILE *restrict stream, fpos_t *restrict pos) {
   return 0;
 }
 
-int fseek(FILE *stream, long int offset, int whence) {
-  __stdio_not_yet_implemented();
+static long seek(FILE *stream, long offset, int whence) {
+  long rc;
+
+  switch (whence) {
+  case SEEK_SET:
+  case SEEK_CUR:
+  case SEEK_END:
+    /* EMPTY - OK */
+    break;
+
+  default:
+    errno = EINVAL;
+    return EOF;
+    break;
+  }
+
+  rc = lseek(stream->handle, offset, whence);
+
+  if (rc != EOF) {
+    stream->ungetc_buf_full = false;
+    stream->bufidx = 0;
+    stream->bufend = 0;
+    stream->pos = rc;
+    return rc;
+  }
+
+  return EOF;
+}
+
+int fseek(FILE *stream, long offset, int whence) {
+  int rc;
+
+  if (stream->status & FWRITE)
+    if (flush_buffer(stream) == EOF)
+      return EOF;
+
+  stream->status &= ~EOFFLAG;
+
+  if (stream->status & FRW)
+    stream->status &= ~(FREAD | FWRITE);
+
+  if (whence == SEEK_CUR)
+    offset -= (((int)stream->bufend - (int)stream->bufidx) +
+               (int)stream->ungetc_buf_full);
+
+  if (seek(stream, offset, whence) == EOF)
+    return EOF;
+  return 0;
 }
 
 int fsetpos(FILE *stream, const fpos_t *pos) { __stdio_not_yet_implemented(); }

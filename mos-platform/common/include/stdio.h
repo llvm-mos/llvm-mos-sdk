@@ -28,7 +28,7 @@ typedef struct _FILE FILE;
 #define _IOLBF (1u << 1)
 #define _IONBF (1u << 2)
 
-typedef uint64_t fpos_t;
+typedef uint32_t fpos_t;
 
 extern FILE *stdin;
 extern FILE *stdout;

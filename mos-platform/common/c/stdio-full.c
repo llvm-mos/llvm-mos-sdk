@@ -586,7 +586,7 @@ static int fill_buffer(FILE *stream) {
   return EOF;
 }
 
-__attribute__((always_inline)) static int read_from_buffer(void *ctx) {
+__attribute__((always_inline)) static int read_byte(void *ctx) {
   FILE *stream = ctx;
   if (stream->bufidx == stream->bufend)
     if (fill_buffer(stream) == EOF)
@@ -594,19 +594,19 @@ __attribute__((always_inline)) static int read_from_buffer(void *ctx) {
   return stream->buffer[stream->bufidx++];
 }
 
-static int fgetc_impl(FILE *stream) {
+static int read_char(FILE *stream) {
   if (stream->ungetc_buf_full) {
     stream->ungetc_buf_full = false;
     return stream->ungetc_buf;
   }
-  return stream->status & FBIN ? read_from_buffer(stream)
-                               : __to_ascii(stream, read_from_buffer);
+  return stream->status & FBIN ? read_byte(stream)
+                               : __to_ascii(stream, read_byte);
 }
 
 int fgetc(FILE *stream) {
   if (prep_read(stream) == EOF)
     return EOF;
-  return fgetc_impl(stream);
+  return read_char(stream);
 }
 
 char *fgets(char *restrict s, int size, FILE *restrict stream) {
@@ -617,7 +617,7 @@ char *fgets(char *restrict s, int size, FILE *restrict stream) {
     return NULL;
 
   for (; size > 1; --size) {
-    int c = fgetc_impl(stream);
+    int c = read_char(stream);
     if (c == EOF) {
       // Don't append '\0' if no characters have been read; just return NULL.
       if (dest == s)
@@ -650,7 +650,7 @@ static int prep_write(FILE *stream) {
   return 0;
 }
 
-__attribute__((always_inline)) static int write_to_buffer(char c, void *ctx) {
+__attribute__((always_inline)) static int write_byte(char c, void *ctx) {
   FILE *stream = ctx;
   stream->buffer[stream->bufidx++] = c;
   if (stream->bufidx == stream->bufsize)
@@ -659,51 +659,39 @@ __attribute__((always_inline)) static int write_to_buffer(char c, void *ctx) {
   return 0;
 }
 
+static int write_char(char c, FILE *stream) {
+  if (stream->status & FBIN) {
+    if (write_byte(c, stream) == EOF)
+      return EOF;
+  } else if (__from_ascii(c, stream, write_byte) == EOF) {
+    return EOF;
+  }
+  if ((stream->status & _IOLBF) && c == '\n')
+    if (flush_buffer(stream) == EOF)
+      return EOF;
+  return 0;
+}
+
 int fputc(int c, FILE *stream) {
   if (prep_write(stream) == EOF)
     return EOF;
-
-  if (stream->status & FBIN) {
-    if (write_to_buffer(c, stream) == EOF)
-      return EOF;
-  } else if (__from_ascii(c, stream, write_to_buffer) == EOF) {
+  if (write_char(c, stream) == EOF)
     return EOF;
-  }
-
-  if (!stream->bufidx)
-    return c;
-
-  if (((stream->status & _IOLBF) && ((char)c == '\n')) /* _IOLBF */
-      || (stream->status & _IONBF)                     /* _IONBF */
-  ) {
-    /* unbuffered stream or end-of-line. */
+  if (stream->status & _IONBF)
     if (flush_buffer(stream) == EOF)
       return EOF;
-  }
-
   return c;
 }
 
 int fputs(const char *restrict s, FILE *restrict stream) {
   if (prep_write(stream) == EOF)
     return EOF;
-
-  for (; *s; ++s) {
-    if (stream->status & FBIN) {
-      if (write_to_buffer(*s, stream) == EOF)
-        return EOF;
-    } else if (__from_ascii(*s, stream, write_to_buffer) == EOF) {
+  for (; *s; ++s)
+    if (write_char(*s, stream) == EOF)
       return EOF;
-    }
-    if ((stream->status & _IOLBF) && *s == '\n')
-      if (flush_buffer(stream) == EOF)
-        return EOF;
-  }
-
   if (stream->status & _IONBF)
     if (flush_buffer(stream) == EOF)
       return EOF;
-
   return 0;
 }
 
@@ -714,27 +702,12 @@ int putchar(int c) { return putc(c, stdout); }
 int puts(const char *s) {
   if (prep_write(stdout) == EOF)
     return EOF;
-
-  for (; *s; ++s) {
-    if (stdout->status & FBIN) {
-      if (write_to_buffer(*s, stdout) == EOF)
-        return EOF;
-    } else if (__from_ascii(*s, stdout, write_to_buffer) == EOF) {
+  for (; *s; ++s)
+    if (write_char(*s, stdout) == EOF)
       return EOF;
-    }
-    if ((stdout->status & _IOLBF) && *s == '\n')
-      if (flush_buffer(stdout) == EOF)
-        return EOF;
-  }
-
-  if (stdout->status & FBIN) {
-    if (write_to_buffer('\n', stdout) == EOF)
-      return EOF;
-  } else if (__from_ascii('\n', stdout, write_to_buffer) == EOF) {
+  if (write_char('\n', stdout) == EOF)
     return EOF;
-  }
-
-  if (stdout->status & (_IOLBF | _IONBF))
+  if (stdout->status & _IONBF)
     return flush_buffer(stdout);
   return 0;
 }
@@ -766,9 +739,9 @@ size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
     for (size_t size_i = 0; size_i < size; ++size_i) {
       char c = ((char *)ptr)[nmemb_i * size + size_i];
       if (stream->status & FBIN) {
-        if (write_to_buffer(c, stream) == EOF)
+        if (write_byte(c, stream) == EOF)
           return nmemb_i;
-      } else if (__from_ascii(c, stream, write_to_buffer) == EOF) {
+      } else if (__from_ascii(c, stream, write_byte) == EOF) {
         return nmemb_i;
       }
       if (!stream->bufidx)

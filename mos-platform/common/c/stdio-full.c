@@ -729,7 +729,6 @@ size_t fread(void *__restrict ptr, size_t size, size_t nmemb,
 
 size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
               FILE *restrict stream) {
-  size_t last_newline_idx = 0;
   size_t nmemb_i;
 
   if (prep_write(stream) == EOF)
@@ -738,24 +737,12 @@ size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
   for (nmemb_i = 0; nmemb_i < nmemb; ++nmemb_i) {
     for (size_t size_i = 0; size_i < size; ++size_i) {
       char c = ((char *)ptr)[nmemb_i * size + size_i];
-      if (stream->status & FBIN) {
-        if (write_byte(c, stream) == EOF)
-          return nmemb_i;
-      } else if (__from_ascii(c, stream, write_byte) == EOF) {
+      if (write_char(c, stream) == EOF)
         return nmemb_i;
-      }
-      if (!stream->bufidx)
-        last_newline_idx = 0;
-      else if (c == '\n')
-        last_newline_idx = stream->bufidx;
     }
   }
 
-  /* Fully-buffered streams are OK. Non-buffered streams must be flushed,
-     line-buffered streams only if there's a newline in the buffer.
-  */
-  switch (stream->status & (_IONBF | _IOLBF)) {
-  case _IONBF:
+  if (stream->status & _IONBF) {
     if (flush_buffer(stream) == EOF) {
       /* We are in a pinch here. We have an error, which requires a
          return value < nmemb. On the other hand, all objects have
@@ -766,26 +753,7 @@ size_t fwrite(const void *restrict ptr, size_t size, size_t nmemb,
       */
       return nmemb_i - 1;
     }
-
-    break;
-
-  case _IOLBF:
-    if (last_newline_idx > 0) {
-      size_t bufidx = stream->bufidx;
-      stream->bufidx = last_newline_idx;
-
-      if (flush_buffer(stream) == EOF) {
-        /* See comment above. */
-        stream->bufidx = bufidx;
-        return nmemb_i - 1;
-      }
-
-      stream->bufidx = bufidx - last_newline_idx;
-      memmove(stream->buffer, stream->buffer + last_newline_idx,
-              stream->bufidx);
-    }
   }
-
   return nmemb_i;
 }
 

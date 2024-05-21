@@ -131,8 +131,8 @@ Macros</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a175abb747ea3b78aa8da87355dcec473"><td class="memItemLeft" align="right" valign="top">typedef struct _FILE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a></td></tr>
 <tr class="separator:a175abb747ea3b78aa8da87355dcec473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6848528c8f78a5c9e399fa881c5a893f"><td class="memItemLeft" align="right" valign="top">typedef uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a></td></tr>
-<tr class="separator:a6848528c8f78a5c9e399fa881c5a893f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d8024575832cf578e21406fbb1a7dc2"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a8d8024575832cf578e21406fbb1a7dc2">fpos_t</a></td></tr>
+<tr class="separator:a8d8024575832cf578e21406fbb1a7dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -208,11 +208,11 @@ Functions</h2></td></tr>
 <tr class="separator:a56ad21113b20c2163c3d1af1f8e28621"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a849f7b752ccd18ea2d5bdae42b11f48d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a849f7b752ccd18ea2d5bdae42b11f48d">fwrite</a> (const void *__restrict ptr, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> <a class="el" href="neslib_8h.html#a245260f6f74972558f61b85227df5aae">size</a>, <a class="el" href="unistd_8h.html#a028b7cbca0d37bbc9bc219370525227f">size_t</a> nmemb, <a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream)</td></tr>
 <tr class="separator:a849f7b752ccd18ea2d5bdae42b11f48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4700e47684c5e43000501cff7eb2ca8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a4700e47684c5e43000501cff7eb2ca8f">fgetpos</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, <a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a> *__restrict__ pos)</td></tr>
+<tr class="memitem:a4700e47684c5e43000501cff7eb2ca8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a4700e47684c5e43000501cff7eb2ca8f">fgetpos</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *__restrict__ stream, <a class="el" href="stdio_8h.html#a8d8024575832cf578e21406fbb1a7dc2">fpos_t</a> *__restrict__ pos)</td></tr>
 <tr class="separator:a4700e47684c5e43000501cff7eb2ca8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a800ee8381f5cce368abe5df835aa107c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a800ee8381f5cce368abe5df835aa107c">fseek</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream, long int offset, int whence)</td></tr>
 <tr class="separator:a800ee8381f5cce368abe5df835aa107c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76eb887fc5fbc842c2fb977dd926848c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a76eb887fc5fbc842c2fb977dd926848c">fsetpos</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream, const <a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a> *pos)</td></tr>
+<tr class="memitem:a76eb887fc5fbc842c2fb977dd926848c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a76eb887fc5fbc842c2fb977dd926848c">fsetpos</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream, const <a class="el" href="stdio_8h.html#a8d8024575832cf578e21406fbb1a7dc2">fpos_t</a> *pos)</td></tr>
 <tr class="separator:a76eb887fc5fbc842c2fb977dd926848c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6273f71322efc95f429d9e990a8ef8ae"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stdio_8h.html#a6273f71322efc95f429d9e990a8ef8ae">ftell</a> (<a class="el" href="stdio_8h.html#a175abb747ea3b78aa8da87355dcec473">FILE</a> *stream)</td></tr>
 <tr class="separator:a6273f71322efc95f429d9e990a8ef8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -412,14 +412,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a6848528c8f78a5c9e399fa881c5a893f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6848528c8f78a5c9e399fa881c5a893f">&#9670;&nbsp;</a></span>fpos_t</h2>
+<a id="a8d8024575832cf578e21406fbb1a7dc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d8024575832cf578e21406fbb1a7dc2">&#9670;&nbsp;</a></span>fpos_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef uint64_t <a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a></td>
+          <td class="memname">typedef uint32_t <a class="el" href="stdio_8h.html#a8d8024575832cf578e21406fbb1a7dc2">fpos_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -550,7 +550,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a> *__restrict__&#160;</td>
+          <td class="paramtype"><a class="el" href="stdio_8h.html#a8d8024575832cf578e21406fbb1a7dc2">fpos_t</a> *__restrict__&#160;</td>
           <td class="paramname"><em>pos</em>&#160;</td>
         </tr>
         <tr>
@@ -872,7 +872,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="stdio_8h.html#a6848528c8f78a5c9e399fa881c5a893f">fpos_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="stdio_8h.html#a8d8024575832cf578e21406fbb1a7dc2">fpos_t</a> *&#160;</td>
           <td class="paramname"><em>pos</em>&#160;</td>
         </tr>
         <tr>

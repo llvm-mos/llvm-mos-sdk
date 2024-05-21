@@ -868,7 +868,10 @@ long int ftell(FILE *stream) {
                          (int)stream->ungetc_buf_full));
 }
 
-void rewind(FILE *stream) { __stdio_not_yet_implemented(); }
+void rewind(FILE *stream) {
+  stream->status &= ~ERRORFLAG;
+  fseek(stream, 0L, SEEK_SET);
+}
 
 // Error-handling functions
 

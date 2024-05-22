@@ -7,8 +7,8 @@
 
 // These need to be non-null, but their contents otherwise doesn't matter.
 __attribute__((weak)) FILE *stdin = (FILE *)1;
-__attribute__((weak)) FILE *stdout = (FILE *)1;
-__attribute__((weak)) FILE *stderr = (FILE *)1;
+__attribute__((weak)) FILE *stdout = (FILE *)2;
+__attribute__((weak)) FILE *stderr = (FILE *)3;
 
 // Character input/output functions
 

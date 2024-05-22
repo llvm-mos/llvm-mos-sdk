@@ -5,9 +5,10 @@
 #include <stdint.h>
 #include <string.h>
 
-__attribute__((weak)) FILE *stdin;
-__attribute__((weak)) FILE *stdout;
-__attribute__((weak)) FILE *stderr;
+// These need to be non-null, but their contents otherwise doesn't matter.
+__attribute__((weak)) FILE *stdin = (FILE *)1;
+__attribute__((weak)) FILE *stdout = (FILE *)1;
+__attribute__((weak)) FILE *stderr = (FILE *)1;
 
 // Character input/output functions
 

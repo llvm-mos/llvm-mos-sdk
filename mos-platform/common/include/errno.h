@@ -9,11 +9,13 @@ extern int _errno;
 #define errno _errno
 
 #define EACCES 13
+#define EAGAIN 11
 #define EBADF 9
 #define EBUSY 16
 #define EDOM 33
 #define EEXIST 17
 #define EILSEQ 84
+#define EINTR 4
 #define EINVAL 22
 #define EIO 5
 #define ENODEV 19
@@ -21,6 +23,7 @@ extern int _errno;
 #define ENOMEM 12
 #define ENOSPC 28
 #define ENOSYS 38
+#define ENOEXEC 8
 #define EMFILE 24
 #define ERANGE 34
 #define ESPIPE 29

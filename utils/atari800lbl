@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Generates Atari800 emulator labels from the given MOS ELF file(s).
+
+nm $@ | awk '{ print substr($1,5), $3 }'

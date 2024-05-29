@@ -32,10 +32,13 @@ add_platform_library(atari8-common-c
   close.s
   fdtab.s
   fdtable.s
+  fdtoiocb.s
   findfreeiocb.s
   getfd.s
   open.s
   oserror.s
+  rwcommon.s
+  write.s
 )
 target_include_directories(atari8-common-c BEFORE PUBLIC .)
 target_link_libraries(atari8-common-c PRIVATE common-asminc)

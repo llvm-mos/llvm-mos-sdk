@@ -38,6 +38,7 @@ add_platform_library(atari8-common-c
   open.s
   oserror.s
   rwcommon.s
+  sysremove.s
   write.s
 )
 target_include_directories(atari8-common-c BEFORE PUBLIC .)

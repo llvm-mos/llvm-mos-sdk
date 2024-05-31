@@ -79,6 +79,7 @@ add_platform_library(cx16-c
  cx16_k_screen_set_charset.s
  cx16_k_sprite_set_image.s
  cx16_k_sprite_set_position.s
+ filevars.s
  get_numbanks.s
  get_ostype.s
  get_tv.s

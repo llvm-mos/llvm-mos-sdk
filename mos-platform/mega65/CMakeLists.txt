@@ -20,5 +20,8 @@ merge_libraries(mega65-crt0
 add_platform_object_file(mega65-basic-header basic-header.o basic-header.S)
 add_platform_object_file(mega65-unmap-basic unmap-basic.o unmap-basic.S)
 
-add_platform_library(mega65-c kernal.S)
+add_platform_library(mega65-c
+  filevars.s
+  kernal.S
+)
 target_include_directories(mega65-c BEFORE PUBLIC .)

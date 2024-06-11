@@ -37,8 +37,8 @@ __attribute__((weak)) int fputs(const char *__restrict__ s,
 
 int getc(FILE *stream) { return fgetc(stream); }
 
-static bool ungetc_buffer;
-static char ungetc_buffer_full;
+static char ungetc_buffer;
+static bool ungetc_buffer_full;
 
 static int getchar_wrapper(void *ctx) { return __getchar(); }
 __attribute__((weak)) int getchar(void) {

@@ -16,16 +16,11 @@
 .globl findfreeiocb
 findfreeiocb:
 
-        ldx     #0
-        ldy     #$FF
-loop:   tya
-        cmp     ICHID,x
+        lda     #0
+loop:   tax
+        ldy     ICHID,x
+        cpy     #$FF
         beq     found
-        txa
-        clc
-        adc     #$10
-        tax
-        cmp     #$80
-        bcc     loop
-        inx                     ; return ZF cleared
+        adc     #$10            ; C = 0
+        bpl     loop            ; repeat for $10,$20,$30,...,$70
 found:  rts

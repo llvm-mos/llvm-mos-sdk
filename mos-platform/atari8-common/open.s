@@ -25,6 +25,7 @@ open:
         jsr     findfreeiocb
         beq     iocbok          ; we found one
 
+        pla
         lda     #<EMFILE        ; "too many open files"
 seterr: jsr     __directerrno
         lda     #$FF

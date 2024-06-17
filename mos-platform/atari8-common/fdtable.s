@@ -31,22 +31,18 @@ fdtoiocb_down:
         bne     inval
         cmp     #MAX_FD_INDEX
         bcs     inval
-        tax
-        lda     fd_index,x              ; get index
         tay
-        lda     #$ff
-        sta     fd_index,x              ; clear entry
-        tya
+        lda     fd_index,y              ; get index
         asl     a                       ; create index into fd table
         asl     a
         tax
         lda     #$ff
+        sta     fd_index,y              ; clear entry
         cmp     fd_table+ft_iocb,x      ; entry in use?
         beq     inval                   ; no, return error
         lda     fd_table+ft_usa,x       ; get usage counter
         beq     ok_notlast              ; 0? (shouldn't happen)
-        sec
-        sbc     #1                      ; decr usage counter
+        sbc     #1                      ; decr usage counter, C=1
         sta     fd_table+ft_usa,x
 retiocb:php
         txa
@@ -109,8 +105,7 @@ fddecusage:
         beq     ret                     ; no, do nothing
         lda     fd_table+ft_usa,x       ; get usage counter
         beq     ret                     ; 0? should not happen
-        sec
-        sbc     #1                      ; decrement by one
+        sbc     #1                      ; decrement by one, C=1
         sta     fd_table+ft_usa,x
         bne     ret                     ; not 0
         lda     #$ff                    ; 0, table entry unused now

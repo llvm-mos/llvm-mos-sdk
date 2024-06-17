@@ -28,11 +28,10 @@ fdt_to_fdi:
         tay
         lda     #$ff
         tax
-        inx
-loop:   cmp     fd_index,x
+loop:   inx
+        cmp     fd_index,x
         beq     found
-        inx
-        cpx     #MAX_FD_INDEX
+        cpx     #MAX_FD_INDEX-1
         bcc     loop
         rts
 
@@ -48,15 +47,14 @@ found:  tya
 ; A - fd_table entry
 ; return C = 0/1 for OK/error
 ; returns fd in A if OK
-; registers destroyed, tmp1 destroyed
+; registers destroyed
 getfd:
 
-        sta     __rc10          ; save fd_table entry
         jsr     fdt_to_fdi
         bcs     error
 
         pha
-        lda     __rc10
+        tya
         asl     a
         asl     a                       ; also clears C
         tax

@@ -16,4 +16,4 @@ function cb(address, value)
   end
 end
 
-emu.addMemoryCallback(cb, emu.callbackType.write, 0x4018)
+emu.addMemoryCallback(cb, emu.callbackType.write, 0x401B)

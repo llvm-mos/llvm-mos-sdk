@@ -22,6 +22,7 @@
 ; get fd_table entry in A
 ; return C = 0/1 for OK/error
 ; return fd_index entry in A if OK
+; return ft_table entry in Y (for getfd below)
 ; registers destroyed
 fdt_to_fdi:
 

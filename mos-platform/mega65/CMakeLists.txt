@@ -15,6 +15,7 @@ install(FILES link.ld TYPE LIB)
 add_platform_library(mega65-crt0)
 merge_libraries(mega65-crt0
   common-init-stack
+  common-exit-loop
 )
 
 add_platform_object_file(mega65-basic-header basic-header.o basic-header.S)

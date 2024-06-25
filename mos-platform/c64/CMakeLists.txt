@@ -16,6 +16,7 @@ install(FILES link.ld TYPE LIB)
 add_platform_library(c64-crt0)
 merge_libraries(c64-crt0
   common-init-stack
+  common-exit-loop
 )
 
 install(FILES c64.inc DESTINATION ${ASMINCDIR})

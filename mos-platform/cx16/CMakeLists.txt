@@ -14,6 +14,7 @@ install(FILES imag-regs.ld link.ld TYPE LIB)
 add_platform_library(cx16-crt0)
 merge_libraries(cx16-crt0
   common-init-stack
+  common-exit-return
 )
 
 install(FILES cx16.inc DESTINATION ${ASMINCDIR})

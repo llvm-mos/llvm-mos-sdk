@@ -17,6 +17,7 @@ install(FILES link.ld TYPE LIB)
 add_platform_library(c128-crt0)
 merge_libraries(c128-crt0
   common-init-stack
+  common-exit-loop
 )
 
 install(FILES c128.inc DESTINATION ${ASMINCDIR})

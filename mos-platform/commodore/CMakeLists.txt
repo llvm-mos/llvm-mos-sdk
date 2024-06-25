@@ -15,7 +15,7 @@ add_platform_library(commodore-crt0)
 merge_libraries(commodore-crt0
   common-copy-zp-data
   common-zero-bss
-  common-exit-return
+  common-exit-loop
 )
 
 add_platform_library(commodore-c

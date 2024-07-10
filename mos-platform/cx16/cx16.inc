@@ -235,3 +235,5 @@ I_FB_SET_8_PIXELS_OPAQUE	= $02F8
 I_FB_FILL_PIXELS              	= $02FA
 I_FB_FILTER_PIXELS            	= $02FC
 I_FB_MOVE_PIXELS              	= $02FE
+
+DEVNUM = $0292

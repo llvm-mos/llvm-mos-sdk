@@ -28,11 +28,9 @@ initcurunit:
         lda     #8              ; Default is SD card
         sta     DEVNUM
 L0:     sta     curunit
-        rts
 
 
 .section .fini,"axR",@progbits
 updatedevnum:
         lda     curunit
         sta     DEVNUM
-        rts

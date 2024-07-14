@@ -7,3 +7,7 @@ install_example(plasma.prg)
 add_executable(vertical_raster.prg vertical_raster.cc)
 install_example(vertical_raster.prg)
 
+add_executable(simple_dma.prg simple_dma.cc)
+install_example(simple_dma.prg)
+
+

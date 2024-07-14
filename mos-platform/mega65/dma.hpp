@@ -18,18 +18,18 @@ namespace mega65::dma {
 /**
  * Data structure for running enhanced DMA jobs
  *
- * @tparam T Either a F018B (default) or F018 DMA list object.
+ * @tparam T Either a F018B (default) or F018A DMA list object.
  * @tparam N Byte count of the options and their potential
  *           arguments excluding the end option (0) which is automatically
  *           added.
  */
-template <size_t N, typename T> struct DMAJob {
+template <size_t N, typename T = DMAList_F018B> struct DMAJob {
   static_assert(N > 0);
   static_assert(std::is_same<T, DMAList_F018A>::value ||
                 std::is_same<T, DMAList_F018B>::value);
   std::array<uint8_t, N> options;
   const uint8_t end_option = 0;
-  T dmalist; // Either F018 or F018B
+  T dmalist;
 };
 
 /// Common structure for DMA fill and copy jobs
@@ -86,7 +86,7 @@ CommonDMAJob make_dma_copy(const uint32_t src, const uint32_t dst,
 }
 
 /**
- * Perform DMA action defined in DMAJob structure.
+ * Perform enhanced DMA action defined in DMAJob structure.
  */
 template <size_t N, typename T>
 inline void trigger_dma(const DMAJob<N, T> &dma_job) {
@@ -96,4 +96,4 @@ inline void trigger_dma(const DMAJob<N, T> &dma_job) {
   DMA.trigger_enhanced = ((uint16_t)&dma_job) & 0xff;
 }
 
-} // end of namespace mega65::dma
+} // end of namespace

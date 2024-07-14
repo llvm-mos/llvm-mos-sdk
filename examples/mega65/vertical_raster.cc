@@ -3,7 +3,7 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-// Vertical Raster Bars using the F018 DMA controller.
+// Vertical Raster Bars using the DMAgic DMA controller.
 //
 // - Timing is crucial: specify NTSC or PAL below.
 // - Compile with `mos-mega65-clang++ -Os -flto`
@@ -71,6 +71,7 @@ int main() {
   dma.dmalist.source_bank = 0x00;
   dma.dmalist.dest_addr = 0x0020;
   dma.dmalist.dest_bank = 0x0d ^ DMA_HOLD;
+  dma.dmalist.modulo = 0;
 
   // Wait for new raster line
   const auto line = VICIV.rasterline;

@@ -83,25 +83,25 @@ struct DMAgicController {
 
 /// Older 11 byte DMA list structure; also known as just "F018"
 struct DMAList_F018A {
-  uint8_t command;         //!< offset 0x00
-  uint16_t count;          //!< offset 0x01
-  uint16_t source_addr;    //!< offset 0x03
-  uint8_t source_bank = 0; //!< offset 0x05
-  uint16_t dest_addr;      //!< offset 0x06
-  uint8_t dest_bank;       //!< offset 0x08
-  uint16_t modulo = 0;     //!< offset 0x09
+  uint8_t command;      //!< offset 0x00
+  uint16_t count;       //!< offset 0x01
+  uint16_t source_addr; //!< offset 0x03
+  uint8_t source_bank;  //!< offset 0x05
+  uint16_t dest_addr;   //!< offset 0x06
+  uint8_t dest_bank;    //!< offset 0x08
+  uint16_t modulo;      //!< offset 0x09
 };
 
 /// Newer 12-byte "F018B" DMA list structure
 struct DMAList_F018B {
-  uint8_t command;         //!< offset 0x00
-  uint16_t count;          //!< offset 0x01
-  uint16_t source_addr;    //!< offset 0x03
-  uint8_t source_bank = 0; //!< offset 0x05
-  uint16_t dest_addr;      //!< offset 0x06
-  uint8_t dest_bank;       //!< offset 0x08
-  uint8_t command_msb = 0; //!< offset 0x09
-  uint16_t modulo = 0;     //!< offset 0x0a
+  uint8_t command;      //!< offset 0x00
+  uint16_t count;       //!< offset 0x01
+  uint16_t source_addr; //!< offset 0x03
+  uint8_t source_bank;  //!< offset 0x05
+  uint16_t dest_addr;   //!< offset 0x06
+  uint8_t dest_bank;    //!< offset 0x08
+  uint8_t command_msb;  //!< offset 0x09
+  uint16_t modulo;      //!< offset 0x0a
 };
 
 #endif

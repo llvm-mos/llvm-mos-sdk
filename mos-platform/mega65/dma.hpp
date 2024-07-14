@@ -89,11 +89,12 @@ CommonDMAJob make_dma_copy(const uint32_t src, const uint32_t dst,
  * Perform enhanced DMA action defined in DMAJob structure.
  */
 template <size_t N, typename T>
-inline void trigger_dma(const DMAJob<N, T> &dma_job) {
+inline void trigger_dma(volatile const DMAJob<N, T> &dma_job) {
   DMA.enable_f018b = std::is_same<T, DMAList_F018B>::value;
   DMA.addr_bank = 0;
   DMA.addr_msb = ((uint16_t)&dma_job) >> 8;
   DMA.trigger_enhanced = ((uint16_t)&dma_job) & 0xff;
+  asm volatile("");
 }
 
-} // end of namespace
+} // namespace mega65::dma

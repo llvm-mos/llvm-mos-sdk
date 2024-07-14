@@ -8,27 +8,18 @@
 
 using namespace mega65::dma;
 
-constexpr uint32_t DST = 0x0800; // Address of default screen
-constexpr uint16_t COUNT = 4;
-
-/// "DMA" is a volatile ref.
-template <typename T> void trigger(T dma) {
-  DMA.enable_f018b = true;
-  DMA.addr_bank = 0;
-  DMA.addr_msb = ((uint16_t)(&dma)) >> 8;
-  DMA.trigger_enhanced = ((uint16_t)(&dma)) & 0xff; // <- triggers DMA job
-}
+constexpr uint32_t SCREEN_ADDR = 0x0800; // Screen area
+constexpr uint16_t COUNT = 4;            // Number of bytes to fill/copy
 
 int main(void) {
   {
-    auto dma = make_dma_fill(DST, 21, COUNT);
-    trigger(dma);
+    // repeat some chars on first line
+    const auto dma = make_dma_fill(SCREEN_ADDR, 41, COUNT);
+    trigger_dma(dma);
   }
   {
-    auto dma = make_dma_copy(DST, DST + COUNT, COUNT);
-    trigger(dma);
-  }
-  while (true) {
-    asm volatile("");
+    // copy first line to second line
+    const auto dma = make_dma_copy(SCREEN_ADDR, SCREEN_ADDR + 80, 80);
+    trigger_dma(dma);
   }
 }

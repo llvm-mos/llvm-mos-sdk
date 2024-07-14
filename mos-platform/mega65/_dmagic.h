@@ -42,10 +42,10 @@ enum
     : uint8_t
 #endif
 {
-  DMA_HOLD = 0b00010000,      //!< Do not change the address (bit 4)
-  DMA_MODULO = 0b00100000,    //!< Apply the MODULO field to wrap around (bit 5)
-  DMA_DIRECTION = 0b01000000, //!< Apply the MODULO field to wrap around (bit 6)
-  DMA_IO = 0b10000000, //!< I/O registers visible during the DMA controller at
+  DMA_HOLD = 16,      //!< Do not change the address (bit 4)
+  DMA_MODULO = 32,    //!< Apply the MODULO field to wrap around (bit 5)
+  DMA_DIRECTION = 64, //!< Apply the MODULO field to wrap around (bit 6)
+  DMA_IO = 128, //!< I/O registers visible during the DMA controller at
                        //!< $D000–$DFFF (bit 7).
 };
 

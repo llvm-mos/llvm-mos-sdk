@@ -5,8 +5,10 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 install(FILES
     _45E100.h
+    _dmagic.h
     _vic3.h
     _vic4.h
+    dma.hpp
     mega65.h
 TYPE INCLUDE)
 

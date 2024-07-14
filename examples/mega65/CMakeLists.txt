@@ -4,3 +4,6 @@ install_example(viciv_test.prg)
 add_executable(plasma.prg plasma.cc)
 install_example(plasma.prg)
 
+add_executable(vertical_raster.prg vertical_raster.cc)
+install_example(vertical_raster.prg)
+

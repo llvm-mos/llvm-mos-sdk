@@ -9,17 +9,18 @@
 using namespace mega65::dma;
 
 constexpr uint32_t SCREEN_ADDR = 0x0800; // Screen area
-constexpr uint16_t COUNT = 4;            // Number of bytes to fill/copy
+constexpr uint16_t COUNT = 4;            // Bytes to fill
+constexpr uint8_t CHAR = 41;             // Char symbol to print
 
 int main(void) {
   {
     // repeat some chars on first line
-    const auto dma = make_dma_fill(SCREEN_ADDR, 41, COUNT);
+    const auto dma = make_dma_fill(SCREEN_ADDR, CHAR, COUNT);
     trigger_dma(dma);
   }
   {
-    // copy first line to second line
-    const auto dma = make_dma_copy(SCREEN_ADDR, SCREEN_ADDR + 80, 80);
+    // copy chars from above to second line
+    const auto dma = make_dma_copy(SCREEN_ADDR, SCREEN_ADDR + 80, COUNT);
     trigger_dma(dma);
   }
 }

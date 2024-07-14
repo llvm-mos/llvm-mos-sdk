@@ -95,12 +95,15 @@ inline void trigger_dma(const DMAJob<N, T> &dma_job) {
   DMA.addr_msb = ((uint16_t)&dma_job) >> 8;
   DMA.trigger_enhanced = ((uint16_t)&dma_job) & 0xff;
   // The following is to prevent `dma_job` from being optimized out
-  // by making sure it's used in fictive asm code. A simple
-  // `asm volatile("")` also seems to work for unknown reasons(?).
-  asm volatile(""
-               : /* no output */
-               : "R"(dma_job.options[0])
-               : /* no clobbers */);
+  // by ensuring it's used in fictive asm code.
+  // asm volatile(""
+  //             : /* no output */
+  //             : "R"(dma_job.options[0])
+  //             : /* no clobbers */);
+  //
+  // A simple volatile also seems to work and doesn't inject any
+  // code. Reason unknown.
+  asm volatile("");
 }
 
 } // namespace mega65::dma

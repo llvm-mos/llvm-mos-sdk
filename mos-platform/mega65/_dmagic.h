@@ -67,29 +67,94 @@ enum
   DST_SKIP_RATE_OPT = 0x85,
 };
 
-/// @brief DMA audio channel structure
+/// DMA audio channel structure
 struct DMAAudioChannel {
-  uint8_t enable;      //!< Enable Audio DMA channel X (offset 0x00)
-  uint8_t baddr_lsb;   //!< Audio DMA channel X current address LSB (offset 0x01)
-  uint8_t baddr_msb;   //!< Audio DMA channel X current address MSB (offset 0x02)
-  uint8_t baddr_mb;    //!< Audio DMA channel X current address middle byte (offset 0x03)
-  uint8_t freq_lsb;    //!< Audio DMA channel X frequency LSB (offset 0x04)
-  uint8_t freq_mb;     //!< Audio DMA channel X frequency middle byte (offset 0x05)
-  uint8_t freq_msb;    //!< Audio DMA channel X frequency MSB (offset 0x06)
-  uint8_t taddr_lsb;   //!< Audio DMA channel X top address LSB (offset 0x07)
-  uint8_t taddr_msb;   //!< Audio DMA channel X top address MSB (offset 0x08)
-  uint8_t volume;      //!< Audio DMA channel X playback volume (offset 0x09)
-  uint8_t curaddr_lsb; //!< Audio DMA channel X current address LSB (offset 0x0a)
-  uint8_t curaddr_mb;  //!< Audio DMA channel X current address middle byte (offset 0x0b)
-  uint8_t curaddr_msb; //!< Audio DMA channel X current address MSB (offset 0x0c)
-  uint8_t tmraddr_lsb; //!< Audio DMA channel X timing counter LSB (offset 0x0d)
-  uint8_t tmraddr_mb;  //!< Audio DMA channel X timing counter middle byte (offset 0x0e)
-  uint8_t tmraddr_msb; //!< Audio DMA channel X timing counter MSB (offset 0x0f)
+  uint8_t enable; //!< Enable Audio DMA channel X (offset 0x00)
+  union {
+    struct {
+      uint8_t baddr_lsb; //!< base address LSB (offset 0x01)
+      uint8_t baddr_msb; //!< base address MSB (offset 0x02)
+      uint8_t baddr_mb;  //!< base address middle byte (offset 0x03)
+    };
+#if (__STDC_VERSION__ >= 202000)
+    unsigned _BitInt(24) baddr; //!< 24-bit base address (offset 0x01)
+#endif
+  };
+  union {
+    struct {
+      uint8_t freq_lsb; //!< frequency LSB (offset 0x04)
+      uint8_t freq_mb;  //!< frequency middle byte (offset 0x05)
+      uint8_t freq_msb; //!< frequency MSB (offset 0x06)
+    };
+#if (__STDC_VERSION__ >= 202000)
+    unsigned _BitInt(24) freq; //!< 24-bit frequency (offset 0x04)
+#endif
+  };
+  union {
+    struct {
+      uint8_t taddr_lsb; //!< top address LSB (offset 0x07)
+      uint8_t taddr_msb; //!< top address MSB (offset 0x08)
+    };
+#if (__STDC_VERSION__ >= 202000)
+    unsigned _BitInt(16) taddr; //!< 16-bit top address (offset 0x07)
+#endif
+  };
+  uint8_t volume; //!< playback volume (offset 0x09)
+  union {
+    struct {
+      uint8_t curaddr_lsb; //!< current address LSB (offset 0x0a)
+      uint8_t curaddr_mb;  //!< current address middle byte (offset 0x0b)
+      uint8_t curaddr_msb; //!< current address MSB (offset 0x0c)
+    };
+#if (__STDC_VERSION__ >= 202000)
+    unsigned _BitInt(24) curaddr; //!< 24-bit current address (offset 0x0a)
+#endif
+  };
+  union {
+    struct {
+      uint8_t tmraddr_lsb; //!< timing counter LSB (offset 0x0d)
+      uint8_t tmraddr_mb;  //!< timing counter middle byte (offset 0x0e)
+      uint8_t tmraddr_msb; //!< timing counter MSB (offset 0x0f)
+    };
+#if (__STDC_VERSION__ >= 202000)
+    unsigned _BitInt(24) tmraddr; //!< 24-bit timing counter (offset 0x0d)
+#endif
+  };
 };
 
 #ifdef __cplusplus
 static_assert(sizeof(DMAAudioChannel) == 0x10);
 #endif
+
+/// Bitflags for controlling the DMA audio enable register ($d711)
+enum
+#ifdef __clang__
+    : uint8_t
+#endif
+{
+  DMA_AUDEN = 0b10000000,     //!< Enable Audio DMA
+  DMA_BLKD = 0b01000000,      //!< Block DMA
+  DMA_AUD_WRBLK = 0b00100000, //!< Audio write block
+  DMA_NOMIX = 0b00010000,     //!< No mix
+  DMA_AUDBLKTO = 0b00000111,  //!< Audio block timeout (DEBUG) Bits 0-2
+};
+
+/// Bitflags for controlling individual DMA audio channel enable registers ($d720, etc)
+enum
+#ifdef __clang__
+    : uint8_t
+#endif
+{
+  DMA_CHENABLE = 0b10000000, //!< Enable channel
+  DMA_CHLOOP = 0b01000000,   //!< Channel looping
+  DMA_CHSGN = 0b00100000,    //!< Use signed samples
+  DMA_CHSINE = 0b00010000,   //!< Play 32-sample sine wave instead of DMA data
+  DMA_CHSTP = 0b00001000,    //!< Stop flag
+  DMA_CHSBITS =
+      0b00000011, //!< Sample bits (11=16, 10=8, 01=upper nybl, 00=lower nybl)
+  DMA_CHSBITS_16 = 0b00000011, //!< 16-bit samples
+  DMA_CHSBITS_8 = 0b00000010,  //!< 8-bit samples
+};
 
 /// The F018 "DMAgic" DMA controller at 0xd700
 struct DMAgicController {

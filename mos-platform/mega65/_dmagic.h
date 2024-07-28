@@ -76,7 +76,7 @@ struct DMAAudioChannel {
       uint8_t baddr_msb; //!< base address MSB (offset 0x02)
       uint8_t baddr_mb;  //!< base address middle byte (offset 0x03)
     };
-#if (__STDC_VERSION__ >= 202000)
+#ifdef __clang__
     unsigned _BitInt(24) baddr; //!< 24-bit base address (offset 0x01)
 #endif
   };
@@ -86,7 +86,7 @@ struct DMAAudioChannel {
       uint8_t freq_mb;  //!< frequency middle byte (offset 0x05)
       uint8_t freq_msb; //!< frequency MSB (offset 0x06)
     };
-#if (__STDC_VERSION__ >= 202000)
+#ifdef __clang__
     unsigned _BitInt(24) freq; //!< 24-bit frequency (offset 0x04)
 #endif
   };
@@ -95,7 +95,7 @@ struct DMAAudioChannel {
       uint8_t taddr_lsb; //!< top address LSB (offset 0x07)
       uint8_t taddr_msb; //!< top address MSB (offset 0x08)
     };
-#if (__STDC_VERSION__ >= 202000)
+#ifdef __clang__
     unsigned _BitInt(16) taddr; //!< 16-bit top address (offset 0x07)
 #endif
   };
@@ -106,7 +106,7 @@ struct DMAAudioChannel {
       uint8_t curaddr_mb;  //!< current address middle byte (offset 0x0b)
       uint8_t curaddr_msb; //!< current address MSB (offset 0x0c)
     };
-#if (__STDC_VERSION__ >= 202000)
+#ifdef __clang__
     unsigned _BitInt(24) curaddr; //!< 24-bit current address (offset 0x0a)
 #endif
   };
@@ -116,7 +116,7 @@ struct DMAAudioChannel {
       uint8_t tmraddr_mb;  //!< timing counter middle byte (offset 0x0e)
       uint8_t tmraddr_msb; //!< timing counter MSB (offset 0x0f)
     };
-#if (__STDC_VERSION__ >= 202000)
+#ifdef __clang__
     unsigned _BitInt(24) tmraddr; //!< 24-bit timing counter (offset 0x0d)
 #endif
   };

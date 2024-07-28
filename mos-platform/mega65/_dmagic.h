@@ -67,6 +67,7 @@ enum
   DST_SKIP_RATE_OPT = 0x85,
 };
 
+/// @brief DMA audio channel structure
 struct DMAAudioChannel {
   uint8_t enable;      //!< Enable Audio DMA channel X (offset 0x00)
   uint8_t baddr_lsb;   //!< Audio DMA channel X current address LSB (offset 0x01)
@@ -106,87 +107,17 @@ struct DMAgicController {
   uint8_t unused3[10];      //!< offset 0x12-0x1b
   uint8_t ch0rvol;          //!< Audio DMA channel 0 right channel volume (offset 0x1c)
   uint8_t ch1rvol;          //!< Audio DMA channel 1 right channel volume (offset 0x1d)
-  uint8_t ch0lvol;          //!< Audio DMA channel 0 left channel volume (offset 0x1e)
-  uint8_t ch1lvol;          //!< Audio DMA channel 1 left channel volume (offset 0x1f)
+  uint8_t ch2lvol;          //!< Audio DMA channel 2 left channel volume (offset 0x1e)
+  uint8_t ch3lvol;          //!< Audio DMA channel 3 left channel volume (offset 0x1f)
   union {
-    struct DMAAudioChannel ch0; //!< Audio DMA channel 0 (offset 0x20)
     struct {
-      uint8_t ch0en; //!< Enable Audio DMA channel 0 (offset 0x20)
-      uint8_t
-          ch0baddrl; //!< Audio DMA channel X current address LSB (offset 0x21)
-      uint8_t ch0baddrc; //!< Audio DMA channel X current address middle byte
-                         //!< (offset 0x22)
-      uint8_t
-          ch0baddrm; //!< Audio DMA channel X current address MSB (offset 0x23)
-      uint8_t ch0freql; //!< Audio DMA channel X frequency LSB (offset 0x24)
-      uint8_t
-          ch0freqc; //!< Audio DMA channel X frequency middle byte (offset 0x25)
-      uint8_t ch0freqm;  //!< Audio DMA channel X frequency MSB (offset 0x26)
-      uint8_t ch0taddrl; //!< Audio DMA channel X top address LSB (offset 0x27)
-      uint8_t ch0taddrm; //!< Audio DMA channel X top address MSB (offset 0x28)
-      uint8_t ch0volume; //!< Audio DMA channel X playback volume (offset 0x29)
-      uint8_t ch0curaddrl; //!< Audio DMA channel X current address LSB (offset
-                           //!< 0x2a)
-      uint8_t ch0curaddrc; //!< Audio DMA channel X current address middle byte
-                           //!< (offset 0x2b)
-      uint8_t ch0curaddrm; //!< Audio DMA channel X current address MSB (offset
-                           //!< 0x2c)
-      uint8_t
-          ch0tmraddrl; //!< Audio DMA channel X timing counter LSB (offset 0x2d)
-      uint8_t ch0tmraddrc; //!< Audio DMA channel X timing counter middle byte
-                           //!< (offset 0x2e)
-      uint8_t
-          ch0tmraddrm; //!< Audio DMA channel X timing counter MSB (offset 0x2f)
+      struct DMAAudioChannel ch0; //!< Audio DMA channel 0 (offset 0x20)
+      struct DMAAudioChannel ch1; //!< Audio DMA channel 1 (offset 0x30)
+      struct DMAAudioChannel ch2; //!< Audio DMA channel 2 (offset 0x40)
+      struct DMAAudioChannel ch3; //!< Audio DMA channel 3 (offset 0x50)
     };
+    struct DMAAudioChannel channel[4]; //!< Audio channels as an array (offset 0x20)
   };
-  uint8_t ch1en;          //!< Enable Audio DMA channel 1 (offset 0x30)
-  uint8_t ch1baddrl;        //!< Audio DMA channel X current address LSB (offset 0x31)
-  uint8_t ch1baddrc;        //!< Audio DMA channel X current address middle byte (offset 0x32)
-  uint8_t ch1baddrm;        //!< Audio DMA channel X current address MSB (offset 0x33)
-  uint8_t ch1freql;         //!< Audio DMA channel X frequency LSB (offset 0x34)
-  uint8_t ch1freqc;         //!< Audio DMA channel X frequency middle byte (offset 0x35)
-  uint8_t ch1freqm;         //!< Audio DMA channel X frequency MSB (offset 0x36)
-  uint8_t ch1taddrl;        //!< Audio DMA channel X top address LSB (offset 0x37)
-  uint8_t ch1taddrm;        //!< Audio DMA channel X top address MSB (offset 0x38)
-  uint8_t ch1volume;        //!< Audio DMA channel X playback volume (offset 0x39)
-  uint8_t ch1curaddrl;      //!< Audio DMA channel X current address LSB (offset 0x3a)
-  uint8_t ch1curaddrc;      //!< Audio DMA channel X current address middle byte (offset 0x3b)
-  uint8_t ch1curaddrm;      //!< Audio DMA channel X current address MSB (offset 0x3c)
-  uint8_t ch1tmraddrl;      //!< Audio DMA channel X timing counter LSB (offset 0x3d)
-  uint8_t ch1tmraddrc;      //!< Audio DMA channel X timing counter middle byte (offset 0x3e)
-  uint8_t ch1tmraddrm;      //!< Audio DMA channel X timing counter MSB (offset 0x3f)
-  uint8_t ch2en;            //!< Enable Audio DMA channel 2 (offset 0x40)
-  uint8_t ch2baddrl;        //!< Audio DMA channel X current address LSB (offset 0x41)
-  uint8_t ch2baddrc;        //!< Audio DMA channel X current address middle byte (offset 0x42)
-  uint8_t ch2baddrm;        //!< Audio DMA channel X current address MSB (offset 0x43)
-  uint8_t ch2freql;         //!< Audio DMA channel X frequency LSB (offset 0x44)
-  uint8_t ch2freqc;         //!< Audio DMA channel X frequency middle byte (offset 0x45)
-  uint8_t ch2freqm;         //!< Audio DMA channel X frequency MSB (offset 0x46)
-  uint8_t ch2taddrl;        //!< Audio DMA channel X top address LSB (offset 0x47)
-  uint8_t ch2taddrm;        //!< Audio DMA channel X top address MSB (offset 0x48)
-  uint8_t ch2volume;        //!< Audio DMA channel X playback volume (offset 0x49)
-  uint8_t ch2curaddrl;      //!< Audio DMA channel X current address LSB (offset 0x4a)
-  uint8_t ch2curaddrc;      //!< Audio DMA channel X current address middle byte (offset 0x4b)
-  uint8_t ch2curaddrm;      //!< Audio DMA channel X current address MSB (offset 0x4c)
-  uint8_t ch2tmraddrl;      //!< Audio DMA channel X timing counter LSB (offset 0x4d)
-  uint8_t ch2tmraddrc;      //!< Audio DMA channel X timing counter middle byte (offset 0x4e)
-  uint8_t ch2tmraddrm;      //!< Audio DMA channel X timing counter MSB (offset 0x4f)
-  uint8_t ch3en;            //!< Enable Audio DMA channel 3 (offset 0x50)
-  uint8_t ch3baddrl;        //!< Audio DMA channel X current address LSB (offset 0x51)
-  uint8_t ch3baddrc;        //!< Audio DMA channel X current address middle byte (offset 0x52)
-  uint8_t ch3baddrm;        //!< Audio DMA channel X current address MSB (offset 0x53)
-  uint8_t ch3freql;         //!< Audio DMA channel X frequency LSB (offset 0x54)
-  uint8_t ch3freqc;         //!< Audio DMA channel X frequency middle byte (offset 0x55)
-  uint8_t ch3freqm;         //!< Audio DMA channel X frequency MSB (offset 0x56)
-  uint8_t ch3taddrl;        //!< Audio DMA channel X top address LSB (offset 0x57)
-  uint8_t ch3taddrm;        //!< Audio DMA channel X top address MSB (offset 0x58)
-  uint8_t ch3volume;        //!< Audio DMA channel X playback volume (offset 0x59)
-  uint8_t ch3curaddrl;      //!< Audio DMA channel X current address LSB (offset 0x5a)
-  uint8_t ch3curaddrc;      //!< Audio DMA channel X current address middle byte (offset 0x5b)
-  uint8_t ch3curaddrm;      //!< Audio DMA channel X current address MSB (offset 0x5c)
-  uint8_t ch3tmraddrl;      //!< Audio DMA channel X timing counter LSB (offset 0x5d)
-  uint8_t ch3tmraddrc;      //!< Audio DMA channel X timing counter middle byte (offset 0x5e)
-  uint8_t ch3tmraddrm;      //!< Audio DMA channel X timing counter MSB (offset 0x5f)
 };
 
 #ifdef __cplusplus

@@ -139,19 +139,18 @@ enum
   DMA_AUDBLKTO = 0b00000111,  //!< Audio block timeout (DEBUG) Bits 0-2
 };
 
-/// Bitflags for controlling individual DMA audio channel enable registers ($d720, etc)
+/// Bitflags for controlling individual DMA audio channel enable registers
+/// ($d720, etc)
 enum
 #ifdef __clang__
     : uint8_t
 #endif
 {
-  DMA_CHENABLE = 0b10000000, //!< Enable channel
-  DMA_CHLOOP = 0b01000000,   //!< Channel looping
-  DMA_CHSGN = 0b00100000,    //!< Use signed samples
-  DMA_CHSINE = 0b00010000,   //!< Play 32-sample sine wave instead of DMA data
-  DMA_CHSTP = 0b00001000,    //!< Stop flag
-  DMA_CHSBITS =
-      0b00000011, //!< Sample bits (11=16, 10=8, 01=upper nybl, 00=lower nybl)
+  DMA_CHENABLE = 0b10000000,   //!< Enable channel
+  DMA_CHLOOP = 0b01000000,     //!< Channel looping
+  DMA_CHSGN = 0b00100000,      //!< Use signed samples
+  DMA_CHSINE = 0b00010000,     //!< Play 32-sample sine wave instead of DMA data
+  DMA_CHSTP = 0b00001000,      //!< Stop flag
   DMA_CHSBITS_16 = 0b00000011, //!< 16-bit samples
   DMA_CHSBITS_8 = 0b00000010,  //!< 8-bit samples
 };

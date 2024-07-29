@@ -148,7 +148,7 @@ enum
 {
   DMA_CHENABLE = 0b10000000,   //!< Enable channel
   DMA_CHLOOP = 0b01000000,     //!< Channel looping
-  DMA_CHSGN = 0b00100000,      //!< Use signed samples
+  DMA_CHSGN = 0b00100000,      //!< If set, use unsigned samples
   DMA_CHSINE = 0b00010000,     //!< Play 32-sample sine wave instead of DMA data
   DMA_CHSTP = 0b00001000,      //!< Stop flag
   DMA_CHSBITS_16 = 0b00000011, //!< 16-bit samples

@@ -18,12 +18,17 @@ static const uint8_t sample[] = {
 };
 
 int main(void) {
-  DMA.ch0.enable = 0;                                 // mute channel 0
   DMA.auden = DMA_AUDEN;                              // enable DMA audio
+  DMA.ch0rvol = 0;                                    // mute right
+  DMA.ch0.enable = 0;                                 // mute channel 0
   DMA.ch0.baddr = (uint24_t)&sample;                  // base address
   DMA.ch0.curaddr = (uint24_t)&sample;                // current address
   DMA.ch0.taddr = (uint16_t)&sample + sizeof(sample); // top address
   DMA.ch0.freq = 0x001a88;                            // frequency
-  DMA.ch0.volume = 255;                               // max volume
+  DMA.ch0.volume = 0x3f;                              // max volume
   DMA.ch0.enable = DMA_CHENABLE ^ DMA_CHSBITS_8 ^ DMA_CHLOOP; // play!
+  while (1) {
+      // Leaves at least one cycle for DMA audio to steal
+      VICIV.bordercol += 1;
+  }  
 }

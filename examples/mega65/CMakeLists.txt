@@ -10,4 +10,7 @@ install_example(vertical_raster.prg)
 add_executable(simple_dma.prg simple_dma.cc)
 install_example(simple_dma.prg)
 
+add_executable(dma_audio.prg dma_audio.c)
+install_example(dma_audio.prg)
+install(FILES drums.s8 TYPE BIN)
 

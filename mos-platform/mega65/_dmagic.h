@@ -135,7 +135,7 @@ enum
   DMA_AUDEN = 0b10000000,     //!< Enable Audio DMA
   DMA_BLKD = 0b01000000,      //!< Block DMA
   DMA_AUD_WRBLK = 0b00100000, //!< Audio write block
-  DMA_NOMIX = 0b00010000,     //!< No mix
+  DMA_NOMIX = 0b00010000,     //!< No mix; disables SID chips etc.
   DMA_AUDBLKTO = 0b00000111,  //!< Audio block timeout (DEBUG) Bits 0-2
 };
 

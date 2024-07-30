@@ -5,8 +5,9 @@
 //
 // C++ support for MEGA65 DMA operations.
 //
-
-#pragma once
+//
+#ifndef _MEGA65_DMA_H
+#define _MEGA65_DMA_H
 
 #include <array>
 #include <cstdint>
@@ -94,7 +95,11 @@ inline void trigger_dma(const DMAJob<N, T> &dma_job) {
   DMA.addr_bank = 0;
   DMA.addr_msb = ((uint16_t)&dma_job) >> 8;
   DMA.trigger_enhanced = ((uint16_t)&dma_job) & 0xff;
+  // Avoid the above from being optimized out. Ideally 
+  // we would want to somehow access `dma_job`, but an
+  // empty statement seems to be sufficient.
   asm volatile("");
 }
 
 } // namespace mega65::dma
+#endif // _MEGA65_DMA_H

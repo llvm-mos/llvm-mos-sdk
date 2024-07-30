@@ -6,8 +6,8 @@
 // C++ support for MEGA65 DMA operations.
 //
 //
-#ifndef _MEGA65_DMA_H
-#define _MEGA65_DMA_H
+#ifndef _MEGA65_DMA_HPP
+#define _MEGA65_DMA_HPP
 
 #include <array>
 #include <cstdint>
@@ -102,4 +102,4 @@ inline void trigger_dma(const DMAJob<N, T> &dma_job) {
 }
 
 } // namespace mega65::dma
-#endif // _MEGA65_DMA_H
+#endif // _MEGA65_DMA_HPP

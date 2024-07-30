@@ -75,6 +75,7 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="__45E100_8h_source.html">_45E100.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="__6526_8h_source.html">_6526.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="__dmagic_8h_source.html">_dmagic.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="__sid_8h_source.html">_sid.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="__vic2_8h_source.html">_vic2.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="__vic3_8h_source.html">_vic3.h</a>&gt;</code><br />
@@ -84,14 +85,25 @@ Include dependency graph for mega65.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="mega65_8h__incl.png" border="0" usemap="#mega65_2mega65_8h" alt=""/></div>
 <map name="mega65_2mega65_8h" id="mega65_2mega65_8h">
-<area shape="rect" title=" " alt="" coords="193,5,337,32"/>
-<area shape="rect" title=" " alt="" coords="33,155,104,181"/>
-<area shape="rect" href="__45E100_8h.html" title=" " alt="" coords="24,80,113,107"/>
-<area shape="rect" href="__6526_8h.html" title=" " alt="" coords="137,80,211,107"/>
-<area shape="rect" href="__sid_8h.html" title=" " alt="" coords="235,80,295,107"/>
-<area shape="rect" href="__vic2_8h.html" title=" " alt="" coords="319,80,387,107"/>
-<area shape="rect" href="__vic3_8h.html" title=" " alt="" coords="411,80,479,107"/>
-<area shape="rect" href="__vic4_8h.html" title=" " alt="" coords="503,80,571,107"/>
+<area shape="rect" title=" " alt="" coords="237,5,381,32"/>
+<area shape="rect" title=" " alt="" coords="125,155,195,181"/>
+<area shape="rect" href="__45E100_8h.html" title=" " alt="" coords="215,80,305,107"/>
+<area shape="rect" href="__6526_8h.html" title=" " alt="" coords="118,80,191,107"/>
+<area shape="rect" href="__dmagic_8h.html" title=" " alt="" coords="597,80,686,107"/>
+<area shape="rect" href="__sid_8h.html" title=" " alt="" coords="329,80,389,107"/>
+<area shape="rect" href="__vic2_8h.html" title=" " alt="" coords="413,80,481,107"/>
+<area shape="rect" href="__vic3_8h.html" title=" " alt="" coords="505,80,573,107"/>
+<area shape="rect" href="__vic4_8h.html" title=" " alt="" coords="26,80,94,107"/>
+<area shape="rect" title=" " alt="" coords="604,155,679,181"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="mega65_8h__dep__incl.png" border="0" usemap="#mega65_2mega65_8hdep" alt=""/></div>
+<map name="mega65_2mega65_8hdep" id="mega65_2mega65_8hdep">
+<area shape="rect" title=" " alt="" coords="5,5,149,32"/>
+<area shape="rect" href="dma_8hpp.html" title=" " alt="" coords="9,80,145,107"/>
 </map>
 </div>
 </div>
@@ -138,6 +150,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a34f5ce65c6a8474efba77a668c53445f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mega65_8h.html#a34f5ce65c6a8474efba77a668c53445f">ETHERNET</a>&#160;&#160;&#160;(*(volatile struct __45E100 *)0xd6e0)</td></tr>
 <tr class="memdesc:a34f5ce65c6a8474efba77a668c53445f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ethernet controller.  <a href="mega65_8h.html#a34f5ce65c6a8474efba77a668c53445f">More...</a><br /></td></tr>
 <tr class="separator:a34f5ce65c6a8474efba77a668c53445f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a137c9e7c0bc9e12f455df0a6e41c0287"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mega65_8h.html#a137c9e7c0bc9e12f455df0a6e41c0287">DMA</a>&#160;&#160;&#160;(*(volatile struct <a class="el" href="structDMAgicController.html">DMAgicController</a> *)0xd700)</td></tr>
+<tr class="memdesc:a137c9e7c0bc9e12f455df0a6e41c0287"><td class="mdescLeft">&#160;</td><td class="mdescRight">DMAgic DMA controller.  <a href="mega65_8h.html#a137c9e7c0bc9e12f455df0a6e41c0287">More...</a><br /></td></tr>
+<tr class="separator:a137c9e7c0bc9e12f455df0a6e41c0287"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d52f94c72b3d19ce29c11c384bbf551"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mega65_8h.html#a2d52f94c72b3d19ce29c11c384bbf551">MATHBUSY</a>&#160;&#160;&#160;(*(volatile uint8_t *)0xd70f)</td></tr>
 <tr class="memdesc:a2d52f94c72b3d19ce29c11c384bbf551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Math busy flag.  <a href="mega65_8h.html#a2d52f94c72b3d19ce29c11c384bbf551">More...</a><br /></td></tr>
 <tr class="separator:a2d52f94c72b3d19ce29c11c384bbf551"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,50 +168,50 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:adab0c4467b3c6f365e87d0316a74bf64"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
-&#160;&#160;<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a2a9daf215a30f1c539ead18c66380fc1">COLOR_BLACK</a> = 0x00, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64ad47b4c240a0109970bb2a7fe3a07d3ec">COLOR_WHITE</a> = 0x01, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a592503b9434c1e751a92f3fc536d7950">COLOR_RED</a> = 0x02, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a7896ff2cc707b5873da0b97d38bf852e">COLOR_CYAN</a> = 0x03, 
+<tr class="memitem:ad4a9934b75947f1fae21deee31688bb7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
+&#160;&#160;<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a2a9daf215a30f1c539ead18c66380fc1">COLOR_BLACK</a> = 0x00, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7ad47b4c240a0109970bb2a7fe3a07d3ec">COLOR_WHITE</a> = 0x01, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a592503b9434c1e751a92f3fc536d7950">COLOR_RED</a> = 0x02, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a7896ff2cc707b5873da0b97d38bf852e">COLOR_CYAN</a> = 0x03, 
 <br />
-&#160;&#160;<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a278276a8155620ed5e155c80d35316cc">COLOR_PURPLE</a> = 0x04, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64acfa9d8bbffc418447ed826f286abca02">COLOR_GREEN</a> = 0x05, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a1340428efccb140dcbdb71aa6176f696">COLOR_BLUE</a> = 0x06, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64ab03862907066c68204ee9df1ee04aa29">COLOR_YELLOW</a> = 0x07, 
+&#160;&#160;<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a278276a8155620ed5e155c80d35316cc">COLOR_PURPLE</a> = 0x04, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7acfa9d8bbffc418447ed826f286abca02">COLOR_GREEN</a> = 0x05, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a1340428efccb140dcbdb71aa6176f696">COLOR_BLUE</a> = 0x06, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7ab03862907066c68204ee9df1ee04aa29">COLOR_YELLOW</a> = 0x07, 
 <br />
-&#160;&#160;<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a0d36904c1e8ef3978abfe51c57b70423">COLOR_ORANGE</a> = 0x08, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a70b424bcf0a4a80c0a6f810d1cff20fe">COLOR_BROWN</a> = 0x09, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a62ccae84d9ece49369203d9e2f1a7c81">COLOR_LIGHTRED</a> = 0x0A, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a88d293e4c5fb987b9f762c1844daf205">COLOR_DARKGREY</a> = 0x0B, 
+&#160;&#160;<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a0d36904c1e8ef3978abfe51c57b70423">COLOR_ORANGE</a> = 0x08, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a70b424bcf0a4a80c0a6f810d1cff20fe">COLOR_BROWN</a> = 0x09, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a62ccae84d9ece49369203d9e2f1a7c81">COLOR_LIGHTRED</a> = 0x0A, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a88d293e4c5fb987b9f762c1844daf205">COLOR_DARKGREY</a> = 0x0B, 
 <br />
-&#160;&#160;<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a4da5c032ccee3cb8f5ddd5a9070f320f">COLOR_MIDGREY</a> = 0x0C, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a0e20e3f00499a7558c932ee79d2cfe77">COLOR_LIGHTGREEN</a> = 0x0D, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a35fe9bfe5643d0bd9db577a149ac8898">COLOR_LIGHTBLUE</a> = 0x0E, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a62ca6f47d47ef14c4cbb2ee8783f2e05">COLOR_LIGHTGREY</a> = 0x0F, 
+&#160;&#160;<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a4da5c032ccee3cb8f5ddd5a9070f320f">COLOR_MIDGREY</a> = 0x0C, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a0e20e3f00499a7558c932ee79d2cfe77">COLOR_LIGHTGREEN</a> = 0x0D, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a35fe9bfe5643d0bd9db577a149ac8898">COLOR_LIGHTBLUE</a> = 0x0E, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a62ca6f47d47ef14c4cbb2ee8783f2e05">COLOR_LIGHTGREY</a> = 0x0F, 
 <br />
-&#160;&#160;<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a8504a26d60c01a79ea7f2ff452d875cb">COLOR_GURUMEDITATION</a> = 0x10, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a319d4668d5be8f1e1421c24e20d3cb79">COLOR_RAMBUTAN</a> = 0x11, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a8f0921371e42ea27a2645d58723346bd">COLOR_CARROT</a> = 0x12, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64ab9a804f84e80ff49916e24c93cc07037">COLOR_LEMONTART</a> = 0x13, 
+&#160;&#160;<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a8504a26d60c01a79ea7f2ff452d875cb">COLOR_GURUMEDITATION</a> = 0x10, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a319d4668d5be8f1e1421c24e20d3cb79">COLOR_RAMBUTAN</a> = 0x11, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a8f0921371e42ea27a2645d58723346bd">COLOR_CARROT</a> = 0x12, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7ab9a804f84e80ff49916e24c93cc07037">COLOR_LEMONTART</a> = 0x13, 
 <br />
-&#160;&#160;<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a653832e73d8da087c10ab7291e6f4db2">COLOR_PANDAN</a> = 0x14, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a6d11121eaa4eb3abeb9cff05c9a91865">COLOR_SEASICKGREEN</a> = 0x15, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a22f754acf9adb0a2a78a85d568cf9510">COLOR_SOYLENTGREEN</a> = 0x16, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64aed18b6fa151fdb408ec3deacedc708a8">COLOR_SLIMERGREEN</a> = 0x17, 
+&#160;&#160;<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a653832e73d8da087c10ab7291e6f4db2">COLOR_PANDAN</a> = 0x14, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a6d11121eaa4eb3abeb9cff05c9a91865">COLOR_SEASICKGREEN</a> = 0x15, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a22f754acf9adb0a2a78a85d568cf9510">COLOR_SOYLENTGREEN</a> = 0x16, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7aed18b6fa151fdb408ec3deacedc708a8">COLOR_SLIMERGREEN</a> = 0x17, 
 <br />
-&#160;&#160;<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64aa07f58a3f3a8b581e92fbaf39aec8e84">COLOR_THEOTHERCYAN</a> = 0x18, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a2fbcd5327f6e0a70dc81e03dcf09341a">COLOR_SEASKY</a> = 0x19, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a0c8653679bec5c31815e189a3bf62526">COLOR_SMURFBLUE</a> = 0x1A, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64aba5f56b7d33434d36fd324683fdd014b">COLOR_SCREENOFDEATH</a> = 0x1B, 
+&#160;&#160;<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7aa07f58a3f3a8b581e92fbaf39aec8e84">COLOR_THEOTHERCYAN</a> = 0x18, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a2fbcd5327f6e0a70dc81e03dcf09341a">COLOR_SEASKY</a> = 0x19, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a0c8653679bec5c31815e189a3bf62526">COLOR_SMURFBLUE</a> = 0x1A, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7aba5f56b7d33434d36fd324683fdd014b">COLOR_SCREENOFDEATH</a> = 0x1B, 
 <br />
-&#160;&#160;<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64ab330499f6e4fe7838855832b88417972">COLOR_PLUMSAUCE</a> = 0x1C, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64a14392e45688c4575ce80d031d6cbb94c">COLOR_SOURGRAPE</a> = 0x1D, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64aafd36f240f32d5d1b622d6c6a697a546">COLOR_BUBBLEGUM</a> = 0x1E, 
-<a class="el" href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64af167bd53437b13a61b9dda203bf1c27f">COLOR_HOTTAMALES</a> = 0x1F
+&#160;&#160;<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7ab330499f6e4fe7838855832b88417972">COLOR_PLUMSAUCE</a> = 0x1C, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7a14392e45688c4575ce80d031d6cbb94c">COLOR_SOURGRAPE</a> = 0x1D, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7aafd36f240f32d5d1b622d6c6a697a546">COLOR_BUBBLEGUM</a> = 0x1E, 
+<a class="el" href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7af167bd53437b13a61b9dda203bf1c27f">COLOR_HOTTAMALES</a> = 0x1F
 <br />
  }</td></tr>
-<tr class="memdesc:adab0c4467b3c6f365e87d0316a74bf64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default color palette.  <a href="mega65_8h.html#adab0c4467b3c6f365e87d0316a74bf64">More...</a><br /></td></tr>
-<tr class="separator:adab0c4467b3c6f365e87d0316a74bf64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ad4a9934b75947f1fae21deee31688bb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default color palette.  <a href="mega65_8h.html#ad4a9934b75947f1fae21deee31688bb7">More...</a><br /></td></tr>
+<tr class="separator:ad4a9934b75947f1fae21deee31688bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="acb012180af18034ef3f844b198ecbe03"></a>
@@ -276,6 +291,22 @@ Enumerations</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Default address of screen character matrix. </p>
+
+</div>
+</div>
+<a id="a137c9e7c0bc9e12f455df0a6e41c0287"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a137c9e7c0bc9e12f455df0a6e41c0287">&#9670;&nbsp;</a></span>DMA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DMA&#160;&#160;&#160;(*(volatile struct <a class="el" href="structDMAgicController.html">DMAgicController</a> *)0xd700)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>DMAgic DMA controller. </p>
 
 </div>
 </div>
@@ -472,8 +503,8 @@ Enumerations</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="adab0c4467b3c6f365e87d0316a74bf64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adab0c4467b3c6f365e87d0316a74bf64">&#9670;&nbsp;</a></span>anonymous enum</h2>
+<a id="ad4a9934b75947f1fae21deee31688bb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4a9934b75947f1fae21deee31688bb7">&#9670;&nbsp;</a></span>anonymous enum</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -486,38 +517,38 @@ Enumerations</h2></td></tr>
 
 <p>Default color palette. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a2a9daf215a30f1c539ead18c66380fc1"></a>COLOR_BLACK&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64ad47b4c240a0109970bb2a7fe3a07d3ec"></a>COLOR_WHITE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a592503b9434c1e751a92f3fc536d7950"></a>COLOR_RED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a7896ff2cc707b5873da0b97d38bf852e"></a>COLOR_CYAN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a278276a8155620ed5e155c80d35316cc"></a>COLOR_PURPLE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64acfa9d8bbffc418447ed826f286abca02"></a>COLOR_GREEN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a1340428efccb140dcbdb71aa6176f696"></a>COLOR_BLUE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64ab03862907066c68204ee9df1ee04aa29"></a>COLOR_YELLOW&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a0d36904c1e8ef3978abfe51c57b70423"></a>COLOR_ORANGE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a70b424bcf0a4a80c0a6f810d1cff20fe"></a>COLOR_BROWN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a62ccae84d9ece49369203d9e2f1a7c81"></a>COLOR_LIGHTRED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a88d293e4c5fb987b9f762c1844daf205"></a>COLOR_DARKGREY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a4da5c032ccee3cb8f5ddd5a9070f320f"></a>COLOR_MIDGREY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a0e20e3f00499a7558c932ee79d2cfe77"></a>COLOR_LIGHTGREEN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a35fe9bfe5643d0bd9db577a149ac8898"></a>COLOR_LIGHTBLUE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a62ca6f47d47ef14c4cbb2ee8783f2e05"></a>COLOR_LIGHTGREY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a8504a26d60c01a79ea7f2ff452d875cb"></a>COLOR_GURUMEDITATION&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a319d4668d5be8f1e1421c24e20d3cb79"></a>COLOR_RAMBUTAN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a8f0921371e42ea27a2645d58723346bd"></a>COLOR_CARROT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64ab9a804f84e80ff49916e24c93cc07037"></a>COLOR_LEMONTART&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a653832e73d8da087c10ab7291e6f4db2"></a>COLOR_PANDAN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a6d11121eaa4eb3abeb9cff05c9a91865"></a>COLOR_SEASICKGREEN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a22f754acf9adb0a2a78a85d568cf9510"></a>COLOR_SOYLENTGREEN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64aed18b6fa151fdb408ec3deacedc708a8"></a>COLOR_SLIMERGREEN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64aa07f58a3f3a8b581e92fbaf39aec8e84"></a>COLOR_THEOTHERCYAN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a2fbcd5327f6e0a70dc81e03dcf09341a"></a>COLOR_SEASKY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a0c8653679bec5c31815e189a3bf62526"></a>COLOR_SMURFBLUE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64aba5f56b7d33434d36fd324683fdd014b"></a>COLOR_SCREENOFDEATH&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64ab330499f6e4fe7838855832b88417972"></a>COLOR_PLUMSAUCE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64a14392e45688c4575ce80d031d6cbb94c"></a>COLOR_SOURGRAPE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64aafd36f240f32d5d1b622d6c6a697a546"></a>COLOR_BUBBLEGUM&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adab0c4467b3c6f365e87d0316a74bf64af167bd53437b13a61b9dda203bf1c27f"></a>COLOR_HOTTAMALES&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a2a9daf215a30f1c539ead18c66380fc1"></a>COLOR_BLACK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7ad47b4c240a0109970bb2a7fe3a07d3ec"></a>COLOR_WHITE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a592503b9434c1e751a92f3fc536d7950"></a>COLOR_RED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a7896ff2cc707b5873da0b97d38bf852e"></a>COLOR_CYAN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a278276a8155620ed5e155c80d35316cc"></a>COLOR_PURPLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7acfa9d8bbffc418447ed826f286abca02"></a>COLOR_GREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a1340428efccb140dcbdb71aa6176f696"></a>COLOR_BLUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7ab03862907066c68204ee9df1ee04aa29"></a>COLOR_YELLOW&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a0d36904c1e8ef3978abfe51c57b70423"></a>COLOR_ORANGE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a70b424bcf0a4a80c0a6f810d1cff20fe"></a>COLOR_BROWN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a62ccae84d9ece49369203d9e2f1a7c81"></a>COLOR_LIGHTRED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a88d293e4c5fb987b9f762c1844daf205"></a>COLOR_DARKGREY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a4da5c032ccee3cb8f5ddd5a9070f320f"></a>COLOR_MIDGREY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a0e20e3f00499a7558c932ee79d2cfe77"></a>COLOR_LIGHTGREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a35fe9bfe5643d0bd9db577a149ac8898"></a>COLOR_LIGHTBLUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a62ca6f47d47ef14c4cbb2ee8783f2e05"></a>COLOR_LIGHTGREY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a8504a26d60c01a79ea7f2ff452d875cb"></a>COLOR_GURUMEDITATION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a319d4668d5be8f1e1421c24e20d3cb79"></a>COLOR_RAMBUTAN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a8f0921371e42ea27a2645d58723346bd"></a>COLOR_CARROT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7ab9a804f84e80ff49916e24c93cc07037"></a>COLOR_LEMONTART&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a653832e73d8da087c10ab7291e6f4db2"></a>COLOR_PANDAN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a6d11121eaa4eb3abeb9cff05c9a91865"></a>COLOR_SEASICKGREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a22f754acf9adb0a2a78a85d568cf9510"></a>COLOR_SOYLENTGREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7aed18b6fa151fdb408ec3deacedc708a8"></a>COLOR_SLIMERGREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7aa07f58a3f3a8b581e92fbaf39aec8e84"></a>COLOR_THEOTHERCYAN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a2fbcd5327f6e0a70dc81e03dcf09341a"></a>COLOR_SEASKY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a0c8653679bec5c31815e189a3bf62526"></a>COLOR_SMURFBLUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7aba5f56b7d33434d36fd324683fdd014b"></a>COLOR_SCREENOFDEATH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7ab330499f6e4fe7838855832b88417972"></a>COLOR_PLUMSAUCE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7a14392e45688c4575ce80d031d6cbb94c"></a>COLOR_SOURGRAPE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7aafd36f240f32d5d1b622d6c6a697a546"></a>COLOR_BUBBLEGUM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad4a9934b75947f1fae21deee31688bb7af167bd53437b13a61b9dda203bf1c27f"></a>COLOR_HOTTAMALES&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

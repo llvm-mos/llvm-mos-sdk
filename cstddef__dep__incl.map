@@ -1,12 +1,13 @@
 <map id="common/include/cstddef" name="common/include/cstddef">
-<area shape="rect" id="node1" title=" " alt="" coords="253,5,436,32"/>
-<area shape="rect" id="node2" href="$array.html" title=" " alt="" coords="34,177,202,203"/>
-<area shape="rect" id="node4" href="$initializer__list.html" title=" " alt="" coords="233,87,456,114"/>
-<area shape="rect" id="node5" href="$iterator.html" title=" " alt="" coords="26,87,209,114"/>
-<area shape="rect" id="node6" href="$new.html" title=" " alt="" coords="480,87,641,114"/>
-<area shape="rect" id="node8" href="$type__traits.html" title=" " alt="" coords="666,80,828,121"/>
-<area shape="rect" id="node3" href="$soa_8h.html" title=" " alt="" coords="345,259,514,285"/>
-<area shape="rect" id="node7" href="$varint_8h.html" title=" " alt="" coords="467,177,611,203"/>
-<area shape="rect" id="node9" href="$fixed__point_8h.html" title=" " alt="" coords="686,169,851,211"/>
-<area shape="rect" id="node10" href="$utility.html" title=" " alt="" coords="876,177,1048,203"/>
+<area shape="rect" id="node1" title=" " alt="" coords="492,5,675,32"/>
+<area shape="rect" id="node2" href="$array.html" title=" " alt="" coords="861,177,1029,203"/>
+<area shape="rect" id="node5" href="$initializer__list.html" title=" " alt="" coords="5,87,228,114"/>
+<area shape="rect" id="node6" href="$iterator.html" title=" " alt="" coords="707,87,889,114"/>
+<area shape="rect" id="node7" href="$new.html" title=" " alt="" coords="252,87,413,114"/>
+<area shape="rect" id="node9" href="$type__traits.html" title=" " alt="" coords="502,80,665,121"/>
+<area shape="rect" id="node3" href="$soa_8h.html" title=" " alt="" coords="375,259,544,285"/>
+<area shape="rect" id="node4" href="$dma_8hpp.html" title=" " alt="" coords="815,259,951,285"/>
+<area shape="rect" id="node8" href="$varint_8h.html" title=" " alt="" coords="205,177,349,203"/>
+<area shape="rect" id="node10" href="$fixed__point_8h.html" title=" " alt="" coords="621,169,786,211"/>
+<area shape="rect" id="node11" href="$utility.html" title=" " alt="" coords="373,177,545,203"/>
 </map>

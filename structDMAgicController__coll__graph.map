@@ -1,0 +1,4 @@
+<map id="DMAgicController" name="DMAgicController">
+<area shape="rect" id="node1" title="The F018 &quot;DMAgic&quot; DMA controller at 0xd700." alt="" coords="9,153,145,180"/>
+<area shape="rect" id="node2" href="$structDMAAudioChannel.html" title="DMA audio channel structure." alt="" coords="5,5,148,32"/>
+</map>

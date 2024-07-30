@@ -1,13 +1,19 @@
 var searchData=
 [
-  ['a_4822',['A',['../classsoa_1_1ArrayConstIterator.html#a356fcc5e6f440f795f15479ca020c46f',1,'soa::ArrayConstIterator']]],
-  ['abort_4823',['abort',['../struct__sim__reg.html#acb5ba6272904f4e4c69580eef37bc375',1,'_sim_reg']]],
-  ['access_4824',['access',['../structcbm__dirent.html#a94cc4b7ec11936a774b70ffa197d2aa3',1,'cbm_dirent']]],
-  ['addr_5fhi_4825',['addr_hi',['../nes-mmc3_2mapper_8h.html#a4b6d5982a670e9a2c66612a5cced6f4c',1,'mapper.h']]],
-  ['address_4826',['address',['../bios_8h.html#aa137c1d2696e2763e22c44299393db13',1,'bios.h']]],
-  ['address_5ftype_4827',['address_type',['../bios_8h.html#acb6023792285d817ac4000375a09a040',1,'bios.h']]],
-  ['alignment_5fof_5fv_4828',['alignment_of_v',['../namespacestd.html#a64ccbcea1c02ee9d2a563751eb9cc60a',1,'std']]],
-  ['all_4829',['all',['../famitone2_2LICENSE.html#ac81fb3a249cb2f41e5be357e54a8679f',1,'all():&#160;LICENSE'],['../neslib_2LICENSE.html#ac81fb3a249cb2f41e5be357e54a8679f',1,'all():&#160;LICENSE']]],
-  ['arg_4830',['arg',['../structStatus.html#ab0f2dbcc9ec350267595300e71480226',1,'Status']]],
-  ['attr_4831',['attr',['../structneo__file__stat.html#aee0fbb7a2745faf90cd464a4ef3b83ef',1,'neo_file_stat::attr()'],['../structvdc__sprite__t.html#a9b5115aa71df9ffbdce3da2e6ae9a1c8',1,'vdc_sprite_t::attr()'],['../neslib_8h.html#a206b3d754a8d0963d0f74ef00a6e41d5',1,'attr():&#160;neslib.h']]]
+  ['a_4924',['A',['../classsoa_1_1ArrayConstIterator.html#a356fcc5e6f440f795f15479ca020c46f',1,'soa::ArrayConstIterator']]],
+  ['abort_4925',['abort',['../struct__sim__reg.html#acb5ba6272904f4e4c69580eef37bc375',1,'_sim_reg']]],
+  ['access_4926',['access',['../structcbm__dirent.html#a94cc4b7ec11936a774b70ffa197d2aa3',1,'cbm_dirent']]],
+  ['addr_5fbank_4927',['addr_bank',['../structDMAgicController.html#a522262fd734b0818adc07fc0262bd682',1,'DMAgicController']]],
+  ['addr_5fhi_4928',['addr_hi',['../nes-mmc3_2mapper_8h.html#a4b6d5982a670e9a2c66612a5cced6f4c',1,'mapper.h']]],
+  ['addr_5flsb_4929',['addr_lsb',['../structDMAgicController.html#a41cc73fb4c540e96bfdcdb873219d4a6',1,'DMAgicController']]],
+  ['addr_5flsb_5ftrigger_4930',['addr_lsb_trigger',['../structDMAgicController.html#a576a8d04245fa5eed944362659d6c244',1,'DMAgicController']]],
+  ['addr_5fmb_4931',['addr_mb',['../structDMAgicController.html#a992aeb7329ef5db9ae8740c8cc54de73',1,'DMAgicController']]],
+  ['addr_5fmsb_4932',['addr_msb',['../structDMAgicController.html#a6dbe12a7fcc3191c05dc29e8dabb4095',1,'DMAgicController']]],
+  ['address_4933',['address',['../bios_8h.html#aa137c1d2696e2763e22c44299393db13',1,'bios.h']]],
+  ['address_5ftype_4934',['address_type',['../bios_8h.html#acb6023792285d817ac4000375a09a040',1,'bios.h']]],
+  ['alignment_5fof_5fv_4935',['alignment_of_v',['../namespacestd.html#a64ccbcea1c02ee9d2a563751eb9cc60a',1,'std']]],
+  ['all_4936',['all',['../famitone2_2LICENSE.html#ac81fb3a249cb2f41e5be357e54a8679f',1,'all():&#160;LICENSE'],['../neslib_2LICENSE.html#ac81fb3a249cb2f41e5be357e54a8679f',1,'all():&#160;LICENSE']]],
+  ['arg_4937',['arg',['../structStatus.html#ab0f2dbcc9ec350267595300e71480226',1,'Status']]],
+  ['attr_4938',['attr',['../structneo__file__stat.html#aee0fbb7a2745faf90cd464a4ef3b83ef',1,'neo_file_stat::attr()'],['../structvdc__sprite__t.html#a9b5115aa71df9ffbdce3da2e6ae9a1c8',1,'vdc_sprite_t::attr()'],['../neslib_8h.html#a206b3d754a8d0963d0f74ef00a6e41d5',1,'attr():&#160;neslib.h']]],
+  ['auden_4939',['auden',['../structDMAgicController.html#a19bd06512ba46b89d3a501cca3cd9994',1,'DMAgicController']]]
 ];

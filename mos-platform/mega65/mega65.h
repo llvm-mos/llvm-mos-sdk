@@ -22,6 +22,7 @@ extern "C" {
 
 #include <_45E100.h>
 #include <_6526.h>
+#include <_dmagic.h>
 #include <_sid.h>
 #include <_vic2.h>
 #include <_vic3.h>
@@ -162,6 +163,8 @@ struct __color_palette {
 #define HYPERVISOR (*(volatile struct __hypervisor *)0xd640)
 /// Ethernet controller
 #define ETHERNET (*(volatile struct __45E100 *)0xd6e0)
+/// DMAgic DMA controller
+#define DMA (*(volatile struct DMAgicController *)0xd700)
 /// Math busy flag
 #define MATHBUSY (*(volatile uint8_t *)0xd70f)
 /// Math accelerator

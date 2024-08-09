@@ -12,3 +12,6 @@ install_example(k_graph_test.prg)
 
 add_executable(k_graph_line_test.prg k_graph_line_test.c)
 install_example(k_graph_line_test.prg)
+
+add_executable(plasma.prg plasma.cc)
+install_example(plasma.prg)

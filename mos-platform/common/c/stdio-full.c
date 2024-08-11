@@ -8,11 +8,12 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include <__stdio-internal.h>
 
 // Flags for representing mode (see fopen()). Note these must fit the same
 // status field as the _IO?BF flags in <stdio.h> and the internal flags below.
@@ -36,20 +37,6 @@
 #define BYTESTREAM (1u << 13)
 // File associated with stream should be remove()d on closing (tmpfile()).
 #define DELONCLOSE (1u << 14)
-
-struct _FILE {
-  signed char handle;   // OS file handle
-  char *buffer;         // Pointer to buffer memory
-  size_t bufsize;       // Size of buffer
-  size_t bufidx;        // Index of current position in buffer
-  size_t bufend;        // Index of last pre-read character in buffer
-  fpos_t pos;           // Offset and multibyte parsing state
-  char ungetc_buf;      // ungetc() buffer
-  bool ungetc_buf_full; // Number of ungetc()'ed characters
-  unsigned status;      // Status flags; see above
-  char *filename;       // Name the current stream has been opened with
-  FILE *next;           // Pointer to next struct (internal)
-};
 
 // Buffer one-two lines; write() implementations have constant overhead, and
 // buffering amortizes it.
@@ -128,6 +115,9 @@ static unsigned filemode(const char *const mode) {
   }
 
   return rc;
+}
+
+__attribute__((weak)) void __update_diskpos(FILE *stream) {
 }
 
 static FILE *init_file(FILE *stream) {
@@ -563,6 +553,8 @@ static int prep_read(FILE *stream) {
 }
 
 static int fill_buffer(FILE *stream) {
+  __update_diskpos(stream);
+
   /* No need to handle buffers > INT_MAX, as PDCLib doesn't allow them */
   int rc = read(stream->handle, stream->buffer, stream->bufsize);
 

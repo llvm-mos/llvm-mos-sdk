@@ -326,8 +326,11 @@ FILE *fopen(const char *restrict filename, const char *restrict mode) {
   // interactive device."
   rc->status |= fmode | _IOLBF;
 
-  if ((rc->handle = stdio_open(filename, rc->status)) == -1)
+  if ((rc->handle = stdio_open(filename, rc->status)) == -1) {
+    free(rc->buffer);
+    free(rc);
     return NULL;
+  }
 
   rc->filename = malloc(strlen(filename));
   strcpy(rc->filename, filename);

@@ -142,7 +142,7 @@ extern "C" {
 #define JOY_FIRE2_MASK          JOY_BTN_2_MASK
 #define JOY_FIRE2(v)            ((v) & JOY_FIRE2_MASK)
 
-/// Status of SNES joystick
+/// Status of SNES joystick populated by cx16_k_joystick_get();
 struct JoyStatus {
   /**
    * Bits:
@@ -157,7 +157,12 @@ struct JoyStatus {
    */
   uint8_t data1;
   /// True if joystick is disconnected
-  bool detached;
+#if (defined(__cplusplus) || (__STDC_VERSION__ >= 202311L))
+  bool
+#else
+  _Bool
+#endif
+  detached;
 
 #ifdef __cplusplus
   /// Button A (red)

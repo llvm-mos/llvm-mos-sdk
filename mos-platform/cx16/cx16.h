@@ -167,10 +167,13 @@ struct JoyStatus {
       detached;
 
 #ifdef __cplusplus
-  /// Update status by calling the `JOYSTICK_GET` kernal routine
-  ///
-  /// @param joystick_num Joystick number (0 = keyboard, 1-4 = port 1-4)
-  inline void update(const uint8_t joystick_num) {
+  /**
+   * Get state of one of the joysticks by calling the `JOYSTICK_GET` kernal routine.
+   *
+   * @param joystick_num Use 0 for the keyboard joystick; 1 to 4 for SNES controllers.
+   * @returns 3-byte struct containing state of all buttons and attachment status.
+   */
+  inline void get(const uint8_t joystick_num) {
     asm volatile("JOYSTICK_GET = $FF56\n"
                  "jsr __JOYSTICK_GET\n"
                  : /* output */ "=a"(data0), "=x"(data1), "=y"(detached)
@@ -499,7 +502,14 @@ void cx16_k_graph_set_font(void *fontaddr) __attribute__((leaf));
 void cx16_k_graph_set_window(unsigned int x, unsigned int y, unsigned int width, unsigned int height) __attribute__((leaf));
 int cx16_k_i2c_read_byte(unsigned char device, unsigned char offset) __attribute__((leaf)); // returns negative on error
 int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned char byte) __attribute__((leaf)); // return negative on error
-struct JoyStatus cx16_k_joystick_get(unsigned char sticknum) __attribute__((leaf));
+
+/**
+ * Get state of one of the joysticks by calling the `JOYSTICK_GET` kernal routine.
+ *
+ * @param joystick_num Use 0 for the keyboard joystick; 1 to 4 for SNES controllers.
+ * @returns 3-byte struct containing state of all buttons and attachment status.
+ */
+struct JoyStatus cx16_k_joystick_get(unsigned char joystick_num) __attribute__((leaf));
 void cx16_k_joystick_scan(void) __attribute__((leaf));
 unsigned char cx16_k_kbdbuf_get_modifiers(void) __attribute__((leaf));
 int cx16_k_kbdbuf_peek(unsigned char *index_ptr) __attribute__((leaf)); // returns negative if empty, if index_ptr non-NULL set contents to queue length

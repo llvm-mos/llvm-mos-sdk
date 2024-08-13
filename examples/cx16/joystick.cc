@@ -3,14 +3,11 @@
 // See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 // information.
 
-// Example of how to read joysticks on cx16.
+// Read joystick state on cx16.
 //
-// Notes:
-//
-// - Status is stored in 3-byte struct `JoyStatus`.
-// - Controller state is read either with
-//   - the `JoyState::update()` member function in C++, OR
-//   - `cx16_k_joystick_get()` using regular C.
+// State is stored in a 3-byte struct, `JoyStatus`, and read either
+// - in C++ with member function `JoyState::get()` OR
+// - in C/C++ with `cx16_k_joystick_get()`
 
 #include <cstdio>
 #include <cx16.h>
@@ -30,56 +27,56 @@ int main(void) {
   JoyStatus joy;
 
   while (true) {
-    joy.update(JOY_KEYBOARD);
+    joy.get(JOY_KEYBOARD);
     if (joy.detached) {
-        continue;
+      continue;
     }
 
     // Directions
     if (joy.north_east()) {
-      printf("NE\n");
+      printf("NE ");
     } else if (joy.north_west()) {
-      printf("NW\n");
+      printf("NW ");
     } else if (joy.south_east()) {
-      printf("SE\n");
+      printf("SE ");
     } else if (joy.south_west()) {
-      printf("SW\n");
+      printf("SW ");
     } else if (joy.north()) {
-      printf("N\n");
+      printf("N ");
     } else if (joy.south()) {
-      printf("S\n");
+      printf("S ");
     } else if (joy.east()) {
-      printf("E\n");
+      printf("E ");
     } else if (joy.west()) {
-      printf("W\n");
+      printf("W ");
     }
 
     // Other buttons
     if (joy.button_a()) {
-      printf("Button A\n");
+      printf("A ");
     }
     if (joy.button_b()) {
-      printf("Button B\n");
+      printf("B ");
     }
     if (joy.button_x()) {
-      printf("Button X\n");
+      printf("X ");
     }
     if (joy.button_y()) {
-      printf("Button Y\n");
+      printf("Y ");
     }
     if (joy.fire_left()) {
-      printf("Fire left\n");
+      printf("FireLeft ");
     }
     if (joy.fire_right()) {
-      printf("Fire right\n");
+      printf("FireRight ");
     }
     if (joy.select()) {
-      printf("Select\n");
+      printf("Select ");
     }
     if (joy.start()) {
-      printf("Start\n");
+      printf("Start ");
     }
 
-    waitvsync();
+    waitvsync(); // cool it!
   }
 }

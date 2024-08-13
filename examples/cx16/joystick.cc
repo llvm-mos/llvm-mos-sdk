@@ -7,7 +7,7 @@
 #include <cx16.h>
 
 int main(void) {
-  printf("Use joystick in port 1.");
+  printf("Use joystick in port 1.\n");
 
   while (true) {
     const auto joy = cx16_k_joystick_get(0);

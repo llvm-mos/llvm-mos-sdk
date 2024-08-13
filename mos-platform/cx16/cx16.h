@@ -130,17 +130,13 @@ extern "C" {
 #define JOY_RIGHT_MASK          0x01
 
 #define JOY_BTN_A_MASK          JOY_BTN_1_MASK
-#define JOY_BTN_B_MASK          JOY_BTN_2_MASK
+#define JOY_BTN_B_MASK          JOY_BTN_1_MASK
+#define JOY_BTN_X_MASK          JOY_BTN_2_MASK
+#define JOY_BTN_Y_MASK          JOY_BTN_2_MASK
 #define JOY_SELECT_MASK         JOY_BTN_3_MASK
 #define JOY_START_MASK          JOY_BTN_4_MASK
-
-#define JOY_BTN_A(v)            ((v) & JOY_BTN_A_MASK)
-#define JOY_BTN_B(v)            ((v) & JOY_BTN_B_MASK)
-#define JOY_SELECT(v)           ((v) & JOY_SELECT_MASK)
-#define JOY_START(v)            ((v) & JOY_START_MASK)
-
-#define JOY_FIRE2_MASK          JOY_BTN_2_MASK
-#define JOY_FIRE2(v)            ((v) & JOY_FIRE2_MASK)
+#define JOY_FIRE_LEFT_MASK      JOY_BTN_3_MASK
+#define JOY_FIRE_RIGHT_MASK     JOY_BTN_4_MASK
 
 /// Status of SNES joystick populated by cx16_k_joystick_get();
 struct JoyStatus {
@@ -166,15 +162,15 @@ struct JoyStatus {
 
 #ifdef __cplusplus
   /// Button A (red)
-  inline bool button_a() const { return !(data1 & JOY_BTN_1_MASK); }
+  inline bool button_a() const { return !(data1 & JOY_BTN_A_MASK); }
   /// Button B (yellow)
-  inline bool button_b() const { return !(data0 & JOY_BTN_1_MASK); }
+  inline bool button_b() const { return !(data0 & JOY_BTN_B_MASK); }
   /// Button X (blue)
-  inline bool button_x() const { return !(data1 & JOY_BTN_2_MASK); }
+  inline bool button_x() const { return !(data1 & JOY_BTN_X_MASK); }
   /// Button Y (green)
-  inline bool button_y() const { return !(data0 & JOY_BTN_2_MASK); }
-  inline bool fire_left() const { return !(data1 & JOY_BTN_3_MASK); }
-  inline bool fire_right() const { return !(data1 & JOY_BTN_4_MASK); }
+  inline bool button_y() const { return !(data0 & JOY_BTN_Y_MASK); }
+  inline bool fire_left() const { return !(data1 & JOY_FIRE_LEFT_MASK); }
+  inline bool fire_right() const { return !(data1 & JOY_FIRE_RIGHT_MASK); }
   inline bool select() const { return !(data0 & JOY_SELECT_MASK); }
   inline bool start() const { return !(data0 & JOY_START_MASK); }
   inline bool north() const { return !(data0 & JOY_UP_MASK); }

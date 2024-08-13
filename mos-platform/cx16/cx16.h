@@ -138,6 +138,12 @@ extern "C" {
 #define JOY_FIRE_LEFT_MASK      JOY_BTN_3_MASK
 #define JOY_FIRE_RIGHT_MASK     JOY_BTN_4_MASK
 
+#define JOY_KEYBOARD            0
+#define JOY_PORT1               1
+#define JOY_PORT2               2
+#define JOY_PORT3               3
+#define JOY_PORT4               4
+
 /// Status of SNES joystick populated by cx16_k_joystick_get();
 struct JoyStatus {
   /**
@@ -158,9 +164,19 @@ struct JoyStatus {
 #else
   _Bool
 #endif
-  detached;
+      detached;
 
 #ifdef __cplusplus
+  /// Update status by calling the `JOYSTICK_GET` kernal routine
+  ///
+  /// @param joystick_num Joystick number (0 = keyboard, 1-4 = port 1-4)
+  inline void update(const uint8_t joystick_num) {
+    asm volatile("JOYSTICK_GET = $FF56\n"
+                 "jsr __JOYSTICK_GET\n"
+                 : /* output */ "=a"(data0), "=x"(data1), "=y"(detached)
+                 : /* input */ "a"(joystick_num)
+                 : /* a, x, y are automatically on the clobber list */);
+  }
   /// Button A (red)
   inline bool button_a() const { return !(data1 & JOY_BTN_A_MASK); }
   /// Button B (yellow)
@@ -191,7 +207,6 @@ struct JoyStatus {
   }
 #endif
 };
-
 
 /* Additional mouse button mask */
 #define MOUSE_BTN_MIDDLE        0x02

@@ -142,6 +142,56 @@ extern "C" {
 #define JOY_FIRE2_MASK          JOY_BTN_2_MASK
 #define JOY_FIRE2(v)            ((v) & JOY_FIRE2_MASK)
 
+/// Status of SNES joystick
+struct JoyStatus {
+  /**
+   * Bits:
+   * | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+   * | B | Y |SEL|STA|UP |DN |LT |RT |
+   */
+  uint8_t data0;
+  /**
+   * Bits:
+   * | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+   * | A | X | L | R | 1 | 1 | 1 | 1 |
+   */
+  uint8_t data1;
+  /// True if joystick is disconnected
+  bool detached;
+
+#ifdef __cplusplus
+  /// Button A (red)
+  inline bool button_a() const { return !(data1 & JOY_BTN_1_MASK); }
+  /// Button B (yellow)
+  inline bool button_b() const { return !(data0 & JOY_BTN_1_MASK); }
+  /// Button X (blue)
+  inline bool button_x() const { return !(data1 & JOY_BTN_2_MASK); }
+  /// Button Y (green)
+  inline bool button_y() const { return !(data0 & JOY_BTN_2_MASK); }
+  inline bool fire_left() const { return !(data1 & JOY_BTN_3_MASK); }
+  inline bool fire_right() const { return !(data1 & JOY_BTN_4_MASK); }
+  inline bool select() const { return !(data0 & JOY_SELECT_MASK); }
+  inline bool start() const { return !(data0 & JOY_START_MASK); }
+  inline bool north() const { return !(data0 & JOY_UP_MASK); }
+  inline bool south() const { return !(data0 & JOY_DOWN_MASK); }
+  inline bool east() const { return !(data0 & JOY_RIGHT_MASK); }
+  inline bool west() const { return !(data0 & JOY_LEFT_MASK); }
+  inline bool north_east() const {
+    return !(data0 & (JOY_UP_MASK | JOY_RIGHT_MASK));
+  }
+  inline bool north_west() const {
+    return !(data0 & (JOY_UP_MASK | JOY_LEFT_MASK));
+  }
+  inline bool south_east() const {
+    return !(data0 & (JOY_DOWN_MASK | JOY_RIGHT_MASK));
+  }
+  inline bool south_west() const {
+    return !(data0 & (JOY_DOWN_MASK | JOY_LEFT_MASK));
+  }
+#endif
+};
+
+
 /* Additional mouse button mask */
 #define MOUSE_BTN_MIDDLE        0x02
 
@@ -433,7 +483,7 @@ void cx16_k_graph_set_font(void *fontaddr) __attribute__((leaf));
 void cx16_k_graph_set_window(unsigned int x, unsigned int y, unsigned int width, unsigned int height) __attribute__((leaf));
 int cx16_k_i2c_read_byte(unsigned char device, unsigned char offset) __attribute__((leaf)); // returns negative on error
 int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned char byte) __attribute__((leaf)); // return negative on error
-long cx16_k_joystick_get(unsigned char sticknum) __attribute__((leaf)); // returns $YYYYXXAA (see docs, result negative if joystick not present)
+struct JoyStatus cx16_k_joystick_get(unsigned char sticknum) __attribute__((leaf));
 void cx16_k_joystick_scan(void) __attribute__((leaf));
 unsigned char cx16_k_kbdbuf_get_modifiers(void) __attribute__((leaf));
 int cx16_k_kbdbuf_peek(unsigned char *index_ptr) __attribute__((leaf)); // returns negative if empty, if index_ptr non-NULL set contents to queue length

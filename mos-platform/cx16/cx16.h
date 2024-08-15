@@ -37,6 +37,8 @@
 #ifndef _CX16_H
 #define _CX16_H
 
+#include <stdbool.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -118,7 +120,7 @@ extern "C" {
 #define COLOR_LIGHTBLUE         0x0E
 #define COLOR_GRAY3             0x0F
 
-/* NES controller masks for joy_read() */
+/* NES controller masks for JoyStatus */
 
 #define JOY_BTN_1_MASK          0x80
 #define JOY_BTN_2_MASK          0x40
@@ -159,12 +161,7 @@ struct JoyStatus {
    */
   uint8_t data1;
   /// True if joystick is disconnected
-#if (defined(__cplusplus) || (__STDC_VERSION__ >= 202311L))
-  bool
-#else
-  _Bool
-#endif
-      detached;
+  bool detached;
 
 #ifdef __cplusplus
   /**

@@ -4,15 +4,11 @@
 // information.
 
 // Read joystick state on cx16.
-//
-// State is stored in a 3-byte struct, `JoyStatus`, and read either
-// - in C++ with member function `JoyState::get()` OR
-// - in C/C++ with `cx16_k_joystick_get()`
 
 #include <cstdio>
 #include <cx16.h>
 
-int main(void) {
+int main() {
   printf("Use keyboard joystick.\n\n");
   printf("- Enter:  Start\n");
   printf("- Lshift: Select\n");
@@ -24,10 +20,8 @@ int main(void) {
   printf("- D:      Fire left\n");
   printf("- C:      Fire right\n\n");
 
-  JoyStatus joy;
-
   while (true) {
-    joy.get(JOY_KEYBOARD);
+    const JoyState joy = cx16_k_joystick_get(JOY_KEYBOARD);
 
     // Directions
     if (joy.north_east()) {

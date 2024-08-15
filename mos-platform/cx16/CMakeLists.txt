@@ -58,7 +58,6 @@ add_platform_library(cx16-c
  cx16_k_graph_set_window.s
  cx16_k_i2c_read_byte.s
  cx16_k_i2c_write_byte.s
- cx16_k_joystick_get.s
  cx16_k_joystick_scan.s
  cx16_k_kbdbuf_get_modifiers.s
  cx16_k_kbdbuf_peek.s

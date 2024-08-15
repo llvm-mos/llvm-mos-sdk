@@ -28,9 +28,6 @@ int main(void) {
 
   while (true) {
     joy.get(JOY_KEYBOARD);
-    if (joy.detached) {
-      continue;
-    }
 
     // Directions
     if (joy.north_east()) {

@@ -57,13 +57,13 @@ static constexpr uint8_t sine_table[UINT8_MAX + 1] = {
     0x8c, 0x89, 0x86, 0x83};
 
 // Generate charset with 8 * 256 characters at given address
-void make_charset(uint16_t charset_address, RandomXORS &rng) {
+void make_charset(const uint16_t charset_address, RandomXORS &rng) {
 
   // Lambda function to generate a single 8x8 pixels pattern
   auto make_char = [&](const uint8_t sine) {
     uint8_t pattern = 0;
-    static constexpr uint8_t bits[8] = {1, 2, 4, 8, 16, 32, 64, 128};
-    for (const auto bit : bits) {
+    static constexpr uint8_t BITS[8] = {1, 2, 4, 8, 16, 32, 64, 128};
+    for (const auto bit : BITS) {
       if (rng.rand8() > sine) {
         pattern |= bit;
       }
@@ -72,9 +72,9 @@ void make_charset(uint16_t charset_address, RandomXORS &rng) {
   };
 
   auto charset = reinterpret_cast<volatile uint8_t *>(charset_address);
-
+  constexpr int SINE_REPEAT = 8;
   for (const auto sine : sine_table) {
-    for (int _i = 0; _i < 8; ++_i) {
+    for (int _i = 0; _i < SINE_REPEAT; ++_i) {
       *(charset++) = make_char(sine);
     }
   }
@@ -123,13 +123,17 @@ public:
 
   // Write summed buffers to VERA screen memory
   inline void write_to_screen() const {
-    size_t row = 0;
-    VERA.control = 0;
-    // Set two byte stride: one for text; one for color
-    VERA.address_hi = VERA_INC_2 | 1U;
+    constexpr uint32_t TEXTMODE_VRAM = 0x1b000;        // Top left screen corner
+    constexpr uint16_t TOTAL_COLS = 128;               // Visible and hidden
+    constexpr uint16_t BYTES_PER_ROW = 2 * TOTAL_COLS; // Chars w. color
 
+    // Set two byte VRAM stride: one for text; one for color
+    VERA.control = 0;
+    VERA.address_hi = (uint8_t)(TEXTMODE_VRAM >> 16) | VERA_INC_2;
+
+    uint16_t row = 0;
     for (const auto y : ydata) {
-      VERA.address = 0xb000 + (2 * 128 * row++);
+      VERA.address = (uint16_t)TEXTMODE_VRAM + BYTES_PER_ROW * row++;
 #pragma unroll
       for (const auto x : xdata) {
         VERA.data0 = x + y;
@@ -139,12 +143,16 @@ public:
 };
 
 int main() {
-  static constexpr size_t COLS = 80;
-  static constexpr size_t ROWS = 60;
-  static constexpr uint16_t CHARSET_ADDRESS = 0x3000;
+  constexpr size_t COLS = 80; // Visible columns
+  constexpr size_t ROWS = 60; // Visible rows
+  constexpr uint16_t CHARSET_ADDRESS = 0x3000;
+
   RandomXORS rng;
   Plasma<COLS, ROWS> plasma(CHARSET_ADDRESS, rng);
+  videomode(VIDEOMODE_80COL);
+
   while (true) {
+    waitvsync(); // cool it!
     plasma.update();
   }
 }

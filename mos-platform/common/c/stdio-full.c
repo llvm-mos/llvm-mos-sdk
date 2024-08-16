@@ -185,7 +185,8 @@ FILE *tmpfile(void) {
   char name[L_tmpnam];
   tmpnam(name);
   FILE *f = fopen(name, "wb+");
-  f->status |= DELONCLOSE;
+  if (f)
+    f->status |= DELONCLOSE;
   return f;
 }
 

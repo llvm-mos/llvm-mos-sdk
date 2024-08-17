@@ -15,3 +15,6 @@ install_example(k_graph_line_test.prg)
 
 add_executable(k_joystick_get_test.prg k_joystick_get_test.cc)
 install_example(k_joystick_get_test.prg)
+
+add_executable(plasma.prg plasma.cc)
+install_example(plasma.prg)

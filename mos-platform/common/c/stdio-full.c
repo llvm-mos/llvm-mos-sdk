@@ -128,36 +128,11 @@ static unsigned filemode(const char *const mode) {
   return rc;
 }
 
-static FILE *init_file(FILE *stream) {
-  FILE *rc = stream;
-
-  if (rc == NULL) {
-    if ((rc = (FILE *)malloc(sizeof(struct _FILE))) == NULL) {
-      /* No memory */
-      return NULL;
-    }
-  }
-
-  if ((rc->buffer = (char *)malloc(BUFSIZ)) == NULL) {
-    /* No memory */
-    free(rc);
-    return NULL;
-  }
-
-  rc->bufsize = BUFSIZ;
-  rc->bufidx = 0;
-  rc->bufend = 0;
-  rc->pos = 0;
-  rc->ungetc_buf_full = false;
-  rc->status = FREEBUFFER;
-  rc->del_filename = NULL;
-
-  // TODO: Setting mbstate
-
-  return rc;
-}
-
-static signed char stdio_open(const char *const filename, unsigned int mode) {
+// Initializes stream by opening the handle and initializing most of structure
+// members.  stream->buffer, stream->bufsize and stream->next must be
+// initialized on entry.
+// Returns stream on success, NULL on failure (and frees stream).
+static FILE *stdio_open(FILE *stream, const char *filename, unsigned int mode) {
   int osmode;
 
   if (mode & FRW)
@@ -175,7 +150,23 @@ static signed char stdio_open(const char *const filename, unsigned int mode) {
   else if (mode & FAPPEND)
     osmode |= O_APPEND;
 
-  return open(filename, osmode);
+  stream->handle = open(filename, osmode);
+  if (stream->handle == -1) {
+    free(stream->buffer);
+    free(stream);
+    return NULL;
+  }
+  
+  stream->bufidx = 0;
+  stream->bufend = 0;
+  stream->pos = 0;
+  stream->ungetc_buf_full = false;
+  // Setting buffer to _IOLBF because "when opened, a stream is fully
+  // buffered if and only if it can be determined not to refer to an
+  // interactive device."
+  stream->status = mode | _IOLBF | FREEBUFFER;
+  stream->del_filename = NULL;
+  return stream;
 }
 
 // Operations on files
@@ -254,35 +245,37 @@ static int flush_buffer(FILE *stream) {
   }
 }
 
-// Removes the given stream from the internal list of open files.
-void remove_stream(FILE *stream) {
-  if (filelist == stream) {
-    filelist = stream->next;
-    return;
-  }
-  for (FILE *f = filelist;; f = f->next) {
-    if (f->next == stream) {
-      f->next = f->next->next;
-      break;
-    }
-  }
-}
+static int stdio_close(FILE *stream) {
+  int rc = 0;
 
-int fclose(FILE *stream) {
   /* Flush buffer */
-  if (stream->status & FWRITE && flush_buffer(stream) == EOF)
-    return EOF;
+  if (stream->status & FWRITE)
+    rc = flush_buffer(stream);
 
   /* Close handle */
-  close(stream->handle);
-
-  /* Remove stream from list */
-  remove_stream(stream);
+  if (close(stream->handle) != 0)
+    rc = EOF;
 
   /* Delete tmpfile() */
   if (stream->del_filename) {
-    remove(stream->del_filename);
+    if (remove(stream->del_filename) != 0)
+      rc = EOF;
     free(stream->del_filename);
+  }
+  return rc;
+}
+
+static void free_stream(FILE *stream) {
+  /* Remove stream from list */
+  if (filelist == stream) {
+    filelist = stream->next;
+  } else {
+    for (FILE *f = filelist;; f = f->next) {
+      if (f->next == stream) {
+        f->next = f->next->next;
+        break;
+      }
+    }
   }
 
   /* Free buffer */
@@ -292,8 +285,12 @@ int fclose(FILE *stream) {
   /* Free stream */
   if (stream != stdin && stream != stdout && stream != stderr)
     free(stream);
+}
 
-  return 0;
+int fclose(FILE *stream) {
+  int rc = stdio_close(stream);
+  free_stream(stream);
+  return rc;
 }
 
 int fflush(FILE *stream) {
@@ -316,26 +313,23 @@ int fflush(FILE *stream) {
 FILE *fopen(const char *restrict filename, const char *restrict mode) {
   unsigned int fmode = filemode(mode);
 
-  // Initializing FILE structure failed.
-  FILE *rc;
-  if ((rc = init_file(NULL)) == NULL)
+  FILE *stream = (FILE *)malloc(sizeof(struct _FILE));
+  if (stream == NULL)
     return NULL;
 
-  // Setting buffer to _IOLBF because "when opened, a stream is fully
-  // buffered if and only if it can be determined not to refer to an
-  // interactive device."
-  rc->status |= fmode | _IOLBF;
-
-  if ((rc->handle = stdio_open(filename, rc->status)) == -1) {
-    free(rc->buffer);
-    free(rc);
+  stream->buffer = (char *)malloc(BUFSIZ);
+  if (stream->buffer == NULL) {
+    free(stream);
     return NULL;
   }
 
-  rc->next = filelist;
-  filelist = rc;
-
-  return rc;
+  stream = stdio_open(stream, filename, fmode);
+  if (stream != NULL) {
+    stream->bufsize = BUFSIZ;
+    stream->next = filelist;
+    filelist = stream;
+  }
+  return stream;
 }
 
 FILE *freopen(const char *restrict filename, const char *restrict mode,
@@ -347,62 +341,20 @@ FILE *freopen(const char *restrict filename, const char *restrict mode,
     return NULL;
   }
 
-  /* Flush buffer */
-  if (stream->status & FWRITE)
-    flush_buffer(stream);
+  /* C standard: "Failure to close the file is ignored" */
+  stdio_close(stream);
 
-  if (filename == NULL)
-    return NULL;
-
-  /* Close handle */
-  close(stream->handle);
-
-  /* Remove stream from list */
-  remove_stream(stream);
-
-  /* Delete tmpfile() */
-  if (stream->del_filename) {
-    remove(stream->del_filename);
-    free(stream->del_filename);
-  }
-
-  /* Free buffer */
-  if (stream->status & FREEBUFFER)
-    free(stream->buffer);
-
-  /* Stream is closed, or never was open at this point.
-     Now we check if we have the whereabouts to open it.
-  */
-
-  if (fmode == 0) {
-    /* Mode invalid */
-    free(stream);
+  if (filename == NULL || fmode == 0) {
+    free_stream(stream);
     return NULL;
   }
 
-  /* (Re-)initializing the structure. */
-  if (init_file(stream) == NULL) {
-    /* Re-init failed. */
-    free(stream);
+  if (setvbuf(stream, NULL, _IOLBF, BUFSIZ) != 0) {
+    free_stream(stream);
     return NULL;
   }
 
-  /* Resetting buffer mode and filemode */
-  stream->status |= fmode | _IOLBF;
-
-  /* Attempt open */
-  if ((stream->handle = stdio_open(filename, stream->status)) == -1) {
-    /* OS open() failed */
-    free(stream->buffer);
-    free(stream);
-    return NULL;
-  }
-
-  /* Adding to list of open files */
-  stream->next = filelist;
-  filelist = stream;
-
-  return stream;
+  return stdio_open(stream, filename, fmode);
 }
 
 void setbuf(FILE *restrict stream, char *restrict buf) {

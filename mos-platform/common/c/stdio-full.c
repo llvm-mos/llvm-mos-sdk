@@ -34,8 +34,6 @@
 #define WIDESTREAM (1u << 12)
 // Stream is byte-oriented.
 #define BYTESTREAM (1u << 13)
-// File associated with stream should be remove()d on closing (tmpfile()).
-#define DELONCLOSE (1u << 14)
 
 struct _FILE {
   signed char handle;   // OS file handle
@@ -47,7 +45,7 @@ struct _FILE {
   char ungetc_buf;      // ungetc() buffer
   bool ungetc_buf_full; // Number of ungetc()'ed characters
   unsigned status;      // Status flags; see above
-  char *filename;       // Name the current stream has been opened with
+  char *del_filename;   // Name of the file to be remove()d on closing
   FILE *next;           // Pointer to next struct (internal)
 };
 
@@ -152,6 +150,7 @@ static FILE *init_file(FILE *stream) {
   rc->pos = 0;
   rc->ungetc_buf_full = false;
   rc->status = FREEBUFFER;
+  rc->del_filename = NULL;
 
   // TODO: Setting mbstate
 
@@ -182,12 +181,15 @@ static signed char stdio_open(const char *const filename, unsigned int mode) {
 // Operations on files
 
 FILE *tmpfile(void) {
-  char name[L_tmpnam];
-  tmpnam(name);
-  FILE *f = fopen(name, "wb+");
-  if (f)
-    f->status |= DELONCLOSE;
-  return f;
+  char filename[L_tmpnam];
+  tmpnam(filename);
+  FILE *stream = fopen(filename, "wb+");
+  if (stream) {
+    stream->del_filename = malloc(strlen(filename));
+    if (stream->del_filename)
+      strcpy(stream->del_filename, filename);
+  }
+  return stream;
 }
 
 char *tmpnam(char *s) {
@@ -278,17 +280,14 @@ int fclose(FILE *stream) {
   remove_stream(stream);
 
   /* Delete tmpfile() */
-  if (stream->status & DELONCLOSE)
-    remove(stream->filename);
+  if (stream->del_filename) {
+    remove(stream->del_filename);
+    free(stream->del_filename);
+  }
 
   /* Free buffer */
   if (stream->status & FREEBUFFER)
     free(stream->buffer);
-
-  /* Free filename (standard streams do not have one, but free( NULL )
-     is a valid no-op)
-  */
-  free(stream->filename);
 
   /* Free stream */
   if (stream != stdin && stream != stdout && stream != stderr)
@@ -333,29 +332,10 @@ FILE *fopen(const char *restrict filename, const char *restrict mode) {
     return NULL;
   }
 
-  rc->filename = malloc(strlen(filename));
-  strcpy(rc->filename, filename);
-
   rc->next = filelist;
   filelist = rc;
 
   return rc;
-}
-
-// TODO: Support mode changes
-static int change_mode(FILE *stream, unsigned int mode) {
-  if (mode == 0)
-    return INT_MIN;
-
-  /* Attempt mode change without closing the stream */
-
-  if (stream->filename == NULL) {
-    /* Standard stream, no filename for reopen */
-    return INT_MIN;
-  } else {
-    /* Stream with file associated, attempt reopen */
-    return 0;
-  }
 }
 
 FILE *freopen(const char *restrict filename, const char *restrict mode,
@@ -371,25 +351,8 @@ FILE *freopen(const char *restrict filename, const char *restrict mode,
   if (stream->status & FWRITE)
     flush_buffer(stream);
 
-  if (filename == NULL) {
-    /* Attempt to change mode without closing stream */
-    switch (change_mode(stream, fmode)) {
-    case INT_MIN:
-      /* fail completely */
-      return NULL;
-
-    case 0:
-      /* fail; try close / reopen */
-      filename = stream->filename;
-      /* Setting to NULL to make the free() below a non-op. */
-      stream->filename = NULL;
-      break;
-
-    default:
-      /* success */
-      return stream;
-    }
-  }
+  if (filename == NULL)
+    return NULL;
 
   /* Close handle */
   close(stream->handle);
@@ -398,32 +361,14 @@ FILE *freopen(const char *restrict filename, const char *restrict mode,
   remove_stream(stream);
 
   /* Delete tmpfile() */
-  if (stream->status & DELONCLOSE) {
-    /* Have to switch here; stream->filename may have moved to
-       filename after failed in-place mode change above.
-    */
-    remove((stream->filename == NULL) ? filename : stream->filename);
-    stream->status &= ~DELONCLOSE;
+  if (stream->del_filename) {
+    remove(stream->del_filename);
+    free(stream->del_filename);
   }
 
   /* Free buffer */
   if (stream->status & FREEBUFFER)
     free(stream->buffer);
-
-  if (filename == NULL) {
-    /* Input was filename NULL, stream->filename NULL.
-       No filename means there is nothing to reopen. In-place
-       mode change was already attempted (and failed) above.
-    */
-    return NULL;
-  } else {
-    /* We have a filename, either from input or (if filename
-       was NULL) from stream. We will attempt the re-open with
-       that, and will retrieve _PDCLIB_realpath() from that.
-       So stream->filename is no longer needed.
-    */
-    free(stream->filename);
-  }
 
   /* Stream is closed, or never was open at this point.
      Now we check if we have the whereabouts to open it.
@@ -431,14 +376,6 @@ FILE *freopen(const char *restrict filename, const char *restrict mode,
 
   if (fmode == 0) {
     /* Mode invalid */
-    free(stream->filename);
-    free(stream);
-    return NULL;
-  }
-
-  if (filename == NULL || filename[0] == '\0') {
-    /* No filename available (standard stream?) */
-    free(stream->filename);
     free(stream);
     return NULL;
   }
@@ -446,7 +383,6 @@ FILE *freopen(const char *restrict filename, const char *restrict mode,
   /* (Re-)initializing the structure. */
   if (init_file(stream) == NULL) {
     /* Re-init failed. */
-    free(stream->filename);
     free(stream);
     return NULL;
   }
@@ -457,14 +393,10 @@ FILE *freopen(const char *restrict filename, const char *restrict mode,
   /* Attempt open */
   if ((stream->handle = stdio_open(filename, stream->status)) == -1) {
     /* OS open() failed */
-    free(stream->filename);
     free(stream->buffer);
     free(stream);
     return NULL;
   }
-
-  stream->filename = malloc(strlen(filename));
-  strcpy(stream->filename, filename);
 
   /* Adding to list of open files */
   stream->next = filelist;

@@ -85,128 +85,6 @@ void _stdio_closeall(void) {
     fclose(f);
 }
 
-// Helper function that parses the C-style mode string passed to fopen() into
-// the PDCLib flags FREAD, FWRITE, FAPPEND, FRW (read-write) and FBIN (binary
-// mode).
-static unsigned filemode(const char *const mode) {
-  unsigned rc = 0;
-
-  switch (mode[0]) {
-  case 'r':
-    rc |= FREAD;
-    break;
-
-  case 'w':
-    rc |= FWRITE;
-    break;
-
-  case 'a':
-    rc |= FAPPEND | FWRITE;
-    break;
-  }
-
-  for (int i = 1; i < 4; ++i) {
-    switch (mode[i]) {
-    case '+':
-      rc |= FRW;
-      break;
-
-    case 'b':
-      rc |= FBIN;
-      break;
-
-    case 'x':
-      rc |= FEXCL;
-      break;
-
-    case '\0':
-      // End of mode
-      return rc;
-    }
-  }
-
-  return rc;
-}
-
-// Initializes stream by opening the handle and initializing most of structure
-// members.  stream->buffer, stream->bufsize and stream->next must be
-// initialized on entry.
-// Returns stream on success, NULL on failure (and frees stream).
-static FILE *stdio_open(FILE *stream, const char *filename, unsigned int mode) {
-  int osmode;
-
-  if (mode & FRW)
-    osmode = O_RDWR;
-  else if (mode & FREAD)
-    osmode = O_RDONLY;
-  else
-    osmode = O_WRONLY;
-
-  if (mode & (FWRITE | FAPPEND))
-    osmode |= O_CREAT;
-
-  if (mode & FWRITE)
-    osmode |= mode & FEXCL ? O_EXCL : O_TRUNC;
-  else if (mode & FAPPEND)
-    osmode |= O_APPEND;
-
-  stream->handle = open(filename, osmode);
-  if (stream->handle == -1) {
-    free(stream->buffer);
-    free(stream);
-    return NULL;
-  }
-  
-  stream->bufidx = 0;
-  stream->bufend = 0;
-  stream->pos = 0;
-  stream->ungetc_buf_full = false;
-  // Setting buffer to _IOLBF because "when opened, a stream is fully
-  // buffered if and only if it can be determined not to refer to an
-  // interactive device."
-  stream->status = mode | _IOLBF | FREEBUFFER;
-  stream->del_filename = NULL;
-  return stream;
-}
-
-// Operations on files
-
-FILE *tmpfile(void) {
-  char filename[L_tmpnam];
-  tmpnam(filename);
-  FILE *stream = fopen(filename, "wb+");
-  if (stream) {
-    stream->del_filename = malloc(strlen(filename));
-    if (stream->del_filename)
-      strcpy(stream->del_filename, filename);
-  }
-  return stream;
-}
-
-char *tmpnam(char *s) {
-  static char filename[L_tmpnam];
-  if (s == NULL)
-    s = filename;
-
-  strcpy(s, "tmp00");
-  while (s[4] != '2' || s[3] != '4') {
-    FILE *f = fopen(s, "rb");
-    if (!f)
-      break;
-    fclose(f);
-    if (s[3] == '9') {
-      s[3] = '0';
-      ++s[4];
-    } else {
-      ++s[3];
-    }
-  }
-
-  return s;
-}
-
-// File access functions
-
 /* A system call that writes a stream's buffer.
    Returns 0 on success, EOF on write error.
    Sets stream error flags and errno appropriately on error.
@@ -287,6 +165,128 @@ static void free_stream(FILE *stream) {
     free(stream);
 }
 
+// Helper function that parses the C-style mode string passed to fopen() into
+// the PDCLib flags FREAD, FWRITE, FAPPEND, FRW (read-write) and FBIN (binary
+// mode).
+static unsigned filemode(const char *const mode) {
+  unsigned rc = 0;
+
+  switch (mode[0]) {
+  case 'r':
+    rc |= FREAD;
+    break;
+
+  case 'w':
+    rc |= FWRITE;
+    break;
+
+  case 'a':
+    rc |= FAPPEND | FWRITE;
+    break;
+  }
+
+  for (int i = 1; i < 4; ++i) {
+    switch (mode[i]) {
+    case '+':
+      rc |= FRW;
+      break;
+
+    case 'b':
+      rc |= FBIN;
+      break;
+
+    case 'x':
+      rc |= FEXCL;
+      break;
+
+    case '\0':
+      // End of mode
+      return rc;
+    }
+  }
+
+  return rc;
+}
+
+// Initializes stream by opening the handle and initializing most of structure
+// members.  stream->buffer, stream->bufsize and stream->next must be
+// initialized on entry.
+// Returns stream on success, NULL on failure (and frees stream).
+static FILE *stdio_open(FILE *stream, const char *filename, unsigned int mode) {
+  // Setting buffer to _IOLBF because "when opened, a stream is fully
+  // buffered if and only if it can be determined not to refer to an
+  // interactive device."
+  stream->status = mode | _IOLBF | FREEBUFFER;
+
+  int osmode;
+
+  if (mode & FRW)
+    osmode = O_RDWR;
+  else if (mode & FREAD)
+    osmode = O_RDONLY;
+  else
+    osmode = O_WRONLY;
+
+  if (mode & (FWRITE | FAPPEND))
+    osmode |= O_CREAT;
+
+  if (mode & FWRITE)
+    osmode |= mode & FEXCL ? O_EXCL : O_TRUNC;
+  else if (mode & FAPPEND)
+    osmode |= O_APPEND;
+
+  stream->handle = open(filename, osmode);
+  if (stream->handle == -1) {
+    free_stream(stream);
+    return NULL;
+  }
+
+  stream->bufidx = 0;
+  stream->bufend = 0;
+  stream->pos = 0;
+  stream->ungetc_buf_full = false;
+  stream->del_filename = NULL;
+  return stream;
+}
+
+// Operations on files
+
+FILE *tmpfile(void) {
+  char filename[L_tmpnam];
+  tmpnam(filename);
+  FILE *stream = fopen(filename, "wb+");
+  if (stream) {
+    stream->del_filename = malloc(strlen(filename));
+    if (stream->del_filename)
+      strcpy(stream->del_filename, filename);
+  }
+  return stream;
+}
+
+char *tmpnam(char *s) {
+  static char filename[L_tmpnam];
+  if (s == NULL)
+    s = filename;
+
+  strcpy(s, "tmp00");
+  while (s[4] != '2' || s[3] != '4') {
+    FILE *f = fopen(s, "rb");
+    if (!f)
+      break;
+    fclose(f);
+    if (s[3] == '9') {
+      s[3] = '0';
+      ++s[4];
+    } else {
+      ++s[3];
+    }
+  }
+
+  return s;
+}
+
+// File access functions
+
 int fclose(FILE *stream) {
   int rc = stdio_close(stream);
   free_stream(stream);
@@ -322,14 +322,11 @@ FILE *fopen(const char *restrict filename, const char *restrict mode) {
     free(stream);
     return NULL;
   }
+  stream->bufsize = BUFSIZ;
 
-  stream = stdio_open(stream, filename, fmode);
-  if (stream != NULL) {
-    stream->bufsize = BUFSIZ;
-    stream->next = filelist;
-    filelist = stream;
-  }
-  return stream;
+  stream->next = filelist;
+  filelist = stream;
+  return stdio_open(stream, filename, fmode);
 }
 
 FILE *freopen(const char *restrict filename, const char *restrict mode,

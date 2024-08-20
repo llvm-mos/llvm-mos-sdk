@@ -478,15 +478,7 @@ int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned c
  * @param joystick_num Keyboard joystick (0) or SNES controllers (1-4).
  * @returns Struct with current status.
  */
-inline struct JoyState cx16_k_joystick_get(const unsigned char joystick_num) {
-  struct JoyState s;
-  __attribute__((leaf)) asm volatile(
-      "jsr __JOYSTICK_GET\n"
-      : /* output */ "=a"(s.data0), "=x"(s.data1), "=y"(s.detached)
-      : /* input */ "a"(joystick_num)
-      : /* clobber: a, x, y implicitly registered above */);
-  return s;
-}
+struct JoyState cx16_k_joystick_get(unsigned char joystick_num);
 
 void cx16_k_joystick_scan(void) __attribute__((leaf));
 unsigned char cx16_k_kbdbuf_get_modifiers(void) __attribute__((leaf));

@@ -157,30 +157,24 @@ struct JoyState {
   bool detached; //!< True if joystick is disconnected
 
 #ifdef __cplusplus
-  inline bool button_a() const { return !(data1 & JOY_BTN_A_MASK); }
-  inline bool button_b() const { return !(data0 & JOY_BTN_B_MASK); }
-  inline bool button_x() const { return !(data1 & JOY_BTN_X_MASK); }
-  inline bool button_y() const { return !(data0 & JOY_BTN_Y_MASK); }
-  inline bool fire_left() const { return !(data1 & JOY_FIRE_LEFT_MASK); }
-  inline bool fire_right() const { return !(data1 & JOY_FIRE_RIGHT_MASK); }
-  inline bool select() const { return !(data0 & JOY_SELECT_MASK); }
-  inline bool start() const { return !(data0 & JOY_START_MASK); }
-  inline bool north() const { return !(data0 & JOY_UP_MASK); }
-  inline bool south() const { return !(data0 & JOY_DOWN_MASK); }
-  inline bool east() const { return !(data0 & JOY_RIGHT_MASK); }
-  inline bool west() const { return !(data0 & JOY_LEFT_MASK); }
-  inline bool north_east() const {
-    return !(data0 & (JOY_UP_MASK | JOY_RIGHT_MASK));
-  }
-  inline bool north_west() const {
-    return !(data0 & (JOY_UP_MASK | JOY_LEFT_MASK));
-  }
-  inline bool south_east() const {
+  bool button_a() const { return !(data1 & JOY_BTN_A_MASK); }
+  bool button_b() const { return !(data0 & JOY_BTN_B_MASK); }
+  bool button_x() const { return !(data1 & JOY_BTN_X_MASK); }
+  bool button_y() const { return !(data0 & JOY_BTN_Y_MASK); }
+  bool fire_left() const { return !(data1 & JOY_FIRE_LEFT_MASK); }
+  bool fire_right() const { return !(data1 & JOY_FIRE_RIGHT_MASK); }
+  bool select() const { return !(data0 & JOY_SELECT_MASK); }
+  bool start() const { return !(data0 & JOY_START_MASK); }
+  bool north() const { return !(data0 & JOY_UP_MASK); }
+  bool south() const { return !(data0 & JOY_DOWN_MASK); }
+  bool east() const { return !(data0 & JOY_RIGHT_MASK); }
+  bool west() const { return !(data0 & JOY_LEFT_MASK); }
+  bool north_east() const { return !(data0 & (JOY_UP_MASK | JOY_RIGHT_MASK)); }
+  bool north_west() const { return !(data0 & (JOY_UP_MASK | JOY_LEFT_MASK)); }
+  bool south_east() const {
     return !(data0 & (JOY_DOWN_MASK | JOY_RIGHT_MASK));
   }
-  inline bool south_west() const {
-    return !(data0 & (JOY_DOWN_MASK | JOY_LEFT_MASK));
-  }
+  bool south_west() const { return !(data0 & (JOY_DOWN_MASK | JOY_LEFT_MASK)); }
 #endif
 };
 
@@ -487,7 +481,6 @@ int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned c
 inline struct JoyState cx16_k_joystick_get(const unsigned char joystick_num) {
   struct JoyState s;
   __attribute__((leaf)) asm volatile(
-      "JOYSTICK_GET = $FF56\n"
       "jsr __JOYSTICK_GET\n"
       : /* output */ "=a"(s.data0), "=x"(s.data1), "=y"(s.detached)
       : /* input */ "a"(joystick_num)

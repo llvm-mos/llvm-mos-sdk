@@ -218,7 +218,7 @@ enum {
 #define VIDEOMODE_SWAP          (-1)
 
 /* VERA's address increment/decrement numbers */
-enum {
+enum : unsigned char {
     VERA_DEC_0                  = ((0 << 1) | 1) << 3,
     VERA_DEC_1                  = ((1 << 1) | 1) << 3,
     VERA_DEC_2                  = ((2 << 1) | 1) << 3,

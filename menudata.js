@@ -266,6 +266,7 @@ var menudata={children:[
 {text:"e",url:"globals_eval_e.html#index_e"},
 {text:"f",url:"globals_eval_f.html#index_f"},
 {text:"g",url:"globals_eval_g.html#index_g"},
+{text:"j",url:"globals_eval_j.html#index_j"},
 {text:"m",url:"globals_eval_m.html#index_m"},
 {text:"n",url:"globals_eval_n.html#index_n"},
 {text:"p",url:"globals_eval_p.html#index_p"},

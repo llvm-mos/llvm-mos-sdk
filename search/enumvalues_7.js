@@ -1,5 +1,15 @@
 var searchData=
 [
-  ['missile_5f0_5589',['MISSILE_0',['../vcslib_8h.html#ac6b0426c033d8575e9103bf98ee65fa8a6bf128af7ee947de431a019b0baf50d2',1,'vcslib.h']]],
-  ['missile_5f1_5590',['MISSILE_1',['../vcslib_8h.html#ac6b0426c033d8575e9103bf98ee65fa8adc1b74224959d6e646c3cd18d4792d3e',1,'vcslib.h']]]
+  ['joy_5fbtn_5fa_5fmask_5604',['JOY_BTN_A_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10a9c21c9ecff6513f67f4ebd521cc81456',1,'cx16.h']]],
+  ['joy_5fbtn_5fb_5fmask_5605',['JOY_BTN_B_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10a69cadb584e26f719444c06c976c05468',1,'cx16.h']]],
+  ['joy_5fbtn_5fx_5fmask_5606',['JOY_BTN_X_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10aed78312e0ab9669f07b6cc5c6b947f86',1,'cx16.h']]],
+  ['joy_5fbtn_5fy_5fmask_5607',['JOY_BTN_Y_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10a9e0bab9dc14e5612faf2520764e513e3',1,'cx16.h']]],
+  ['joy_5fdown_5fmask_5608',['JOY_DOWN_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10aa0f9d4f7d0ad3f016117a960d7b4789b',1,'cx16.h']]],
+  ['joy_5ffire_5fleft_5fmask_5609',['JOY_FIRE_LEFT_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10aa877da6fcf059955ad8e780bbde3789e',1,'cx16.h']]],
+  ['joy_5ffire_5fright_5fmask_5610',['JOY_FIRE_RIGHT_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10a6ede80dca2d7b040f8c5742e3afe4711',1,'cx16.h']]],
+  ['joy_5fleft_5fmask_5611',['JOY_LEFT_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10a5009f65eb88e5c668fd6d684497ed0bf',1,'cx16.h']]],
+  ['joy_5fright_5fmask_5612',['JOY_RIGHT_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10a180c3210fb2d1f57b5a93ef349ad55d3',1,'cx16.h']]],
+  ['joy_5fselect_5fmask_5613',['JOY_SELECT_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10af72050dae9d0b6d14166a75abefdde03',1,'cx16.h']]],
+  ['joy_5fstart_5fmask_5614',['JOY_START_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10a2e6f14006a012f4664893e321ff524a8',1,'cx16.h']]],
+  ['joy_5fup_5fmask_5615',['JOY_UP_MASK',['../cx16_8h.html#a28c18d226849147a618fde2310662f10a2c68b9032ab0f6cdd09dfc8ccb4e3399',1,'cx16.h']]]
 ];

@@ -16,6 +16,5 @@ vpeek:
         sty     VERA_ADDR_H
         stx     VERA_ADDR_M
         sta     VERA_ADDR_L
-        ldx     #0
         lda     VERA_DATA0
         rts

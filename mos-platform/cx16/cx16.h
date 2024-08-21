@@ -37,6 +37,8 @@
 #ifndef _CX16_H
 #define _CX16_H
 
+#include <stdbool.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -118,29 +120,63 @@ extern "C" {
 #define COLOR_LIGHTBLUE         0x0E
 #define COLOR_GRAY3             0x0F
 
-/* NES controller masks for joy_read() */
+/// NES controller masks for JoyState
+enum : unsigned char {
+  // Masks for JoyState::data0
+  JOY_BTN_B_MASK = 1 << 7,
+  JOY_BTN_Y_MASK = 1 << 6,
+  JOY_SELECT_MASK = 1 << 5,
+  JOY_START_MASK = 1 << 4,
+  JOY_UP_MASK = 1 << 3,
+  JOY_DOWN_MASK = 1 << 2,
+  JOY_LEFT_MASK = 1 << 1,
+  JOY_RIGHT_MASK = 1 << 0,
+  // Masks for JoyState::data1
+  JOY_BTN_A_MASK = 1 << 7,
+  JOY_BTN_X_MASK = 1 << 6,
+  JOY_FIRE_LEFT_MASK = 1 << 5,
+  JOY_FIRE_RIGHT_MASK = 1 << 4
+};
 
-#define JOY_BTN_1_MASK          0x80
-#define JOY_BTN_2_MASK          0x40
-#define JOY_BTN_3_MASK          0x20
-#define JOY_BTN_4_MASK          0x10
-#define JOY_UP_MASK             0x08
-#define JOY_DOWN_MASK           0x04
-#define JOY_LEFT_MASK           0x02
-#define JOY_RIGHT_MASK          0x01
+/// Joystick selection
+#define JOY_KEYBOARD 0
+#define JOY_SNES_PORT1 1
+#define JOY_SNES_PORT2 2
+#define JOY_SNES_PORT3 3
+#define JOY_SNES_PORT4 4
 
-#define JOY_BTN_A_MASK          JOY_BTN_1_MASK
-#define JOY_BTN_B_MASK          JOY_BTN_2_MASK
-#define JOY_SELECT_MASK         JOY_BTN_3_MASK
-#define JOY_START_MASK          JOY_BTN_4_MASK
+/// Status of SNES joystick populated by cx16_k_joystick_get();
+struct JoyState {
+  union {
+    struct {
+      unsigned char data0; //!< Bits: B Y Select Start Up Down Left Right
+      unsigned char data1; //!< Bits: A X FireL  FireR 1  1    1    1
+    };
+    unsigned short data; //!< data0 and data1 combined
+  };
+  bool detached; //!< True if joystick is disconnected
 
-#define JOY_BTN_A(v)            ((v) & JOY_BTN_A_MASK)
-#define JOY_BTN_B(v)            ((v) & JOY_BTN_B_MASK)
-#define JOY_SELECT(v)           ((v) & JOY_SELECT_MASK)
-#define JOY_START(v)            ((v) & JOY_START_MASK)
-
-#define JOY_FIRE2_MASK          JOY_BTN_2_MASK
-#define JOY_FIRE2(v)            ((v) & JOY_FIRE2_MASK)
+#ifdef __cplusplus
+  bool button_a() const { return !(data1 & JOY_BTN_A_MASK); }
+  bool button_b() const { return !(data0 & JOY_BTN_B_MASK); }
+  bool button_x() const { return !(data1 & JOY_BTN_X_MASK); }
+  bool button_y() const { return !(data0 & JOY_BTN_Y_MASK); }
+  bool fire_left() const { return !(data1 & JOY_FIRE_LEFT_MASK); }
+  bool fire_right() const { return !(data1 & JOY_FIRE_RIGHT_MASK); }
+  bool select() const { return !(data0 & JOY_SELECT_MASK); }
+  bool start() const { return !(data0 & JOY_START_MASK); }
+  bool north() const { return !(data0 & JOY_UP_MASK); }
+  bool south() const { return !(data0 & JOY_DOWN_MASK); }
+  bool east() const { return !(data0 & JOY_RIGHT_MASK); }
+  bool west() const { return !(data0 & JOY_LEFT_MASK); }
+  bool north_east() const { return !(data0 & (JOY_UP_MASK | JOY_RIGHT_MASK)); }
+  bool north_west() const { return !(data0 & (JOY_UP_MASK | JOY_LEFT_MASK)); }
+  bool south_east() const {
+    return !(data0 & (JOY_DOWN_MASK | JOY_RIGHT_MASK));
+  }
+  bool south_west() const { return !(data0 & (JOY_DOWN_MASK | JOY_LEFT_MASK)); }
+#endif
+};
 
 /* Additional mouse button mask */
 #define MOUSE_BTN_MIDDLE        0x02
@@ -433,10 +469,22 @@ void cx16_k_graph_set_font(void *fontaddr) __attribute__((leaf));
 void cx16_k_graph_set_window(unsigned int x, unsigned int y, unsigned int width, unsigned int height) __attribute__((leaf));
 int cx16_k_i2c_read_byte(unsigned char device, unsigned char offset) __attribute__((leaf)); // returns negative on error
 int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned char byte) __attribute__((leaf)); // return negative on error
-long cx16_k_joystick_get(unsigned char sticknum) __attribute__((leaf)); // returns $YYYYXXAA (see docs, result negative if joystick not present)
+
+/**
+ * Get joystick state using KERNAL routine `JOYSTICK_GET`.
+ *
+ * More information: https://github.com/X16Community/x16-docs
+ *
+ * @param joystick_num Keyboard joystick (0) or SNES controllers (1-4).
+ * @returns Struct with current status.
+ */
+struct JoyState cx16_k_joystick_get(unsigned char joystick_num);
+
 void cx16_k_joystick_scan(void) __attribute__((leaf));
 unsigned char cx16_k_kbdbuf_get_modifiers(void) __attribute__((leaf));
-int cx16_k_kbdbuf_peek(unsigned char *index_ptr) __attribute__((leaf)); // returns negative if empty, if index_ptr non-NULL set contents to queue length
+int cx16_k_kbdbuf_peek(unsigned char *index_ptr)
+    __attribute__((leaf)); // returns negative if empty, if index_ptr non-NULL
+                           // set contents to queue length
 void cx16_k_kbdbuf_put(unsigned char c) __attribute__((leaf));
 const char* cx16_k_keymap_get_id(void) __attribute__((leaf));
 unsigned char cx16_k_keymap_set(const char* identifier) __attribute__((leaf));	// returns 0 on success

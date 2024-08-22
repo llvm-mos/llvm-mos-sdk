@@ -8,14 +8,12 @@
 ; Originally from cc65. Modified from original version.  See license information in cx16.h
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/get_ostype.s
 ;
-.global get_numbanks
-get_numbanks:
-	ldy	ROM_BANK	; make sure ROM bank 0
-	stz	ROM_BANK
-	ldx	#0		; clear high
+.global get_ostype
+.section .text.get_ostype,"axR",@progbits
+get_ostype:
+	ldy	rom_bank	; make sure ROM bank 0
+	stz	rom_bank
 	lda	$FF80		; special ROM build version byte
-	sty	ROM_BANK	; restore previous bank
-	bpl	1f		; branch if version negative
-	dex			; decrement high for sign extend
-1:	rts
+	sty	rom_bank	; restore previous bank
+        rts
 

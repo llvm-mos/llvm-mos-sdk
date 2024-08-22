@@ -259,14 +259,6 @@ enum : unsigned char {
 #define VERA_IRQ_SPR_COLL       0b00000100
 #define VERA_IRQ_AUDIO_LOW      0b00001000
 
-/* CX16 specific flags for cbm_load() */
-enum : unsigned char {
-  LOAD_RAM = 0,    //!< Load into RAM
-  LOAD_VERIFY = 1, //!< Performs verify
-  LOAD_VRAM0 = 2,  //!< Loads into VRAM $00000 + address
-  LOAD_VRAM1 = 3,  //!< Loads into VRAM $10000 + address
-};
-
 /* Define hardware. */
 
 #define RAM_BANK        (*(volatile unsigned char *)0x00)
@@ -391,6 +383,17 @@ struct __emul {
 
 /* An array window into the half Mebibyte or two Mebibytes of banked RAM */
 #define BANK_RAM        ((volatile unsigned char *)0xA000)
+
+/*
+ * KERNAL version.
+ *
+ * - 0xFF = custom build
+ * - Positive = release versions ($02 = release version 2),
+ * - two's complement negative numbers = prerelease versions ($FE = $100 - 2 = prerelease version 2).
+ *
+ * ROM_BANK must be set to 0 (KERNAL) before probing.
+ */
+#define KERNAL_VERSION ((volatile signed char *)0xFF80)
 
 /*****************************************************************************/
 /*                          CX16 kernal functions                            */

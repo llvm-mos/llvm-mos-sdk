@@ -185,7 +185,7 @@ struct JoyState {
 ** set_tv() argument codes
 ** NOTE: llvm-mos-sdk added newer 240P modes
 */
-enum {
+enum : unsigned char {
     TV_NONE                     = 0x00,
     TV_VGA,
     TV_NTSC_COLOR,

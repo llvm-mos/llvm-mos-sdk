@@ -11,6 +11,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-mouse_config
 ;
 .global cx16_k_mouse_config
+.section .text.cx16_k_mouse_config,"axR",@progbits
 cx16_k_mouse_config:
 				; A = showmouse (already set)
 				; X = xsize8 (already set)

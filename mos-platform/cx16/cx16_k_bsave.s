@@ -11,6 +11,7 @@
 ; similar to cbm_k_save, but no two byte header written (aka savehl in X16 kernel source)
 ;
 .global cx16_k_bsave
+.section .text.cx16_k_bsave,"axR",@progbits
 cx16_k_bsave:
 	ldx	__rc4		; X/Y = end
 	ldy	__rc4+1

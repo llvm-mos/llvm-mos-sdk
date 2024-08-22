@@ -10,6 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-keymap
 ;
 .global cx16_k_keymap_set
+.section .text.cx16_k_keymap_set,"axR",@progbits
 cx16_k_keymap_set:
 	ldx	__rc2			; X/Y = identifier
 	ldy	__rc3

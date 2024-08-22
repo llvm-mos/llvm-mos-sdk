@@ -11,6 +11,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-memory_crc
 ;
 .global cx16_k_memory_crc
+.section .text.cx16_k_memory_crc,"axR",@progbits
 cx16_k_memory_crc:
 	sta	__r1		; r1 = num_bytes
 	stx	__r1+1

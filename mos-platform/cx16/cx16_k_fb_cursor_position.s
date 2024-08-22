@@ -11,6 +11,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-fb_cursor_position
 ;
 .global cx16_k_fb_cursor_position
+.section .text.cx16_k_fb_cursor_position,"axR",@progbits
 cx16_k_fb_cursor_position:
 	ldy	__rc2		; NOTE: copy args backwards due to overlap
 	sty	__r1		; r1 = y

@@ -11,5 +11,4 @@
 .section .text.cx16_k_fb_get_pixel,"axR",@progbits
 cx16_k_fb_get_pixel:
 	jsr	__FB_GET_PIXEL
-	ldx	#0
 	rts

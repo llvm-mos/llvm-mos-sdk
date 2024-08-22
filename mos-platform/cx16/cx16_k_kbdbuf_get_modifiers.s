@@ -11,5 +11,4 @@
 .section .text.cx16_k_kbdbuf_get_modifiers,"axR",@progbits
 cx16_k_kbdbuf_get_modifiers:
 	jsr	__KBDBUF_GET_MODIFIERS
-	ldx	#0
 	rts

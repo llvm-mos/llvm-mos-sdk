@@ -26,5 +26,4 @@ vera_sprites_enable:
         asl                             ; move bit 6 to bit 0 via carry
         asl
         rol
-        ldx     #0			; zero extend
         rts

@@ -28,5 +28,4 @@ vera_layer_enable:
         lsr
         lsr
         lsr
-        ldx     #0			; zero extend
         rts

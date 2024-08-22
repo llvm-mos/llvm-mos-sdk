@@ -21,5 +21,4 @@ cx16_k_mouse_get:
 	dey
 	bpl	1b
 	txa			; return buttons
-	ldx	#0
 	rts

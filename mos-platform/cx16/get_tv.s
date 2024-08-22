@@ -14,5 +14,4 @@ get_tv:
 	stz	VERA_CTRL	; set DCSEL=0 to access DC_VIDEO
 	lda	VERA_DC_VIDEO	; load DC_VIDEO
 	and	#$0F		; mask out non-mode bits
-	ldx	#0		; zero extend
 1:	rts

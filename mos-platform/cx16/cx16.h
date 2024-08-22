@@ -259,6 +259,26 @@ enum : unsigned char {
 #define VERA_IRQ_SPR_COLL       0b00000100
 #define VERA_IRQ_AUDIO_LOW      0b00001000
 
+/** ROM bank labels */
+enum : unsigned char {
+  ROM_KERNAL = 0,    //!< KERNAL operating system and drivers
+  ROM_KEYBD = 1,     //!< Keyboard layout tables
+  ROM_CBMDOS = 2,    //!< The computer-based CMDR-DOS for FAT32 SD cards
+  ROM_FAT32 = 3,     //!< The FAT32 driver itself
+  ROM_BASIC = 4,     //!< BASIC interpreter
+  ROM_MONITOR = 5,   //!< Machine Language Monitor
+  ROM_CHARSET = 6,   //!< PETSCII and ISO character sets (uploaded into VRAM)
+  ROM_DIAG = 7,      //!< Memory diagnostic
+  ROM_GRAPH = 8,     //!< Kernal graph and font routines
+  ROM_DEMO = 9,      //!< Demo routines
+  ROM_AUDIO = 10,    //!< Audio API routines
+  ROM_UTIL = 11,     //!< System Configuration (Date/Time, Display Preferences)
+  ROM_BANNEX = 12,   //!< BASIC Annex (code for some added BASIC functions)
+  ROM_X16EDIT1 = 13, //!< The built-in text editor
+  ROM_X16EDIT2 = 14, //!< The built-in text editor
+  ROM_BASLOAD = 15   //!< A transpiler that converts BASLOAD dialect to BASIC V2
+};
+
 /* Define hardware. */
 
 #define RAM_BANK        (*(volatile unsigned char *)0x00)

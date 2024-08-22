@@ -28,6 +28,7 @@ target_link_libraries(atari8-common-crt0 PRIVATE common-asminc)
 add_platform_library(atari8-common-c
   putchar.c
   getchar.c
+  update_diskpos.c
 
   close.s
   fdtab.s
@@ -35,8 +36,10 @@ add_platform_library(atari8-common-c
   fdtoiocb.s
   findfreeiocb.s
   getfd.s
+  note.s
   open.s
   oserror.s
+  point.s
   rwcommon.s
   sysremove.s
   write.s

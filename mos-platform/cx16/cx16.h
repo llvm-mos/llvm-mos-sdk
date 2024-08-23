@@ -510,12 +510,12 @@ void cx16_k_fb_init(void) __attribute__((leaf));
 void cx16_k_fb_move_pixels(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int count) __attribute__((leaf));
 void cx16_k_fb_set_8_pixels(unsigned char pattern, unsigned char color) __attribute__((leaf));
 void cx16_k_fb_set_8_pixels_opaque(unsigned char pattern, unsigned char mask, unsigned char color1, unsigned char color2) __attribute__((leaf));
-void cx16_k_fb_set_palette(void *paladdr, unsigned char index, unsigned char count __attribute__((leaf)));
+void cx16_k_fb_set_palette(void *paladdr, unsigned char index, unsigned char count) __attribute__((leaf));
 void cx16_k_graph_clear(void) __attribute__((leaf));
 void cx16_k_graph_draw_image(unsigned int x, unsigned int y, void *imageaddr, unsigned int width, unsigned int height) __attribute__((leaf));
 void cx16_k_graph_draw_line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) __attribute__((leaf));
 void cx16_k_graph_draw_oval(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned int corner_radius, unsigned char fillflag) __attribute__((leaf));
-void cx16_k_graph_draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned int corner_radius, unsigned char fillflag __attribute__((leaf)));
+void cx16_k_graph_draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned int corner_radius, unsigned char fillflag) __attribute__((leaf));
 long cx16_k_graph_get_char_size(unsigned char c, unsigned char style) __attribute__((leaf)); // if printable returns info (0x00bbwwhh), else negative style byte (0xFF0000ss)
 void cx16_k_graph_init(graph_fb_functions_t *fb_funcs_ptr) __attribute__((leaf));
 void cx16_k_graph_move_rect(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int width, unsigned int height) __attribute__((leaf));

@@ -228,12 +228,15 @@ static FILE *stdio_open(FILE *stream, const char *filename, unsigned int mode) {
     osmode = O_WRONLY;
 
   if (mode & (FWRITE | FAPPEND))
-    osmode |= O_CREAT;
+    osmode |= O_CREAT;    // file doesn't exist: create
 
-  if (mode & FWRITE)
-    osmode |= mode & FEXCL ? O_EXCL : O_TRUNC;
-  else if (mode & FAPPEND)
-    osmode |= O_APPEND;
+  if (mode & FAPPEND) {
+    osmode |= O_APPEND;   // file exists: append
+  } else if (mode & FWRITE) {
+    osmode |= mode & FEXCL
+               ? O_EXCL   // file exists: fail
+               : O_TRUNC; // file exists: truncate
+  }
 
   stream->handle = open(filename, osmode);
   if (stream->handle == -1) {

@@ -53,6 +53,13 @@
 	sty	__r6
 .endm
 
+; Run RAM/ROM routine in another bank
+.macro MACRO_JSRFAR address, bank
+        jsr __JSRFAR
+        .short \address
+        .byte \bank
+.endm
+
 ; cx16 hardware I/O addresses (derived from x16-rom io.inc)
 ; https://github.com/X16Community/x16-rom/blob/master/inc/io.inc
 

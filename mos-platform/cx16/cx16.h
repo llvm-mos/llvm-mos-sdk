@@ -146,7 +146,7 @@ enum : unsigned char {
 #define JOY_SNES_PORT4 4
 
 /// Status of SNES joystick populated by cx16_k_joystick_get();
-struct JoyState {
+typedef struct {
   union {
     struct {
       unsigned char data0; //!< Bits: B Y Select Start Up Down Left Right
@@ -176,7 +176,7 @@ struct JoyState {
   }
   bool south_west() const { return !(data0 & (JOY_DOWN_MASK | JOY_LEFT_MASK)); }
 #endif
-};
+} JoyState;
 
 /* Additional mouse button mask */
 #define MOUSE_BTN_MIDDLE        0x02
@@ -534,7 +534,7 @@ int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned c
  * @param joystick_num Keyboard joystick (0) or SNES controllers (1-4).
  * @returns Struct with current status.
  */
-struct JoyState cx16_k_joystick_get(unsigned char joystick_num);
+JoyState cx16_k_joystick_get(unsigned char joystick_num);
 
 void cx16_k_joystick_scan(void) __attribute__((leaf));
 unsigned char cx16_k_kbdbuf_get_modifiers(void) __attribute__((leaf));

@@ -13,11 +13,10 @@
 .section .text.vpoke,"axR",@progbits
 vpoke:
         stz     VERA_CTRL              	; set DCSEL=0 to access ADDRSEL=0
-        ldy     __rc4
-        sty     VERA_ADDR_H
         ldy     __rc3
-        sty     VERA_ADDR_M
+        sty     VERA_ADDR_H
         ldy     __rc2
-        sty     VERA_ADDR_L
+        sty     VERA_ADDR_M
+        stx     VERA_ADDR_L
         sta     VERA_DATA0
         rts

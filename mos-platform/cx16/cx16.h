@@ -601,13 +601,21 @@ unsigned char vera_sprites_enable(unsigned char enable) __attribute__((leaf)); /
 */
 signed char videomode(signed char mode) __attribute__((leaf));   // set video mode using VIDEOMODE_* enum constant, returns previous or -1 if error
 
-/* Get a byte from a location in VERA's internal address space. */
-unsigned char vpeek(unsigned long addr) __attribute__((leaf));    // read byte from VERA VRAM address
+/**
+ * Read a single byte from a VERA VRAM address.
+ *
+ * @param addr 17-bit VRAM address
+ * @returns Byte value at address
+ * */
+unsigned char vpeek(unsigned long addr);
 
-/* Put a byte into a location in VERA's internal address space.
-** (addr is second instead of first for the sake of code efficiency.)
-*/
-void vpoke(unsigned char data, unsigned long addr); // write byte value to VERA VRAM address
+/**
+ * Write a single byte to a VERA VRAM address.
+ *
+ * @param value Value to store
+ * @param addr 17-bit VRAM address
+ */
+void vpoke(unsigned char value, unsigned long addr);
 
 void waitvsync(void);  // wait for the vertical blank interrupt
 

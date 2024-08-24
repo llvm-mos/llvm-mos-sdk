@@ -88,7 +88,7 @@ add_platform_library(cx16-c
  vera_layer_enable.s
  vera_sprites_enable.s
  videomode.s
- vpeek.s
+ vpeek.c
  vpoke.c
  waitvsync.s
  kernal.S

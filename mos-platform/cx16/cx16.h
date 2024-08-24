@@ -607,7 +607,7 @@ unsigned char vpeek(unsigned long addr) __attribute__((leaf));    // read byte f
 /* Put a byte into a location in VERA's internal address space.
 ** (addr is second instead of first for the sake of code efficiency.)
 */
-void vpoke(unsigned char data, unsigned long addr) __attribute__((leaf)); // write byte value to VERA VRAM address
+void vpoke(unsigned char data, unsigned long addr); // write byte value to VERA VRAM address
 
 void waitvsync(void);  // wait for the vertical blank interrupt
 

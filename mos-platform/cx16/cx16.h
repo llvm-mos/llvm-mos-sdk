@@ -617,7 +617,10 @@ unsigned char vpeek(unsigned long addr);
  */
 void vpoke(unsigned char value, unsigned long addr);
 
-void waitvsync(void);  // wait for the vertical blank interrupt
+/**
+ * Wait for the vertical blank interrupt
+ */
+void waitvsync(void);
 
 #ifdef __cplusplus
 }

@@ -352,6 +352,10 @@ struct __vera {
         unsigned char   control;
     } spi;                              /* SD card interface */
 };
+#if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L) || (defined(__cplusplus) && __cplusplus >= 201103L)
+static_assert(sizeof(struct __vera) == 32, "struct __vera must be 32 bytes");
+#endif
+
 #define VERA    (*(volatile struct __vera *)0x9F20)
 
 /* Audio chip */
@@ -363,6 +367,22 @@ struct __ym2151 {
     unsigned char       data;
 };
 #define YM2151  (*(volatile struct __ym2151 *)0x9F40)
+
+/** VERA Programmable Sound Generator (PSG) layout */
+struct __vera_psg {
+    union {
+        unsigned short freq;
+        struct {
+            unsigned char freq_lo; //!< Frequency word (7:0)
+            unsigned char freq_hi; //!< Frequency word (15:8)
+        };
+    };
+    unsigned char volume;   //!< Left (bit 7); right (bit 6); volume (bit 5:0)
+    unsigned char waveform; //!< Waveform (bit 7:6) and pulse width (bit 5:0)
+};
+#if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L) || (defined(__cplusplus) && __cplusplus >= 201103L)
+static_assert(sizeof(struct __vera_psg) == 4, "struct __vera_psg must be 4 bytes");
+#endif
 
 /* A structure with the x16emu's settings registers */
 struct __emul {
@@ -378,6 +398,10 @@ struct __emul {
     unsigned char const keymap;         /* Keyboard layout number */
              char const detect[2];      /* "16" if running on x16emu */
 };
+#if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L) || (defined(__cplusplus) && __cplusplus >= 201103L)
+static_assert(sizeof(struct __emul) == 16, "struct __emul must be 16 bytes");
+#endif
+
 #define EMULATOR        (*(volatile struct __emul *)0x9FB0)
 
 /* An array window into the half Mebibyte or two Mebibytes of banked RAM */

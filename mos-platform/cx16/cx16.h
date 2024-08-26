@@ -556,7 +556,16 @@ void cx16_k_mouse_scan(void) __attribute__((leaf));
 unsigned long cx16_k_rdtim(void) __attribute__((leaf));
 unsigned char cx16_k_screen_mode_get(screen_mode_info_t *info_ptr) __attribute__((leaf)); // returns 0 on success
 unsigned char cx16_k_screen_mode_set(unsigned char mode) __attribute__((leaf)); // returns 0 on success
-void cx16_k_screen_set_charset(unsigned char charset_type, void *charsetaddr) __attribute__((leaf));
+
+/**
+ * Activates a 8x8 text mode charset
+ *
+ * See X16 [KERNAL documentation](https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2005%20-%20KERNAL.md#function-name-screen_set_charset)
+ *
+ * @param charset_type Decides what charset to upload.
+ * @param charsetaddr  Pointer to charset if `charset_type = 0`.
+  */
+void cx16_k_screen_set_charset(unsigned char charset_type, void *charsetaddr);
 unsigned char cx16_k_sprite_set_image(unsigned char num, unsigned char w, unsigned char h, unsigned char maskflag, void *imageaddr, void *maskaddr, unsigned char bpp) __attribute__((leaf)); // returns 0 on success
 unsigned char cx16_k_sprite_set_position(unsigned char sprnum, unsigned int xpos, unsigned int ypos) __attribute__((leaf)); // returns 0 on success
 

@@ -10,6 +10,7 @@
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/videomode.s
 ;
 .global videomode
+.section .text.videomode,"axR",@progbits
 videomode:
         pha                     ; save new mode
         sec                     ; get old mode

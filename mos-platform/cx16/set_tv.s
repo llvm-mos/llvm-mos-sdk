@@ -10,6 +10,7 @@
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/set_tv.s
 ;
 .global set_tv
+.section .text.set_tv,"axR",@progbits
 set_tv:
 	stz	VERA_CTRL	; set DCSEL=0 to access DC_VIDEO
 	eor	VERA_DC_VIDEO	; eor in current register bits

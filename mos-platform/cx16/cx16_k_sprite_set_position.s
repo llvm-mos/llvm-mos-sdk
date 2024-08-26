@@ -10,6 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-sprite_set_position
 ;
 .global cx16_k_sprite_set_position
+.section .text.cx16_k_sprite_set_position,"axR",@progbits
 cx16_k_sprite_set_position:
 	sta	__r4		; save num in r4 temp
 	lda	__rc2

@@ -10,6 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-i2c_read_byte
 ;
 .global cx16_k_i2c_read_byte
+.section .text.cx16_k_i2c_read_byte,"axR",@progbits
 cx16_k_i2c_read_byte:
 	sta	__rc2
 	txa

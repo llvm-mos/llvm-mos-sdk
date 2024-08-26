@@ -10,6 +10,7 @@
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/vpoke.s
 ;
 .global vpoke
+.section .text.vpoke,"axR",@progbits
 vpoke:
         stz     VERA_CTRL              	; set DCSEL=0 to access ADDRSEL=0
         ldy     __rc4

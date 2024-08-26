@@ -259,14 +259,6 @@ enum {
 #define VERA_IRQ_SPR_COLL       0b00000100
 #define VERA_IRQ_AUDIO_LOW      0b00001000
 
-/* CX16 specific flags for cbm_load() */
-enum : unsigned char {
-  LOAD_RAM = 0,    //!< Load into RAM
-  LOAD_VERIFY = 1, //!< Performs verify
-  LOAD_VRAM0 = 2,  //!< Loads into VRAM $00000 + address
-  LOAD_VRAM1 = 3,  //!< Loads into VRAM $10000 + address
-};
-
 /* Define hardware. */
 
 #define RAM_BANK        (*(volatile unsigned char *)0x00)

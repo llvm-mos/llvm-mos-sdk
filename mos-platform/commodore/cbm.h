@@ -204,6 +204,16 @@ void waitvsync (void);
 #define CBM_WRITE       1       /* ditto */
 #define CBM_SEQ         2       /* default is ",r" -- or ",s" when writing */
 
+/** Flags for cbm_load() */
+enum : unsigned char {
+  CBM_LOAD_RAM = 0,    //!< Load into RAM
+  CBM_LOAD_VERIFY = 1, //!< Performs verify
+#ifdef __CX16__
+  CX16_LOAD_VRAM0 = 2,  //!< Loads into VRAM $00000 + address
+  CX16_LOAD_VRAM1 = 3,  //!< Loads into VRAM $10000 + address
+#endif
+};
+
 /* Kernal-level functions */
 unsigned char cbm_k_acptr (void);
 unsigned char cbm_k_basin (void);

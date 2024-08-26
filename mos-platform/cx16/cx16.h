@@ -371,8 +371,9 @@ struct __emul {
     unsigned char       keyboard;       /* Boolean: displaying typed keys */
     unsigned char       echo;           /* How to send Kernal output to host */
     unsigned char       save_on_exit;   /* Boolean: save machine state on exit */
-    unsigned char       gif_method;     /* How GIF movie is being recorded */
-    unsigned char const unused1[2];
+    unsigned char       gif_method;     /* Control GIF (0=pause; 1=single; 2=resume) */
+    unsigned char       wav_method;     /* Control WAV (0=pause; 1=record; 2=autostart) */
+    unsigned char       cmd_key_off;    /* Boolean: disable emulator command keys */
     unsigned long const cycle_count;    /* Running total of CPU cycles (8 MHz.) */
     unsigned char const unused2[1];
     unsigned char const keymap;         /* Keyboard layout number */

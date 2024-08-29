@@ -221,7 +221,27 @@ void cbm_k_clrch (void);
 unsigned char cbm_k_getin (void);
 unsigned cbm_k_iobase (void) __attribute__((leaf));
 void cbm_k_listen (unsigned char dev);
-void *cbm_k_load(unsigned char flag, void *startaddr) __attribute__((leaf));
+
+/**
+ * @brief CBM KERNAL function to load or verify file
+ *
+ * Should be called after `cbm_k_setlfs()` and `cbm_k_setnam()`.
+ * On Commander X16, the `flag` argument takes the following
+ * values:
+ *
+ * `flag` | Description
+ * ------ | ---------------
+ *   0    | Load at address
+ *   1    | Verify
+ *   2    | Loads into VRAM $00000 + address
+ *   3    | Loads into VRAM $10000 + address
+ *
+ * @param flag Load (0) or verify (1-255)
+ * @param load_addr Load address pointer (if secondary address = 0).
+ * @return Address of last byte loaded/verified or KERNAL error code
+ */
+void *cbm_k_load(unsigned char flag, void *load_addr);
+
 unsigned char cbm_k_open (void) __attribute__((leaf));
 unsigned char cbm_k_readst (void);
 unsigned char cbm_k_save(void *startaddr, void *endaddr_plusone) __attribute__((leaf));

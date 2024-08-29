@@ -1,26 +1,32 @@
-#include <cbm.h>
+// Copyright 2024 LLVM-MOS Project
+// Licensed under the Apache License, Version 2.0 with LLVM Exceptions.
+// See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
+// information.
+
 #include <stdint.h>
 
-void *cbm_k_load(const unsigned char verifyflag, const void *startaddr) {
+// Helper to (dis)assemble a 16-bit integer
+typedef union {
+  uint16_t value;
+  struct {
+    uint8_t lo, hi;
+  };
+} Word;
 
-  const uint16_t addr = (uint16_t)(startaddr);
+void *cbm_k_load(const unsigned char flag, void *load_addr) {
 
-  union {
-    uint16_t word;
-    struct {
-      uint8_t lo, hi;
-    };
-  } result;
+  Word result;
+  const Word addr = {.value = (uint16_t)(load_addr)};
 
   __attribute__((leaf)) __asm__ volatile(
       "    jsr __LOAD   \n"
-      "    bsr 1f       \n" // carry-clear = no error
-      "    tax          \n" // get error code from A
+      "    bcc 1f       \n" // no error if carry clear
+      "    tax          \n" // else get error code from A
       "    ldy #0       \n"
-      "1:               \n" // no errror
+      "1:               \n" // no error
       : "=x"(result.lo), "=y"(result.hi)
-      : "a"(verifyflag), "x"((uint8_t)(addr)), "y"((uint8_t)(addr >> 8))
+      : "a"(flag), "x"(addr.lo), "y"(addr.hi)
       : "p");
 
-  return (void *)(result.word);
+  return (void *)(result.value);
 }

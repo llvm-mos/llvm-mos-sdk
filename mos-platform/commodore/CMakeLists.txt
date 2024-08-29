@@ -38,7 +38,7 @@ add_platform_library(commodore-c
   cbm_k_getin.c
   cbm_k_iobase.s
   cbm_k_listen.c
-  cbm_k_load.s
+  cbm_k_load.c
   cbm_k_open.s
   cbm_k_readst.c
   cbm_k_save.s

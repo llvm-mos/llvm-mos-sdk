@@ -123,7 +123,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-screenshots
+          name: test-screenshots-${{ runner.os }}
           path: build/**/*.png
 
       - name: Build the docs.
@@ -150,6 +150,7 @@ jobs:
       - name: Upload the SDK.
         uses: actions/upload-artifact@v4
         with:
+          name: sdk-${{ runner.os }}
           path: |
             llvm-mos-linux.tar.xz
             llvm-mos-windows.7z
@@ -160,9 +161,10 @@ jobs:
     needs: package
     steps:
       - name: Download the SDK.
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: artifact
+          pattern: sdk-*
+          merge-multiple: true
 
       - name: Prerelease the SDK.
         uses: softprops/action-gh-release@v1

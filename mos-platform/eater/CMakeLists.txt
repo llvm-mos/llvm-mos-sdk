@@ -18,7 +18,7 @@ add_platform_library(eater-crt0
 merge_libraries(eater-crt0
   common-crt0
   common-init-stack
-  common-copy-zp-data
+  common-copy-data
   common-zero-bss
   common-exit-loop
 )

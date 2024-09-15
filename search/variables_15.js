@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['unclaimed_5255',['unclaimed',['../struct__sim__reg.html#ab3a5e278b65999beb7b26b1e46494c19',1,'_sim_reg']]],
-  ['unused1_5256',['unused1',['../structDMAgicController.html#a2a1c2ad2e045516cde42d29612977cff',1,'DMAgicController']]],
-  ['unused2_5257',['unused2',['../structDMAgicController.html#a5b47b63fcbb307ba34ffb883785d3723',1,'DMAgicController']]],
-  ['unused3_5258',['unused3',['../structDMAgicController.html#a4f9bcfed76100757f6daf3d0279a8402',1,'DMAgicController']]],
-  ['use_5259',['use',['../famitone2_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a37d51c2d1e9296bc4cd1ad1eb80d3096',1,'use():&#160;LICENSE'],['../neslib_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE']]]
+  ['unclaimed_5257',['unclaimed',['../struct__sim__reg.html#ab3a5e278b65999beb7b26b1e46494c19',1,'_sim_reg']]],
+  ['unused1_5258',['unused1',['../structDMAgicController.html#a2a1c2ad2e045516cde42d29612977cff',1,'DMAgicController']]],
+  ['unused2_5259',['unused2',['../structDMAgicController.html#a5b47b63fcbb307ba34ffb883785d3723',1,'DMAgicController']]],
+  ['unused3_5260',['unused3',['../structDMAgicController.html#a4f9bcfed76100757f6daf3d0279a8402',1,'DMAgicController']]],
+  ['use_5261',['use',['../famitone2_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE'],['../nesdoug_2LICENSE.html#a37d51c2d1e9296bc4cd1ad1eb80d3096',1,'use():&#160;LICENSE'],['../neslib_2LICENSE.html#ad9560658c9a0ef4ecdf80639dc9d3142',1,'use():&#160;LICENSE']]]
 ];

@@ -53,7 +53,7 @@ jobs:
           mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
           mv mesen_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
       - name: Upload test tools
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-tools
           path: ${{env.TEST_TOOLS_DIR }}
@@ -121,7 +121,7 @@ jobs:
 
       - name: Upload test screenshots.
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-screenshots
           path: build/**/*.png
@@ -148,7 +148,7 @@ jobs:
         run: tar -cJvf llvm-mos-macos.tar.xz llvm-mos
 
       - name: Upload the SDK.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           path: |
             llvm-mos-linux.tar.xz

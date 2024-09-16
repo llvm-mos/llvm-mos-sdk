@@ -106,7 +106,7 @@ var searchData=
   ['cx16_5fk_5fgraph_5fset_5fwindow_4344',['cx16_k_graph_set_window',['../cx16_8h.html#a8d933fc7c273c87125b2daa44a740919',1,'cx16.h']]],
   ['cx16_5fk_5fi2c_5fread_5fbyte_4345',['cx16_k_i2c_read_byte',['../cx16_8h.html#a10a3a36e95822e192744527034eb2a06',1,'cx16.h']]],
   ['cx16_5fk_5fi2c_5fwrite_5fbyte_4346',['cx16_k_i2c_write_byte',['../cx16_8h.html#ad9195f190a2a32ab66897dfc57902551',1,'cx16.h']]],
-  ['cx16_5fk_5fjoystick_5fget_4347',['cx16_k_joystick_get',['../cx16_8h.html#ab4155a98acc6258f694e79ee431fa9df',1,'cx16.h']]],
+  ['cx16_5fk_5fjoystick_5fget_4347',['cx16_k_joystick_get',['../cx16_8h.html#ad428a992ade9f8d58bf2e128ec60f5bd',1,'cx16.h']]],
   ['cx16_5fk_5fjoystick_5fscan_4348',['cx16_k_joystick_scan',['../cx16_8h.html#a9b79d8e781c70f43e411739aed475879',1,'cx16.h']]],
   ['cx16_5fk_5fkbdbuf_5fget_5fmodifiers_4349',['cx16_k_kbdbuf_get_modifiers',['../cx16_8h.html#a50413660e0ecf394cbf3b2258aaced45',1,'cx16.h']]],
   ['cx16_5fk_5fkbdbuf_5fpeek_4350',['cx16_k_kbdbuf_peek',['../cx16_8h.html#a59e28ad42ce0105a98cd416b014d371b',1,'cx16.h']]],

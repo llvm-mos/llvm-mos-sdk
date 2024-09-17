@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.18)
+set(LLVM_MOS_PLATFORM geos-cbm)
+find_package(llvm-mos-sdk REQUIRED)
+project(llvm-mos-sdk-SamVlir)
+add_executable(SamVlir.cvt SamVlirRes.c SamVlirFile.c SamVlirEdit.c SamVlirHdr.c)
+install_example(SamVlir.cvt)

@@ -1,0 +1,1150 @@
+
+SamVlir.cvt.elf:	file format elf32-mos
+
+SYMBOL TABLE:
+00000000 l    df *ABS*	00000000 ld-temp.o
+00005000 l     O .vlir01	0000000a dlgClose
+00005000 l     O .vlir02	00000009 dlg_edit
+0000006b l       *ABS*	00000000 __zp_reg_size
+00000616 l       .data	00000000 __userzp_copy
+0000041d l       .text	00000000 __swaploop
+00000434 l     F .text	00000054 SwapMod
+00000090 l     O .zp.bss	00000001 curModule
+00000792 l     O .bss	00000004 swapTable
+00000488 l     F .text	00000005 FileIn
+0000048d l     F .text	00000005 EditIn
+00000492 l     F .text	00000004 R_DoAbout
+00000496 l     F .text	0000000d R_RunDA
+0000500a l     F .vlir01	000000db RunDA
+000004a3 l     F .text	00000005 R_RunDA0
+000004a8 l     F .text	00000005 R_RunDA1
+000004ad l     F .text	00000005 R_RunDA2
+000004b2 l     F .text	00000005 R_RunDA3
+000004b7 l     F .text	00000005 R_RunDA4
+000004bc l     F .text	00000005 R_RunDA5
+000004c1 l     F .text	00000005 R_RunDA6
+000004c6 l     F .text	00000005 R_RunDA7
+000004cb l     F .text	00000009 R_DoClose
+000050e5 l     F .vlir01	0000000c DoClose
+000004d4 l     F .text	0000000a R_DoQuit
+000004de l     F .text	00000009 R_DoCut
+00005009 l     F .vlir02	00000014 DoCut
+000004e7 l     F .text	00000009 R_DoCopy
+0000501d l     F .vlir02	00000014 DoCopy
+000004f0 l     F .text	00000009 R_DoPaste
+00005031 l     F .vlir02	00000014 DoPaste
+000004f9 l     F .text	00000006 R_DoIcon1
+00005045 l     F .vlir02	00000014 DoIcon1
+00000682 l     O .data	0000000b ClearScreen
+0000070a l     O .data	00000088 DAText
+0000068d l     O .data	00000034 GeosSubMenu
+000006e8 l     O .data	00000016 MenuTable
+000006fe l     O .data	0000000c IconTable
+000050f1 l     O .vlir01	000001c0 spriteBuf
+00005059 l     O .vlir02	00000014 cut_msg
+0000506d l     O .vlir02	00000015 copy_msg
+00005082 l     O .vlir02	00000016 paste_msg
+00005098 l     O .vlir02	00000015 icon1_msg
+000006c1 l     O .data	00000011 FileSubMenu
+000006d2 l     O .data	00000016 EditSubMenu
+00000796 l     O .bss	00000008 Icon1Picture
+00000403 g       .text	00000000 __do_init_stack
+000004ff g     F .text	000000cc main
+00008100 g       *ABS*	00000000 fileHeader
+00005000 g       *ABS*	00000000 __overlayaddr
+00001000 g       *ABS*	00000000 __overlaysize
+00000011 g       *ABS*	00000000 __r7H
+0000002f g       *ABS*	00000000 dispBufferOn
+000052b1 g     O .vlir01	00000016 close_msg
+00008a00 g       *ABS*	00000000 sprpic
+00000001 g       *ABS*	00000000 CPU_DATA
+0000d017 g       *ABS*	00000000 moby2
+0000851e g       *ABS*	00000000 screencolors
+00000020 g       *ABS*	00000000 __r15
+000000fe g     O .info_block	000000fe __std_file_header
+00000008 g       *ABS*	00000000 __r3
+00000018 g       *ABS*	00000000 __r11L
+0000000a g       *ABS*	00000000 __r4
+00000008 g       *ABS*	00000000 __r3L
+00000009 g       *ABS*	00000000 __r3H
+00000019 g       *ABS*	00000000 __r11H
+00000006 g       *ABS*	00000000 __r2L
+00000007 g       *ABS*	00000000 __r2H
+00000002 g       *ABS*	00000000 __r0
+00000004 g       *ABS*	00000000 __r1L
+00000005 g       *ABS*	00000000 __r1H
+0000001a g       *ABS*	00000000 __r12
+0000001c g       *ABS*	00000000 __r13
+0000001e g       *ABS*	00000000 __r14
+0000000c g       *ABS*	00000000 __r5
+0000000e g       *ABS*	00000000 __r6
+00000018 g       *ABS*	00000000 __r11
+0000000c g       *ABS*	00000000 __r5L
+00000002 g       *ABS*	00000000 __r0L
+0000851d g       *ABS*	00000000 sysDBData
+0000850a g       *ABS*	00000000 random
+00000004 g       *ABS*	00000000 __r1
+00000006 g       *ABS*	00000000 __r2
+00000010 g       *ABS*	00000000 __r7
+0000848b g       *ABS*	00000000 isGEOS
+00000010 g       *ABS*	00000000 __r7L
+00000016 g       *ABS*	00000000 __r10
+00000016 g       *ABS*	00000000 __r10L
+00000014 g       *ABS*	00000000 __r9
+0000000d g       *ABS*	00000000 __r5H
+0000000e g       *ABS*	00000000 __r6L
+0000000f g       *ABS*	00000000 __r6H
+00000000  w    O .dir_block	0000003a __std_dir_entry
+0000040e g       .text	00000000 __after_main
+00000415 g       .text	00000000 __swap_userzp
+00000090 g       *ABS*	00000000 __zp_reg_start
+0000c22c g       *ABS*	00000000 __EnterDeskTop
+00001000  w      *ABS*	00000000 __heap_default_limit
+00002000 g       *ABS*	00000000 __backbufsize
+000000fb g       *ABS*	00000000 __zp_reg_end
+0000006b g       *ABS*	00000000 __zp_reg_size
+00000400 g       *ABS*	00000000 __stacksize
+000003f8 g       *ABS*	00000000 __vlir00_size
+00000004 g       *ABS*	00000000 __vlir00_sect
+0000009a g       *ABS*	00000000 __vlir00_offs
+00000003 g       *ABS*	00000000 __vlir01_sect
+000000cd g       *ABS*	00000000 __vlir01_offs
+00000001 g       *ABS*	00000000 __vlir02_sect
+000000af g       *ABS*	00000000 __vlir02_offs
+00000000 g       *ABS*	00000000 __vlir03_sect
+00000000 g       *ABS*	00000000 __vlir03_offs
+00000000 g       *ABS*	00000000 __vlir04_sect
+00000000 g       *ABS*	00000000 __vlir04_offs
+00000000 g       *ABS*	00000000 __vlir05_sect
+00000000 g       *ABS*	00000000 __vlir05_offs
+00000000 g       *ABS*	00000000 __vlir06_sect
+00000000 g       *ABS*	00000000 __vlir06_offs
+00000000 g       *ABS*	00000000 __vlir07_sect
+00000000 g       *ABS*	00000000 __vlir07_offs
+00000000 g       *ABS*	00000000 __vlir08_sect
+00000000 g       *ABS*	00000000 __vlir08_offs
+00000000 g       *ABS*	00000000 __vlir09_sect
+00000000 g       *ABS*	00000000 __vlir09_offs
+00000000 g       *ABS*	00000000 __vlir0a_sect
+00000000 g       *ABS*	00000000 __vlir0a_offs
+00000000 g       *ABS*	00000000 __vlir0b_sect
+00000000 g       *ABS*	00000000 __vlir0b_offs
+00000000 g       *ABS*	00000000 __vlir0c_sect
+00000000 g       *ABS*	00000000 __vlir0c_offs
+00000000 g       *ABS*	00000000 __vlir0d_sect
+00000000 g       *ABS*	00000000 __vlir0d_offs
+00000000 g       *ABS*	00000000 __vlir0e_sect
+00000000 g       *ABS*	00000000 __vlir0e_offs
+00000000 g       *ABS*	00000000 __vlir0f_sect
+00000000 g       *ABS*	00000000 __vlir0f_offs
+000002fa g       *ABS*	00000000 __vlir01_size
+000000fe g       *ABS*	00000000 __vlir02_size
+00000001 g       *ABS*	00000000 __vlir03_size
+00000001 g       *ABS*	00000000 __vlir04_size
+00000001 g       *ABS*	00000000 __vlir05_size
+00000001 g       *ABS*	00000000 __vlir06_size
+00000001 g       *ABS*	00000000 __vlir07_size
+00000001 g       *ABS*	00000000 __vlir08_size
+00000001 g       *ABS*	00000000 __vlir09_size
+00000001 g       *ABS*	00000000 __vlir0a_size
+00000001 g       *ABS*	00000000 __vlir0b_size
+00000001 g       *ABS*	00000000 __vlir0c_size
+00000001 g       *ABS*	00000000 __vlir0d_size
+00000001 g       *ABS*	00000000 __vlir0e_size
+00000001 g       *ABS*	00000000 __vlir0f_size
+0000079e g       .noinit	00000000 __heap_start
+00005000 g       *ABS*	00000000 __stack
+00000090 g       .zp.data	00000000 __zp_data_start
+00000400 g       *ABS*	00000000 __zp_data_load_start
+00000000 g       *ABS*	00000000 __zp_data_size
+00000090 g       .zp.bss	00000000 __zp_bss_start
+00000001 g       *ABS*	00000000 __zp_bss_size
+00000400 g       .text	00000000 _init
+00000400 g       .text	00000000 _start
+00000414 g       .text	00000000 _fini
+000005cb g       .text	00000000 __init_array_start
+000005cb g       .text	00000000 __init_array_end
+000005cb g       .text	00000000 __fini_array_start
+000005cb g       .text	00000000 __fini_array_end
+00000616 g       .data	00000000 __data_start
+00000792 g       .data	00000000 __data_end
+00000616 g       *ABS*	00000000 __data_load_start
+0000017c g       *ABS*	00000000 __data_size
+00000792 g       .bss	00000000 __bss_start
+0000079e g       .bss	00000000 __bss_end
+0000000c g       *ABS*	00000000 __bss_size
+00000070 g       *ABS*	00000000 __rs0
+00000072 g       *ABS*	00000000 __rs1
+00000074 g       *ABS*	00000000 __rs2
+00000076 g       *ABS*	00000000 __rs3
+00000078 g       *ABS*	00000000 __rs4
+0000007a g       *ABS*	00000000 __rs5
+0000007c g       *ABS*	00000000 __rs6
+0000007e g       *ABS*	00000000 __rs7
+00000080 g       *ABS*	00000000 __rs8
+00000082 g       *ABS*	00000000 __rs9
+00000084 g       *ABS*	00000000 __rs10
+00000086 g       *ABS*	00000000 __rs11
+00000088 g       *ABS*	00000000 __rs12
+0000008a g       *ABS*	00000000 __rs13
+0000008c g       *ABS*	00000000 __rs14
+0000008e g       *ABS*	00000000 __rs15
+00000070 g       *ABS*	00000000 __rc0
+00000071 g       *ABS*	00000000 __rc1
+00000072 g       *ABS*	00000000 __rc2
+00000073 g       *ABS*	00000000 __rc3
+00000074 g       *ABS*	00000000 __rc4
+00000075 g       *ABS*	00000000 __rc5
+00000076 g       *ABS*	00000000 __rc6
+00000077 g       *ABS*	00000000 __rc7
+00000078 g       *ABS*	00000000 __rc8
+00000079 g       *ABS*	00000000 __rc9
+0000007a g       *ABS*	00000000 __rc10
+0000007b g       *ABS*	00000000 __rc11
+0000007c g       *ABS*	00000000 __rc12
+0000007d g       *ABS*	00000000 __rc13
+0000007e g       *ABS*	00000000 __rc14
+0000007f g       *ABS*	00000000 __rc15
+00000080 g       *ABS*	00000000 __rc16
+00000081 g       *ABS*	00000000 __rc17
+00000082 g       *ABS*	00000000 __rc18
+00000083 g       *ABS*	00000000 __rc19
+00000084 g       *ABS*	00000000 __rc20
+00000085 g       *ABS*	00000000 __rc21
+00000086 g       *ABS*	00000000 __rc22
+00000087 g       *ABS*	00000000 __rc23
+00000088 g       *ABS*	00000000 __rc24
+00000089 g       *ABS*	00000000 __rc25
+0000008a g       *ABS*	00000000 __rc26
+0000008b g       *ABS*	00000000 __rc27
+0000008c g       *ABS*	00000000 __rc28
+0000008d g       *ABS*	00000000 __rc29
+0000008e g       *ABS*	00000000 __rc30
+0000008f g       *ABS*	00000000 __rc31
+00000012 g       *ABS*	00000000 __r8
+00000003 g       *ABS*	00000000 __r0H
+0000000a g       *ABS*	00000000 __r4L
+0000000b g       *ABS*	00000000 __r4H
+00000012 g       *ABS*	00000000 __r8L
+00000013 g       *ABS*	00000000 __r8H
+00000014 g       *ABS*	00000000 __r9L
+00000015 g       *ABS*	00000000 __r9H
+00000017 g       *ABS*	00000000 __r10H
+0000001a g       *ABS*	00000000 __r12L
+0000001b g       *ABS*	00000000 __r12H
+0000001c g       *ABS*	00000000 __r13L
+0000001d g       *ABS*	00000000 __r13H
+0000001e g       *ABS*	00000000 __r14L
+0000001f g       *ABS*	00000000 __r14H
+00000020 g       *ABS*	00000000 __r15L
+00000021 g       *ABS*	00000000 __r15H
+00000000 g       *ABS*	00000000 CPU_DDR
+00000090 g       *ABS*	00000000 STATUS
+000000ba g       *ABS*	00000000 curDevice
+00000000 g       *ABS*	00000000 zpage
+00000022 g       *ABS*	00000000 curPattern
+00000024 g       *ABS*	00000000 string
+00000026 g       *ABS*	00000000 baselineOffset
+00000027 g       *ABS*	00000000 curSetWidth
+00000029 g       *ABS*	00000000 curHeight
+0000002a g       *ABS*	00000000 curIndexTable
+0000002c g       *ABS*	00000000 cardDataPntr
+0000002e g       *ABS*	00000000 currentMode
+00000030 g       *ABS*	00000000 mouseOn
+00000031 g       *ABS*	00000000 msePicPtr
+00000033 g       *ABS*	00000000 windowTop
+00000034 g       *ABS*	00000000 windowBottom
+00000035 g       *ABS*	00000000 leftMargin
+00000037 g       *ABS*	00000000 rightMargin
+00000039 g       *ABS*	00000000 pressFlag
+0000003a g       *ABS*	00000000 mouseXPos
+0000003c g       *ABS*	00000000 mouseYPos
+0000003d g       *ABS*	00000000 returnAddress
+0000003f g       *ABS*	00000000 graphMode
+0000008e g       *ABS*	00000000 TURBO_DD00
+0000008f g       *ABS*	00000000 TURBO_DD00_CPY
+000000fb g       *ABS*	00000000 __a0
+000000fb g       *ABS*	00000000 __a0L
+000000fc g       *ABS*	00000000 __a0H
+000000fd g       *ABS*	00000000 __a1
+000000fd g       *ABS*	00000000 __a1L
+000000fe g       *ABS*	00000000 __a1H
+00000316 g       *ABS*	00000000 bkvec
+00000318 g       *ABS*	00000000 nmivec
+0000031a g       *ABS*	00000000 kernalVectors
+00008000 g       *ABS*	00000000 diskBlkBuf
+00008200 g       *ABS*	00000000 curDirHead
+00008300 g       *ABS*	00000000 fileTrScTab
+00008400 g       *ABS*	00000000 dirEntryBuf
+0000841e g       *ABS*	00000000 DrACurDkNm
+00008430 g       *ABS*	00000000 DrBCurDkNm
+00008442 g       *ABS*	00000000 dataFileName
+00008453 g       *ABS*	00000000 dataDiskName
+00008465 g       *ABS*	00000000 PrntFilename
+00008476 g       *ABS*	00000000 PrntDiskName
+00008489 g       *ABS*	00000000 curDrive
+0000848a g       *ABS*	00000000 diskOpenFlg
+0000848c g       *ABS*	00000000 interleave
+0000848d g       *ABS*	00000000 numDrives
+0000848e g       *ABS*	00000000 driveType
+00008492 g       *ABS*	00000000 turboFlags
+00008496 g       *ABS*	00000000 curRecord
+00008497 g       *ABS*	00000000 usedRecords
+00008498 g       *ABS*	00000000 fileWritten
+00008499 g       *ABS*	00000000 fileSize
+0000849b g       *ABS*	00000000 appMain
+0000849d g       *ABS*	00000000 intTopVector
+0000849f g       *ABS*	00000000 intBotVector
+000084a1 g       *ABS*	00000000 mouseVector
+000084a3 g       *ABS*	00000000 keyVector
+000084a5 g       *ABS*	00000000 inputVector
+000084a7 g       *ABS*	00000000 mouseFaultVec
+000084a9 g       *ABS*	00000000 otherPressVec
+000084ab g       *ABS*	00000000 StringFaultVec
+000084ad g       *ABS*	00000000 alarmTmtVector
+000084af g       *ABS*	00000000 BRKVector
+000084b1 g       *ABS*	00000000 RecoverVector
+000084b3 g       *ABS*	00000000 selectionFlash
+000084b4 g       *ABS*	00000000 alphaFlag
+000084b5 g       *ABS*	00000000 iconSelFlg
+000084b6 g       *ABS*	00000000 faultData
+000084b7 g       *ABS*	00000000 menuNumber
+000084b8 g       *ABS*	00000000 mouseTop
+000084b9 g       *ABS*	00000000 mouseBottom
+000084ba g       *ABS*	00000000 mouseLeft
+000084bc g       *ABS*	00000000 mouseRight
+000084be g       *ABS*	00000000 stringX
+000084c0 g       *ABS*	00000000 stringY
+000084c1 g       *ABS*	00000000 mousePicData
+00008501 g       *ABS*	00000000 maxMouseSpeed
+00008502 g       *ABS*	00000000 minMouseSpeed
+00008503 g       *ABS*	00000000 mouseAccel
+00008504 g       *ABS*	00000000 keyData
+00008505 g       *ABS*	00000000 mouseData
+00008506 g       *ABS*	00000000 inputData
+00008507 g       *ABS*	00000000 mouseSpeed
+0000850c g       *ABS*	00000000 saveFontTab
+00008515 g       *ABS*	00000000 dblClickCount
+00008516 g       *ABS*	00000000 year
+00008517 g       *ABS*	00000000 month
+00008518 g       *ABS*	00000000 day
+00008519 g       *ABS*	00000000 hour
+0000851a g       *ABS*	00000000 minutes
+0000851b g       *ABS*	00000000 seconds
+0000851c g       *ABS*	00000000 alarmSetFlag
+0000851f g       *ABS*	00000000 dlgBoxRamBuf
+000088bb g       *ABS*	00000000 savedmoby2
+000088bc g       *ABS*	00000000 scr80polar
+000088bd g       *ABS*	00000000 scr80colors
+000088be g       *ABS*	00000000 vdcClrMode
+000088bf g       *ABS*	00000000 driveData
+000088c3 g       *ABS*	00000000 ramExpSize
+000088c4 g       *ABS*	00000000 sysRAMFlg
+000088c5 g       *ABS*	00000000 firstBoot
+000088c6 g       *ABS*	00000000 curType
+000088c7 g       *ABS*	00000000 ramBase
+000088cb g       *ABS*	00000000 inputDevName
+000088dc g       *ABS*	00000000 DrCCurDkNm
+000088ee g       *ABS*	00000000 DrDCurDkNm
+00008900 g       *ABS*	00000000 dir2Head
+00008ff8 g       *ABS*	00000000 objPointer
+0000c006 g       *ABS*	00000000 bootName
+0000c00f g       *ABS*	00000000 version
+0000c010 g       *ABS*	00000000 nationality
+0000c012 g       *ABS*	00000000 sysFlgCopy
+0000c018 g       *ABS*	00000000 dateCopy
+0000d000 g       *ABS*	00000000 mobpos
+0000d010 g       *ABS*	00000000 msbxpos
+0000d011 g       *ABS*	00000000 grcntrl1
+0000d012 g       *ABS*	00000000 rasreg
+0000d013 g       *ABS*	00000000 lpxpos
+0000d014 g       *ABS*	00000000 lpypos
+0000d015 g       *ABS*	00000000 mobenble
+0000d016 g       *ABS*	00000000 grcntrl2
+0000d018 g       *ABS*	00000000 grmemptr
+0000d019 g       *ABS*	00000000 grirq
+0000d01a g       *ABS*	00000000 grirqen
+0000d01b g       *ABS*	00000000 mobprior
+0000d01c g       *ABS*	00000000 mobmcm
+0000d01d g       *ABS*	00000000 mobx2
+0000d01e g       *ABS*	00000000 mobmobcol
+0000d01f g       *ABS*	00000000 mobbakcol
+0000d020 g       *ABS*	00000000 extclr
+0000d021 g       *ABS*	00000000 bakclr
+0000d025 g       *ABS*	00000000 mcmclr
+0000d027 g       *ABS*	00000000 mobclr
+0000d02f g       *ABS*	00000000 keyreg
+0000d030 g       *ABS*	00000000 clkreg
+0000fffa g       *ABS*	00000000 NMI_VECTOR
+0000fffc g       *ABS*	00000000 RESET_VECTOR
+0000fffe g       *ABS*	00000000 IRQ_VECTOR
+00007900 g       *ABS*	00000000 __InitForPrint
+00007903 g       *ABS*	00000000 __StartPrint
+00007906 g       *ABS*	00000000 __PrintBuffer
+00007909 g       *ABS*	00000000 __StopPrint
+0000790c g       *ABS*	00000000 __GetDimensions
+0000790f g       *ABS*	00000000 __PrinsASCII
+00007912 g       *ABS*	00000000 __StartASCII
+00007915 g       *ABS*	00000000 __SetNLQ
+00009030 g       *ABS*	00000000 __Get1stDirEntry
+00009033 g       *ABS*	00000000 __GetNxtDirEntry
+00009036 g       *ABS*	00000000 __GetOffPageTrSc
+00009039 g       *ABS*	00000000 __AddDirBlock
+0000903c g       *ABS*	00000000 __ReadBuff
+0000903f g       *ABS*	00000000 __WriteBuff
+00009042 g       *ABS*	00000000 __SendTSBytes
+00009045 g       *ABS*	00000000 __CheckErrors
+00009048 g       *ABS*	00000000 __AllocateBlock
+0000904b g       *ABS*	00000000 __ReadLink
+0000c000 g       *ABS*	00000000 __BootGEOS
+0000c003 g       *ABS*	00000000 __ResetHandle
+0000c100 g       *ABS*	00000000 __InterruptMain
+0000c103 g       *ABS*	00000000 __InitProcesses
+0000c106 g       *ABS*	00000000 __RestartProcess
+0000c109 g       *ABS*	00000000 __EnableProcess
+0000c10c g       *ABS*	00000000 __BlockProcess
+0000c10f g       *ABS*	00000000 __UnblockProcess
+0000c112 g       *ABS*	00000000 __FreezeProcess
+0000c115 g       *ABS*	00000000 __UnfreezeProcess
+0000c118 g       *ABS*	00000000 __HorizontalLine
+0000c11b g       *ABS*	00000000 __InvertLine
+0000c11e g       *ABS*	00000000 __RecoverLine
+0000c121 g       *ABS*	00000000 __VerticalLine
+0000c124 g       *ABS*	00000000 __Rectangle
+0000c127 g       *ABS*	00000000 __FrameRectangle
+0000c12a g       *ABS*	00000000 __InvertRectangle
+0000c12d g       *ABS*	00000000 __RecoverRectangle
+0000c130 g       *ABS*	00000000 __DrawLine
+0000c133 g       *ABS*	00000000 __DrawPoint
+0000c136 g       *ABS*	00000000 __GraphicsString
+0000c139 g       *ABS*	00000000 __SetPattern
+0000c13c g       *ABS*	00000000 __GetScanLine
+0000c13f g       *ABS*	00000000 __TestPoint
+0000c142 g       *ABS*	00000000 __BitmapUp
+0000c145 g       *ABS*	00000000 __PutChar
+0000c148 g       *ABS*	00000000 __PutString
+0000c14b g       *ABS*	00000000 __UseSystemFont
+0000c14e g       *ABS*	00000000 __StartMouseMode
+0000c151 g       *ABS*	00000000 __DoMenu
+0000c154 g       *ABS*	00000000 __RecoverMenu
+0000c157 g       *ABS*	00000000 __RecoverAllMenus
+0000c15a g       *ABS*	00000000 __DoIcons
+0000c15d g       *ABS*	00000000 __DShiftLeft
+0000c160 g       *ABS*	00000000 __BBMult
+0000c163 g       *ABS*	00000000 __BMult
+0000c166 g       *ABS*	00000000 __DMult
+0000c169 g       *ABS*	00000000 __Ddiv
+0000c16c g       *ABS*	00000000 __DSdiv
+0000c16f g       *ABS*	00000000 __Dabs
+0000c172 g       *ABS*	00000000 __Dnegate
+0000c175 g       *ABS*	00000000 __Ddec
+0000c178 g       *ABS*	00000000 __ClearRam
+0000c17b g       *ABS*	00000000 __FillRam
+0000c17e g       *ABS*	00000000 __MoveData
+0000c181 g       *ABS*	00000000 __InitRam
+0000c184 g       *ABS*	00000000 __PutDecimal
+0000c187 g       *ABS*	00000000 __GetRandom
+0000c18a g       *ABS*	00000000 __MouseUp
+0000c18d g       *ABS*	00000000 __MouseOff
+0000c190 g       *ABS*	00000000 __DoPreviousMenu
+0000c193 g       *ABS*	00000000 __ReDoMenu
+0000c196 g       *ABS*	00000000 __GetSerialNumber
+0000c199 g       *ABS*	00000000 __Sleep
+0000c19c g       *ABS*	00000000 __ClearMouseMode
+0000c19f g       *ABS*	00000000 __i_Rectangle
+0000c1a2 g       *ABS*	00000000 __i_FrameRectangle
+0000c1a5 g       *ABS*	00000000 __i_RecoverRectangle
+0000c1a8 g       *ABS*	00000000 __i_GraphicsString
+0000c1ab g       *ABS*	00000000 __i_BitmapUp
+0000c1ae g       *ABS*	00000000 __i_PutString
+0000c1b1 g       *ABS*	00000000 __GetRealSize
+0000c1b4 g       *ABS*	00000000 __i_FillRam
+0000c1b7 g       *ABS*	00000000 __i_MoveData
+0000c1ba g       *ABS*	00000000 __GetString
+0000c1bd g       *ABS*	00000000 __GotoFirstMenu
+0000c1c0 g       *ABS*	00000000 __InitTextPrompt
+0000c1c3 g       *ABS*	00000000 __MainLoop
+0000c1c6 g       *ABS*	00000000 __DrawSprite
+0000c1c9 g       *ABS*	00000000 __GetCharWidth
+0000c1cc g       *ABS*	00000000 __LoadCharSet
+0000c1cf g       *ABS*	00000000 __PosSprite
+0000c1d2 g       *ABS*	00000000 __EnablSprite
+0000c1d5 g       *ABS*	00000000 __DisablSprite
+0000c1d8 g       *ABS*	00000000 __CallRoutine
+0000c1db g       *ABS*	00000000 __CalcBlksFree
+0000c1de g       *ABS*	00000000 __ChkDkGEOS
+0000c1e1 g       *ABS*	00000000 __NewDisk
+0000c1e4 g       *ABS*	00000000 __GetBlock
+0000c1e7 g       *ABS*	00000000 __PutBlock
+0000c1ea g       *ABS*	00000000 __SetGEOSDisk
+0000c1ed g       *ABS*	00000000 __SaveFile
+0000c1f0 g       *ABS*	00000000 __SetGDirEntry
+0000c1f3 g       *ABS*	00000000 __BldGDirEntry
+0000c1f6 g       *ABS*	00000000 __GetFreeDirBlk
+0000c1f9 g       *ABS*	00000000 __WriteFile
+0000c1fc g       *ABS*	00000000 __BlkAlloc
+0000c1ff g       *ABS*	00000000 __ReadFile
+0000c202 g       *ABS*	00000000 __SmallPutChar
+0000c205 g       *ABS*	00000000 __FollowChain
+0000c208 g       *ABS*	00000000 __GetFile
+0000c20b g       *ABS*	00000000 __FindFile
+0000c20e g       *ABS*	00000000 __CRC
+0000c211 g       *ABS*	00000000 __LdFile
+0000c214 g       *ABS*	00000000 __EnterTurbo
+0000c217 g       *ABS*	00000000 __LdDeskAcc
+0000c21a g       *ABS*	00000000 __ReadBlock
+0000c21d g       *ABS*	00000000 __LdApplic
+0000c220 g       *ABS*	00000000 __WriteBlock
+0000c223 g       *ABS*	00000000 __VerWriteBlock
+0000c226 g       *ABS*	00000000 __FreeFile
+0000c229 g       *ABS*	00000000 __GetFHdrInfo
+0000c22f g       *ABS*	00000000 __StartAppl
+0000c232 g       *ABS*	00000000 __ExitTurbo
+0000c235 g       *ABS*	00000000 __PurgeTurbo
+0000c238 g       *ABS*	00000000 __DeleteFile
+0000c23b g       *ABS*	00000000 __FindFTypes
+0000c23e g       *ABS*	00000000 __RstrAppl
+0000c241 g       *ABS*	00000000 __ToBASIC
+0000c244 g       *ABS*	00000000 __FastDelFile
+0000c247 g       *ABS*	00000000 __GetDirHead
+0000c24a g       *ABS*	00000000 __PutDirHead
+0000c24d g       *ABS*	00000000 __NxtBlkAlloc
+0000c250 g       *ABS*	00000000 __ImprintRectangle
+0000c253 g       *ABS*	00000000 __i_ImprintRectangle
+0000c256 g       *ABS*	00000000 __DoDlgBox
+0000c259 g       *ABS*	00000000 __RenameFile
+0000c25c g       *ABS*	00000000 __InitForIO
+0000c25f g       *ABS*	00000000 __DoneWithIO
+0000c262 g       *ABS*	00000000 __DShiftRight
+0000c265 g       *ABS*	00000000 __CopyString
+0000c268 g       *ABS*	00000000 __CopyFString
+0000c26b g       *ABS*	00000000 __CmpString
+0000c26e g       *ABS*	00000000 __CmpFString
+0000c271 g       *ABS*	00000000 __FirstInit
+0000c274 g       *ABS*	00000000 __OpenRecordFile
+0000c277 g       *ABS*	00000000 __CloseRecordFile
+0000c27a g       *ABS*	00000000 __NextRecord
+0000c27d g       *ABS*	00000000 __PreviousRecord
+0000c280 g       *ABS*	00000000 __PointRecord
+0000c283 g       *ABS*	00000000 __DeleteRecord
+0000c286 g       *ABS*	00000000 __InsertRecord
+0000c289 g       *ABS*	00000000 __AppendRecord
+0000c28c g       *ABS*	00000000 __ReadRecord
+0000c28f g       *ABS*	00000000 __WriteRecord
+0000c292 g       *ABS*	00000000 __SetNextFree
+0000c295 g       *ABS*	00000000 __UpdateRecordFile
+0000c298 g       *ABS*	00000000 __GetPtrCurDkNm
+0000c29b g       *ABS*	00000000 __PromptOn
+0000c29e g       *ABS*	00000000 __PromptOff
+0000c2a1 g       *ABS*	00000000 __OpenDisk
+0000c2a4 g       *ABS*	00000000 __DoInlineReturn
+0000c2a7 g       *ABS*	00000000 __GetNextChar
+0000c2aa g       *ABS*	00000000 __BitmapClip
+0000c2ad g       *ABS*	00000000 __FindBAMBit
+0000c2b0 g       *ABS*	00000000 __SetDevice
+0000c2b3 g       *ABS*	00000000 __IsMseInRegion
+0000c2b6 g       *ABS*	00000000 __ReadByte
+0000c2b9 g       *ABS*	00000000 __FreeBlock
+0000c2bc g       *ABS*	00000000 __ChangeDiskDevice
+0000c2bf g       *ABS*	00000000 __RstrFrmDialog
+0000c2c2 g       *ABS*	00000000 __Panic
+0000c2c5 g       *ABS*	00000000 __BitOtherClip
+0000c2c8 g       *ABS*	00000000 __StashRAM
+0000c2cb g       *ABS*	00000000 __FetchRAM
+0000c2ce g       *ABS*	00000000 __SwapRAM
+0000c2d1 g       *ABS*	00000000 __VerifyRAM
+0000c2d4 g       *ABS*	00000000 __DoRAMOp
+0000c2d7 g       *ABS*	00000000 __TempHideMouse
+0000c2dd g       *ABS*	00000000 __SetNewMode
+0000c2e0 g       *ABS*	00000000 __NormalizeX
+0000c2e3 g       *ABS*	00000000 __MoveBData
+0000c2e6 g       *ABS*	00000000 __SwapBData
+0000c2e9 g       *ABS*	00000000 __VerifyBData
+0000c2ec g       *ABS*	00000000 __DoBOp
+0000c2ef g       *ABS*	00000000 __AccessCache
+0000c2f2 g       *ABS*	00000000 __HideOnlyMouse
+0000c2f5 g       *ABS*	00000000 __SetColorMode
+0000c2f8 g       *ABS*	00000000 __ColorCard
+0000c2fb g       *ABS*	00000000 __ColorRectangle
+0000fe80 g       *ABS*	00000000 __InitMouse
+0000fe83 g       *ABS*	00000000 __SlowMouse
+0000fe86 g       *ABS*	00000000 __UpdateMouse
+0000fe89 g       *ABS*	00000000 __SetMouse
+0000fd00 g       *ABS*	00000000 __InitMouse_128
+0000fd03 g       *ABS*	00000000 __SlowMouse_128
+0000fd06 g       *ABS*	00000000 __UpdateMouse_128
+0000fd09 g       *ABS*	00000000 __SetMouse_128
+
+DYNAMIC SYMBOL TABLE:
+
+Disassembly of section .text:
+
+00000400 <_init>:
+00000400 <_start>:
+; _start():
+     400: 20 15 04     	jsr	$415 <__swap_userzp>
+
+00000403 <__do_init_stack>:
+; __do_init_stack():
+     403: a9 00        	lda	#$0
+     405: 85 70        	sta	$70                     ; 0x70 <__std_dir_entry+0x70>
+     407: a9 50        	lda	#$50
+     409: 85 71        	sta	$71                     ; 0x71 <__std_dir_entry+0x71>
+     40b: 20 ff 04     	jsr	$4ff <main>
+
+0000040e <__after_main>:
+; __after_main():
+     40e: 20 15 04     	jsr	$415 <__swap_userzp>
+     411: 4c 2c c2     	jmp	$c22c <close_msg+0x6f7b>
+
+00000414 <_fini>:
+; _fini():
+     414: 60           	rts
+
+00000415 <__swap_userzp>:
+; __swap_userzp():
+     415: 08           	php
+     416: 48           	pha
+     417: 8a           	txa
+     418: 48           	pha
+     419: 98           	tya
+     41a: 48           	pha
+     41b: a2 6b        	ldx	#$6b
+
+0000041d <__swaploop>:
+; __swaploop():
+     41d: bc 90 00     	ldy	$90,x                   ; 0x90 <curModule>
+     420: bd 16 06     	lda	$616,x                  ; 0x616 <__userzp_copy>
+     423: 9d 90 00     	sta	$90,x                   ; 0x90 <curModule>
+     426: 98           	tya
+     427: 9d 16 06     	sta	$616,x                  ; 0x616 <__userzp_copy>
+     42a: ca           	dex
+     42b: 10 f0        	bpl	$41d <__swaploop>
+     42d: 68           	pla
+     42e: a8           	tay
+     42f: 68           	pla
+     430: aa           	tax
+     431: 68           	pla
+     432: 28           	plp
+     433: 60           	rts
+
+00000434 <SwapMod>:
+; SwapMod():
+     434: a6 90        	ldx	$90                     ; 0x90 <curModule>
+     436: 85 72        	sta	$72                     ; 0x72 <__std_dir_entry+0x72>
+     438: e4 72        	cpx	$72                     ; 0x72 <__std_dir_entry+0x72>
+     43a: f0 4b        	beq	$487 <SwapMod+0x53>
+     43c: a0 00        	ldy	#$0
+     43e: 85 90        	sta	$90                     ; 0x90 <curModule>
+     440: 0a           	asl
+     441: 85 72        	sta	$72                     ; 0x72 <__std_dir_entry+0x72>
+     443: a9 00        	lda	#$0
+     445: 2a           	rol
+     446: 85 73        	sta	$73                     ; 0x73 <__std_dir_entry+0x73>
+     448: a9 92        	lda	#$92
+     44a: 18           	clc
+     44b: 65 72        	adc	$72                     ; 0x72 <__std_dir_entry+0x72>
+     44d: aa           	tax
+     44e: a9 07        	lda	#$7
+     450: 65 73        	adc	$73                     ; 0x73 <__std_dir_entry+0x73>
+     452: 85 72        	sta	$72                     ; 0x72 <__std_dir_entry+0x72>
+     454: 18           	clc
+     455: 8a           	txa
+     456: 69 fe        	adc	#$fe
+     458: aa           	tax
+     459: a5 72        	lda	$72                     ; 0x72 <__std_dir_entry+0x72>
+     45b: 69 ff        	adc	#$ff
+     45d: 85 73        	sta	$73                     ; 0x73 <__std_dir_entry+0x73>
+     45f: 86 72        	stx	$72                     ; 0x72 <__std_dir_entry+0x72>
+     461: a2 10        	ldx	#$10
+     463: 84 10        	sty	$10                     ; 0x10 <__std_dir_entry+0x10>
+     465: a0 00        	ldy	#$0
+     467: b1 72        	lda	($72),y                 ; 0x72 <__std_dir_entry+0x72>
+     469: 85 74        	sta	$74                     ; 0x74 <__std_dir_entry+0x74>
+     46b: c8           	iny
+     46c: b1 72        	lda	($72),y                 ; 0x72 <__std_dir_entry+0x72>
+     46e: a0 50        	ldy	#$50
+     470: 84 11        	sty	$11                     ; 0x11 <__std_dir_entry+0x11>
+     472: a4 74        	ldy	$74                     ; 0x74 <__std_dir_entry+0x74>
+     474: 84 04        	sty	$4                      ; 0x4 <__std_dir_entry+0x4>
+     476: 85 05        	sta	$5                      ; 0x5 <__std_dir_entry+0x5>
+     478: a0 00        	ldy	#$0
+     47a: 84 06        	sty	$6                      ; 0x6 <__std_dir_entry+0x6>
+     47c: 86 07        	stx	$7                      ; 0x7 <__std_dir_entry+0x7>
+     47e: 20 15 04     	jsr	$415 <__swap_userzp>
+     481: 20 ff c1     	jsr	$c1ff <close_msg+0x6f4e>
+     484: 20 15 04     	jsr	$415 <__swap_userzp>
+     487: 60           	rts
+
+00000488 <FileIn>:
+; FileIn():
+     488: a9 01        	lda	#$1
+     48a: 4c 34 04     	jmp	$434 <SwapMod>
+
+0000048d <EditIn>:
+; EditIn():
+     48d: a9 02        	lda	#$2
+     48f: 4c 34 04     	jmp	$434 <SwapMod>
+
+00000492 <R_DoAbout>:
+; R_DoAbout():
+     492: 20 bd c1     	jsr	$c1bd <close_msg+0x6f0c>
+     495: 60           	rts
+
+00000496 <R_RunDA>:
+; R_RunDA():
+     496: 85 a2        	sta	$a2                     ; 0xa2 <__vlir00_offs+0x8>
+     498: 20 bd c1     	jsr	$c1bd <close_msg+0x6f0c>
+     49b: 20 88 04     	jsr	$488 <FileIn>
+     49e: a5 a2        	lda	$a2                     ; 0xa2 <__vlir00_offs+0x8>
+     4a0: 4c 0a 50     	jmp	$500a <RunDA>
+
+000004a3 <R_RunDA0>:
+; R_RunDA0():
+     4a3: a9 00        	lda	#$0
+     4a5: 4c 96 04     	jmp	$496 <R_RunDA>
+
+000004a8 <R_RunDA1>:
+; R_RunDA1():
+     4a8: a9 01        	lda	#$1
+     4aa: 4c 96 04     	jmp	$496 <R_RunDA>
+
+000004ad <R_RunDA2>:
+; R_RunDA2():
+     4ad: a9 02        	lda	#$2
+     4af: 4c 96 04     	jmp	$496 <R_RunDA>
+
+000004b2 <R_RunDA3>:
+; R_RunDA3():
+     4b2: a9 03        	lda	#$3
+     4b4: 4c 96 04     	jmp	$496 <R_RunDA>
+
+000004b7 <R_RunDA4>:
+; R_RunDA4():
+     4b7: a9 04        	lda	#$4
+     4b9: 4c 96 04     	jmp	$496 <R_RunDA>
+
+000004bc <R_RunDA5>:
+; R_RunDA5():
+     4bc: a9 05        	lda	#$5
+     4be: 4c 96 04     	jmp	$496 <R_RunDA>
+
+000004c1 <R_RunDA6>:
+; R_RunDA6():
+     4c1: a9 06        	lda	#$6
+     4c3: 4c 96 04     	jmp	$496 <R_RunDA>
+
+000004c6 <R_RunDA7>:
+; R_RunDA7():
+     4c6: a9 07        	lda	#$7
+     4c8: 4c 96 04     	jmp	$496 <R_RunDA>
+
+000004cb <R_DoClose>:
+; R_DoClose():
+     4cb: 20 bd c1     	jsr	$c1bd <close_msg+0x6f0c>
+     4ce: 20 88 04     	jsr	$488 <FileIn>
+     4d1: 4c e5 50     	jmp	$50e5 <DoClose>
+
+000004d4 <R_DoQuit>:
+; R_DoQuit():
+     4d4: 20 bd c1     	jsr	$c1bd <close_msg+0x6f0c>
+     4d7: 20 15 04     	jsr	$415 <__swap_userzp>
+     4da: 4c 2c c2     	jmp	$c22c <close_msg+0x6f7b>
+     4dd: 60           	rts
+
+000004de <R_DoCut>:
+; R_DoCut():
+     4de: 20 bd c1     	jsr	$c1bd <close_msg+0x6f0c>
+     4e1: 20 8d 04     	jsr	$48d <EditIn>
+     4e4: 4c 09 50     	jmp	$5009 <dlgClose+0x9>
+
+000004e7 <R_DoCopy>:
+; R_DoCopy():
+     4e7: 20 bd c1     	jsr	$c1bd <close_msg+0x6f0c>
+     4ea: 20 8d 04     	jsr	$48d <EditIn>
+     4ed: 4c 1d 50     	jmp	$501d <RunDA+0x13>
+
+000004f0 <R_DoPaste>:
+; R_DoPaste():
+     4f0: 20 bd c1     	jsr	$c1bd <close_msg+0x6f0c>
+     4f3: 20 8d 04     	jsr	$48d <EditIn>
+     4f6: 4c 31 50     	jmp	$5031 <RunDA+0x27>
+
+000004f9 <R_DoIcon1>:
+; R_DoIcon1():
+     4f9: 20 8d 04     	jsr	$48d <EditIn>
+     4fc: 4c 45 50     	jmp	$5045 <RunDA+0x3b>
+
+000004ff <main>:
+; main():
+     4ff: a0 82        	ldy	#$82
+     501: a2 06        	ldx	#$6
+     503: a9 c0        	lda	#$c0
+     505: 8d 2f 00     	sta	$2f                     ; 0x2f <__std_dir_entry+0x2f>
+     508: 84 02        	sty	$2                      ; 0x2 <__std_dir_entry+0x2>
+     50a: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+     50c: 20 36 c1     	jsr	$c136 <close_msg+0x6e85>
+     50f: a2 06        	ldx	#$6
+     511: 86 10        	stx	$10                     ; 0x10 <__std_dir_entry+0x10>
+     513: a2 01        	ldx	#$1
+     515: 86 11        	stx	$11                     ; 0x11 <__std_dir_entry+0x11>
+     517: a2 d4        	ldx	#$d4
+     519: 86 16        	stx	$16                     ; 0x16 <__std_dir_entry+0x16>
+     51b: a0 91        	ldy	#$91
+     51d: a2 05        	ldx	#$5
+     51f: 86 17        	stx	$17                     ; 0x17 <__std_dir_entry+0x17>
+     521: a2 00        	ldx	#$0
+     523: 84 0e        	sty	$e                      ; 0xe <__std_dir_entry+0xe>
+     525: 86 0f        	stx	$f                      ; 0xf <__std_dir_entry+0xf>
+     527: 20 15 04     	jsr	$415 <__swap_userzp>
+     52a: 20 3b c2     	jsr	$c23b <close_msg+0x6f8a>
+     52d: 20 15 04     	jsr	$415 <__swap_userzp>
+     530: a2 91        	ldx	#$91
+     532: 86 02        	stx	$2                      ; 0x2 <__std_dir_entry+0x2>
+     534: a2 00        	ldx	#$0
+     536: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+     538: 20 15 04     	jsr	$415 <__swap_userzp>
+     53b: 20 74 c2     	jsr	$c274 <close_msg+0x6fc3>
+     53e: 20 15 04     	jsr	$415 <__swap_userzp>
+     541: a2 04        	ldx	#$4
+     543: 86 02        	stx	$2                      ; 0x2 <__std_dir_entry+0x2>
+     545: a2 81        	ldx	#$81
+     547: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+     549: a2 92        	ldx	#$92
+     54b: 86 04        	stx	$4                      ; 0x4 <__std_dir_entry+0x4>
+     54d: a2 07        	ldx	#$7
+     54f: 86 05        	stx	$5                      ; 0x5 <__std_dir_entry+0x5>
+     551: a2 04        	ldx	#$4
+     553: 86 06        	stx	$6                      ; 0x6 <__std_dir_entry+0x6>
+     555: a2 00        	ldx	#$0
+     557: 86 07        	stx	$7                      ; 0x7 <__std_dir_entry+0x7>
+     559: 20 7e c1     	jsr	$c17e <close_msg+0x6ecd>
+     55c: 20 15 04     	jsr	$415 <__swap_userzp>
+     55f: 20 77 c2     	jsr	$c277 <close_msg+0x6fc6>
+     562: 20 15 04     	jsr	$415 <__swap_userzp>
+     565: a2 ff        	ldx	#$ff
+     567: 86 90        	stx	$90                     ; 0x90 <curModule>
+     569: a2 0a        	ldx	#$a
+     56b: 86 0e        	stx	$e                      ; 0xe <__std_dir_entry+0xe>
+     56d: a2 07        	ldx	#$7
+     56f: 86 0f        	stx	$f                      ; 0xf <__std_dir_entry+0xf>
+     571: a2 05        	ldx	#$5
+     573: 86 10        	stx	$10                     ; 0x10 <__std_dir_entry+0x10>
+     575: a2 07        	ldx	#$7
+     577: 86 11        	stx	$11                     ; 0x11 <__std_dir_entry+0x11>
+     579: a2 00        	ldx	#$0
+     57b: 86 16        	stx	$16                     ; 0x16 <__std_dir_entry+0x16>
+     57d: 86 17        	stx	$17                     ; 0x17 <__std_dir_entry+0x17>
+     57f: 20 15 04     	jsr	$415 <__swap_userzp>
+     582: 20 3b c2     	jsr	$c23b <close_msg+0x6f8a>
+     585: 20 15 04     	jsr	$415 <__swap_userzp>
+     588: a6 11        	ldx	$11                     ; 0x11 <__std_dir_entry+0x11>
+     58a: e0 07        	cpx	#$7
+     58c: f0 1e        	beq	$5ac <main+0xad>
+     58e: 86 72        	stx	$72                     ; 0x72 <__std_dir_entry+0x72>
+     590: a9 08        	lda	#$8
+     592: 38           	sec
+     593: e5 72        	sbc	$72                     ; 0x72 <__std_dir_entry+0x72>
+     595: 85 72        	sta	$72                     ; 0x72 <__std_dir_entry+0x72>
+     597: 09 80        	ora	#$80
+     599: 8d 93 06     	sta	$693                    ; 0x693 <GeosSubMenu+0x6>
+     59c: 06 72        	asl	$72                     ; 0x72 <__std_dir_entry+0x72>
+     59e: a5 72        	lda	$72                     ; 0x72 <__std_dir_entry+0x72>
+     5a0: 0a           	asl
+     5a1: 0a           	asl
+     5a2: 0a           	asl
+     5a3: 38           	sec
+     5a4: e5 72        	sbc	$72                     ; 0x72 <__std_dir_entry+0x72>
+     5a6: 18           	clc
+     5a7: 69 10        	adc	#$10
+     5a9: 8d 8e 06     	sta	$68e                    ; 0x68e <GeosSubMenu+0x1>
+     5ac: a2 e8        	ldx	#$e8
+     5ae: 86 02        	stx	$2                      ; 0x2 <__std_dir_entry+0x2>
+     5b0: a2 06        	ldx	#$6
+     5b2: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+     5b4: a9 00        	lda	#$0
+     5b6: 20 51 c1     	jsr	$c151 <close_msg+0x6ea0>
+     5b9: a2 fe        	ldx	#$fe
+     5bb: 86 02        	stx	$2                      ; 0x2 <__std_dir_entry+0x2>
+     5bd: a2 06        	ldx	#$6
+     5bf: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+     5c1: 20 5a c1     	jsr	$c15a <close_msg+0x6ea9>
+     5c4: 20 c3 c1     	jsr	$c1c3 <close_msg+0x6f12>
+     5c7: a2 00        	ldx	#$0
+     5c9: 8a           	txa
+     5ca: 60           	rts
+
+Disassembly of section .vlir01:
+
+00005000 <dlgClose>:
+    5000: 81 01 01 48 0b 01 08 b1         ...H....
+    5008: 52 00                           R.
+
+0000500a <RunDA>:
+; RunDA():
+    500a: 85 72        	sta	$72                     ; 0x72 <__std_dir_entry+0x72>
+    500c: a2 40        	ldx	#$40
+    500e: a0 8a        	ldy	#$8a
+    5010: a9 f1        	lda	#$f1
+    5012: 86 02        	stx	$2                      ; 0x2 <__std_dir_entry+0x2>
+    5014: 84 03        	sty	$3                      ; 0x3 <__std_dir_entry+0x3>
+    5016: 85 04        	sta	$4                      ; 0x4 <__std_dir_entry+0x4>
+    5018: a2 50        	ldx	#$50
+    501a: 86 05        	stx	$5                      ; 0x5 <__std_dir_entry+0x5>
+    501c: a2 c0        	ldx	#$c0
+; DoCopy():
+    501e: 86 06        	stx	$6                      ; 0x6 <__std_dir_entry+0x6>
+    5020: a2 01        	ldx	#$1
+    5022: 86 07        	stx	$7                      ; 0x7 <__std_dir_entry+0x7>
+    5024: 20 7e c1     	jsr	$c17e <close_msg+0x6ecd>
+    5027: ae 01 00     	ldx	$1                      ; 0x1 <__std_dir_entry+0x1>
+    502a: a0 35        	ldy	#$35
+    502c: 8c 01 00     	sty	$1                      ; 0x1 <__std_dir_entry+0x1>
+    502f: ac 17 d0     	ldy	$d017                   ; 0xd017 <close_msg+0x7d66>
+; DoPaste():
+    5032: 84 74        	sty	$74                     ; 0x74 <__std_dir_entry+0x74>
+    5034: a0 00        	ldy	#$0
+    5036: 8c 17 d0     	sty	$d017                   ; 0xd017 <close_msg+0x7d66>
+    5039: 8e 01 00     	stx	$1                      ; 0x1 <__std_dir_entry+0x1>
+    503c: a6 72        	ldx	$72                     ; 0x72 <__std_dir_entry+0x72>
+    503e: 86 75        	stx	$75                     ; 0x75 <__std_dir_entry+0x75>
+    5040: 06 75        	asl	$75                     ; 0x75 <__std_dir_entry+0x75>
+    5042: 98           	tya
+    5043: 2a           	rol
+    5044: 85 73        	sta	$73                     ; 0x73 <__std_dir_entry+0x73>
+; DoIcon1():
+    5046: a5 75        	lda	$75                     ; 0x75 <__std_dir_entry+0x75>
+    5048: 0a           	asl
+    5049: 26 73        	rol	$73                     ; 0x73 <__std_dir_entry+0x73>
+    504b: 0a           	asl
+    504c: 26 73        	rol	$73                     ; 0x73 <__std_dir_entry+0x73>
+    504e: 0a           	asl
+    504f: a8           	tay
+    5050: a5 73        	lda	$73                     ; 0x73 <__std_dir_entry+0x73>
+    5052: 2a           	rol
+    5053: aa           	tax
+    5054: 18           	clc
+    5055: 98           	tya
+    5056: 65 72        	adc	$72                     ; 0x72 <__std_dir_entry+0x72>
+    5058: 85 72        	sta	$72                     ; 0x72 <__std_dir_entry+0x72>
+; cut_msg():
+    505a: 8a           	txa
+    505b: 69 00        	adc	#$0
+    505d: 85 73        	sta	$73                     ; 0x73 <__std_dir_entry+0x73>
+    505f: a9 0a        	lda	#$a
+    5061: 18           	clc
+    5062: 65 72        	adc	$72                     ; 0x72 <__std_dir_entry+0x72>
+    5064: aa           	tax
+    5065: a9 07        	lda	#$7
+    5067: 65 73        	adc	$73                     ; 0x73 <__std_dir_entry+0x73>
+    5069: 86 0e        	stx	$e                      ; 0xe <__std_dir_entry+0xe>
+    506b: 85 0f        	sta	$f                      ; 0xf <__std_dir_entry+0xf>
+; copy_msg():
+    506d: a2 00        	ldx	#$0
+    506f: 86 02        	stx	$2                      ; 0x2 <__std_dir_entry+0x2>
+    5071: 86 06        	stx	$6                      ; 0x6 <__std_dir_entry+0x6>
+    5073: 86 07        	stx	$7                      ; 0x7 <__std_dir_entry+0x7>
+    5075: 86 08        	stx	$8                      ; 0x8 <__std_dir_entry+0x8>
+    5077: 86 09        	stx	$9                      ; 0x9 <__std_dir_entry+0x9>
+    5079: 86 10        	stx	$10                     ; 0x10 <__std_dir_entry+0x10>
+    507b: 86 11        	stx	$11                     ; 0x11 <__std_dir_entry+0x11>
+    507d: 86 16        	stx	$16                     ; 0x16 <__std_dir_entry+0x16>
+    507f: 20 15 04     	jsr	$415 <__swap_userzp>
+; paste_msg():
+    5082: 20 08 c2     	jsr	$c208 <close_msg+0x6f57>
+    5085: 20 15 04     	jsr	$415 <__swap_userzp>
+    5088: ae 01 00     	ldx	$1                      ; 0x1 <__std_dir_entry+0x1>
+    508b: a0 35        	ldy	#$35
+    508d: 8c 01 00     	sty	$1                      ; 0x1 <__std_dir_entry+0x1>
+    5090: a4 74        	ldy	$74                     ; 0x74 <__std_dir_entry+0x74>
+    5092: 8c 17 d0     	sty	$d017                   ; 0xd017 <close_msg+0x7d66>
+    5095: 8e 01 00     	stx	$1                      ; 0x1 <__std_dir_entry+0x1>
+; icon1_msg():
+    5098: a2 f1        	ldx	#$f1
+    509a: 86 02        	stx	$2                      ; 0x2 <__std_dir_entry+0x2>
+    509c: a2 50        	ldx	#$50
+    509e: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+    50a0: a2 40        	ldx	#$40
+    50a2: 86 04        	stx	$4                      ; 0x4 <__std_dir_entry+0x4>
+    50a4: a2 8a        	ldx	#$8a
+    50a6: 86 05        	stx	$5                      ; 0x5 <__std_dir_entry+0x5>
+    50a8: a2 c0        	ldx	#$c0
+    50aa: 86 06        	stx	$6                      ; 0x6 <__std_dir_entry+0x6>
+    50ac: a2 01        	ldx	#$1
+    50ae: 86 07        	stx	$7                      ; 0x7 <__std_dir_entry+0x7>
+    50b0: 20 7e c1     	jsr	$c17e <close_msg+0x6ecd>
+    50b3: ae 1e 85     	ldx	$851e                   ; 0x851e <close_msg+0x326d>
+    50b6: a0 e8        	ldy	#$e8
+    50b8: 84 02        	sty	$2                      ; 0x2 <__std_dir_entry+0x2>
+    50ba: a0 03        	ldy	#$3
+    50bc: 84 03        	sty	$3                      ; 0x3 <__std_dir_entry+0x3>
+    50be: a0 00        	ldy	#$0
+    50c0: 84 04        	sty	$4                      ; 0x4 <__std_dir_entry+0x4>
+    50c2: a0 8c        	ldy	#$8c
+    50c4: 84 05        	sty	$5                      ; 0x5 <__std_dir_entry+0x5>
+    50c6: 86 06        	stx	$6                      ; 0x6 <__std_dir_entry+0x6>
+    50c8: 20 7b c1     	jsr	$c17b <close_msg+0x6eca>
+    50cb: a2 00        	ldx	#$0
+    50cd: 86 08        	stx	$8                      ; 0x8 <__std_dir_entry+0x8>
+    50cf: 86 09        	stx	$9                      ; 0x9 <__std_dir_entry+0x9>
+    50d1: a2 0f        	ldx	#$f
+    50d3: 86 06        	stx	$6                      ; 0x6 <__std_dir_entry+0x6>
+    50d5: a2 3f        	ldx	#$3f
+    50d7: 86 0a        	stx	$a                      ; 0xa <__std_dir_entry+0xa>
+    50d9: a2 01        	ldx	#$1
+    50db: 86 0b        	stx	$b                      ; 0xb <__std_dir_entry+0xb>
+    50dd: a2 c7        	ldx	#$c7
+    50df: 86 07        	stx	$7                      ; 0x7 <__std_dir_entry+0x7>
+    50e1: 20 2d c1     	jsr	$c12d <close_msg+0x6e7c>
+    50e4: 60           	rts
+
+000050e5 <DoClose>:
+; DoClose():
+    50e5: a2 00        	ldx	#$0
+    50e7: a0 50        	ldy	#$50
+    50e9: 86 02        	stx	$2                      ; 0x2 <__std_dir_entry+0x2>
+    50eb: 84 03        	sty	$3                      ; 0x3 <__std_dir_entry+0x3>
+    50ed: 20 56 c2     	jsr	$c256 <close_msg+0x6fa5>
+    50f0: 60           	rts
+
+000050f1 <spriteBuf>:
+    50f1: 00 00 00 00 00 00 00 00         ........
+    50f9: 00 00 00 00 00 00 00 00         ........
+    5101: 00 00 00 00 00 00 00 00         ........
+    5109: 00 00 00 00 00 00 00 00         ........
+    5111: 00 00 00 00 00 00 00 00         ........
+    5119: 00 00 00 00 00 00 00 00         ........
+    5121: 00 00 00 00 00 00 00 00         ........
+    5129: 00 00 00 00 00 00 00 00         ........
+    5131: 00 00 00 00 00 00 00 00         ........
+    5139: 00 00 00 00 00 00 00 00         ........
+    5141: 00 00 00 00 00 00 00 00         ........
+    5149: 00 00 00 00 00 00 00 00         ........
+    5151: 00 00 00 00 00 00 00 00         ........
+    5159: 00 00 00 00 00 00 00 00         ........
+    5161: 00 00 00 00 00 00 00 00         ........
+    5169: 00 00 00 00 00 00 00 00         ........
+    5171: 00 00 00 00 00 00 00 00         ........
+    5179: 00 00 00 00 00 00 00 00         ........
+    5181: 00 00 00 00 00 00 00 00         ........
+    5189: 00 00 00 00 00 00 00 00         ........
+    5191: 00 00 00 00 00 00 00 00         ........
+    5199: 00 00 00 00 00 00 00 00         ........
+    51a1: 00 00 00 00 00 00 00 00         ........
+    51a9: 00 00 00 00 00 00 00 00         ........
+    51b1: 00 00 00 00 00 00 00 00         ........
+    51b9: 00 00 00 00 00 00 00 00         ........
+    51c1: 00 00 00 00 00 00 00 00         ........
+    51c9: 00 00 00 00 00 00 00 00         ........
+    51d1: 00 00 00 00 00 00 00 00         ........
+    51d9: 00 00 00 00 00 00 00 00         ........
+    51e1: 00 00 00 00 00 00 00 00         ........
+    51e9: 00 00 00 00 00 00 00 00         ........
+    51f1: 00 00 00 00 00 00 00 00         ........
+    51f9: 00 00 00 00 00 00 00 00         ........
+    5201: 00 00 00 00 00 00 00 00         ........
+    5209: 00 00 00 00 00 00 00 00         ........
+    5211: 00 00 00 00 00 00 00 00         ........
+    5219: 00 00 00 00 00 00 00 00         ........
+    5221: 00 00 00 00 00 00 00 00         ........
+    5229: 00 00 00 00 00 00 00 00         ........
+    5231: 00 00 00 00 00 00 00 00         ........
+    5239: 00 00 00 00 00 00 00 00         ........
+    5241: 00 00 00 00 00 00 00 00         ........
+    5249: 00 00 00 00 00 00 00 00         ........
+    5251: 00 00 00 00 00 00 00 00         ........
+    5259: 00 00 00 00 00 00 00 00         ........
+    5261: 00 00 00 00 00 00 00 00         ........
+    5269: 00 00 00 00 00 00 00 00         ........
+    5271: 00 00 00 00 00 00 00 00         ........
+    5279: 00 00 00 00 00 00 00 00         ........
+    5281: 00 00 00 00 00 00 00 00         ........
+    5289: 00 00 00 00 00 00 00 00         ........
+    5291: 00 00 00 00 00 00 00 00         ........
+    5299: 00 00 00 00 00 00 00 00         ........
+    52a1: 00 00 00 00 00 00 00 00         ........
+    52a9: 00 00 00 00 00 00 00 00         ........
+
+000052b1 <close_msg>:
+    52b1: 63 6c 6f 73 65 20 68 61         close ha
+    52b9: 6e 64 6c 65 72 20 63 61         ndler ca
+    52c1: 6c 6c 65 64 2e 00               lled..
+
+Disassembly of section .vlir02:
+
+00005000 <dlg_edit>:
+    5000: 81 01 01 48 0c 01 08 20         ...H... 
+    5008: 00                              .
+
+00005009 <DoCut>:
+; DoCut():
+    5009: a2 59        	ldx	#$59
+; RunDA():
+    500b: a0 50        	ldy	#$50
+    500d: a9 00        	lda	#$0
+    500f: 86 20        	stx	$20                     ; 0x20 <__std_dir_entry+0x20>
+    5011: 84 21        	sty	$21                     ; 0x21 <__std_dir_entry+0x21>
+    5013: 85 02        	sta	$2                      ; 0x2 <__std_dir_entry+0x2>
+    5015: a2 50        	ldx	#$50
+    5017: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+    5019: 20 56 c2     	jsr	$c256 <close_msg+0x6fa5>
+    501c: 60           	rts
+
+0000501d <DoCopy>:
+; DoCopy():
+    501d: a2 6d        	ldx	#$6d
+    501f: a0 50        	ldy	#$50
+    5021: a9 00        	lda	#$0
+    5023: 86 20        	stx	$20                     ; 0x20 <__std_dir_entry+0x20>
+    5025: 84 21        	sty	$21                     ; 0x21 <__std_dir_entry+0x21>
+    5027: 85 02        	sta	$2                      ; 0x2 <__std_dir_entry+0x2>
+    5029: a2 50        	ldx	#$50
+    502b: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+    502d: 20 56 c2     	jsr	$c256 <close_msg+0x6fa5>
+    5030: 60           	rts
+
+00005031 <DoPaste>:
+; DoPaste():
+    5031: a2 82        	ldx	#$82
+    5033: a0 50        	ldy	#$50
+    5035: a9 00        	lda	#$0
+    5037: 86 20        	stx	$20                     ; 0x20 <__std_dir_entry+0x20>
+    5039: 84 21        	sty	$21                     ; 0x21 <__std_dir_entry+0x21>
+    503b: 85 02        	sta	$2                      ; 0x2 <__std_dir_entry+0x2>
+    503d: a2 50        	ldx	#$50
+    503f: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+    5041: 20 56 c2     	jsr	$c256 <close_msg+0x6fa5>
+    5044: 60           	rts
+
+00005045 <DoIcon1>:
+; DoIcon1():
+    5045: a2 98        	ldx	#$98
+    5047: a0 50        	ldy	#$50
+    5049: a9 00        	lda	#$0
+    504b: 86 20        	stx	$20                     ; 0x20 <__std_dir_entry+0x20>
+    504d: 84 21        	sty	$21                     ; 0x21 <__std_dir_entry+0x21>
+    504f: 85 02        	sta	$2                      ; 0x2 <__std_dir_entry+0x2>
+    5051: a2 50        	ldx	#$50
+    5053: 86 03        	stx	$3                      ; 0x3 <__std_dir_entry+0x3>
+    5055: 20 56 c2     	jsr	$c256 <close_msg+0x6fa5>
+    5058: 60           	rts
+
+00005059 <cut_msg>:
+    5059: 63 75 74 20 68 61 6e 64         cut hand
+    5061: 6c 65 72 20 63 61 6c 6c         ler call
+    5069: 65 64 2e 00                     ed..
+
+0000506d <copy_msg>:
+    506d: 63 6f 70 79 20 68 61 6e         copy han
+    5075: 64 6c 65 72 20 63 61 6c         dler cal
+    507d: 6c 65 64 2e 00                  led..
+
+00005082 <paste_msg>:
+    5082: 70 61 73 74 65 20 68 61         paste ha
+    508a: 6e 64 6c 65 72 20 63 61         ndler ca
+    5092: 6c 6c 65 64 2e 00               lled..
+
+00005098 <icon1_msg>:
+    5098: 69 63 6f 6e 20 68 61 6e         icon han
+    50a0: 64 6c 65 72 20 63 61 6c         dler cal
+    50a8: 6c 65 64 2e 00                  led..

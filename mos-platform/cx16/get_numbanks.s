@@ -9,7 +9,7 @@
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/get_numbanks.s
 ;
 .global get_numbanks
-.section .text.get_numbanks,"axR",@progbits
+.section .text.get_numbanks,"ax",@progbits
 get_numbanks:
 	sec		; set carry to get MEMTOP
 	jsr	__MEMTOP

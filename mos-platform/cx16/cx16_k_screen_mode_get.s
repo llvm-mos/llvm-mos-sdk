@@ -10,7 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-screen_mode
 ;
 .global cx16_k_screen_mode_get
-.section .text.cx16_k_screen_mode_get,"axR",@progbits
+.section .text.cx16_k_screen_mode_get,"ax",@progbits
 cx16_k_screen_mode_get:
 	sec			; C = set for get screen mode info
 	jsr	__SCREEN_MODE

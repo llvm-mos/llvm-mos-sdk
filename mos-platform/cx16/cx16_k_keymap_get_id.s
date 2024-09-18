@@ -8,7 +8,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-keymap
 ;
 .global cx16_k_keymap_get_id
-.section .text.cx16_k_keymap_get_id,"axR",@progbits
+.section .text.cx16_k_keymap_get_id,"ax",@progbits
 cx16_k_keymap_get_id:
 	sec				; set C for get keymap identifier
 	jsr	__KEYMAP

@@ -10,7 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-fb_get_info
 ;
 .global cx16_k_fb_get_info
-.section .text.cx16_k_fb_get_info,"axR",@progbits
+.section .text.cx16_k_fb_get_info,"ax",@progbits
 cx16_k_fb_get_info:
 	ldy	__rc2			; push info_ptr
 	phy

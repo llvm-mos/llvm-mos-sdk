@@ -11,7 +11,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-graph_draw_rect
 ;
 .global cx16_k_graph_draw_rect
-.section .text.cx16_k_graph_draw_rect,"axR",@progbits
+.section .text.cx16_k_graph_draw_rect,"ax",@progbits
 cx16_k_graph_draw_rect:
 	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 	ldy	__rc10		; load fillflag

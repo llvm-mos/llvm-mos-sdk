@@ -10,7 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-screen_set_charset
 ;
 .global cx16_k_screen_set_charset
-.section .text.cx16_k_screen_set_charset,"axR",@progbits
+.section .text.cx16_k_screen_set_charset,"ax",@progbits
 cx16_k_screen_set_charset:
 				; A = charset_type (already set)
 	ldx	__rc2		; X/Y = charset_addr

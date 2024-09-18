@@ -11,7 +11,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-graph_draw_line
 ;
 .global cx16_k_graph_draw_line
-.section .text.cx16_k_graph_draw_line,"axR",@progbits
+.section .text.cx16_k_graph_draw_line,"ax",@progbits
 cx16_k_graph_draw_line:
 	X16_kernal_push_r6_r10	; documented as trashing additional regs
 	ldy	__rc6		; NOTE: copy args backwards due to overlap

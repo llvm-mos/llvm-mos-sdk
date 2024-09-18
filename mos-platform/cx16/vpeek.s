@@ -10,7 +10,7 @@
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/vpeek.s
 ;
 .global vpeek
-.section .text.vpeek,"axR",@progbits
+.section .text.vpeek,"ax",@progbits
 vpeek:
         stz     VERA_CTRL              	; set DCSEL=0 to access ADDRSEL=0
         ldy     __rc2

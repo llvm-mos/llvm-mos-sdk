@@ -10,7 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-sprite_set_image
 ;
 .global cx16_k_sprite_set_image
-.section .text.cx16_k_sprite_set_image,"axR",@progbits
+.section .text.cx16_k_sprite_set_image,"ax",@progbits
 cx16_k_sprite_set_image:
 	ldy	__rc2		; save h in r4 temp
 	sty	__r4

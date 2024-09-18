@@ -10,7 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-screen_mode
 ;
 .global cx16_k_screen_mode_set
-.section .text.cx16_k_screen_mode_set,"axR",@progbits
+.section .text.cx16_k_screen_mode_set,"ax",@progbits
 cx16_k_screen_mode_set:
 					; A = mode (already set)
 	clc				; clear C for set screen mode

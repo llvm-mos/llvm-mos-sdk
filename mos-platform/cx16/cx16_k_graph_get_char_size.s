@@ -10,7 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-graph_get_char_size
 ;
 .global cx16_k_graph_get_char_size
-.section .text.cx16_k_graph_get_char_size,"axR",@progbits
+.section .text.cx16_k_graph_get_char_size,"ax",@progbits
 cx16_k_graph_get_char_baseline:
 	X16_kernal_push_r6_r10	; appears to trash additional registers
 				; A = c (already set)

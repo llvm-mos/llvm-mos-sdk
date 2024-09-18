@@ -10,7 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-mouse_get
 ;
 .global cx16_k_mouse_get
-.section .text.cx16_k_mouse_get,"axR",@progbits
+.section .text.cx16_k_mouse_get,"ax",@progbits
 cx16_k_mouse_get:
 	ldx	#__r4		; x = temp pos
 	jsr	__MOUSE_GET

@@ -233,11 +233,13 @@ void cbm_k_listen (unsigned char dev);
  * ------ | ---------------
  *   0    | Load at address
  *   1    | Verify
- *   2    | Loads into VRAM $00000 + address
- *   3    | Loads into VRAM $10000 + address
+ *   2    | Loads into VRAM $00000 + address (cx16)
+ *   3    | Loads into VRAM $10000 + address (cx16)
  *
- * @param flag Load (0) or verify (1-255)
- * @param load_addr Load address pointer (if secondary address = 0).
+ * On other Commodore targets, a non-zero `flag` value triggers verify.
+ *
+ * @param flag Load or verify
+ * @param load_addr Load address pointer (if not verifying).
  * @return Address of last byte loaded/verified or KERNAL error code
  */
 void *cbm_k_load(unsigned char flag, void *load_addr);

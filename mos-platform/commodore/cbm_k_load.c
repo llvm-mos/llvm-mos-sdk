@@ -14,7 +14,6 @@ typedef union {
 } Word;
 
 void *cbm_k_load(const unsigned char flag, void *load_addr) {
-
   Word result;
   const Word addr = {.value = (uint16_t)(load_addr)};
 

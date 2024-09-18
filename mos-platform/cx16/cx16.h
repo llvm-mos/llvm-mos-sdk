@@ -263,7 +263,7 @@ enum {
 enum : unsigned char {
   ROM_KERNAL = 0,    //!< KERNAL operating system and drivers
   ROM_KEYBD = 1,     //!< Keyboard layout tables
-  ROM_CBMDOS = 2,    //!< The computer-based CMDR-DOS for FAT32 SD cards
+  ROM_CMDRDOS = 2,   //!< The computer-based CMDR-DOS for FAT32 SD cards
   ROM_FAT32 = 3,     //!< The FAT32 driver itself
   ROM_BASIC = 4,     //!< BASIC interpreter
   ROM_MONITOR = 5,   //!< Machine Language Monitor

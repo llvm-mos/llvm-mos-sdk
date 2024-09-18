@@ -567,7 +567,7 @@ int8_t CmpString(char *src, char *dest)
   asm volatile(
     "           ldx   #2 \n"
     "           ldy   #4 \n"
-    "           jsr   __CopyString \n"
+    "           jsr   __CmpString \n"
     "           beq   __cmp_eq \n"
     "           bmi   __cmp_lt \n"
     "           lda   #1 \n"
@@ -589,7 +589,7 @@ int8_t CmpFString(char *src, char *dest, uint8_t count)
   asm volatile(
     "           ldx   #2 \n"
     "           ldy   #4 \n"
-    "           jsr   __CopyFString \n"
+    "           jsr   __CmpFString \n"
     "           beq   __cmp_eq \n"
     "           bmi   __cmp_lt \n"
     "           lda   #1 \n"

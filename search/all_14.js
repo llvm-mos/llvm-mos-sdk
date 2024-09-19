@@ -201,7 +201,7 @@ var searchData=
   ['spriteworking_3271',['SPRITEWORKING',['../__suzy_8h.html#abdf5e0b64cd3d1eddc855beaceaaa8e9',1,'_suzy.h']]],
   ['srand_3272',['srand',['../common_2include_2stdlib_8h.html#a210f1bb7dc29a87394a25027e4231004',1,'stdlib.h']]],
   ['src_3273',['src',['../memory_8h.html#ab3b4066b211a3d1de8f72e90b2bca8ab',1,'memory.h']]],
-  ['src_5faddr_5fbits_5fopt_3274',['SRC_ADDR_BITS_OPT',['../__dmagic_8h.html#a34df7cc7f69a8ec535eec8a524dcbaf9a220dd874fb55850c066fcbceccd5bb90',1,'_dmagic.h']]],
+  ['src_5faddr_5fbits_5fopt_3274',['SRC_ADDR_BITS_OPT',['../__dmagic_8h.html#a97f905ac94bfebd46e50e32c7389e6eba220dd874fb55850c066fcbceccd5bb90',1,'_dmagic.h']]],
   ['sscanf_3275',['sscanf',['../stdio_8h.html#a64f00f77e0477f5b37b0be49d70de846',1,'stdio.h']]],
   ['start_5fvert_5fsync_3276',['START_VERT_SYNC',['../atari2600__constants_8h.html#abc7a65581a75e2bfb1c8a39e9deab8e6',1,'atari2600_constants.h']]],
   ['status_3277',['Status',['../structStatus.html',1,'Status'],['../structpce__cdb__subq__data.html#a3312611f3a7117bdb1244dc486e23d50',1,'pce_cdb_subq_data::status()']]],

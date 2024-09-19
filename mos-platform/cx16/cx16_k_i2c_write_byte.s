@@ -10,6 +10,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-i2c_write_byte
 ;
 .global cx16_k_i2c_write_byte
+.section .text.cx16_k_i2c_write_byte,"ax",@progbits
 cx16_k_i2c_write_byte:
 	sta	__rc3		; save device
 	stx	__rc4		; save offset

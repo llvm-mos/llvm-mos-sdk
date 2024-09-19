@@ -21,7 +21,7 @@ curunit:
         .fill    1
 
 
-.section .init,"axR",@progbits
+.section .init,"ax",@progbits
 initcurunit:
         lda     DEVNUM
         bne     L0
@@ -30,7 +30,7 @@ initcurunit:
 L0:     sta     curunit
 
 
-.section .fini,"axR",@progbits
+.section .fini,"ax",@progbits
 updatedevnum:
         lda     curunit
         sta     DEVNUM

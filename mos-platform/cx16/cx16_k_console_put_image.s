@@ -11,6 +11,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-console_put_image
 ;
 .global cx16_k_console_put_image
+.section .text.cx16_k_console_put_image,"ax",@progbits
 cx16_k_console_put_image:
 	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
 	ldy	__rc4

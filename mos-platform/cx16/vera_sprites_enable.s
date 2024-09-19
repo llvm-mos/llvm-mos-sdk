@@ -10,6 +10,7 @@
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/layer_enable.s
 ;
 .global vera_sprites_enable
+.section .text.vera_sprites_enable,"ax",@progbits
 vera_sprites_enable:
         stz     VERA_CTRL              	; set DCSEL=0 to access DC_VIDEO
         tax                             ; test A

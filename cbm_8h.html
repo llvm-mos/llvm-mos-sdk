@@ -202,8 +202,9 @@ Functions</h2></td></tr>
 <tr class="separator:a40f5a4a090db213cd6041387eedaa6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac89c038e7393898d2e73b0479486417e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#ac89c038e7393898d2e73b0479486417e">cbm_k_listen</a> (unsigned char dev)</td></tr>
 <tr class="separator:ac89c038e7393898d2e73b0479486417e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b24367b19af9f53476fc19fdbff2174"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a2b24367b19af9f53476fc19fdbff2174">cbm_k_load</a> (unsigned char flag, void *startaddr) __attribute__((leaf))</td></tr>
-<tr class="separator:a2b24367b19af9f53476fc19fdbff2174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0e2e0bf57a6173c1be26c8a64515d90"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#ae0e2e0bf57a6173c1be26c8a64515d90">cbm_k_load</a> (unsigned char flag, void *load_addr)</td></tr>
+<tr class="memdesc:ae0e2e0bf57a6173c1be26c8a64515d90"><td class="mdescLeft">&#160;</td><td class="mdescRight">CBM KERNAL function to load or verify file.  <a href="cbm_8h.html#ae0e2e0bf57a6173c1be26c8a64515d90">More...</a><br /></td></tr>
+<tr class="separator:ae0e2e0bf57a6173c1be26c8a64515d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2926f961f407dfa96cf22cc38da9afe3"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a2926f961f407dfa96cf22cc38da9afe3">cbm_k_open</a> (void) __attribute__((leaf))</td></tr>
 <tr class="separator:a2926f961f407dfa96cf22cc38da9afe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11ca4276b87f487149adbc3b2a63c51d"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cbm_8h.html#a11ca4276b87f487149adbc3b2a63c51d">cbm_k_readst</a> (void)</td></tr>
@@ -1009,8 +1010,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2b24367b19af9f53476fc19fdbff2174"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b24367b19af9f53476fc19fdbff2174">&#9670;&nbsp;</a></span>cbm_k_load()</h2>
+<a id="ae0e2e0bf57a6173c1be26c8a64515d90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0e2e0bf57a6173c1be26c8a64515d90">&#9670;&nbsp;</a></span>cbm_k_load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1025,7 +1026,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>startaddr</em>&#160;</td>
+          <td class="paramname"><em>load_addr</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1034,6 +1035,30 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>CBM KERNAL function to load or verify file. </p>
+<p>Should be called after <code><a class="el" href="cbm_8h.html#a79418756f07ac5ae6aa030536bc5e703">cbm_k_setlfs()</a></code> and <code><a class="el" href="cbm_8h.html#a8c8f90a209175777531e64dd5670493c">cbm_k_setnam()</a></code>. On Commander X16, the <code>flag</code> argument takes the following values:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"><code>flag</code> </th><th class="markdownTableHeadNone">Description  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone">Load at address  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">Verify  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">2 </td><td class="markdownTableBodyNone">Loads into VRAM $00000 + address (cx16)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">3 </td><td class="markdownTableBodyNone">Loads into VRAM $10000 + address (cx16)  </td></tr>
+</table>
+<p>On other Commodore targets, a non-zero <code>flag</code> value triggers verify.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flag</td><td>Load or verify </td></tr>
+    <tr><td class="paramname">load_addr</td><td>Load address pointer (if not verifying). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Address of last byte loaded/verified or KERNAL error code </dd></dl>
 
 </div>
 </div>

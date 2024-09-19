@@ -29,7 +29,7 @@ var searchData=
   ['cbm_5fk_5fgetin_589',['cbm_k_getin',['../cbm_8h.html#ac850203c7a097aa5e8813b6274b5b4f7',1,'cbm.h']]],
   ['cbm_5fk_5fiobase_590',['cbm_k_iobase',['../cbm_8h.html#a40f5a4a090db213cd6041387eedaa6b1',1,'cbm.h']]],
   ['cbm_5fk_5flisten_591',['cbm_k_listen',['../cbm_8h.html#ac89c038e7393898d2e73b0479486417e',1,'cbm.h']]],
-  ['cbm_5fk_5fload_592',['cbm_k_load',['../cbm_8h.html#a2b24367b19af9f53476fc19fdbff2174',1,'cbm.h']]],
+  ['cbm_5fk_5fload_592',['cbm_k_load',['../cbm_8h.html#ae0e2e0bf57a6173c1be26c8a64515d90',1,'cbm.h']]],
   ['cbm_5fk_5fopen_593',['cbm_k_open',['../cbm_8h.html#a2926f961f407dfa96cf22cc38da9afe3',1,'cbm.h']]],
   ['cbm_5fk_5freadst_594',['cbm_k_readst',['../cbm_8h.html#a11ca4276b87f487149adbc3b2a63c51d',1,'cbm.h']]],
   ['cbm_5fk_5fsave_595',['cbm_k_save',['../cbm_8h.html#ab377a4fa9b8926addec7ca23dee65925',1,'cbm.h']]],

@@ -15,6 +15,10 @@
  * Miscellaneous defines
  ***********************************************************************/
 
+#include <stdbool.h>
+#include <stdint.h>
+
+#if 0
 typedef unsigned char uint8_t;              /* an unsigned byte */
 typedef unsigned int uint16_t;              /* an unsigned 16 bit word */
 typedef int int16_t;                        /* a signed 16-bit word */
@@ -23,6 +27,7 @@ typedef signed char int8_t;                 /* a signed byte */
 #define bool   _Bool
 #define true   1
 #define false  0
+#endif
 
 #define LOW_BYTE(x) (*((unsigned char*)  &(##x)+0)) 
 #define HIGH_BYTE(x) (*((unsigned char*) &(##x)+1)) 

@@ -6,6 +6,7 @@ endif()
 
 install(FILES geos.h geos_constants.h geos_symbols.h geos_memorymap.h geos_types.h geos_routines.h TYPE INCLUDE)
 install(FILES geos.ld vlir.ld link.ld TYPE LIB)
+install(FILES README.md DESTINATION mos-platform/geos-cbm)
 
 add_platform_library(geos-cbm-crt crt0.c geos_crt.c)
 

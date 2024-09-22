@@ -1,9 +1,9 @@
-__overlaysize 	= 0x1000;
+__overlaysize   = DEFINED(__overlaysize_param) ? __overlaysize_param : 0x1000;
 
-__backbufsize	  = 0x2000;
+__backbufsize	= 0x2000;
 __overlayaddr 	= 0x8000 - __backbufsize - __overlaysize;
 __stacksize   	= 0x0400;
-__stack   	    = __overlayaddr;
+__stack   	= __overlayaddr;
 __zp_reg_start  = 0x90;
 __zp_reg_end    = 0xfb;
 __zp_reg_size   = __zp_reg_end - __zp_reg_start;

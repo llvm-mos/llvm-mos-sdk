@@ -9,36 +9,43 @@
  *
  ***********************************************************************/
 
-#include "geos.h"
+#include <geos.h>
 
 /***********************************************************************
  * GEOS Graphic routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 void DrawPoint(uint16_t x, uint8_t y, bool recover, bool background)
 {
   __r3 = x;
   __r11L = y;
   if (recover) {
-    __attribute__((leaf))
-    asm volatile("lda #0xff \n");
+    if (background) {
+      __attribute__((leaf))
+      asm volatile("lda #0xff \n"
+                  "clc \n"
+                  "jsr __DrawPoint " : : : "a","x","y","c","v");
+    } else {
+      __attribute__((leaf))
+      asm volatile("lda #0xff \n"
+                  "sec \n"
+                  "jsr __DrawPoint " : : : "a","x","y","c","v");
+    }
   } else {
     if (background) {
       __attribute__((leaf))
-      asm volatile("clc \n");
+      asm volatile("lda #0 \n"
+                  "clc \n"
+                  "jsr __DrawPoint " : : : "a","x","y","c","v");
     } else {
       __attribute__((leaf))
-      asm volatile("sec \n");
+      asm volatile("lda #0 \n"
+                  "sec \n"
+                  "jsr __DrawPoint " : : : "a","x","y","c","v");
     }
-    __attribute__((leaf))
-    asm volatile("lda #0 \n");
   }
-  __attribute__((leaf))
-  asm volatile("jsr __DrawPoint " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 bool TestPoint(uint16_t x, uint8_t y)
 {
   bool is_pixel_set;
@@ -54,27 +61,24 @@ bool TestPoint(uint16_t x, uint8_t y)
   return is_pixel_set;
 }
 
-__attribute__((leaf)) 
 void HorizontalLine(uint16_t left, uint16_t right, uint8_t y, uint8_t pattern)
 {
   __r11L = y;
   __r3 = left;
   __r4 = right;
   __attribute__((leaf))
-  asm volatile("jsr __HorizontalLine " : "=a" (pattern) : "a" (pattern) : "x","y","c","v");
+  asm volatile("jsr __HorizontalLine " : : "a" (pattern) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void VerticalLine(uint16_t x, uint8_t top, uint8_t bottom, uint8_t pattern)
 {
   __r3L = top;
   __r3H = bottom;
   __r4 = x;
   __attribute__((leaf))
-  asm volatile("jsr __VerticalLine " : "=a" (pattern) : "a" (pattern) : "x","y","c","v");
+  asm volatile("jsr __VerticalLine " : : "a" (pattern) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void InvertLine(uint16_t left, uint16_t right, uint8_t y)
 {
   __r3 = left;
@@ -84,7 +88,6 @@ void InvertLine(uint16_t left, uint16_t right, uint8_t y)
   asm volatile("jsr __InvertLine " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void RecoverLine(uint16_t left, uint16_t right, uint8_t y)
 {
   __r3 = left;
@@ -94,7 +97,6 @@ void RecoverLine(uint16_t left, uint16_t right, uint8_t y)
   asm volatile("jsr __RecoverLine " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void DrawLine(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom, bool recover, bool background)
 {
   __r3 = left;
@@ -103,32 +105,38 @@ void DrawLine(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom, bool r
   __r11H = bottom;
 
   if (recover) {
-    __attribute__((leaf))
-    asm volatile("lda #0xff \n");
+    if (background) {
+      __attribute__((leaf))
+      asm volatile("lda #0xff \n"
+                   "clc \n"
+                   "jsr __DrawLine " : : : "a","x","y","c","v");
+    } else {
+      __attribute__((leaf))
+      asm volatile("lda #0xff \n"
+                   "sec \n"
+                   "jsr __DrawLine " : : : "a","x","y","c","v");
+    }
   } else {
     if (background) {
       __attribute__((leaf))
-      asm volatile("clc \n");
+      asm volatile("lda #0 \n"
+                   "clc \n"
+                   "jsr __DrawLine " : : : "a","x","y","c","v");
     } else {
       __attribute__((leaf))
-      asm volatile("sec \n");
+      asm volatile("lda #0 \n"
+                   "sec \n"
+                   "jsr __DrawLine " : : : "a","x","y","c","v");
     }
-    __attribute__((leaf))
-    asm volatile("lda #0 \n");
   }
-
-  __attribute__((leaf)) 
-  asm volatile("jsr __DrawLine " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void SetPattern(uint8_t pattern)
 {
   __attribute__((leaf))
   asm volatile("jsr __SetPattern " : "=a"(pattern) : "a"(pattern) : "c","v");
 }
 
-__attribute__((leaf)) 
 void Rectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom)
 {
   __r3 = left;
@@ -139,7 +147,6 @@ void Rectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom)
   asm volatile("jsr __Rectangle " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void FrameRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom, uint8_t pattern)
 {
   __r3 = left;
@@ -150,7 +157,6 @@ void FrameRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom, 
   asm volatile("jsr __FrameRectangle" : "=a"(pattern) : "a"(pattern) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void InvertRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom)
 {
   __r3 = left;
@@ -161,7 +167,6 @@ void InvertRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom)
   asm volatile("jsr __InvertRectangle " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void RecoverRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom)
 {
   __r3 = left;
@@ -172,7 +177,6 @@ void RecoverRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom
   asm volatile("jsr __RecoverRectangle " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void ImprintRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom)
 {
   __r3 = left;
@@ -182,7 +186,6 @@ void ImprintRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom
   asm volatile("jsr __ImprintRectangle " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void BitmapUp(const uint8_t *bitmap, uint8_t card_left, uint8_t top, uint8_t card_width, uint8_t height)
 {
   __r0 = (uint16_t)bitmap;
@@ -194,7 +197,6 @@ void BitmapUp(const uint8_t *bitmap, uint8_t card_left, uint8_t top, uint8_t car
   asm volatile("jsr __BitmapUp " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void BitmapClip(const uint8_t *bitmap, uint8_t card_left, uint8_t top, uint8_t card_width, uint8_t height,
                 uint8_t left_skip, uint8_t right_skip, uint16_t top_skip)
 {
@@ -212,7 +214,6 @@ void BitmapClip(const uint8_t *bitmap, uint8_t card_left, uint8_t top, uint8_t c
   asm volatile("jsr __BitmapClip " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void BitOtherClip(const uint8_t *bitmap, uint8_t card_left, uint8_t top, uint8_t card_width, uint8_t height,
                   uint8_t left_skip, uint8_t right_skip, uint16_t top_skip,
                   vector app_input, vector sync)
@@ -233,7 +234,6 @@ void BitOtherClip(const uint8_t *bitmap, uint8_t card_left, uint8_t top, uint8_t
   asm volatile("jsr __BitOtherClip " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void GraphicsString(const uint8_t *graph_string)
 {
   __r0 = (uint16_t)graph_string;
@@ -241,7 +241,6 @@ void GraphicsString(const uint8_t *graph_string)
   asm volatile("jsr __GraphicsString " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void GetScanLine(uint8_t y, uint16_t *first_screen_byte, uint16_t *first_backgr_byte)
 {
   __attribute__((leaf))
@@ -254,7 +253,6 @@ void GetScanLine(uint8_t y, uint16_t *first_screen_byte, uint16_t *first_backgr_
  * GEOS Character routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 void PutString(uint16_t x, uint8_t y, const char *str)
 {
   __r11 = x;
@@ -264,7 +262,6 @@ void PutString(uint16_t x, uint8_t y, const char *str)
   asm volatile("jsr __PutString " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void PutDecimal(uint16_t value, uint16_t x, uint8_t y, uint8_t format)
 {
   __r0 = value;
@@ -274,7 +271,6 @@ void PutDecimal(uint16_t value, uint16_t x, uint8_t y, uint8_t format)
   asm volatile("jsr __PutDecimal" : "=a"(format) : "a"(format) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 uint8_t GetString(char *buffer, uint16_t x, uint8_t y, uint8_t max_chars, vector fault)
 {
   uint8_t len;
@@ -295,7 +291,6 @@ uint8_t GetString(char *buffer, uint16_t x, uint8_t y, uint8_t max_chars, vector
   return len;
 }
 
-__attribute__((leaf)) 
 char GetNextChar(void)
 {
   char ch;
@@ -305,51 +300,45 @@ char GetNextChar(void)
   return ch;
 }
 
-__attribute__((leaf)) 
 void InitTextPrompt(uint8_t height)
 {
   __attribute__((leaf))
   asm volatile("jsr __InitTextPrompt " : "=a"(height) : "a"(height) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void PromptOn(void)
 {
   __attribute__((leaf))
   asm volatile(" jsr __PromptOn" : : : "a","x","c","v");
 }
 
-__attribute__((leaf)) 
 void PromptOff(void)
 {
   __attribute__((leaf))
   asm volatile(" jsr __PromptOff" : : : "a","x","c","v");
 }
 
-__attribute__((leaf)) 
 uint16_t PutChar(uint16_t x, uint8_t y, char ch)
 {
   __r11 = x;
   __r1H = y;
 
   __attribute__((leaf))
-  asm volatile("jsr __PutChar " : "=a" (ch) : "a" (ch) : "x","y","c","v");
+  asm volatile("jsr __PutChar " : : "a" (ch) : "x","y","c","v");
 
   return __r11;
 }
 
-__attribute__((leaf)) 
 uint16_t SmallPutchar(uint16_t x, uint8_t y, char ch)
 {
   __r1H = y;
   __r11 = x;
   __attribute__((leaf))
-  asm volatile("jsr __SmallPutchar" : "=a"(ch) : "a"(ch) : "x", "y", "c", "v");
+  asm volatile("jsr __SmallPutchar" : : "a"(ch) : "x", "y", "c", "v");
 
   return __r11;
 }
 
-__attribute__((leaf)) 
 void GetRealSize(char ch, uint8_t mode, uint8_t *width, uint8_t *height, uint8_t *baseline_offset)
 {
   uint8_t w, h, o;
@@ -361,7 +350,6 @@ void GetRealSize(char ch, uint8_t mode, uint8_t *width, uint8_t *height, uint8_t
   *baseline_offset = o;
 }
 
-__attribute__((leaf)) 
 uint8_t GetCharWidth(char ch)
 {
   uint8_t width;
@@ -371,7 +359,6 @@ uint8_t GetCharWidth(char ch)
   return width;
 }
 
-__attribute__((leaf)) 
 void LoadCharSet(uint8_t *font_info_tab)
 {
   __r0 = (uint16_t)font_info_tab;
@@ -379,7 +366,6 @@ void LoadCharSet(uint8_t *font_info_tab)
   asm volatile("jsr __LoadCharSet" : : : "a","y","c","v");
 }
 
-__attribute__((leaf)) 
 void UseSystemFont(void)
 {
   __attribute__((leaf))
@@ -390,63 +376,54 @@ void UseSystemFont(void)
  * GEOS Mouse routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 void InitMouse(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __InitMouse " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void InitMouse_128(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __InitMouse_128 " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void SlowMouse(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __SlowMouse " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void SlowMouse_128(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __SlowMouse_128 " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void UpdateMouse(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __UpdateMouse " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void UpdateMouse128(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __UpdateMouse_128 " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void SetMouse(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __SetMouse " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void SetMouse_128(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __SetMouse_128" : : : "a", "x", "y", "c", "v");
 }
 
-__attribute__((leaf)) 
 void StartMouseMode(uint16_t x, uint8_t y)
 {
   __r11 = x;
@@ -457,28 +434,24 @@ void StartMouseMode(uint16_t x, uint8_t y)
   );
 }
 
-__attribute__((leaf)) 
 void ClearMouseMode(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __ClearMouseMode " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void MouseOff(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __MouseOff " : : : "a","c","v");
 }
 
-__attribute__((leaf)) 
 void MouseUp(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __MouseUp " : : : "a","c","v");
 }
 
-__attribute__((leaf)) 
 bool IsMseInRegion(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom)
 {
   bool is_in;
@@ -497,7 +470,6 @@ bool IsMseInRegion(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom)
  * GEOS Sprite support
  ***********************************************************************/
 
-__attribute__((leaf)) 
 void DrawSprite(uint8_t sprite_no, const uint8_t *sprite_data)
 {
   __r3L = sprite_no;
@@ -506,7 +478,6 @@ void DrawSprite(uint8_t sprite_no, const uint8_t *sprite_data)
   asm volatile("jsr __DrawSprite " : : : "a","y","c","v");
 }
 
-__attribute__((leaf)) 
 void PosSprite(uint8_t sprite_no, uint16_t x, uint8_t y)
 {
   __r3L = sprite_no;
@@ -516,7 +487,6 @@ void PosSprite(uint8_t sprite_no, uint16_t x, uint8_t y)
   asm volatile("jsr __PosSprite" : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void EnablSprite(uint8_t sprite_no)
 {
   __r3L = sprite_no;
@@ -524,7 +494,6 @@ void EnablSprite(uint8_t sprite_no)
   asm volatile("jsr __EnablSprite" : : : "a","x","c","v");
 }
 
-__attribute__((leaf)) 
 void DisablSprite(uint8_t sprite_no)
 {
   __r3L = sprite_no;
@@ -536,50 +505,43 @@ void DisablSprite(uint8_t sprite_no)
  * GEOS Process Support
  ***********************************************************************/
 
-__attribute__((leaf)) 
 void InitProcesses(uint8_t num_of_processes, const uint8_t *process_table)
 {
   __r0 = (uint16_t)process_table;
   __attribute__((leaf))
-  asm volatile("jsr __InitProcesses" : "=a" (num_of_processes) : "a" (num_of_processes) : "x","y","c","v");
+  asm volatile("jsr __InitProcesses" : : "a" (num_of_processes) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void RestartProcess(uint8_t process_num)
 {
   __attribute__((leaf))
   asm volatile("jsr __RestartProcess" : : "x" (process_num) : "a","c","v");
 }
 
-__attribute__((leaf)) 
 void BlockProcess(uint8_t process_num)
 {
   __attribute__((leaf))
   asm volatile("jsr __BlockProcess" : : "x" (process_num) : "a","c","v");
 }
 
-__attribute__((leaf)) 
 void UnblockProcess(uint8_t process_num)
 {
   __attribute__((leaf))
   asm volatile("jsr __UnblockProcess" : : "x" (process_num) : "a","c","v");
 }
 
-__attribute__((leaf)) 
 void FreezeProcess(uint8_t process_num)
 {
   __attribute__((leaf))
   asm volatile("jsr __FreezeProcess" : : "x" (process_num) : "a","c","v");
 }
 
-__attribute__((leaf)) 
 void UnfreezeProcess(uint8_t process_num)
 {
   __attribute__((leaf))
   asm volatile("jsr __UnfreezeProcess" : : "x" (process_num) : "a","c","v");
 }
 
-__attribute__((leaf)) 
 void Sleep(uint16_t jiffies)
 {
   __r0 = jiffies;
@@ -587,7 +549,6 @@ void Sleep(uint16_t jiffies)
   asm volatile("jsr __Sleep" : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void EnableProcess(uint8_t process_num)
 {
   __attribute__((leaf))
@@ -598,7 +559,6 @@ void EnableProcess(uint8_t process_num)
  * GEOS Menu, Dialog Boxes & Icons routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 uint8_t DoDlgBox(uint8_t *dlg_table)
 {
   __r0 = (uint16_t)dlg_table;
@@ -607,7 +567,6 @@ uint8_t DoDlgBox(uint8_t *dlg_table)
   return __r0L;
 }
 
-__attribute__((leaf)) 
 void RstrFrmDialog(uint8_t icon_no)
 {
   sysDBData = icon_no;
@@ -615,50 +574,43 @@ void RstrFrmDialog(uint8_t icon_no)
   asm volatile("jsr __RstrFrmDialog " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void DoMenu(const menu_tab_t* menu_table, uint8_t selected_menu_no)
 {
   __r0 = (uint16_t)menu_table;
   __attribute__((leaf))
-  asm volatile("jsr __DoMenu " : "=a" (selected_menu_no) : "a" (selected_menu_no) : "x","y","c","v");
+  asm volatile("jsr __DoMenu " : : "a" (selected_menu_no) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void DoPreviousMenu(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __DoPreviousMenu " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void ReDoMenu(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __ReDoMenu " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void RecoverMenu(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __RecoverMenu " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void RecoverAllMenus(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __RecoverAllMenus" : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void GotoFirstMenu(void)
 {
   __attribute__((leaf))
   asm volatile("jsr __GotoFirstMenu" : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void DoIcons(const icon_table_t* icon_table)
 {
   __r0 = (uint16_t)icon_table;
@@ -671,7 +623,6 @@ void DoIcons(const icon_table_t* icon_table)
  * MISC & General Utitlities
  ***********************************************************************/
 
-__attribute__((leaf)) 
 uint16_t GetRandom(void)
 {
   __attribute__((leaf))
@@ -679,7 +630,6 @@ uint16_t GetRandom(void)
   return random;
 }
 
-__attribute__((leaf)) 
 void CopyString(char *src, char *dest)
 {
   __r0 = (uint16_t)src;
@@ -691,7 +641,6 @@ void CopyString(char *src, char *dest)
       "jsr   __CopyString " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void CopyFString(uint8_t *src, uint8_t *dest, uint8_t count)
 {
   __r0 = (uint16_t)src;
@@ -700,10 +649,9 @@ void CopyFString(uint8_t *src, uint8_t *dest, uint8_t count)
   asm volatile(
       "ldx   #2 \n"
       "ldy   #4 \n"
-      "jsr   __CopyFString " : "=a" (count) : "a" (count) : "x","y","c","v");
+      "jsr   __CopyFString " : : "a" (count) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 int8_t CmpString(char *src, char *dest)
 {
   uint8_t result;
@@ -726,7 +674,6 @@ int8_t CmpString(char *src, char *dest)
     return result;
 }
 
-__attribute__((leaf)) 
 int8_t CmpFString(char *src, char *dest, uint8_t count)
 {
   uint8_t result;
@@ -749,13 +696,11 @@ int8_t CmpFString(char *src, char *dest, uint8_t count)
     return result;
 }
 
-__attribute__((leaf)) 
 void Panic(void)
 {
   asm volatile("jsr __Panic " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void MoveData(const void* src, void* dest, uint16_t count)
 {
   __r0 = (uint16_t)src;
@@ -765,7 +710,6 @@ void MoveData(const void* src, void* dest, uint16_t count)
   asm volatile("jsr __MoveData " : : : "a","y","c","v");
 }
 
-__attribute__((leaf)) 
 void ClearRam(void* memory, uint16_t count)
 {
   __r0 = count;
@@ -774,7 +718,6 @@ void ClearRam(void* memory, uint16_t count)
   asm volatile ("jsr __ClearRam " : : : "a","y","c","v");
 }
 
-__attribute__((leaf)) 
 void FillRam(void* memory, uint16_t count, uint8_t value)
 {
   __r0 = count;
@@ -784,7 +727,6 @@ void FillRam(void* memory, uint16_t count, uint8_t value)
   asm volatile ("jsr __FillRam " : : : "a","y","c","v");
 }
 
-__attribute__((leaf)) 
 void InitRam(uint8_t* init_table)
 {
   __r0 = (uint16_t)init_table;
@@ -792,7 +734,6 @@ void InitRam(uint8_t* init_table)
   asm volatile ("jsr __InitRam " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 uint16_t GetSerialNumber(void)
 {
   __attribute__((leaf)) 
@@ -800,7 +741,6 @@ uint16_t GetSerialNumber(void)
   return __r0;
 }
 
-__attribute__((leaf)) 
 void ToBasic(uint8_t* basic_cmd)
 {
   __r7 = (uint16_t)basic_cmd;
@@ -809,14 +749,12 @@ void ToBasic(uint8_t* basic_cmd)
                 "jsr __ToBasic " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void FirstInit(void)
 {
   __attribute__((leaf)) 
   asm volatile ("jsr __FirstInit " : : : "a","x","y","c","v");
 }
 
-__attribute__((leaf)) 
 uint16_t CRC(uint8_t* data, uint16_t count)
 {
   __r0 = (uint16_t)data;
@@ -830,7 +768,6 @@ uint16_t CRC(uint8_t* data, uint16_t count)
  * GEOS High-Level Disk & File Routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 disk_err_t ChangeDiskDevice(uint8_t device)
 {
   disk_err_t errno;
@@ -838,12 +775,11 @@ disk_err_t ChangeDiskDevice(uint8_t device)
   __attribute__((leaf)) asm volatile(
     "jsr __swap_userzp \n"
     "jsr __ChangeDiskDevice \n" 
-    "jsr __swap_userzp ": "=x" (errno), "=a" (device) : "a" (device) : "y", "c", "v");
+    "jsr __swap_userzp ": "=x" (errno) : "a" (device) : "y", "c", "v");
     
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t SetDevice(uint8_t device)
 {
   disk_err_t errno;
@@ -851,12 +787,11 @@ disk_err_t SetDevice(uint8_t device)
   __attribute__((leaf)) asm volatile(
     "jsr __swap_userzp \n"
     "jsr __SetDevice \n" 
-    "jsr __swap_userzp ": "=x" (errno), "=a" (device) : "a" (device) : "y", "c", "v");
+    "jsr __swap_userzp ": "=x" (errno) : "a" (device) : "y", "c", "v");
     
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t OpenDisk(char** disk_name)
 {
   disk_err_t errno;
@@ -870,7 +805,6 @@ disk_err_t OpenDisk(char** disk_name)
   return errno;
 }
 
-__attribute__((leaf)) 
 void GetPtrCurDkNm(disk_name_t buffer)
 {
   __attribute__((leaf)) asm volatile(
@@ -888,7 +822,6 @@ void GetPtrCurDkNm(disk_name_t buffer)
     buffer[idx] = '\0';
 }
 
-__attribute__((leaf)) 
 disk_err_t SetGEOSDisk(void)
 {
   disk_err_t errno;
@@ -902,7 +835,6 @@ disk_err_t SetGEOSDisk(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 bool ChkDkGEOS(dir_header_t* dir_header)
 {
   __r5 = (uint16_t)dir_header;
@@ -914,7 +846,6 @@ bool ChkDkGEOS(dir_header_t* dir_header)
   return isGEOS;
 }
 
-__attribute__((leaf)) 
 uint8_t FindFTypes(char file_names[][17], geos_file_type_t file_type, uint8_t max_filenames, const char* permanent_name)
 {
   __r6 = (uint16_t)file_names;
@@ -931,7 +862,6 @@ uint8_t FindFTypes(char file_names[][17], geos_file_type_t file_type, uint8_t ma
   return __r7H;
 }
 
-__attribute__((leaf)) 
 disk_err_t GetFile(const char* file_name, uint8_t loadOptFlg, const char* disk_name, const char* data_file, uint8_t* load_addr, uint8_t daRecFlg)
 {
   disk_err_t errno;
@@ -952,7 +882,6 @@ disk_err_t GetFile(const char* file_name, uint8_t loadOptFlg, const char* disk_n
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t FindFile(const char* file_name, tr_se_pair_t* tr_se, dir_entry_t* dir_entry)
 {
   disk_err_t errno;
@@ -971,7 +900,6 @@ disk_err_t FindFile(const char* file_name, tr_se_pair_t* tr_se, dir_entry_t* dir
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t SaveFile(file_header_block_t* header_block, uint8_t dir_page)
 {
   disk_err_t errno;
@@ -988,7 +916,6 @@ disk_err_t SaveFile(file_header_block_t* header_block, uint8_t dir_page)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t DeleteFile(const char* file_name)
 {
   disk_err_t errno;
@@ -1004,7 +931,6 @@ disk_err_t DeleteFile(const char* file_name)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t RenameFile(const char* old_name, const char* new_name)
 {
   disk_err_t errno;
@@ -1020,7 +946,6 @@ disk_err_t RenameFile(const char* old_name, const char* new_name)
   return errno;
 }
 
-__attribute__((leaf)) 
 uint16_t CalcBlksFree(dir_header_t* dir_header, uint16_t* total_blocks)
 {
   __r5 = (uint16_t)dir_header;
@@ -1035,7 +960,6 @@ uint16_t CalcBlksFree(dir_header_t* dir_header, uint16_t* total_blocks)
  * GEOS Intermediate-Level File Routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 disk_err_t GetBlock(tr_se_pair_t tr_se, disk_block_t* disk_block)
 {
   disk_err_t errno;
@@ -1053,7 +977,6 @@ disk_err_t GetBlock(tr_se_pair_t tr_se, disk_block_t* disk_block)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t PutBlock(tr_se_pair_t tr_se, const disk_block_t* disk_block)
 {
   disk_err_t errno;
@@ -1071,7 +994,6 @@ disk_err_t PutBlock(tr_se_pair_t tr_se, const disk_block_t* disk_block)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t GetFHdrInfo(const dir_entry_t* dir_entry, tr_se_pair_t* tr_se, uint8_t** load_addr)
 {
   disk_err_t errno;
@@ -1091,7 +1013,6 @@ disk_err_t GetFHdrInfo(const dir_entry_t* dir_entry, tr_se_pair_t* tr_se, uint8_
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t ReadFile(uint8_t* buffer, uint16_t bufsize, tr_se_pair_t tr_se)
 {
   disk_err_t errno;
@@ -1111,7 +1032,6 @@ disk_err_t ReadFile(uint8_t* buffer, uint16_t bufsize, tr_se_pair_t tr_se)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t WriteFile(const uint8_t* buffer, tr_se_pair_t* blocks)
 {
   disk_err_t errno;
@@ -1127,7 +1047,6 @@ disk_err_t WriteFile(const uint8_t* buffer, tr_se_pair_t* blocks)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t ReadByteInit(tr_se_pair_t tr_se, disk_block_t* buffer, uint8_t* value)
 {
   disk_err_t errno;
@@ -1149,7 +1068,6 @@ disk_err_t ReadByteInit(tr_se_pair_t tr_se, disk_block_t* buffer, uint8_t* value
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t ReadByteNext(uint8_t* value)
 {
   disk_err_t errno;
@@ -1165,7 +1083,6 @@ disk_err_t ReadByteNext(uint8_t* value)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t GetDirHead(void)
 {
   disk_err_t errno;
@@ -1179,7 +1096,6 @@ disk_err_t GetDirHead(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t PutDirHead(void)
 {
   disk_err_t errno;
@@ -1193,7 +1109,6 @@ disk_err_t PutDirHead(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t NewDisk(void)
 {
   disk_err_t errno;
@@ -1209,7 +1124,6 @@ disk_err_t NewDisk(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t LdApplic(dir_entry_t* dir_entry, uint8_t loadOptFlg, const char* disk_name, const char* data_file, uint8_t* load_addr)
 {
   disk_err_t errno;
@@ -1228,7 +1142,6 @@ disk_err_t LdApplic(dir_entry_t* dir_entry, uint8_t loadOptFlg, const char* disk
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t LdDeskAcc(dir_entry_t* dir_entry)
 {
   disk_err_t errno;
@@ -1244,7 +1157,6 @@ disk_err_t LdDeskAcc(dir_entry_t* dir_entry)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t LdFile(dir_entry_t* dir_entry)
 {
   disk_err_t errno;
@@ -1260,7 +1172,6 @@ disk_err_t LdFile(dir_entry_t* dir_entry)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t StartAppl(uint8_t loadOptFlg, const char* disk_name, const char* data_file, uint8_t* start_addr)
 {
   disk_err_t errno;
@@ -1279,7 +1190,6 @@ disk_err_t StartAppl(uint8_t loadOptFlg, const char* disk_name, const char* data
   return errno;
 }
 
-__attribute__((leaf)) 
 void RstrAppl(void)
 {
   __attribute__((leaf)) asm volatile(
@@ -1289,7 +1199,6 @@ void RstrAppl(void)
   );
 }
 
-__attribute__((leaf)) 
 disk_err_t GetFreeDirBlk(uint8_t dir_page_no, uint8_t* free_entry_idx, uint8_t* page_no)
 {
   disk_err_t errno;
@@ -1309,7 +1218,6 @@ disk_err_t GetFreeDirBlk(uint8_t dir_page_no, uint8_t* free_entry_idx, uint8_t* 
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t BlkAlloc(uint16_t bytecount, const tr_se_pair_t* tr_se_tab, uint16_t* blocks_alloc, tr_se_pair_t* last_block)
 {
   disk_err_t errno;
@@ -1330,7 +1238,6 @@ disk_err_t BlkAlloc(uint16_t bytecount, const tr_se_pair_t* tr_se_tab, uint16_t*
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t NxtBlkAlloc(tr_se_pair_t start_block, uint16_t bytecount, const tr_se_pair_t* tr_se_tab, uint16_t* blocks_alloc, tr_se_pair_t* last_block)
 {
   disk_err_t errno;
@@ -1353,7 +1260,6 @@ disk_err_t NxtBlkAlloc(tr_se_pair_t start_block, uint16_t bytecount, const tr_se
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t SetNextFree(tr_se_pair_t start_block, tr_se_pair_t* alloc_block)
 {
   disk_err_t errno;
@@ -1373,7 +1279,6 @@ disk_err_t SetNextFree(tr_se_pair_t start_block, tr_se_pair_t* alloc_block)
   return errno;
 }
 
-__attribute__((leaf)) 
 uint8_t FindBAMBit(tr_se_pair_t tr_se, uint8_t* bam_offset)
 {
   uint8_t offs;
@@ -1389,7 +1294,6 @@ uint8_t FindBAMBit(tr_se_pair_t tr_se, uint8_t* bam_offset)
   return bits;
 }
 
-__attribute__((leaf)) 
 disk_err_t FreeBlock(tr_se_pair_t tr_se)
 {
   disk_err_t errno;
@@ -1406,7 +1310,6 @@ disk_err_t FreeBlock(tr_se_pair_t tr_se)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t SetGDirEntry(uint8_t dir_page, uint16_t num_blocks, const file_tr_se_tab_t* ts_tab, const file_header_t* file_header, tr_se_pair_t** first_block)
 {
   disk_err_t errno;
@@ -1426,7 +1329,6 @@ disk_err_t SetGDirEntry(uint8_t dir_page, uint16_t num_blocks, const file_tr_se_
   return errno;
 }
 
-__attribute__((leaf)) 
 tr_se_pair_t* BldGDirEntry(uint16_t num_blocks, const file_tr_se_tab_t* ts_tab, const file_header_t* file_header)
 {
   disk_err_t errno;
@@ -1442,7 +1344,6 @@ tr_se_pair_t* BldGDirEntry(uint16_t num_blocks, const file_tr_se_tab_t* ts_tab, 
   return (tr_se_pair_t*)__r6;
 }
 
-__attribute__((leaf)) 
 disk_err_t FollowChain(tr_se_pair_t start_block, file_tr_se_tab_t* ts_tab)
 {
   disk_err_t errno;
@@ -1461,7 +1362,6 @@ disk_err_t FollowChain(tr_se_pair_t start_block, file_tr_se_tab_t* ts_tab)
 
 }
 
-__attribute__((leaf)) 
 disk_err_t FastDelFile(const char* file_name, file_tr_se_tab_t* ts_tab)
 {
   disk_err_t errno;
@@ -1478,7 +1378,6 @@ disk_err_t FastDelFile(const char* file_name, file_tr_se_tab_t* ts_tab)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t FreeFile(const dir_entry_t* buffer)
 {
   disk_err_t errno;
@@ -1498,7 +1397,6 @@ disk_err_t FreeFile(const dir_entry_t* buffer)
  * GEOS Low-Level File Routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 void InitForIO(void)
 {
   __attribute__((leaf)) asm volatile(
@@ -1517,7 +1415,6 @@ void DoneWithIO(void)
   );
 }
 
-__attribute__((leaf)) 
 disk_err_t PurgeTurbo(void)
 {
   disk_err_t errno;
@@ -1531,7 +1428,6 @@ disk_err_t PurgeTurbo(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t EnterTurbo(void)
 {
   disk_err_t errno;
@@ -1545,7 +1441,6 @@ disk_err_t EnterTurbo(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t ExitTurbo(void)
 {
   disk_err_t errno;
@@ -1559,7 +1454,6 @@ disk_err_t ExitTurbo(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t ReadBlock(tr_se_pair_t block_ts, disk_block_t* block_buffer)
 {
   disk_err_t errno;
@@ -1577,7 +1471,6 @@ disk_err_t ReadBlock(tr_se_pair_t block_ts, disk_block_t* block_buffer)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t WriteBlock(tr_se_pair_t block_ts, const disk_block_t* block_buffer)
 {
   disk_err_t errno;
@@ -1595,7 +1488,6 @@ disk_err_t WriteBlock(tr_se_pair_t block_ts, const disk_block_t* block_buffer)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t VerWriteBlock(tr_se_pair_t block_ts, const disk_block_t* block_buffer)
 {
   disk_err_t errno;
@@ -1617,7 +1509,6 @@ disk_err_t VerWriteBlock(tr_se_pair_t block_ts, const disk_block_t* block_buffer
  * GEOS VLIR File Routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 disk_err_t OpenRecordFile(const char* file_name)
 {
   disk_err_t errno;
@@ -1633,7 +1524,6 @@ disk_err_t OpenRecordFile(const char* file_name)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t CloseRecordFile(void)
 {
   disk_err_t errno;
@@ -1647,7 +1537,6 @@ disk_err_t CloseRecordFile(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t UpdateRecordFile(void)
 {
   disk_err_t errno;
@@ -1661,7 +1550,6 @@ disk_err_t UpdateRecordFile(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t PreviousRecord(uint8_t* record_no, bool* is_empty)
 {
   disk_err_t errno;
@@ -1680,7 +1568,6 @@ disk_err_t PreviousRecord(uint8_t* record_no, bool* is_empty)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t NextRecord(uint8_t* record_no, bool* is_empty)
 {
   disk_err_t errno;
@@ -1699,7 +1586,6 @@ disk_err_t NextRecord(uint8_t* record_no, bool* is_empty)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t PointRecord(uint8_t record_no, uint8_t* new_record_no, bool* is_empty)
 {
   disk_err_t errno;
@@ -1717,7 +1603,6 @@ disk_err_t PointRecord(uint8_t record_no, uint8_t* new_record_no, bool* is_empty
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t DeleteRecord(void)
 {
   disk_err_t errno;
@@ -1731,7 +1616,6 @@ disk_err_t DeleteRecord(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t WriteRecord(const uint8_t* data, uint16_t num_bytes)
 {
   disk_err_t errno;
@@ -1748,7 +1632,6 @@ disk_err_t WriteRecord(const uint8_t* data, uint16_t num_bytes)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t ReadRecord(uint8_t* data, uint16_t num_bytes, bool* is_empty)
 {
   disk_err_t errno;
@@ -1767,7 +1650,6 @@ disk_err_t ReadRecord(uint8_t* data, uint16_t num_bytes, bool* is_empty)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t AppendRecord(void)
 {
   disk_err_t errno;
@@ -1781,7 +1663,6 @@ disk_err_t AppendRecord(void)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t InsertRecord(void)
 {
   disk_err_t errno;
@@ -1799,7 +1680,6 @@ disk_err_t InsertRecord(void)
  * GEOS Expansion RAM Routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 uint8_t StashRAM(const uint8_t* cbm_source, uint8_t* reu_dest, uint16_t count, uint8_t reu_bank)
 {
   disk_err_t errno;
@@ -1819,7 +1699,6 @@ uint8_t StashRAM(const uint8_t* cbm_source, uint8_t* reu_dest, uint16_t count, u
     return reu_status;
 }
 
-__attribute__((leaf)) 
 uint8_t FetchRAM(const uint8_t* reu_source, uint8_t* cbm_dest, uint16_t count, uint8_t reu_bank)
 {
   disk_err_t errno;
@@ -1839,7 +1718,6 @@ uint8_t FetchRAM(const uint8_t* reu_source, uint8_t* cbm_dest, uint16_t count, u
     return reu_status;
 }
 
-__attribute__((leaf)) 
 uint8_t SwapRAM(uint8_t* cbm_addr, uint8_t* reu_addr, uint16_t count, uint8_t reu_bank)
 {
   disk_err_t errno;
@@ -1859,7 +1737,6 @@ uint8_t SwapRAM(uint8_t* cbm_addr, uint8_t* reu_addr, uint16_t count, uint8_t re
     return reu_status;
 }
 
-__attribute__((leaf)) 
 uint8_t VerifyRAM(const uint8_t* cbm_addr, const uint8_t* reu_addr, uint16_t count, uint8_t reu_bank)
 {
   disk_err_t errno;
@@ -1879,7 +1756,6 @@ uint8_t VerifyRAM(const uint8_t* cbm_addr, const uint8_t* reu_addr, uint16_t cou
     return reu_status;
 }
 
-__attribute__((leaf)) 
 uint8_t DoRAMOp(uint8_t* cbm_addr, uint8_t* reu_addr, uint16_t count, uint8_t reu_bank, uint8_t cmd)
 {
   disk_err_t errno;
@@ -1903,7 +1779,6 @@ uint8_t DoRAMOp(uint8_t* cbm_addr, uint8_t* reu_addr, uint16_t count, uint8_t re
  * GEOS Printing Routines
  ***********************************************************************/
 
-__attribute__((leaf)) 
 void InitForPrint(void)
 {
   __attribute__((leaf)) asm volatile(
@@ -1913,7 +1788,6 @@ void InitForPrint(void)
   );
 }
 
-__attribute__((leaf)) 
 void PrintBuffer(const uint8_t* print_data, uint8_t* work_buf, const uint8_t* color_data)
 {
   __r0 = (uint16_t)print_data;
@@ -1927,7 +1801,6 @@ void PrintBuffer(const uint8_t* print_data, uint8_t* work_buf, const uint8_t* co
   );
 }
 
-__attribute__((leaf)) 
 void StopPrint(uint8_t* temp_buf, uint8_t* work_buf)
 {
   __r0 = (uint16_t)temp_buf;
@@ -1940,7 +1813,6 @@ void StopPrint(uint8_t* temp_buf, uint8_t* work_buf)
   );
 }
 
-__attribute__((leaf)) 
 uint8_t GetDimensions(uint8_t* cards_wide, uint8_t* cards_height)
 {
   uint8_t modes;
@@ -1957,7 +1829,6 @@ uint8_t GetDimensions(uint8_t* cards_wide, uint8_t* cards_height)
   return modes;
 }
 
-__attribute__((leaf)) 
 void PrintASCII(const char* print_data, uint8_t* work_buf)
 {
   __r0 = (uint16_t)print_data;
@@ -1970,7 +1841,6 @@ void PrintASCII(const char* print_data, uint8_t* work_buf)
   );
 }
 
-__attribute__((leaf)) 
 uint8_t StartASCII(uint8_t* work_buf)
 {
   uint8_t errno;
@@ -1986,7 +1856,6 @@ uint8_t StartASCII(uint8_t* work_buf)
   return errno;
 }
 
-__attribute__((leaf)) 
 void SetNLQ(uint8_t* work_buf)
 {
   __r1 = (uint16_t)work_buf;
@@ -2002,7 +1871,6 @@ void SetNLQ(uint8_t* work_buf)
  * Only in GEOS 128
  ***********************************************************************/
 
-__attribute__((leaf)) 
 void TempHideMouse(void)
 {
   __attribute__((leaf)) asm volatile(
@@ -2010,7 +1878,6 @@ void TempHideMouse(void)
   );
 }
 
-__attribute__((leaf)) 
 void HideOnlyMouse(void)
 {
   __attribute__((leaf)) asm volatile(
@@ -2018,7 +1885,6 @@ void HideOnlyMouse(void)
   );
 }
 
-__attribute__((leaf)) 
 void SetNewMode(void)
 {
   __attribute__((leaf)) asm volatile(
@@ -2026,7 +1892,6 @@ void SetNewMode(void)
   );
 }
 
-__attribute__((leaf)) 
 uint16_t NormalizeX(uint16_t x)
 {
   __r0 = x;
@@ -2039,7 +1904,6 @@ uint16_t NormalizeX(uint16_t x)
   return __r0;
 }
 
-__attribute__((leaf)) 
 void MoveBData(const uint8_t* source, uint8_t* dest, uint16_t count, uint8_t src_bank, uint8_t dst_bank)
 {
   __r0 = (uint16_t)source;
@@ -2053,7 +1917,6 @@ void MoveBData(const uint8_t* source, uint8_t* dest, uint16_t count, uint8_t src
   );
 }
 
-__attribute__((leaf)) 
 void SwapBData(uint8_t* addr1, uint8_t* addr2, uint16_t count, uint8_t a1_bank, uint8_t a2_bank)
 {
   __r0 = (uint16_t)addr1;
@@ -2067,7 +1930,6 @@ void SwapBData(uint8_t* addr1, uint8_t* addr2, uint16_t count, uint8_t a1_bank, 
   );
 }
 
-__attribute__((leaf)) 
 uint8_t VerifyBData(uint8_t* addr1, uint8_t* addr2, uint16_t count, uint8_t a1_bank, uint8_t a2_bank)
 {
   uint8_t status;
@@ -2085,7 +1947,6 @@ uint8_t VerifyBData(uint8_t* addr1, uint8_t* addr2, uint16_t count, uint8_t a1_b
   return status;
 }
 
-__attribute__((leaf)) 
 uint8_t DoBOp(uint8_t* addr1, uint8_t* addr2, uint16_t count, uint8_t a1_bank, uint8_t a2_bank, uint8_t mode)
 {
   uint8_t status;
@@ -2103,7 +1964,6 @@ uint8_t DoBOp(uint8_t* addr1, uint8_t* addr2, uint16_t count, uint8_t a1_bank, u
   return status;
 }
 
-__attribute__((leaf)) 
 uint8_t AccessCache(uint8_t block_no, uint8_t* buffer, uint8_t mode, uint8_t* verify_result)
 {
   uint8_t ver;
@@ -2127,14 +1987,12 @@ uint8_t AccessCache(uint8_t block_no, uint8_t* buffer, uint8_t mode, uint8_t* ve
 
 }
 
-__attribute__((leaf)) 
 void SetColorMode(uint8_t clr_mode)
 {
   __attribute__((leaf)) 
-  asm volatile("jsr __SetColorMode" : "=a" (clr_mode) : "a" (clr_mode) : "x","y","c","v");
+  asm volatile("jsr __SetColorMode" : : "a" (clr_mode) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 void SetColorCard(uint16_t x, uint8_t y, uint8_t color)
 {
   __r3 = x;
@@ -2144,7 +2002,6 @@ void SetColorCard(uint16_t x, uint8_t y, uint8_t color)
     "jsr __ColorCard " : : "a" (color) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 uint8_t GetColorCard(uint16_t x, uint8_t y)
 {
   uint8_t color;
@@ -2159,7 +2016,6 @@ uint8_t GetColorCard(uint16_t x, uint8_t y)
   return color;
 }
 
-__attribute__((leaf)) 
 void ColorRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom, uint8_t fbcolor)
 {
   __r2L = top;
@@ -2167,10 +2023,9 @@ void ColorRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom, 
   __r3 = left;
   __r3 = right;
 
-  __attribute__((leaf)) asm volatile("jsr __ColorCard " : "=a" (fbcolor) : "a" (fbcolor) : "x","y","c","v");
+  __attribute__((leaf)) asm volatile("jsr __ColorCard " : : "a" (fbcolor) : "x","y","c","v");
 }
 
-__attribute__((leaf)) 
 disk_err_t Get1stDirEntry(dir_entry_t** dir_entry)
 {
   disk_err_t errno;
@@ -2185,7 +2040,6 @@ disk_err_t Get1stDirEntry(dir_entry_t** dir_entry)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t GetNxtDirEntry(dir_entry_t** dir_entry, bool* end_of_dir)
 {
   disk_err_t errno;
@@ -2204,7 +2058,6 @@ disk_err_t GetNxtDirEntry(dir_entry_t** dir_entry, bool* end_of_dir)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t GetOffPageTrSc(bool* no_geos_disk, tr_se_pair_t* border_block)
 {
   disk_err_t errno;
@@ -2223,7 +2076,6 @@ disk_err_t GetOffPageTrSc(bool* no_geos_disk, tr_se_pair_t* border_block)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t AllocateBlock(tr_se_pair_t block_addr)
 {
   disk_err_t errno;
@@ -2240,7 +2092,6 @@ disk_err_t AllocateBlock(tr_se_pair_t block_addr)
   return errno;
 }
 
-__attribute__((leaf)) 
 disk_err_t ReadLink(tr_se_pair_t block_addr, uint8_t* buffer)
 {
   disk_err_t errno;
@@ -2258,7 +2109,6 @@ disk_err_t ReadLink(tr_se_pair_t block_addr, uint8_t* buffer)
   return errno;
 }
 
-__attribute__((leaf)) 
 void MainLoop(void)
 {
   __attribute__((leaf)) asm volatile(

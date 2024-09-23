@@ -47,20 +47,20 @@ void InitSwap(void) {
  * of "ReadRecord" so that it does not affect any opened VLIR file.
  *********************************************************************/
 
-noinline void SwapMod(uint8_t req_mod_no) {
+__attribute__((noinline)) void SwapMod(uint8_t req_mod_no) {
   if (req_mod_no != curModule) {
     curModule = req_mod_no;
     ReadFile(OVERLAYADDR, OVERLAYSIZE, swapTable[req_mod_no - 1]);
   }
 }
 
-noinline void FileIn() { SwapMod(MOD_FILE); }
+__attribute__((noinline)) void FileIn() { SwapMod(MOD_FILE); }
 
-noinline void EditIn() { SwapMod(MOD_EDIT); }
+__attribute__((noinline)) void EditIn() { SwapMod(MOD_EDIT); }
 
-noinline void R_DoAbout(void) { GotoFirstMenu(); }
+__attribute__((noinline)) void R_DoAbout(void) { GotoFirstMenu(); }
 
-noinline void R_RunDA(uint8_t da_idx) {
+__attribute__((noinline)) void R_RunDA(uint8_t da_idx) {
   GotoFirstMenu();
   FileIn();
   RunDA(da_idx);

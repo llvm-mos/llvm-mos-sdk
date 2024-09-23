@@ -10,8 +10,9 @@
 
 #include "SamVlir.h"
 
-__attribute__((
-    section(".info_block"))) retain file_header_t __std_file_header = {
+__attribute__((section(".info_block"))) 
+__attribute__((retain)) 
+file_header_t __std_file_header = {
     3,
     21,
     0x80 | 63,

@@ -41,7 +41,7 @@ char icon1_msg[] = "icon handler called.";
  * will not inline the code in the main (VLIR 0) record.
  ********************************************************************/
 
-noinline void DoCut(void) {
+__attribute__((noinline)) void DoCut(void) {
   __r15 = (uint16_t)cut_msg;
   DoDlgBox(dlg_edit);
 }
@@ -53,7 +53,7 @@ noinline void DoCut(void) {
  * will not inline the code in the main (VLIR 0) record.
  ********************************************************************/
 
-noinline void DoCopy(void) {
+__attribute__((noinline)) void DoCopy(void) {
   __r15 = (uint16_t)copy_msg;
   DoDlgBox(dlg_edit);
 }
@@ -65,7 +65,7 @@ noinline void DoCopy(void) {
  * will not inline the code in the main (VLIR 0) record.
  ********************************************************************/
 
-noinline void DoPaste(void) {
+__attribute__((noinline)) void DoPaste(void) {
   __r15 = (uint16_t)paste_msg;
   DoDlgBox(dlg_edit);
 }
@@ -77,7 +77,7 @@ noinline void DoPaste(void) {
  * will not inline the code in the main (VLIR 0) record.
  ********************************************************************/
 
-noinline void DoIcon1(void) {
+__attribute__((noinline)) void DoIcon1(void) {
   __r15 = (uint16_t)icon1_msg;
   DoDlgBox(dlg_edit);
 }

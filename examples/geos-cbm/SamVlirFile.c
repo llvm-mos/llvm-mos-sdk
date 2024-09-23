@@ -29,7 +29,7 @@
 
 uint8_t spriteBuf[7 * 64];
 
-noinline void RunDA(uint8_t da_index) {
+__attribute__((noinline)) void RunDA(uint8_t da_index) {
 
   /* place code that will run before a desk accessory here */
 
@@ -102,4 +102,4 @@ DB_ICON(OK, DBI_X_0, DBI_Y_2)
 DB_TXTSTR(DBI_X_0, DBI_Y_0, close_msg)
 DB_END(dlgClose)
 
-noinline void DoClose(void) { DoDlgBox(dlgClose); }
+__attribute__((noinline)) void DoClose(void) { DoDlgBox(dlgClose); }

@@ -52,19 +52,25 @@ void EnterDeskTop(void) {
                                      "jmp __EnterDeskTop\n");
 }
 
-__attribute__((section(".dir_block"))) retain __attribute__((
-    weak)) cvt_dir_entry_t __std_dir_entry = {{USR,
-                                               {0, 0xff},
-                                               "llvm-mos VLIR   ",
-                                               {0, 0xff},
-                                               VLIR,
-                                               APPLICATION,
-                                               {24, 07, 01, 0, 0},
-                                               0},
-                                              "PRG formatted GEOS file V1.0"};
+__attribute__((section(".dir_block")))
+__attribute__((retain))
+__attribute__((weak)) 
+cvt_dir_entry_t __std_dir_entry = {
+    {USR,
+    {0, 0xff},
+    "llvm-mos VLIR   ",
+    {0, 0xff},
+    VLIR,
+    APPLICATION,
+    {24, 07, 01, 0, 0},
+    0},
+    "PRG formatted GEOS file V1.0"
+};
 
-__attribute__((section(".info_block"))) retain __attribute__((
-    weak)) file_header_t __std_file_header = {
+__attribute__((section(".info_block"))) 
+__attribute__((retain))
+__attribute__((weak)) 
+file_header_t __std_file_header = {
     3,
     21,
     0x80 | 63,
@@ -92,4 +98,5 @@ __attribute__((section(".info_block"))) retain __attribute__((
     "<Name of Programmer>",
     "",
     "",
-    ""};
+    ""
+};

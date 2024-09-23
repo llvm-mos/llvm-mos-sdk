@@ -17,7 +17,4 @@
 #include "geos_symbols.h"
 #include "geos_routines.h"
 
-#define noinline __attribute__((noinline))
-#define retain __attribute__((retain))
-
 #endif

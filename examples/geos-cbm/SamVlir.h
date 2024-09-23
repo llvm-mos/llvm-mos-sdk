@@ -49,14 +49,14 @@
 extern char DAText[8][17];
 
 /* File module exports */
-extern noinline void RunDA(uint8_t da_index);
-extern noinline void DoClose(void);
+extern __attribute__((noinline)) void RunDA(uint8_t da_index);
+extern __attribute__((noinline)) void DoClose(void);
 
 /* Edit module exports */
-extern noinline void DoCut(void);
-extern noinline void DoCopy(void);
-extern noinline void DoPaste(void);
-extern noinline void DoIcon1(void);
+extern __attribute__((noinline)) void DoCut(void);
+extern __attribute__((noinline)) void DoCopy(void);
+extern __attribute__((noinline)) void DoPaste(void);
+extern __attribute__((noinline)) void DoIcon1(void);
 
 /* Import from linker definition file overlay start and size */
 extern uint8_t __overlayaddr;

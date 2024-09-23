@@ -18,30 +18,16 @@
 void DrawPoint(uint16_t x, uint8_t y, bool recover, bool background) {
   __r3 = x;
   __r11L = y;
-  if (recover) {
-    if (background) {
-      __attribute__((leaf)) asm volatile("lda #0xff \n"
-                                         "clc \n"
-                                         "jsr __DrawPoint " : : : "a",
-                                         "x", "y", "c", "v");
-    } else {
-      __attribute__((leaf)) asm volatile("lda #0xff \n"
-                                         "sec \n"
-                                         "jsr __DrawPoint " : : : "a",
-                                         "x", "y", "c", "v");
-    }
+
+  const unsigned char mode = recover ? 255 : 0;
+  if (background) {
+    __attribute__((leaf)) asm volatile(
+      "clc             \n"
+      "jsr __DrawPoint \n" : : "a"(mode) : "x", "y", "p");
   } else {
-    if (background) {
-      __attribute__((leaf)) asm volatile("lda #0 \n"
-                                         "clc \n"
-                                         "jsr __DrawPoint " : : : "a",
-                                         "x", "y", "c", "v");
-    } else {
-      __attribute__((leaf)) asm volatile("lda #0 \n"
-                                         "sec \n"
-                                         "jsr __DrawPoint " : : : "a",
-                                         "x", "y", "c", "v");
-    }
+    __attribute__((leaf)) asm volatile(
+      "sec             \n"
+      "jsr __DrawPoint \n" : : "a"(mode) : "x", "y","p");
   }
 }
 
@@ -99,36 +85,21 @@ void DrawLine(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom,
   __r4 = right;
   __r11H = bottom;
 
-  if (recover) {
-    if (background) {
-      __attribute__((leaf)) asm volatile("lda #0xff \n"
-                                         "clc \n"
-                                         "jsr __DrawLine " : : : "a",
-                                         "x", "y", "c", "v");
-    } else {
-      __attribute__((leaf)) asm volatile("lda #0xff \n"
-                                         "sec \n"
-                                         "jsr __DrawLine " : : : "a",
-                                         "x", "y", "c", "v");
-    }
+  const unsigned char mode = recover ? 255 : 0;
+  if (background) {
+    __attribute__((leaf)) asm volatile(
+      "clc             \n"
+      "jsr __DrawLine \n" : : "a"(mode) : "x", "y", "p");
   } else {
-    if (background) {
-      __attribute__((leaf)) asm volatile("lda #0 \n"
-                                         "clc \n"
-                                         "jsr __DrawLine " : : : "a",
-                                         "x", "y", "c", "v");
-    } else {
-      __attribute__((leaf)) asm volatile("lda #0 \n"
-                                         "sec \n"
-                                         "jsr __DrawLine " : : : "a",
-                                         "x", "y", "c", "v");
-    }
+    __attribute__((leaf)) asm volatile(
+      "sec             \n"
+      "jsr __DrawLine \n" : : "a"(mode) : "x", "y","p");
   }
 }
 
 void SetPattern(uint8_t pattern) {
   __attribute__((leaf)) asm volatile(
-      "jsr __SetPattern " : "=a"(pattern) : "a"(pattern) : "c", "v");
+      "jsr __SetPattern " : : "a"(pattern) : "c", "v");
 }
 
 void Rectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom) {
@@ -147,7 +118,7 @@ void FrameRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom,
   __r4 = right;
   __r2H = bottom;
   __attribute__((leaf)) asm volatile(
-      "jsr __FrameRectangle" : "=a"(pattern) : "a"(pattern) : "x", "y", "c",
+      "jsr __FrameRectangle" : : "a"(pattern) : "x", "y", "c",
       "v");
 }
 

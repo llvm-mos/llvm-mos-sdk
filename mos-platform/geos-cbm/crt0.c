@@ -48,9 +48,8 @@ asm(".global __after_main\n"
     "     jmp __EnterDeskTop\n");
 
 void EnterDeskTop(void) {
-  __attribute__((leaf)) asm volatile(
-    "jsr __swap_userzp \n"
-    "jmp __EnterDeskTop\n");
+  __attribute__((leaf)) asm volatile("jsr __swap_userzp \n"
+                                     "jmp __EnterDeskTop\n");
 }
 
 __attribute__((section(".dir_block"))) retain __attribute__((

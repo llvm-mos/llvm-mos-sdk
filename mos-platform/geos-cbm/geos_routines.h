@@ -31,7 +31,7 @@ disk_err_t GetOffPageTrSc(bool *no_geos_disk, tr_se_pair_t *border_block);
 disk_err_t AllocateBlock(tr_se_pair_t block_addr);
 disk_err_t ReadLink(tr_se_pair_t block_addr, uint8_t *buffer);
 
-/* undocumented Official and Hitchhikers Guides
+/** undocumented Official and Hitchhikers Guides
 extern void __AddDirBlock(void);
 extern void __ReadBuff(void);
 extern void __WriteBuff(void);
@@ -99,7 +99,7 @@ void InitMouse(void);
 void SlowMouse(void);
 void UpdateMouse(void);
 void SetMouse(void);
-/* for C128 */
+/** for C128 */
 void MouseInit_128(void);
 void SlowMouse_128(void);
 void UpdateMouse_128(void);
@@ -280,7 +280,7 @@ uint8_t DoRAMOp(uint8_t *cbm_addr, uint8_t *reu_addr, uint16_t count,
  * only in GEOS 128
  ***********************************************************************/
 
-/* GEOS 128 Back-RAM Routines */
+/** GEOS 128 Back-RAM Routines */
 void MoveBData(const uint8_t *source, uint8_t *dest, uint16_t count,
                uint8_t src_bank, uint8_t dst_bank);
 void SwapBData(uint8_t *addr1, uint8_t *addr2, uint16_t count, uint8_t a1_bank,
@@ -288,7 +288,7 @@ void SwapBData(uint8_t *addr1, uint8_t *addr2, uint16_t count, uint8_t a1_bank,
 uint8_t DoBOp(uint8_t *addr1, uint8_t *addr2, uint16_t count, uint8_t a1_bank,
               uint8_t a2_bank, uint8_t mode);
 
-/* GEOS 128 additional Routines */
+/** GEOS 128 additional Routines */
 void TempHideMouse(void);
 void HideOnlyMouse(void);
 void SetNewMode(void);
@@ -302,10 +302,3 @@ void ColorRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom,
                     uint8_t fbcolor);
 
 void MainLoop(void);
-
-/* Not needed for GEOS applications
-    extern void __CallRoutine(void);
-    extern void __BootGEOS(void);
-    extern void __ResetHandle(void);
-    extern void __InterruptMain(void);
-*/

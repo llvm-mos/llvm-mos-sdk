@@ -8,8 +8,11 @@
  *
  ***********************************************************************/
 
-#ifndef GEOS_CONSTANTS_H
-#define GEOS_CONSTANTS_H
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /***********************************************************************
  * Miscellaneous defines
@@ -23,8 +26,9 @@
 
 #define WORD(w) (w & 0xff), (w >> 8)
 
-#define AUX(x) #x
-#define STRINGIFY(x) AUX(x)
+#define STRINGIFY_AUX(x) #x
+#define STRINGIFY(x) STRINGIFY_AUX(x)
+
 
 /***********************************************************************
  * Hardware related defines
@@ -145,35 +149,35 @@ typedef enum __attribute__((__packed__)) {
  * Keyboard Equates
  ***********************************************************************/
 
-#define KEY_INVALID = 31
-#define KEY_F1 = 1
-#define KEY_F2 = 2
-#define KEY_F3 = 3
-#define KEY_F4 = 4
-#define KEY_F5 = 5
-#define KEY_F6 = 6
-#define KEY_NOSCRL = 7
-#define KEY_TAB = 9
-#define KEY_LF = 10
-#define KEY_ENTER = 11
-#define KEY_F7 = 14
-#define KEY_F8 = 15
-#define KEY_UP = 16
-#define KEY_DOWN = 17
-#define KEY_HOME = 18
-#define KEY_CLEAR = 19
-#define KEY_LARROW = 20
-#define KEY_UPARROR = 21
-#define KEY_STOP = 22
-#define KEY_RUN = 23
-#define KEY_BPS = 24
-#define KEY_LEFT = BACKSPACE
-#define KEY_HELP = 25
-#define KEY_ALT = 26
-#define KEY_ESC = 27
-#define KEY_RIGHT = 30
-#define KEY_DELETE = 29
-#define KEY_INSERT = 28
+#define KEY_INVALID 31
+#define KEY_F1 1
+#define KEY_F2 2
+#define KEY_F3 3
+#define KEY_F4 4
+#define KEY_F5 5
+#define KEY_F6 6
+#define KEY_NOSCRL 7
+#define KEY_TAB 9
+#define KEY_LF 10
+#define KEY_ENTER 11
+#define KEY_F7 14
+#define KEY_F8 15
+#define KEY_UP 16
+#define KEY_DOWN 17
+#define KEY_HOME 18
+#define KEY_CLEAR 19
+#define KEY_LARROW 20
+#define KEY_UPARROR 21
+#define KEY_STOP 22
+#define KEY_RUN 23
+#define KEY_BPS 24
+#define KEY_LEFT BACKSPACE
+#define KEY_HELP 25
+#define KEY_ALT 26
+#define KEY_ESC 27
+#define KEY_RIGHT 30
+#define KEY_DELETE 29
+#define KEY_INSERT 28
 
 /***********************************************************************
  * Mouse Equates
@@ -749,4 +753,6 @@ typedef enum __attribute__((__packed__)) {
 #define DISK_DRV_LGH 0x0d80
 #define OS_VARS_LGH 0x0500
 
+#ifdef __cplusplus
+}
 #endif

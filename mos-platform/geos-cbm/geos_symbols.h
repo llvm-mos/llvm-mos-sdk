@@ -8,8 +8,11 @@
  *
  ***********************************************************************/
 
-#ifndef GEOS_SYMBOLS_H
-#define GEOS_SYMBOLS_H
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "geos_types.h"
 
@@ -330,4 +333,6 @@ extern vector NMI_VECTOR;   /** nmi vector location */
 extern vector RESET_VECTOR; /** reset vector location */
 extern vector IRQ_VECTOR;   /** interrupt vector location */
 
+#ifdef __cplusplus
+}
 #endif

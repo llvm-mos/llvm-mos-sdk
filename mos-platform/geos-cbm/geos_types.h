@@ -6,8 +6,11 @@
  *
  ***********************************************************************/
 
-#ifndef GEOS_TYPES_H
-#define GEOS_TYPES_H
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "geos_constants.h"
 
@@ -224,4 +227,6 @@ typedef struct mobpos {
   uint8_t y;
 } mobpos_t;
 
+#ifdef __cplusplus
+}
 #endif

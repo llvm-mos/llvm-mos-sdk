@@ -8,8 +8,7 @@
  *
  ***********************************************************************/
 
-#ifndef GEOS_H
-#define GEOS_H
+#pragma once
 
 #include "geos_constants.h"
 #include "geos_memorymap.h"
@@ -17,4 +16,3 @@
 #include "geos_symbols.h"
 #include "geos_routines.h"
 
-#endif

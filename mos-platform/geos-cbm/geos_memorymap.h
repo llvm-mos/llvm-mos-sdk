@@ -8,8 +8,9 @@
  *
  ***********************************************************************/
 
-#ifndef GEOS_MEMORYMAP_H
-#define GEOS_MEMORYMAP_H
+#pragma once
+
+#define SET_OVERLAYSIZE(bytes) asm(".globl __overlaysize_param\n__overlaysize_param = " #bytes)
 
 #define APP_RAM 0x0400       /** start of application space */
 #define BACK_SCR_BASE 0x6000 /** base of background screen */
@@ -28,7 +29,4 @@
 #define MOUSE_JMP 0xfe80  /** start of mouse jump table */
 #define MOUSE_BASE 0xfe80 /** start of input driver */
 #define END_MOUSE_128 0xfe80
-#define config 0xff00
 #define END_MOUSE 0xfffa /** end of input driver */
-
-#endif

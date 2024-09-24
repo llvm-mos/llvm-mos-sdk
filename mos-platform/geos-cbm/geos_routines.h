@@ -8,6 +8,12 @@
  *
  ***********************************************************************/
 
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /***********************************************************************
  * Jump addresses within printer drivers
  ***********************************************************************/
@@ -302,3 +308,7 @@ void ColorRectangle(uint16_t left, uint8_t top, uint16_t right, uint8_t bottom,
                     uint8_t fbcolor);
 
 void MainLoop(void);
+
+#ifdef __cplusplus
+}
+#endif

@@ -350,7 +350,7 @@ Whenever you now need a function or static data of the overlay, you need to load
     }
 
 `OVERLAYADDR` and `OVERLAYSIZE` are defined by the linker and default to `0x5000` and `0x1000` (for details see the `vlir.ld` linker script in `.../mos-platform/geos-cbm/vlir.ld`).
-You can change the size of the overlay memory to e.g. 2k bytes by adding the following statement to any of your C files:
+You can change the size of the overlay memory to e.g. 8k bytes by adding the following statement to any of your C files:
 
     SET_OVERLAYSIZE(0x2000)    
 

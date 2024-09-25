@@ -10,26 +10,26 @@ __zp_reg_size   = __zp_reg_end - __zp_reg_start;
 
 MEMORY {
   zp          : ORIGIN = __zp_reg_start, LENGTH = __zp_reg_size
-  vlir00(rwx) : ORIGIN = 0x0400, LENGTH = __overlayaddr - __stacksize - 0x0400 
-  vlir01(rwx) : ORIGIN = __overlayaddr+0*__overlaysize, LENGTH = __overlaysize
-  vlir02(rwx) : ORIGIN = __overlayaddr+1*__overlaysize, LENGTH = __overlaysize
-  vlir03(rwx) : ORIGIN = __overlayaddr+2*__overlaysize, LENGTH = __overlaysize
-  vlir04(rwx) : ORIGIN = __overlayaddr+3*__overlaysize, LENGTH = __overlaysize
-  vlir05(rwx) : ORIGIN = __overlayaddr+4*__overlaysize, LENGTH = __overlaysize
-  vlir06(rwx) : ORIGIN = __overlayaddr+5*__overlaysize, LENGTH = __overlaysize
-  vlir07(rwx) : ORIGIN = __overlayaddr+6*__overlaysize, LENGTH = __overlaysize
-  vlir08(rwx) : ORIGIN = __overlayaddr+7*__overlaysize, LENGTH = __overlaysize
-  vlir09(rwx) : ORIGIN = __overlayaddr+8*__overlaysize, LENGTH = __overlaysize
-  vlir0a(rwx) : ORIGIN = __overlayaddr+9*__overlaysize, LENGTH = __overlaysize
-  vlir0b(rwx) : ORIGIN = __overlayaddr+10*__overlaysize, LENGTH = __overlaysize
-  vlir0c(rwx) : ORIGIN = __overlayaddr+11*__overlaysize, LENGTH = __overlaysize
-  vlir0d(rwx) : ORIGIN = __overlayaddr+12*__overlaysize, LENGTH = __overlaysize
-  vlir0e(rwx) : ORIGIN = __overlayaddr+13*__overlaysize, LENGTH = __overlaysize
-  vlir0f(rwx) : ORIGIN = __overlayaddr+14*__overlaysize, LENGTH = __overlaysize
+  vlir00 : ORIGIN = 0x0400, LENGTH = __overlayaddr - __stacksize - 0x0400 
+  vlir01 : ORIGIN = __overlayaddr+0*__overlaysize, LENGTH = __overlaysize
+  vlir02 : ORIGIN = __overlayaddr+1*__overlaysize, LENGTH = __overlaysize
+  vlir03 : ORIGIN = __overlayaddr+2*__overlaysize, LENGTH = __overlaysize
+  vlir04 : ORIGIN = __overlayaddr+3*__overlaysize, LENGTH = __overlaysize
+  vlir05 : ORIGIN = __overlayaddr+4*__overlaysize, LENGTH = __overlaysize
+  vlir06 : ORIGIN = __overlayaddr+5*__overlaysize, LENGTH = __overlaysize
+  vlir07 : ORIGIN = __overlayaddr+6*__overlaysize, LENGTH = __overlaysize
+  vlir08 : ORIGIN = __overlayaddr+7*__overlaysize, LENGTH = __overlaysize
+  vlir09 : ORIGIN = __overlayaddr+8*__overlaysize, LENGTH = __overlaysize
+  vlir0a : ORIGIN = __overlayaddr+9*__overlaysize, LENGTH = __overlaysize
+  vlir0b : ORIGIN = __overlayaddr+10*__overlaysize, LENGTH = __overlaysize
+  vlir0c : ORIGIN = __overlayaddr+11*__overlaysize, LENGTH = __overlaysize
+  vlir0d : ORIGIN = __overlayaddr+12*__overlaysize, LENGTH = __overlaysize
+  vlir0e : ORIGIN = __overlayaddr+13*__overlaysize, LENGTH = __overlaysize
+  vlir0f : ORIGIN = __overlayaddr+14*__overlaysize, LENGTH = __overlaysize
 
-  dir_block(rw)       : ORIGIN = 0x0000, LENGTH = 0xfe
-  info_block(rw)      : ORIGIN = 0x00fe, LENGTH = 0xfe
-  vlir_block_rest(rw) : ORIGIN = 0x01fc, LENGTH = 0xfe - 16 * 2
+  dir_block       : ORIGIN = 0x0000, LENGTH = 0xfe
+  info_block      : ORIGIN = 0x00fe, LENGTH = 0xfe
+  vlir_block_rest : ORIGIN = 0x01fc, LENGTH = 0xfe - 16 * 2
 }
 
 REGION_ALIAS("c_readonly", vlir00)

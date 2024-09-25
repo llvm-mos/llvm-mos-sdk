@@ -8,7 +8,8 @@
  *
  ***********************************************************************/
 
-#pragma once
+#ifndef GEOS_SYMBOLS_H
+#define GEOS_SYMBOLS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -335,4 +336,6 @@ extern vector IRQ_VECTOR;   /** interrupt vector location */
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif

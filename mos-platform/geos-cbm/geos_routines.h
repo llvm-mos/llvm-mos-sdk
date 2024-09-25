@@ -8,7 +8,8 @@
  *
  ***********************************************************************/
 
-#pragma once
+#ifndef GEOS_ROUTINES_H
+#define GEOS_ROUTINES_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -311,4 +312,6 @@ void MainLoop(void);
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif

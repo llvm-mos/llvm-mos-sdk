@@ -8,7 +8,8 @@
  *
  ***********************************************************************/
 
-#pragma once
+#ifndef GEOS_MEMORYMAP_H
+#define GEOS_MEMORYMAP_H
 
 #define SET_OVERLAYSIZE(bytes) asm(".globl __overlaysize_param\n__overlaysize_param = " #bytes)
 
@@ -30,3 +31,5 @@
 #define MOUSE_BASE 0xfe80 /** start of input driver */
 #define END_MOUSE_128 0xfe80
 #define END_MOUSE 0xfffa /** end of input driver */
+
+#endif

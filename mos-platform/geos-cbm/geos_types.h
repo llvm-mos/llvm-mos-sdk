@@ -6,7 +6,8 @@
  *
  ***********************************************************************/
 
-#pragma once
+#ifndef GEOS_TYPES_H
+#define GEOS_TYPES_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -228,5 +229,7 @@ typedef struct mobpos {
 } mobpos_t;
 
 #ifdef __cplusplus
-}
+extern "C" {
+#endif
+
 #endif

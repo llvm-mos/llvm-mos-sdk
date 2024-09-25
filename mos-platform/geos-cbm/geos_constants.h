@@ -8,7 +8,8 @@
  *
  ***********************************************************************/
 
-#pragma once
+#ifndef GEOS_CONSTANTS_H
+#define GEOS_CONSTANTS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -755,4 +756,6 @@ typedef enum __attribute__((__packed__)) {
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif

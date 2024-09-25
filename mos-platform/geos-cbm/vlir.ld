@@ -11,21 +11,21 @@ __zp_reg_size   = __zp_reg_end - __zp_reg_start;
 MEMORY {
   zp          : ORIGIN = __zp_reg_start, LENGTH = __zp_reg_size
   vlir00 : ORIGIN = 0x0400, LENGTH = __overlayaddr - __stacksize - 0x0400 
-  vlir01 : ORIGIN = __overlayaddr+0*__overlaysize, LENGTH = __overlaysize
-  vlir02 : ORIGIN = __overlayaddr+1*__overlaysize, LENGTH = __overlaysize
-  vlir03 : ORIGIN = __overlayaddr+2*__overlaysize, LENGTH = __overlaysize
-  vlir04 : ORIGIN = __overlayaddr+3*__overlaysize, LENGTH = __overlaysize
-  vlir05 : ORIGIN = __overlayaddr+4*__overlaysize, LENGTH = __overlaysize
-  vlir06 : ORIGIN = __overlayaddr+5*__overlaysize, LENGTH = __overlaysize
-  vlir07 : ORIGIN = __overlayaddr+6*__overlaysize, LENGTH = __overlaysize
-  vlir08 : ORIGIN = __overlayaddr+7*__overlaysize, LENGTH = __overlaysize
-  vlir09 : ORIGIN = __overlayaddr+8*__overlaysize, LENGTH = __overlaysize
-  vlir0a : ORIGIN = __overlayaddr+9*__overlaysize, LENGTH = __overlaysize
-  vlir0b : ORIGIN = __overlayaddr+10*__overlaysize, LENGTH = __overlaysize
-  vlir0c : ORIGIN = __overlayaddr+11*__overlaysize, LENGTH = __overlaysize
-  vlir0d : ORIGIN = __overlayaddr+12*__overlaysize, LENGTH = __overlaysize
-  vlir0e : ORIGIN = __overlayaddr+13*__overlaysize, LENGTH = __overlaysize
-  vlir0f : ORIGIN = __overlayaddr+14*__overlaysize, LENGTH = __overlaysize
+  vlir01 : ORIGIN = __overlayaddr+0x010000, LENGTH = __overlaysize
+  vlir02 : ORIGIN = __overlayaddr+0x020000, LENGTH = __overlaysize
+  vlir03 : ORIGIN = __overlayaddr+0x030000, LENGTH = __overlaysize
+  vlir04 : ORIGIN = __overlayaddr+0x040000, LENGTH = __overlaysize
+  vlir05 : ORIGIN = __overlayaddr+0x050000, LENGTH = __overlaysize
+  vlir06 : ORIGIN = __overlayaddr+0x060000, LENGTH = __overlaysize
+  vlir07 : ORIGIN = __overlayaddr+0x070000, LENGTH = __overlaysize
+  vlir08 : ORIGIN = __overlayaddr+0x080000, LENGTH = __overlaysize
+  vlir09 : ORIGIN = __overlayaddr+0x090000, LENGTH = __overlaysize
+  vlir0a : ORIGIN = __overlayaddr+0x0a0000, LENGTH = __overlaysize
+  vlir0b : ORIGIN = __overlayaddr+0x0b0000, LENGTH = __overlaysize
+  vlir0c : ORIGIN = __overlayaddr+0x0c0000, LENGTH = __overlaysize
+  vlir0d : ORIGIN = __overlayaddr+0x0d0000, LENGTH = __overlaysize
+  vlir0e : ORIGIN = __overlayaddr+0x0e0000, LENGTH = __overlaysize
+  vlir0f : ORIGIN = __overlayaddr+0x0f0000, LENGTH = __overlaysize
 
   dir_block       : ORIGIN = 0x0000, LENGTH = 0xfe
   info_block      : ORIGIN = 0x00fe, LENGTH = 0xfe
@@ -42,21 +42,21 @@ SECTIONS {
   .dir_block : { *(.dir_block .dir_block.*) } >dir_block
   .info_block : { *(.info_block .info_block.*) } >info_block
 
-  .vlir01 __overlayaddr : AT (__overlayaddr+0*__overlaysize) { *(.vlir01 .vlir01.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir01
-  .vlir02 __overlayaddr : AT (__overlayaddr+1*__overlaysize) { *(.vlir02 .vlir02.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir02
-  .vlir03 __overlayaddr : AT (__overlayaddr+2*__overlaysize) { *(.vlir03 .vlir03.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir03
-  .vlir04 __overlayaddr : AT (__overlayaddr+3*__overlaysize) { *(.vlir04 .vlir04.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir04
-  .vlir05 __overlayaddr : AT (__overlayaddr+4*__overlaysize) { *(.vlir05 .vlir05.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir05
-  .vlir06 __overlayaddr : AT (__overlayaddr+5*__overlaysize) { *(.vlir06 .vlir06.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir06
-  .vlir07 __overlayaddr : AT (__overlayaddr+6*__overlaysize) { *(.vlir07 .vlir07.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir07
-  .vlir08 __overlayaddr : AT (__overlayaddr+7*__overlaysize) { *(.vlir08 .vlir08.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir08
-  .vlir09 __overlayaddr : AT (__overlayaddr+8*__overlaysize) { *(.vlir09 .vlir09.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir09
-  .vlir0a __overlayaddr : AT (__overlayaddr+9*__overlaysize) { *(.vlir0a .vlir0a.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0a
-  .vlir0b __overlayaddr : AT (__overlayaddr+10*__overlaysize) { *(.vlir0b .vlir0b.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0b
-  .vlir0c __overlayaddr : AT (__overlayaddr+11*__overlaysize) { *(.vlir0c .vlir0c.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0c
-  .vlir0d __overlayaddr : AT (__overlayaddr+12*__overlaysize) { *(.vlir0d .vlir0d.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0d
-  .vlir0e __overlayaddr : AT (__overlayaddr+13*__overlaysize) { *(.vlir0e .vlir0e.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0e
-  .vlir0f __overlayaddr : AT (__overlayaddr+14*__overlaysize) { *(.vlir0f .vlir0f.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0f
+  .vlir01 __overlayaddr + 0x010000 : { *(.vlir01 .vlir01.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir01
+  .vlir02 __overlayaddr + 0x020000 : { *(.vlir02 .vlir02.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir02
+  .vlir03 __overlayaddr + 0x030000 : { *(.vlir03 .vlir03.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir03
+  .vlir04 __overlayaddr + 0x040000 : { *(.vlir04 .vlir04.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir04
+  .vlir05 __overlayaddr + 0x050000 : { *(.vlir05 .vlir05.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir05
+  .vlir06 __overlayaddr + 0x060000 : { *(.vlir06 .vlir06.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir06
+  .vlir07 __overlayaddr + 0x070000 : { *(.vlir07 .vlir07.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir07
+  .vlir08 __overlayaddr + 0x080000 : { *(.vlir08 .vlir08.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir08
+  .vlir09 __overlayaddr + 0x090000 : { *(.vlir09 .vlir09.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir09
+  .vlir0a __overlayaddr + 0x0a0000 : { *(.vlir0a .vlir0a.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0a
+  .vlir0b __overlayaddr + 0x0b0000 : { *(.vlir0b .vlir0b.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0b
+  .vlir0c __overlayaddr + 0x0c0000 : { *(.vlir0c .vlir0c.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0c
+  .vlir0d __overlayaddr + 0x0d0000 : { *(.vlir0d .vlir0d.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0d
+  .vlir0e __overlayaddr + 0x0e0000 : { *(.vlir0e .vlir0e.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0e
+  .vlir0f __overlayaddr + 0x0f0000 : { *(.vlir0f .vlir0f.*) NOCROSSREFS(.vlir01 .vlir02 .vlir03 .vlir04 .vlir05 .vlir06 .vlir07 .vlir08 .vlir09 .vlir0a .vlir0b .vlir0c .vlir0d .vlir0e .vlir0f) } > vlir0f
 }
 
 __vlir00_size = SIZEOF(.text) + SIZEOF(.rodata) + SIZEOF(.data);

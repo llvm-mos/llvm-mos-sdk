@@ -22,8 +22,8 @@ extern "C" {
 #include <stdbool.h>
 #include <stdint.h>
 
-#define LOW_BYTE(x) (*((unsigned char *)&(##x) + 0))
-#define HIGH_BYTE(x) (*((unsigned char *)&(##x) + 1))
+// #define LOW_BYTE(x) (*((unsigned char *)&(##x) + 0))
+// #define HIGH_BYTE(x) (*((unsigned char *)&(##x) + 1))
 
 #define WORD(w) (w & 0xff), (w >> 8)
 
@@ -55,7 +55,7 @@ extern "C" {
  ***********************************************************************/
 
 /** Menu types */
-typedef enum __attribute__((__packed__)) {
+typedef enum {
   HORIZONTAL = 0b00000000,
   VERTICAL = 0b10000000,
   CONSTRAINED = 0b01000000,
@@ -72,7 +72,7 @@ typedef enum __attribute__((__packed__)) {
                            */
 
 /** Types of menu actions */
-typedef enum __attribute__((__packed__)) {
+typedef enum {
   MENU_ACTION = 0x00,  /** for setting byte in menu table that indicates */
   DYN_SUB_MENU = 0x40, /** whether the menu item causes action */
   SUB_MENU = 0x80      /** or sub menu */
@@ -120,7 +120,6 @@ typedef enum __attribute__((__packed__)) {
 /** Putchar constants */
 
 #define EOF 0       /** end of text object */
-#define NULL 0      /** end of string */
 #define BACKSPACE 8 /** move left a card */
 #define TAB 9
 #define FORWARDSPACE 9  /** move right one card */
@@ -319,7 +318,7 @@ typedef enum __attribute__((__packed__)) {
  * GEOS File Type Equates
  ***********************************************************************/
 
-typedef enum __attribute__((__packed__)) {
+typedef enum {
   NOT_GEOS = 0, /** Old C-64 file, without GEOS header
                  * (PRG, SEQ, USR, REL) */
 
@@ -376,7 +375,7 @@ typedef enum __attribute__((__packed__)) {
  * of data blocks on the disk, and has nothing to do with the data in the
  * blocks. */
 
-typedef enum __attribute__((__packed__)) {
+typedef enum {
   SEQUENTIAL, /** standard T,S structure (like commodore SEQ
                * and PRG files) */
   VLIR        /** Variable-length-indexed-record-file (user for
@@ -385,7 +384,7 @@ typedef enum __attribute__((__packed__)) {
 } file_structure_t;
 
 /** Standard Commodore file types (supported by the old 1541 DOS) */
-typedef enum __attribute__((__packed__)) {
+typedef enum {
   DEL, /** deleted file */
   SEQ, /** sequential file */
   PRG, /** program file */
@@ -552,7 +551,7 @@ typedef enum __attribute__((__packed__)) {
 
 /** The following equates are ERROR values returned from direct access routines
  */
-typedef enum __attribute__((__packed__)) {
+typedef enum {
   NO_BLOCKS = 1,         /** "not enough blocks" */
   INV_TRACK = 2,         /** "invalid track" */
   INSUFF_SPACE = 3,      /** "not enough blocks on disk" */

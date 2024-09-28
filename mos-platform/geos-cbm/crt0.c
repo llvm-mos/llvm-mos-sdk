@@ -9,52 +9,56 @@
 
 #include "geos.h"
 
-asm(".set __zp_reg_size, 0xfb - 0x90 \n"
-    ".section .data \n"
-    "__userzp_copy:	.space __zp_reg_size+1 \n"
-    ".section .text  \n"
-    ".global __swap_userzp \n"
-    "__swap_userzp: \n"
-    "     php                             ; save all registers and flags \n"
-    "     pha \n"
-    "     txa \n"
-    "     pha \n"
-    "     tya \n"
-    "     pha \n"
-    "     ldx     # __zp_reg_size           ; $FA..$90 \n"
-    "__swaploop: \n"
-    "     ldy     __zp_reg_start,x        ; load zp byte \n"
-    "     lda     __userzp_copy,x         ; load buffer byte \n"
-    "     sta     __zp_reg_start,x        ; store zp byte \n"
-    "     tya \n"
-    "     sta     __userzp_copy,x         ; store buffer byte \n"
-    "     dex \n"
-    "     bpl     __swaploop \n"
-    "     pla                             ; restore all registers and flags \n"
-    "     tay \n"
-    "     pla \n"
-    "     tax \n"
-    "     pla \n"
-    "     plp \n"
-    "     rts \n");
 
-asm(".section .init.010,\"axR\",@progbits \n"
-    "jsr __swap_userzp \n");
+asm(R"ASM(
+    .set __zp_reg_size, 0xfb - 0x90
+    .section .data
+    __userzp_copy:	.space __zp_reg_size+1
+    .section .text 
+    .global __swap_userzp 
+    __swap_userzp:
+         php                             ; save all registers and flags 
+         pha 
+         txa 
+         pha
+         tya 
+         pha 
+         ldx     # __zp_reg_size         ; $FA..$90
+    __swaploop:
+         ldy     __zp_reg_start,x        ; load zp byte 
+         lda     __userzp_copy,x         ; load buffer byte 
+         sta     __zp_reg_start,x        ; store zp byte 
+         tya 
+         sta     __userzp_copy,x         ; store buffer byte 
+         dex 
+         bpl     __swaploop 
+         pla                             ; restore all registers and flags
+         tay 
+         pla 
+         tax
+         pla
+         plp
+         rts
+    )ASM");
 
-asm(".global __after_main\n"
-    ".section .after_main,\"axR\",@progbits\n"
-    "__after_main:\n"
-    "     jsr __swap_userzp\n"
-    "     jmp __EnterDeskTop\n");
+asm(R"ASM(
+    .section .init.010,"axR",@progbits
+    jsr __swap_userzp
+)ASM");
+
+asm(R"ASM(
+                 .global __after_main
+                 .section .after_main,"axR",@progbits
+   __after_main: jsr __swap_userzp
+                 jmp __EnterDeskTop
+)ASM");
 
 void EnterDeskTop(void) {
   __attribute__((leaf)) asm volatile("jsr __swap_userzp \n"
                                      "jmp __EnterDeskTop\n");
 }
 
-__attribute__((section(".dir_block")))
-__attribute__((retain))
-__attribute__((weak)) 
+__attribute__((section(".dir_block"), retain, weak))
 cvt_dir_entry_t __std_dir_entry = {
     {USR,
     {0, 0xff},
@@ -67,9 +71,7 @@ cvt_dir_entry_t __std_dir_entry = {
     "PRG formatted GEOS file V1.0"
 };
 
-__attribute__((section(".info_block"))) 
-__attribute__((retain))
-__attribute__((weak)) 
+__attribute__((section(".info_block"), retain, weak)) 
 file_header_t __std_file_header = {
     3,
     21,

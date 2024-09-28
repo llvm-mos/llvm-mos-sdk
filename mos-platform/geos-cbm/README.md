@@ -74,8 +74,7 @@ Every GEOS application needs an info block. If you do not supply one, a default 
 
 If you want your own info block, please supply it as C code as shown here:
 
-    __attribute__((section(".info_block")))
-    retain
+    __attribute__((section(".info_block"), retain))
     file_header_t  __std_file_header  = {
     3,21, 0x80|63,
     {

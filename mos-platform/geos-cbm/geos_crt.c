@@ -39,9 +39,9 @@ bool TestPoint(uint16_t x, uint8_t y) {
   __attribute__((leaf)) asm volatile(
       "jsr __TestPoint \n"
       "ldx #0 \n"
-      "bcc pixel_unset \n"
+      "bcc 1f \n"
       "inx \n"
-      "pixel_unset:" : "=x"(is_pixel_set) : : "a",
+      "1:" : "=x"(is_pixel_set) : : "a",
       "y", "c", "v");
   return is_pixel_set;
 }
@@ -570,17 +570,17 @@ int8_t CmpString(char *src, char *dest) {
 
   __r0 = (uint16_t)src;
   __r1 = (uint16_t)dest;
-  __attribute__((leaf)) asm volatile("           ldx   #2 \n"
-                                     "           ldy   #4 \n"
-                                     "           jsr   __CmpString \n"
-                                     "           beq   __cmp_eq \n"
-                                     "           bmi   __cmp_lt \n"
-                                     "           lda   #1 \n"
-                                     "           bpl   __cmp_done \n"
-                                     "__cmp_lt:  lda   #0xff \n"
-                                     "           bmi   __cmp_done \n"
-                                     "__cmp_eq:  lda   #0 \n"
-                                     "__cmp_done: " : "=a"(result) : : "x",
+  __attribute__((leaf)) asm volatile("   ldx   #2 \n"
+                                     "   ldy   #4 \n"
+                                     "   jsr   __CmpString \n"
+                                     "   beq   1f \n"
+                                     "   bmi   2f \n"
+                                     "   lda   #1 \n"
+                                     "   bpl   3f \n"
+                                     "2: lda   #0xff \n"
+                                     "   bmi   3f \n"
+                                     "1: lda   #0 \n"
+                                     "3: " : "=a"(result) : : "x",
                                      "y", "c", "v");
 
   return result;
@@ -592,23 +592,26 @@ int8_t CmpFString(char *src, char *dest, uint8_t count) {
   __r0 = (uint16_t)src;
   __r1 = (uint16_t)dest;
   __attribute__((leaf)) asm volatile(
-      "           ldx   #2 \n"
-      "           ldy   #4 \n"
-      "           jsr   __CmpFString \n"
-      "           beq   __cmp_eq \n"
-      "           bmi   __cmp_lt \n"
-      "           lda   #1 \n"
-      "           bpl   __cmp_done \n"
-      "__cmp_lt:  lda   #0xff \n"
-      "           bmi   __cmp_done \n"
-      "__cmp_eq:  lda   #0 \n"
-      "__cmp_done:" : "=a"(result) : "a"(count) : "x",
+      "   ldx   #2 \n"
+      "   ldy   #4 \n"
+      "   jsr   __CmpFString \n"
+      "   beq   1f \n"
+      "   bmi   2f \n"
+      "   lda   #1 \n"
+      "   bpl   3f \n"
+      "2: lda   #0xff \n"
+      "   bmi   3f \n"
+      "1: lda   #0 \n"
+      "3:" : "=a"(result) : "a"(count) : "x",
       "y", "c", "v");
 
   return result;
 }
 
-void Panic(void) { asm volatile("jsr __Panic " : : : "a", "x", "y", "c", "v"); }
+void Panic(void) 
+{ 
+  asm volatile("jsr __Panic " : : : "a", "x", "y", "c", "v"); 
+}
 
 void MoveData(const void *src, void *dest, uint16_t count) {
   __r0 = (uint16_t)src;
@@ -711,9 +714,9 @@ void GetPtrCurDkNm(disk_name_t buffer) {
                                      "x", "y", "c", "v");
   uint8_t idx = 0;
   const char *p = (const char *)__r0;
-  while ((idx < DK_NM_ID_LEN) && (*p != (char)0xa0)) {
+  while ((idx < DK_NM_ID_LEN) && (*p != (char)0xa0)) 
     buffer[idx++] = *p++;
-  }
+  
   if (idx < DK_NM_ID_LEN)
     buffer[idx] = '\0';
 }
@@ -1752,12 +1755,12 @@ uint8_t AccessCache(uint8_t block_no, uint8_t *buffer, uint8_t mode,
   __r1H = block_no;
   __r4 = (uint16_t)buffer;
 
-  __attribute__((leaf)) asm volatile("                 jsr __AccessCache \n"
-                                     "                 beq __cache_valid \n"
-                                     "                 ldx #0xff \n"
-                                     "                 bne __cache_done \n"
-                                     "__cache_valid:   ldx #0x00 \n"
-                                     "__cache_done: " : "=a"(ver),
+  __attribute__((leaf)) asm volatile("     jsr __AccessCache \n"
+                                     "     beq 1f \n"
+                                     "     ldx #0xff \n"
+                                     "     bne 2f \n"
+                                     "1:   ldx #0x00 \n"
+                                     "2: : " : "=a"(ver),
                                      "=x"(block_valid),
                                      "=y"(unused) : "y"(mode) : "c", "v");
 

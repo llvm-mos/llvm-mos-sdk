@@ -166,7 +166,7 @@ executables and libraries for that target.
 | Commodore                       | VIC-20             | `mos-vic20-clang`                |
 | CP/M-65                         | -                  | `mos-cpm65-clang`                |
 | Dodo 6502 Game System           | -                  | `mos-dodo-clang`                 |
-| Commodore GEOS                  | 64, 128            | ˋmos-geos-cbm-clangˋ              |
+| Commodore GEOS                  | 64, 128            | `mos-geos-cbm-clang`              |
 | MEGA65                          | -                  | `mos-mega65-clang`               |
 | NES                             | Action53 mapper    | `mos-nes-action53-clang`         |
 | NES                             | CNROM mapper       | `mos-nes-cnrom-clang`            |

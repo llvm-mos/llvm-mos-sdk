@@ -63,7 +63,7 @@ jobs:
     needs: build-test-tools
     strategy:
       matrix:
-        os: [windows-2019, macos-latest, ubuntu-20.04]
+        os: [windows-2019, macos-13, macos-14, ubuntu-20.04]
     steps:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
@@ -100,11 +100,16 @@ jobs:
         run: |
           curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-windows-main/llvm-mos-windows-main.7z
           7z x llvm-mos-windows-main.7z
-      - name: Fetch the latest Mac llvm-mos release.
-        if: startsWith(matrix.os, 'macos')
+      - name: Fetch the latest Intel Mac llvm-mos release.
+        if: startsWith(matrix.os, 'macos-13')
         run: |
           curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-darwin-main/llvm-mos-darwin-main.tar.xz
           tar -xvf llvm-mos-darwin-main.tar.xz
+      - name: Fetch the latest Apple Silicon Mac llvm-mos release.
+        if: startsWith(matrix.os, 'macos-14')
+        run: |
+          curl -LO https://github.com/llvm-mos/llvm-mos/releases/download/llvm-mos-macos-arm64-main/llvm-mos-macos-arm64-main.tar.xz
+          tar -xvf llvm-mos-macos-arm64-main.tar.xz
 
       - name: Build the SDK.
         run: |
@@ -143,9 +148,12 @@ jobs:
       - name: Archive the Windows SDK.
         if: startsWith(matrix.os, 'windows')
         run: 7z a llvm-mos-windows.7z llvm-mos
-      - name: Archive the Mac OS SDK.
-        if: startsWith(matrix.os, 'macos')
-        run: tar -cJvf llvm-mos-macos.tar.xz llvm-mos
+      - name: Archive the Intel Mac OS SDK.
+        if: startsWith(matrix.os, 'macos-13')
+        run: tar -cJvf llvm-mos-macos-x64.tar.xz llvm-mos
+      - name: Archive the Apple Silicon Mac OS SDK.
+        if: startsWith(matrix.os, 'macos-14')
+        run: tar -cJvf llvm-mos-macos-arm64.tar.xz llvm-mos
 
       - name: Upload the SDK.
         uses: actions/upload-artifact@v4
@@ -154,7 +162,8 @@ jobs:
           path: |
             llvm-mos-linux.tar.xz
             llvm-mos-windows.7z
-            llvm-mos-macos.tar.xz
+            llvm-mos-macos-x64.tar.xz
+            llvm-mos-macos-arm64.tar.xz
 
   prerelease:
     runs-on: ubuntu-latest
@@ -175,7 +184,8 @@ jobs:
           files: |
             llvm-mos-linux.tar.xz
             llvm-mos-windows.7z
-            llvm-mos-macos.tar.xz
+            llvm-mos-macos-x64.tar.xz
+            llvm-mos-macos-arm64.tar.xz
           prerelease: true
       - name: Dispatch Test Suite
         uses: llvm-mos/repository-dispatch@v1

@@ -97,15 +97,8 @@ __attribute__((weak)) size_t strcspn(const char *s1, const char *s2) {
 }
 
 __attribute__((weak)) char *strpbrk(const char *s1, const char *s2) {
-  while (*s1) {
-    const char *s1;
-    for (s1 = s2; *s1 && *s1 != *s1; s1++)
-      ;
-    if (*s1)
-      return (char *)s1;
-    s1++;
-  }
-  return (char *)NULL;
+  s1 += strcspn(s1, s2);
+  return *s1 ? (char *)s1 : NULL;
 }
 
 __attribute__((weak)) char *strrchr(const char *s, int c) {

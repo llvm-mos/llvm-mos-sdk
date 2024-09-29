@@ -1,10 +1,15 @@
 var searchData=
 [
-  ['neo_5ffile_5fcreate_5638',['NEO_FILE_CREATE',['../file_8h.html#a3e424c712cc516e19dc5d3f76a026f2ca19f9aa99f6033a092d8b14c3c9d4cc83',1,'file.h']]],
-  ['neo_5ffile_5fread_5639',['NEO_FILE_READ',['../file_8h.html#a3e424c712cc516e19dc5d3f76a026f2cacba0f245b5d2868fbcd6cb46f4b02d9c',1,'file.h']]],
-  ['neo_5ffile_5fread_5fwrite_5640',['NEO_FILE_READ_WRITE',['../file_8h.html#a3e424c712cc516e19dc5d3f76a026f2cabed21d1411942369f05169ffbb57629c',1,'file.h']]],
-  ['neo_5ffile_5fwrite_5641',['NEO_FILE_WRITE',['../file_8h.html#a3e424c712cc516e19dc5d3f76a026f2ca248e0c7ac87230c361fe7f6c4b1d1def',1,'file.h']]],
-  ['neo_5fuext_5fanalogue_5finput_5642',['NEO_UEXT_ANALOGUE_INPUT',['../uext_8h.html#a9c23ef839456d36496a0283bb72066ada6b7f7d7e34b6c1547f806cafe26f65bf',1,'uext.h']]],
-  ['neo_5fuext_5finput_5643',['NEO_UEXT_INPUT',['../uext_8h.html#a9c23ef839456d36496a0283bb72066ada337cbe2826db08f34ca9345a969c6de7',1,'uext.h']]],
-  ['neo_5fuext_5foutput_5644',['NEO_UEXT_OUTPUT',['../uext_8h.html#a9c23ef839456d36496a0283bb72066adae6e6d543f249e51d1709d56a6c785b78',1,'uext.h']]]
+  ['joy_5fbtn_5fa_5fmask_6848',['JOY_BTN_A_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256a9c21c9ecff6513f67f4ebd521cc81456',1,'cx16.h']]],
+  ['joy_5fbtn_5fb_5fmask_6849',['JOY_BTN_B_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256a69cadb584e26f719444c06c976c05468',1,'cx16.h']]],
+  ['joy_5fbtn_5fx_5fmask_6850',['JOY_BTN_X_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256aed78312e0ab9669f07b6cc5c6b947f86',1,'cx16.h']]],
+  ['joy_5fbtn_5fy_5fmask_6851',['JOY_BTN_Y_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256a9e0bab9dc14e5612faf2520764e513e3',1,'cx16.h']]],
+  ['joy_5fdown_5fmask_6852',['JOY_DOWN_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256aa0f9d4f7d0ad3f016117a960d7b4789b',1,'cx16.h']]],
+  ['joy_5ffire_5fleft_5fmask_6853',['JOY_FIRE_LEFT_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256aa877da6fcf059955ad8e780bbde3789e',1,'cx16.h']]],
+  ['joy_5ffire_5fright_5fmask_6854',['JOY_FIRE_RIGHT_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256a6ede80dca2d7b040f8c5742e3afe4711',1,'cx16.h']]],
+  ['joy_5fleft_5fmask_6855',['JOY_LEFT_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256a5009f65eb88e5c668fd6d684497ed0bf',1,'cx16.h']]],
+  ['joy_5fright_5fmask_6856',['JOY_RIGHT_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256a180c3210fb2d1f57b5a93ef349ad55d3',1,'cx16.h']]],
+  ['joy_5fselect_5fmask_6857',['JOY_SELECT_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256af72050dae9d0b6d14166a75abefdde03',1,'cx16.h']]],
+  ['joy_5fstart_5fmask_6858',['JOY_START_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256a2e6f14006a012f4664893e321ff524a8',1,'cx16.h']]],
+  ['joy_5fup_5fmask_6859',['JOY_UP_MASK',['../cx16_8h.html#acccca2614a595986f8c5ab78892b9256a2c68b9032ab0f6cdd09dfc8ccb4e3399',1,'cx16.h']]]
 ];

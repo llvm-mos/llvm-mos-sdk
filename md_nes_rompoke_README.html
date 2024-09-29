@@ -69,7 +69,7 @@ $(function() {
 <p>The correct way to work around this is to ensure that the value output by the CPU is the same as outputting the ROM. This is typically done by creating a byte array <code>A</code> where, for any given value <code>N</code>, <code>A[N] == N</code>; then, whenever one wants to write <code>N</code> to ROM, it is done to the address of <code>A[N]</code>.</p>
 <p>However, this byte array would normally take up 256 bytes of the 16384 bytes typically present in the "fixed" ROM. Many mappers only require a far smaller table; for example, an UNROM cartridge typically only has 16 banks, so the only values one would need to write to the ROM bus will be between 0 and 15.</p>
 <p>The solution presented here - <code>rompoke.*</code> and <code>rompoke-table.ld</code> - allows the LLVM-MOS SDK to dynamically allocate, at link time, a minimally-sized array based on the INES header configuration.</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md30"></a>
 Adding a new mapper</h1>
 <p>To add a new mapper, one has to define a file called <code>_rompoke.ld</code> in their mapper's directory. This file will determine the size of the byte array <code>A</code>, from 0 - no bus conflicts - to 256 bytes. As such, at its simplest, one can define the file as follows:</p>
 <div class="fragment"><div class="line">__rom_poke_table_size = 256;</div>

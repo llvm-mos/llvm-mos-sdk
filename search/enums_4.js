@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['neo_5ffile_5fmode_5444',['neo_file_mode',['../file_8h.html#a3e424c712cc516e19dc5d3f76a026f2c',1,'file.h']]],
-  ['neo_5fuext_5fdirection_5445',['neo_uext_direction',['../uext_8h.html#a9c23ef839456d36496a0283bb72066ad',1,'uext.h']]]
+  ['geos_5ffile_5ftype_5ft_6632',['geos_file_type_t',['../geos__constants_8h.html#a2fda566af20dd116a4931519ee0ad5dc',1,'geos_constants.h']]]
 ];

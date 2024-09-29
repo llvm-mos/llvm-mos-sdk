@@ -1,17 +1,11 @@
 var searchData=
 [
-  ['vera_5flayer_5fenable_4931',['vera_layer_enable',['../cx16_8h.html#a5858aa4b14df2b02f0100f33a588baa2',1,'cx16.h']]],
-  ['vera_5fsprites_5fenable_4932',['vera_sprites_enable',['../cx16_8h.html#aaf115703e890719c1666d5bda2897c50',1,'cx16.h']]],
-  ['vfprintf_4933',['vfprintf',['../stdio_8h.html#a3c30ad8abcdcfec5b935dfd30ddad1fa',1,'stdio.h']]],
-  ['vfscanf_4934',['vfscanf',['../stdio_8h.html#ac493b4c43435df04da3f4f6b8ebe5f59',1,'stdio.h']]],
-  ['videomode_4935',['videomode',['../c128_8h.html#a6b383e3e735451959fbb1f655a72e55b',1,'videomode(unsigned char mode):&#160;c128.h'],['../cx16_8h.html#a3717f98d8e7fedf291cb6d372e49f7ca',1,'videomode(signed char mode) __attribute__((leaf)):&#160;cx16.h']]],
-  ['vpeek_4936',['vpeek',['../cx16_8h.html#af9881c814f2b40278c6f104ff3a171d0',1,'cx16.h']]],
-  ['vpoke_4937',['vpoke',['../cx16_8h.html#a932344999f2d172264c938eaa65f81fc',1,'cx16.h']]],
-  ['vprintf_4938',['vprintf',['../stdio_8h.html#a469695a1085801623e0a0e62bd09b5fc',1,'stdio.h']]],
-  ['vram_5fadr_4939',['vram_adr',['../neslib_8h.html#ab435b344bc9ef4b60f84c1357d171c8a',1,'neslib.h']]],
-  ['vram_5fput_4940',['vram_put',['../neslib_8h.html#a43abedc1019b177c9baeeffd4402ccb2',1,'neslib.h']]],
-  ['vscanf_4941',['vscanf',['../stdio_8h.html#ac7c3d20e8397fc139898332141cba468',1,'stdio.h']]],
-  ['vsnprintf_4942',['vsnprintf',['../stdio_8h.html#a5c35ed7416b6b1ce06ded7627fc5ecf5',1,'stdio.h']]],
-  ['vsprintf_4943',['vsprintf',['../stdio_8h.html#a22080e8fc6f594282b027c1dd57a3009',1,'stdio.h']]],
-  ['vsscanf_4944',['vsscanf',['../stdio_8h.html#a3852c8a5749f9b3843985294bfa26ce9',1,'stdio.h']]]
+  ['unfreezeprocess_5874',['UnfreezeProcess',['../geos__routines_8h.html#aef8008ea9744026331e325de58ed98dd',1,'geos_routines.h']]],
+  ['ungetc_5875',['ungetc',['../stdio_8h.html#a54efa95b6d5b41adec98e5b8a1a9f27b',1,'stdio.h']]],
+  ['unlink_5876',['unlink',['../unistd_8h.html#a1bf2f9d00e15a9cf2f60b7b2b633e5d8',1,'unistd.h']]],
+  ['unlockprocess_5877',['UnlockProcess',['../geos__routines_8h.html#a54755a9f7365e391a10dca6c5cd58b70',1,'geos_routines.h']]],
+  ['updatemouse_5878',['UpdateMouse',['../geos__routines_8h.html#ab89f1dc884a812020df8443fdab4e72f',1,'geos_routines.h']]],
+  ['updatemouse_5f128_5879',['UpdateMouse_128',['../geos__routines_8h.html#a9d66127d466771de953c308aaaee9b7c',1,'geos_routines.h']]],
+  ['updaterecordfile_5880',['UpdateRecordFile',['../geos__routines_8h.html#aca4f179d7438e83ac4b66fec9eddc6af',1,'geos_routines.h']]],
+  ['usesystemfont_5881',['UseSystemFont',['../geos__routines_8h.html#ab285d04f78a85a0ae0cda0cb01afb9fe',1,'geos_routines.h']]]
 ];

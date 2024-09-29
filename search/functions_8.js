@@ -1,22 +1,5 @@
 var searchData=
 [
-  ['imaxabs_4438',['imaxabs',['../inttypes_8h.html#ad9e8a565a34b6981f500d88773ec7bcd',1,'inttypes.h']]],
-  ['imaxdiv_4439',['imaxdiv',['../inttypes_8h.html#abdaff0aa6f40596b90b84a7ad63d2299',1,'inttypes.h']]],
-  ['infinity_4440',['infinity',['../classstd_1_1numeric__limits.html#a76ab877ccae51785f63818e9a1718676',1,'std::numeric_limits']]],
-  ['initializer_5flist_4441',['initializer_list',['../classstd_1_1initializer__list.html#abe1e36129986ffbe5dfb19b34ceebdb6',1,'std::initializer_list']]],
-  ['int_5fbitcount_4442',['int_bitcount',['../classFixedPoint.html#adb7b9546d631f99f6c1262de252be11d',1,'FixedPoint']]],
-  ['is_5fsigned_4443',['is_signed',['../classFixedPoint.html#ab97aff86811e8b96048deeff0cd50776',1,'FixedPoint']]],
-  ['isalnum_4444',['isalnum',['../ctype_8h.html#adf38e126f73a010f30af76db2a28c6e1',1,'ctype.h']]],
-  ['isalpha_4445',['isalpha',['../ctype_8h.html#a25908ae63aac2df990634e1ae5bd14d9',1,'ctype.h']]],
-  ['isblank_4446',['isblank',['../ctype_8h.html#aea4929b1b41f1a6d723e0312b1f050ed',1,'ctype.h']]],
-  ['iscntrl_4447',['iscntrl',['../ctype_8h.html#a0008a4e8e7889734dc1d83297de07158',1,'ctype.h']]],
-  ['isdigit_4448',['isdigit',['../ctype_8h.html#a3fa45b35c8abf67a950b6d3d4063dede',1,'ctype.h']]],
-  ['isfast_4449',['isfast',['../c128_8h.html#a24e23fad956a479fbe8a51e1f7defa82',1,'c128.h']]],
-  ['isgraph_4450',['isgraph',['../ctype_8h.html#a49f40fd869fd0c90e4497fda08c89561',1,'ctype.h']]],
-  ['islower_4451',['islower',['../ctype_8h.html#a7b8f652a0423a80922dd89d8829db5f2',1,'ctype.h']]],
-  ['isprint_4452',['isprint',['../ctype_8h.html#a99355d8f0fb41ec43effb95189db0ed4',1,'ctype.h']]],
-  ['ispunct_4453',['ispunct',['../ctype_8h.html#af29554b3ec04ea7684482bffed5dbce6',1,'ctype.h']]],
-  ['isspace_4454',['isspace',['../ctype_8h.html#a56be4166e4673843042a548a7f513dbc',1,'ctype.h']]],
-  ['isupper_4455',['isupper',['../ctype_8h.html#adadd6582d46775aab6a51e29d16d9f77',1,'ctype.h']]],
-  ['isxdigit_4456',['isxdigit',['../ctype_8h.html#adaf3aadefe3fc4fb07b6be0d7b880f53',1,'ctype.h']]]
+  ['hideonlymouse_5300',['HideOnlyMouse',['../geos__routines_8h.html#a3733f1f351942df01b50a98a8f333b80',1,'geos_routines.h']]],
+  ['horizontalline_5301',['HorizontalLine',['../geos__routines_8h.html#ac0aa1ba1099f29d369d8e18e5309103d',1,'geos_routines.h']]]
 ];

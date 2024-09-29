@@ -32,6 +32,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - [Commodore VIC-20](https://en.wikipedia.org/wiki/VIC-20)
 - [CP/M-65](https://github.com/davidgiven/cpm65)
 - [Dodo 6502 Game System](https://github.com/peternoyes/dodo)
+- [Commodore GEOS](https://en.wikipedia.org/wiki/GEOS_(8-bit_operating_system))
 - [MEGA65](https://mega65.org/)
 - [NES (Nintendo Entertainment System)](https://en.wikipedia.org/wiki/Nintendo_Entertainment_System)
   - [Action 53](https://www.nesdev.org/wiki/Action_53)
@@ -165,6 +166,7 @@ executables and libraries for that target.
 | Commodore                       | VIC-20             | `mos-vic20-clang`                |
 | CP/M-65                         | -                  | `mos-cpm65-clang`                |
 | Dodo 6502 Game System           | -                  | `mos-dodo-clang`                 |
+| Commodore GEOS                  | 64, 128            | `mos-geos-cbm-clang`              |
 | MEGA65                          | -                  | `mos-mega65-clang`               |
 | NES                             | Action53 mapper    | `mos-nes-action53-clang`         |
 | NES                             | CNROM mapper       | `mos-nes-cnrom-clang`            |

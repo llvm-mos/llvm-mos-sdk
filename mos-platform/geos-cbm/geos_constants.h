@@ -22,9 +22,6 @@ extern "C" {
 #include <stdbool.h>
 #include <stdint.h>
 
-// #define LOW_BYTE(x) (*((unsigned char *)&(##x) + 0))
-// #define HIGH_BYTE(x) (*((unsigned char *)&(##x) + 1))
-
 #define WORD(w) (w & 0xff), (w >> 8)
 
 #define STRINGIFY_AUX(x) #x

@@ -113,6 +113,42 @@ void neo_uext_spi_block_read(uint8_t device, void *dest, uint16_t len);
  */
 void neo_uext_spi_block_write(uint8_t device, const void *src, uint16_t len);
 
+/**
+ * @brief Read a block from an UART device.
+ *
+ * Check errors with @see neo_api_error
+ */
+void neo_uext_uart_block_read(uint8_t device, void *dest, uint16_t len);
+
+/**
+ * @brief Write a block to an UART device.
+ *
+ * Check errors with @see neo_api_error
+ */
+void neo_uext_uart_block_write(uint8_t device, const void *src, uint16_t len);
+
+#define NEO_UART_PROTOCOL_8N1 0
+
+/**
+ * @brief Configure the UART baud rate and protocol.
+ */
+void neo_uext_uart_configure(uint32_t baudrate, uint8_t protocol);
+
+/**
+ * @brief Write a byte to UART.
+ */
+void neo_uext_uart_write(uint8_t value);
+
+/**
+ * @brief Read a byte from UART.
+ */
+uint8_t neo_uext_uart_read(void);
+
+/**
+ * @brief Check if a byte can be read from UART.
+ */
+bool neo_uext_uart_available(void);
+
 #ifdef __cplusplus
 }
 #endif

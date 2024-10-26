@@ -53,6 +53,11 @@ void neo_sound_play_effect(uint8_t channel, uint8_t id);
  */
 uint8_t neo_sound_status(uint8_t channel);
 
+/**
+ * @brief Query the number of channels.
+ */
+uint8_t neo_sound_channel_count(void);
+
 #ifdef __cplusplus
 }
 #endif

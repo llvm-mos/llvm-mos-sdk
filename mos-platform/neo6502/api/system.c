@@ -5,6 +5,7 @@
 
 #include "../neo6502.h"
 #include "../kernel.h"
+#include "neo/system.h"
 
 uint8_t neo_api_error(void) {
     KWaitMessage();
@@ -12,14 +13,14 @@ uint8_t neo_api_error(void) {
 }
 
 long neo_system_timer(void) {
-	KSendMessageSync(API_GROUP_SYSTEM, API_FN_TIMER);
-	return *((long*) ControlPort.params);
+    KSendMessageSync(API_GROUP_SYSTEM, API_FN_TIMER);
+    return *((long*) ControlPort.params);
 }
 
 uint8_t neo_system_key_status(char key) {
     ControlPort.params[0] = key;
-	KSendMessageSync(API_GROUP_SYSTEM, API_FN_KEY_STATUS);
-	return ControlPort.params[0];
+    KSendMessageSync(API_GROUP_SYSTEM, API_FN_KEY_STATUS);
+    return ControlPort.params[0];
 }
 
 void neo_system_credits(void) {
@@ -38,4 +39,16 @@ void neo_system_locale(const char *locale) {
 
 void neo_system_reset(void) {
     KSendMessage(API_GROUP_SYSTEM, API_FN_RESET);
+}
+
+void neo_system_debug_putc(char key) {
+    ControlPort.params[0] = key;
+    KSendMessage(API_GROUP_SYSTEM, API_FN_PUTC_DEBUG);
+}
+
+void neo_system_version(neo_version_t *version) {
+    KSendMessageSync(API_GROUP_SYSTEM, API_FN_VERSION);
+    version->major = ControlPort.params[0];
+    version->minor = ControlPort.params[1];
+    version->patch = ControlPort.params[2];
 }

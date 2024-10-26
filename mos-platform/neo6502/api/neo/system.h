@@ -59,6 +59,24 @@ void neo_system_locale(const char *locale);
 __attribute__((leaf, noreturn))
 void neo_system_reset(void);
 
+/**
+ * @brief Write a character to the debug port.
+ *
+ * @param ch Character to write.
+ */
+void neo_system_debug_putc(char ch);
+
+typedef struct neo_version {
+    uint8_t major, minor, patch;
+} neo_version_t;
+
+/**
+ * @brief Retrieve the Neo6502 version.
+ *
+ * @param version Pointer to neo_version_t structure.
+ */
+void neo_system_version(neo_version_t *version);
+
 #ifdef __cplusplus
 }
 #endif

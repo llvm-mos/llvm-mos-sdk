@@ -39,3 +39,8 @@ uint8_t neo_sound_status(uint8_t channel) {
     KSendMessageSync(API_GROUP_SOUND, API_FN_SOUND_STATUS);
     return ControlPort.params[0];
 }
+
+uint8_t neo_sound_channel_count(void) {
+    KSendMessageSync(API_GROUP_SOUND, API_FN_GET_CHANNEL_COUNT);
+    return ControlPort.params[0];
+}

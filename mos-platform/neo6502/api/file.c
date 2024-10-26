@@ -220,6 +220,18 @@ void neo_file_set_attr(const char *path, uint8_t attr) {
     KWaitMessage();
 }
 
+bool neo_file_eof(uint8_t channel) {
+    ControlPort.params[0] = channel;
+    KSendMessageSync(API_GROUP_FILEIO, API_FN_FILE_CHECK_EOF);
+    return ControlPort.params[0] != 0;
+}
+
+void neo_file_get_cwd(char *buffer, uint8_t length) {
+    *((volatile uint16_t*) (ControlPort.params)) = (uint16_t) buffer;
+    ControlPort.params[2] = length;
+    KSendMessageSync(API_GROUP_FILEIO, API_FN_GET_CWD);
+}
+
 void neo_file_list_filtered_p(const neo_pstring_t *filter) {
     *((volatile uint16_t*) (ControlPort.params)) = (uint16_t) filter;
     KSendMessage(API_GROUP_FILEIO, API_FN_LIST_FILTERED);

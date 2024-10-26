@@ -89,6 +89,13 @@ uint8_t neo_graphics_read_pixel(uint16_t x, uint16_t y) {
     return ControlPort.params[0];
 }
 
+void neo_graphics_write_pixel(uint16_t x, uint16_t y, uint8_t idx) {
+    ((volatile uint16_t*) ControlPort.params)[0] = x;
+    ((volatile uint16_t*) ControlPort.params)[1] = y;
+    ControlPort.params[4] = idx;
+    KSendMessage(API_GROUP_GRAPHICS, API_FN_WRITE_PIXEL);
+}
+
 void neo_graphics_reset_palette(void) {
     KSendMessage(API_GROUP_GRAPHICS, API_FN_RESET_PALETTE);
 }
@@ -101,8 +108,8 @@ void neo_graphics_set_tilemap(const void *src, uint16_t x, uint16_t y) {
 }
 
 long neo_graphics_frame_count(void) {
-	KSendMessageSync(API_GROUP_GRAPHICS, API_FN_FRAME_COUNT);
-	return *((long*) ControlPort.params);
+    KSendMessageSync(API_GROUP_GRAPHICS, API_FN_FRAME_COUNT);
+    return *((long*) ControlPort.params);
 }
 
 void neo_graphics_set_color(uint8_t idx) {

@@ -71,14 +71,16 @@ $(function() {
 <div class="title">neo6502.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for neo6502.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="neo6502_8h__incl.png" border="0" usemap="#neo6502_2neo6502_8h" alt=""/></div>
 <map name="neo6502_2neo6502_8h" id="neo6502_2neo6502_8h">
-<area shape="rect" title=" " alt="" coords="5,5,156,32"/>
-<area shape="rect" title=" " alt="" coords="45,80,116,107"/>
+<area shape="rect" title=" " alt="" coords="22,5,173,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,88,107"/>
+<area shape="rect" title=" " alt="" coords="113,80,183,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -129,6 +131,12 @@ Macros</h2></td></tr>
 <tr class="separator:a3c2610bcdd46957db631b1882b67c8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e4c16af42a916b2a361985a7d5882c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a5e4c16af42a916b2a361985a7d5882c8">API_FN_RESET</a>&#160;&#160;&#160;0x07</td></tr>
 <tr class="separator:a5e4c16af42a916b2a361985a7d5882c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a021fcf259285e164664da2b117964597"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a021fcf259285e164664da2b117964597">API_FN_MOS</a>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:a021fcf259285e164664da2b117964597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9c0ec6294b46f2da115ba0a387996b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ab9c0ec6294b46f2da115ba0a387996b1">API_FN_PUTC_DEBUG</a>&#160;&#160;&#160;0x0A</td></tr>
+<tr class="separator:ab9c0ec6294b46f2da115ba0a387996b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adff31adb198fd01d3ad2c28efea4c456"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#adff31adb198fd01d3ad2c28efea4c456">API_FN_VERSION</a>&#160;&#160;&#160;0x0B</td></tr>
+<tr class="separator:adff31adb198fd01d3ad2c28efea4c456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10c56318c7c8b1975c67f461ba7a30c2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a10c56318c7c8b1975c67f461ba7a30c2">API_GROUP_CONSOLE</a>&#160;&#160;&#160;0x02</td></tr>
 <tr class="separator:a10c56318c7c8b1975c67f461ba7a30c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad518ce0e3facec3d617be5096a338411"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ad518ce0e3facec3d617be5096a338411">API_FN_READ_CHAR</a>&#160;&#160;&#160;0x01</td></tr>
@@ -163,6 +171,12 @@ Macros</h2></td></tr>
 <tr class="separator:a7ce7aaa34f6d19207a71a592d79e2f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9e0b1dc8092089041cab8485f4e1237"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ab9e0b1dc8092089041cab8485f4e1237">API_FN_CURSOR_INVERSE</a>&#160;&#160;&#160;0x10</td></tr>
 <tr class="separator:ab9e0b1dc8092089041cab8485f4e1237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1722dab5dfcc8e8289173166bd9f9efe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a1722dab5dfcc8e8289173166bd9f9efe">API_FN_CONSOLE_TAB</a>&#160;&#160;&#160;0x11</td></tr>
+<tr class="separator:a1722dab5dfcc8e8289173166bd9f9efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3d25379ba6beecc92a169eddf6feca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a2b3d25379ba6beecc92a169eddf6feca">API_FN_GET_TEXT_COLOR</a>&#160;&#160;&#160;0x12</td></tr>
+<tr class="separator:a2b3d25379ba6beecc92a169eddf6feca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a512b37ba860df62404d307d18da5ef4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a512b37ba860df62404d307d18da5ef4b">API_FN_SET_CURSOR_VISIBILITY</a>&#160;&#160;&#160;0x13</td></tr>
+<tr class="separator:a512b37ba860df62404d307d18da5ef4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae493208b9a90e35ac77deadb5880dfb7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ae493208b9a90e35ac77deadb5880dfb7">API_QUEUE_EMPTY</a>&#160;&#160;&#160;0xFF</td></tr>
 <tr class="separator:ae493208b9a90e35ac77deadb5880dfb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab13e8d9239bc632fa6fe290f0a2f4074"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ab13e8d9239bc632fa6fe290f0a2f4074">API_GROUP_FILEIO</a>&#160;&#160;&#160;0x03</td></tr>
@@ -209,6 +223,10 @@ Macros</h2></td></tr>
 <tr class="separator:a2d51f5980fb13e4ec61ec77cc8797009"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32a11c511f1697f79f9a89ea493aca64"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a32a11c511f1697f79f9a89ea493aca64">API_FN_FILE_SET_ATTR</a>&#160;&#160;&#160;0x15</td></tr>
 <tr class="separator:a32a11c511f1697f79f9a89ea493aca64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d703b46e7f666fce166084e2069412f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a5d703b46e7f666fce166084e2069412f">API_FN_FILE_CHECK_EOF</a>&#160;&#160;&#160;0x16</td></tr>
+<tr class="separator:a5d703b46e7f666fce166084e2069412f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5607558f4baeba4095bae03e847650a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a5607558f4baeba4095bae03e847650a4">API_FN_GET_CWD</a>&#160;&#160;&#160;0x17</td></tr>
+<tr class="separator:a5607558f4baeba4095bae03e847650a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb69794c860e6c5cfffd1303f2880112"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#acb69794c860e6c5cfffd1303f2880112">API_FN_LIST_FILTERED</a>&#160;&#160;&#160;0x20</td></tr>
 <tr class="separator:acb69794c860e6c5cfffd1303f2880112"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7de43d74b61dbb0555d9a7490e19497a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a7de43d74b61dbb0555d9a7490e19497a">API_FILE_TO_SCREEN</a>&#160;&#160;&#160;0xFFFF</td></tr>
@@ -229,6 +247,12 @@ Macros</h2></td></tr>
 <tr class="separator:a001033d6f74196814505a7bf966ece30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e30ba2916815835ac2d5fa8c7261f78"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a1e30ba2916815835ac2d5fa8c7261f78">API_FN_COMP</a>&#160;&#160;&#160;0x06</td></tr>
 <tr class="separator:a1e30ba2916815835ac2d5fa8c7261f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c0a8b22d88b9c344dea9f4d01a5a198"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a5c0a8b22d88b9c344dea9f4d01a5a198">API_FN_POW</a>&#160;&#160;&#160;0x07</td></tr>
+<tr class="separator:a5c0a8b22d88b9c344dea9f4d01a5a198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac68c240f73b52e657a5daf16967e4857"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ac68c240f73b52e657a5daf16967e4857">API_FN_DISTANCE</a>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:ac68c240f73b52e657a5daf16967e4857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d9b74732d5d76c0d80ed55cd5e8bf02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a2d9b74732d5d76c0d80ed55cd5e8bf02">API_FN_ATAN2</a>&#160;&#160;&#160;0x09</td></tr>
+<tr class="separator:a2d9b74732d5d76c0d80ed55cd5e8bf02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2c22e36b1bc41400590b75041fae284"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#aa2c22e36b1bc41400590b75041fae284">API_FN_NEG</a>&#160;&#160;&#160;0x10</td></tr>
 <tr class="separator:aa2c22e36b1bc41400590b75041fae284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f16bfefac18f99d33c9e6567f296821"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a1f16bfefac18f99d33c9e6567f296821">API_FN_FLOOR</a>&#160;&#160;&#160;0x11</td></tr>
@@ -261,6 +285,8 @@ Macros</h2></td></tr>
 <tr class="separator:abb476f2f0464c96fd5bdd25a0ff84e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8e0c8f695098a244b6bb4b8d51f2fa5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ae8e0c8f695098a244b6bb4b8d51f2fa5">API_FN_NUM_TO_STR</a>&#160;&#160;&#160;0x22</td></tr>
 <tr class="separator:ae8e0c8f695098a244b6bb4b8d51f2fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1117c1273a9db6a776f222628f02ed9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ab1117c1273a9db6a776f222628f02ed9">API_FN_SET_DEG_RAD_MODE</a>&#160;&#160;&#160;0x23</td></tr>
+<tr class="separator:ab1117c1273a9db6a776f222628f02ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac71d02c188ce558fa380fef5bb4f3217"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ac71d02c188ce558fa380fef5bb4f3217">API_GROUP_GRAPHICS</a>&#160;&#160;&#160;0x05</td></tr>
 <tr class="separator:ac71d02c188ce558fa380fef5bb4f3217"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65b11922de188b9405b06763f842733f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a65b11922de188b9405b06763f842733f">API_FN_SET_GFX</a>&#160;&#160;&#160;0x01</td></tr>
@@ -291,6 +317,10 @@ Macros</h2></td></tr>
 <tr class="separator:a01dceb68b2af171abc46ef02f85d7495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52d7f5d524ed884e8d01961bb263a23e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a52d7f5d524ed884e8d01961bb263a23e">API_FN_FRAME_COUNT</a>&#160;&#160;&#160;0x25</td></tr>
 <tr class="separator:a52d7f5d524ed884e8d01961bb263a23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eb574b965dbbe245bb2ac9dfde602e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a6eb574b965dbbe245bb2ac9dfde602e5">API_FN_GET_PALETTE</a>&#160;&#160;&#160;0x26</td></tr>
+<tr class="separator:a6eb574b965dbbe245bb2ac9dfde602e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1484295e98b1e553524efcbe5f1b944e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a1484295e98b1e553524efcbe5f1b944e">API_FN_WRITE_PIXEL</a>&#160;&#160;&#160;0x27</td></tr>
+<tr class="separator:a1484295e98b1e553524efcbe5f1b944e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57aedbe8f7d4e7509d5c6ee4c018b7cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a57aedbe8f7d4e7509d5c6ee4c018b7cb">API_FN_SET_COLOR</a>&#160;&#160;&#160;0x40</td></tr>
 <tr class="separator:a57aedbe8f7d4e7509d5c6ee4c018b7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6f7eaa063e654807a1466033ca258f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ab6f7eaa063e654807a1466033ca258f0">API_FN_SET_SOLID</a>&#160;&#160;&#160;0x41</td></tr>
@@ -347,6 +377,10 @@ Macros</h2></td></tr>
 <tr class="separator:ae752db008164bf5698a6a0e39bf277f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b246b8d4660f553395d4769861ff1ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a5b246b8d4660f553395d4769861ff1ae">API_FN_READ_CONTROLLER</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:a5b246b8d4660f553395d4769861ff1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1682a0f721f62cdb3a3402fead0ffa7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#aa1682a0f721f62cdb3a3402fead0ffa7">API_FN_READ_CONTROLLER_COUNT</a>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:aa1682a0f721f62cdb3a3402fead0ffa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2ce59629bb55cb96fba983406275341"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ab2ce59629bb55cb96fba983406275341">API_FN_READ_CONTROLLER2</a>&#160;&#160;&#160;0x03</td></tr>
+<tr class="separator:ab2ce59629bb55cb96fba983406275341"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6f1f7af94a96fe4a6cd49b994ecd21b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#aa6f1f7af94a96fe4a6cd49b994ecd21b">API_CONTROLLER_LEFT</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:aa6f1f7af94a96fe4a6cd49b994ecd21b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad829efa10dc93b64459b56065488b806"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ad829efa10dc93b64459b56065488b806">API_CONTROLLER_RIGHT</a>&#160;&#160;&#160;0x02</td></tr>
@@ -373,6 +407,10 @@ Macros</h2></td></tr>
 <tr class="separator:a8fa978b8f210dea9bba1bc8cde8b1f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d4eb02483a3733b2e498bbc7fa374c9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a4d4eb02483a3733b2e498bbc7fa374c9">API_FN_SOUND_STATUS</a>&#160;&#160;&#160;0x06</td></tr>
 <tr class="separator:a4d4eb02483a3733b2e498bbc7fa374c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe34dbe985757964fa5f692c018c66a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#afe34dbe985757964fa5f692c018c66a2">API_FN_QUEUE_SOUND_EX</a>&#160;&#160;&#160;0x07</td></tr>
+<tr class="separator:afe34dbe985757964fa5f692c018c66a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b6ce1c7fddc8975b7a474328ad647b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a88b6ce1c7fddc8975b7a474328ad647b">API_FN_GET_CHANNEL_COUNT</a>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:a88b6ce1c7fddc8975b7a474328ad647b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98a267ab853ccb30fd61c953b7e48523"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a98a267ab853ccb30fd61c953b7e48523">API_SOUND_CH_00</a>&#160;&#160;&#160;0x00</td></tr>
 <tr class="separator:a98a267ab853ccb30fd61c953b7e48523"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcdba831e2252b668dadc71b6d4cb9ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#adcdba831e2252b668dadc71b6d4cb9ca">API_NOTE_REST</a>&#160;&#160;&#160;0x0000</td></tr>
@@ -809,6 +847,8 @@ Macros</h2></td></tr>
 <tr class="separator:aec2b0a59200da034af5229925e0d60f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae288856346cda93aefced6ce98da6f21"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ae288856346cda93aefced6ce98da6f21">API_FN_TURTLE_HOME</a>&#160;&#160;&#160;0x05</td></tr>
 <tr class="separator:ae288856346cda93aefced6ce98da6f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a979c9a30ceb9682f236e8faf3e7389a7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a979c9a30ceb9682f236e8faf3e7389a7">API_FN_TURTLE_SHOW</a>&#160;&#160;&#160;0x06</td></tr>
+<tr class="separator:a979c9a30ceb9682f236e8faf3e7389a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8cbae8002cd5bd25f38ebacef75d22d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#af8cbae8002cd5bd25f38ebacef75d22d">API_TURTLE_LEFT</a>&#160;&#160;&#160;270</td></tr>
 <tr class="separator:af8cbae8002cd5bd25f38ebacef75d22d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2a718f9b55484e578859b973c0c145e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#aa2a718f9b55484e578859b973c0c145e">API_TURTLE_RIGHT</a>&#160;&#160;&#160;90</td></tr>
@@ -819,7 +859,7 @@ Macros</h2></td></tr>
 <tr class="separator:a2ccc307c8cd91af428550c9f83fa53e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e38926fbca9aab803bd769889f131b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a0e38926fbca9aab803bd769889f131b3">API_PEN_DOWN</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:a0e38926fbca9aab803bd769889f131b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bab7c1f406cc1e6df144a6f3760c3d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a7bab7c1f406cc1e6df144a6f3760c3d8">API_GROUP_UEXT</a>&#160;&#160;&#160;0x09</td></tr>
+<tr class="memitem:a7bab7c1f406cc1e6df144a6f3760c3d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a7bab7c1f406cc1e6df144a6f3760c3d8">API_GROUP_UEXT</a>&#160;&#160;&#160;0x0A</td></tr>
 <tr class="separator:a7bab7c1f406cc1e6df144a6f3760c3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b5ca8e9b06cfe6196256238b8eb1f7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a5b5ca8e9b06cfe6196256238b8eb1f7e">API_FN_UEXT_INIT</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:a5b5ca8e9b06cfe6196256238b8eb1f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -837,6 +877,36 @@ Macros</h2></td></tr>
 <tr class="separator:a08a1319057d5407dd364fa71b0757c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4af870c754a8f812d1b20d3842d0a06c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a4af870c754a8f812d1b20d3842d0a06c">API_FN_I2C_STATUS</a>&#160;&#160;&#160;0x08</td></tr>
 <tr class="separator:a4af870c754a8f812d1b20d3842d0a06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2edda9b9664a8b37abfa42257336352a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a2edda9b9664a8b37abfa42257336352a">API_FN_I2C_READ_BLOCK</a>&#160;&#160;&#160;0x09</td></tr>
+<tr class="separator:a2edda9b9664a8b37abfa42257336352a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51930ed945a809c554a1765b72952959"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a51930ed945a809c554a1765b72952959">API_FN_I2C_WRITE_BLOCK</a>&#160;&#160;&#160;0x0A</td></tr>
+<tr class="separator:a51930ed945a809c554a1765b72952959"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556c9cf9fb78055d1007059597e9f3e0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a556c9cf9fb78055d1007059597e9f3e0">API_FN_SPI_READ_BLOCK</a>&#160;&#160;&#160;0x0B</td></tr>
+<tr class="separator:a556c9cf9fb78055d1007059597e9f3e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeeeab445d346b3f104a56dbf37b97d9c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#aeeeab445d346b3f104a56dbf37b97d9c">API_FN_SPI_WRITE_BLOCK</a>&#160;&#160;&#160;0x0C</td></tr>
+<tr class="separator:aeeeab445d346b3f104a56dbf37b97d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10ef69936e7dd495a0154364e9633810"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a10ef69936e7dd495a0154364e9633810">API_FN_UART_READ_BLOCK</a>&#160;&#160;&#160;0x0D</td></tr>
+<tr class="separator:a10ef69936e7dd495a0154364e9633810"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab68db5e3529147c12eb755f3d9471ef0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ab68db5e3529147c12eb755f3d9471ef0">API_FN_UART_WRITE_BLOCK</a>&#160;&#160;&#160;0x0E</td></tr>
+<tr class="separator:ab68db5e3529147c12eb755f3d9471ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2914a472a8c4a7a8bc98f7ccb3e0d5a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#af2914a472a8c4a7a8bc98f7ccb3e0d5a">API_FN_UART_SET_CONFIG</a>&#160;&#160;&#160;0x0F</td></tr>
+<tr class="separator:af2914a472a8c4a7a8bc98f7ccb3e0d5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7363976363e7987c37bfc6c06773628c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a7363976363e7987c37bfc6c06773628c">API_FN_UART_WRITE</a>&#160;&#160;&#160;0x10</td></tr>
+<tr class="separator:a7363976363e7987c37bfc6c06773628c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a982291242ca62e02f12326329d64562b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a982291242ca62e02f12326329d64562b">API_FN_UART_READ</a>&#160;&#160;&#160;0x11</td></tr>
+<tr class="separator:a982291242ca62e02f12326329d64562b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f65fa58d5ffed4bd7ca9219692e381b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a3f65fa58d5ffed4bd7ca9219692e381b">API_FN_UART_AVAILABLE</a>&#160;&#160;&#160;0x12</td></tr>
+<tr class="separator:a3f65fa58d5ffed4bd7ca9219692e381b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d5da5bf0087b992e12ff5f860a2b2c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a6d5da5bf0087b992e12ff5f860a2b2c6">API_GROUP_MOUSE</a>&#160;&#160;&#160;0x0B</td></tr>
+<tr class="separator:a6d5da5bf0087b992e12ff5f860a2b2c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abec69e0dd1a30b0d9cfbfecd6ad7c36c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#abec69e0dd1a30b0d9cfbfecd6ad7c36c">API_GROUP_BLITTER</a>&#160;&#160;&#160;0x0C</td></tr>
+<tr class="separator:abec69e0dd1a30b0d9cfbfecd6ad7c36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4ecb4a46ff6de732b94be7a86649886"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ab4ecb4a46ff6de732b94be7a86649886">API_GROUP_EDITOR</a>&#160;&#160;&#160;0x0D</td></tr>
+<tr class="separator:ab4ecb4a46ff6de732b94be7a86649886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa26b84b1b66471cc4f01aded175b0d9c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#aa26b84b1b66471cc4f01aded175b0d9c">API_FN_EDITOR_INIT</a>&#160;&#160;&#160;0x01</td></tr>
+<tr class="separator:aa26b84b1b66471cc4f01aded175b0d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86d463e4d3a344f1935aef72f683673e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#a86d463e4d3a344f1935aef72f683673e">API_FN_EDITOR_REENTER</a>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:a86d463e4d3a344f1935aef72f683673e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba2a7fe77a7501e5844370eec0185207"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#aba2a7fe77a7501e5844370eec0185207">COLOR_BLACK</a>&#160;&#160;&#160;0x80</td></tr>
 <tr class="separator:aba2a7fe77a7501e5844370eec0185207"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad86358bf19927183dd7b4ae215a29731"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neo6502_8h.html#ad86358bf19927183dd7b4ae215a29731">COLOR_RED</a>&#160;&#160;&#160;0x81</td></tr>
@@ -1207,6 +1277,20 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a2d9b74732d5d76c0d80ed55cd5e8bf02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d9b74732d5d76c0d80ed55cd5e8bf02">&#9670;&nbsp;</a></span>API_FN_ATAN2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_ATAN2&#160;&#160;&#160;0x09</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af46c7e20d2f7637fee3be5c4afbc30a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af46c7e20d2f7637fee3be5c4afbc30a5">&#9670;&nbsp;</a></span>API_FN_BASIC</h2>
 
@@ -1285,6 +1369,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_FN_CONSOLE_STATUS&#160;&#160;&#160;0x02</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1722dab5dfcc8e8289173166bd9f9efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1722dab5dfcc8e8289173166bd9f9efe">&#9670;&nbsp;</a></span>API_FN_CONSOLE_TAB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_CONSOLE_TAB&#160;&#160;&#160;0x11</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1459,6 +1557,20 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="ac68c240f73b52e657a5daf16967e4857"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac68c240f73b52e657a5daf16967e4857">&#9670;&nbsp;</a></span>API_FN_DISTANCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_DISTANCE&#160;&#160;&#160;0x08</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0df4df57b542f7f3f90cc2c9ad40e651"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0df4df57b542f7f3f90cc2c9ad40e651">&#9670;&nbsp;</a></span>API_FN_DIV_DEC</h2>
 
@@ -1585,6 +1697,34 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="aa26b84b1b66471cc4f01aded175b0d9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa26b84b1b66471cc4f01aded175b0d9c">&#9670;&nbsp;</a></span>API_FN_EDITOR_INIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_EDITOR_INIT&#160;&#160;&#160;0x01</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a86d463e4d3a344f1935aef72f683673e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86d463e4d3a344f1935aef72f683673e">&#9670;&nbsp;</a></span>API_FN_EDITOR_REENTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_EDITOR_REENTER&#160;&#160;&#160;0x02</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9065c66ccd0648b368fd9e35a7837b09"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9065c66ccd0648b368fd9e35a7837b09">&#9670;&nbsp;</a></span>API_FN_EXP</h2>
 
@@ -1593,6 +1733,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_FN_EXP&#160;&#160;&#160;0x17</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d703b46e7f666fce166084e2069412f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d703b46e7f666fce166084e2069412f">&#9670;&nbsp;</a></span>API_FN_FILE_CHECK_EOF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_FILE_CHECK_EOF&#160;&#160;&#160;0x16</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1809,6 +1963,62 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a88b6ce1c7fddc8975b7a474328ad647b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b6ce1c7fddc8975b7a474328ad647b">&#9670;&nbsp;</a></span>API_FN_GET_CHANNEL_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_GET_CHANNEL_COUNT&#160;&#160;&#160;0x08</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5607558f4baeba4095bae03e847650a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5607558f4baeba4095bae03e847650a4">&#9670;&nbsp;</a></span>API_FN_GET_CWD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_GET_CWD&#160;&#160;&#160;0x17</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6eb574b965dbbe245bb2ac9dfde602e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eb574b965dbbe245bb2ac9dfde602e5">&#9670;&nbsp;</a></span>API_FN_GET_PALETTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_GET_PALETTE&#160;&#160;&#160;0x26</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2b3d25379ba6beecc92a169eddf6feca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3d25379ba6beecc92a169eddf6feca">&#9670;&nbsp;</a></span>API_FN_GET_TEXT_COLOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_GET_TEXT_COLOR&#160;&#160;&#160;0x12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a3c7b1a5f672b1b7afe1d06df989ce447"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c7b1a5f672b1b7afe1d06df989ce447">&#9670;&nbsp;</a></span>API_FN_GPIO_READ</h2>
 
@@ -1851,6 +2061,20 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a2edda9b9664a8b37abfa42257336352a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2edda9b9664a8b37abfa42257336352a">&#9670;&nbsp;</a></span>API_FN_I2C_READ_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_I2C_READ_BLOCK&#160;&#160;&#160;0x09</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4af870c754a8f812d1b20d3842d0a06c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4af870c754a8f812d1b20d3842d0a06c">&#9670;&nbsp;</a></span>API_FN_I2C_STATUS</h2>
 
@@ -1873,6 +2097,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_FN_I2C_WRITE&#160;&#160;&#160;0x05</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51930ed945a809c554a1765b72952959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51930ed945a809c554a1765b72952959">&#9670;&nbsp;</a></span>API_FN_I2C_WRITE_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_I2C_WRITE_BLOCK&#160;&#160;&#160;0x0A</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2019,6 +2257,20 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a021fcf259285e164664da2b117964597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a021fcf259285e164664da2b117964597">&#9670;&nbsp;</a></span>API_FN_MOS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_MOS&#160;&#160;&#160;0x08</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a773e620ab067bd06f385a75c6537c02e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a773e620ab067bd06f385a75c6537c02e">&#9670;&nbsp;</a></span>API_FN_MUL</h2>
 
@@ -2075,6 +2327,34 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a5c0a8b22d88b9c344dea9f4d01a5a198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c0a8b22d88b9c344dea9f4d01a5a198">&#9670;&nbsp;</a></span>API_FN_POW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_POW&#160;&#160;&#160;0x07</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9c0ec6294b46f2da115ba0a387996b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9c0ec6294b46f2da115ba0a387996b1">&#9670;&nbsp;</a></span>API_FN_PUTC_DEBUG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_PUTC_DEBUG&#160;&#160;&#160;0x0A</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="abc205a2041f70168d1fa32b2507969dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc205a2041f70168d1fa32b2507969dc">&#9670;&nbsp;</a></span>API_FN_QUEUE_SOUND</h2>
 
@@ -2083,6 +2363,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_FN_QUEUE_SOUND&#160;&#160;&#160;0x04</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe34dbe985757964fa5f692c018c66a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe34dbe985757964fa5f692c018c66a2">&#9670;&nbsp;</a></span>API_FN_QUEUE_SOUND_EX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_QUEUE_SOUND_EX&#160;&#160;&#160;0x07</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2111,6 +2405,34 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_FN_READ_CONTROLLER&#160;&#160;&#160;0x01</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab2ce59629bb55cb96fba983406275341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2ce59629bb55cb96fba983406275341">&#9670;&nbsp;</a></span>API_FN_READ_CONTROLLER2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_READ_CONTROLLER2&#160;&#160;&#160;0x03</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa1682a0f721f62cdb3a3402fead0ffa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1682a0f721f62cdb3a3402fead0ffa7">&#9670;&nbsp;</a></span>API_FN_READ_CONTROLLER_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_READ_CONTROLLER_COUNT&#160;&#160;&#160;0x02</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2299,6 +2621,34 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a512b37ba860df62404d307d18da5ef4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a512b37ba860df62404d307d18da5ef4b">&#9670;&nbsp;</a></span>API_FN_SET_CURSOR_VISIBILITY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_SET_CURSOR_VISIBILITY&#160;&#160;&#160;0x13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1117c1273a9db6a776f222628f02ed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1117c1273a9db6a776f222628f02ed9">&#9670;&nbsp;</a></span>API_FN_SET_DEG_RAD_MODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_SET_DEG_RAD_MODE&#160;&#160;&#160;0x23</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad1c8b185847cc211cc4043987181bccd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad1c8b185847cc211cc4043987181bccd">&#9670;&nbsp;</a></span>API_FN_SET_DRAW_SIZE</h2>
 
@@ -2447,6 +2797,34 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_FN_SOUND_STATUS&#160;&#160;&#160;0x06</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a556c9cf9fb78055d1007059597e9f3e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a556c9cf9fb78055d1007059597e9f3e0">&#9670;&nbsp;</a></span>API_FN_SPI_READ_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_SPI_READ_BLOCK&#160;&#160;&#160;0x0B</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeeeab445d346b3f104a56dbf37b97d9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeeab445d346b3f104a56dbf37b97d9c">&#9670;&nbsp;</a></span>API_FN_SPI_WRITE_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_SPI_WRITE_BLOCK&#160;&#160;&#160;0x0C</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2663,6 +3041,20 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a979c9a30ceb9682f236e8faf3e7389a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a979c9a30ceb9682f236e8faf3e7389a7">&#9670;&nbsp;</a></span>API_FN_TURTLE_SHOW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_TURTLE_SHOW&#160;&#160;&#160;0x06</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="abf3572225a6f9eda2ef58c8e65378060"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf3572225a6f9eda2ef58c8e65378060">&#9670;&nbsp;</a></span>API_FN_TURTLE_TURN</h2>
 
@@ -2671,6 +3063,90 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_FN_TURTLE_TURN&#160;&#160;&#160;0x02</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f65fa58d5ffed4bd7ca9219692e381b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f65fa58d5ffed4bd7ca9219692e381b">&#9670;&nbsp;</a></span>API_FN_UART_AVAILABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_UART_AVAILABLE&#160;&#160;&#160;0x12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a982291242ca62e02f12326329d64562b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a982291242ca62e02f12326329d64562b">&#9670;&nbsp;</a></span>API_FN_UART_READ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_UART_READ&#160;&#160;&#160;0x11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a10ef69936e7dd495a0154364e9633810"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10ef69936e7dd495a0154364e9633810">&#9670;&nbsp;</a></span>API_FN_UART_READ_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_UART_READ_BLOCK&#160;&#160;&#160;0x0D</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2914a472a8c4a7a8bc98f7ccb3e0d5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2914a472a8c4a7a8bc98f7ccb3e0d5a">&#9670;&nbsp;</a></span>API_FN_UART_SET_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_UART_SET_CONFIG&#160;&#160;&#160;0x0F</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7363976363e7987c37bfc6c06773628c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7363976363e7987c37bfc6c06773628c">&#9670;&nbsp;</a></span>API_FN_UART_WRITE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_UART_WRITE&#160;&#160;&#160;0x10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab68db5e3529147c12eb755f3d9471ef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab68db5e3529147c12eb755f3d9471ef0">&#9670;&nbsp;</a></span>API_FN_UART_WRITE_BLOCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_UART_WRITE_BLOCK&#160;&#160;&#160;0x0E</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2691,6 +3167,20 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="adff31adb198fd01d3ad2c28efea4c456"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adff31adb198fd01d3ad2c28efea4c456">&#9670;&nbsp;</a></span>API_FN_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_VERSION&#160;&#160;&#160;0x0B</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a09119a1d875028845e6c00899f9422e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09119a1d875028845e6c00899f9422e4">&#9670;&nbsp;</a></span>API_FN_WRITE_CHAR</h2>
 
@@ -2699,6 +3189,34 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_FN_WRITE_CHAR&#160;&#160;&#160;0x06</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1484295e98b1e553524efcbe5f1b944e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1484295e98b1e553524efcbe5f1b944e">&#9670;&nbsp;</a></span>API_FN_WRITE_PIXEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_FN_WRITE_PIXEL&#160;&#160;&#160;0x27</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abec69e0dd1a30b0d9cfbfecd6ad7c36c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abec69e0dd1a30b0d9cfbfecd6ad7c36c">&#9670;&nbsp;</a></span>API_GROUP_BLITTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_GROUP_BLITTER&#160;&#160;&#160;0x0C</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2727,6 +3245,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_GROUP_CONTROLLER&#160;&#160;&#160;0x07</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab4ecb4a46ff6de732b94be7a86649886"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4ecb4a46ff6de732b94be7a86649886">&#9670;&nbsp;</a></span>API_GROUP_EDITOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_GROUP_EDITOR&#160;&#160;&#160;0x0D</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2769,6 +3301,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define API_GROUP_MATH&#160;&#160;&#160;0x04</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6d5da5bf0087b992e12ff5f860a2b2c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d5da5bf0087b992e12ff5f860a2b2c6">&#9670;&nbsp;</a></span>API_GROUP_MOUSE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define API_GROUP_MOUSE&#160;&#160;&#160;0x0B</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2838,7 +3384,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define API_GROUP_UEXT&#160;&#160;&#160;0x09</td>
+          <td class="memname">#define API_GROUP_UEXT&#160;&#160;&#160;0x0A</td>
         </tr>
       </table>
 </div><div class="memdoc">

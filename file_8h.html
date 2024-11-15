@@ -85,8 +85,9 @@ Include dependency graph for file.h:</div>
 <map name="neo6502_2api_2neo_2file_8h" id="neo6502_2api_2neo_2file_8h">
 <area shape="rect" title=" " alt="" coords="5,5,172,32"/>
 <area shape="rect" title=" " alt="" coords="53,155,124,181"/>
-<area shape="rect" href="neo6502_8h.html" title=" " alt="" coords="43,80,134,107"/>
-<area shape="rect" href="neo6502_2api_2neo_2types_8h.html" title=" " alt="" coords="159,80,229,107"/>
+<area shape="rect" href="neo6502_8h.html" title=" " alt="" coords="149,80,239,107"/>
+<area shape="rect" href="neo6502_2api_2neo_2types_8h.html" title=" " alt="" coords="53,80,124,107"/>
+<area shape="rect" title=" " alt="" coords="153,155,235,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -110,15 +111,71 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ad1a52a7ed47886f94a78178ac9e56b47"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#ad1a52a7ed47886f94a78178ac9e56b47">NEO_FILE_DESTINATION_GRAPHICS</a>&#160;&#160;&#160;((void*) 0xFFFF)</td></tr>
 <tr class="separator:ad1a52a7ed47886f94a78178ac9e56b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91f43ba721ef3318752566cb47da82cf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a91f43ba721ef3318752566cb47da82cf">NEO_FILE_ATTR_DIRECTORY</a>&#160;&#160;&#160;0x01</td></tr>
+<tr class="memitem:a6567b786e31c0ef66031c834002b146d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a6567b786e31c0ef66031c834002b146d">NEO_FIOATTR_DIR</a>&#160;&#160;&#160;0x01</td></tr>
+<tr class="separator:a6567b786e31c0ef66031c834002b146d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc2f076522a27edbe92340bc89fa3b8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a4dc2f076522a27edbe92340bc89fa3b8">NEO_FIOATTR_SYSTEM</a>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:a4dc2f076522a27edbe92340bc89fa3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfde8d1cc1161b8c54b669470c209a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a8cfde8d1cc1161b8c54b669470c209a2">NEO_FIOATTR_ARCHIVE</a>&#160;&#160;&#160;0x04</td></tr>
+<tr class="separator:a8cfde8d1cc1161b8c54b669470c209a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9f0798bc44e65ccdb8ac548d7d6ccfc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#ac9f0798bc44e65ccdb8ac548d7d6ccfc">NEO_FIOATTR_READONLY</a>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:ac9f0798bc44e65ccdb8ac548d7d6ccfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44a51f62bd5b27327adfd1efaa3358f8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a44a51f62bd5b27327adfd1efaa3358f8">NEO_FIOATTR_HIDDEN</a>&#160;&#160;&#160;0x10</td></tr>
+<tr class="separator:a44a51f62bd5b27327adfd1efaa3358f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e5c1b9cac400aaf56a74fa7be704110"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a6e5c1b9cac400aaf56a74fa7be704110">NEO_FIOERROR_OK</a>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:a6e5c1b9cac400aaf56a74fa7be704110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8647c7fc835f4b91dc94b52b0581754"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#ab8647c7fc835f4b91dc94b52b0581754">NEO_FIOERROR_UNKNOWN</a>&#160;&#160;&#160;0x01</td></tr>
+<tr class="separator:ab8647c7fc835f4b91dc94b52b0581754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8fcb967b2a5dfee84e9cb651caab1ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#af8fcb967b2a5dfee84e9cb651caab1ea">NEO_FIOERROR_EOF</a>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:af8fcb967b2a5dfee84e9cb651caab1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5117d0861e88909d8e52ac7be329003"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#ab5117d0861e88909d8e52ac7be329003">NEO_FIOERROR_UNIMPLEMENTED</a>&#160;&#160;&#160;0x03</td></tr>
+<tr class="separator:ab5117d0861e88909d8e52ac7be329003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84747be58e49e6bb994fd9e3ea121d0e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a84747be58e49e6bb994fd9e3ea121d0e">NEO_FIOERROR_NO_FILE</a>&#160;&#160;&#160;0x11</td></tr>
+<tr class="separator:a84747be58e49e6bb994fd9e3ea121d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f5f4e236092417687265c454e628e0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#ab7f5f4e236092417687265c454e628e0">NEO_FIOERROR_NO_PATH</a>&#160;&#160;&#160;0x12</td></tr>
+<tr class="separator:ab7f5f4e236092417687265c454e628e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ac85caa5ebe0160424e73c3554c14b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#ad2ac85caa5ebe0160424e73c3554c14b">NEO_FIOERROR_INVALID_DRIVE</a>&#160;&#160;&#160;0x13</td></tr>
+<tr class="separator:ad2ac85caa5ebe0160424e73c3554c14b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeec24b124ec39abfd20233b9b53099ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#aeec24b124ec39abfd20233b9b53099ef">NEO_FIOERROR_INVALID_NAME</a>&#160;&#160;&#160;0x14</td></tr>
+<tr class="separator:aeec24b124ec39abfd20233b9b53099ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa46560a9d7c46a49a1a5dab562d5a012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#aa46560a9d7c46a49a1a5dab562d5a012">NEO_FIOERROR_INVALID_PARAMETER</a>&#160;&#160;&#160;0x15</td></tr>
+<tr class="separator:aa46560a9d7c46a49a1a5dab562d5a012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f425717ac1d64abe64cb126d53f6622"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a2f425717ac1d64abe64cb126d53f6622">NEO_FIOERROR_DENIED</a>&#160;&#160;&#160;0x21</td></tr>
+<tr class="separator:a2f425717ac1d64abe64cb126d53f6622"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac876f46011fa0691a01d9bdacf82c997"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#ac876f46011fa0691a01d9bdacf82c997">NEO_FIOERROR_EXIST</a>&#160;&#160;&#160;0x22</td></tr>
+<tr class="separator:ac876f46011fa0691a01d9bdacf82c997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ef3d444d1ac118a6af9ffa862295752"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a2ef3d444d1ac118a6af9ffa862295752">NEO_FIOERROR_INVALID_OBJECT</a>&#160;&#160;&#160;0x23</td></tr>
+<tr class="separator:a2ef3d444d1ac118a6af9ffa862295752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af08b657c0e1f818fa4bcad3e20650169"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#af08b657c0e1f818fa4bcad3e20650169">NEO_FIOERROR_WRITE_PROTECTED</a>&#160;&#160;&#160;0x24</td></tr>
+<tr class="separator:af08b657c0e1f818fa4bcad3e20650169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20b2ea82df7229a3eccb86d78660345a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a20b2ea82df7229a3eccb86d78660345a">NEO_FIOERROR_LOCKED</a>&#160;&#160;&#160;0x25</td></tr>
+<tr class="separator:a20b2ea82df7229a3eccb86d78660345a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d3b9705d04204e8cf86aadca331d0db"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a5d3b9705d04204e8cf86aadca331d0db">NEO_FIOERROR_DISK_ERR</a>&#160;&#160;&#160;0x31</td></tr>
+<tr class="separator:a5d3b9705d04204e8cf86aadca331d0db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a71160137334aa57e03295138e8e918"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a5a71160137334aa57e03295138e8e918">NEO_FIOERROR_INT_ERR</a>&#160;&#160;&#160;0x32</td></tr>
+<tr class="separator:a5a71160137334aa57e03295138e8e918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a881441e79153da4d03e147d2fa33e588"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a881441e79153da4d03e147d2fa33e588">NEO_FIOERROR_NOT_READY</a>&#160;&#160;&#160;0x33</td></tr>
+<tr class="separator:a881441e79153da4d03e147d2fa33e588"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ce37b8cffdac2bd4919d56a78ca31f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#ab6ce37b8cffdac2bd4919d56a78ca31f">NEO_FIOERROR_NOT_ENABLED</a>&#160;&#160;&#160;0x34</td></tr>
+<tr class="separator:ab6ce37b8cffdac2bd4919d56a78ca31f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeedc975cccfb9cecf41e76d6c1ce3157"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#aeedc975cccfb9cecf41e76d6c1ce3157">NEO_FIOERROR_NO_FILESYSTEM</a>&#160;&#160;&#160;0x35</td></tr>
+<tr class="separator:aeedc975cccfb9cecf41e76d6c1ce3157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a099c87dffff3de025eef5e6760769dce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a099c87dffff3de025eef5e6760769dce">NEO_FIOERROR_MKFS_ABORTED</a>&#160;&#160;&#160;0x41</td></tr>
+<tr class="separator:a099c87dffff3de025eef5e6760769dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a114727d11c212f2e6ba6ccf83bc1bf0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a114727d11c212f2e6ba6ccf83bc1bf0d">NEO_FIOERROR_TIMEOUT</a>&#160;&#160;&#160;0x42</td></tr>
+<tr class="separator:a114727d11c212f2e6ba6ccf83bc1bf0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d44650b64d813a5803e41ff0ad97cb5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a4d44650b64d813a5803e41ff0ad97cb5">NEO_FIOERROR_NOT_ENOUGH_CORE</a>&#160;&#160;&#160;0x43</td></tr>
+<tr class="separator:a4d44650b64d813a5803e41ff0ad97cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a34f44883be5d4ae2baff20ce785e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a20a34f44883be5d4ae2baff20ce785e8">NEO_FIOERROR_TOO_MANY_OPEN_FILES</a>&#160;&#160;&#160;0x44</td></tr>
+<tr class="separator:a20a34f44883be5d4ae2baff20ce785e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91f43ba721ef3318752566cb47da82cf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a91f43ba721ef3318752566cb47da82cf">NEO_FILE_ATTR_DIRECTORY</a>&#160;&#160;&#160;<a class="el" href="file_8h.html#a6567b786e31c0ef66031c834002b146d">NEO_FIOATTR_DIR</a></td></tr>
 <tr class="separator:a91f43ba721ef3318752566cb47da82cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaadcef69614ea07d1a8dc694bfb0530e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#aaadcef69614ea07d1a8dc694bfb0530e">NEO_FILE_ATTR_SYSTEM</a>&#160;&#160;&#160;0x02</td></tr>
+<tr class="memitem:aaadcef69614ea07d1a8dc694bfb0530e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#aaadcef69614ea07d1a8dc694bfb0530e">NEO_FILE_ATTR_SYSTEM</a>&#160;&#160;&#160;<a class="el" href="file_8h.html#a4dc2f076522a27edbe92340bc89fa3b8">NEO_FIOATTR_SYSTEM</a></td></tr>
 <tr class="separator:aaadcef69614ea07d1a8dc694bfb0530e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a927dc9a269d9644f96481e689c18c5bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a927dc9a269d9644f96481e689c18c5bd">NEO_FILE_ATTR_ARCHIVE</a>&#160;&#160;&#160;0x04</td></tr>
+<tr class="memitem:a927dc9a269d9644f96481e689c18c5bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a927dc9a269d9644f96481e689c18c5bd">NEO_FILE_ATTR_ARCHIVE</a>&#160;&#160;&#160;<a class="el" href="file_8h.html#a8cfde8d1cc1161b8c54b669470c209a2">NEO_FIOATTR_ARCHIVE</a></td></tr>
 <tr class="separator:a927dc9a269d9644f96481e689c18c5bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bf3f3ef9601719ff1d3173fcd230b3c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a4bf3f3ef9601719ff1d3173fcd230b3c">NEO_FILE_ATTR_READ_ONLY</a>&#160;&#160;&#160;0x08</td></tr>
+<tr class="memitem:a4bf3f3ef9601719ff1d3173fcd230b3c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a4bf3f3ef9601719ff1d3173fcd230b3c">NEO_FILE_ATTR_READ_ONLY</a>&#160;&#160;&#160;<a class="el" href="file_8h.html#ac9f0798bc44e65ccdb8ac548d7d6ccfc">NEO_FIOATTR_READONLY</a></td></tr>
 <tr class="separator:a4bf3f3ef9601719ff1d3173fcd230b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a19cef83476c48bf2eca6d4da4d8c17"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a0a19cef83476c48bf2eca6d4da4d8c17">NEO_FILE_ATTR_HIDDEN</a>&#160;&#160;&#160;0x10</td></tr>
+<tr class="memitem:a0a19cef83476c48bf2eca6d4da4d8c17"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a0a19cef83476c48bf2eca6d4da4d8c17">NEO_FILE_ATTR_HIDDEN</a>&#160;&#160;&#160;<a class="el" href="file_8h.html#a44a51f62bd5b27327adfd1efaa3358f8">NEO_FIOATTR_HIDDEN</a></td></tr>
 <tr class="separator:a0a19cef83476c48bf2eca6d4da4d8c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -238,6 +295,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a87ab7bf42d605ba6f81eb316e88771bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a87ab7bf42d605ba6f81eb316e88771bc">neo_file_set_attr</a> (const char *path, uint8_t <a class="el" href="neslib_8h.html#a206b3d754a8d0963d0f74ef00a6e41d5">attr</a>)</td></tr>
 <tr class="memdesc:a87ab7bf42d605ba6f81eb316e88771bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set file attributes, using a C string for the filename.  <a href="file_8h.html#a87ab7bf42d605ba6f81eb316e88771bc">More...</a><br /></td></tr>
 <tr class="separator:a87ab7bf42d605ba6f81eb316e88771bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2251067cfaddfab9d225c212de3e3d0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a2251067cfaddfab9d225c212de3e3d0b">neo_file_eof</a> (uint8_t <a class="el" href="famitone2_8h.html#abd7697134589aaeaa645826770a848dd">channel</a>)</td></tr>
+<tr class="memdesc:a2251067cfaddfab9d225c212de3e3d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if file is at end of file.  <a href="file_8h.html#a2251067cfaddfab9d225c212de3e3d0b">More...</a><br /></td></tr>
+<tr class="separator:a2251067cfaddfab9d225c212de3e3d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0dd4ecdf27057dfefb0e7277881c336"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#aa0dd4ecdf27057dfefb0e7277881c336">neo_file_get_cwd</a> (char *buffer, uint8_t <a class="el" href="bios_8h.html#a766e27240b5a5fd8763035537a67785f">length</a>)</td></tr>
+<tr class="memdesc:aa0dd4ecdf27057dfefb0e7277881c336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current working directory.  <a href="file_8h.html#aa0dd4ecdf27057dfefb0e7277881c336">More...</a><br /></td></tr>
+<tr class="separator:aa0dd4ecdf27057dfefb0e7277881c336"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a2c78155f259b9921a2ee196e2cc89c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="file_8h.html#a3a2c78155f259b9921a2ee196e2cc89c">neo_file_list_filtered_p</a> (const <a class="el" href="api-internal_8h.html#a6550ba42b9c03470d95573e3142dc789">neo_pstring_t</a> *filter)</td></tr>
 <tr class="memdesc:a3a2c78155f259b9921a2ee196e2cc89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a filtered listing of files in the current directory, using a Pascal string for the needle.  <a href="file_8h.html#a3a2c78155f259b9921a2ee196e2cc89c">More...</a><br /></td></tr>
 <tr class="separator:a3a2c78155f259b9921a2ee196e2cc89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -253,7 +316,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NEO_FILE_ATTR_ARCHIVE&#160;&#160;&#160;0x04</td>
+          <td class="memname">#define NEO_FILE_ATTR_ARCHIVE&#160;&#160;&#160;<a class="el" href="file_8h.html#a8cfde8d1cc1161b8c54b669470c209a2">NEO_FIOATTR_ARCHIVE</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -267,7 +330,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NEO_FILE_ATTR_DIRECTORY&#160;&#160;&#160;0x01</td>
+          <td class="memname">#define NEO_FILE_ATTR_DIRECTORY&#160;&#160;&#160;<a class="el" href="file_8h.html#a6567b786e31c0ef66031c834002b146d">NEO_FIOATTR_DIR</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -281,7 +344,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NEO_FILE_ATTR_HIDDEN&#160;&#160;&#160;0x10</td>
+          <td class="memname">#define NEO_FILE_ATTR_HIDDEN&#160;&#160;&#160;<a class="el" href="file_8h.html#a44a51f62bd5b27327adfd1efaa3358f8">NEO_FIOATTR_HIDDEN</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -295,7 +358,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NEO_FILE_ATTR_READ_ONLY&#160;&#160;&#160;0x08</td>
+          <td class="memname">#define NEO_FILE_ATTR_READ_ONLY&#160;&#160;&#160;<a class="el" href="file_8h.html#ac9f0798bc44e65ccdb8ac548d7d6ccfc">NEO_FIOATTR_READONLY</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -309,7 +372,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NEO_FILE_ATTR_SYSTEM&#160;&#160;&#160;0x02</td>
+          <td class="memname">#define NEO_FILE_ATTR_SYSTEM&#160;&#160;&#160;<a class="el" href="file_8h.html#a4dc2f076522a27edbe92340bc89fa3b8">NEO_FIOATTR_SYSTEM</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -324,6 +387,398 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define NEO_FILE_DESTINATION_GRAPHICS&#160;&#160;&#160;((void*) 0xFFFF)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8cfde8d1cc1161b8c54b669470c209a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cfde8d1cc1161b8c54b669470c209a2">&#9670;&nbsp;</a></span>NEO_FIOATTR_ARCHIVE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOATTR_ARCHIVE&#160;&#160;&#160;0x04</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6567b786e31c0ef66031c834002b146d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6567b786e31c0ef66031c834002b146d">&#9670;&nbsp;</a></span>NEO_FIOATTR_DIR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOATTR_DIR&#160;&#160;&#160;0x01</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44a51f62bd5b27327adfd1efaa3358f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44a51f62bd5b27327adfd1efaa3358f8">&#9670;&nbsp;</a></span>NEO_FIOATTR_HIDDEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOATTR_HIDDEN&#160;&#160;&#160;0x10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac9f0798bc44e65ccdb8ac548d7d6ccfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9f0798bc44e65ccdb8ac548d7d6ccfc">&#9670;&nbsp;</a></span>NEO_FIOATTR_READONLY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOATTR_READONLY&#160;&#160;&#160;0x08</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4dc2f076522a27edbe92340bc89fa3b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dc2f076522a27edbe92340bc89fa3b8">&#9670;&nbsp;</a></span>NEO_FIOATTR_SYSTEM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOATTR_SYSTEM&#160;&#160;&#160;0x02</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f425717ac1d64abe64cb126d53f6622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f425717ac1d64abe64cb126d53f6622">&#9670;&nbsp;</a></span>NEO_FIOERROR_DENIED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_DENIED&#160;&#160;&#160;0x21</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d3b9705d04204e8cf86aadca331d0db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d3b9705d04204e8cf86aadca331d0db">&#9670;&nbsp;</a></span>NEO_FIOERROR_DISK_ERR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_DISK_ERR&#160;&#160;&#160;0x31</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8fcb967b2a5dfee84e9cb651caab1ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8fcb967b2a5dfee84e9cb651caab1ea">&#9670;&nbsp;</a></span>NEO_FIOERROR_EOF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_EOF&#160;&#160;&#160;0x02</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac876f46011fa0691a01d9bdacf82c997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac876f46011fa0691a01d9bdacf82c997">&#9670;&nbsp;</a></span>NEO_FIOERROR_EXIST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_EXIST&#160;&#160;&#160;0x22</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a71160137334aa57e03295138e8e918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a71160137334aa57e03295138e8e918">&#9670;&nbsp;</a></span>NEO_FIOERROR_INT_ERR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_INT_ERR&#160;&#160;&#160;0x32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad2ac85caa5ebe0160424e73c3554c14b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2ac85caa5ebe0160424e73c3554c14b">&#9670;&nbsp;</a></span>NEO_FIOERROR_INVALID_DRIVE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_INVALID_DRIVE&#160;&#160;&#160;0x13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeec24b124ec39abfd20233b9b53099ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeec24b124ec39abfd20233b9b53099ef">&#9670;&nbsp;</a></span>NEO_FIOERROR_INVALID_NAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_INVALID_NAME&#160;&#160;&#160;0x14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2ef3d444d1ac118a6af9ffa862295752"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ef3d444d1ac118a6af9ffa862295752">&#9670;&nbsp;</a></span>NEO_FIOERROR_INVALID_OBJECT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_INVALID_OBJECT&#160;&#160;&#160;0x23</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa46560a9d7c46a49a1a5dab562d5a012"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa46560a9d7c46a49a1a5dab562d5a012">&#9670;&nbsp;</a></span>NEO_FIOERROR_INVALID_PARAMETER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_INVALID_PARAMETER&#160;&#160;&#160;0x15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20b2ea82df7229a3eccb86d78660345a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20b2ea82df7229a3eccb86d78660345a">&#9670;&nbsp;</a></span>NEO_FIOERROR_LOCKED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_LOCKED&#160;&#160;&#160;0x25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a099c87dffff3de025eef5e6760769dce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a099c87dffff3de025eef5e6760769dce">&#9670;&nbsp;</a></span>NEO_FIOERROR_MKFS_ABORTED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_MKFS_ABORTED&#160;&#160;&#160;0x41</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a84747be58e49e6bb994fd9e3ea121d0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84747be58e49e6bb994fd9e3ea121d0e">&#9670;&nbsp;</a></span>NEO_FIOERROR_NO_FILE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_NO_FILE&#160;&#160;&#160;0x11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeedc975cccfb9cecf41e76d6c1ce3157"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeedc975cccfb9cecf41e76d6c1ce3157">&#9670;&nbsp;</a></span>NEO_FIOERROR_NO_FILESYSTEM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_NO_FILESYSTEM&#160;&#160;&#160;0x35</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab7f5f4e236092417687265c454e628e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7f5f4e236092417687265c454e628e0">&#9670;&nbsp;</a></span>NEO_FIOERROR_NO_PATH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_NO_PATH&#160;&#160;&#160;0x12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6ce37b8cffdac2bd4919d56a78ca31f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6ce37b8cffdac2bd4919d56a78ca31f">&#9670;&nbsp;</a></span>NEO_FIOERROR_NOT_ENABLED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_NOT_ENABLED&#160;&#160;&#160;0x34</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d44650b64d813a5803e41ff0ad97cb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d44650b64d813a5803e41ff0ad97cb5">&#9670;&nbsp;</a></span>NEO_FIOERROR_NOT_ENOUGH_CORE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_NOT_ENOUGH_CORE&#160;&#160;&#160;0x43</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a881441e79153da4d03e147d2fa33e588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a881441e79153da4d03e147d2fa33e588">&#9670;&nbsp;</a></span>NEO_FIOERROR_NOT_READY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_NOT_READY&#160;&#160;&#160;0x33</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e5c1b9cac400aaf56a74fa7be704110"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e5c1b9cac400aaf56a74fa7be704110">&#9670;&nbsp;</a></span>NEO_FIOERROR_OK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_OK&#160;&#160;&#160;0x00</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a114727d11c212f2e6ba6ccf83bc1bf0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a114727d11c212f2e6ba6ccf83bc1bf0d">&#9670;&nbsp;</a></span>NEO_FIOERROR_TIMEOUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_TIMEOUT&#160;&#160;&#160;0x42</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20a34f44883be5d4ae2baff20ce785e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a34f44883be5d4ae2baff20ce785e8">&#9670;&nbsp;</a></span>NEO_FIOERROR_TOO_MANY_OPEN_FILES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_TOO_MANY_OPEN_FILES&#160;&#160;&#160;0x44</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5117d0861e88909d8e52ac7be329003"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5117d0861e88909d8e52ac7be329003">&#9670;&nbsp;</a></span>NEO_FIOERROR_UNIMPLEMENTED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_UNIMPLEMENTED&#160;&#160;&#160;0x03</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab8647c7fc835f4b91dc94b52b0581754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8647c7fc835f4b91dc94b52b0581754">&#9670;&nbsp;</a></span>NEO_FIOERROR_UNKNOWN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_UNKNOWN&#160;&#160;&#160;0x01</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af08b657c0e1f818fa4bcad3e20650169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af08b657c0e1f818fa4bcad3e20650169">&#9670;&nbsp;</a></span>NEO_FIOERROR_WRITE_PROTECTED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEO_FIOERROR_WRITE_PROTECTED&#160;&#160;&#160;0x24</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -454,7 +909,7 @@ Functions</h2></td></tr>
 <p>Close a file channel. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID</td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID</td></tr>
   </table>
   </dd>
 </dl>
@@ -613,6 +1068,70 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>Check errors with </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="neo6502_2api_2neo_2system_8h.html#a4cdc6e58366b549b6a0f295b91dc500d" title="Return the error code, if any.">neo_api_error</a> </dd></dl>
+
+</div>
+</div>
+<a id="a2251067cfaddfab9d225c212de3e3d0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2251067cfaddfab9d225c212de3e3d0b">&#9670;&nbsp;</a></span>neo_file_eof()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neo_file_eof </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if file is at end of file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if file is at end of file. </dd></dl>
+
+</div>
+</div>
+<a id="aa0dd4ecdf27057dfefb0e7277881c336"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0dd4ecdf27057dfefb0e7277881c336">&#9670;&nbsp;</a></span>neo_file_get_cwd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neo_file_get_cwd </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve the current working directory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Buffer to write the current working directory to. </td></tr>
+    <tr><td class="paramname">length</td><td>Length of buffer, in bytes. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -855,7 +1374,7 @@ Functions</h2></td></tr>
 <p>Open a file channel, using a C string for the filename. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID </td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
     <tr><td class="paramname">filename</td><td>Filename (C string) </td></tr>
     <tr><td class="paramname">mode</td><td>Mode </td></tr>
   </table>
@@ -901,7 +1420,7 @@ Functions</h2></td></tr>
 <p>Open a file channel, using a Pascal string for the filename. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID </td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
     <tr><td class="paramname">filename</td><td>Filename (Pascal string) </td></tr>
     <tr><td class="paramname">mode</td><td>Mode </td></tr>
   </table>
@@ -1002,7 +1521,7 @@ Functions</h2></td></tr>
 <p>To read into graphics memory, use </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="file_8h.html#ad1a52a7ed47886f94a78178ac9e56b47">NEO_FILE_DESTINATION_GRAPHICS</a> .</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID </td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
     <tr><td class="paramname">dest</td><td>Destination </td></tr>
     <tr><td class="paramname">len</td><td>Length, in bytes </td></tr>
   </table>
@@ -1194,7 +1713,7 @@ Functions</h2></td></tr>
 <p>Seek a file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID </td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
     <tr><td class="paramname">pos</td><td>New file position</td></tr>
   </table>
   </dd>
@@ -1308,7 +1827,7 @@ Functions</h2></td></tr>
 <p>Set the file's size. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID </td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
     <tr><td class="paramname">size</td><td>New file size, in bytes</td></tr>
   </table>
   </dd>
@@ -1336,7 +1855,7 @@ Functions</h2></td></tr>
 <p>Get the file's size, in bytes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID </td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
   </table>
   </dd>
 </dl>
@@ -1530,7 +2049,7 @@ Functions</h2></td></tr>
 <p>Tell a file's position. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID </td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
   </table>
   </dd>
 </dl>
@@ -1574,7 +2093,7 @@ Functions</h2></td></tr>
 <p>Write bytes to an open file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>Channel ID </td></tr>
+    <tr><td class="paramname">channel</td><td>File channel ID </td></tr>
     <tr><td class="paramname">src</td><td>Source </td></tr>
     <tr><td class="paramname">len</td><td>Length, in bytes </td></tr>
   </table>

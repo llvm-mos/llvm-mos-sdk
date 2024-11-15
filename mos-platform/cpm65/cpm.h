@@ -60,7 +60,7 @@ typedef struct __attribute__((packed)) {
   uint16_t drm;  /* maximum directory entry number */
   uint8_t al[2]; /* directory allocation bitmap */
   uint16_t cks;  /* checksum vector size */
-  uint16_t off;  /* number of reserved tracks */
+  uint16_t off;  /* number of reserved sectors */
 } DPB;
 
 typedef struct __attribute__((packed)) {
@@ -98,13 +98,18 @@ extern uint8_t cpm_cmdlinelen;
 extern char cpm_cmdline[0x7f];
 extern uint8_t cpm_errno;
 
+enum {
+  CONIO_READ_POLLING = 0xff00,
+  CONIO_READ_BLOCKING = 0xfd00
+};
+
 /*  0 */ extern __attribute__((leaf)) void _Noreturn cpm_warmboot(void);
 /*  1 */ extern __attribute__((leaf)) uint8_t cpm_conin(void);
 /*  2 */ extern __attribute__((leaf)) void cpm_conout(uint8_t b);
 /*  3 */ extern __attribute__((leaf)) uint8_t cpm_auxin(void);
 /*  4 */ extern __attribute__((leaf)) void cpm_auxout(uint8_t b);
 /*  5 */ extern __attribute__((leaf)) void cpm_lstout(uint8_t b);
-/*  6 */ extern __attribute__((leaf)) uint8_t cpm_conio(uint8_t b);
+/*  6 */ extern __attribute__((leaf)) uint8_t cpm_conio(uint16_t b);
 /*  7 */ extern __attribute__((leaf)) uint8_t cpm_get_iobyte(void);
 /*  8 */ extern __attribute__((leaf)) void cpm_set_iobyte(uint8_t iob);
 /*  9 */ extern __attribute__((leaf)) void cpm_printstring_i(uint16_t s);

@@ -5,6 +5,7 @@
 //
 // Based on https://github.com/paulscottrobson/neo6502-firmware/blob/main/examples
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #ifndef _NEO6502_H
@@ -37,25 +38,31 @@ struct __ControlPort {
 #define API_FN_SERIAL_STATUS 0x05
 #define API_FN_LOCALE        0x06
 #define API_FN_RESET         0x07
+#define API_FN_MOS           0x08
+#define API_FN_PUTC_DEBUG    0x0A
+#define API_FN_VERSION       0x0B
 
 // Console functions (Group 2)
-#define API_GROUP_CONSOLE     0x02
-#define API_FN_READ_CHAR      0x01
-#define API_FN_CONSOLE_STATUS 0x02
-#define API_FN_READ_LINE      0x03
-#define API_FN_DEFINE_HOTKEY  0x04
-#define API_FN_DEFINE_CHAR    0x05
-#define API_FN_WRITE_CHAR     0x06
-#define API_FN_SET_CURSOR_POS 0x07
-#define API_FN_LIST_HOTKEYS   0x08
-#define API_FN_SCREEN_SIZE    0x09
-#define API_FN_INSERT_LINE    0x0A
-#define API_FN_DELETE_LINE    0x0B
-#define API_FN_CLEAR_SCREEN   0x0C
-#define API_FN_CURSOR_POS     0x0D
-#define API_FN_CLEAR_REGIION  0x0E
-#define API_FN_SET_TEXT_COLOR 0x0F
-#define API_FN_CURSOR_INVERSE 0x10
+#define API_GROUP_CONSOLE            0x02
+#define API_FN_READ_CHAR             0x01
+#define API_FN_CONSOLE_STATUS        0x02
+#define API_FN_READ_LINE             0x03
+#define API_FN_DEFINE_HOTKEY         0x04
+#define API_FN_DEFINE_CHAR           0x05
+#define API_FN_WRITE_CHAR            0x06
+#define API_FN_SET_CURSOR_POS        0x07
+#define API_FN_LIST_HOTKEYS          0x08
+#define API_FN_SCREEN_SIZE           0x09
+#define API_FN_INSERT_LINE           0x0A
+#define API_FN_DELETE_LINE           0x0B
+#define API_FN_CLEAR_SCREEN          0x0C
+#define API_FN_CURSOR_POS            0x0D
+#define API_FN_CLEAR_REGIION         0x0E
+#define API_FN_SET_TEXT_COLOR        0x0F
+#define API_FN_CURSOR_INVERSE        0x10
+#define API_FN_CONSOLE_TAB           0x11
+#define API_FN_GET_TEXT_COLOR        0x12
+#define API_FN_SET_CURSOR_VISIBILITY 0x13
 
 // Console results (Group 2 Function 2)
 #define API_QUEUE_EMPTY 0xFF
@@ -83,36 +90,42 @@ struct __ControlPort {
 #define API_FN_DIR_CLOSE      0x13
 #define API_FN_FILE_COPY      0x14
 #define API_FN_FILE_SET_ATTR  0x15
+#define API_FN_FILE_CHECK_EOF 0x16
+#define API_FN_GET_CWD        0x17
 #define API_FN_LIST_FILTERED  0x20
 
 // File I/O parameters (Group 3 Function 2)
 #define API_FILE_TO_SCREEN 0xFFFF
 
 // Mathematics functions (Group 4)
-#define API_GROUP_MATH    0x04
-#define API_FN_ADD        0x00
-#define API_FN_SUB        0x01
-#define API_FN_MUL        0x02
-#define API_FN_DIV_DEC    0x03
-#define API_FN_DIV_INT    0x04
-#define API_FN_MOD        0x05
-#define API_FN_COMP       0x06
-#define API_FN_NEG        0x10
-#define API_FN_FLOOR      0x11
-#define API_FN_SQRT       0x12
-#define API_FN_SINE       0x13
-#define API_FN_COS        0x14
-#define API_FN_TAN        0x15
-#define API_FN_ATAN       0x16
-#define API_FN_EXP        0x17
-#define API_FN_LOG        0x18
-#define API_FN_ABS        0x19
-#define API_FN_SIGN       0x1A
-#define API_FN_RND_DEC    0x1B
-#define API_FN_RND_INT    0x1C
-#define API_FN_INT_TO_DEC 0x20
-#define API_FN_STR_TO_NUM 0x21
-#define API_FN_NUM_TO_STR 0x22
+#define API_GROUP_MATH          0x04
+#define API_FN_ADD              0x00
+#define API_FN_SUB              0x01
+#define API_FN_MUL              0x02
+#define API_FN_DIV_DEC          0x03
+#define API_FN_DIV_INT          0x04
+#define API_FN_MOD              0x05
+#define API_FN_COMP             0x06
+#define API_FN_POW              0x07
+#define API_FN_DISTANCE         0x08
+#define API_FN_ATAN2            0x09
+#define API_FN_NEG              0x10
+#define API_FN_FLOOR            0x11
+#define API_FN_SQRT             0x12
+#define API_FN_SINE             0x13
+#define API_FN_COS              0x14
+#define API_FN_TAN              0x15
+#define API_FN_ATAN             0x16
+#define API_FN_EXP              0x17
+#define API_FN_LOG              0x18
+#define API_FN_ABS              0x19
+#define API_FN_SIGN             0x1A
+#define API_FN_RND_DEC          0x1B
+#define API_FN_RND_INT          0x1C
+#define API_FN_INT_TO_DEC       0x20
+#define API_FN_STR_TO_NUM       0x21
+#define API_FN_NUM_TO_STR       0x22
+#define API_FN_SET_DEG_RAD_MODE 0x23
 
 // Graphics functions (Group 5)
 #define API_GROUP_GRAPHICS     0x05
@@ -130,6 +143,8 @@ struct __ControlPort {
 #define API_FN_SET_TILEMAP     0x23
 #define API_FN_READ_SPRITE_PXL 0x24
 #define API_FN_FRAME_COUNT     0x25
+#define API_FN_GET_PALETTE     0x26
+#define API_FN_WRITE_PIXEL     0x27
 #define API_FN_SET_COLOR       0x40
 #define API_FN_SET_SOLID       0x41
 #define API_FN_SET_DRAW_SIZE   0x42
@@ -168,8 +183,10 @@ struct __ControlPort {
 #define API_COLLISION_NONE 0x00
 
 // Controller functions (Group 7)
-#define API_GROUP_CONTROLLER   0x07
-#define API_FN_READ_CONTROLLER 0x01
+#define API_GROUP_CONTROLLER         0x07
+#define API_FN_READ_CONTROLLER       0x01
+#define API_FN_READ_CONTROLLER_COUNT 0x02
+#define API_FN_READ_CONTROLLER2      0x03
 
 // Controller results (Group 7, Function 1)
 #define API_CONTROLLER_LEFT  0x01
@@ -180,13 +197,15 @@ struct __ControlPort {
 #define API_CONTROLLER_BTNB  0x20
 
 // Sound functions (Group 8)
-#define API_GROUP_SOUND      0x08
-#define API_FN_RESET_SOUND   0x01
-#define API_FN_RESET_CHANNEL 0x02
-#define API_FN_BEEP          0x03
-#define API_FN_QUEUE_SOUND   0x04
-#define API_FN_PLAY_SOUND    0x05
-#define API_FN_SOUND_STATUS  0x06
+#define API_GROUP_SOUND          0x08
+#define API_FN_RESET_SOUND       0x01
+#define API_FN_RESET_CHANNEL     0x02
+#define API_FN_BEEP              0x03
+#define API_FN_QUEUE_SOUND       0x04
+#define API_FN_PLAY_SOUND        0x05
+#define API_FN_SOUND_STATUS      0x06
+#define API_FN_QUEUE_SOUND_EX    0x07
+#define API_FN_GET_CHANNEL_COUNT 0x08
 
 // Sound parameters (Group 8, Functions 2,4,5)
 #define API_SOUND_CH_00 0x00
@@ -413,6 +432,7 @@ struct __ControlPort {
 #define API_FN_TURTLE_MOVE 0x03
 #define API_FN_TURTLE_HIDE 0x04
 #define API_FN_TURTLE_HOME 0x05
+#define API_FN_TURTLE_SHOW 0x06
 
 // Turtle Graphics parameters (Group 9, Function 2)
 #define API_TURTLE_LEFT  270
@@ -424,15 +444,36 @@ struct __ControlPort {
 #define API_PEN_DOWN 0x01
 
 // UExt functions (Group 10)
-#define API_GROUP_UEXT      0x09
-#define API_FN_UEXT_INIT    0x01
-#define API_FN_GPIO_WRITE   0x02
-#define API_FN_GPIO_READ    0x03
-#define API_FN_SET_PORT_DIR 0x04
-#define API_FN_I2C_WRITE    0x05
-#define API_FN_I2C_READ     0x06
-#define API_FN_ANALOG_READ  0x07
-#define API_FN_I2C_STATUS   0x08
+#define API_GROUP_UEXT          0x0A
+#define API_FN_UEXT_INIT        0x01
+#define API_FN_GPIO_WRITE       0x02
+#define API_FN_GPIO_READ        0x03
+#define API_FN_SET_PORT_DIR     0x04
+#define API_FN_I2C_WRITE        0x05
+#define API_FN_I2C_READ         0x06
+#define API_FN_ANALOG_READ      0x07
+#define API_FN_I2C_STATUS       0x08
+#define API_FN_I2C_READ_BLOCK   0x09
+#define API_FN_I2C_WRITE_BLOCK  0x0A
+#define API_FN_SPI_READ_BLOCK   0x0B
+#define API_FN_SPI_WRITE_BLOCK  0x0C
+#define API_FN_UART_READ_BLOCK  0x0D
+#define API_FN_UART_WRITE_BLOCK 0x0E
+#define API_FN_UART_SET_CONFIG  0x0F
+#define API_FN_UART_WRITE       0x10
+#define API_FN_UART_READ        0x11
+#define API_FN_UART_AVAILABLE   0x12
+
+// TODO: Mouse functions (Group 11)
+#define API_GROUP_MOUSE 0x0B
+
+// TODO: Blitter functions (Group 12)
+#define API_GROUP_BLITTER 0x0C
+
+// Editor functions (Group 13)
+#define API_GROUP_EDITOR      0x0D
+#define API_FN_EDITOR_INIT    0x01
+#define API_FN_EDITOR_REENTER 0x02
 
 // Colors
 #define COLOR_BLACK       0x80

@@ -15,9 +15,19 @@ extern "C" {
 #endif
 
 /**
- * @brief Read the default controller's status.'
+ * @brief Read the default controller's status.
  */
-uint8_t neo_controller_read(void);
+uint8_t neo_controller_read_default(void);
+
+/**
+ * @brief Read the connected controller count.
+ */
+uint8_t neo_controller_count(void);
+
+/**
+ * @brief Read the specified controller's status.
+ */
+uint32_t neo_controller_read(uint8_t index);
 
 #ifdef __cplusplus
 }

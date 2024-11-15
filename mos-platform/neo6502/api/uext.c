@@ -58,26 +58,62 @@ void neo_uext_i2c_block_read(uint8_t device, void *dest, uint16_t len) {
     ControlPort.params[0] = device;
     *((volatile uint16_t*) (ControlPort.params + 1)) = (uint16_t) dest;
     *((volatile uint16_t*) (ControlPort.params + 3)) = len;
-    KSendMessage(API_GROUP_UEXT, 9);
+    KSendMessage(API_GROUP_UEXT, API_FN_I2C_READ_BLOCK);
 }
 
 void neo_uext_i2c_block_write(uint8_t device, const void *src, uint16_t len) {
     ControlPort.params[0] = device;
     *((volatile uint16_t*) (ControlPort.params + 1)) = (uint16_t) src;
     *((volatile uint16_t*) (ControlPort.params + 3)) = len;
-    KSendMessage(API_GROUP_UEXT, 10);
+    KSendMessage(API_GROUP_UEXT, API_FN_I2C_WRITE_BLOCK);
 }
 
 void neo_uext_spi_block_read(uint8_t device, void *dest, uint16_t len) {
     ControlPort.params[0] = device;
     *((volatile uint16_t*) (ControlPort.params + 1)) = (uint16_t) dest;
     *((volatile uint16_t*) (ControlPort.params + 3)) = len;
-    KSendMessage(API_GROUP_UEXT, 11);
+    KSendMessage(API_GROUP_UEXT, API_FN_SPI_READ_BLOCK);
 }
 
 void neo_uext_spi_block_write(uint8_t device, const void *src, uint16_t len) {
     ControlPort.params[0] = device;
     *((volatile uint16_t*) (ControlPort.params + 1)) = (uint16_t) src;
     *((volatile uint16_t*) (ControlPort.params + 3)) = len;
-    KSendMessage(API_GROUP_UEXT, 12);
+    KSendMessage(API_GROUP_UEXT, API_FN_SPI_WRITE_BLOCK);
 }
+
+void neo_uext_uart_block_read(uint8_t device, void *dest, uint16_t len) {
+    ControlPort.params[0] = device;
+    *((volatile uint16_t*) (ControlPort.params + 1)) = (uint16_t) dest;
+    *((volatile uint16_t*) (ControlPort.params + 3)) = len;
+    KSendMessage(API_GROUP_UEXT, API_FN_UART_READ_BLOCK);
+}
+
+void neo_uext_uart_block_write(uint8_t device, const void *src, uint16_t len) {
+    ControlPort.params[0] = device;
+    *((volatile uint16_t*) (ControlPort.params + 1)) = (uint16_t) src;
+    *((volatile uint16_t*) (ControlPort.params + 3)) = len;
+    KSendMessage(API_GROUP_UEXT, API_FN_UART_WRITE_BLOCK);
+}
+
+void neo_uext_uart_configure(uint32_t baudrate, uint8_t protocol) {
+    *((volatile uint32_t*) ControlPort.params) = baudrate;
+    ControlPort.params[4] = protocol;
+    KSendMessage(API_GROUP_UEXT, API_FN_UART_SET_CONFIG);
+}
+
+void neo_uext_uart_write(uint8_t value) {
+    ControlPort.params[0] = value;
+    KSendMessage(API_GROUP_UEXT, API_FN_UART_WRITE);
+}
+
+uint8_t neo_uext_uart_read(void) {
+    KSendMessageSync(API_GROUP_UEXT, API_FN_UART_READ);
+    return ControlPort.params[0];
+}
+
+bool neo_uext_uart_available(void) {
+    KSendMessageSync(API_GROUP_UEXT, API_FN_UART_AVAILABLE);
+    return ControlPort.params[0] != 0;
+}
+

@@ -130,6 +130,19 @@ void neo_console_clear_region(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
  */
 void neo_console_set_text_color(uint8_t fg, uint8_t bg);
 
+/**
+ * @brief Fetch the text color.
+ *
+ * @param fg Foreground color.
+ * @param bg Background color.
+ */
+void neo_console_get_text_color(uint8_t *fg, uint8_t *bg);
+
+/**
+ * @brief Set the cursor visibility.
+ */
+void neo_console_set_cursor_visibility(uint8_t value);
+
 #ifdef __cplusplus
 }
 #endif

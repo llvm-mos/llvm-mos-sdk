@@ -30,3 +30,7 @@ void neo_turtle_hide(void) {
 void neo_turtle_home(void) {
     KSendMessage(API_GROUP_TURTLE, API_FN_TURTLE_HOME);
 }
+
+void neo_turtle_show(void) {
+    KSendMessage(API_GROUP_TURTLE, API_FN_TURTLE_SHOW);
+}

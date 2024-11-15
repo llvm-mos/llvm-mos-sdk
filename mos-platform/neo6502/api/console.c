@@ -92,3 +92,14 @@ void neo_console_set_text_color(uint8_t fg, uint8_t bg) {
     ControlPort.params[1] = bg;
     KSendMessage(API_GROUP_CONSOLE, API_FN_SET_TEXT_COLOR);
 }
+
+void neo_console_get_text_color(uint8_t *fg, uint8_t *bg) {
+    KSendMessageSync(API_GROUP_CONSOLE, API_FN_GET_TEXT_COLOR);
+    if (fg) *fg = ControlPort.params[0];
+    if (bg) *bg = ControlPort.params[1];
+}
+
+void neo_console_set_cursor_visibility(uint8_t value) {
+    ControlPort.params[0] = value;
+    KSendMessage(API_GROUP_CONSOLE, API_FN_SET_CURSOR_VISIBILITY);
+}

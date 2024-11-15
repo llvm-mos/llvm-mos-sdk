@@ -29,11 +29,42 @@ typedef struct neo_file_stat {
     uint8_t attr;
 } neo_file_stat_t;
 
-#define NEO_FILE_ATTR_DIRECTORY 0x01
-#define NEO_FILE_ATTR_SYSTEM    0x02
-#define NEO_FILE_ATTR_ARCHIVE   0x04
-#define NEO_FILE_ATTR_READ_ONLY 0x08
-#define NEO_FILE_ATTR_HIDDEN    0x10
+#define NEO_FIOATTR_DIR      0x01
+#define NEO_FIOATTR_SYSTEM   0x02
+#define NEO_FIOATTR_ARCHIVE  0x04
+#define NEO_FIOATTR_READONLY 0x08
+#define NEO_FIOATTR_HIDDEN   0x10
+
+#define NEO_FIOERROR_OK                  0x00
+#define NEO_FIOERROR_UNKNOWN             0x01
+#define NEO_FIOERROR_EOF                 0x02
+#define NEO_FIOERROR_UNIMPLEMENTED       0x03
+#define NEO_FIOERROR_NO_FILE             0x11
+#define NEO_FIOERROR_NO_PATH             0x12
+#define NEO_FIOERROR_INVALID_DRIVE       0x13
+#define NEO_FIOERROR_INVALID_NAME        0x14
+#define NEO_FIOERROR_INVALID_PARAMETER   0x15
+#define NEO_FIOERROR_DENIED              0x21
+#define NEO_FIOERROR_EXIST               0x22
+#define NEO_FIOERROR_INVALID_OBJECT      0x23
+#define NEO_FIOERROR_WRITE_PROTECTED     0x24
+#define NEO_FIOERROR_LOCKED              0x25
+#define NEO_FIOERROR_DISK_ERR            0x31
+#define NEO_FIOERROR_INT_ERR             0x32
+#define NEO_FIOERROR_NOT_READY           0x33
+#define NEO_FIOERROR_NOT_ENABLED         0x34
+#define NEO_FIOERROR_NO_FILESYSTEM       0x35
+#define NEO_FIOERROR_MKFS_ABORTED        0x41
+#define NEO_FIOERROR_TIMEOUT             0x42
+#define NEO_FIOERROR_NOT_ENOUGH_CORE     0x43
+#define NEO_FIOERROR_TOO_MANY_OPEN_FILES 0x44
+
+// Legacy synonyms.
+#define NEO_FILE_ATTR_DIRECTORY NEO_FIOATTR_DIR
+#define NEO_FILE_ATTR_SYSTEM    NEO_FIOATTR_SYSTEM
+#define NEO_FILE_ATTR_ARCHIVE   NEO_FIOATTR_ARCHIVE
+#define NEO_FILE_ATTR_READ_ONLY NEO_FIOATTR_READONLY
+#define NEO_FILE_ATTR_HIDDEN    NEO_FIOATTR_HIDDEN
 
 /**
  * @brief Display the listing of files in the current directory.
@@ -89,7 +120,7 @@ void neo_file_store(const char *filename, const void *src, uint16_t len);
 /**
  * @brief Open a file channel, using a Pascal string for the filename.
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  * @param filename Filename (Pascal string)
  * @param mode Mode @see neo_file_mode_t
  *
@@ -100,7 +131,7 @@ void neo_file_open_p(uint8_t channel, const neo_pstring_t *filename, uint8_t mod
 /**
  * @brief Open a file channel, using a C string for the filename.
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  * @param filename Filename (C string)
  * @param mode Mode @see neo_file_mode_t
  *
@@ -111,7 +142,7 @@ void neo_file_open(uint8_t channel, const char *filename, uint8_t mode);
 /**
  * @brief Close a file channel.
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  *
  * Check errors with @see neo_api_error
  */
@@ -120,7 +151,7 @@ void neo_file_close(uint8_t channel);
 /**
  * @brief Seek a file.
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  * @param pos New file position
  *
  * Check errors with @see neo_api_error
@@ -130,7 +161,7 @@ void neo_file_seek(uint8_t channel, uint32_t pos);
 /**
  * @brief Tell a file's position.
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  * @return Current file position
  *
  * Check errors with @see neo_api_error
@@ -142,7 +173,7 @@ uint32_t neo_file_tell(uint8_t channel);
  *
  * To read into graphics memory, use @see NEO_FILE_DESTINATION_GRAPHICS .
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  * @param dest Destination
  * @param len Length, in bytes
  * @return Amount of data actually read
@@ -154,7 +185,7 @@ uint16_t neo_file_read(uint8_t channel, void *dest, uint16_t len);
 /**
  * @brief Write bytes to an open file.
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  * @param src Source
  * @param len Length, in bytes
  * @return Amount of data actually written
@@ -166,7 +197,7 @@ uint32_t neo_file_write(uint8_t channel, const void *src, uint16_t len);
 /**
  * @brief Get the file's size, in bytes.
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  * @return File size, in bytes
  *
  * Check errors with @see neo_api_error
@@ -176,7 +207,7 @@ uint32_t neo_file_size(uint8_t channel);
 /**
  * @brief Set the file's size.
  *
- * @param channel Channel ID
+ * @param channel File channel ID
  * @param size New file size, in bytes
  *
  * Check errors with @see neo_api_error
@@ -367,6 +398,22 @@ void neo_file_set_attr_p(const neo_pstring_t *path, uint8_t attr);
  * Check errors with @see neo_api_error
  */
 void neo_file_set_attr(const char *path, uint8_t attr);
+
+/**
+ * @brief Check if file is at end of file.
+ *
+ * @param channel File channel ID
+ * @return True if file is at end of file.
+ */
+bool neo_file_eof(uint8_t channel);
+
+/**
+ * @brief Retrieve the current working directory.
+ *
+ * @param buffer Buffer to write the current working directory to.
+ * @param length Length of buffer, in bytes.
+ */
+void neo_file_get_cwd(char *buffer, uint8_t length);
 
 /**
  * @brief Display a filtered listing of files in the current directory, using a Pascal string for the needle.

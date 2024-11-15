@@ -47,6 +47,11 @@ void neo_turtle_hide(void);
  */
 void neo_turtle_home(void);
 
+/**
+ * @brief Show the turtle.
+ */
+void neo_turtle_show(void);
+
 #ifdef __cplusplus
 }
 #endif

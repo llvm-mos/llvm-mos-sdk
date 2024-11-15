@@ -115,6 +115,15 @@ void neo_graphics_set_palette(uint8_t idx, uint8_t r, uint8_t g, uint8_t b);
 uint8_t neo_graphics_read_pixel(uint16_t x, uint16_t y);
 
 /**
+ * @brief Write pixel.
+ *
+ * @param x X
+ * @param y Y
+ * @param idx Palette index.
+ */
+void neo_graphics_write_pixel(uint16_t x, uint16_t y, uint8_t idx);
+
+/**
  * @brief Reset palette.
  */
 void neo_graphics_reset_palette(void);

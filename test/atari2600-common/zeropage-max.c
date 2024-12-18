@@ -7,7 +7,7 @@
 
 // 128 bytes PIA RAM
 // 32 bytes for registers
-// 16 bytes for stack (overestimate)
+// 32 bytes for stack (overestimate)
 // 8 bytes for test result
 char buf[128 - 32 - 16 - 8];
 

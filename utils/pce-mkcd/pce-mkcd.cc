@@ -371,6 +371,10 @@ public:
       uint32_t phdr = phdr_offset + (phdr_size * i);
       if (int_at(elf_data, phdr + ELF32_PHDR_TYPE) == PT_LOAD) {
         uint32_t filesz = int_at(elf_data, phdr + ELF32_PHDR_FILESZ);
+        if (!filesz) {
+          // Skip PHDR sections which do not contain any data.
+          continue;
+        }
         uint32_t memsz = int_at(elf_data, phdr + ELF32_PHDR_MEMSZ);
         uint32_t low = int_at(elf_data, phdr + ELF32_PHDR_PADDR);
         uint32_t high = low + memsz - 1;
@@ -436,6 +440,9 @@ public:
       if (int_at(elf_data, phdr + ELF32_PHDR_TYPE) == PT_LOAD) {
         uint32_t offset = int_at(elf_data, phdr + ELF32_PHDR_OFFSET);
         uint32_t filesz = int_at(elf_data, phdr + ELF32_PHDR_FILESZ);
+        if (!filesz) {
+          continue;
+        }
         uint32_t addr = int_at(elf_data, phdr + ELF32_PHDR_PADDR);
         uint32_t file_offset = addr_to_file_offset(addr);
         memcpy(&data[file_offset], &elf_data[offset], filesz);

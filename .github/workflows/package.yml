@@ -14,7 +14,7 @@ on:
   repository_dispatch:
 jobs:
   build-test-tools:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Cache test tools
         id: cache
@@ -63,7 +63,7 @@ jobs:
     needs: build-test-tools
     strategy:
       matrix:
-        os: [windows-2019, macos-latest, ubuntu-20.04]
+        os: [windows-2019, macos-latest, ubuntu-22.04]
     steps:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')

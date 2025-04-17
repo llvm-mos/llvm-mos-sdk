@@ -109,7 +109,7 @@ __attribute__((leaf)) inline void split_mirrored_screen(char screen_id) {
  * <- NMI writes value to the mapper register
  * store mapper register
  */
-asm(".section .nmi.10,\"axR\",@progbits\n"
+asm(".section .nmi.10,\"ax\",@progbits\n"
     "lda _BANK_SHADOW\n"
     "and #$1F\n"
     "ora _CHR_BANK_NMI_NEXT\n"

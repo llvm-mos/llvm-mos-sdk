@@ -7,7 +7,7 @@ static void ppu_wait_vblank(void) {
 }
 
 // Set up the hardware stack and launch early initialization.
-asm(".section .init.50,\"axR\",@progbits\n"
+asm(".section .init.50,\"ax\",@progbits\n"
     "  sei\n"
     "  ldx #$ff\n"
     "  txs\n"
@@ -33,7 +33,7 @@ void __early_init(void) {
   // registers.
 }
 
-asm(".section .init.250,\"axR\",@progbits\n"
+asm(".section .init.250,\"ax\",@progbits\n"
     "  jsr __late_init\n");
 
 void __late_init(void) {

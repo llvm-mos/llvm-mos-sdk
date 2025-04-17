@@ -31,7 +31,7 @@ __attribute__((leaf)) void split_chr_bank(char value) {
  * TODO: Adapt to C when the AXY caller convention is present, allowing the
  * compiler to optimize unused shadow variables out.
  */
-asm(".section .nmi.10,\"axR\",@progbits\n"
+asm(".section .nmi.10,\"ax\",@progbits\n"
 	  "lda _BANK_NEXT\n"
 	  "tay\n"
 	  "sta __rom_poke_table,y\n");

@@ -28,12 +28,12 @@
 
 .zeropage __irq_ptr, __irq_index, __irq_done
 
-.section .init.100,"axR",@progbits
+.section .init.100,"ax",@progbits
 	lda #$40
 	sta APU_PAD2
 	jsr __disable_irq
 
-.section .nmi.100,"axR",@progbits
+.section .nmi.100,"ax",@progbits
 	jsr __bank_nmi
 
 .section .text.bank_nmi,"ax",@progbits

@@ -9,7 +9,7 @@
 ; Initialize the soft stack by dynamically figuring out the available memory.
 
 .global __do_init_stack
-.section .init.100,"axR",@progbits
+.section .init.100,"ax",@progbits
 __do_init_stack:
 	rep #$30 ; 16-bit index, 16-bit accumulator
 

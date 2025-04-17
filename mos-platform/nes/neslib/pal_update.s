@@ -7,13 +7,13 @@
 
 .include "nes.inc"
 
-.section .init.265,"axR",@progbits
+.section .init.265,"ax",@progbits
 .globl pal_update_init
 pal_update_init:
 	jsr pal_clear
 
 
-.section .nmi.060,"axR",@progbits
+.section .nmi.060,"ax",@progbits
 .globl pal_update_nmi
 pal_update_nmi:
 	lda PAL_UPDATE		;update palette if needed

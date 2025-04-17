@@ -7,13 +7,13 @@
 
 .include "nes.inc"
 
-.section .init.270,"axR",@progbits
+.section .init.270,"ax",@progbits
 .globl oam_update_init
 oam_update_init:
 	jsr oam_clear
 
 
-.section .nmi.055,"axR",@progbits
+.section .nmi.055,"ax",@progbits
 .globl oam_update_nmi
 oam_update_nmi:
         lda #>OAM_BUF

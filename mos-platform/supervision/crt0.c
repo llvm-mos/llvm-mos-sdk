@@ -1,7 +1,7 @@
 #include "supervision.h"
 
 // Set up the hardware stack and launch early initialization.
-asm(".section .init.50,\"axR\",@progbits\n"
+asm(".section .init.50,\"ax\",@progbits\n"
     "  sei\n"
     "  ldx #$ff\n"
     "  txs\n"

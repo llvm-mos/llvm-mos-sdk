@@ -8,7 +8,7 @@
 
 ; Initialize the system from the reset vector.
 .global __do_reset
-.section .init.50,"axR",@progbits
+.section .init.50,"ax",@progbits
 __do_reset:
 ; Fix the D and I flags.
   cld

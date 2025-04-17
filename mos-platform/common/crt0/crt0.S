@@ -1,7 +1,7 @@
-.section .call_main,"axR",@progbits
+.section .call_main,"ax",@progbits
   jsr main
 
-.section .fini_rts,"axR",@progbits
+.section .fini_rts,"ax",@progbits
   rts
 
 ; Make sure to search libraries for the after-main code to include.

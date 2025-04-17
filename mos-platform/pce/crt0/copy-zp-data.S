@@ -9,6 +9,6 @@
 ; TODO: This would be best to emit in llvm-mos itself.
 
 .global __do_copy_zp_data
-.section .init.200,"axR",@progbits
+.section .init.200,"ax",@progbits
 __do_copy_zp_data:
 	tii __zp_data_start, __zp_data_load_start, #__zp_data_size

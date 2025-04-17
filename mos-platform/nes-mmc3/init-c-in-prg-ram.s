@@ -4,6 +4,6 @@
 ; information.
 
 ; Set WRAM to read/write
-.section .init.30,"axR",@progbits
+.section .init.30,"ax",@progbits
 lda #$80
 sta $a001

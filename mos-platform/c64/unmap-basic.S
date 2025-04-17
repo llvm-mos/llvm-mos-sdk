@@ -5,7 +5,7 @@
 
 
 ; bank switching needs to complete before any CRT initialization
-.section .init.010,"axR",@progbits
+.section .init.010,"ax",@progbits
         ldx #$2F ; restore default CPU I/O port data directions
         stx 0    ;
         ldx #$3E ; LORAM = 0
@@ -14,7 +14,7 @@
 
 
 ; restore BASIC ROM after all other exit handlers have completed
-.section .fini.990,"axR", @progbits
+.section .fini.990,"ax", @progbits
         ldx #$3F ; LORAM = 1
         stx 1    ; switch in BASIC ROM at $A000-$BFFF
 

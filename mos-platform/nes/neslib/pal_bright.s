@@ -3,7 +3,7 @@
 ; See https://github.com/llvm-mos/llvm-mos-sdk/blob/main/LICENSE for license
 ; information.
 
-.section .init.260,"axR",@progbits
+.section .init.260,"ax",@progbits
 .globl pal_bright_init
 pal_bright_init:
 	lda #4

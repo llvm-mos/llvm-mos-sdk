@@ -118,7 +118,7 @@ __attribute__((leaf)) inline void split_nt_bank(char bank_id) {
  * <- NMI writes value to the mapper register
  * store mapper register
  */
-asm(".section .nmi.10,\"axR\",@progbits\n"
+asm(".section .nmi.10,\"ax\",@progbits\n"
     "lda _BANK_NEXT\n"
     "and #$CF\n"
     "ora _CHR_NMI_BANK_NEXT\n"

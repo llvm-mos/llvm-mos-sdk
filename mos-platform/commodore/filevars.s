@@ -20,7 +20,7 @@ curunit:
         .fill    1
 
 
-.section .init,"axR",@progbits
+.section .init,"ax",@progbits
 initcurunit:
         lda     devnum
         bne     1f

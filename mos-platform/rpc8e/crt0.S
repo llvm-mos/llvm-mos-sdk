@@ -6,7 +6,7 @@
 
 .include "imag.inc"
 
-.section .init.50,"axR",@progbits
+.section .init.50,"ax",@progbits
 ; Clear emulation mode.
 	clc
 	xce

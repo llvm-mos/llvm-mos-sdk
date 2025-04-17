@@ -6,7 +6,7 @@ static RegistrationList atexit_list;
 
 extern "C" {
 
-asm(".section .fini.100,\"axR\",@progbits\n"
+asm(".section .fini.100,\"ax\",@progbits\n"
     "jsr __do_atexit\n");
 
 void __do_atexit() { atexit_list.run_all_exits(); }

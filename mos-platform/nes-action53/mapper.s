@@ -31,7 +31,7 @@
 A53_REG_SELECT	= $5000
 A53_REG_VALUE	= $8000
 
-.section .nmi.150,"axR",@progbits
+.section .nmi.150,"ax",@progbits
 .globl swap_chr_bank_nmi
 swap_chr_bank_nmi:
 	lda #$00
@@ -39,7 +39,7 @@ swap_chr_bank_nmi:
 	lda _CHR_BANK_NEXT
 	sta A53_REG_VALUE
 
-.section .nmi.300,"axR",@progbits
+.section .nmi.300,"ax",@progbits
 .globl restore_prg_bank_nmi
 restore_prg_bank_nmi:
 	lda #$01

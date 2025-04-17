@@ -4,7 +4,7 @@
 // The default character conversion used with the screen requires the screen to
 // be in ISO mode, so establish it before it is used. This is done in assembly
 // to avoid pulling in init_array machinery for small programs.
-asm(".section .init.250,\"axR\",@progbits\n"
+asm(".section .init.250,\"ax\",@progbits\n"
     "shift:\n"
     "  lda #0x0f\n"
     "  jsr __CHROUT\n");

@@ -43,7 +43,7 @@ MMC1_PRG	= $e000
 	sta \addr
 .endmacro
 
-.section .nmi.100,"axR",@progbits
+.section .nmi.100,"ax",@progbits
 	jsr bank_nmi
 
 .section .text.bank_nmi,"ax",@progbits

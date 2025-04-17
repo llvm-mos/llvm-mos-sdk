@@ -42,13 +42,13 @@ asm(R"ASM(
     )ASM");
 
 asm(R"ASM(
-    .section .init.010,"axR",@progbits
+    .section .init.010,"ax",@progbits
     jsr __swap_userzp
 )ASM");
 
 asm(R"ASM(
                  .global __after_main
-                 .section .after_main,"axR",@progbits
+                 .section .after_main,"ax",@progbits
    __after_main: jsr __swap_userzp
                  jmp __EnterDeskTop
 )ASM");

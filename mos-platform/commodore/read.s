@@ -24,7 +24,7 @@
 ;--------------------------------------------------------------------------
 ; initstdin: Open the stdin file descriptors for the keyboard
 
-.section .init,"axR",@progbits
+.section .init,"ax",@progbits
   jsr initstdin
 
 .text

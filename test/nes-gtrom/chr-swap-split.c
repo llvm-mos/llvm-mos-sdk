@@ -5,7 +5,7 @@
 
 volatile char frame_count;
 
-asm(".section .nmi,\"axR\",@progbits\n"
+asm(".section .nmi,\"ax\",@progbits\n"
     "inc frame_count\n");
 
 void ppu_wait_vblank(void) {

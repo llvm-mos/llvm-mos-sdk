@@ -4,7 +4,7 @@ extern char __zp_bss_start[];
 extern void __zp_bss_size;
 
 asm(".global __do_zero_zp_bss\n"
-    ".section .init.200,\"axR\",@progbits\n"
+    ".section .init.200,\"ax\",@progbits\n"
     "__do_zero_zp_bss:\n"
     "  jsr __zero_zp_bss\n");
 

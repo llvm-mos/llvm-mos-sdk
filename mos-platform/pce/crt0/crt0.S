@@ -36,7 +36,7 @@ _early_start:
 ; Jump to the real start routine, now that banks are set up.
 	jmp _start
 
-.section .init.50,"axR",@progbits
+.section .init.50,"ax",@progbits
 ; Disable interrupts (MMIO).
 	lda #$07
 	sta $1402

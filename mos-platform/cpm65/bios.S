@@ -5,7 +5,7 @@
 ; terms of the Apache 2.0 license with the LLVM exceptions. See the LICENSE file
 ; in the project root for the full text.
 
-.section .init.200, "Rax", @progbits
+.section .init.200, "ax", @progbits
 __do_setup_bios:
 	ldy #38
 	jsr BDOS

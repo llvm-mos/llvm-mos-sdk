@@ -112,7 +112,7 @@ ok:     lda     __rc11          ; get fd
 
 ; This must happen after fclosing all stdio files.
 
-.section .fini.200,"axR",@progbits
+.section .fini.200,"ax",@progbits
 closeallfiles:
 
         lda     #MAX_FD_INDEX-1

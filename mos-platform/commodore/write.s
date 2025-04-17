@@ -23,7 +23,7 @@
 ;--------------------------------------------------------------------------
 ; initstdout: Open the stdout and stderr file descriptors for the screen.
 
-.section .init,"axR",@progbits
+.section .init,"ax",@progbits
   jsr initstdout
 
 .text

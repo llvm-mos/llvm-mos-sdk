@@ -19,7 +19,7 @@ curunit:
         .fill    1
 
 
-.section .init,"axR",@progbits
+.section .init,"ax",@progbits
 initcurunit:
         lda     #8              ; Default is disk
         sta     curunit

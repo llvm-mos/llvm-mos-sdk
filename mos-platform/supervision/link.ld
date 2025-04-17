@@ -48,9 +48,9 @@ REGION_ALIAS("c_writeable", ram)
 SECTIONS {
   .text : {
        INCLUDE text-sections.ld
-       *(.nmi_begin)
-       *(SORT_BY_INIT_PRIORITY(.nmi.* .nmi))
-       *(.nmi_end)
+       KEEP(*(.nmi_begin))
+       KEEP(*(SORT_BY_INIT_PRIORITY(.nmi.* .nmi)))
+       KEEP(*(.nmi_end))
   } >c_readonly
   INCLUDE rodata.ld
   INCLUDE data.ld

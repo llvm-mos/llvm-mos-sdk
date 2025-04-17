@@ -20,7 +20,7 @@
 
 ; This must happen after fclosing all stdio files.
 
-.section .fini.200,"axR",@progbits
+.section .fini.200,"ax",@progbits
 closeallfiles:
 
         ldx     #MAX_FDS-1

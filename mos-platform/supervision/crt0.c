@@ -7,7 +7,7 @@ asm(".section .init.50,\"ax\",@progbits\n"
     "  txs\n"
     "  jsr __early_init\n");
 
-void __early_init(void) {
+__attribute__((weak)) void __early_init(void) {
     // Disable NMI, LCD, configure default bank.
     sv_sys_control_set(SV_SYS_BANK(0) |
                        SV_SYS_NMI_DISABLE |

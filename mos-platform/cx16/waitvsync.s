@@ -9,6 +9,7 @@
 ; https://github.com/cc65/cc65/blob/master/libsrc/cx16/waitvsync.s
 ;
 .global waitvsync
+.section .text.waitvsync,"ax",@progbits
 waitvsync:
         jsr     __RDTIM
         sta     __rc2

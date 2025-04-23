@@ -37,6 +37,8 @@
 #ifndef _CX16_H
 #define _CX16_H
 
+#include <stdbool.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -118,29 +120,63 @@ extern "C" {
 #define COLOR_LIGHTBLUE         0x0E
 #define COLOR_GRAY3             0x0F
 
-/* NES controller masks for joy_read() */
+/// NES controller masks for JoyState
+enum : unsigned char {
+  // Masks for JoyState::data0
+  JOY_BTN_B_MASK = 1 << 7,
+  JOY_BTN_Y_MASK = 1 << 6,
+  JOY_SELECT_MASK = 1 << 5,
+  JOY_START_MASK = 1 << 4,
+  JOY_UP_MASK = 1 << 3,
+  JOY_DOWN_MASK = 1 << 2,
+  JOY_LEFT_MASK = 1 << 1,
+  JOY_RIGHT_MASK = 1 << 0,
+  // Masks for JoyState::data1
+  JOY_BTN_A_MASK = 1 << 7,
+  JOY_BTN_X_MASK = 1 << 6,
+  JOY_FIRE_LEFT_MASK = 1 << 5,
+  JOY_FIRE_RIGHT_MASK = 1 << 4
+};
 
-#define JOY_BTN_1_MASK          0x80
-#define JOY_BTN_2_MASK          0x40
-#define JOY_BTN_3_MASK          0x20
-#define JOY_BTN_4_MASK          0x10
-#define JOY_UP_MASK             0x08
-#define JOY_DOWN_MASK           0x04
-#define JOY_LEFT_MASK           0x02
-#define JOY_RIGHT_MASK          0x01
+/// Joystick selection
+#define JOY_KEYBOARD 0
+#define JOY_SNES_PORT1 1
+#define JOY_SNES_PORT2 2
+#define JOY_SNES_PORT3 3
+#define JOY_SNES_PORT4 4
 
-#define JOY_BTN_A_MASK          JOY_BTN_1_MASK
-#define JOY_BTN_B_MASK          JOY_BTN_2_MASK
-#define JOY_SELECT_MASK         JOY_BTN_3_MASK
-#define JOY_START_MASK          JOY_BTN_4_MASK
+/// Status of SNES joystick populated by cx16_k_joystick_get();
+typedef struct {
+  union {
+    struct {
+      unsigned char data0; //!< Bits: B Y Select Start Up Down Left Right
+      unsigned char data1; //!< Bits: A X FireL  FireR 1  1    1    1
+    };
+    unsigned short data; //!< data0 and data1 combined
+  };
+  bool detached; //!< True if joystick is disconnected
 
-#define JOY_BTN_A(v)            ((v) & JOY_BTN_A_MASK)
-#define JOY_BTN_B(v)            ((v) & JOY_BTN_B_MASK)
-#define JOY_SELECT(v)           ((v) & JOY_SELECT_MASK)
-#define JOY_START(v)            ((v) & JOY_START_MASK)
-
-#define JOY_FIRE2_MASK          JOY_BTN_2_MASK
-#define JOY_FIRE2(v)            ((v) & JOY_FIRE2_MASK)
+#ifdef __cplusplus
+  bool button_a() const { return !(data1 & JOY_BTN_A_MASK); }
+  bool button_b() const { return !(data0 & JOY_BTN_B_MASK); }
+  bool button_x() const { return !(data1 & JOY_BTN_X_MASK); }
+  bool button_y() const { return !(data0 & JOY_BTN_Y_MASK); }
+  bool fire_left() const { return !(data1 & JOY_FIRE_LEFT_MASK); }
+  bool fire_right() const { return !(data1 & JOY_FIRE_RIGHT_MASK); }
+  bool select() const { return !(data0 & JOY_SELECT_MASK); }
+  bool start() const { return !(data0 & JOY_START_MASK); }
+  bool north() const { return !(data0 & JOY_UP_MASK); }
+  bool south() const { return !(data0 & JOY_DOWN_MASK); }
+  bool east() const { return !(data0 & JOY_RIGHT_MASK); }
+  bool west() const { return !(data0 & JOY_LEFT_MASK); }
+  bool north_east() const { return !(data0 & (JOY_UP_MASK | JOY_RIGHT_MASK)); }
+  bool north_west() const { return !(data0 & (JOY_UP_MASK | JOY_LEFT_MASK)); }
+  bool south_east() const {
+    return !(data0 & (JOY_DOWN_MASK | JOY_RIGHT_MASK));
+  }
+  bool south_west() const { return !(data0 & (JOY_DOWN_MASK | JOY_LEFT_MASK)); }
+#endif
+} JoyState;
 
 /* Additional mouse button mask */
 #define MOUSE_BTN_MIDDLE        0x02
@@ -149,7 +185,7 @@ extern "C" {
 ** set_tv() argument codes
 ** NOTE: llvm-mos-sdk added newer 240P modes
 */
-enum {
+enum : unsigned char {
     TV_NONE                     = 0x00,
     TV_VGA,
     TV_NTSC_COLOR,
@@ -182,7 +218,7 @@ enum {
 #define VIDEOMODE_SWAP          (-1)
 
 /* VERA's address increment/decrement numbers */
-enum {
+enum : unsigned char {
     VERA_DEC_0                  = ((0 << 1) | 1) << 3,
     VERA_DEC_1                  = ((1 << 1) | 1) << 3,
     VERA_DEC_2                  = ((2 << 1) | 1) << 3,
@@ -222,6 +258,26 @@ enum {
 #define VERA_IRQ_RASTER         0b00000010
 #define VERA_IRQ_SPR_COLL       0b00000100
 #define VERA_IRQ_AUDIO_LOW      0b00001000
+
+/** ROM bank labels */
+enum : unsigned char {
+  ROM_KERNAL = 0,    //!< KERNAL operating system and drivers
+  ROM_KEYBD = 1,     //!< Keyboard layout tables
+  ROM_CMDRDOS = 2,   //!< The computer-based CMDR-DOS for FAT32 SD cards
+  ROM_FAT32 = 3,     //!< The FAT32 driver itself
+  ROM_BASIC = 4,     //!< BASIC interpreter
+  ROM_MONITOR = 5,   //!< Machine Language Monitor
+  ROM_CHARSET = 6,   //!< PETSCII and ISO character sets (uploaded into VRAM)
+  ROM_DIAG = 7,      //!< Memory diagnostic
+  ROM_GRAPH = 8,     //!< Kernal graph and font routines
+  ROM_DEMO = 9,      //!< Demo routines
+  ROM_AUDIO = 10,    //!< Audio API routines
+  ROM_UTIL = 11,     //!< System Configuration (Date/Time, Display Preferences)
+  ROM_BANNEX = 12,   //!< BASIC Annex (code for some added BASIC functions)
+  ROM_X16EDIT1 = 13, //!< The built-in text editor
+  ROM_X16EDIT2 = 14, //!< The built-in text editor
+  ROM_BASLOAD = 15   //!< A transpiler that converts BASLOAD dialect to BASIC V2
+};
 
 /* Define hardware. */
 
@@ -316,6 +372,10 @@ struct __vera {
         unsigned char   control;
     } spi;                              /* SD card interface */
 };
+#if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L) || (defined(__cplusplus) && __cplusplus >= 201103L)
+static_assert(sizeof(struct __vera) == 32, "struct __vera must be 32 bytes");
+#endif
+
 #define VERA    (*(volatile struct __vera *)0x9F20)
 
 /* Audio chip */
@@ -328,6 +388,22 @@ struct __ym2151 {
 };
 #define YM2151  (*(volatile struct __ym2151 *)0x9F40)
 
+/** VERA Programmable Sound Generator (PSG) layout */
+struct __vera_psg {
+    union {
+        unsigned short freq;
+        struct {
+            unsigned char freq_lo; //!< Frequency word (7:0)
+            unsigned char freq_hi; //!< Frequency word (15:8)
+        };
+    };
+    unsigned char volume;   //!< Left (bit 7); right (bit 6); volume (bit 5:0)
+    unsigned char waveform; //!< Waveform (bit 7:6) and pulse width (bit 5:0)
+};
+#if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L) || (defined(__cplusplus) && __cplusplus >= 201103L)
+static_assert(sizeof(struct __vera_psg) == 4, "struct __vera_psg must be 4 bytes");
+#endif
+
 /* A structure with the x16emu's settings registers */
 struct __emul {
     unsigned char       debug;          /* Boolean: debugging enabled */
@@ -335,13 +411,18 @@ struct __emul {
     unsigned char       keyboard;       /* Boolean: displaying typed keys */
     unsigned char       echo;           /* How to send Kernal output to host */
     unsigned char       save_on_exit;   /* Boolean: save machine state on exit */
-    unsigned char       gif_method;     /* How GIF movie is being recorded */
-    unsigned char const unused1[2];
+    unsigned char       gif_method;     /* Control GIF (0=pause; 1=single; 2=resume) */
+    unsigned char       wav_method;     /* Control WAV (0=pause; 1=record; 2=autostart) */
+    unsigned char       cmd_key_off;    /* Boolean: disable emulator command keys */
     unsigned long const cycle_count;    /* Running total of CPU cycles (8 MHz.) */
     unsigned char const unused2[1];
     unsigned char const keymap;         /* Keyboard layout number */
              char const detect[2];      /* "16" if running on x16emu */
 };
+#if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L) || (defined(__cplusplus) && __cplusplus >= 201103L)
+static_assert(sizeof(struct __emul) == 16, "struct __emul must be 16 bytes");
+#endif
+
 #define EMULATOR        (*(volatile struct __emul *)0x9FB0)
 
 /* An array window into the half Mebibyte or two Mebibytes of banked RAM */
@@ -418,12 +499,12 @@ void cx16_k_fb_init(void) __attribute__((leaf));
 void cx16_k_fb_move_pixels(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int count) __attribute__((leaf));
 void cx16_k_fb_set_8_pixels(unsigned char pattern, unsigned char color) __attribute__((leaf));
 void cx16_k_fb_set_8_pixels_opaque(unsigned char pattern, unsigned char mask, unsigned char color1, unsigned char color2) __attribute__((leaf));
-void cx16_k_fb_set_palette(void *paladdr, unsigned char index, unsigned char count __attribute__((leaf)));
+void cx16_k_fb_set_palette(void *paladdr, unsigned char index, unsigned char count) __attribute__((leaf));
 void cx16_k_graph_clear(void) __attribute__((leaf));
 void cx16_k_graph_draw_image(unsigned int x, unsigned int y, void *imageaddr, unsigned int width, unsigned int height) __attribute__((leaf));
 void cx16_k_graph_draw_line(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) __attribute__((leaf));
 void cx16_k_graph_draw_oval(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned int corner_radius, unsigned char fillflag) __attribute__((leaf));
-void cx16_k_graph_draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned int corner_radius, unsigned char fillflag __attribute__((leaf)));
+void cx16_k_graph_draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned int corner_radius, unsigned char fillflag) __attribute__((leaf));
 long cx16_k_graph_get_char_size(unsigned char c, unsigned char style) __attribute__((leaf)); // if printable returns info (0x00bbwwhh), else negative style byte (0xFF0000ss)
 void cx16_k_graph_init(graph_fb_functions_t *fb_funcs_ptr) __attribute__((leaf));
 void cx16_k_graph_move_rect(unsigned int sx, unsigned int sy, unsigned int tx, unsigned int ty, unsigned int width, unsigned int height) __attribute__((leaf));
@@ -433,10 +514,22 @@ void cx16_k_graph_set_font(void *fontaddr) __attribute__((leaf));
 void cx16_k_graph_set_window(unsigned int x, unsigned int y, unsigned int width, unsigned int height) __attribute__((leaf));
 int cx16_k_i2c_read_byte(unsigned char device, unsigned char offset) __attribute__((leaf)); // returns negative on error
 int cx16_k_i2c_write_byte(unsigned char device, unsigned char offset, unsigned char byte) __attribute__((leaf)); // return negative on error
-long cx16_k_joystick_get(unsigned char sticknum) __attribute__((leaf)); // returns $YYYYXXAA (see docs, result negative if joystick not present)
+
+/**
+ * Get joystick state using KERNAL routine `JOYSTICK_GET`.
+ *
+ * More information: https://github.com/X16Community/x16-docs
+ *
+ * @param joystick_num Keyboard joystick (0) or SNES controllers (1-4).
+ * @returns Struct with current status.
+ */
+JoyState cx16_k_joystick_get(unsigned char joystick_num);
+
 void cx16_k_joystick_scan(void) __attribute__((leaf));
 unsigned char cx16_k_kbdbuf_get_modifiers(void) __attribute__((leaf));
-int cx16_k_kbdbuf_peek(unsigned char *index_ptr) __attribute__((leaf)); // returns negative if empty, if index_ptr non-NULL set contents to queue length
+int cx16_k_kbdbuf_peek(unsigned char *index_ptr)
+    __attribute__((leaf)); // returns negative if empty, if index_ptr non-NULL
+                           // set contents to queue length
 void cx16_k_kbdbuf_put(unsigned char c) __attribute__((leaf));
 const char* cx16_k_keymap_get_id(void) __attribute__((leaf));
 unsigned char cx16_k_keymap_set(const char* identifier) __attribute__((leaf));	// returns 0 on success

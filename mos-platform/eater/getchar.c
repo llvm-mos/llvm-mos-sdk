@@ -1,9 +1,10 @@
-#include <stdio.h>
 #include <chrin.h>
+#include <stdio.h>
 
-int getchar(void) {
-  int c = __chrin();
-  if (c == '\r')
-    c = '\n';
-  return c;
+__attribute__((always_inline, weak)) int __to_ascii(void *ctx,
+                                                    int (*read)(void *ctx)) {
+  int c = read(ctx);
+  return c == '\r' ? '\n' : c;
 }
+
+int __getchar(void) { return __chrin(); }

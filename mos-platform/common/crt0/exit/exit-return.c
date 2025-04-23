@@ -1,5 +1,5 @@
 asm(".global __after_main\n"
-    ".section .after_main,\"axR\",@progbits\n"
+    ".section .after_main,\"ax\",@progbits\n"
     "__after_main:\n"
     "  jmp __exit_return\n");
 

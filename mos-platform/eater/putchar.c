@@ -1,10 +1,11 @@
 #include <stdio.h>
 
-__attribute__((always_inline, weak)) void __char_conv(char c,
-                                                      void (*emit)(char c)) {
+__attribute__((always_inline, weak)) int
+__from_ascii(char c, void *ctx, int (*write)(char c, void *ctx)) {
   if (__builtin_expect(c == '\n', 0))
-    emit('\r');
-  emit(c);
+    if (write('\r', ctx) == EOF)
+      return EOF;
+  return write(c, ctx);
 }
 
 // Implemented in assembly.

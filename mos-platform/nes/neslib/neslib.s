@@ -16,7 +16,7 @@
 .include "neslib.inc"
 .include "ntsc.inc"
 
-.section .init.100,"axR",@progbits
+.section .init.100,"ax",@progbits
 clearRAM:
     lda #0
     tax
@@ -33,7 +33,7 @@ clearRAM:
     bne 1b
 
 
-.section .init.255,"axR",@progbits
+.section .init.255,"ax",@progbits
 clearPalette:
 	lda #$3f
 	sta PPUADDR
@@ -59,7 +59,7 @@ clearVRAM:
 	bne 1b
 
 
-.section .init.400,"axR",@progbits
+.section .init.400,"ax",@progbits
 .globl neslib_final_init
 neslib_final_init:
 	lda #0
@@ -67,7 +67,7 @@ neslib_final_init:
 	sta PPUSCROLL
 
 
-.section .nmi.050,"axR",@progbits
+.section .nmi.050,"ax",@progbits
 .globl neslib_nmi_begin
 neslib_nmi_begin:
 	lda PPUMASK_VAR	;if rendering is disabled, do not access the VRAM at all
@@ -86,7 +86,7 @@ neslib_nmi_begin:
 
 
 
-.section .nmi.075,"axR",@progbits
+.section .nmi.075,"ax",@progbits
 .globl neslib_nmi_end
 neslib_nmi_end:
 	lda #0

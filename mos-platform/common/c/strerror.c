@@ -1,11 +1,33 @@
 #include <string.h>
 
-static const char *errors[] = {"ERANGE", "EDOM", "EILSEQ", "EINVAL", "ENOMEM"};
+#include <errno.h>
 
 __attribute__((weak)) const char *strerror(int n) {
-  if (n > 0) {
-    return errors[((unsigned char)n) - 1];
-  } else {
-    return "";
+#define CASE(NAME)                                                             \
+  case NAME:                                                                   \
+    return #NAME
+
+  switch (n) {
+    CASE(EACCES);
+    CASE(EAGAIN);
+    CASE(EBADF);
+    CASE(EBUSY);
+    CASE(EDOM);
+    CASE(EEXIST);
+    CASE(EILSEQ);
+    CASE(EINTR);
+    CASE(EINVAL);
+    CASE(EIO);
+    CASE(ENODEV);
+    CASE(ENOENT);
+    CASE(ENOEXEC);
+    CASE(ENOMEM);
+    CASE(ENOSPC);
+    CASE(ENOSYS);
+    CASE(EMFILE);
+    CASE(ERANGE);
+    CASE(ESPIPE);
+  default:
+    return "unknown";
   }
 }

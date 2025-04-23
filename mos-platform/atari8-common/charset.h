@@ -51,10 +51,7 @@ template <size_t N> struct AtasciiString {
 
       // Date: 2018 April 20
 
-      // Author: Rebecca Bettencourt <support@kreativekorp.com>
-
-      // UNICODE LICENSE V3
-      // Copyright © 1991-2023 Unicode, Inc.
+      // Original Author: Rebecca Bettencourt <support@kreativekorp.com>
 
     case 0x2665:
       return 0x00; // BLACK HEART SUIT
@@ -356,10 +353,7 @@ template <size_t N> struct AtasciiInternationalString {
 
       // Date: 2018 April 20
 
-      // Author: Rebecca Bettencourt <support@kreativekorp.com>
-
-      // UNICODE LICENSE V3
-      // Copyright © 1991-2023 Unicode, Inc.
+      // Original Author: Rebecca Bettencourt <support@kreativekorp.com>
 
     case 0x00E1:
       return 0x00; // LATIN SMALL LETTER A WITH ACUTE

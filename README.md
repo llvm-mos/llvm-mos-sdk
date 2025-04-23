@@ -22,6 +22,8 @@ The LLVM-MOS compiler toolchain and platform libraries.
     to [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L65)
 	- Compatible with SIC! [128 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L88) to
 	  [512 KiB](https://github.com/atari800/atari800/blob/ATARI800_5_2_0/DOC/cart.txt#L90)
+- [Atari Lynx](https://en.wikipedia.org/wiki/Atari_Lynx)
+  - BLL format ".o" executable file
 - [Ben Eater's Breadboard 6502 Computer](https://eater.net/6502)
 - [Commander X16](https://www.commanderx16.com/)
 - [Commodore 64](https://en.wikipedia.org/wiki/Commodore_64)
@@ -30,6 +32,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - [Commodore VIC-20](https://en.wikipedia.org/wiki/VIC-20)
 - [CP/M-65](https://github.com/davidgiven/cpm65)
 - [Dodo 6502 Game System](https://github.com/peternoyes/dodo)
+- [Commodore GEOS](https://en.wikipedia.org/wiki/GEOS_(8-bit_operating_system))
 - [MEGA65](https://mega65.org/)
 - [NES (Nintendo Entertainment System)](https://en.wikipedia.org/wiki/Nintendo_Entertainment_System)
   - [Action 53](https://www.nesdev.org/wiki/Action_53)
@@ -41,6 +44,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - [MMC1](https://www.nesdev.org/wiki/MMC1)
   - [MMC3](https://www.nesdev.org/wiki/MMC3)
 - [Ohio Scientific Challenger 1P](https://en.wikipedia.org/wiki/Ohio_Scientific#Superboard_II,_Challenger_1P_(1978))
+- [OLIMEX Neo6502](https://www.olimex.com/Products/Retro-Computers/Neo6502/open-source-hardware)
 - [Picocomputer 6502](https://picocomputer.github.io) (RP6502)
 - [PC Engine / TurboGrafx-16](https://en.wikipedia.org/wiki/TurboGrafx-16)
   - [PC Engine CD](https://en.wikipedia.org/wiki/TurboGrafx-16#TurboGrafx-CD/CD-ROM%C2%B2)
@@ -153,6 +157,7 @@ executables and libraries for that target.
 | Atari 8-bit                     | MegaCart cartridge | `mos-atari8-cart-megacart-clang` |
 | Atari 8-bit                     | Standard cartridge | `mos-atari8-cart-std-clang`      |
 | Atari 8-bit                     | XEGS cartridge     | `mos-atari8-cart-xegs-clang`     |
+| Atari Lynx                      | BLL executable     | `mos-lynx-bll-clang`             |
 | Ben Eater's 6502 Breadboard Kit | -                  | `mos-eater-clang`                |
 | Commander X16                   | -                  | `mos-cx16-clang`                 |
 | Commodore                       | 64                 | `mos-c64-clang`                  |
@@ -161,6 +166,7 @@ executables and libraries for that target.
 | Commodore                       | VIC-20             | `mos-vic20-clang`                |
 | CP/M-65                         | -                  | `mos-cpm65-clang`                |
 | Dodo 6502 Game System           | -                  | `mos-dodo-clang`                 |
+| Commodore GEOS                  | 64, 128            | `mos-geos-cbm-clang`              |
 | MEGA65                          | -                  | `mos-mega65-clang`               |
 | NES                             | Action53 mapper    | `mos-nes-action53-clang`         |
 | NES                             | CNROM mapper       | `mos-nes-cnrom-clang`            |
@@ -171,10 +177,12 @@ executables and libraries for that target.
 | NES                             | UNROM mapper       | `mos-nes-unrom-clang`            |
 | NES                             | UNROM-512 mapper   | `mos-nes-unrom-512-clang`        |
 | Ohio Scientific Challenger 1P   | -                  | `mos-osi-c1p-clang`              |
+| OLIMEX Neo6502                  | -                  | `mos-neo6502-clang`              |
 | Picocomputer 6502               | -                  | `mos-rp6502-clang`               |
 | PC Engine                       | Standard           | `mos-pce-clang`                  |
 | PC Engine                       | CD                 | `mos-pce-cd-clang`               |
 | RPC/8e (RedPower 2)             | -                  | `mos-rpc8e-clang`                |
+| Watara Supervision              | -                  | `mos-supervision-clang`          |
 | 6502 simulator                  | -                  | `mos-sim-clang`                  |
 
 

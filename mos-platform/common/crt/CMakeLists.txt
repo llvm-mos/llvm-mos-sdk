@@ -14,5 +14,5 @@ add_platform_library(common-crt
 
 # Merge the builtins library from llvm-mos into libcrt.
 get_filename_component(compiler_dir ${CMAKE_C_COMPILER} DIRECTORY)
-find_library(builtins clang_rt.builtins REQUIRED PATHS ${compiler_dir}/../lib/clang/19/lib/mos-unknown-unknown NO_DEFAULT_PATH)
+find_library(builtins clang_rt.builtins REQUIRED PATHS ${compiler_dir}/../lib/clang/20/lib/mos-unknown-unknown NO_DEFAULT_PATH)
 merge_libraries(common-crt ${builtins})

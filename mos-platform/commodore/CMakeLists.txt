@@ -5,14 +5,16 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES cbm.h TYPE INCLUDE)
-install(FILES cbm_kernal.inc DESTINATION ${ASMINCDIR})
+install(FILES
+  cbm.inc
+  cbm_kernal.inc
+  DESTINATION ${ASMINCDIR})
 install(FILES commodore.ld TYPE LIB)
 
 add_platform_library(commodore-crt0)
 merge_libraries(commodore-crt0
   common-copy-zp-data
   common-zero-bss
-  common-exit-return
 )
 
 add_platform_library(commodore-c
@@ -36,7 +38,7 @@ add_platform_library(commodore-c
   cbm_k_getin.c
   cbm_k_iobase.s
   cbm_k_listen.c
-  cbm_k_load.s
+  cbm_k_load.c
   cbm_k_open.s
   cbm_k_readst.c
   cbm_k_save.s
@@ -49,6 +51,22 @@ add_platform_library(commodore-c
   cbm_k_udtim.c
   cbm_k_unlsn.c
   cbm_k_untlk.c
+
+  close.s
+  diskcmd.s
+  filedes.s
+  filename.s
+  filetype.s
+  filevars.s
+  open.s
+  oserror.s
+  read.s
+  rwcommon.s
+  scratch.s
+  sysremove.s
+  sysrename.s
+  translate-filename.cc
+  write.s
 )
 
 target_include_directories(commodore-c BEFORE PUBLIC .)

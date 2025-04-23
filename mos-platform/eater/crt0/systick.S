@@ -16,7 +16,7 @@
 
 ; Initialize the system millisecond tick timer.
 .global __do_init_systick
-.section .init.250,"axR",@progbits
+.section .init.250,"ax",@progbits
 __do_init_systick:
   lda #$a0                      ; Enable T2 interrupts.
   sta VIA_IER

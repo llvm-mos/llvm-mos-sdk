@@ -26,7 +26,7 @@
     .ifb \exiter
         jmp BIOS
     .else
-        jsr BDOS
+        jsr BIOS
         jmp \exiter
     .endif
 .endm

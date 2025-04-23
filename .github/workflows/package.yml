@@ -14,7 +14,7 @@ on:
   repository_dispatch:
 jobs:
   build-test-tools:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Cache test tools
         id: cache
@@ -53,7 +53,7 @@ jobs:
           mkdir -p ${{ env.LIBRETRO_CORES_DIR }}
           mv mesen_libretro.so ${{ env.LIBRETRO_CORES_DIR }}
       - name: Upload test tools
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-tools
           path: ${{env.TEST_TOOLS_DIR }}
@@ -63,7 +63,7 @@ jobs:
     needs: build-test-tools
     strategy:
       matrix:
-        os: [windows-2019, macos-latest, ubuntu-20.04]
+        os: [windows-2019, macos-latest, ubuntu-22.04]
     steps:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')
@@ -121,9 +121,9 @@ jobs:
 
       - name: Upload test screenshots.
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: test-screenshots
+          name: test-screenshots-${{ runner.os }}
           path: build/**/*.png
 
       - name: Build the docs.
@@ -148,8 +148,9 @@ jobs:
         run: tar -cJvf llvm-mos-macos.tar.xz llvm-mos
 
       - name: Upload the SDK.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
+          name: sdk-${{ runner.os }}
           path: |
             llvm-mos-linux.tar.xz
             llvm-mos-windows.7z
@@ -160,9 +161,10 @@ jobs:
     needs: package
     steps:
       - name: Download the SDK.
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: artifact
+          pattern: sdk-*
+          merge-multiple: true
 
       - name: Prerelease the SDK.
         uses: softprops/action-gh-release@v1

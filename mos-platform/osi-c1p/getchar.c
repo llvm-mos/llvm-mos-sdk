@@ -4,7 +4,7 @@
 extern void __kbhit(void);
 extern unsigned char volatile __CHARBUF;
 
-int getchar(void) {
+int __getchar(void) {
   do {
     __kbhit();
   } while (!__CHARBUF);

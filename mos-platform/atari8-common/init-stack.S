@@ -3,7 +3,7 @@
 .global __do_init_stack
 
 ; Initialize soft stack pointer to MEMTOP+1
-.section .init.100,"axR",@progbits
+.section .init.100,"ax",@progbits
 __do_init_stack:
   clc
   lda $2e5

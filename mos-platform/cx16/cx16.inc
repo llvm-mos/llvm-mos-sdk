@@ -53,6 +53,13 @@
 	sty	__r6
 .endm
 
+; Run RAM/ROM routine in another bank
+.macro MACRO_JSRFAR address, bank
+        jsr __JSRFAR
+        .short \address
+        .byte \bank
+.endm
+
 ; cx16 hardware I/O addresses (derived from x16-rom io.inc)
 ; https://github.com/X16Community/x16-rom/blob/master/inc/io.inc
 
@@ -235,3 +242,5 @@ I_FB_SET_8_PIXELS_OPAQUE	= $02F8
 I_FB_FILL_PIXELS              	= $02FA
 I_FB_FILTER_PIXELS            	= $02FC
 I_FB_MOVE_PIXELS              	= $02FE
+
+DEVNUM = $0292

@@ -7,13 +7,13 @@ static void ppu_wait_vblank(void) {
 }
 
 // Set up the hardware stack and launch early initialization.
-asm(".section .init.50,\"axR\",@progbits\n"
+asm(".section .init.50,\"ax\",@progbits\n"
     "  sei\n"
     "  ldx #$ff\n"
     "  txs\n"
     "  jsr __early_init\n");
 
-void __early_init(void) {
+__attribute__((weak)) void __early_init(void) {
   // Disable NMI generation.
   PPU.control = 0;
   // Disable rendering.
@@ -33,10 +33,10 @@ void __early_init(void) {
   // registers.
 }
 
-asm(".section .init.250,\"axR\",@progbits\n"
+asm(".section .init.250,\"ax\",@progbits\n"
     "  jsr __late_init\n");
 
-void __late_init(void) {
+__attribute__((weak)) void __late_init(void) {
   // Wait for cycle 57165 at the earliest. This is late enough for the PPU to be
   // fully functional and for the main program to begin.
   ppu_wait_vblank();

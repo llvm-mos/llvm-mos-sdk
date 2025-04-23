@@ -8,6 +8,6 @@ _reset:
   sta $8001
   jmp _start
 
-.section .init.250,"axR",@progbits
+.section .init.250,"ax",@progbits
   lda #$40
   sta __bank_select_hi

@@ -14,7 +14,7 @@
 
 ; Initialize the serial port.
 .global __do_init_serial
-.section .init.270,"axR",@progbits
+.section .init.270,"ax",@progbits
 __do_init_serial:
   lda ACIA_STATUS           ; Clear any reported errors.
   lda ACIA_DATA             ; Empty the receive buffer if something is in it.

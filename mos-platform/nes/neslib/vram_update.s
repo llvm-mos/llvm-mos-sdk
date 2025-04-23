@@ -8,7 +8,7 @@
 .include "nes.inc"
 .include "neslib.inc"
 
-.section .init.280,"axR",@progbits
+.section .init.280,"ax",@progbits
 .globl vram_update_init
 vram_update_init:
 	lda #0
@@ -17,7 +17,7 @@ vram_update_init:
 	jsr set_vram_update
 
 
-.section .nmi.065,"axR",@progbits
+.section .nmi.065,"ax",@progbits
 .globl vram_update_nmi
 vram_update_nmi:
 	lda NAME_UPD_ENABLE

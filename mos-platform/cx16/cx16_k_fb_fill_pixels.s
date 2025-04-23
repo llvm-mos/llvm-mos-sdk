@@ -11,6 +11,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-fb_fill_pixels
 ;
 .global cx16_k_fb_fill_pixels
+.section .text.cx16_k_fb_fill_pixels,"ax",@progbits
 cx16_k_fb_fill_pixels:
 	ldy	__rc2		; NOTE: copy args backwards due to overlap
 	sty	__r1		; r1 = step

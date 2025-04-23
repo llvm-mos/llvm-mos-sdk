@@ -1,7 +1,7 @@
 #include "rp6502.h"
 #include <stdio.h>
 
-int getchar(void) {
+int __getchar(void) {
   RIA.xstack = 1;
   RIA.a = 0;
   RIA.op = RIA_OP_READ_XSTACK;

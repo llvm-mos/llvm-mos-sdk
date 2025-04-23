@@ -1,5 +1,7 @@
 #include "osi_screen.h"
 
+#include <stdio.h>
+
 template <unsigned int scr_base_int, unsigned int video_ram_size,
           unsigned int screen_width, unsigned int screen_height,
           unsigned int screen_firstchar, unsigned int scroll_dist>
@@ -18,8 +20,8 @@ using __osic1p_screen = __osi_screen<>;
 
 extern "C" {
 
-__attribute__((always_inline, weak)) void __char_conv(char c,
-                                                      void (*emit)(char c)) {
+__attribute__((always_inline, weak)) int
+__from_ascii(char c, void *ctx, int (*write)(char c, void *ctx)) {
   /*
    * The low-level character output function implements LF as line feed
    * without CR, e.g. the active position stays in the same column. Here we
@@ -27,8 +29,9 @@ __attribute__((always_inline, weak)) void __char_conv(char c,
    * to the initial position of the next line.
    */
   if (c == '\n')
-    emit('\r');
-  emit(c);
+    if (write('\r', ctx) == EOF)
+      return EOF;
+  return write(c, ctx);
 }
 
 /**

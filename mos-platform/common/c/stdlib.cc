@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include "util.h"
 #include "varint.h"
 
 using namespace __impl;
@@ -77,17 +78,6 @@ bool is_hex_digit(char c) {
   return isdigit(c) || 'a' <= c && c <= 'f' || 'A' <= c && c <= 'F';
 }
 
-signed char strtox_parse_digit(char c, char base) {
-  if (!isalnum(c))
-    return -1;
-  if (isdigit(c)) {
-    signed char val = c - '0';
-    return val < base ? val : -1;
-  }
-  signed char val = tolower(c) - 'a' + 10;
-  return val < base ? val : -1;
-}
-
 const char *strtox_prelim(const char *p, char *sign, char *base) {
   /* skipping leading whitespace */
   while (isspace(*p))
@@ -135,7 +125,7 @@ bool strtox_main(const char **p, char base, bool is_signed, bool negative,
                  VarInt &rc) {
   rc.zero();
 
-  signed char digit = strtox_parse_digit(**p, base);
+  signed char digit = __parse_digit(**p, base);
   if (digit < 0) {
     *p = NULL;
     return false;
@@ -156,14 +146,14 @@ bool strtox_main(const char **p, char base, bool is_signed, bool negative,
       }
     }
     ++(*p);
-  } while ((digit = strtox_parse_digit(**p, base)) >= 0);
+  } while ((digit = __parse_digit(**p, base)) >= 0);
 
   return false;
 
 overflow:
   errno = ERANGE;
 
-  while (strtox_parse_digit(**p, base) != -1)
+  while (__parse_digit(**p, base) != -1)
     ++(*p);
 
   if (is_signed) {

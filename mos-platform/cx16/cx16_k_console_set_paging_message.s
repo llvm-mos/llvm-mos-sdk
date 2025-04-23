@@ -11,6 +11,7 @@
 ; https://github.com/X16Community/x16-docs/blob/master/X16%20Reference%20-%2004%20-%20KERNAL.md#function-name-console_set_paging_message
 ;
 .global cx16_k_console_set_paging_message
+.section .text.cx16_k_console_set_paging_message,"ax",@progbits
 cx16_k_console_set_paging_message:
 	X16_kernal_push_r6_r10	; assuming additional regs trashed (paranoia)
     					; r0 = addr (already set)

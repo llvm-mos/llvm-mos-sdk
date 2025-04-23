@@ -1,14 +1,14 @@
 /* A mechanism for dynamically building an _init script. */
 _init = .;
 _start = .;
-*(SORT_BY_INIT_PRIORITY(.init.* .init))
-*(.call_main)
-*(.after_main)
+KEEP(*(SORT_BY_INIT_PRIORITY(.init.* .init)))
+KEEP(*(.call_main))
+KEEP(*(.after_main))
 
 /* A mechanism for dynamically building a _fini script. */
 _fini = .;
-*(SORT_BY_INIT_PRIORITY(.fini.* .fini))
-*(.fini_rts)
+KEEP(*(SORT_BY_INIT_PRIORITY(.fini.* .fini)))
+KEEP(*(.fini_rts))
 
 *(.text .text.* CODE LOWCODE ONCE STARTUP)
 

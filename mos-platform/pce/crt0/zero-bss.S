@@ -9,7 +9,7 @@
 ; TODO: This would be best to emit in llvm-mos itself.
 
 .global __do_zero_bss
-.section .init.200,"axR",@progbits
+.section .init.200,"ax",@progbits
 __do_zero_bss:
 	stz __bss_start
 	tii __bss_start, __zero_bss_start, #__zero_bss_size

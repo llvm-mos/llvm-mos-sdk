@@ -65,6 +65,14 @@ __attribute__((weak)) void operator delete[](void *ptr) noexcept {
   operator delete(ptr);
 }
 
+__attribute__((weak)) void operator delete(void *ptr, std::size_t) noexcept {
+  operator delete(ptr);
+}
+
+__attribute__((weak)) void operator delete[](void *ptr, std::size_t) noexcept {
+  operator delete(ptr);
+}
+
 static std::new_handler current_new_handler = nullptr;
 
 namespace std {

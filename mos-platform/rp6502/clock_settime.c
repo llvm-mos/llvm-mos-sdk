@@ -1,6 +1,8 @@
 #include <rp6502.h>
 #include <time.h>
 
+int __mappederrno (unsigned char code);
+
 int clock_settime(clockid_t clock_id, const struct timespec *tp) {
   RIA.a = clock_id;
   RIA.x = clock_id >> 8;
@@ -15,5 +17,6 @@ int clock_settime(clockid_t clock_id, const struct timespec *tp) {
   RIA.op = RIA_OP_CLOCK_SETTIME;
   while (RIA.busy & RIA_BUSY_BIT)
     ;
-  return RIA.a | (RIA.x << 8);
+  int ax = RIA.a | (RIA.x << 8);
+  return ax < 0 ? __mappederrno(RIA.errno) : ax;
 }

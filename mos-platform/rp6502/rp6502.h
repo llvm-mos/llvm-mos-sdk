@@ -91,14 +91,6 @@ int write_xram(unsigned buf, unsigned count, int fildes);
 #define SEEK_END 1
 #define SEEK_SET 2
 
-int open(const char *name, int flags, ...);
-int read(int fildes, void *buf, unsigned count);
-int write(int fildes, const void *buf, unsigned count);
-int close(int fd);
-long lseek(int fd, long offset, int whence);
-unsigned char _sysremove(const char *name);
-unsigned char _sysrename(const char *oldpath, const char *newpath);
-
 /* XRAM structure helpers */
 
 #define xram0_struct_set(addr, type, member, val)                              \

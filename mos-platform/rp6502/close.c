@@ -1,4 +1,7 @@
 #include <rp6502.h>
+#include <unistd.h>
+
+int __mappederrno (unsigned char code);
 
 int close(int fd) {
   RIA.a = fd;
@@ -6,5 +9,6 @@ int close(int fd) {
   RIA.op = RIA_OP_CLOSE;
   while (RIA.busy & RIA_BUSY_BIT)
     ;
-  return RIA.a | (RIA.x << 8);
+  int ax = RIA.a | (RIA.x << 8);
+  return ax < 0 ? __mappederrno(RIA.errno) : ax;
 }

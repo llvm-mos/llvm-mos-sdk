@@ -36,6 +36,7 @@ add_platform_library(rp6502-c
   lrand.c
   lseek.c
   open.c
+  oserror.s
   phi2.c
   putchar.c
   read_xram.c

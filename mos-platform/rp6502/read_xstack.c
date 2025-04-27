@@ -1,5 +1,7 @@
 #include <rp6502.h>
 
+int __mappederrno (unsigned char code);
+
 int read_xstack(void *buf, unsigned count, int fildes) {
   RIA.xstack = count >> 8;
   RIA.xstack = count;
@@ -12,5 +14,5 @@ int read_xstack(void *buf, unsigned count, int fildes) {
   for (int i = 0; i < ax; i++) {
     ((char *)buf)[i] = RIA.xstack;
   }
-  return ax;
+  return ax < 0 ? __mappederrno(RIA.errno) : ax;
 }

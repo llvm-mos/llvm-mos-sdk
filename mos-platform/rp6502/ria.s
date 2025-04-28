@@ -1,7 +1,4 @@
-;
-; 2023, Rumbledethumps
-;
-; Helpers for building API shims
+; Helpers for building RIA API shims
 
 .include "rp6502.inc"
 .include "imag.inc"

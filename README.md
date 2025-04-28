@@ -232,6 +232,11 @@ To modify the SDK, you'll need to be able to build it yourself. This requires a
 working LLVM-MOS compiler, which can be found in the current SDK release.
 Accordingly, make sure to install the SDK first using the instructions above.
 
+### Install a working host compiler and CMake
+
+The SDK builds with CMake and builds binaries that are intended to run on your host operating system (in addition to the libraries for the 6502).
+Accordingly, to build the SDK, you'll need to install a working CMake and host OS C/C++ compiler, such that CMake is able to build binaries.
+
 ### Install ninja
 
 For the steps below to work as-is, you'll need to install Ninja, the fast,

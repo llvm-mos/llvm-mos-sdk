@@ -101,6 +101,9 @@ __set_prg_bank:
 set_prg_bank:
 	tay
 .Lset:
+	lda #<prg_rom_is_512
+	beq continue_bankswitch
+	
 	lda _PRG_BANK       ; Load the value of _PRG_BANK into the accumulator
     and #%00010000       ; Compare it with 16
     beq set_bits_to_0    ; If _PRG_BANK is less than 16, branch to set_bits_to_0

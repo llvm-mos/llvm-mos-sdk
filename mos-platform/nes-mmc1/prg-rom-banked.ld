@@ -154,6 +154,8 @@ SECTIONS {
 
 PROVIDE(__prg_rom_size = 512);
 
+prg_rom_is_512 = __prg_rom_size >= 512 ? 1 : 0;
+
 OUTPUT_FORMAT {
   INCLUDE ines-header.ld
   FULL(prg_rom_0)     FULL(reset, 0, LENGTH(prg_rom_0)  ? LENGTH(reset) : 0)

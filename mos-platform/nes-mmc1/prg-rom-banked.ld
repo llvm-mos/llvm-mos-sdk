@@ -15,7 +15,6 @@ __prg_rom_11_lma    = 0x0b8000;
 __prg_rom_12_lma    = 0x0c8000;
 __prg_rom_13_lma    = 0x0d8000;
 __prg_rom_14_lma    = 0x0e8000;
-__prg_rom_15_lma    = 0x0f8000;
 __prg_rom_16_lma    = 0x108000;
 __prg_rom_17_lma    = 0x118000;
 __prg_rom_18_lma    = 0x128000;
@@ -26,11 +25,11 @@ __prg_rom_22_lma    = 0x168000;
 __prg_rom_23_lma    = 0x178000;
 __prg_rom_24_lma    = 0x188000;
 __prg_rom_25_lma    = 0x198000;
-__prg_rom_26_lma    = 0x1A8000;
-__prg_rom_27_lma    = 0x1B8000;
-__prg_rom_28_lma    = 0x1C8000;
-__prg_rom_29_lma    = 0x1D8000;
-__prg_rom_30_lma    = 0x1E8000;
+__prg_rom_26_lma    = 0x1a8000;
+__prg_rom_27_lma    = 0x1b8000;
+__prg_rom_28_lma    = 0x1c8000;
+__prg_rom_29_lma    = 0x1d8000;
+__prg_rom_30_lma    = 0x1e8000;
 __prg_rom_fixed_lma = 0xc000;
 
 __prg_rom_0_offset     = 0x00000;
@@ -48,7 +47,6 @@ __prg_rom_11_offset    = 0x2c000;
 __prg_rom_12_offset    = 0x30000;
 __prg_rom_13_offset    = 0x34000;
 __prg_rom_14_offset    = 0x38000;
-__prg_rom_15_offset    = 0x3C000;
 __prg_rom_16_offset    = 0x40000;
 __prg_rom_17_offset    = 0x44000;
 __prg_rom_18_offset    = 0x48000;
@@ -83,7 +81,6 @@ MEMORY {
   prg_rom_12    : ORIGIN = __prg_rom_12_lma,    LENGTH = __prg_rom_size >= 256 ? 0x4000 - 12 : 0
   prg_rom_13    : ORIGIN = __prg_rom_13_lma,    LENGTH = __prg_rom_size >= 256 ? 0x4000 - 12 : 0
   prg_rom_14    : ORIGIN = __prg_rom_14_lma,    LENGTH = __prg_rom_size >= 256 ? 0x4000 - 12 : 0
-  prg_rom_15    : ORIGIN = __prg_rom_15_lma,    LENGTH = __prg_rom_size >= 512 ? 0x4000 - 12 : 0
   prg_rom_16    : ORIGIN = __prg_rom_16_lma,    LENGTH = __prg_rom_size >= 512 ? 0x4000 - 12 : 0
   prg_rom_17    : ORIGIN = __prg_rom_17_lma,    LENGTH = __prg_rom_size >= 512 ? 0x4000 - 12 : 0
   prg_rom_18    : ORIGIN = __prg_rom_18_lma,    LENGTH = __prg_rom_size >= 512 ? 0x4000 - 12 : 0
@@ -126,7 +123,6 @@ SECTIONS {
   .prg_rom_12    : { *(.prg_rom_12    .prg_rom_12.*)    } >prg_rom_12
   .prg_rom_13    : { *(.prg_rom_13    .prg_rom_13.*)    } >prg_rom_13
   .prg_rom_14    : { *(.prg_rom_14    .prg_rom_14.*)    } >prg_rom_14
-  .prg_rom_15    : { *(.prg_rom_15    .prg_rom_15.*)    } >prg_rom_15
   .prg_rom_16    : { *(.prg_rom_16    .prg_rom_16.*)    } >prg_rom_16
   .prg_rom_17    : { *(.prg_rom_17    .prg_rom_17.*)    } >prg_rom_17
   .prg_rom_18    : { *(.prg_rom_18    .prg_rom_18.*)    } >prg_rom_18

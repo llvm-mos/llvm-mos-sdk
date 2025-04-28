@@ -102,11 +102,8 @@ set_prg_bank:
 	tay
 .Lset:
 	lda _PRG_BANK       ; Load the value of _PRG_BANK into the accumulator
-    cmp #16              ; Compare it with 16
-    bcc set_bits_to_0    ; If _PRG_BANK is less than 16, branch to set_bits_to_0
-	lda _PRG_BANK       ; Load the value of _PRG_BANK into the accumulator
-    cmp #16              ; Compare it with 16
-    bcc .set_bits_to_0   ; If _PRG_BANK is less than 16, branch to set_bits_to_0
+    and #%00010000       ; Compare it with 16
+    beq set_bits_to_0    ; If _PRG_BANK is less than 16, branch to set_bits_to_0
 
 .set_bits_to_1:
     lda _CHR_BANK0      ; Load the value of _CHR_BANK0
@@ -126,7 +123,7 @@ set_prg_bank:
     lda _CHR_BANK1       ; Load the value of _CHR_BANK1
     and #%11101111       ; Clear the 4th bit
     sta _CHR_BANK1       ; Store the updated value back
-
+	
 .continue_bankswitch:
 	inc __reset_mmc1_byte
 	ldx #1

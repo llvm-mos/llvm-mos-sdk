@@ -36,6 +36,32 @@ struct __RP6502 {
 #define RIA_READY_RX_BIT 0x40
 #define RIA_BUSY_BIT 0x80
 
+/* XSTACK helpers */
+
+void ria_push_long(unsigned long val);
+void ria_push_int(unsigned int val);
+#define ria_push_char(v) RIA.xstack = v
+
+long ria_pop_long(void);
+int ria_pop_int(void);
+#define ria_pop_char() RIA.xstack
+
+/* Set the RIA fastcall register */
+
+void ria_set_axsreg(unsigned long axsreg);
+void ria_set_ax(unsigned int ax);
+#define ria_set_a(v) RIA.a = v
+
+/* Run an OS operation */
+
+int ria_call_int(unsigned char op);
+long ria_call_long(unsigned char op);
+
+/* These run _mappederrno() on error */
+
+int ria_call_int_errno(unsigned char op);
+long ria_call_long_errno(unsigned char op);
+
 /* OS operation numbers */
 
 #define RIA_OP_EXIT 0xFF
@@ -60,6 +86,13 @@ struct __RP6502 {
 #define RIA_OP_UNLINK 0x1B
 #define RIA_OP_RENAME 0x1C
 
+/* RIA constants for direct lseek calls. */
+/* Note: Use constants from C library when calling C library. */
+
+#define RIA_SEEK_CUR 0
+#define RIA_SEEK_END 1
+#define RIA_SEEK_SET 2
+
 /* C API for the operating system. */
 
 int xregn(char device, char channel, unsigned char address, unsigned count,
@@ -72,24 +105,6 @@ int read_xstack(void *buf, unsigned count, int fildes);
 int read_xram(unsigned buf, unsigned count, int fildes);
 int write_xstack(const void *buf, unsigned count, int fildes);
 int write_xram(unsigned buf, unsigned count, int fildes);
-
-/* Temporary home for standard library headers. */
-
-#define STDIN_FILENO 0
-#define STDOUT_FILENO 1
-#define STDERR_FILENO 2
-
-#define O_RDONLY 0x01
-#define O_WRONLY 0x02
-#define O_RDWR 0x03
-#define O_CREAT 0x10
-#define O_TRUNC 0x20
-#define O_APPEND 0x40
-#define O_EXCL 0x80
-
-#define SEEK_CUR 0
-#define SEEK_END 1
-#define SEEK_SET 2
 
 /* XRAM structure helpers */
 

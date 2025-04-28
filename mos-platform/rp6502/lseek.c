@@ -1,19 +1,24 @@
 #include <rp6502.h>
+#include <stdio.h>
 #include <unistd.h>
 
-int __mappederrno (unsigned char code);
-
 off_t lseek(int fd, off_t offset, int whence) {
-  RIA.a = fd;
-  RIA.x = fd >> 8;
-  RIA.xstack = offset >> 24;
-  RIA.xstack = offset >> 16;
-  RIA.xstack = offset >> 8;
-  RIA.xstack = offset;
-  RIA.xstack = whence;
-  RIA.op = RIA_OP_LSEEK;
-  while (RIA.busy & RIA_BUSY_BIT)
-    ;
-  long axsreg = (long)RIA.a | ((long)RIA.x << 8) | ((long)RIA.sreg << 16);
-  return axsreg < 0 ? __mappederrno(RIA.errno) : axsreg;
+  /* Modified argument order for short stacking offset */
+  switch (whence) {
+  case SEEK_CUR:
+    ria_push_char(RIA_SEEK_CUR);
+    break;
+  case SEEK_END:
+    ria_push_char(RIA_SEEK_END);
+    break;
+  case SEEK_SET:
+    ria_push_char(RIA_SEEK_SET);
+    break;
+  default:
+    ria_push_int(whence);
+    break;
+  }
+  ria_push_long(offset);
+  ria_set_ax(fd);
+  return ria_call_long_errno(RIA_OP_LSEEK);
 }

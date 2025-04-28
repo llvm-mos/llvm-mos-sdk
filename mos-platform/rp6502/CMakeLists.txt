@@ -42,6 +42,7 @@ add_platform_library(rp6502-c
   read_xram.c
   read_xstack.c
   read.c
+  ria.s
   stdin_opt.c
   sysremove.c
   sysrename.c

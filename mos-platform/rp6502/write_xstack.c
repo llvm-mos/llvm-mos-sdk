@@ -4,14 +4,13 @@
 int __mappederrno(unsigned char code);
 
 int write_xstack(const void *buf, unsigned count, int fildes) {
-  unsigned i;
+  ria_set_ax(fildes);
   if (count > 512) {
     RIA.errno = EINVAL;
     return __mappederrno(RIA.errno);
   }
-  for (i = count; i;) {
+  for (unsigned i = count; i;) {
     ria_push_char(((char *)buf)[--i]);
   }
-  ria_set_ax(fildes);
   return ria_call_int_errno(RIA_OP_WRITE_XSTACK);
 }

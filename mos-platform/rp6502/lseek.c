@@ -3,7 +3,6 @@
 #include <unistd.h>
 
 off_t lseek(int fd, off_t offset, int whence) {
-  /* Modified argument order for short stacking offset */
   switch (whence) {
   case SEEK_CUR:
     ria_push_char(RIA_SEEK_CUR);

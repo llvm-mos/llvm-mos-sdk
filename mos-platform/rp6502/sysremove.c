@@ -11,8 +11,7 @@ unsigned char __sysremove(const char *name) {
     RIA.errno = EINVAL;
     return __mappederrno(RIA.errno);
   }
-  while (namelen) {
+  while (namelen)
     ria_push_char(name[--namelen]);
-  }
   return ria_call_int_errno(RIA_OP_UNLINK);
 }

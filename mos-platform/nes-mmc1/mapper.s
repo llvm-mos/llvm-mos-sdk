@@ -109,21 +109,25 @@ set_prg_bank:
     lda _CHR_BANK0      ; Load the value of _CHR_BANK0
     ora #%00010000       ; Set the 4th bit
     sta _CHR_BANK0      ; Store the updated value back
+	mmc1_register_write MMC1_CHR0
 
     lda _CHR_BANK1       ; Load the value of _CHR_BANK1
     ora #%00010000       ; Set the 4th bit
     sta _CHR_BANK1       ; Store the updated value back
+	mmc1_register_write MMC1_CHR1
     bne .continue_bankswitch
 
 .set_bits_to_0:
     lda _CHR_BANK0      ; Load the value of _CHR_BANK0
     and #%11101111       ; Clear the 4th bit
     sta _CHR_BANK0      ; Store the updated value back
+	mmc1_register_write MMC1_CHR0
 
     lda _CHR_BANK1       ; Load the value of _CHR_BANK1
     and #%11101111       ; Clear the 4th bit
     sta _CHR_BANK1       ; Store the updated value back
-	
+	mmc1_register_write MMC1_CHR1
+
 .continue_bankswitch:
 	inc __reset_mmc1_byte
 	ldx #1

@@ -1,4 +1,4 @@
-#include <rp6502.h>
+#include "rp6502.h"
 #include <unistd.h>
 
 int read(int fildes, void *buf, unsigned count) {

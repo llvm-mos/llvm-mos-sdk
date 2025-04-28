@@ -1,4 +1,4 @@
-#include <rp6502.h>
+#include "rp6502.h"
 #include <time.h>
 
 extern int __clock_gettimespec(struct timespec *ts, unsigned char op);

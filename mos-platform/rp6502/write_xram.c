@@ -1,4 +1,4 @@
-#include <rp6502.h>
+#include "rp6502.h"
 
 int write_xram(unsigned buf, unsigned count, int fildes) {
   ria_set_ax(fildes);

@@ -1,5 +1,5 @@
 #include <fcntl.h>
-#include <rp6502.h>
+#include "rp6502.h"
 
 int close(int fd) {
   ria_set_ax(fd);

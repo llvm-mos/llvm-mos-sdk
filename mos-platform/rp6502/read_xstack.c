@@ -1,4 +1,4 @@
-#include <rp6502.h>
+#include "rp6502.h"
 
 int read_xstack(void *buf, unsigned count, int fildes) {
   int i, ax;

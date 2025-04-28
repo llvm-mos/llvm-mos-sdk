@@ -1,4 +1,4 @@
-#include <rp6502.h>
+#include "rp6502.h"
 
 int stdin_opt(unsigned long ctrl_bits, unsigned char str_length) {
   ria_push_long(ctrl_bits);

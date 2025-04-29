@@ -148,7 +148,7 @@ SECTIONS {
   .reset_fixed : { KEEP(*(.reset_fixed)) } >reset_fixed
 }
 
-PROVIDE(__prg_rom_size = 512);
+PROVIDE(__prg_rom_size = 256);
 
 prg_rom_is_512 = __prg_rom_size >= 512 ? 1 : 0;
 
@@ -169,7 +169,7 @@ OUTPUT_FORMAT {
   FULL(prg_rom_12)    FULL(reset, 0, LENGTH(prg_rom_12) ? LENGTH(reset) : 0)
   FULL(prg_rom_13)    FULL(reset, 0, LENGTH(prg_rom_13) ? LENGTH(reset) : 0)
   FULL(prg_rom_14)    FULL(reset, 0, LENGTH(prg_rom_14) ? LENGTH(reset) : 0)
-  FULL(prg_rom_fixed) FULL(reset_fixed)
+  FULL(prg_rom_fixed) FULL(reset_fixed, 0, __prg_rom_size >= 512 ? 0x4000 - 12 : 0)
 
   FULL(prg_rom_16)    FULL(reset, 0, LENGTH(prg_rom_16) ? LENGTH(reset) : 0)
   FULL(prg_rom_17)    FULL(reset, 0, LENGTH(prg_rom_17) ? LENGTH(reset) : 0)
@@ -186,7 +186,7 @@ OUTPUT_FORMAT {
   FULL(prg_rom_28)    FULL(reset, 0, LENGTH(prg_rom_28) ? LENGTH(reset) : 0)
   FULL(prg_rom_29)    FULL(reset, 0, LENGTH(prg_rom_29) ? LENGTH(reset) : 0)
   FULL(prg_rom_30)    FULL(reset, 0, LENGTH(prg_rom_30) ? LENGTH(reset) : 0)
-  FULL(prg_rom_fixed) FULL(reset_fixed)
+  FULL(prg_rom_fixed) FULL(reset_fixed, 0, __prg_rom_size >= 512 ? 0x4000 - 12 : 0)
   
   FULL(chr_rom)
 }

@@ -99,8 +99,8 @@ get_prg_bank:
 .weak set_prg_bank
 __set_prg_bank:
 set_prg_bank:
-	bit .Luse_suxrom_bankswitching
-	bpl .Lcontinue_bank_switch
+	ldx #<prg_rom_is_512
+	beq .Lcontinue_bank_switch
 	; save the new bank byte on the stack for safe keeping
 	pha
 	; check which bits changed
@@ -120,24 +120,22 @@ set_prg_bank:
   	; restore the bank byte and put it in y so we can reload it on retry
   	pla
 .Lcontinue_bank_switch:
-  tay
-  ; original code below
+  	tay
+  	; original code below
 .Lset:
-  inc __reset_mmc1_byte
-  ldx #1
-  stx _IN_PROGRESS
-  mmc1_register_write MMC1_PRG
-  ldx _IN_PROGRESS
-  beq .Lretry
-  dex
-  stx _IN_PROGRESS
-  sty _PRG_BANK
-  rts
+  	inc __reset_mmc1_byte
+	ldx #1
+	stx _IN_PROGRESS
+	mmc1_register_write MMC1_PRG
+	ldx _IN_PROGRESS
+	beq .Lretry
+	dex
+	stx _IN_PROGRESS
+	sty _PRG_BANK
+	rts
 .Lretry:
-  tya
-  jmp .Lset
-.Luse_suxrom_bankswitching:
-  .byte ((<prg_rom_is_512) << 7)
+	tya
+	jmp .Lset
 
 .section .text.banked_call,"ax",@progbits
 .weak banked_call

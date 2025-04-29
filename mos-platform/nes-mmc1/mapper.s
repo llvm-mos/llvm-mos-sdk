@@ -99,54 +99,45 @@ get_prg_bank:
 .weak set_prg_bank
 __set_prg_bank:
 set_prg_bank:
-	tay
+	bit .Luse_suxrom_bankswitching
+	bpl .Lcontinue_bank_switch
+	; save the new bank byte on the stack for safe keeping
+	pha
+	; check which bits changed
+	eor _PRG_BANK
+	; if the outer bank bit changed then we need to set a new outerbank
+	and #%00010000
+	beq .Lset_inner_bank
+.Lset_new_outer_bank:
+	; Flip the outer bank bit for _CHR_BANK0 and _CHR_BANK1
+	lda _CHR_BANK0
+	eor #%00010000
+	jsr set_chr_bank_0_retry
+	lda _CHR_BANK1
+	eor #%00010000
+	jsr set_chr_bank_1_retry
+.Lset_inner_bank:
+  	; restore the bank byte and put it in y so we can reload it on retry
+  	pla
+.Lcontinue_bank_switch:
+  tay
+  ; original code below
 .Lset:
-	lda #<prg_rom_is_512
-	beq continue_bankswitch
-	
-	lda _PRG_BANK       ; Load the value of _PRG_BANK into the accumulator
-    and #%00010000       ; Compare it with 16
-    beq set_bits_to_0    ; If _PRG_BANK is less than 16, branch to set_bits_to_0
-
-.set_bits_to_1:
-    lda _CHR_BANK0      ; Load the value of _CHR_BANK0
-    ora #%00010000       ; Set the 4th bit
-    sta _CHR_BANK0      ; Store the updated value back
-	mmc1_register_write MMC1_CHR0
-
-    lda _CHR_BANK1       ; Load the value of _CHR_BANK1
-    ora #%00010000       ; Set the 4th bit
-    sta _CHR_BANK1       ; Store the updated value back
-	mmc1_register_write MMC1_CHR1
-    bne .continue_bankswitch
-
-.set_bits_to_0:
-    lda _CHR_BANK0      ; Load the value of _CHR_BANK0
-    and #%11101111       ; Clear the 4th bit
-    sta _CHR_BANK0      ; Store the updated value back
-	mmc1_register_write MMC1_CHR0
-
-    lda _CHR_BANK1       ; Load the value of _CHR_BANK1
-    and #%11101111       ; Clear the 4th bit
-    sta _CHR_BANK1       ; Store the updated value back
-	mmc1_register_write MMC1_CHR1
-
-.continue_bankswitch:
-	inc __reset_mmc1_byte
-	ldx #1
-	stx _IN_PROGRESS
-	mmc1_register_write MMC1_PRG
-	ldx _IN_PROGRESS
-	beq .Lretry
-	dex
-	stx _IN_PROGRESS
-	sty _PRG_BANK
-	rts
+  inc __reset_mmc1_byte
+  ldx #1
+  stx _IN_PROGRESS
+  mmc1_register_write MMC1_PRG
+  ldx _IN_PROGRESS
+  beq .Lretry
+  dex
+  stx _IN_PROGRESS
+  sty _PRG_BANK
+  rts
 .Lretry:
-	tya
-	jmp .Lset
-
-
+  tya
+  jmp .Lset
+.Luse_suxrom_bankswitching:
+  .byte ((<prg_rom_is_512) << 7)
 
 .section .text.banked_call,"ax",@progbits
 .weak banked_call

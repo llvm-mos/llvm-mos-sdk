@@ -99,7 +99,7 @@ get_prg_bank:
 .weak set_prg_bank
 __set_prg_bank:
 set_prg_bank:
-	ldx #<prg_rom_is_512
+	ldx #<__prg_rom_is_512 
 	beq .Lcontinue_bank_switch
 	; save the new bank byte on the stack for safe keeping
 	pha

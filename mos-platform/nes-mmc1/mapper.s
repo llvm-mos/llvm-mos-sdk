@@ -120,6 +120,14 @@ set_prg_bank:
   	; restore the bank byte and put it in y so we can reload it on retry
   	pla
 .Lcontinue_bank_switch:
+	; bit 4 is PRG RAM en/disable, so use those from the current bank value
+	ldx __rc2 ; preserve the current __rc2 value in X so we can use it as a temp
+	and #%00001111
+	sta __rc2 ; store the new bank bits
+	lda _PRG_BANK ; load the current prg_ram enable bit
+	and #%00010000
+	ora __rc2 ; combine them together
+	stx __rc2 ; restore the tmp register we used
   	tay
   	; original code below
 .Lset:

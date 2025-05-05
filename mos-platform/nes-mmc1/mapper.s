@@ -148,15 +148,24 @@ set_prg_bank:
 .section .text.banked_call,"ax",@progbits
 .weak banked_call
 banked_call:
-	tay
-	lda _PRG_BANK
-	pha
-	tya
-	jsr __set_prg_bank
-	lda __rc2
-	sta __rc18
-	lda __rc3
-	sta __rc19
+	tay					; save current bank in y
+	lda _PRG_BANK 		; load new bank in A
+	pha					; push new bank to stack
+    
+    lda __rc2 			; push function pointer to stack
+    pha
+    lda __rc3
+    pha
+    
+	tya					; restore current bank from A
+
+    jsr __set_prg_bank 	; set the new bank
+    
+    pla				 	; restore function pointer from stack
+    sta __rc19
+    pla 
+    sta __rc18
+		
 	jsr __call_indir
 	pla
 	jsr __set_prg_bank

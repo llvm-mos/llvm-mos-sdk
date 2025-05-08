@@ -1,16 +1,12 @@
-#include <rp6502.h>
+#include "rp6502.h"
 
 int read_xstack(void *buf, unsigned count, int fildes) {
-  RIA.xstack = count >> 8;
-  RIA.xstack = count;
-  RIA.a = fildes;
-  RIA.x = fildes >> 8;
-  RIA.op = RIA_OP_READ_XSTACK;
-  while (RIA.busy & RIA_BUSY_BIT)
-    ;
-  int ax = RIA.a | (RIA.x << 8);
-  for (int i = 0; i < ax; i++) {
-    ((char *)buf)[i] = RIA.xstack;
+  int i, ax;
+  ria_push_int(count);
+  ria_set_ax(fildes);
+  ax = ria_call_int_errno(RIA_OP_READ_XSTACK);
+  for (i = 0; i < ax; i++) {
+    ((char *)buf)[i] = ria_pop_char();
   }
   return ax;
 }

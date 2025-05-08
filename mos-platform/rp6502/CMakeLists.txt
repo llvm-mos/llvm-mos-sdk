@@ -36,11 +36,13 @@ add_platform_library(rp6502-c
   lrand.c
   lseek.c
   open.c
+  oserror.s
   phi2.c
   putchar.c
   read_xram.c
   read_xstack.c
   read.c
+  ria.s
   stdin_opt.c
   sysremove.c
   sysrename.c

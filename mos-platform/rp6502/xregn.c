@@ -8,14 +8,11 @@ int xregn(char device, char channel, unsigned char address, unsigned count,
   RIA.xstack = device;
   RIA.xstack = channel;
   RIA.xstack = address;
-  for (unsigned i = 0; i < count; i++) {
+  while (count--) {
     unsigned v = va_arg(args, unsigned);
     RIA.xstack = v >> 8;
     RIA.xstack = v;
   }
   va_end(args);
-  RIA.op = RIA_OP_XREG;
-  while (RIA.busy & RIA_BUSY_BIT)
-    ;
-  return RIA.a | (RIA.x << 8);
+  return ria_call_int_errno(RIA_OP_XREG);
 }

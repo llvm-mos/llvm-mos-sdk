@@ -1,21 +1,20 @@
 #include <errno.h>
-#include <rp6502.h>
+#include "rp6502.h"
 #include <string.h>
 
-unsigned char _sysrename(const char *oldpath, const char *newpath) {
+int __mappederrno(unsigned char code);
+
+unsigned char __sysrename(const char *oldpath, const char *newpath) {
   size_t oldpathlen = strlen(oldpath);
   size_t newpathlen = strlen(newpath);
-  if (oldpathlen + newpathlen > 254) {
+  if (oldpathlen + newpathlen > 510) {
     RIA.errno = EINVAL;
-    return -1;
+    return __mappederrno(RIA.errno);
   }
   while (oldpathlen)
-    RIA.xstack = oldpath[--oldpathlen];
-  RIA.xstack = 0;
+    ria_push_char(oldpath[--oldpathlen]);
+  ria_push_char(0);
   while (newpathlen)
-    RIA.xstack = newpath[--newpathlen];
-  RIA.op = RIA_OP_RENAME;
-  while (RIA.busy & RIA_BUSY_BIT)
-    ;
-  return RIA.a | (RIA.x << 8);
+    ria_push_char(newpath[--newpathlen]);
+  return ria_call_int_errno(RIA_OP_RENAME);
 }

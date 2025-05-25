@@ -1,6 +1,6 @@
+#include "rp6502.h"
 #include <errno.h>
 #include <fcntl.h>
-#include "rp6502.h"
 #include <string.h>
 
 int __mappederrno(unsigned char code);
@@ -8,8 +8,8 @@ int __mappederrno(unsigned char code);
 int open(const char *name, int flags, ...) {
   size_t namelen = strlen(name);
   if (namelen > 255) {
-    RIA.errno = EINVAL;
-    return __mappederrno(RIA.errno);
+    RIA.errno_ = EINVAL;
+    return __mappederrno(RIA.errno_);
   }
   while (namelen)
     ria_push_char(name[--namelen]);

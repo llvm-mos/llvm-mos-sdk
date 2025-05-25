@@ -1,5 +1,5 @@
-#include <errno.h>
 #include "rp6502.h"
+#include <errno.h>
 #include <string.h>
 
 int __mappederrno(unsigned char code);
@@ -8,8 +8,8 @@ unsigned char __sysrename(const char *oldpath, const char *newpath) {
   size_t oldpathlen = strlen(oldpath);
   size_t newpathlen = strlen(newpath);
   if (oldpathlen + newpathlen > 510) {
-    RIA.errno = EINVAL;
-    return __mappederrno(RIA.errno);
+    RIA.errno_ = EINVAL;
+    return __mappederrno(RIA.errno_);
   }
   while (oldpathlen)
     ria_push_char(oldpath[--oldpathlen]);

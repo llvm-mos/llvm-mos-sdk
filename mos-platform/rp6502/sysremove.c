@@ -1,5 +1,5 @@
-#include <errno.h>
 #include "rp6502.h"
+#include <errno.h>
 #include <string.h>
 
 int __mappederrno(unsigned char code);
@@ -8,8 +8,8 @@ unsigned char __sysremove(const char *name) {
   size_t namelen;
   namelen = strlen(name);
   if (namelen > 255) {
-    RIA.errno = EINVAL;
-    return __mappederrno(RIA.errno);
+    RIA.errno_ = EINVAL;
+    return __mappederrno(RIA.errno_);
   }
   while (namelen)
     ria_push_char(name[--namelen]);

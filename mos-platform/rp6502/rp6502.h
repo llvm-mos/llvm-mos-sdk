@@ -106,6 +106,20 @@ int read_xram(unsigned buf, unsigned count, int fildes);
 int write_xstack(const void *buf, unsigned count, int fildes);
 int write_xram(unsigned buf, unsigned count, int fildes);
 
+/* XREG helper macros */
+
+#define xreg__(_16, _15, _14, _13, _12, _11, _10, _9, _8, _7, _6, _5, _4, _3,  \
+               _2, _1, count, ...)                                             \
+  count
+#define xreg_(...)                                                             \
+  xreg__(__VA_ARGS__, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+#define xreg(d, c, a, ...) xregn(d, c, a, xreg_(__VA_ARGS__), __VA_ARGS__)
+
+#define xreg_ria_keyboard(...) xreg(0, 0, 0, __VA_ARGS__)
+#define xreg_ria_mouse(...) xreg(0, 0, 1, __VA_ARGS__)
+#define xreg_vga_canvas(...) xreg(1, 0, 0, __VA_ARGS__)
+#define xreg_vga_mode(...) xreg(1, 0, 1, __VA_ARGS__)
+
 /* XRAM structure helpers */
 
 #define xram0_struct_set(addr, type, member, val)                              \

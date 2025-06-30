@@ -98,7 +98,7 @@ long ria_call_long_errno(unsigned char op);
 int xregn(char device, char channel, unsigned char address, unsigned count,
           ...);
 int phi2(void);
-int codepage(void);
+int codepage(int);
 long lrand(void);
 int stdin_opt(unsigned long ctrl_bits, unsigned char str_length);
 int read_xstack(void *buf, unsigned count, int fildes);

@@ -63,7 +63,7 @@ jobs:
     needs: build-test-tools
     strategy:
       matrix:
-        os: [windows-2019, macos-latest, ubuntu-22.04]
+        os: [windows-2022, macos-latest, ubuntu-22.04]
     steps:
       - name: Install Ubuntu build dependencies.
         if: startsWith(matrix.os, 'ubuntu')

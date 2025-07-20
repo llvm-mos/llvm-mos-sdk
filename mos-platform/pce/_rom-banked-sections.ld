@@ -266,7 +266,7 @@ __rom_vbank0a_bank = 0;
 __rom_vbank0a_lma = __rom_vbank0a;
 __rom_vbank0b = 0x10000 - __rom_bank0_size;
 __rom_vbank0b_size = __rom_bank0_size - 0x2000;
-__rom_vbank0b_offset = 0x2000;
+__rom_vbank0b_offset = __rom_bank0_size > 0x2000 ? 0x2000 : 0;
 __rom_vbank0b_bank = __rom_bank0_size > 0x2000 ? 1 : -1;
 __rom_vbank0b_lma = __rom_vbank0b;
 

@@ -56,11 +56,11 @@ set_prg_a000:
 
 .section .text.set_reg_retry,"ax",@progbits
 __set_reg_retry:
-	inc __in_progress
+	dec __in_progress
 	sta $8000
 	stx $8001
-	lda __in_progress
-	beq __set_reg_retry
+	bit __in_progress
+	bpl __set_reg_retry
 	lda #0
 	sta __in_progress
 	rts

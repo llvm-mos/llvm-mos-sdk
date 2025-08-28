@@ -99,9 +99,39 @@ get_prg_bank:
 .weak set_prg_bank
 __set_prg_bank:
 set_prg_bank:
-	tay
+	ldx #<__prg_rom_is_512 
+	beq .Lcontinue_bank_switch
+	; save the new bank byte on the stack for safe keeping
+	pha
+	; check which bits changed
+	eor _PRG_BANK
+	; if the outer bank bit changed then we need to set a new outerbank
+	and #%00010000
+	beq .Lset_inner_bank
+.Lset_new_outer_bank:
+	; Flip the outer bank bit for _CHR_BANK0 and _CHR_BANK1
+	lda _CHR_BANK0
+	eor #%00010000
+	jsr set_chr_bank_0_retry
+	lda _CHR_BANK1
+	eor #%00010000
+	jsr set_chr_bank_1_retry
+.Lset_inner_bank:
+  	; restore the bank byte and put it in y so we can reload it on retry
+  	pla
+.Lcontinue_bank_switch:
+	; bit 4 is PRG RAM en/disable, so use those from the current bank value
+	ldx __rc2 ; preserve the current __rc2 value in X so we can use it as a temp
+	and #%00001111
+	sta __rc2 ; store the new bank bits
+	lda _PRG_BANK ; load the current prg_ram enable bit
+	and #%00010000
+	ora __rc2 ; combine them together
+	stx __rc2 ; restore the tmp register we used
+  	tay
+  	; original code below
 .Lset:
-	inc __reset_mmc1_byte
+  	inc __reset_mmc1_byte
 	ldx #1
 	stx _IN_PROGRESS
 	mmc1_register_write MMC1_PRG
@@ -115,20 +145,27 @@ set_prg_bank:
 	tya
 	jmp .Lset
 
-
-
 .section .text.banked_call,"ax",@progbits
 .weak banked_call
 banked_call:
-	tay
-	lda _PRG_BANK
-	pha
-	tya
-	jsr __set_prg_bank
-	lda __rc2
-	sta __rc18
-	lda __rc3
-	sta __rc19
+	tay					; save current bank in y
+	lda _PRG_BANK 		; load new bank in A
+	pha					; push new bank to stack
+    
+    lda __rc2 			; push function pointer to stack
+    pha
+    lda __rc3
+    pha
+    
+	tya					; restore current bank from A
+
+    jsr __set_prg_bank 	; set the new bank
+    
+    pla				 	; restore function pointer from stack
+    sta __rc19
+    pla 
+    sta __rc18
+		
 	jsr __call_indir
 	pla
 	jsr __set_prg_bank

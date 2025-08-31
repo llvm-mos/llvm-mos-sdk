@@ -34,6 +34,7 @@ add_platform_library(neo6502-c
   api/system.c
   api/turtle.c
   api/uext.c
+  api/mouse.c
   char-conv.c
   clock.c
   getchar.c

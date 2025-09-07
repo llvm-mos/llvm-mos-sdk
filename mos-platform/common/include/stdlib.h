@@ -150,8 +150,13 @@ size_t __heap_limit();
 
 /* Set the maximum size of the heap.  Note the limitations above. */
 /* Setting the heap limit implicitly allocates the heap.  Don't call this
-   function if you aren't going to use the heap. */
-void __set_heap_limit(size_t limit);
+ * function if you aren't going to use the heap.  Returns the value actually
+ * set -- this value is capped to avoid trashing the stack. 
+ */
+size_t __set_heap_limit(size_t limit);
+
+/* Return the maximum safe heap size to avoid stack collision. */
+size_t __get_heap_max_safe_size(void);
 
 /* Return heap bytes in use, including overhead for heap data structures in
    the existing allocations. */

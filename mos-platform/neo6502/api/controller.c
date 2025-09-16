@@ -16,7 +16,8 @@ uint8_t neo_controller_count(void) {
     return ControlPort.params[0];
 }
 
-uint8_t neo_controller_read(uint8_t index) {
+uint32_t neo_controller_read(uint8_t index) {
+    ControlPort.params[0] = index;
     KSendMessageSync(API_GROUP_CONTROLLER, API_FN_READ_CONTROLLER2);
     return *((uint32_t*) ControlPort.params);
 }

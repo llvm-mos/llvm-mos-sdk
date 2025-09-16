@@ -63,7 +63,7 @@ void start_sid_random_generator(void) {
 }
 
 /* Pseudo random number generator using SID noise */
-inline uint8_t rand8(void) { return SID.noise; }
+uint8_t rand8(void) { return SID.noise; }
 
 /* Generate charset with 8 * 256 characters */
 void make_charset(void) {

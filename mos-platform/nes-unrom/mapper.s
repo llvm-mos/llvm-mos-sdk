@@ -10,12 +10,15 @@
 .section .text.banked_call,"ax",@progbits
 .weak banked_call
 banked_call:
-	ldy _BANK_SHADOW
+    tay
+	lda _BANK_SHADOW
+	pha
+	tya
 	jsr set_prg_bank
 	lda __rc2
 	sta __rc18
 	lda __rc3
 	sta __rc19
 	jsr __call_indir
-	tya
+	pla
 	jmp set_prg_bank

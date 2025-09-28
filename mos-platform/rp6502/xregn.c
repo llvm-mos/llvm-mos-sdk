@@ -14,5 +14,5 @@ int xregn(char device, char channel, unsigned char address, unsigned count,
     RIA.xstack = v;
   }
   va_end(args);
-  return ria_call_int_errno(RIA_OP_XREG);
+  return ria_call_int(RIA_OP_XREG);
 }

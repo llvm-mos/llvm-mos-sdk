@@ -32,20 +32,20 @@ add_platform_library(rp6502-c
   clock.c
   close.c
   codepage.c
+  errno.s
   getchar.c
   lrand.c
   lseek.c
   open.c
-  oserror.s
   phi2.c
   putchar.c
   read_xram.c
   read_xstack.c
   read.c
+  remove.c
+  rename.c
   ria.s
   stdin_opt.c
-  sysremove.c
-  sysrename.c
   write_xram.c
   write_xstack.c
   write.c

@@ -66,14 +66,14 @@ void pce_vdc_copy_to_vram(uint16_t dest, const void *source, uint16_t length) {
   PCE_VDC_INDEX_CONST(VDC_REG_VRAM_WRITE_ADDR);
   *IO_VDC_DATA = dest;
   PCE_VDC_INDEX_CONST(VDC_REG_VRAM_DATA);
-  pce_memop(IO_VDC_DATA, source, length, PCE_MEMOP_INCR_ALT);
+  pce_memop((void *)IO_VDC_DATA, source, length, PCE_MEMOP_INCR_ALT);
 }
 
 void pce_vdc_copy_from_vram(void *dest, uint16_t source, uint16_t length) {
   PCE_VDC_INDEX_CONST(VDC_REG_VRAM_READ_ADDR);
   *IO_VDC_DATA = source;
   PCE_VDC_INDEX_CONST(VDC_REG_VRAM_DATA);
-  pce_memop(dest, IO_VDC_DATA, length, PCE_MEMOP_ALT_INCR);
+  pce_memop(dest, (const void *)IO_VDC_DATA, length, PCE_MEMOP_ALT_INCR);
 }
 
 void pce_vdc_dma_start(uint8_t mode, uint16_t source, uint16_t dest,
@@ -222,7 +222,9 @@ void pce_sgx_vdc_set(uint8_t id) {
   *IO_VPC_PORT = id;
 }
 
-volatile uint8_t *pce_sgx_vdc_get_index() { return IO_VDC_INDEX; }
+volatile uint8_t *pce_sgx_vdc_get_index() {
+  return (volatile uint8_t *)IO_VDC_INDEX;
+}
 
 volatile uint16_t *pce_sgx_vdc_get_data() { return IO_VDC_DATA; }
 

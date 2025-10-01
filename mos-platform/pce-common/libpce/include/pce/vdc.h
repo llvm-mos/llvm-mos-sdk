@@ -280,7 +280,7 @@ void pce_sgx_vdc_set(uint8_t id);
 /**
  * @brief SuperGrafx: Get the current VDC's index port location.
  */
-volatile uint8_t *pce_sgx_vdc_get_index(void);
+volatile uint16_t *pce_sgx_vdc_get_index(void);
 
 /**
  * @brief SuperGrafx: Get the current VDC's data port location.

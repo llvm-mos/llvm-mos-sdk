@@ -22,12 +22,12 @@ void pce_vce_set_color(uint16_t index, uint16_t value) {
 
 void pce_vce_copy_palette(uint8_t index, const void *source, uint8_t count) {
   *IO_VCE_COLOR_INDEX = ((uint16_t)index) << 4;
-  pce_memop(IO_VCE_COLOR_DATA, source, ((uint16_t)count) << 5,
+  pce_memop((void *)IO_VCE_COLOR_DATA, source, ((uint16_t)count) << 5,
             PCE_MEMOP_INCR_ALT);
 }
 
 void pce_vce_copy_palette_to_ram(void *dest, uint8_t index, uint8_t count) {
   *IO_VCE_COLOR_INDEX = ((uint16_t)index) << 4;
-  pce_memop(dest, IO_VCE_COLOR_DATA, ((uint16_t)count) << 5,
+  pce_memop(dest, (const void *)IO_VCE_COLOR_DATA, ((uint16_t)count) << 5,
             PCE_MEMOP_ALT_INCR);
 }

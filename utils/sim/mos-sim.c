@@ -1,3 +1,4 @@
+#include <inttypes.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -73,12 +74,12 @@ int8_t read6502(uint16_t address) {
 
 void finish(void) {
   if (shouldPrintCycles)
-    fprintf(stderr, "%llu cycles\n", clockticks6502);
+    fprintf(stderr, "%" PRIu64 " cycles\n", clockticks6502);
 
   if (shouldProfile)
     for (int addr = 0; addr < 65536; ++addr)
       if (clockTicksAtAddress[addr])
-        fprintf(stderr, "%04x %llu\n", addr, clockTicksAtAddress[addr]);
+        fprintf(stderr, "%04x %" PRIu64 "\n", addr, clockTicksAtAddress[addr]);
 }
 
 void write6502(uint16_t address, uint8_t value) {

@@ -78,18 +78,41 @@ long ria_call_long(unsigned char op);
 #define RIA_OP_READ_XRAM 0x17
 #define RIA_OP_WRITE_XSTACK 0x18
 #define RIA_OP_WRITE_XRAM 0x19
-#define RIA_OP_LSEEK 0x1A
+#define RIA_OP_LSEEK_CC65 0x1A
 #define RIA_OP_UNLINK 0x1B
 #define RIA_OP_RENAME 0x1C
-
-/* RIA constants for direct lseek calls. */
-/* Note: Use constants from C library when calling C library. */
-
-#define RIA_SEEK_CUR 0
-#define RIA_SEEK_END 1
-#define RIA_SEEK_SET 2
+#define RIA_OP_LSEEK 0x1D
+#define RIA_OP_LSEEK_LLVM 0x1D
+#define RIA_OP_SYNCFS 0x1E
+#define RIA_OP_STAT 0x1F
+#define RIA_OP_OPENDIR 0x20
+#define RIA_OP_READDIR 0x21
+#define RIA_OP_CLOSEDIR 0x22
+#define RIA_OP_TELLDIR 0x23
+#define RIA_OP_SEEKDIR 0x24
+#define RIA_OP_REWINDDIR 0x25
+#define RIA_OP_CHMOD 0x26
+#define RIA_OP_UTIME 0x27
+#define RIA_OP_MKDIR 0x28
+#define RIA_OP_CHDIR 0x29
+#define RIA_OP_CHDRIVE 0x2A
+#define RIA_OP_GETCWD 0x2B
+#define RIA_OP_SETLABEL 0x2C
+#define RIA_OP_GETLABEL 0x2D
+#define RIA_OP_GETFREE 0x2E
 
 /* C API for the operating system. */
+
+typedef struct {
+  unsigned long fsize;
+  unsigned fdate;
+  unsigned ftime;
+  unsigned crdate;
+  unsigned crtime;
+  unsigned char fattrib;
+  char altname[12 + 1];
+  char fname[255 + 1];
+} f_stat_t;
 
 int xregn(char device, char channel, unsigned char address, unsigned count,
           ...);
@@ -101,6 +124,23 @@ int read_xstack(void *buf, unsigned count, int fildes);
 int read_xram(unsigned buf, unsigned count, int fildes);
 int write_xstack(const void *buf, unsigned count, int fildes);
 int write_xram(unsigned buf, unsigned count, int fildes);
+long f_lseek(long offset, int whence, int fildes);
+int f_stat(const char *path, f_stat_t *dirent);
+int f_opendir(const char *name);
+int f_readdir(f_stat_t *dirent, int dirdes);
+int f_closedir(int dirdes);
+long f_telldir(int dirdes);
+int f_seekdir(long offs, int dirdes);
+int f_rewinddir(int dirdes);
+int f_chmod(const char *path, unsigned char attr, unsigned char mask);
+int f_utime(const char *path, unsigned fdate, unsigned ftime, unsigned crdate,
+            unsigned crtime);
+int f_mkdir(const char *name);
+int f_chdrive(const char *name);
+int f_getcwd(char *name, unsigned len);
+int f_setlabel(const char *name);
+int f_getlabel(const char *path, char *label);
+int f_getfree(const char *name, unsigned long *free, unsigned long *total);
 
 /* XREG helper macros */
 

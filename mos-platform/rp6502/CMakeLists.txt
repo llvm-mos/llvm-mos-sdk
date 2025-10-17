@@ -26,6 +26,7 @@ merge_libraries(rp6502-crt0
 
 add_platform_library(rp6502-c
   abort.c
+  chdir.c
   clock_getres.c
   clock_gettime.c
   clock_settime.c
@@ -33,6 +34,22 @@ add_platform_library(rp6502-c
   close.c
   codepage.c
   errno.s
+  f_chdrive.c
+  f_chmod.c
+  f_closedir.c
+  f_getcwd.c
+  f_getfree.c
+  f_getlabel.c
+  f_lseek.c
+  f_mkdir.c
+  f_opendir.c
+  f_readdir.c
+  f_rewinddir.c
+  f_seekdir.c
+  f_setlabel.c
+  f_stat.c
+  f_telldir.c
+  f_utime.c
   getchar.c
   lrand.c
   lseek.c
@@ -46,6 +63,7 @@ add_platform_library(rp6502-c
   rename.c
   ria.s
   stdin_opt.c
+  syncfs.c
   write_xram.c
   write_xstack.c
   write.c

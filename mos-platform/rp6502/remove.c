@@ -1,4 +1,5 @@
 #include "rp6502.h"
+#include <stdio.h>
 #include <errno.h>
 #include <string.h>
 

@@ -63,7 +63,7 @@ long ria_call_long(unsigned char op);
 #define RIA_OP_ZXSTACK 0x00
 #define RIA_OP_XREG 0x01
 #define RIA_OP_PHI2 0x02
-#define RIA_OP_CODEPAGE 0x03
+#define RIA_OP_CODE_PAGE 0x03
 #define RIA_OP_LRAND 0x04
 #define RIA_OP_STDIN_OPT 0x05
 #define RIA_OP_ERRNO_OPT 0x06
@@ -117,7 +117,7 @@ typedef struct {
 int xregn(char device, char channel, unsigned char address, unsigned count,
           ...);
 int phi2(void);
-int codepage(int);
+int code_page(int);
 long lrand(void);
 int stdin_opt(unsigned long ctrl_bits, unsigned char str_length);
 int read_xstack(void *buf, unsigned count, int fildes);

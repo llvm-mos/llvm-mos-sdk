@@ -32,7 +32,7 @@ add_platform_library(rp6502-c
   clock_settime.c
   clock.c
   close.c
-  codepage.c
+  code_page.c
   errno.s
   f_chdrive.c
   f_chmod.c

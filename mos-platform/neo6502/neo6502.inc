@@ -444,6 +444,12 @@ API_FN_I2C_READ     = $06 ; API function
 API_FN_ANALOG_READ  = $07 ; API function
 API_FN_I2C_STATUs   = $08 ; API function
 
+API_GROUP_MOUSE                         = $0B ; API function group
+API_FN_MOVE_DISPLAY_CURSOR              = $01 ; API function
+API_FN_SET_MOUSE_DISPLAY_CURSOR         = $02 ; API function
+API_FN_GET_MOUSE_STATE                  = $03 ; API function
+API_FN_TEST_MOUSE_PRESENT               = $04 ; API function
+API_FN_SELECT_MOUSE_CURSOR              = $05 ; API function
 
 ;--------;
 ; colors ;

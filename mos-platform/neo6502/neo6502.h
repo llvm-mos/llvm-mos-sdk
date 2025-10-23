@@ -464,8 +464,14 @@ struct __ControlPort {
 #define API_FN_UART_READ        0x11
 #define API_FN_UART_AVAILABLE   0x12
 
-// TODO: Mouse functions (Group 11)
+// Mouse functions (Group 11)
 #define API_GROUP_MOUSE 0x0B
+#define API_FN_MOVE_DISPLAY_CURSOR 1
+#define API_FN_SET_MOUSE_DISPLAY_CURSOR 2
+#define API_FN_GET_MOUSE_STATE 3
+#define API_FN_TEST_MOUSE_PRESENT 4
+#define API_FN_SELECT_MOUSE_CURSOR 5
+
 
 // TODO: Blitter functions (Group 12)
 #define API_GROUP_BLITTER 0x0C

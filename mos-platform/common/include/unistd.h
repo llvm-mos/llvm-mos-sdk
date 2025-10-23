@@ -72,6 +72,7 @@ typedef long int off_t;
 int write(int fd, const void* buf, unsigned count);
 int read(int fd, void* buf, unsigned count);
 off_t lseek(int fd, off_t offset, int whence);
+int syncfs (int fd);
 int unlink(const char* name);     /* Same as remove() */
 
 /* Directories */

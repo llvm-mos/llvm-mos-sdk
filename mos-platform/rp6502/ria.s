@@ -64,23 +64,3 @@ ria_call_long:
     ldy RIA_SREG+1
     sty __rc3
     rts
-
-; int ria_call_int_errno(unsigned char op);
-.globl ria_call_int_errno
-ria_call_int_errno:
-    sta RIA_OP
-    jsr RIA_SPIN
-    ldx RIA_X
-    bmi ERROR
-    rts
-
-; long ria_call_long_errno(unsigned char op);
-.globl ria_call_long_errno
-ria_call_long_errno:
-    jsr ria_call_long
-    bmi ERROR
-    rts
-
-ERROR:
-    lda RIA_ERRNO
-    jmp __mappederrno

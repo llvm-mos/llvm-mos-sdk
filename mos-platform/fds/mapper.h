@@ -8,20 +8,20 @@ extern "C" {
 #endif
 
 // Enables/disables disk I/O registers.
-__attribute__((leaf)) void set_disk_io(bool value);
+__attribute__((leaf)) void fds_set_disk_io(bool value);
 
 // Enables/disables sound I/O registers.
-__attribute__((leaf)) void set_sound_io(bool value);
+__attribute__((leaf)) void fds_set_sound_io(bool value);
 
 // Set the next byte to write to disk.
-__attribute__((leaf)) void write_disk_data(char value);
+__attribute__((leaf)) void fds_write_disk_data(char value);
 
 #define TRANSFER_WRITE 0
 #define TRANSFER_READ 1
 
 // Set the current disk transfer mode. Your options are
 // TRANSFER_WRITE and TRANSFER_READ.
-__attribute__((leaf)) void set_transfer_mode(bool mode);
+__attribute__((leaf)) void fds_set_transfer_mode(bool mode);
 
 #define MIRROR_VERTICAL 0
 #define MIRROR_HORIZONTAL 1
@@ -31,10 +31,10 @@ __attribute__((leaf)) void set_transfer_mode(bool mode);
 __attribute__((leaf)) void set_mirroring(char mirroring);
 
 // Set all 8 bits of the $4025 FDS Control register.
-__attribute__((leaf)) void set_fds_ctrl(char value);
+__attribute__((leaf)) void fds_set_ctrl(char value);
 
 // Write 7-bit data to the rear expansion port ($4026).
-__attribute__((leaf)) void write_ext_data(char value);
+__attribute__((leaf)) void fds_write_ext_data(char value);
 
 struct __fds_read {
     unsigned char disk_status;

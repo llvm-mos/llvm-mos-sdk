@@ -43,6 +43,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - [UNROM-512](https://www.nesdev.org/wiki/UNROM_512)
   - [MMC1](https://www.nesdev.org/wiki/MMC1)
   - [MMC3](https://www.nesdev.org/wiki/MMC3)
+  - [Family Computer Disk System](https://www.nesdev.org/wiki/Family_Computer_Disk_System)
 - [Ohio Scientific Challenger 1P](https://en.wikipedia.org/wiki/Ohio_Scientific#Superboard_II,_Challenger_1P_(1978))
 - [OLIMEX Neo6502](https://www.olimex.com/Products/Retro-Computers/Neo6502/open-source-hardware)
 - [Picocomputer 6502](https://picocomputer.github.io) (RP6502)

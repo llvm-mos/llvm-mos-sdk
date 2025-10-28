@@ -5,7 +5,6 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
-  common.ld
   prg-ram.ld
   c-in-prg-ram.ld
 TYPE LIB)

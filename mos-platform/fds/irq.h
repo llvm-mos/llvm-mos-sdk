@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
-#ifndef _BIOS_H_
-#define _BIOS_H_
+#ifndef _IRQ_H_
+#define _IRQ_H_
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,3 +1,4 @@
+#include "mapper.h"
 #include <peekpoke.h>
 #include <stdbool.h>
 

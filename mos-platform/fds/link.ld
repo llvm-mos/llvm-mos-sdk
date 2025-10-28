@@ -7,7 +7,7 @@ ASSERT(__rc31 == 0x2f, "Inconsistent zero page map.")
 
 MEMORY {
   /* The FDS BIOS uses 16 bytes at the beginning and 15 bytes at the end - 31 bytes total - of the zero page. */
-  zp : ORIGIN = __rc31 + 1, LENGTH = (0x100 - 31) - (__rc31 + 1)
+  zp : ORIGIN = __rc31 + 1, LENGTH = (0x100 - 15) - (__rc31 + 1)
 
   /* CPU address space. */
   ram : ORIGIN = 0x0200, LENGTH = 0x0600

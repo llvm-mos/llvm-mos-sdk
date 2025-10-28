@@ -45,7 +45,7 @@ SECTIONS {
 
   .ram (NOLOAD) : { *(.ram .ram.*) } > ram
 
-  .vectors (COPY) : { KEEP(*(.vectors)) }
+  .vectors (INFO) : { KEEP(*(.vectors)) }
 }
 
 INCLUDE prg-ram.ld

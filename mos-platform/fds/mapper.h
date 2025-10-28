@@ -73,7 +73,7 @@ struct __fds_apu {
   unsigned char mod_ctr_val;
 };
 
-#define FDS_APU (*(volatile struct __apu*)0x4040)
+#define FDS_APU (*(volatile struct __fds_apu*)0x4040)
 
 #ifdef __cplusplus
 }

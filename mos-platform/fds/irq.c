@@ -7,7 +7,7 @@ void fds_set_timer_irq_reload(unsigned value) {
 }
 
 void fds_set_timer_irq_ctrl(bool enabled, bool repeat) {
-  POKE(0x4022, (enabled << 1) & repeat);
+  POKE(0x4022, (enabled << 1) | repeat);
 }
 
 void fds_set_nmi_action(char action) {

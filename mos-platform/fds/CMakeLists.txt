@@ -5,10 +5,6 @@ if(NOT CMAKE_CROSSCOMPILING)
 endif()
 
 install(FILES
-  prg-ram.ld
-  c-in-prg-ram.ld
-TYPE LIB)
-install(FILES
   irq.h
   mapper.h
 TYPE INCLUDE)

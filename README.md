@@ -49,6 +49,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
 - [PC Engine / TurboGrafx-16](https://en.wikipedia.org/wiki/TurboGrafx-16)
   - [PC Engine CD](https://en.wikipedia.org/wiki/TurboGrafx-16#TurboGrafx-CD/CD-ROM%C2%B2)
 - [RPC/8e](http://www.eloraam.com/blog/2012/04/22/rp-control-internals/) (RedPower 2)
+- [SNES [(Nintendo Entertainment System)] (https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System)
 - 6502 simulator (included)
 
 ## Notable features
@@ -182,6 +183,7 @@ executables and libraries for that target.
 | PC Engine                       | Standard           | `mos-pce-clang`                  |
 | PC Engine                       | CD                 | `mos-pce-cd-clang`               |
 | RPC/8e (RedPower 2)             | -                  | `mos-rpc8e-clang`                |
+| SNES                            | -                  | `mos-snes-clang`                 |
 | Watara Supervision              | -                  | `mos-supervision-clang`          |
 | 6502 simulator                  | -                  | `mos-sim-clang`                  |
 

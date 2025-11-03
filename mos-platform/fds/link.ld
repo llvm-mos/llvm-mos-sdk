@@ -51,7 +51,13 @@ SECTIONS {
   .ram (NOLOAD) : { *(.ram .ram.*) } > ram
   .prg_ram (NOLOAD) : { *(.prg_ram .prg_ram.*) } >prg_ram
 
-  .vectors (INFO) : { KEEP(*(.vectors)) }
+  .vectors (INFO) : {
+    SHORT(nmi_user_1)
+    SHORT(nmi_user_2)
+    SHORT(bypass)
+    SHORT(_start)
+    SHORT(irq)
+  }
 }
 
 REGION_ALIAS("c_readonly", prg_ram)

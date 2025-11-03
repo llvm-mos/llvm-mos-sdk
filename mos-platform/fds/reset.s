@@ -8,9 +8,8 @@
 ; NMI handler, we can disable NMIs again, set our
 ; actual handler, and jump into our program before the
 ; BIOS attempts to check for the license text.
-;
-; TODO: Make this weak/modifiable.
-.section .text.bypass,"axR",@progbits
+.text
+.weak bypass
 bypass:
   lda #$00
   sta $2000
@@ -23,10 +22,3 @@ bypass:
   lda #$AC
   sta $0103
   jmp ($FFFC)
-
-.section .vectors
-.short nmi_user_1
-.short nmi_user_2
-.short bypass
-.short _start
-.short irq

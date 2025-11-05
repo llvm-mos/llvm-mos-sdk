@@ -6,5 +6,4 @@
 .global fds_bios_Delayms
 fds_bios_Delayms:
   tay
-  jsr __DELAY_MS
-  rts
+  jmp __DELAY_MS

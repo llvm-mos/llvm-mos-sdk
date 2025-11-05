@@ -14,5 +14,4 @@ fds_bios_GetDiskInfo:
   sta [__fds_bios_GetDiskInfo+3]
   lda __rc3
   sta [__fds_bios_GetDiskInfo+4]
-  jsr __fds_bios_GetDiskInfo
-  rts
+  jmp __fds_bios_GetDiskInfo

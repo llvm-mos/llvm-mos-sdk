@@ -19,5 +19,4 @@ fds_bios_WriteFile:
   stx [__fds_bios_WriteFile+5]
   ldx __rc5
   stx [__fds_bios_WriteFile+6]
-  jsr __fds_bios_WriteFile
-  rts
+  jmp __fds_bios_WriteFile

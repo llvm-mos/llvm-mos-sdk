@@ -6,5 +6,4 @@
 .global fds_bios_MemFill
 fds_bios_MemFill:
   ldy __rc2
-  jsr __MEM_FILL
-  rts
+  jmp __MEM_FILL

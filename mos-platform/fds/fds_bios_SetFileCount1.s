@@ -14,5 +14,4 @@ fds_bios_SetFileCount1:
   stx [__fds_bios_SetFileCount1+3]
   ldx __rc3
   stx [__fds_bios_SetFileCount1+4]
-  jsr __fds_bios_SetFileCount1
-  rts
+  jmp __fds_bios_SetFileCount1

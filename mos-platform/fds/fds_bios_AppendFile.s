@@ -19,5 +19,4 @@ fds_bios_AppendFile:
   sta [__fds_bios_AppendFile+5]
   lda __rc5
   sta [__fds_bios_AppendFile+6]
-  jsr __fds_bios_AppendFile
-  rts
+  jmp __fds_bios_AppendFile

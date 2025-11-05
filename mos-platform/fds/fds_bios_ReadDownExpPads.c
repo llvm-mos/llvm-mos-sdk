@@ -1,6 +1,6 @@
 #include "bios.h"
 
-extern void __READ_DOWN_EXP_PADS(void) __attribute__((leaf));
+void __READ_DOWN_EXP_PADS(void) __attribute__((leaf));
 
 struct fds_bios_trans_exp_pads *fds_bios_ReadDownExpPads(void) {
   __READ_DOWN_EXP_PADS();

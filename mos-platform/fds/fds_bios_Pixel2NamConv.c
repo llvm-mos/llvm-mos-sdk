@@ -1,7 +1,7 @@
 #include "bios.h"
 #include <peekpoke.h>
 
-extern void __PIXEL_TO_NAM_CONV(void) __attribute__((leaf));
+void __PIXEL_TO_NAM_CONV(void) __attribute__((leaf));
 
 unsigned fds_bios_Pixel2NamConv(struct fds_bios_coords coords) {
   POKE(0x02, coords.y);

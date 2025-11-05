@@ -1,6 +1,6 @@
 #include <peekpoke.h>
 
-extern void __GET_NUM_FILES(void) __attribute__((leaf));
+void __GET_NUM_FILES(void) __attribute__((leaf));
 
 unsigned char fds_bios_GetNumFiles(void) {
   __GET_NUM_FILES();

@@ -1,7 +1,7 @@
 #include "bios.h"
 #include <peekpoke.h>
 
-extern void __OR_PADS(void) __attribute__((leaf));
+void __OR_PADS(void) __attribute__((leaf));
 
 struct fds_bios_pads_combined fds_bios_OrPads(struct fds_bios_pads pads) {
   POKE(0xF5, pads.pad[0]);

@@ -1,7 +1,7 @@
 #include "bios.h"
 #include <peekpoke.h>
 
-extern void __READ_PADS(void) __attribute__((leaf));
+void __READ_PADS(void) __attribute__((leaf));
 
 struct fds_bios_pads fds_bios_ReadPads(void) {
   __READ_PADS();

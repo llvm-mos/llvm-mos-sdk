@@ -109,7 +109,7 @@ $(function() {
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Miscellaneous functions</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="string_8h.html#a4cb469bec7b722064b97a406346acb61">   41</a></span>&#160;<span class="keywordtype">void</span> *<a class="code" href="string_8h.html#a4cb469bec7b722064b97a406346acb61">memset</a>(<span class="keywordtype">void</span> *ptr, <span class="keywordtype">int</span> value, <span class="keywordtype">size_t</span> num);</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="string_8h.html#a4cb469bec7b722064b97a406346acb61">   41</a></span>&#160;<span class="keywordtype">void</span> *<a class="code" href="string_8h.html#a4cb469bec7b722064b97a406346acb61">memset</a>(<span class="keywordtype">void</span> *ptr, <span class="keywordtype">int</span> <a class="code" href="fds_2bios_8h.html#a1de5cca0fbfc376f5a6997b84006e25e">value</a>, <span class="keywordtype">size_t</span> num);</div>
 <div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="string_8h.html#a828c93c902d3cdaca675c2ebeabdcc30">   42</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="string_8h.html#a828c93c902d3cdaca675c2ebeabdcc30">strerror</a>(<span class="keywordtype">int</span> n);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="string_8h.html#aa383452fe445bfae989358c9d7d96f4f">   44</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="string_8h.html#aa383452fe445bfae989358c9d7d96f4f">strlen</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s);</div>
@@ -119,7 +119,7 @@ $(function() {
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// Version of memset with better arguments for MOS. All non-pointer arguments</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// can fit in registers, and there is no superfluous return value. Compiler</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// intrinsic memset calls use this version, and user code is free to as well.</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> __memset(<span class="keywordtype">char</span> *ptr, <span class="keywordtype">char</span> value, <span class="keywordtype">size_t</span> num);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> __memset(<span class="keywordtype">char</span> *ptr, <span class="keywordtype">char</span> <a class="code" href="fds_2bios_8h.html#a1de5cca0fbfc376f5a6997b84006e25e">value</a>, <span class="keywordtype">size_t</span> num);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
@@ -127,6 +127,7 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// not _STRING_H_</span></div>
 <div class="ttc" id="adodo_2api_8h_html_a8d4cf0a552cf0437a3cc208b0e065952"><div class="ttname"><a href="dodo_2api_8h.html#a8d4cf0a552cf0437a3cc208b0e065952">c</a></div><div class="ttdeci">byte byte c</div><div class="ttdef"><b>Definition:</b> api.h:59</div></div>
+<div class="ttc" id="afds_2bios_8h_html_a1de5cca0fbfc376f5a6997b84006e25e"><div class="ttname"><a href="fds_2bios_8h.html#a1de5cca0fbfc376f5a6997b84006e25e">value</a></div><div class="ttdeci">char value</div><div class="ttdef"><b>Definition:</b> bios.h:265</div></div>
 <div class="ttc" id="astring_8h_html_a07f4a84c11c106e95c32b6ab509346ef"><div class="ttname"><a href="string_8h.html#a07f4a84c11c106e95c32b6ab509346ef">strncmp</a></div><div class="ttdeci">int strncmp(const char *s1, const char *s2, size_t n)</div></div>
 <div class="ttc" id="astring_8h_html_a0c05a458deff028ef4d4e64059098db4"><div class="ttname"><a href="string_8h.html#a0c05a458deff028ef4d4e64059098db4">strrchr</a></div><div class="ttdeci">char * strrchr(const char *s, int c)</div></div>
 <div class="ttc" id="astring_8h_html_a0c23f3ad5d354081f857a03369000b9b"><div class="ttname"><a href="string_8h.html#a0c23f3ad5d354081f857a03369000b9b">strcat</a></div><div class="ttdeci">char * strcat(char *__restrict__ s1, const char *__restrict__ s2)</div></div>

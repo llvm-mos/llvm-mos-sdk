@@ -111,7 +111,7 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Write a byte to extended RAM at set offset</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// RAM must be selected first, or use banked_call_ram</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f">   43</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f">xram_write</a>(<span class="keywordtype">int</span> offset, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> value);</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f">   43</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f">xram_write</a>(<span class="keywordtype">int</span> offset, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="fds_2bios_8h.html#a1de5cca0fbfc376f5a6997b84006e25e">value</a>);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// Read a byte from extended RAM at set offset</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">// RAM must be selected first, or use banked_call_ram</span></div>
@@ -122,6 +122,7 @@ $(function() {
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// _MAPPER_H_</span></div>
+<div class="ttc" id="afds_2bios_8h_html_a1de5cca0fbfc376f5a6997b84006e25e"><div class="ttname"><a href="fds_2bios_8h.html#a1de5cca0fbfc376f5a6997b84006e25e">value</a></div><div class="ttdeci">char value</div><div class="ttdef"><b>Definition:</b> bios.h:265</div></div>
 <div class="ttc" id="amapper__xram__single_8h_html_a3c7086d577e56891127c05fc2f7cd43a"><div class="ttname"><a href="mapper__xram__single_8h.html#a3c7086d577e56891127c05fc2f7cd43a">method</a></div><div class="ttdeci">void(* method)(void))</div><div class="ttdef"><b>Definition:</b> mapper_xram_single.h:39</div></div>
 <div class="ttc" id="amapper__xram__single_8h_html_a66c05a3456c22c6fc517e6787fa84203"><div class="ttname"><a href="mapper__xram__single_8h.html#a66c05a3456c22c6fc517e6787fa84203">xram_read</a></div><div class="ttdeci">unsigned char xram_read(int offset)</div></div>
 <div class="ttc" id="amapper__xram__single_8h_html_a69902bb10c3dfd6132eeee0690ae033f"><div class="ttname"><a href="mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f">xram_write</a></div><div class="ttdeci">void xram_write(int offset, unsigned char value)</div></div>

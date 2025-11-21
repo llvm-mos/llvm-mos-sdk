@@ -196,6 +196,8 @@ int main(int argc, const char *argv[]) {
   }
 
   char status_buf[9];
+  status_buf[8] = '\0';
+
   const char statuses[] = "czidb1vn";
 
   reset6502(cmos);

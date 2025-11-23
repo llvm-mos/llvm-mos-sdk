@@ -195,14 +195,13 @@ int main(int argc, const char *argv[]) {
     }
   }
 
-  char status_buf[9];
-  status_buf[8] = '\0';
-
-  const char statuses[] = "czidb1vn";
-
   reset6502(cmos);
   for (;;) {
-    if (shouldTrace){
+    char status_buf[9];
+    status_buf[8] = '\0';
+    const char statuses[] = "czidb1vn";
+
+    if (shouldTrace) {
       for (int i=0; i<8; ++i) {
         status_buf[7-i] = status&(1<<i) ?
           statuses[i] : '.';

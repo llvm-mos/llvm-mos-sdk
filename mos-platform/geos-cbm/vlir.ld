@@ -1,4 +1,5 @@
 __overlaysize   = DEFINED(__overlaysize_param) ? __overlaysize_param : 0x1000;
+__appram_start  = DEFINED(__appram_start_param) ? __appram_start_param : 0x0400;
 
 __backbufsize	= 0x2000;
 __overlayaddr 	= 0x8000 - __backbufsize - __overlaysize;
@@ -9,8 +10,8 @@ __zp_reg_end    = 0xfb;
 __zp_reg_size   = __zp_reg_end - __zp_reg_start;
 
 MEMORY {
-  zp          : ORIGIN = __zp_reg_start, LENGTH = __zp_reg_size
-  vlir00 : ORIGIN = 0x0400, LENGTH = __overlayaddr - __stacksize - 0x0400 
+  zp     : ORIGIN = __zp_reg_start, LENGTH = __zp_reg_size
+  vlir00 : ORIGIN = __appram_start, LENGTH = __overlayaddr - __stacksize - __appram_start 
   vlir01 : ORIGIN = __overlayaddr+0x010000, LENGTH = __overlaysize
   vlir02 : ORIGIN = __overlayaddr+0x020000, LENGTH = __overlaysize
   vlir03 : ORIGIN = __overlayaddr+0x030000, LENGTH = __overlaysize

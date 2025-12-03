@@ -12,6 +12,7 @@
 #define GEOS_MEMORYMAP_H
 
 #define SET_OVERLAYSIZE(bytes) asm(".globl __overlaysize_param\n__overlaysize_param = " #bytes)
+#define SET_APPRAM_START(adr) asm(".globl __appram_start_param\n__appram_start_param = " #adr)
 
 #define APP_RAM 0x0400       /** start of application space */
 #define BACK_SCR_BASE 0x6000 /** base of background screen */

@@ -87,6 +87,8 @@ This graph shows which files directly or indirectly include this file:</div>
 Macros</h2></td></tr>
 <tr class="memitem:a311831a2086885a3ff5044fe0a02de08"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geos__memorymap_8h.html#a311831a2086885a3ff5044fe0a02de08">SET_OVERLAYSIZE</a>(bytes)&#160;&#160;&#160;asm(&quot;.globl __overlaysize_param\n__overlaysize_param = &quot; #bytes)</td></tr>
 <tr class="separator:a311831a2086885a3ff5044fe0a02de08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dbd9042bbd85b7b84ece6241b2e6cf1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geos__memorymap_8h.html#a9dbd9042bbd85b7b84ece6241b2e6cf1">SET_APPRAM_START</a>(adr)&#160;&#160;&#160;asm(&quot;.globl __appram_start_param\n__appram_start_param = &quot; #adr)</td></tr>
+<tr class="separator:a9dbd9042bbd85b7b84ece6241b2e6cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58a505ad6d4813f211aee18def8434e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geos__memorymap_8h.html#a58a505ad6d4813f211aee18def8434e8">APP_RAM</a>&#160;&#160;&#160;0x0400       /** <a class="el" href="fds_2bios_8h.html#ad56f39f054765ea9dd480006512069cf">start</a> of application space */</td></tr>
 <tr class="separator:a58a505ad6d4813f211aee18def8434e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92b5c9880b22d0ecdfae6c45c40f7fa6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="geos__memorymap_8h.html#a92b5c9880b22d0ecdfae6c45c40f7fa6">BACK_SCR_BASE</a>&#160;&#160;&#160;0x6000 /** base of background screen */</td></tr>
@@ -357,6 +359,24 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define SCREEN_BASE&#160;&#160;&#160;0xa000   /** base of foreground screen */</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9dbd9042bbd85b7b84ece6241b2e6cf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dbd9042bbd85b7b84ece6241b2e6cf1">&#9670;&nbsp;</a></span>SET_APPRAM_START</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SET_APPRAM_START</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">adr</td><td>)</td>
+          <td>&#160;&#160;&#160;asm(&quot;.globl __appram_start_param\n__appram_start_param = &quot; #adr)</td>
         </tr>
       </table>
 </div><div class="memdoc">

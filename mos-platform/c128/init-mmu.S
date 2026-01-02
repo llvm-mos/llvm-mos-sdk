@@ -8,7 +8,7 @@ __mmusave:
 .section .init.010,"ax",@progbits
         lda MMU_CR
         sta __mmusave
-        lda MMU_CFG_RAM0_KERNAL ; map $4000-$BFFF to RAM, $C000-$FFFF to KERNAL/chargen
+        lda #MMU_CFG_RAM0_KERNAL ; map $4000-$BFFF to RAM, $C000-$FFFF to KERNAL/chargen
         sta MMU_CR
 
 ; restore MMU state after all other exit handlers have completed

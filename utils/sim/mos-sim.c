@@ -108,6 +108,7 @@ void write6502(uint16_t address, uint8_t value) {
     exit(value);
   case 0xFFF9:
     putchar(value);
+    fflush(stdout);
     break;
   }
 }

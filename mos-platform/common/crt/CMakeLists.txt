@@ -13,11 +13,30 @@ add_platform_library(common-crt
 )
 
 # Merge the builtins library from llvm-mos into libcrt.
-get_filename_component(compiler_dir ${CMAKE_C_COMPILER} DIRECTORY)
-file(GLOB builtins_dir ${compiler_dir}/../lib/clang/*/lib/mos-unknown-unknown)
-list(LENGTH builtins_dir num_builtins_dirs)
-if(NOT num_builtins_dirs EQUAL 1)
-  message(FATAL_ERROR "Found ${num_builtins_dirs} builtin dirs; expected 1")
+# Query clang for its resource directory
+execute_process(
+  COMMAND ${CMAKE_C_COMPILER} -print-resource-dir
+  RESULT_VARIABLE CLANG_RESOURCE_RESULT
+  OUTPUT_VARIABLE CLANG_RESOURCE_DIR
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+if(NOT CLANG_RESOURCE_RESULT EQUAL 0)
+  message(FATAL_ERROR
+    "Failed to run ${CMAKE_C_COMPILER} -print-resource-dir")
 endif()
-find_library(builtins clang_rt.builtins REQUIRED PATHS ${builtins_dir} NO_DEFAULT_PATH)
+
+set(BUILTINS_DIR
+  ${CLANG_RESOURCE_DIR}/lib/mos-unknown-unknown)
+
+if(NOT EXISTS "${BUILTINS_DIR}")
+  message(FATAL_ERROR
+    "Builtins directory not found: ${BUILTINS_DIR}")
+endif()
+
+find_library(builtins clang_rt.builtins REQUIRED
+  PATHS ${BUILTINS_DIR}
+  NO_DEFAULT_PATH
+)
+
 merge_libraries(common-crt ${builtins})

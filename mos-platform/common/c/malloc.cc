@@ -16,6 +16,20 @@
 
 extern char __heap_start;
 extern char __heap_default_limit;
+extern char __stack_reserve_size;
+
+// Get current soft stack pointer value
+__asm__ (
+".text\n"
+".global __get_current_stack_top\n"
+"__get_current_stack_top:\n"
+"  lda __rc0\n"    // Load low byte of soft stack pointer
+"  ldx __rc1\n"    // Load high byte of soft stack pointer  
+"  rts\n"
+);
+
+// Declare the assembly function for C
+extern "C" size_t __get_current_stack_top();
 
 namespace {
 
@@ -179,6 +193,7 @@ FreeChunk *find_fit(size_t size) {
   return nullptr;
 }
 
+"  rts\n"
 // Allocate at chunk of size bytes from a free chunk. The pointer returned
 // points to the contents (past the chunk header).
 void *allocate_free_chunk(FreeChunk *free_chunk, size_t size) {
@@ -221,24 +236,44 @@ extern "C" {
 
 size_t __heap_limit() { return heap_limit; }
 
-void __set_heap_limit(size_t new_limit) {
+size_t __get_heap_max_safe_size() {
+  size_t stack_location = __get_current_stack_top();
+  size_t reserve_size = (size_t)&__stack_reserve_size;
+  size_t heap_start = (size_t)&__heap_start;
+  
+  if (stack_location <= heap_start + reserve_size) {
+    // Stack is too close to heap start; no safe heap possible
+    return 0;
+  }
+  
+  return stack_location - heap_start - reserve_size;
+}
+
+size_t __set_heap_limit(size_t new_limit) {
   TRACE("__set_heap_limit(%u)\n", new_limit);
 
   // Chunk sizes must be a multiple of two.
   if (new_limit & 1)
     --new_limit;
 
+  // Cap the request to avoid stack collision
+  size_t max_safe = __get_heap_max_safe_size();
+  if (new_limit > max_safe) {
+    TRACE("Capping requested limit %u to max safe %u\n", new_limit, max_safe);
+    new_limit = max_safe;
+  }
+
   if (!initialized) {
     heap_limit = (new_limit < MIN_CHUNK_SIZE) ? MIN_CHUNK_SIZE : new_limit;
     TRACE("Heap not yet initialized. Set limit to %u.\n", heap_limit);
-    return;
+    return heap_limit;
   }
 
   // TODO: We can make this actually shrink the heap too...
   if (new_limit <= heap_limit) {
-    TRACE("New limit %u smaller than current %u; returning.", new_limit,
+    TRACE("New limit %u smaller than current %u; returning.\n", new_limit,
           heap_limit);
-    return;
+    return heap_limit;
   }
 
   size_t grow = new_limit - heap_limit;
@@ -255,7 +290,7 @@ void __set_heap_limit(size_t new_limit) {
     TRACE("Last chunk not free.\n");
     if (grow < MIN_CHUNK_SIZE) {
       TRACE("Not enough new size for a chunk; returning.\n");
-      return;
+      return heap_limit;
     }
     TRACE("Inserting new chunk.\n");
     FreeChunk::insert(heap_end(), grow);
@@ -263,6 +298,7 @@ void __set_heap_limit(size_t new_limit) {
   }
 
   heap_limit = new_limit;
+  return heap_limit;
 }
 
 size_t __heap_bytes_used() { return heap_limit - free_size; }

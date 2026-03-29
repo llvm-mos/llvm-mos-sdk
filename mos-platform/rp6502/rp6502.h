@@ -62,11 +62,10 @@ long ria_call_long(unsigned char op);
 #define RIA_OP_EXIT 0xFF
 #define RIA_OP_ZXSTACK 0x00
 #define RIA_OP_XREG 0x01
-#define RIA_OP_PHI2 0x02
-#define RIA_OP_CODE_PAGE 0x03
-#define RIA_OP_LRAND 0x04
-#define RIA_OP_STDIN_OPT 0x05
-#define RIA_OP_ERRNO_OPT 0x06
+#define RIA_OP_ARGV 0x08
+#define RIA_OP_EXEC 0x09
+#define RIA_OP_ATTR_GET 0x0A
+#define RIA_OP_ATTR_SET 0x0B
 #define RIA_OP_CLOCK 0x0F
 #define RIA_OP_CLOCK_GETRES 0x10
 #define RIA_OP_CLOCK_GETTIME 0x11
@@ -101,6 +100,16 @@ long ria_call_long(unsigned char op);
 #define RIA_OP_GETLABEL 0x2D
 #define RIA_OP_GETFREE 0x2E
 
+/* RIA attribute IDs */
+
+#define RIA_ATTR_ERRNO_OPT 0x00
+#define RIA_ATTR_PHI2_KHZ 0x01
+#define RIA_ATTR_CODE_PAGE 0x02
+#define RIA_ATTR_RLN_LENGTH 0x03
+#define RIA_ATTR_LRAND 0x04
+#define RIA_ATTR_BEL 0x05
+#define RIA_ATTR_LAUNCHER 0x06
+
 /* C API for the operating system. */
 
 typedef struct {
@@ -116,10 +125,13 @@ typedef struct {
 
 int xregn(char device, char channel, unsigned char address, unsigned count,
           ...);
-int phi2(void);
-int code_page(int);
-long lrand(void);
-int stdin_opt(unsigned long ctrl_bits, unsigned char str_length);
+int phi2(void);     // deprecated, use ria_attr_*
+int code_page(int); // deprecated, use ria_attr_*
+long lrand(void);   // deprecated, use ria_attr_*
+int ria_execv(const char *path, char *const argv[]);
+int ria_execl(const char *path, ...);
+long ria_attr_get(unsigned char id);
+int ria_attr_set(long val, unsigned char id);
 int read_xstack(void *buf, unsigned count, int fildes);
 int read_xram(unsigned buf, unsigned count, int fildes);
 int write_xstack(const void *buf, unsigned count, int fildes);

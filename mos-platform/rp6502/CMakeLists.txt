@@ -62,7 +62,9 @@ add_platform_library(rp6502-c
   remove.c
   rename.c
   ria.s
-  stdin_opt.c
+  ria_attr.c
+  ria_execl.c
+  ria_execv.c
   syncfs.c
   write_xram.c
   write_xstack.c

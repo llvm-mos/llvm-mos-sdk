@@ -33,11 +33,10 @@ RIA_SREG        = $FFF8
 RIA_OP_EXIT               = $FF
 RIA_OP_ZXSTACK            = $00
 RIA_OP_XREG               = $01
-RIA_OP_PHI2               = $02
-RIA_OP_CODE_PAGE          = $03
-RIA_OP_LRAND              = $04
-RIA_OP_STDIN_OPT          = $05
-RIA_OP_ERRNO_OPT          = $06
+RIA_OP_ARGV               = $08
+RIA_OP_EXEC               = $09
+RIA_OP_ATTR_GET           = $0A
+RIA_OP_ATTR_SET           = $0B
 RIA_OP_CLOCK              = $0F
 RIA_OP_CLOCK_GETRES       = $10
 RIA_OP_CLOCK_GETTIME      = $11
@@ -71,6 +70,15 @@ RIA_OP_GETCWD             = $2B
 RIA_OP_SETLABEL           = $2C
 RIA_OP_GETLABEL           = $2D
 RIA_OP_GETFREE            = $2E
+
+; RIA attribute IDs
+RIA_ATTR_ERRNO_OPT        = $00
+RIA_ATTR_PHI2_KHZ         = $01
+RIA_ATTR_CODE_PAGE        = $02
+RIA_ATTR_RLN_LENGTH       = $03
+RIA_ATTR_LRAND            = $04
+RIA_ATTR_BEL              = $05
+RIA_ATTR_LAUNCHER         = $06
 
 ; 6522 VIA
 VIA             = $FFD0        ; VIA base address

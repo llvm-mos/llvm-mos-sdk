@@ -9,8 +9,10 @@
 ; Request the RIA use llvm-mos values for RIA_ERRNO
 
 .section .init.100,"ax",@progbits
-  lda #$02 ; 2 = llvm-mos
+  lda #RIA_ATTR_ERRNO_OPT
   sta RIA_A
-  lda #RIA_OP_ERRNO_OPT
+  lda #$02 ; 2 = llvm-mos
+  sta RIA_XSTACK
+  lda #RIA_OP_ATTR_SET
   sta RIA_OP
   jsr RIA_SPIN

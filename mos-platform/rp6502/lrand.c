@@ -1,3 +1,3 @@
 #include "rp6502.h"
 
-long lrand(void) { return ria_call_long(RIA_OP_LRAND); }
+long lrand(void) { return ria_attr_get(RIA_ATTR_LRAND); }

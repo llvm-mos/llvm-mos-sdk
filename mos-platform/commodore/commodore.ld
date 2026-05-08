@@ -8,6 +8,9 @@
 /* Provide imaginary (zero page) registers in the BASIC area. */
 __rc0 = __basic_zp_start;
 INCLUDE imag-regs.ld
+
+/* Size of BASIC ZP region for save-basic library. */
+__basic_zp_size = __basic_zp_end - __basic_zp_start;
 /* No assertion - cx16 uses a non-contiguous imaginary register block larger than 32 bytes. */
 
 MEMORY { zp : ORIGIN = __rc31 + 1, LENGTH = __basic_zp_end - (__rc31 + 1) }

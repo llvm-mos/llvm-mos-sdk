@@ -61,7 +61,7 @@ uint64_t clockTicksAtAddress[65536];
 
 void finish(void);
 
-int8_t read6502(uint16_t address) {
+uint8_t read6502(uint16_t address) {
   if (address == 0xfff0) {
     *((uint32_t *)(memory + address)) = clockticks6502 - clock_start;
   } else if (address == 0xfff5) {

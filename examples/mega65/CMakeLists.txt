@@ -14,3 +14,12 @@ add_executable(dma_audio.prg dma_audio.c)
 install_example(dma_audio.prg)
 install(FILES drums.s8 TYPE BIN)
 
+add_executable(mandelbrot.prg mandelbrot.cc)
+install_example(mandelbrot.prg)
+
+add_executable(mandelbrot_fcm.prg mandelbrot_fcm.cc)
+install_example(mandelbrot_fcm.prg)
+
+add_executable(vector_logo.prg vector_logo.cc)
+install_example(vector_logo.prg)
+

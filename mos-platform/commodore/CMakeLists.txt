@@ -71,3 +71,5 @@ add_platform_library(commodore-c
 
 target_include_directories(commodore-c BEFORE PUBLIC .)
 target_link_libraries(commodore-c PRIVATE common-asminc)
+
+add_platform_object_file(commodore-save-basic save-basic.o save-basic.S)

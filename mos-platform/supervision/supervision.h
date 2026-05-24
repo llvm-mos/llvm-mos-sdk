@@ -61,7 +61,7 @@ struct __sv_noise {
 	uint8_t length;
 	uint8_t control;
 };
-#define SV_AUDIO_NOISE (*(volatile strut __sv_noise*) 0x2028)
+#define SV_AUDIO_NOISE (*(volatile struct __sv_noise*) 0x2028)
 
 #define SV_AUDIO_NOISE_DIV_8     0x00
 #define SV_AUDIO_NOISE_DIV_16    0x01

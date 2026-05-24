@@ -51,6 +51,7 @@ The LLVM-MOS compiler toolchain and platform libraries.
   - [PC Engine CD](https://en.wikipedia.org/wiki/TurboGrafx-16#TurboGrafx-CD/CD-ROM%C2%B2)
 - [RPC/8e](http://www.eloraam.com/blog/2012/04/22/rp-control-internals/) (RedPower 2)
 - 6502 simulator (included)
+- [Supervision](https://en.wikipedia.org/wiki/Watara_Supervision)
 
 ## Notable features
 

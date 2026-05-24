@@ -115,6 +115,8 @@ long ria_call_long(unsigned char op);
 #define RIA_ATTR_EXIT_CODE 0x07
 #define RIA_ATTR_SIGINT 0x08
 #define RIA_ATTR_RLN_CAPS 0x09
+#define RIA_ATTR_RLN_WIDTH 0x0A
+#define RIA_ATTR_RLN_HEIGHT 0x0B
 
 /* C API for the operating system. */
 

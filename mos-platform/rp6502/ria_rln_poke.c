@@ -2,7 +2,7 @@
 #include <rp6502.h>
 #include <string.h>
 
-int ria_readline_poke(const char *poke) {
+int ria_rln_poke(const char *poke) {
   int i;
   size_t pokelen = strlen(poke);
   if (pokelen > 254) {

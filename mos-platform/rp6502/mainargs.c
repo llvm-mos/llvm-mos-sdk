@@ -25,7 +25,7 @@ void __do_initmainargs(void) {
 
   void *buf = argv_mem((size_t)(unsigned int)size);
   if (!buf) {
-    ria_call_int(RIA_OP_ZXSTACK); /* discard pending xstack data */
+    RIA.op = RIA_OP_ZXSTACK;
     return;
   }
 

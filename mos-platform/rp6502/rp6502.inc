@@ -38,10 +38,6 @@ RIA_OP_EXEC               = $09
 RIA_OP_ATTR_GET           = $0A
 RIA_OP_ATTR_SET           = $0B
 RIA_OP_CLOCK              = $0F
-RIA_OP_CLOCK_GETRES       = $10
-RIA_OP_CLOCK_GETTIME      = $11
-RIA_OP_CLOCK_SETTIME      = $12
-RIA_OP_CLOCK_GETTIMEZONE  = $13
 RIA_OP_OPEN               = $14
 RIA_OP_CLOSE              = $15
 RIA_OP_READ_XSTACK        = $16
@@ -73,6 +69,12 @@ RIA_OP_GETFREE            = $2E
 RIA_OP_RLN_LASTKEY        = $30
 RIA_OP_RLN_PEEK           = $31
 RIA_OP_RLN_POKE           = $32
+RIA_OP_TIME_GET           = $38
+RIA_OP_TIME_SET           = $39
+RIA_OP_GMTIME             = $3A
+RIA_OP_LOCALTIME          = $3B
+RIA_OP_MKTIME             = $3C
+RIA_OP_STRFTIME           = $3D
 
 ; RIA attribute IDs
 RIA_ATTR_ERRNO_OPT        = $00

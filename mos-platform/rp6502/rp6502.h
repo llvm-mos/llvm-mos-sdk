@@ -119,6 +119,7 @@ long ria_call_long(unsigned char op);
 #define RIA_ATTR_RLN_CAPS 0x09
 #define RIA_ATTR_RLN_WIDTH 0x0A
 #define RIA_ATTR_RLN_HEIGHT 0x0B
+#define RIA_ATTR_RLN_SUPPRESS_NL 0x0C
 
 /* C API for the operating system. */
 

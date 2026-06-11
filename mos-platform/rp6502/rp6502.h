@@ -5,6 +5,27 @@
 extern "C" {
 #endif
 
+/* RP6502 VIA $FFD0-$FFDF */
+struct __6522 {
+  unsigned char prb;    /* Port register B */
+  unsigned char pra;    /* Port register A */
+  unsigned char ddrb;   /* Data direction register B */
+  unsigned char ddra;   /* Data direction register A */
+  unsigned char t1_lo;  /* Timer 1, low byte */
+  unsigned char t1_hi;  /* Timer 1, high byte */
+  unsigned char t1l_lo; /* Timer 1 latch, low byte */
+  unsigned char t1l_hi; /* Timer 1 latch, high byte */
+  unsigned char t2_lo;  /* Timer 2, low byte */
+  unsigned char t2_hi;  /* Timer 2, high byte */
+  unsigned char sr;     /* Shift register */
+  unsigned char acr;    /* Auxiliary control register */
+  unsigned char pcr;    /* Peripheral control register */
+  unsigned char ifr;    /* Interrupt flag register */
+  unsigned char ier;    /* Interrupt enable register */
+  unsigned char pra2;   /* Port register A w/o handshake */
+};
+#define VIA (*(volatile struct __6522 *)0xFFD0)
+
 /* RP6502 RIA $FFE0-$FFF9 */
 struct __RP6502 {
   const unsigned char ready;
@@ -164,9 +185,9 @@ int f_getcwd(char *name, int size);
 int f_setlabel(const char *name);
 int f_getlabel(const char *path, char *label);
 int f_getfree(const char *name, unsigned long *free, unsigned long *total);
-int ria_readline_lastkey (char* key, int size);
-int ria_readline_peek (char* peek, int size);
-int ria_readline_poke (const char* poke);
+int ria_rln_lastkey(char *key, unsigned char *action);
+int ria_rln_peek(char *peek, unsigned char *pos);
+int ria_rln_poke(const char *poke);
 int time_set(long long time);
 
 /* XREG helper macros */

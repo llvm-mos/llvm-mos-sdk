@@ -6,7 +6,9 @@ endif()
 
 install(FILES
   rp6502.h
+  time.h
 TYPE INCLUDE)
+install(FILES rp6502.inc DESTINATION ${ASMINCDIR})
 install(FILES link.ld TYPE LIB)
 
 add_platform_object_file(rp6502-crt0-o crt0.o
@@ -78,6 +80,7 @@ add_platform_library(rp6502-c
   time.c
   time_set.c
   tm_conv.c
+  unlink.c
   write_xram.c
   write_xstack.c
   write.c

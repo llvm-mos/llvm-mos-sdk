@@ -90,21 +90,30 @@ protected:
   // original array.
   const uint8_t *BytePtrs[sizeof(T)];
 
+private:
+  // Initializes the underlying bytes of the array using a tailcall recursive
+  // function. LLVM is able to fully inline this recursive call, and this also
+  // helps preserve the source info for the line when debugging.
+  template <uint8_t N, uint8_t ByteIdx = 0>
+  [[clang::always_inline]] constexpr void initBytePtrs(
+      const uint8_t ByteArrays[][N], uint8_t Idx) {
+    if constexpr (ByteIdx < sizeof(T)) {
+      BytePtrs[ByteIdx] = &ByteArrays[ByteIdx][Idx];
+      initBytePtrs<N, ByteIdx + 1>(ByteArrays, Idx);
+    }
+  }
+
 public:
   template <uint8_t N>
   [[clang::always_inline]] constexpr BasePtr(const uint8_t ByteArrays[][N],
                                              uint8_t Idx) {
-#pragma unroll
-    for (uint8_t ByteIdx = 0; ByteIdx < sizeof(T); ++ByteIdx)
-      BytePtrs[ByteIdx] = &ByteArrays[ByteIdx][Idx];
+    initBytePtrs<N>(ByteArrays, Idx);
   }
 
   template <uint8_t N>
   [[clang::always_inline]] constexpr BasePtr(uint8_t ByteArrays[][N],
                                              uint8_t Idx) {
-#pragma unroll
-    for (uint8_t ByteIdx = 0; ByteIdx < sizeof(T); ++ByteIdx)
-      BytePtrs[ByteIdx] = &ByteArrays[ByteIdx][Idx];
+    initBytePtrs<N>(ByteArrays, Idx);
   }
 
   /// Return the value of the pointer.
@@ -113,11 +122,22 @@ public:
   /// implicit conversion to T doesn't trigger, e.g., in printf.
   [[clang::always_inline]] T get() const { return static_cast<T>(*this); }
 
+private:
+  // Helper function to read the bytes using another tailcall recursive
+  // function. Stores the bytes read into the array passed in as a parameter.
+  template <uint8_t Idx = 0>
+  [[clang::always_inline]] constexpr void readBytes(
+      uint8_t (&Bytes)[sizeof(T)]) const {
+    if constexpr (Idx < sizeof(T)) {
+      Bytes[Idx] = *BytePtrs[Idx];
+      readBytes<Idx + 1>(Bytes);
+    }
+  }
+
+public:
   [[clang::always_inline]] constexpr operator T() const {
     uint8_t Bytes[sizeof(T)];
-#pragma unroll
-    for (uint8_t Idx = 0; Idx < sizeof(T); ++Idx)
-      Bytes[Idx] = *BytePtrs[Idx];
+    readBytes(Bytes);
     return __bit_cast<T>(Bytes);
   }
 
@@ -126,13 +146,22 @@ public:
     return static_cast<const T>(get())(std::forward<ArgsT>(Args)...);
   }
 
+private:
+  // Helper function to write the bytes using yet another tailcall recursive
+  // function. Stores the bytes read into the underlying byte array.
+  template <uint8_t Idx = 0>
+  [[clang::always_inline]] void writeBytes(const uint8_t *Bytes) {
+    if constexpr (Idx < sizeof(T)) {
+      *const_cast<uint8_t *>(BytePtrs[Idx]) = Bytes[Idx];
+      writeBytes<Idx + 1>(Bytes);
+    }
+  }
+
+public:
   template <typename Q = T>
   [[clang::always_inline]] std::enable_if_t<!std::is_const_v<Q>, const Ptr<T> &>
   operator=(const T &Val) {
-    auto *Bytes = reinterpret_cast<const uint8_t *>(&Val);
-#pragma unroll
-    for (uint8_t Idx = 0; Idx < sizeof(T); ++Idx)
-      *const_cast<uint8_t *>(BytePtrs[Idx]) = Bytes[Idx];
+    writeBytes(reinterpret_cast<const uint8_t *>(&Val));
     return *static_cast<Ptr<T> *>(this);
   }
 
@@ -263,20 +292,27 @@ template <typename T, uint8_t N> class Ptr<T[N]> {
     return reinterpret_cast<Ptr<T> *>(PtrStorage);
   }
 
+  // Helper function to initalize the array for internal multibyte arrays
+  // See also: BasePtr::initBytePtrs
+  template <uint8_t M, uint8_t ArrayIdx = 0>
+  [[clang::always_inline]] constexpr void initPtrs(const uint8_t ByteArrays[][M],
+                                                   uint8_t Idx) {
+    if constexpr (ArrayIdx < N) {
+      new (&ptrs()[ArrayIdx]) Ptr<T>(ByteArrays + ArrayIdx * sizeof(T), Idx);
+      initPtrs<M, ArrayIdx + 1>(ByteArrays, Idx);
+    }
+  }
+
 public:
   template <uint8_t M>
   [[clang::always_inline]] constexpr Ptr(const uint8_t ByteArrays[][M],
                                          uint8_t Idx) {
-#pragma unroll
-    for (uint8_t ArrayIdx = 0; ArrayIdx < N; ++ArrayIdx)
-      new (&ptrs()[ArrayIdx]) Ptr<T>(ByteArrays + ArrayIdx * sizeof(T), Idx);
+    initPtrs<M>(ByteArrays, Idx);
   }
 
   template <uint8_t M>
   [[clang::always_inline]] constexpr Ptr(uint8_t ByteArrays[][M], uint8_t Idx) {
-#pragma unroll
-    for (uint8_t ArrayIdx = 0; ArrayIdx < N; ++ArrayIdx)
-      new (&ptrs()[ArrayIdx]) Ptr<T>(ByteArrays + ArrayIdx * sizeof(T), Idx);
+    initPtrs<M>(ByteArrays, Idx);
   }
 
   Ptr<const T> operator[](uint8_t Idx) const { return ptrs()[Idx]; }
@@ -339,17 +375,24 @@ template <typename T, uint8_t N> class Array {
 
   uint8_t ByteArrays[sizeof(T)][N];
 
+  // Helper fucntion to recursively store the bytes from a multibyte array
+  template <uint8_t ByteIdx = 0>
+  [[clang::always_inline]] constexpr void storeEntryBytes(
+      uint8_t Idx, const std::array<const uint8_t, sizeof(T)> &Bytes) {
+    if constexpr (ByteIdx < sizeof(T)) {
+      ByteArrays[ByteIdx][Idx] = Bytes[ByteIdx];
+      storeEntryBytes<ByteIdx + 1>(Idx, Bytes);
+    }
+  }
+
 public:
   // Note: This partially duplicates the logic in Ptr::operator=, but works for
   // types like multidimensional arrays where assignment isn't defined.
   [[clang::always_inline]] constexpr Array(std::initializer_list<T> Entries) {
     uint8_t Idx = 0;
     for (const T &Entry : Entries) {
-      const auto Bytes =
-          __bit_cast<std::array<const uint8_t, sizeof(T)>>(Entry);
-#pragma unroll
-      for (uint8_t ByteIdx = 0; ByteIdx < sizeof(T); ++ByteIdx)
-        ByteArrays[ByteIdx][Idx] = Bytes[ByteIdx];
+      storeEntryBytes(Idx,
+                      __bit_cast<std::array<const uint8_t, sizeof(T)>>(Entry));
       ++Idx;
     }
   }

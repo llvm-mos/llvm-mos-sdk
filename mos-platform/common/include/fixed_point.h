@@ -89,12 +89,10 @@ public:
   [[clang::always_inline]] constexpr FixedPoint(IntType i, FracType f)
       : val((StorageType)i << FracSize | f) {}
 
-  [[clang::always_inline]] constexpr FixedPoint(const FixedPoint &o)
-      : val(o.val) {}
-  [[clang::always_inline]] constexpr FixedPoint &operator=(FixedPoint o) {
-    val = o.val;
-    return *this;
-  }
+  // The implicitly defined constructors work for this class, so using the
+  // default constructors allow us to use this class in contexts that
+  // require trivial types.
+  constexpr FixedPoint() = default;
 
   /// Constructor to convert floating point values into fixed point
   /// Multiplying by a power of two only increases the exponent of the

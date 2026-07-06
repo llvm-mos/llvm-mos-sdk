@@ -224,7 +224,10 @@ public:
   }
 
   [[clang::always_inline]] constexpr FixedPoint &operator/=(FixedPoint o) {
-    val /= o.get();
+    // Fixed point division is (n << FracSize) / m to maintain the scale.
+    // Widen the numerator before shifting to avoid overflow.
+    FixedPoint<IntSize + FracSize, FracSize, Signed> temp{*this};
+    val = (temp.get() << FracSize) / o.get();
     return *this;
   }
   [[clang::always_inline]] constexpr FixedPoint operator/(FixedPoint o) const {

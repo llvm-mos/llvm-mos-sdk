@@ -10,6 +10,8 @@ __mmusave:
         sta __mmusave
         lda #MMU_CFG_RAM0_KERNAL ; map $4000-$BFFF to RAM, $C000-$FFFF to KERNAL/chargen
         sta MMU_CR
+        lda #0
+        sta FNAM_BANK ; set the bank for the file name to our execution bank
 
 ; restore MMU state after all other exit handlers have completed
 .section .fini.990,"ax", @progbits

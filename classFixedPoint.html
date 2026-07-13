@@ -98,10 +98,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a75fce132d5d474eb903f121c3c462925"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFixedPoint.html#a75fce132d5d474eb903f121c3c462925">FixedPoint</a> (<a class="el" href="classFixedPoint.html#af65f0925a168c4f7422a5386d578cd4f">IntType</a> <a class="el" href="classFixedPoint.html#a5f822290bb775b3409cfd225736cdd5c">i</a>, <a class="el" href="classFixedPoint.html#a3610e22e48146ab311a30790ac738e6f">FracType</a> <a class="el" href="classFixedPoint.html#a21ab29e517732332295f3ddc41b98617">f</a>)</td></tr>
 <tr class="memdesc:a75fce132d5d474eb903f121c3c462925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for setting both the integral and fractional part.  <a href="classFixedPoint.html#a75fce132d5d474eb903f121c3c462925">More...</a><br /></td></tr>
 <tr class="separator:a75fce132d5d474eb903f121c3c462925"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa01f107f36b755440e401e15b8e7e0b"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFixedPoint.html#aaa01f107f36b755440e401e15b8e7e0b">FixedPoint</a> (const <a class="el" href="classFixedPoint.html">FixedPoint</a> &amp;o)</td></tr>
-<tr class="separator:aaa01f107f36b755440e401e15b8e7e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab63a715a8e8a95144005083290582c74"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classFixedPoint.html">FixedPoint</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFixedPoint.html#ab63a715a8e8a95144005083290582c74">operator=</a> (<a class="el" href="classFixedPoint.html">FixedPoint</a> o)</td></tr>
-<tr class="separator:ab63a715a8e8a95144005083290582c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55646c55e0dc8cdfcbdd3681f6fe5ee3"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFixedPoint.html#a55646c55e0dc8cdfcbdd3681f6fe5ee3">FixedPoint</a> ()=default</td></tr>
+<tr class="separator:a55646c55e0dc8cdfcbdd3681f6fe5ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af768f39f7de995f456e11058c21eabb0"><td class="memTemplParams" colspan="2">template&lt;typename T , std::enable_if_t&lt; std::is_floating_point_v&lt; T &gt;, bool &gt;  = true&gt; </td></tr>
 <tr class="memitem:af768f39f7de995f456e11058c21eabb0"><td class="memTemplItemLeft" align="right" valign="top">__fp_consteval&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classFixedPoint.html#af768f39f7de995f456e11058c21eabb0">FixedPoint</a> (T <a class="el" href="classFixedPoint.html#a21ab29e517732332295f3ddc41b98617">f</a>)</td></tr>
 <tr class="separator:af768f39f7de995f456e11058c21eabb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -386,8 +384,8 @@ template&lt;intmax_t IntSize, intmax_t FracSize, bool Signed&gt; </div>
 
 </div>
 </div>
-<a id="aaa01f107f36b755440e401e15b8e7e0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa01f107f36b755440e401e15b8e7e0b">&#9670;&nbsp;</a></span>FixedPoint() <span class="overload">[3/5]</span></h2>
+<a id="a55646c55e0dc8cdfcbdd3681f6fe5ee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55646c55e0dc8cdfcbdd3681f6fe5ee3">&#9670;&nbsp;</a></span>FixedPoint() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -400,14 +398,13 @@ template&lt;intmax_t IntSize, intmax_t FracSize, bool Signed&gt; </div>
         <tr>
           <td class="memname">constexpr <a class="el" href="classFixedPoint.html">FixedPoint</a>&lt; IntSize, FracSize, Signed &gt;::<a class="el" href="classFixedPoint.html">FixedPoint</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classFixedPoint.html">FixedPoint</a>&lt; IntSize, FracSize, Signed &gt; &amp;&#160;</td>
-          <td class="paramname"><em>o</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1643,34 +1640,6 @@ template&lt;intmax_t OI, intmax_t OF, bool S&gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab63a715a8e8a95144005083290582c74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab63a715a8e8a95144005083290582c74">&#9670;&nbsp;</a></span>operator=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;intmax_t IntSize, intmax_t FracSize, bool Signed&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classFixedPoint.html">FixedPoint</a>&amp; <a class="el" href="classFixedPoint.html">FixedPoint</a>&lt; IntSize, FracSize, Signed &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classFixedPoint.html">FixedPoint</a>&lt; IntSize, FracSize, Signed &gt;&#160;</td>
-          <td class="paramname"><em>o</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

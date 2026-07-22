@@ -6,10 +6,10 @@ int __argc;
 char **__argv;
 
 /* Override to provide storage for argv, e.g.:
- *   void *argv_mem(size_t size) { return malloc(size); }
+ *   void *__argv_mem(size_t size) { return malloc(size); }
  * Returns NULL (default) to silently skip argc/argv setup.
  */
-__attribute__((weak)) void *argv_mem(size_t size) {
+__attribute__((weak)) void *__argv_mem(size_t size) {
   (void)size;
   return NULL;
 }

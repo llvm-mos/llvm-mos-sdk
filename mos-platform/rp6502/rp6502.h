@@ -5,6 +5,27 @@
 extern "C" {
 #endif
 
+/* RP6502 VIA $FFD0-$FFDF */
+struct __6522 {
+  unsigned char prb;    /* Port register B */
+  unsigned char pra;    /* Port register A */
+  unsigned char ddrb;   /* Data direction register B */
+  unsigned char ddra;   /* Data direction register A */
+  unsigned char t1_lo;  /* Timer 1, low byte */
+  unsigned char t1_hi;  /* Timer 1, high byte */
+  unsigned char t1l_lo; /* Timer 1 latch, low byte */
+  unsigned char t1l_hi; /* Timer 1 latch, high byte */
+  unsigned char t2_lo;  /* Timer 2, low byte */
+  unsigned char t2_hi;  /* Timer 2, high byte */
+  unsigned char sr;     /* Shift register */
+  unsigned char acr;    /* Auxiliary control register */
+  unsigned char pcr;    /* Peripheral control register */
+  unsigned char ifr;    /* Interrupt flag register */
+  unsigned char ier;    /* Interrupt enable register */
+  unsigned char pra2;   /* Port register A w/o handshake */
+};
+#define VIA (*(volatile struct __6522 *)0xFFD0)
+
 /* RP6502 RIA $FFE0-$FFF9 */
 struct __RP6502 {
   const unsigned char ready;
@@ -62,16 +83,10 @@ long ria_call_long(unsigned char op);
 #define RIA_OP_EXIT 0xFF
 #define RIA_OP_ZXSTACK 0x00
 #define RIA_OP_XREG 0x01
-#define RIA_OP_PHI2 0x02
-#define RIA_OP_CODE_PAGE 0x03
-#define RIA_OP_LRAND 0x04
-#define RIA_OP_STDIN_OPT 0x05
-#define RIA_OP_ERRNO_OPT 0x06
-#define RIA_OP_CLOCK 0x0F
-#define RIA_OP_CLOCK_GETRES 0x10
-#define RIA_OP_CLOCK_GETTIME 0x11
-#define RIA_OP_CLOCK_SETTIME 0x12
-#define RIA_OP_CLOCK_GETTIMEZONE 0x13
+#define RIA_OP_ARGV 0x08
+#define RIA_OP_EXEC 0x09
+#define RIA_OP_ATTR_GET 0x0A
+#define RIA_OP_ATTR_SET 0x0B
 #define RIA_OP_OPEN 0x14
 #define RIA_OP_CLOSE 0x15
 #define RIA_OP_READ_XSTACK 0x16
@@ -100,6 +115,35 @@ long ria_call_long(unsigned char op);
 #define RIA_OP_SETLABEL 0x2C
 #define RIA_OP_GETLABEL 0x2D
 #define RIA_OP_GETFREE 0x2E
+#define RIA_OP_RLN_LASTKEY 0x30
+#define RIA_OP_RLN_PEEK 0x31
+#define RIA_OP_RLN_POKE 0x32
+#define RIA_OP_GMTIME 0x3A
+#define RIA_OP_LOCALTIME 0x3B
+#define RIA_OP_MKTIME 0x3C
+#define RIA_OP_STRFTIME 0x3D
+#define RIA_OP_TIME_SET 0x3E
+#define RIA_OP_TIME_GET 0x3F
+
+/* RIA attribute IDs */
+
+#define RIA_ATTR_ERRNO_OPT 0x00
+#define RIA_ATTR_PHI2_KHZ 0x01
+#define RIA_ATTR_CODE_PAGE 0x02
+#define RIA_ATTR_RLN_LENGTH 0x03
+#define RIA_ATTR_LRAND 0x04
+#define RIA_ATTR_BEL 0x05
+#define RIA_ATTR_LAUNCHER 0x06
+#define RIA_ATTR_EXIT_CODE 0x07
+#define RIA_ATTR_SIGINT 0x08
+#define RIA_ATTR_RLN_CAPS 0x09
+#define RIA_ATTR_RLN_WIDTH 0x0A
+#define RIA_ATTR_RLN_HEIGHT 0x0B
+#define RIA_ATTR_RLN_SUPPRESS_NL 0x0C
+#define RIA_ATTR_CLK_RUN_MS 0x10
+#define RIA_ATTR_CLK_RUN_CS 0x11
+#define RIA_ATTR_CLK_RUN_DS 0x12
+#define RIA_ATTR_CLK_RUN_S 0x13
 
 /* C API for the operating system. */
 
@@ -116,10 +160,13 @@ typedef struct {
 
 int xregn(char device, char channel, unsigned char address, unsigned count,
           ...);
-int phi2(void);
-int code_page(int);
-long lrand(void);
-int stdin_opt(unsigned long ctrl_bits, unsigned char str_length);
+int phi2(void);     // deprecated, use ria_attr_*
+int code_page(int); // deprecated, use ria_attr_*
+long lrand(void);   // deprecated, use ria_attr_*
+int ria_execv(const char *path, char *const argv[]);
+int ria_execl(const char *path, ...);
+long ria_attr_get(unsigned char id);
+int ria_attr_set(long val, unsigned char id);
 int read_xstack(void *buf, unsigned count, int fildes);
 int read_xram(unsigned buf, unsigned count, int fildes);
 int write_xstack(const void *buf, unsigned count, int fildes);
@@ -141,6 +188,10 @@ int f_getcwd(char *name, int size);
 int f_setlabel(const char *name);
 int f_getlabel(const char *path, char *label);
 int f_getfree(const char *name, unsigned long *free, unsigned long *total);
+int ria_rln_lastkey(char *key, unsigned char *action);
+int ria_rln_peek(char *peek, unsigned char *pos);
+int ria_rln_poke(const char *poke);
+int time_set(long long time);
 
 /* XREG helper macros */
 
@@ -154,6 +205,7 @@ int f_getfree(const char *name, unsigned long *free, unsigned long *total);
 #define xreg_ria_keyboard(...) xreg(0, 0, 0, __VA_ARGS__)
 #define xreg_ria_mouse(...) xreg(0, 0, 1, __VA_ARGS__)
 #define xreg_ria_gamepad(...) xreg(0, 0, 2, __VA_ARGS__)
+#define xreg_ria_tablet(...) xreg(0, 0, 3, __VA_ARGS__)
 #define xreg_vga_canvas(...) xreg(1, 0, 0, __VA_ARGS__)
 #define xreg_vga_mode(...) xreg(1, 0, 1, __VA_ARGS__)
 
@@ -250,6 +302,13 @@ typedef struct {
   unsigned char log_size;
   unsigned char has_opacity_metadata; // bool
 } vga_mode4_asprite_t;
+
+typedef struct {
+  int x_pos_px;
+  int y_pos_px;
+  unsigned xram_sprite_ptr;
+  unsigned palette_ptr;
+} vga_mode5_sprite_t;
 
 #ifdef __cplusplus
 }

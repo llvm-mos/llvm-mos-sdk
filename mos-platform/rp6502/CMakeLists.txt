@@ -6,12 +6,16 @@ endif()
 
 install(FILES
   rp6502.h
+  time.h
 TYPE INCLUDE)
+install(FILES rp6502.inc DESTINATION ${ASMINCDIR})
 install(FILES link.ld TYPE LIB)
 
 add_platform_object_file(rp6502-crt0-o crt0.o
+  callmain.s
   init-cpu.s
 )
+target_link_libraries(rp6502-crt0-o PRIVATE common-asminc)
 
 add_platform_library(rp6502-crt0
   exit.c
@@ -26,13 +30,12 @@ merge_libraries(rp6502-crt0
 
 add_platform_library(rp6502-c
   abort.c
+  asctime.c
   chdir.c
-  clock_getres.c
-  clock_gettime.c
-  clock_settime.c
   clock.c
   close.c
   code_page.c
+  ctime.c
   errno.s
   f_chdrive.c
   f_chmod.c
@@ -51,8 +54,12 @@ add_platform_library(rp6502-c
   f_telldir.c
   f_utime.c
   getchar.c
+  gmtime.c
+  localtime.c
   lrand.c
   lseek.c
+  mainargs.c
+  mktime.c
   open.c
   phi2.c
   putchar.c
@@ -62,8 +69,18 @@ add_platform_library(rp6502-c
   remove.c
   rename.c
   ria.s
-  stdin_opt.c
+  ria_attr.c
+  ria_execl.c
+  ria_execv.c
+  ria_rln_lastkey.c
+  ria_rln_peek.c
+  ria_rln_poke.c
+  strftime.c
   syncfs.c
+  time.c
+  time_set.c
+  tm_conv.c
+  unlink.c
   write_xram.c
   write_xstack.c
   write.c

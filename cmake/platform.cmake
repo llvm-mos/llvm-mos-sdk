@@ -29,7 +29,7 @@ endfunction()
 # present. A HOSTED platform supports the fragment of the C standard library
 # currently implemented. A COMPLETE platform cannot have any descendants.
 function(platform name)
-  cmake_parse_arguments(ARGS "COMPLETE;HOSTED" PARENT "" ${ARGN})
+  cmake_parse_arguments(ARGS "COMPLETE;HOSTED;INTERMEDIATE" PARENT "" ${ARGN})
 
   set(PLATFORM ${name})
   set(PLATFORM ${name} PARENT_SCOPE)
@@ -57,15 +57,23 @@ function(platform name)
     # --config flag is not set, argv0 of the form <config>-clang sets the implicit
     # config file as <config>.cfg. We leverage this convention using a set of
     # symlinks for each MOS platform.
-    foreach(suffix clang clang++ clang-cpp)
-      if(WIN32)
-        install(SCRIPT ${CMAKE_SOURCE_DIR}/cmake/install-clang-batch-file.cmake
-                CODE "install_clang_batch_file(${CMAKE_INSTALL_FULL_BINDIR} ${PLATFORM} ${suffix})")
-      else()
-        install(SCRIPT ${CMAKE_SOURCE_DIR}/cmake/install-clang-symlink.cmake
-                CODE "install_clang_symlink(${CMAKE_INSTALL_FULL_BINDIR} ${PLATFORM} ${suffix})")
-      endif()
-    endforeach()
+    #
+    # INTERMEDIATE platforms (e.g. atari8-common) do not get wrappers: they are
+    # shared layers consumed by other platforms, not user-facing build targets,
+    # and a user invoking mos-<intermediate>-clang gets a link that does not run
+    # on real hardware. The generated mos-<name>.cfg is still installed below so
+    # child platforms can @-include it.
+    if(NOT ARGS_INTERMEDIATE)
+      foreach(suffix clang clang++ clang-cpp)
+        if(WIN32)
+          install(SCRIPT ${CMAKE_SOURCE_DIR}/cmake/install-clang-batch-file.cmake
+                  CODE "install_clang_batch_file(${CMAKE_INSTALL_FULL_BINDIR} ${PLATFORM} ${suffix})")
+        else()
+          install(SCRIPT ${CMAKE_SOURCE_DIR}/cmake/install-clang-symlink.cmake
+                  CODE "install_clang_symlink(${CMAKE_INSTALL_FULL_BINDIR} ${PLATFORM} ${suffix})")
+        endif()
+      endforeach()
+    endif()
 
     if(COMPLETE)
       _add_platform_examples(${PLATFORM}-examples)

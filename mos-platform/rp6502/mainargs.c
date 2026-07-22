@@ -14,7 +14,7 @@ __attribute__((weak)) void *__argv_mem(size_t size) {
   return NULL;
 }
 
-/* .init.220: after zero-bss (.init.200) so malloc is usable in argv_mem(). */
+/* .init.220: after zero-bss (.init.200) so malloc is usable in __argv_mem(). */
 asm(".section .init.220,\"ax\",@progbits\n"
     "  jsr __do_initmainargs\n");
 
@@ -23,7 +23,7 @@ void __do_initmainargs(void) {
   if (size <= 0)
     return;
 
-  void *buf = argv_mem((size_t)(unsigned int)size);
+  void *buf = __argv_mem((size_t)(unsigned int)size);
   if (!buf) {
     RIA.op = RIA_OP_ZXSTACK;
     return;

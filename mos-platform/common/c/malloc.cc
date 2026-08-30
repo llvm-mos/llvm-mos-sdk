@@ -193,7 +193,6 @@ FreeChunk *find_fit(size_t size) {
   return nullptr;
 }
 
-"  rts\n"
 // Allocate at chunk of size bytes from a free chunk. The pointer returned
 // points to the contents (past the chunk header).
 void *allocate_free_chunk(FreeChunk *free_chunk, size_t size) {

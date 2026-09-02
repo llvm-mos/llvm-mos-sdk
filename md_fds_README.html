@@ -66,7 +66,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The Famicom Disk System target outputs raw executables intended to be written to a <a href="https://www.nesdev.org/wiki/FDS_disk_format">properly formatted disk</a>. llvm-mos does not include tools for creating/packing FDS disk images; you will need to use a third-party tool (e.g. <a href="https://github.com/ClusterM/fdspacker">FDSPacker</a>) for this.</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Interrupt handling</h1>
 <p>The FDS BIOS has a built-in NMI and IRQ multiplexer. Alongside the built-in handlers, it provides support for three custom NMI handlers and one custom IRQ handler. The IRQ handler is exposed as <code>irq</code>, while the NMI handlers are exposed as <code>nmi_user_1</code>, <code>nmi_user_2</code>, and <code>nmi_user_3</code>.</p>
 <p>Here's an example showing how to define a custom NMI handler from C:</p>
@@ -77,7 +77,7 @@ Interrupt handling</h1>
 <div class="ttc" id="airq_8h_html_a7085a59a8ba884585a282e02e64fb9db"><div class="ttname"><a href="irq_8h.html#a7085a59a8ba884585a282e02e64fb9db">NMI_ACTION_USER_1</a></div><div class="ttdeci">#define NMI_ACTION_USER_1</div><div class="ttdef"><b>Definition:</b> irq.h:17</div></div>
 <div class="ttc" id="airq_8h_html_a7327abc4634ab94e605a003f44aca45e"><div class="ttname"><a href="irq_8h.html#a7327abc4634ab94e605a003f44aca45e">fds_set_nmi_action</a></div><div class="ttdeci">void fds_set_nmi_action(char action)</div></div>
 </div><!-- fragment --><p>For the IRQ handler, <code>fds_set_irq_action</code> can be used similarly.</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Vectors</h1>
 <p>The start/reset, IRQ, and NMI vectors will need to be loaded into memory via a separate file on disk. For convenience, the ELF file output when compiling your program includes a <code>.vectors</code> section that can be extracted into its own file using <code>objcopy</code>:</p>
 <div class="fragment"><div class="line">llvm-objcopy --dump-section .vectors=vectors.bin mygame.prg.elf</div>
@@ -97,7 +97,7 @@ Vectors</h1>
 <div class="line">    ...</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
 License bypass</h1>
 <p>The FDS BIOS performs a license check on initial load. This target includes code for performing the "license bypass" trick, which is commonly used with homebrew; however, this means you will need to create/pack your disk image differently.</p>
 <p>Start by creating a file containing only a single byte with value <code>$90</code> (this is named <code>bypass.bin</code> in the following example). This will need to be added to your disk as the last file loaded by the BIOS, and it needs to be a Program file set to load at address <code>$2000</code>. The disk's file count will also need to be set to the actual loaded file count + 1. Example with FDSPacker:</p>

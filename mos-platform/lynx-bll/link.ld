@@ -5,6 +5,13 @@ __rc0 = 0x00;
 INCLUDE imag-regs.ld
 ASSERT(__rc31 == 0x001f, "Inconsistent zero page map.")
 
+/* values used by asm code which we cannot calculate there */
+__BOOTLDRBLOCK__   = 0x100 - (__BLOCKSIZE__ >> 8);
+__BLOCK0SHIFTER__  = (__BLOCKSIZE__/1024 + 9);
+
+PROVIDE(__BLOCKSIZE__  = 0x0400);   /* Cartridge block size, typically 0x0100 = 64K, 0x0200 = 128K, 0x0400 = 256K, 0x0800 = 512K */
+__DIRECTORYSTART__ = 0;
+
 /* An optimization strategy on Lynx hardware is to reserve memory from
    0xFFF0 down, which is mapped to the graphics hardware but not to the CPU
    by default, to store a display screen. */
@@ -19,7 +26,20 @@ MEMORY {
 REGION_ALIAS("c_readonly", ram)
 REGION_ALIAS("c_writeable", ram)
 
-SECTIONS { INCLUDE c.ld }
+SECTIONS {
+    .text : {
+        INCLUDE text-sections.ld
+        KEEP(*(.irq_begin))
+        KEEP(*(SORT_BY_INIT_PRIORITY(.irq.* .irq)))
+        KEEP(*(.irq_end))
+    } >c_readonly
+
+    INCLUDE rodata.ld
+    INCLUDE data.ld
+    INCLUDE zp.ld
+    INCLUDE bss.ld
+    INCLUDE noinit.ld
+}
 
 /* Set initial soft stack address to just above last memory address. (It grows down.) */
 __stack = __hiram_start;

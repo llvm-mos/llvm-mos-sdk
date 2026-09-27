@@ -52,6 +52,17 @@ if(NOT CMAKE_CROSSCOMPILING)
     PATHS ENV EMUTEST_DIR)
   message(STATUS "Emutest test runner: ${EMUTEST_COMMAND}")
 
+  # VICE's emulators run the c128 and c64 emulator tests (test/vice-runner.py).
+  # Set the VICE_DIR environment variable to VICE's install directory, or pass
+  # -DVICE_X128_COMMAND=<path> / -DVICE_X64SC_COMMAND=<path>; without them
+  # those emulator tests are skipped.
+  find_program(VICE_X128_COMMAND NAMES x128 x128.exe
+    PATHS ENV VICE_DIR PATH_SUFFIXES bin)
+  message(STATUS "VICE x128: ${VICE_X128_COMMAND}")
+  find_program(VICE_X64SC_COMMAND NAMES x64sc x64sc.exe
+    PATHS ENV VICE_DIR PATH_SUFFIXES bin)
+  message(STATUS "VICE x64sc: ${VICE_X64SC_COMMAND}")
+
   find_library(LIBRETRO_STELLA_CORE
     NAMES
     stella2014_libretro.so stella2014_libretro.dylib stella2014_libretro.dll
@@ -63,6 +74,16 @@ if(NOT CMAKE_CROSSCOMPILING)
     NAMES mesen_libretro.so mesen_libretro.dylib mesen_libretro.dll
     PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
   message(STATUS "Libretro MESEN core: ${LIBRETRO_MESEN_CORE}")
+
+  # find_file, not find_library: find_library does not look for .dll files.
+  find_file(LIBRETRO_VICE_X128_CORE
+    NAMES vice_x128_libretro.so vice_x128_libretro.dylib vice_x128_libretro.dll
+    PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
+  message(STATUS "Libretro VICE x128 core: ${LIBRETRO_VICE_X128_CORE}")
+  find_file(LIBRETRO_VICE_X64SC_CORE
+    NAMES vice_x64sc_libretro.so vice_x64sc_libretro.dylib vice_x64sc_libretro.dll
+    PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
+  message(STATUS "Libretro VICE x64sc core: ${LIBRETRO_VICE_X64SC_CORE}")
 
   # Install toolchain and config file for users of find_package(llvm-mos-sdk).
   # CMake's find_package logic will discover

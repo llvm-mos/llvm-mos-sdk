@@ -20,7 +20,7 @@
   cpx #mos16lo(__basic_zp_size)
   bne .Lsave_zp
 
-; --- Restore ZP (before ROM restore and cli at .fini.990) ---
+; --- Restore ZP (before BASIC's ROM is switched back in) ---
 .section .fini.989, "ax", @progbits
   ldx #0
 .Lrestore_zp:
@@ -32,8 +32,11 @@
 
 ; --- Override weak _Exit: restore hardware S and return to BASIC ---
 ; Skips finalization (_fini) by design, matching C semantics for _Exit.
-; The normal exit() path runs _fini first (restoring ZP and ROMs), then
-; calls _Exit which only needs to restore the hardware stack pointer.
+; The normal exit() path runs _fini first (restoring ZP), then calls _Exit
+; which only needs to restore the hardware stack pointer. On the c64 and c128
+; the RTS below returns through a routine (unmap-basic.S / init-mmu.S) that
+; switches BASIC's ROM back in, since exit() and _Exit must still run with the
+; program's own RAM view.
 .globl _Exit
 .section .text._Exit, "ax", @progbits
 _Exit:

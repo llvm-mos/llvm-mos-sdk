@@ -1,0 +1,4 @@
+/* Linked with save-basic.o: main returns and the program hands control back to
+ * BASIC, which prints its READY. prompt. Checks that BASIC's memory
+ * configuration is restored at exactly that point (see init-mmu.S). */
+int main(void) { return 0; }

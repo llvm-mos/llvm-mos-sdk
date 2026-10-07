@@ -1,13 +1,15 @@
 #include <nes.h>
 #include <stdint.h>
 
-// Example: private ISR registers with interrupt_norecurse("__nmi").
-//
-// This NMI handler uses private imaginary registers (__rc0__nmi ..
-// __rc31__nmi) so it need only save A/X/Y. The helper below is called from both
-// the ISR tree and mainline code, so the compiler clones it per suffix at LTO
-// time. main()'s results are not corrupted even though the handler runs at any
-// time.
+/**
+ * Demonstration for the suffixed `interrupt_norecurse` function attribute.
+ * Adding a suffix parameter to this attr creates clones the call tree and
+ * all registers used, so that the ISR contains a completely independent
+ * set of imaginary registers. Without a suffix, the compiler has to defensively
+ * create a large list of register save/restores for the interrupt, which is
+ * not good for interrupts that need to fire and quit as fast as possible.
+ * With this approach, only the a/x/y registers are preserved by default.
+ */
 
 static volatile uint8_t frame_counter;
 
@@ -17,10 +19,11 @@ static void wait_nmi(void) {
     ;
 }
 
-// A helper that uses imaginary registers and is shared between mainline and
-// the ISR tree. The LTO clone pass creates a __nmi-suffixed copy for the ISR.
-// The multiply and divide become compiler-rt libcalls, which are cloned for
-// the ISR too.
+/**
+ * Example function called from both the MAIN thread and the new __nmi
+ * thread, and since its called from both, this will be cloned so that
+ * both can call using their own set of imaginary registers.
+ */
 __attribute__((noinline))
 static uint16_t compute(uint16_t a, uint16_t b) {
   uint16_t result = a * b + 7;
@@ -29,7 +32,11 @@ static uint16_t compute(uint16_t a, uint16_t b) {
   return result;
 }
 
-// NMI handler: runs once per frame via the NES PPU NMI.
+/**
+ * Creates a root for the suffixed ISR, all of the registers and functions
+ * used in it are cloned so that they do not interfere with anything that
+ * the main thread is doing. 
+ */
 __attribute__((interrupt_norecurse("__nmi")))
 void nmi(void) {
   ++frame_counter;
@@ -39,13 +46,12 @@ void nmi(void) {
 }
 
 int main(void) {
-  // Enable NMI.
   PPU.control = 0x80;
 
-  uint16_t accumulator = 1;
+  volatile uint16_t accumulator = 1;
   for (;;) {
     wait_nmi();
-    // This call uses the main registers; the ISR's copy is separate.
+    // This call uses the main registers
     accumulator = compute(accumulator, accumulator);
   }
 }

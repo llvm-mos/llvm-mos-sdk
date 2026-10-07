@@ -1,0 +1,205 @@
+// Link test for interrupt_norecurse("__nmi") under zero-page pressure: main()
+// has more hot globals than fit in zero page, and the NMI's private registers
+// need zero page too. The compiler must leave room for them when promoting
+// globals, or the link overflows zero page.
+
+#include <nes.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+static volatile uint32_t g0;
+static volatile uint32_t g1;
+static volatile uint32_t g2;
+static volatile uint32_t g3;
+static volatile uint32_t g4;
+static volatile uint32_t g5;
+static volatile uint32_t g6;
+static volatile uint32_t g7;
+static volatile uint32_t g8;
+static volatile uint32_t g9;
+static volatile uint32_t g10;
+static volatile uint32_t g11;
+static volatile uint32_t g12;
+static volatile uint32_t g13;
+static volatile uint32_t g14;
+static volatile uint32_t g15;
+static volatile uint32_t g16;
+static volatile uint32_t g17;
+static volatile uint32_t g18;
+static volatile uint32_t g19;
+static volatile uint32_t g20;
+static volatile uint32_t g21;
+static volatile uint32_t g22;
+static volatile uint32_t g23;
+static volatile uint32_t g24;
+static volatile uint32_t g25;
+static volatile uint32_t g26;
+static volatile uint32_t g27;
+static volatile uint32_t g28;
+static volatile uint32_t g29;
+static volatile uint32_t g30;
+static volatile uint32_t g31;
+static volatile uint32_t g32;
+static volatile uint32_t g33;
+static volatile uint32_t g34;
+static volatile uint32_t g35;
+static volatile uint32_t g36;
+static volatile uint32_t g37;
+static volatile uint32_t g38;
+static volatile uint32_t g39;
+static volatile uint32_t g40;
+static volatile uint32_t g41;
+static volatile uint32_t g42;
+static volatile uint32_t g43;
+static volatile uint32_t g44;
+static volatile uint32_t g45;
+static volatile uint32_t g46;
+static volatile uint32_t g47;
+static volatile uint32_t g48;
+static volatile uint32_t g49;
+static volatile uint32_t g50;
+static volatile uint32_t g51;
+static volatile uint32_t g52;
+static volatile uint32_t g53;
+static volatile uint32_t g54;
+static volatile uint32_t g55;
+static volatile uint32_t g56;
+static volatile uint32_t g57;
+static volatile uint32_t g58;
+static volatile uint32_t g59;
+
+static volatile uint16_t nmi_a, nmi_b;
+
+// Enough work to need several of the NMI's private registers.
+__attribute__((interrupt_norecurse("__nmi"))) void nmi(void) {
+  uint16_t a = nmi_a, b = nmi_b;
+  nmi_a = a * b + (a >> 3);
+  nmi_b = b / ((a & 0x7f) | 1);
+}
+
+int main(void) {
+  for (uint8_t n = 0; n < 100; ++n) {
+    g0 += n;
+    g1 += n;
+    g2 += n;
+    g3 += n;
+    g4 += n;
+    g5 += n;
+    g6 += n;
+    g7 += n;
+    g8 += n;
+    g9 += n;
+    g10 += n;
+    g11 += n;
+    g12 += n;
+    g13 += n;
+    g14 += n;
+    g15 += n;
+    g16 += n;
+    g17 += n;
+    g18 += n;
+    g19 += n;
+    g20 += n;
+    g21 += n;
+    g22 += n;
+    g23 += n;
+    g24 += n;
+    g25 += n;
+    g26 += n;
+    g27 += n;
+    g28 += n;
+    g29 += n;
+    g30 += n;
+    g31 += n;
+    g32 += n;
+    g33 += n;
+    g34 += n;
+    g35 += n;
+    g36 += n;
+    g37 += n;
+    g38 += n;
+    g39 += n;
+    g40 += n;
+    g41 += n;
+    g42 += n;
+    g43 += n;
+    g44 += n;
+    g45 += n;
+    g46 += n;
+    g47 += n;
+    g48 += n;
+    g49 += n;
+    g50 += n;
+    g51 += n;
+    g52 += n;
+    g53 += n;
+    g54 += n;
+    g55 += n;
+    g56 += n;
+    g57 += n;
+    g58 += n;
+    g59 += n;
+  }
+  uint32_t sum = 0;
+  sum += g0;
+  sum += g1;
+  sum += g2;
+  sum += g3;
+  sum += g4;
+  sum += g5;
+  sum += g6;
+  sum += g7;
+  sum += g8;
+  sum += g9;
+  sum += g10;
+  sum += g11;
+  sum += g12;
+  sum += g13;
+  sum += g14;
+  sum += g15;
+  sum += g16;
+  sum += g17;
+  sum += g18;
+  sum += g19;
+  sum += g20;
+  sum += g21;
+  sum += g22;
+  sum += g23;
+  sum += g24;
+  sum += g25;
+  sum += g26;
+  sum += g27;
+  sum += g28;
+  sum += g29;
+  sum += g30;
+  sum += g31;
+  sum += g32;
+  sum += g33;
+  sum += g34;
+  sum += g35;
+  sum += g36;
+  sum += g37;
+  sum += g38;
+  sum += g39;
+  sum += g40;
+  sum += g41;
+  sum += g42;
+  sum += g43;
+  sum += g44;
+  sum += g45;
+  sum += g46;
+  sum += g47;
+  sum += g48;
+  sum += g49;
+  sum += g50;
+  sum += g51;
+  sum += g52;
+  sum += g53;
+  sum += g54;
+  sum += g55;
+  sum += g56;
+  sum += g57;
+  sum += g58;
+  sum += g59;
+  return sum == 60ul * 4950ul ? EXIT_SUCCESS : EXIT_FAILURE;
+}

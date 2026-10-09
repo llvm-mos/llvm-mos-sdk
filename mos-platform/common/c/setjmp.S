@@ -147,8 +147,14 @@ longjmp:
   lda (__rc2),y
   sta $101,x
 
-  ; Restore return value
+  ; Return the supplied value, mapping zero to one as required by longjmp.
+  ; POSIX.1-2024, RETURN VALUE (aligned with ISO C):
+  ; https://pubs.opengroup.org/onlinepubs/9799919799/functions/longjmp.html
   lda __rc16
   ldx __rc17
-
+  bne 1f
+  cmp #0
+  bne 1f
+  lda #1
+1:
   rts

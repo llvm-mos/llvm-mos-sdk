@@ -64,6 +64,25 @@ if(NOT CMAKE_CROSSCOMPILING)
     PATHS /lib64/libretro ENV LIBRETRO_CORES_DIR)
   message(STATUS "Libretro MESEN core: ${LIBRETRO_MESEN_CORE}")
 
+  # Xemu ships as a macOS app bundle and is never on PATH, and a bundle
+  # outranks HINTS, so an XMEGA65_DIR override would be ignored in favour of
+  # whatever is installed. The bundle's binary is named in PATHS instead. A
+  # function scopes the setting; find_program's result is cached, so it still
+  # escapes.
+  function(find_xmega65)
+    set(CMAKE_FIND_APPBUNDLE NEVER)
+    find_program(XMEGA65_COMMAND
+      NAMES xmega65 xmega65.native xmega65.exe xemu-xmega65 xemu-xmega65.exe
+      HINTS ENV XMEGA65_DIR
+      PATHS "$ENV{HOME}/bin" /Applications/xmega65.app/Contents/MacOS)
+  endfunction()
+  find_xmega65()
+  message(STATUS "MEGA65 emulator (xmega65): ${XMEGA65_COMMAND}")
+
+  find_program(PYTHON3_COMMAND NAMES python3 python
+    HINTS ENV PYTHON_DIR)
+  message(STATUS "Python 3 interpreter: ${PYTHON3_COMMAND}")
+
   # Install toolchain and config file for users of find_package(llvm-mos-sdk).
   # CMake's find_package logic will discover
   # `$PATH/../lib/cmake/llvm-mos-sdk/llvm-mos-sdk-config.cmake` which in turn

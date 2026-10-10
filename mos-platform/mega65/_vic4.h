@@ -315,6 +315,22 @@ struct __vic4 {
 static_assert(sizeof(__vic4) == 0x80);
 #endif
 
+/// Values written to VICIV.key to choose which registers appear at
+/// 0xD000-0xDFFF. Write the two bytes of a pair in that order; any other
+/// value returns to VIC-II.
+enum
+#ifdef __clang__
+    : uint8_t
+#endif
+{
+  VIC4_KEY_VICIII_A = 0xa5, //!< ...then VIC4_KEY_VICIII_B for C65/VIC-III
+  VIC4_KEY_VICIII_B = 0x96,
+  VIC4_KEY_VICIV_A = 0x47, //!< ...then VIC4_KEY_VICIV_B for MEGA65/VIC-IV
+  VIC4_KEY_VICIV_B = 0x53,
+  VIC4_KEY_ETH_A = 0x45, //!< ...then VIC4_KEY_ETH_B for the 45E100 buffers
+  VIC4_KEY_ETH_B = 0x54,
+};
+
 /*
  * The following masks are auto-generated from iomap.txt.
  * See https://github.com/dansanderson/mega65-symbols

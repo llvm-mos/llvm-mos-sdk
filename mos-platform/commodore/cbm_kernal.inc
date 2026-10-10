@@ -80,6 +80,26 @@
   SETBNK       = $FF68
 #endif
 
+#ifdef __MEGA65__
+  ; MEGA65 extended jump table
+  SAVEFL       = $FF3B
+  GETIO        = $FF41
+  GETLFS       = $FF44
+  SYSFLAGS     = $FF47
+  ADDKEY       = $FF4A
+  CLOSE_ALL    = $FF50
+  LKUPLA       = $FF5F
+  LKUPSA       = $FF62
+  SWAPPER      = $FF65
+  PFKEY        = $FF68
+  SETBNK       = $FF6B
+  JSRFAR       = $FF6E
+  JMPFAR       = $FF71
+  LDA_FAR      = $FF74
+  STA_FAR      = $FF77
+  CMP_FAR      = $FF7A
+#endif
+
 #if defined(__C128__) || defined(__CX16__)
   ; Extended jump table
   CLSALL       = $FF4A

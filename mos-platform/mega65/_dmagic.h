@@ -6,10 +6,8 @@
 #ifndef _DMAGIC_H
 #define _DMAGIC_H
 
-#ifndef __cplusplus
 #include <stddef.h>
 #include <stdint.h>
-#endif
 
 /// DMA commands
 enum
@@ -121,7 +119,7 @@ struct DMAAudioChannel {
   };
 };
 
-#ifdef __cplusplus
+#if defined(__mos__) && defined(__cplusplus)
 static_assert(sizeof(DMAAudioChannel) == 0x10);
 #endif
 
@@ -183,7 +181,7 @@ struct DMAgicController {
   };
 };
 
-#ifdef __cplusplus
+#if defined(__mos__) && defined(__cplusplus)
 static_assert(sizeof(DMAgicController) == 0x60);
 #endif
 

@@ -1,3 +1,7 @@
+# Targets whose platform sources change often enough that the inner build
+# cannot be trusted to notice.
+set(TEST_TARGETS_NEEDING_PLATFORM_SYNC mega65)
+
 function(add_test_target target)
   get_filename_component(llvm_mos ${LLVM_MOS_C_COMPILER} DIRECTORY)
   ExternalProject_Get_Property(mos-platform INSTALL_DIR)
@@ -21,11 +25,25 @@ function(add_test_target target)
       -DCMAKE_C_FLAGS=${config_flag}
       -DCMAKE_CXX_FLAGS=${config_flag}
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_SOURCE_DIR}/cmake/llvm-mos-toolchain.cmake
+      ${ARGN}
     INSTALL_COMMAND ""
     BUILD_ALWAYS On
     TEST_AFTER_INSTALL On
     EXCLUDE_FROM_ALL YES
     DEPENDS mos-platform)
+  # ExternalProject boundaries hide platform source changes from the inner
+  # build, so a target whose platform is being worked on has to be cleaned or
+  # it runs against stale objects. Opt-in: cleaning every target on every run
+  # rebuilds all of them from scratch.
+  if(target IN_LIST TEST_TARGETS_NEEDING_PLATFORM_SYNC)
+    ExternalProject_Add_Step(test-${target} platform-sync
+      COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --target clean
+      COMMENT "Cleaning test-${target} to pick up platform changes"
+      DEPENDEES configure
+      DEPENDERS build
+      ALWAYS 1)
+  endif()
+
   add_dependencies(test test-${target})
   set_property(TARGET test-${target} PROPERTY
     ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/test/${target})
@@ -44,3 +62,9 @@ add_test_target(atari2600-4k)
 add_test_target(atari2600-3e)
 add_test_target(atari8-dos)
 add_test_target(atari8-cart-std)
+if(XMEGA65_COMMAND)
+  add_test_target(mega65
+    -DXMEGA65_COMMAND=${XMEGA65_COMMAND}
+    -DPYTHON3_COMMAND=${PYTHON3_COMMAND}
+    -DD81_SCRIPT=${CMAKE_SOURCE_DIR}/mos-platform/mega65/d81.py)
+endif()

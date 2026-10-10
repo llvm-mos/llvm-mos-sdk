@@ -6,6 +6,8 @@
 #ifndef _VIC3_H
 #define _VIC3_H
 
+#include <stdint.h>
+
 /*
  * The following defines are auto-generated from iomap.txt.
  * See https://github.com/dansanderson/mega65-symbols

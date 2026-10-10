@@ -1,4 +1,4 @@
-platform(atari8-common HOSTED PARENT common)
+platform(atari8-common HOSTED INTERMEDIATE PARENT common)
 
 if(NOT CMAKE_CROSSCOMPILING)
   return()

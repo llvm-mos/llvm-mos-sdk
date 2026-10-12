@@ -1,6 +1,7 @@
 install(
   FILES
     imag-regs.ld
+    imag-regs-suffix-template.ld
 
     c.ld
 

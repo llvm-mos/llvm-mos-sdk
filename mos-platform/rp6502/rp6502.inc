@@ -95,12 +95,12 @@ RIA_ATTR_CLK_RUN_DS       = $12
 RIA_ATTR_CLK_RUN_S        = $13
 
 ; PIX extended registers, the assembly form of xreg()
-.macro xreg device, channel, address, values:vararg
+.macro xreg device, channel, index, values:vararg
     lda #(\device)
     sta RIA_XSTACK
     lda #(\channel)
     sta RIA_XSTACK
-    lda #(\address)
+    lda #(\index)
     sta RIA_XSTACK
 .irp value, \values
     lda #(((\value) >> 8) & $FF)

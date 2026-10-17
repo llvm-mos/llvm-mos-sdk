@@ -172,9 +172,9 @@ int time_set(long long time);
 
 /* Extended memory */
 
-#define xreg(d, c, a, ...)                                                     \
-  xregn(d, c, a, sizeof((long[]){__VA_ARGS__}) / sizeof(long), __VA_ARGS__)
-int xregn(char device, char channel, unsigned char address, unsigned count,
+#define xreg(d, c, i, ...)                                                     \
+  xregn(d, c, i, sizeof((long[]){__VA_ARGS__}) / sizeof(long), __VA_ARGS__)
+int xregn(char device, char channel, unsigned char index, unsigned count,
           ...);
 void xram0_read(void *dest, unsigned src, unsigned count);
 void xram1_read(void *dest, unsigned src, unsigned count);

@@ -154,7 +154,7 @@ int f_opendir(const char *name);
 int f_readdir(f_stat_t *dirent, int dirdes);
 int f_closedir(int dirdes);
 long f_telldir(int dirdes);
-int f_seekdir(long offs, int dirdes);
+int f_seekdir(long loc, int dirdes);
 int f_rewinddir(int dirdes);
 int f_chmod(const char *path, unsigned char attr, unsigned char mask);
 int f_utime(const char *path, unsigned fdate, unsigned ftime, unsigned crdate,

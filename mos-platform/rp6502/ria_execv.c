@@ -43,17 +43,20 @@ int ria_execv(const char *path, char *const argv[]) {
   /* Build the xstack buffer */
   for (i = argc - 1; i >= 0; --i) {
     for (j = (int)lens[i] - 1; j >= 0; --j) {
-      ria_push_char(ptrs[i][j]);
+      RIA.xstack = ptrs[i][j];
     }
   }
 
   /* Push the int table */
-  ria_push_int(0);
+  RIA.xstack = 0;
+  RIA.xstack = 0;
   offset = (unsigned int)(argc + 1) * 2U + total_str;
   for (i = argc - 1; i >= 0; --i) {
     offset -= lens[i];
-    ria_push_int(offset);
+    RIA.xstack = offset >> 8;
+    RIA.xstack = offset;
   }
 
-  return ria_call_int(RIA_OP_EXEC);
+  RIA.op = RIA_OP_EXEC;
+  return ria_spin();
 }

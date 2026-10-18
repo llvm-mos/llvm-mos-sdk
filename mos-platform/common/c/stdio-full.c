@@ -262,7 +262,7 @@ FILE *tmpfile(void) {
   tmpnam(filename);
   FILE *stream = fopen(filename, "wb+");
   if (stream) {
-    stream->del_filename = malloc(strlen(filename));
+    stream->del_filename = malloc(strlen(filename) + 1);
     if (stream->del_filename)
       strcpy(stream->del_filename, filename);
   }

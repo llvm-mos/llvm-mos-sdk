@@ -2,6 +2,7 @@
 #include "rp6502.h"
 
 int close(int fd) {
-  ria_set_ax(fd);
-  return ria_call_int(RIA_OP_CLOSE);
+  RIA.a = fd;
+  RIA.op = RIA_OP_CLOSE;
+  return ria_spin();
 }

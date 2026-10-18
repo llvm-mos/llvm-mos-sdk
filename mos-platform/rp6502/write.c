@@ -7,7 +7,7 @@ int write(int fildes, const void *buf, unsigned count) {
     int blockcount = (count > 512) ? 512 : count;
     int ax = write_xstack(&((char *)buf)[total], blockcount, fildes);
     if (ax < 0) {
-      return ax;
+      return total ? total : ax;
     }
     total += ax;
     count -= ax;

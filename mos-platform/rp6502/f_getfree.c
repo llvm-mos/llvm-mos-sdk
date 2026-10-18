@@ -4,18 +4,24 @@
 
 int f_getfree(const char *name, unsigned long *free, unsigned long *total) {
   int ax;
+  unsigned i;
   size_t namelen = strlen(name);
   if (namelen > 255) {
     errno = EINVAL;
     return -1;
   }
   while (namelen) {
-    ria_push_char(name[--namelen]);
+    RIA.xstack = name[--namelen];
   }
-  ax = ria_call_int(RIA_OP_GETFREE);
+  RIA.op = RIA_OP_GETFREE;
+  ax = ria_spin();
   if (ax >= 0) {
-    *free = ria_pop_long();
-    *total = ria_pop_long();
+    for (i = 0; i < sizeof(*free); i++) {
+      ((char *)free)[i] = RIA.xstack;
+    }
+    for (i = 0; i < sizeof(*total); i++) {
+      ((char *)total)[i] = RIA.xstack;
+    }
   }
   return ax;
 }

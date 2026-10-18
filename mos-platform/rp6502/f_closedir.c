@@ -1,6 +1,7 @@
 #include <rp6502.h>
 
 int f_closedir(int dirdes) {
-  ria_set_ax(dirdes);
-  return ria_call_int(RIA_OP_CLOSEDIR);
+  RIA.a = dirdes;
+  RIA.op = RIA_OP_CLOSEDIR;
+  return ria_spin();
 }

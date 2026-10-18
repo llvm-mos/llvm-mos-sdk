@@ -1,6 +1,8 @@
 #include <rp6502.h>
 
 long f_telldir(int dirdes) {
-  ria_set_ax(dirdes);
-  return ria_call_long(RIA_OP_TELLDIR);
+  RIA.a = dirdes;
+  RIA.op = RIA_OP_TELLDIR;
+  unsigned ax = ria_spin();
+  return ax + ((unsigned long)RIA.sreg << 16);
 }

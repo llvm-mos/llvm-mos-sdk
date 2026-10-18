@@ -9,7 +9,8 @@ int f_opendir(const char *name) {
     return -1;
   }
   while (namelen) {
-    ria_push_char(name[--namelen]);
+    RIA.xstack = name[--namelen];
   }
-  return ria_call_int(RIA_OP_OPENDIR);
+  RIA.op = RIA_OP_OPENDIR;
+  return ria_spin();
 }

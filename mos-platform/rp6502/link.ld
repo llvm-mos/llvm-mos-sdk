@@ -22,7 +22,7 @@ SECTIONS { INCLUDE c.ld }
 __stack = 0xFF00;
 
 OUTPUT_FORMAT {
-    SHORT(0x0200)
+    SHORT(ORIGIN(ram))
     SHORT(_start)
     TRIM(ram)
 }

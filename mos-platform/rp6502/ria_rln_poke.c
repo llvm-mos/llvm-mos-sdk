@@ -10,7 +10,8 @@ int ria_rln_poke(const char *poke) {
     return -1;
   }
   for (i = pokelen; i--;) {
-    ria_push_char(poke[i]);
+    RIA.xstack = poke[i];
   }
-  return ria_call_int(RIA_OP_RLN_POKE);
+  RIA.op = RIA_OP_RLN_POKE;
+  return ria_spin();
 }

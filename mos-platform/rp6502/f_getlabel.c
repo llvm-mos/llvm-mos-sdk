@@ -10,11 +10,12 @@ int f_getlabel(const char *path, char *label) {
     return -1;
   }
   while (pathlen) {
-    ria_push_char(path[--pathlen]);
+    RIA.xstack = path[--pathlen];
   }
-  ax = ria_call_int(RIA_OP_GETLABEL);
+  RIA.op = RIA_OP_GETLABEL;
+  ax = ria_spin();
   for (i = 0; i < ax; i++) {
-    label[i] = ria_pop_char();
+    label[i] = RIA.xstack;
   }
   return ax;
 }

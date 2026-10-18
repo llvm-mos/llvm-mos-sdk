@@ -2,10 +2,11 @@
 
 int f_readdir(f_stat_t *dirent, int dirdes) {
   int i, ax;
-  ria_set_ax(dirdes);
-  ax = ria_call_int(RIA_OP_READDIR);
+  RIA.a = dirdes;
+  RIA.op = RIA_OP_READDIR;
+  ax = ria_spin();
   for (i = 0; i < sizeof(f_stat_t); i++) {
-    ((char *)dirent)[i] = ria_pop_char();
+    ((char *)dirent)[i] = RIA.xstack;
   }
   return ax;
 }

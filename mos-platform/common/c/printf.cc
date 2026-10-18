@@ -63,8 +63,8 @@ void print_string(const char *s, Status *status) {
   if (!(status->flags & E_minus))
     print_string_padding(prec, status);
 
-  while (prec-- > 0)
-    put(*s++, status);
+  for (size_t i = 0; i < prec; ++i)
+    put(s[i], status);
 
   if (status->flags & E_minus)
     print_string_padding(prec, status);

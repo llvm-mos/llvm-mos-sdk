@@ -267,10 +267,12 @@ __attribute__((weak)) int rand(void) {
   x ^= x << 7;
   x ^= x >> 9;
   x ^= x << 8;
-  return seed = x;
+  seed = x;
+  return x & RAND_MAX;
 }
 
-__attribute__((weak)) void srand(unsigned s) { seed = s; }
+// Zero is the one state xorshift never leaves, so srand(0) seeds as srand(1).
+__attribute__((weak)) void srand(unsigned s) { seed = s ? s : 1; }
 
 // Communication with the environment
 

@@ -11,6 +11,7 @@ int remove(const char *name) {
     return -1;
   }
   while (namelen)
-    ria_push_char(name[--namelen]);
-  return ria_call_int(RIA_OP_UNLINK);
+    RIA.xstack = name[--namelen];
+  RIA.op = RIA_OP_UNLINK;
+  return ria_spin();
 }

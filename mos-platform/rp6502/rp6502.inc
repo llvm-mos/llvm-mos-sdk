@@ -60,7 +60,6 @@ RIA_OP_CHMOD              = $26
 RIA_OP_UTIME              = $27
 RIA_OP_MKDIR              = $28
 RIA_OP_CHDIR              = $29
-RIA_OP_CHDRIVE            = $2A
 RIA_OP_GETCWD             = $2B
 RIA_OP_SETLABEL           = $2C
 RIA_OP_GETLABEL           = $2D

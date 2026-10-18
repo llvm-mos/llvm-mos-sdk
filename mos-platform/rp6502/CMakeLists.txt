@@ -35,7 +35,6 @@ add_platform_library(rp6502-c
   creat.c
   ctime.c
   errno.s
-  f_chdrive.c
   f_chmod.c
   f_closedir.c
   f_getcwd.c

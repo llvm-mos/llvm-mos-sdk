@@ -14,7 +14,8 @@ extern "C" {
 
 /// 45E100 Fast Ethernet controller
 ///
-/// Enabled by writing 0x53 and then 0x47 to VIC-IV register 0xD02F
+/// Map the controller's buffers over 0xD000-0xDFFF by writing
+/// VIC4_KEY_ETH_A then VIC4_KEY_ETH_B to VICIV.key.
 struct __45E100 {
   uint8_t ctrl1; //!< Control register 1 (offset 0x00)
   uint8_t ctrl2; //!< Control register 2 (offset 0x01)
@@ -32,9 +33,14 @@ struct __45E100 {
   uint8_t miim_phy_reg;
   uint16_t miimv;     //!< MIIM register value (offset 0x07)
   uint8_t macaddr[6]; //!< MAC address (offset 0x09)
+  /// Debug window (offset 0x0f). Reports whatever was last written to it;
+  /// 0 selects buffer identities, low two bits being the CPU's read buffer.
+  uint8_t debug;
 };
 #ifdef __cplusplus
-static_assert(sizeof(struct __45E100) == 15);
+static_assert(sizeof(struct __45E100) == 16);
+#else
+_Static_assert(sizeof(struct __45E100) == 16, "45E100 block is $D6E0-$D6EF");
 #endif
 
 /// 45E100 Fast Ethernet controller commands
@@ -64,50 +70,66 @@ enum
     : uint8_t
 #endif
 {
-  /** Write 0 to hold ethernet controller under reset */
+  /* ctrl1 ($D6E0) */
+  /** Write 0 to hold the controller under reset */
   ETH_RST_MASK = 0b00000001,
-  /** Write 0 to hold ethernet controller transmit sub-system under reset
-   */
+  /** Write 0 to hold the transmit sub-system under reset */
   ETH_TXRST_MASK = 0b00000010,
   /** Read ethernet RX bits currently on the wire */
   ETH_DRXD_MASK = 0b00000100,
   /** Read ethernet RX data valid (debug) */
   ETH_DRXDV_MASK = 0b00001000,
-  /** Allow remote keyboard input via magic ethernet frames */
+  /** Allow remote keyboard input via magic ethernet frames. Reads back as
+      the remote-control enable status. */
   ETH_KEYEN_MASK = 0b00010000,
-  /** Indicate if ethernet RX is blocked until RX buffers freed */
+  /** RX is blocked until receive buffers are freed */
   ETH_RXBLKD_MASK = 0b01000000,
-  /** Ethernet transmit side is idle, i.e., a packet can be sent. */
+  /** Transmit side is idle, i.e. a packet can be sent */
   ETH_TXIDLE_MASK = 0b10000000,
-  /** Number of free receive buffers */
+
+  /* ctrl2 ($D6E1) */
+  /** Number of free receive buffers. Read only; writing bit 1 is
+      ETH_RXROTATE_MASK instead. */
   ETH_RXBF_MASK = 0b00000110,
-  /** Enable streaming of CPU instruction stream or VIC-IV display on
-   * ethernet
-   */
+  /** Write to hand back the current receive buffer and present the next
+      frame. Edge triggered, so it takes a write with the bit clear followed
+      by one with it set. */
+  ETH_RXROTATE_MASK = 0b00000010,
+  /** Enable streaming of CPU instruction stream or VIC-IV display */
   ETH_STRM_MASK = 0b00001000,
-  /** Ethernet TX IRQ status */
+  /** Indicate if ethernet TX is idle */
   ETH_TXQ_MASK = 0b00010000,
-  /** Ethernet RX IRQ status */
+  /** Indicate if a received frame is waiting */
   ETH_RXQ_MASK = 0b00100000,
   /** Enable ethernet TX IRQ */
   ETH_TXQEN_MASK = 0b01000000,
   /** Enable ethernet RX IRQ */
   ETH_RXQEN_MASK = 0b10000000,
-  /** Ethernet disable promiscuous mode */
+
+  /* ctrl3 ($D6E5) */
+  /** Disable promiscuous mode. iomap.txt annotates this bit twice, as
+      "disable promiscuous mode" and as "enable filtering of unicast frames
+      if MAC address does not match", and annotates ETH_MCST_MASK as both the
+      multicast and the unicast enable. Which reading is right has not been
+      settled here; matching addresses in software avoids the question. */
   ETH_NOPROM_MASK = 0b00000001,
   /** Disable CRC check for received packets */
   ETH_NOCRC_MASK = 0b00000010,
-  /** Ethernet TX clock phase adjust */
+  /** TX clock phase, a two-bit field: use ETH_TXPH_SHIFT */
   ETH_TXPH_MASK = 0b00001100,
+  ETH_TXPH_SHIFT = 2,
   /** Accept broadcast frames */
   ETH_BCST_MASK = 0b00010000,
-  /** Accept multicast frames */
+  /** Accept multicast frames (see ETH_NOPROM_MASK) */
   ETH_MCST_MASK = 0b00100000,
-  /** Ethernet RX clock phase adjust */
+  /** RX clock phase, a two-bit field: use ETH_RXPH_SHIFT */
   ETH_RXPH_MASK = 0b11000000,
-  /** Ethernet MIIM register number */
+  ETH_RXPH_SHIFT = 6,
+
+  /* miim_phy_reg ($D6E6) */
+  /** MIIM register number */
   ETH_MIIMREG_MASK = 0b00011111,
-  /** Ethernet MIIM PHY number (use 0 for Nexys4, 1 for MEGA65 r1 PCBs) */
+  /** MIIM PHY number */
   ETH_MIIMPHY_MASK = 0b11100000
 };
 

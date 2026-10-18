@@ -160,7 +160,7 @@ int f_utime(const char *path, unsigned fdate, unsigned ftime, unsigned crdate,
             unsigned crtime);
 int f_mkdir(const char *name);
 int f_setlabel(const char *name);
-int f_getlabel(const char *path, char *label);
+int f_getlabel(const char *drive, char *label);
 int f_getfree(const char *name, unsigned long *free, unsigned long *total);
 int ria_rln_lastkey(char *key, unsigned char *action);
 int ria_rln_peek(char *peek, unsigned char *pos);

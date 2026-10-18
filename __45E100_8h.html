@@ -66,7 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">_45E100.h File Reference</div>  </div>
 </div><!--header-->
@@ -121,25 +122,33 @@ Enumerations</h2></td></tr>
 , <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2aafbe904ab19084fd67f7cfbed5dcf706">ETH_TXIDLE_MASK</a> = 0b10000000
 , <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a45b90d66ad9ca790179729302cda60c5">ETH_RXBF_MASK</a> = 0b00000110
 , <br />
-&#160;&#160;<a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2ae3c246cdb45611aa967cae94342324ef">ETH_STRM_MASK</a> = 0b00001000
+&#160;&#160;<a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a5692a50c7fb43006f39bc7aae6d94771">ETH_RXROTATE_MASK</a> = 0b00000010
+, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2ae3c246cdb45611aa967cae94342324ef">ETH_STRM_MASK</a> = 0b00001000
 , <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2abcb737b9dd1794855d41ffa4ddf54adb">ETH_TXQ_MASK</a> = 0b00010000
 , <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a27e05631ba289150310b73110e6877a5">ETH_RXQ_MASK</a> = 0b00100000
-, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2ac63db9e7f1386cd9280ff6e393d53d27">ETH_TXQEN_MASK</a> = 0b01000000
 , <br />
-&#160;&#160;<a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a0dcca7f3246e3526e63a77861930a3b9">ETH_RXQEN_MASK</a> = 0b10000000
+&#160;&#160;<a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2ac63db9e7f1386cd9280ff6e393d53d27">ETH_TXQEN_MASK</a> = 0b01000000
+, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a0dcca7f3246e3526e63a77861930a3b9">ETH_RXQEN_MASK</a> = 0b10000000
 , <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2acb6f5be62837027adfcbc038b6bf069a">ETH_NOPROM_MASK</a> = 0b00000001
 , <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a8e3cc3c6c6638696cadceba57c8d471b">ETH_NOCRC_MASK</a> = 0b00000010
-, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a5ddb7e4fdd529d2dcd3fa17388ee268f">ETH_TXPH_MASK</a> = 0b00001100
 , <br />
-&#160;&#160;<a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a7e49e50acbee4df4949e17826908f38e">ETH_BCST_MASK</a> = 0b00010000
+&#160;&#160;<a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a5ddb7e4fdd529d2dcd3fa17388ee268f">ETH_TXPH_MASK</a> = 0b00001100
+, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a95f8fe6a28dc37d2aefa7385a909fe8c">ETH_TXPH_SHIFT</a> = 2
+, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a7e49e50acbee4df4949e17826908f38e">ETH_BCST_MASK</a> = 0b00010000
 , <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2af5fb1e7c9bf83ea865158befc0b4a0b7">ETH_MCST_MASK</a> = 0b00100000
-, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2afe25ac04f4ea1fb48fe99ec97359f8a8">ETH_RXPH_MASK</a> = 0b11000000
-, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2ac021e0b03b1acac52befe88147794edf">ETH_MIIMREG_MASK</a> = 0b00011111
 , <br />
-&#160;&#160;<a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a2d9c9c42b10365857bf8f62997ca415a">ETH_MIIMPHY_MASK</a> = 0b11100000
+&#160;&#160;<a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2afe25ac04f4ea1fb48fe99ec97359f8a8">ETH_RXPH_MASK</a> = 0b11000000
+, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2ae94baba06a0f44fb56b5b787182b3180">ETH_RXPH_SHIFT</a> = 6
+, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2ac021e0b03b1acac52befe88147794edf">ETH_MIIMREG_MASK</a> = 0b00011111
+, <a class="el" href="__45E100_8h.html#a25e50be5c73e0b2fab54944e68dd48c2a2d9c9c42b10365857bf8f62997ca415a">ETH_MIIMPHY_MASK</a> = 0b11100000
 <br />
  }</td></tr>
 <tr class="separator:a25e50be5c73e0b2fab54944e68dd48c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a29d44a83786306febf269336ec995a4e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="__45E100_8h.html#a29d44a83786306febf269336ec995a4e">_Static_assert</a> (sizeof(struct __45E100)==16, &quot;45E100 block <a class="el" href="neslib_2LICENSE.html#aebd6826700682fa635f2b624c6366dbe">is</a> $D6E0-$D6EF&quot;)</td></tr>
+<tr class="separator:a29d44a83786306febf269336ec995a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a7ada2556f3c386db5f31969fb6d4d002"></a>
@@ -180,49 +189,83 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a43ea6febbf8b4eb8988a9e4ca9bf15f4"></a>ETH_RST_MASK&#160;</td><td class="fielddoc"><p>Write 0 to hold ethernet controller under reset </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a43ea6febbf8b4eb8988a9e4ca9bf15f4"></a>ETH_RST_MASK&#160;</td><td class="fielddoc"><p>Write 0 to hold the controller under reset </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2ab67a7bb228bafc0e3569263e0f89eada"></a>ETH_TXRST_MASK&#160;</td><td class="fielddoc"><p>Write 0 to hold ethernet controller transmit sub-system under reset </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2ab67a7bb228bafc0e3569263e0f89eada"></a>ETH_TXRST_MASK&#160;</td><td class="fielddoc"><p>Write 0 to hold the transmit sub-system under reset </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a3b5f9f4b66b541dd6af3758a0fa0f282"></a>ETH_DRXD_MASK&#160;</td><td class="fielddoc"><p>Read ethernet RX bits currently on the wire </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2af2592abafddf16db6a4b2c09b98aa420"></a>ETH_DRXDV_MASK&#160;</td><td class="fielddoc"><p>Read ethernet RX data valid (debug) </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2af8ca616214516cc3fe2f64f8a7033b60"></a>ETH_KEYEN_MASK&#160;</td><td class="fielddoc"><p>Allow remote keyboard input via magic ethernet frames </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2af8ca616214516cc3fe2f64f8a7033b60"></a>ETH_KEYEN_MASK&#160;</td><td class="fielddoc"><p>Allow remote keyboard input via magic ethernet frames. Reads back as the remote-control enable status. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a25f4aee89fb87f7586b4a77b7c6148a8"></a>ETH_RXBLKD_MASK&#160;</td><td class="fielddoc"><p>Indicate if ethernet RX is blocked until RX buffers freed </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a25f4aee89fb87f7586b4a77b7c6148a8"></a>ETH_RXBLKD_MASK&#160;</td><td class="fielddoc"><p>RX is blocked until receive buffers are freed </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2aafbe904ab19084fd67f7cfbed5dcf706"></a>ETH_TXIDLE_MASK&#160;</td><td class="fielddoc"><p>Ethernet transmit side is idle, i.e., a packet can be sent. </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2aafbe904ab19084fd67f7cfbed5dcf706"></a>ETH_TXIDLE_MASK&#160;</td><td class="fielddoc"><p>Transmit side is idle, i.e. a packet can be sent </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a45b90d66ad9ca790179729302cda60c5"></a>ETH_RXBF_MASK&#160;</td><td class="fielddoc"><p>Number of free receive buffers </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a45b90d66ad9ca790179729302cda60c5"></a>ETH_RXBF_MASK&#160;</td><td class="fielddoc"><p>Number of free receive buffers. Read only; writing bit 1 is ETH_RXROTATE_MASK instead. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2ae3c246cdb45611aa967cae94342324ef"></a>ETH_STRM_MASK&#160;</td><td class="fielddoc"><p>Enable streaming of CPU instruction stream or VIC-IV display on ethernet </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a5692a50c7fb43006f39bc7aae6d94771"></a>ETH_RXROTATE_MASK&#160;</td><td class="fielddoc"><p>Write to hand back the current receive buffer and present the next frame. Edge triggered, so it takes a write with the bit clear followed by one with it set. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2abcb737b9dd1794855d41ffa4ddf54adb"></a>ETH_TXQ_MASK&#160;</td><td class="fielddoc"><p>Ethernet TX IRQ status </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2ae3c246cdb45611aa967cae94342324ef"></a>ETH_STRM_MASK&#160;</td><td class="fielddoc"><p>Enable streaming of CPU instruction stream or VIC-IV display </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a27e05631ba289150310b73110e6877a5"></a>ETH_RXQ_MASK&#160;</td><td class="fielddoc"><p>Ethernet RX IRQ status </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2abcb737b9dd1794855d41ffa4ddf54adb"></a>ETH_TXQ_MASK&#160;</td><td class="fielddoc"><p>Indicate if ethernet TX is idle </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a27e05631ba289150310b73110e6877a5"></a>ETH_RXQ_MASK&#160;</td><td class="fielddoc"><p>Indicate if a received frame is waiting </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2ac63db9e7f1386cd9280ff6e393d53d27"></a>ETH_TXQEN_MASK&#160;</td><td class="fielddoc"><p>Enable ethernet TX IRQ </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a0dcca7f3246e3526e63a77861930a3b9"></a>ETH_RXQEN_MASK&#160;</td><td class="fielddoc"><p>Enable ethernet RX IRQ </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2acb6f5be62837027adfcbc038b6bf069a"></a>ETH_NOPROM_MASK&#160;</td><td class="fielddoc"><p>Ethernet disable promiscuous mode </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2acb6f5be62837027adfcbc038b6bf069a"></a>ETH_NOPROM_MASK&#160;</td><td class="fielddoc"><p>Disable promiscuous mode. iomap.txt annotates this bit twice, as "disable promiscuous mode" and as "enable filtering of unicast frames
+  if MAC address does not match", and annotates ETH_MCST_MASK as both the multicast and the unicast enable. Which reading is right has not been settled here; matching addresses in software avoids the question. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a8e3cc3c6c6638696cadceba57c8d471b"></a>ETH_NOCRC_MASK&#160;</td><td class="fielddoc"><p>Disable CRC check for received packets </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a5ddb7e4fdd529d2dcd3fa17388ee268f"></a>ETH_TXPH_MASK&#160;</td><td class="fielddoc"><p>Ethernet TX clock phase adjust </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a5ddb7e4fdd529d2dcd3fa17388ee268f"></a>ETH_TXPH_MASK&#160;</td><td class="fielddoc"><p>TX clock phase, a two-bit field: use ETH_TXPH_SHIFT </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a95f8fe6a28dc37d2aefa7385a909fe8c"></a>ETH_TXPH_SHIFT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a7e49e50acbee4df4949e17826908f38e"></a>ETH_BCST_MASK&#160;</td><td class="fielddoc"><p>Accept broadcast frames </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2af5fb1e7c9bf83ea865158befc0b4a0b7"></a>ETH_MCST_MASK&#160;</td><td class="fielddoc"><p>Accept multicast frames </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2af5fb1e7c9bf83ea865158befc0b4a0b7"></a>ETH_MCST_MASK&#160;</td><td class="fielddoc"><p>Accept multicast frames (see ETH_NOPROM_MASK) </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2afe25ac04f4ea1fb48fe99ec97359f8a8"></a>ETH_RXPH_MASK&#160;</td><td class="fielddoc"><p>Ethernet RX clock phase adjust </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2afe25ac04f4ea1fb48fe99ec97359f8a8"></a>ETH_RXPH_MASK&#160;</td><td class="fielddoc"><p>RX clock phase, a two-bit field: use ETH_RXPH_SHIFT </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2ac021e0b03b1acac52befe88147794edf"></a>ETH_MIIMREG_MASK&#160;</td><td class="fielddoc"><p>Ethernet MIIM register number </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2ae94baba06a0f44fb56b5b787182b3180"></a>ETH_RXPH_SHIFT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2ac021e0b03b1acac52befe88147794edf"></a>ETH_MIIMREG_MASK&#160;</td><td class="fielddoc"><p>MIIM register number </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a2d9c9c42b10365857bf8f62997ca415a"></a>ETH_MIIMPHY_MASK&#160;</td><td class="fielddoc"><p>Ethernet MIIM PHY number (use 0 for Nexys4, 1 for MEGA65 r1 PCBs) </p>
+<tr><td class="fieldname"><a id="a25e50be5c73e0b2fab54944e68dd48c2a2d9c9c42b10365857bf8f62997ca415a"></a>ETH_MIIMPHY_MASK&#160;</td><td class="fielddoc"><p>MIIM PHY number </p>
 </td></tr>
 </table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a29d44a83786306febf269336ec995a4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29d44a83786306febf269336ec995a4e">&#9670;&nbsp;</a></span>_Static_assert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">_Static_assert </td>
+          <td>(</td>
+          <td class="paramtype">sizeof(struct __45E100)&#160;</td>
+          <td class="paramname"> = <code>=16</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;45E100 block <a class="el" href="neslib_2LICENSE.html#aebd6826700682fa635f2b624c6366dbe">is</a> $D6E0-$D6EF&quot;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

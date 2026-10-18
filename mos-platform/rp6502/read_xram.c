@@ -1,8 +1,8 @@
 #include "rp6502.h"
 
-int read_xram(unsigned buf, unsigned count, int fildes) {
-  RIA.xstack = buf >> 8;
-  RIA.xstack = buf;
+int read_xram(unsigned xaddr, unsigned count, int fildes) {
+  RIA.xstack = xaddr >> 8;
+  RIA.xstack = xaddr;
   RIA.xstack = count >> 8;
   RIA.xstack = count;
   RIA.a = fildes;

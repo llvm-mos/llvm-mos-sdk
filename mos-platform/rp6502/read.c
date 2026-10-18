@@ -2,6 +2,9 @@
 #include <unistd.h>
 
 int read(int fildes, void *buf, unsigned count) {
+  /* A count above 0x7FFF moves 0x7FFF bytes, so the total fits in an int. */
+  if (count > 0x7FFF)
+    count = 0x7FFF;
   int total = 0;
   while (count) {
     unsigned blockcount = (count > 512) ? 512 : count;

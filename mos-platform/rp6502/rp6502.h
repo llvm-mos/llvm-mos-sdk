@@ -159,7 +159,6 @@ int f_chmod(const char *path, unsigned char attr, unsigned char mask);
 int f_utime(const char *path, unsigned fdate, unsigned ftime, unsigned crdate,
             unsigned crtime);
 int f_mkdir(const char *name);
-int f_getcwd(char *name, int size);
 int f_setlabel(const char *name);
 int f_getlabel(const char *path, char *label);
 int f_getfree(const char *name, unsigned long *free, unsigned long *total);

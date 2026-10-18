@@ -37,7 +37,6 @@ add_platform_library(rp6502-c
   errno.s
   f_chmod.c
   f_closedir.c
-  f_getcwd.c
   f_getfree.c
   f_getlabel.c
   f_lseek.c

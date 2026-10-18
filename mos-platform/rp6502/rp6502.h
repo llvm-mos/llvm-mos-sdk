@@ -148,7 +148,7 @@ int read_xstack(void *buf, unsigned count, int fildes);
 int read_xram(unsigned xaddr, unsigned count, int fildes);
 int write_xstack(const void *buf, unsigned count, int fildes);
 int write_xram(unsigned xaddr, unsigned count, int fildes);
-long f_lseek(long offset, int whence, int fildes);
+long f_lseek(long offset, char whence, int fildes);
 int f_stat(const char *path, f_stat_t *dirent);
 int f_opendir(const char *name);
 int f_readdir(f_stat_t *dirent, int dirdes);

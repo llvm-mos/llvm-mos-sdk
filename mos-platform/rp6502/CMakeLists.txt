@@ -74,14 +74,12 @@ add_platform_library(rp6502-c
   ria_rln_peek.c
   ria_rln_poke.c
   ria_spin.s
-  rmdir.c
   sleep.c
   strftime.c
   syncfs.c
   time.c
   time_set.c
   tm_conv.c
-  unlink.c
   write_xram.c
   write_xstack.c
   write.c

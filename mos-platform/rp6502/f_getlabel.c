@@ -14,8 +14,11 @@ int f_getlabel(const char *drive, char *label) {
   }
   RIA.op = RIA_OP_GETLABEL;
   ax = ria_spin();
+  if (ax < 0)
+    return ax;
   for (i = 0; i < ax; i++) {
     label[i] = RIA.xstack;
   }
+  label[ax] = 0;
   return ax;
 }

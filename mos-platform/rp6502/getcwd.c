@@ -12,12 +12,13 @@ char *getcwd(char *buf, size_t size) {
   ax = ria_spin();
   if (ax < 0)
     return 0;
-  if ((size_t)ax > size) {
+  if ((size_t)ax >= size) {
     ria_drop();
     errno = ERANGE;
     return 0;
   }
   for (i = 0; i < ax; i++)
     buf[i] = RIA.xstack;
+  buf[ax] = 0;
   return buf;
 }

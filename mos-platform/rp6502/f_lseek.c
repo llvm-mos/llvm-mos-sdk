@@ -1,6 +1,6 @@
 #include <rp6502.h>
 
-long f_lseek(long offset, int whence, int fildes) {
+long f_lseek(long offset, char whence, int fildes) {
   RIA.a = fildes;
   RIA.xstack = offset >> 24;
   RIA.xstack = offset >> 16;

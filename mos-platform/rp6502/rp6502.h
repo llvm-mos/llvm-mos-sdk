@@ -74,7 +74,7 @@ static inline void ria_irq_write(unsigned char mask) { RIA.irq = mask; }
 #define RIA_OP_WRITE_XSTACK 0x18
 #define RIA_OP_WRITE_XRAM 0x19
 #define RIA_OP_LSEEK_CC65 0x1A
-#define RIA_OP_UNLINK 0x1B
+#define RIA_OP_REMOVE 0x1B
 #define RIA_OP_RENAME 0x1C
 #define RIA_OP_LSEEK 0x1D
 #define RIA_OP_LSEEK_LLVM 0x1D
@@ -90,7 +90,6 @@ static inline void ria_irq_write(unsigned char mask) { RIA.irq = mask; }
 #define RIA_OP_UTIME 0x27
 #define RIA_OP_MKDIR 0x28
 #define RIA_OP_CHDIR 0x29
-#define RIA_OP_CHDRIVE 0x2A
 #define RIA_OP_GETCWD 0x2B
 #define RIA_OP_SETLABEL 0x2C
 #define RIA_OP_GETLABEL 0x2D
@@ -145,26 +144,24 @@ int ria_execl(const char *path, ...);
 long ria_attr_get(unsigned char id);
 int ria_attr_set(long val, unsigned char id);
 int read_xstack(void *buf, unsigned count, int fildes);
-int read_xram(unsigned buf, unsigned count, int fildes);
+int read_xram(unsigned xaddr, unsigned count, int fildes);
 int write_xstack(const void *buf, unsigned count, int fildes);
-int write_xram(unsigned buf, unsigned count, int fildes);
-long f_lseek(long offset, int whence, int fildes);
+int write_xram(unsigned xaddr, unsigned count, int fildes);
+long f_lseek(long offset, char whence, int fildes);
 int f_stat(const char *path, f_stat_t *dirent);
 int f_opendir(const char *name);
 int f_readdir(f_stat_t *dirent, int dirdes);
 int f_closedir(int dirdes);
 long f_telldir(int dirdes);
-int f_seekdir(long offs, int dirdes);
+int f_seekdir(long loc, int dirdes);
 int f_rewinddir(int dirdes);
 int f_chmod(const char *path, unsigned char attr, unsigned char mask);
 int f_utime(const char *path, unsigned fdate, unsigned ftime, unsigned crdate,
             unsigned crtime);
 int f_mkdir(const char *name);
-int f_chdrive(const char *name);
-int f_getcwd(char *name, int size);
 int f_setlabel(const char *name);
-int f_getlabel(const char *path, char *label);
-int f_getfree(const char *name, unsigned long *free, unsigned long *total);
+int f_getlabel(const char *drive, char *label);
+int f_getfree(const char *drive, unsigned long *free, unsigned long *total);
 int ria_rln_lastkey(char *key, unsigned char *action);
 int ria_rln_peek(char *peek, unsigned char *pos);
 int ria_rln_poke(const char *poke);
@@ -172,9 +169,9 @@ int time_set(long long time);
 
 /* Extended memory */
 
-#define xreg(d, c, a, ...)                                                     \
-  xregn(d, c, a, sizeof((long[]){__VA_ARGS__}) / sizeof(long), __VA_ARGS__)
-int xregn(char device, char channel, unsigned char address, unsigned count,
+#define xreg(d, c, i, ...)                                                     \
+  xregn(d, c, i, sizeof((long[]){__VA_ARGS__}) / sizeof(long), __VA_ARGS__)
+int xregn(char device, char channel, unsigned char index, unsigned count,
           ...);
 void xram0_read(void *dest, unsigned src, unsigned count);
 void xram1_read(void *dest, unsigned src, unsigned count);

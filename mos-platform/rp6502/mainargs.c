@@ -2,8 +2,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
+/* With no arguments, argv is an empty list, as C requires. */
+static char *no_args[1];
+
 int __argc;
-char **__argv;
+char **__argv = no_args;
 
 /* Override to provide storage for argv, e.g.:
  *   void *__argv_mem(size_t size) { return malloc(size); }
@@ -19,10 +22,17 @@ asm(".section .init.220,\"ax\",@progbits\n"
     "  jsr __do_initmainargs\n");
 
 void __do_initmainargs(void) {
+  /* Only the size is needed now. The drop lets __argv_mem() make API calls. */
   RIA.op = RIA_OP_ARGV;
   int size = ria_spin();
+  ria_drop();
   void *buf = __argv_mem(size);
-  if (!buf) {
+  if (!buf)
+    return;
+
+  /* Ask again for the data, and skip argv if its size changed. */
+  RIA.op = RIA_OP_ARGV;
+  if (ria_spin() != size) {
     ria_drop();
     return;
   }

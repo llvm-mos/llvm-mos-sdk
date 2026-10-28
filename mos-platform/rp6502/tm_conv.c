@@ -7,13 +7,12 @@ static struct tm tm_buf;
 
 struct tm *__tm_conv(const time_t *timep, unsigned char op) {
   unsigned i;
-  if (!timep)
-    return 0;
-  ria_push_long((unsigned long)(*timep >> 32));
-  ria_push_long((unsigned long)*timep);
-  if (ria_call_int(op) < 0)
+  for (i = sizeof(time_t); i;)
+    RIA.xstack = ((const char *)timep)[--i];
+  RIA.op = op;
+  if (ria_spin() < 0)
     return 0;
   for (i = 0; i < sizeof(struct tm); i++)
-    ((char *)&tm_buf)[i] = ria_pop_char();
+    ((char *)&tm_buf)[i] = RIA.xstack;
   return &tm_buf;
 }

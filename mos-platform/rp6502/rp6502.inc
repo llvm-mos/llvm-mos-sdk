@@ -31,7 +31,7 @@ RIA_SREG        = $FFF8
 
 ; RIA OS operation numbers
 RIA_OP_EXIT               = $FF
-RIA_OP_ZXSTACK            = $00
+RIA_OP_DROP_XSTACK        = $00
 RIA_OP_XREG               = $01
 RIA_OP_ARGV               = $08
 RIA_OP_EXEC               = $09
@@ -44,7 +44,7 @@ RIA_OP_READ_XRAM          = $17
 RIA_OP_WRITE_XSTACK       = $18
 RIA_OP_WRITE_XRAM         = $19
 RIA_OP_LSEEK_CC65         = $1A
-RIA_OP_UNLINK             = $1B
+RIA_OP_REMOVE             = $1B
 RIA_OP_RENAME             = $1C
 RIA_OP_LSEEK              = $1D
 RIA_OP_LSEEK_LLVM         = $1D
@@ -60,7 +60,6 @@ RIA_OP_CHMOD              = $26
 RIA_OP_UTIME              = $27
 RIA_OP_MKDIR              = $28
 RIA_OP_CHDIR              = $29
-RIA_OP_CHDRIVE            = $2A
 RIA_OP_GETCWD             = $2B
 RIA_OP_SETLABEL           = $2C
 RIA_OP_GETLABEL           = $2D
@@ -93,6 +92,25 @@ RIA_ATTR_CLK_RUN_MS       = $10
 RIA_ATTR_CLK_RUN_CS       = $11
 RIA_ATTR_CLK_RUN_DS       = $12
 RIA_ATTR_CLK_RUN_S        = $13
+
+; PIX extended registers, the assembly form of xreg()
+.macro xreg device, channel, index, values:vararg
+    lda #(\device)
+    sta RIA_XSTACK
+    lda #(\channel)
+    sta RIA_XSTACK
+    lda #(\index)
+    sta RIA_XSTACK
+.irp value, \values
+    lda #(((\value) >> 8) & $FF)
+    sta RIA_XSTACK
+    lda #((\value) & $FF)
+    sta RIA_XSTACK
+.endr
+    lda #RIA_OP_XREG
+    sta RIA_OP
+    jsr RIA_SPIN
+.endm
 
 ; 6522 VIA
 VIA             = $FFD0        ; VIA base address

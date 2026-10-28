@@ -10,11 +10,12 @@ int f_stat(const char *path, f_stat_t *dirent) {
     return -1;
   }
   while (pathlen) {
-    ria_push_char(path[--pathlen]);
+    RIA.xstack = path[--pathlen];
   }
-  ax = ria_call_int(RIA_OP_STAT);
+  RIA.op = RIA_OP_STAT;
+  ax = ria_spin();
   for (i = 0; i < sizeof(f_stat_t); i++) {
-    ((char *)dirent)[i] = ria_pop_char();
+    ((char *)dirent)[i] = RIA.xstack;
   }
   return ax;
 }

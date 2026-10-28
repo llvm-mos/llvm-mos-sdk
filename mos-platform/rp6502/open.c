@@ -10,7 +10,8 @@ int open(const char *name, int flags, ...) {
     return -1;
   }
   while (namelen)
-    ria_push_char(name[--namelen]);
-  ria_set_ax(flags);
-  return ria_call_int(RIA_OP_OPEN);
+    RIA.xstack = name[--namelen];
+  RIA.a = flags;
+  RIA.op = RIA_OP_OPEN;
+  return ria_spin();
 }

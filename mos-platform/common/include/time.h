@@ -10,6 +10,7 @@ extern "C" {
 #endif
 
 typedef long long time_t;
+typedef long clock_t;
 
 struct tm {
   int tm_sec;
@@ -28,11 +29,7 @@ struct timespec {
   long tv_nsec;
 };
 
-typedef int clockid_t;
-
-#define CLOCK_REALTIME ((clockid_t)0)
-
-long clock(void);
+clock_t clock(void);
 time_t time(time_t *timep);
 time_t mktime(struct tm *timep);
 struct tm *gmtime(const time_t *timep);

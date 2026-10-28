@@ -1,7 +1,7 @@
 #ifndef _RP6502_TIME_H_
 #define _RP6502_TIME_H_
 
-#define CLOCKS_PER_SEC 1000UL
+#define CLOCKS_PER_SEC ((clock_t)1000)
 
 #include_next <time.h>
 

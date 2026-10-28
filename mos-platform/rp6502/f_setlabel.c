@@ -9,7 +9,8 @@ int f_setlabel(const char *name) {
     return -1;
   }
   while (namelen) {
-    ria_push_char(name[--namelen]);
+    RIA.xstack = name[--namelen];
   }
-  return ria_call_int(RIA_OP_SETLABEL);
+  RIA.op = RIA_OP_SETLABEL;
+  return ria_spin();
 }

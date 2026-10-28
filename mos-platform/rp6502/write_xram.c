@@ -1,8 +1,11 @@
 #include "rp6502.h"
 
-int write_xram(unsigned buf, unsigned count, int fildes) {
-  ria_set_ax(fildes);
-  ria_push_int(buf);
-  ria_push_int(count);
-  return ria_call_int(RIA_OP_WRITE_XRAM);
+int write_xram(unsigned xaddr, unsigned count, int fildes) {
+  RIA.a = fildes;
+  RIA.xstack = xaddr >> 8;
+  RIA.xstack = xaddr;
+  RIA.xstack = count >> 8;
+  RIA.xstack = count;
+  RIA.op = RIA_OP_WRITE_XRAM;
+  return ria_spin();
 }

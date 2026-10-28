@@ -2,11 +2,12 @@
 
 int ria_rln_lastkey(char *key, unsigned char *action) {
   int i, ax;
-  ax = ria_call_int(RIA_OP_RLN_LASTKEY);
+  RIA.op = RIA_OP_RLN_LASTKEY;
+  ax = ria_spin();
   if (ax > 0) {
-    *action = ria_pop_char();
+    *action = RIA.xstack;
     for (i = 0; i < ax; i++) {
-      key[i] = ria_pop_char();
+      key[i] = RIA.xstack;
     }
   }
   return ax;

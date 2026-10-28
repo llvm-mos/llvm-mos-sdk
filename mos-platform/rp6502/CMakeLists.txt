@@ -21,7 +21,6 @@ add_platform_library(rp6502-crt0
   exit.c
 )
 merge_libraries(rp6502-crt0
-  common-crt0
   common-init-stack
   common-copy-zp-data
   common-zero-bss
@@ -29,18 +28,15 @@ merge_libraries(rp6502-crt0
 )
 
 add_platform_library(rp6502-c
-  abort.c
   asctime.c
   chdir.c
   clock.c
   close.c
-  code_page.c
+  creat.c
   ctime.c
   errno.s
-  f_chdrive.c
   f_chmod.c
   f_closedir.c
-  f_getcwd.c
   f_getfree.c
   f_getlabel.c
   f_lseek.c
@@ -54,36 +50,46 @@ add_platform_library(rp6502-c
   f_telldir.c
   f_utime.c
   getchar.c
+  getcwd.c
   gmtime.c
+  isatty.c
   localtime.c
-  lrand.c
   lseek.c
   mainargs.c
+  mkdir.c
   mktime.c
   open.c
-  phi2.c
   putchar.c
   read_xram.c
   read_xstack.c
   read.c
   remove.c
   rename.c
-  ria.s
   ria_attr.c
+  ria_drop.c
   ria_execl.c
   ria_execv.c
+  ria_irq.c
   ria_rln_lastkey.c
   ria_rln_peek.c
   ria_rln_poke.c
+  ria_spin.s
+  ria_vsync.c
+  sleep.c
   strftime.c
   syncfs.c
   time.c
   time_set.c
   tm_conv.c
-  unlink.c
   write_xram.c
   write_xstack.c
   write.c
+  xram_move.s
+  xram_peek.c
+  xram_poke.c
+  xram_read.s
+  xram_set.s
+  xram_write.s
   xregn.c
 )
 

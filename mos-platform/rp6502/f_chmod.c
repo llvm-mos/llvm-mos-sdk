@@ -4,15 +4,16 @@
 
 int f_chmod(const char *path, unsigned char attr, unsigned char mask) {
   size_t pathlen;
-  ria_set_a(mask);
+  RIA.a = mask;
   pathlen = strlen(path);
   if (pathlen > 255) {
     errno = EINVAL;
     return -1;
   }
   while (pathlen) {
-    ria_push_char(path[--pathlen]);
+    RIA.xstack = path[--pathlen];
   }
-  ria_push_char(attr);
-  return ria_call_int(RIA_OP_CHMOD);
+  RIA.xstack = attr;
+  RIA.op = RIA_OP_CHMOD;
+  return ria_spin();
 }

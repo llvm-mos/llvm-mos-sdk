@@ -10,7 +10,8 @@ int chdir(const char *name) {
     return -1;
   }
   while (namelen) {
-    ria_push_char(name[--namelen]);
+    RIA.xstack = name[--namelen];
   }
-  return ria_call_int(RIA_OP_CHDIR);
+  RIA.op = RIA_OP_CHDIR;
+  return ria_spin();
 }

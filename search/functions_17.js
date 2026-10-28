@@ -1,6 +1,21 @@
 var searchData=
 [
-  ['xram_5fread_6425',['xram_read',['../mapper__xram__single_8h.html#a66c05a3456c22c6fc517e6787fa84203',1,'mapper_xram_single.h']]],
-  ['xram_5fwrite_6426',['xram_write',['../mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f',1,'mapper_xram_single.h']]],
-  ['xregn_6427',['xregn',['../rp6502_8h.html#a2e230e46483dd9062996f95f50946cfe',1,'rp6502.h']]]
+  ['xram0_5fpeek16_6373',['xram0_peek16',['../rp6502_8h.html#a7848004e5ee6fdb5ea3e2d1161d778bd',1,'rp6502.h']]],
+  ['xram0_5fpeek8_6374',['xram0_peek8',['../rp6502_8h.html#a50b9f20bb346dbdfff98fe4143275fe5',1,'rp6502.h']]],
+  ['xram0_5fpoke16_6375',['xram0_poke16',['../rp6502_8h.html#ad87623ab95cc7c68433f84bf88e8ffda',1,'rp6502.h']]],
+  ['xram0_5fpoke8_6376',['xram0_poke8',['../rp6502_8h.html#a6c2f74162cad0facf2e7a49eda039f5b',1,'rp6502.h']]],
+  ['xram0_5fread_6377',['xram0_read',['../rp6502_8h.html#a3bb8591ed804b326e15c1d277b35d187',1,'rp6502.h']]],
+  ['xram0_5fset_6378',['xram0_set',['../rp6502_8h.html#a03144eb60d0d11d6d4edb30ba80726d6',1,'rp6502.h']]],
+  ['xram0_5fwrite_6379',['xram0_write',['../rp6502_8h.html#a47e6c8208f5b6f0801567e9498bc96de',1,'rp6502.h']]],
+  ['xram1_5fpeek16_6380',['xram1_peek16',['../rp6502_8h.html#aed1d3734a369711f86192bc93f40fb9a',1,'rp6502.h']]],
+  ['xram1_5fpeek8_6381',['xram1_peek8',['../rp6502_8h.html#ab9d85bcb2951f6e005e31d0f5c51c5c7',1,'rp6502.h']]],
+  ['xram1_5fpoke16_6382',['xram1_poke16',['../rp6502_8h.html#a4d01f61491322d2ab2b81fa3c79928c4',1,'rp6502.h']]],
+  ['xram1_5fpoke8_6383',['xram1_poke8',['../rp6502_8h.html#a9039fcb5c04cdde204bafa5d3d9bb269',1,'rp6502.h']]],
+  ['xram1_5fread_6384',['xram1_read',['../rp6502_8h.html#af92c8739fa639284dd5ddbb73cd205bb',1,'rp6502.h']]],
+  ['xram1_5fset_6385',['xram1_set',['../rp6502_8h.html#a41e16d9e9f67e95953d93292b2c12557',1,'rp6502.h']]],
+  ['xram1_5fwrite_6386',['xram1_write',['../rp6502_8h.html#a35062ebce74d588993d643fbd3cf363f',1,'rp6502.h']]],
+  ['xram_5fmove_6387',['xram_move',['../rp6502_8h.html#a1f1bd28ef8a1006ac03ac1e7dda96272',1,'rp6502.h']]],
+  ['xram_5fread_6388',['xram_read',['../mapper__xram__single_8h.html#a66c05a3456c22c6fc517e6787fa84203',1,'mapper_xram_single.h']]],
+  ['xram_5fwrite_6389',['xram_write',['../mapper__xram__single_8h.html#a69902bb10c3dfd6132eeee0690ae033f',1,'mapper_xram_single.h']]],
+  ['xregn_6390',['xregn',['../rp6502_8h.html#adb073a813b7af8e256cb8c415e4599ab',1,'rp6502.h']]]
 ];

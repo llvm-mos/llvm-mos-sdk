@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['license_5379',['LICENSE',['../famitone2_2LICENSE.html',1,'(Global Namespace)'],['../nesdoug_2LICENSE.html',1,'(Global Namespace)'],['../neslib_2LICENSE.html',1,'(Global Namespace)']]],
-  ['limits_5380',['limits',['../limits.html',1,'']]],
-  ['lynx_2eh_5381',['lynx.h',['../lynx_8h.html',1,'']]]
+  ['license_5335',['LICENSE',['../famitone2_2LICENSE.html',1,'(Global Namespace)'],['../nesdoug_2LICENSE.html',1,'(Global Namespace)'],['../neslib_2LICENSE.html',1,'(Global Namespace)']]],
+  ['limits_5336',['limits',['../limits.html',1,'']]],
+  ['lynx_2eh_5337',['lynx.h',['../lynx_8h.html',1,'']]]
 ];

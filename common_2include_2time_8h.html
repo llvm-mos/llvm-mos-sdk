@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -94,22 +93,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimespec.html">timespec</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a922ce1ae64374c9410c8a999e25e82af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#a922ce1ae64374c9410c8a999e25e82af">CLOCK_REALTIME</a>&#160;&#160;&#160;((<a class="el" href="common_2include_2time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a>)0)</td></tr>
-<tr class="separator:a922ce1ae64374c9410c8a999e25e82af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ad7eee6f9a9b5e8009dd578fb5be9fe90"><td class="memItemLeft" align="right" valign="top">typedef long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">time_t</a></td></tr>
 <tr class="separator:ad7eee6f9a9b5e8009dd578fb5be9fe90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6dcac6a5cea7d9c842145e1444d91e22"><td class="memItemLeft" align="right" valign="top">typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a></td></tr>
-<tr class="separator:a6dcac6a5cea7d9c842145e1444d91e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56d31f5d6d90595c821854a129b3e33a"><td class="memItemLeft" align="right" valign="top">typedef long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#a56d31f5d6d90595c821854a129b3e33a">clock_t</a></td></tr>
+<tr class="separator:a56d31f5d6d90595c821854a129b3e33a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af6087dd4b7d4dbb747448dbf122811aa"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#af6087dd4b7d4dbb747448dbf122811aa">clock</a> (void)</td></tr>
-<tr class="separator:af6087dd4b7d4dbb747448dbf122811aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade863cfcca9ee19f20ca95796f8ddc1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_2include_2time_8h.html#a56d31f5d6d90595c821854a129b3e33a">clock_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#ade863cfcca9ee19f20ca95796f8ddc1e">clock</a> (void)</td></tr>
+<tr class="separator:ade863cfcca9ee19f20ca95796f8ddc1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2055ea9c91bbb4f276c372c571b7e43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_2include_2time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">time_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#ae2055ea9c91bbb4f276c372c571b7e43">time</a> (<a class="el" href="common_2include_2time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">time_t</a> *timep)</td></tr>
 <tr class="separator:ae2055ea9c91bbb4f276c372c571b7e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a129bf00a0400a4850fcbe47eec72a4e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_2include_2time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">time_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#a129bf00a0400a4850fcbe47eec72a4e7">mktime</a> (struct <a class="el" href="structtm.html">tm</a> *timep)</td></tr>
@@ -125,30 +119,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a6e58d33339fabd469b2f4790b0f2b843"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_2include_2time_8h.html#a6e58d33339fabd469b2f4790b0f2b843">ctime</a> (const <a class="el" href="common_2include_2time_8h.html#ad7eee6f9a9b5e8009dd578fb5be9fe90">time_t</a> *timep)</td></tr>
 <tr class="separator:a6e58d33339fabd469b2f4790b0f2b843"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a922ce1ae64374c9410c8a999e25e82af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a922ce1ae64374c9410c8a999e25e82af">&#9670;&nbsp;</a></span>CLOCK_REALTIME</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CLOCK_REALTIME&#160;&#160;&#160;((<a class="el" href="common_2include_2time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a>)0)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a6dcac6a5cea7d9c842145e1444d91e22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dcac6a5cea7d9c842145e1444d91e22">&#9670;&nbsp;</a></span>clockid_t</h2>
+<a id="a56d31f5d6d90595c821854a129b3e33a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56d31f5d6d90595c821854a129b3e33a">&#9670;&nbsp;</a></span>clock_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int <a class="el" href="common_2include_2time_8h.html#a6dcac6a5cea7d9c842145e1444d91e22">clockid_t</a></td>
+          <td class="memname">typedef long <a class="el" href="common_2include_2time_8h.html#a56d31f5d6d90595c821854a129b3e33a">clock_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -188,14 +167,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af6087dd4b7d4dbb747448dbf122811aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6087dd4b7d4dbb747448dbf122811aa">&#9670;&nbsp;</a></span>clock()</h2>
+<a id="ade863cfcca9ee19f20ca95796f8ddc1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade863cfcca9ee19f20ca95796f8ddc1e">&#9670;&nbsp;</a></span>clock()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long clock </td>
+          <td class="memname"><a class="el" href="common_2include_2time_8h.html#a56d31f5d6d90595c821854a129b3e33a">clock_t</a> clock </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>

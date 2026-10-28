@@ -53,11 +53,6 @@ struct __RP6502 {
 };
 #define RIA (*(volatile struct __RP6502 *)0xFFE0)
 
-__attribute__((leaf)) int ria_spin(void);
-static inline unsigned char ria_vsync(void) { return RIA.vsync; }
-static inline unsigned char ria_irq_read(void) { return RIA.irq; }
-static inline void ria_irq_write(unsigned char mask) { RIA.irq = mask; }
-
 /* OS operation numbers */
 
 #define RIA_OP_EXIT 0xFF
@@ -104,8 +99,6 @@ static inline void ria_irq_write(unsigned char mask) { RIA.irq = mask; }
 #define RIA_OP_TIME_SET 0x3E
 #define RIA_OP_TIME_GET 0x3F
 
-static inline void ria_drop(void) { RIA.op = RIA_OP_DROP_XSTACK; }
-
 /* RIA attribute IDs */
 
 #define RIA_ATTR_ERRNO_OPT 0x00
@@ -139,6 +132,11 @@ typedef struct {
   char fname[255 + 1];
 } f_stat_t;
 
+void ria_drop(void);
+__attribute__((leaf)) int ria_spin(void);
+unsigned char ria_vsync(void);
+unsigned char ria_irq_read(void);
+void ria_irq_write(unsigned char mask);
 int ria_execv(const char *path, char *const argv[]);
 int ria_execl(const char *path, ...);
 long ria_attr_get(unsigned char id);
@@ -171,8 +169,7 @@ int time_set(long long time);
 
 #define xreg(d, c, i, ...)                                                     \
   xregn(d, c, i, sizeof((long[]){__VA_ARGS__}) / sizeof(long), __VA_ARGS__)
-int xregn(char device, char channel, unsigned char index, unsigned count,
-          ...);
+int xregn(char device, char channel, unsigned char index, unsigned count, ...);
 void xram0_read(void *dest, unsigned src, unsigned count);
 void xram1_read(void *dest, unsigned src, unsigned count);
 void xram0_write(unsigned dest, const void *src, unsigned count);
@@ -180,54 +177,14 @@ void xram1_write(unsigned dest, const void *src, unsigned count);
 void xram0_set(unsigned dest, unsigned char val, unsigned count);
 void xram1_set(unsigned dest, unsigned char val, unsigned count);
 void xram_move(unsigned dest, unsigned src, unsigned count);
-
-static inline unsigned char xram0_peek8(unsigned addr) {
-  RIA.addr0 = addr;
-  return RIA.rw0;
-}
-
-static inline unsigned char xram1_peek8(unsigned addr) {
-  RIA.addr1 = addr;
-  return RIA.rw1;
-}
-
-static inline unsigned xram0_peek16(unsigned addr) {
-  RIA.addr0 = addr;
-  RIA.step0 = 1;
-  unsigned char lo = RIA.rw0;
-  return lo | (unsigned)RIA.rw0 << 8;
-}
-
-static inline unsigned xram1_peek16(unsigned addr) {
-  RIA.addr1 = addr;
-  RIA.step1 = 1;
-  unsigned char lo = RIA.rw1;
-  return lo | (unsigned)RIA.rw1 << 8;
-}
-
-static inline void xram0_poke8(unsigned addr, unsigned char val) {
-  RIA.addr0 = addr;
-  RIA.rw0 = val;
-}
-
-static inline void xram1_poke8(unsigned addr, unsigned char val) {
-  RIA.addr1 = addr;
-  RIA.rw1 = val;
-}
-
-static inline void xram0_poke16(unsigned addr, unsigned val) {
-  RIA.addr0 = addr;
-  RIA.step0 = 1;
-  RIA.rw0 = val;
-  RIA.rw0 = val >> 8;
-}
-
-static inline void xram1_poke16(unsigned addr, unsigned val) {
-  RIA.addr1 = addr;
-  RIA.step1 = 1;
-  RIA.rw1 = val;
-  RIA.rw1 = val >> 8;
-}
+unsigned char xram0_peek8(unsigned addr);
+unsigned char xram1_peek8(unsigned addr);
+unsigned xram0_peek16(unsigned addr);
+unsigned xram1_peek16(unsigned addr);
+void xram0_poke8(unsigned addr, unsigned char val);
+void xram1_poke8(unsigned addr, unsigned char val);
+void xram0_poke16(unsigned addr, unsigned val);
+void xram1_poke16(unsigned addr, unsigned val);
 
 #ifdef __cplusplus
 }

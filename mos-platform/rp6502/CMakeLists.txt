@@ -66,12 +66,15 @@ add_platform_library(rp6502-c
   remove.c
   rename.c
   ria_attr.c
+  ria_drop.c
   ria_execl.c
   ria_execv.c
+  ria_irq.c
   ria_rln_lastkey.c
   ria_rln_peek.c
   ria_rln_poke.c
   ria_spin.s
+  ria_vsync.c
   sleep.c
   strftime.c
   syncfs.c
@@ -82,6 +85,8 @@ add_platform_library(rp6502-c
   write_xstack.c
   write.c
   xram_move.s
+  xram_peek.c
+  xram_poke.c
   xram_read.s
   xram_set.s
   xram_write.s

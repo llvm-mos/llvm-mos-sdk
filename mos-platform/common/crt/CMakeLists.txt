@@ -10,6 +10,11 @@ add_platform_library(common-crt
   mul.cc
   shift.cc
   rotate.cc
+
+  isr-regs-nmi.S
+  isr-regs-irq.S
+  isr-stack-nmi.S
+  isr-stack-irq.S
 )
 
 # Merge the builtins library from llvm-mos into libcrt.

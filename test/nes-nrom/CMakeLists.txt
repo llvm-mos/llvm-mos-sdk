@@ -21,4 +21,7 @@ add_nes_test(zp-data)
 add_nes_test(prg-rom-dpcm)
 add_nes_test(prg-rom-dpcm-pad)
 
+add_nes_test(isr-regs-nmi)
+add_nes_test(isr-regs-zp-pressure)
+
 add_subdirectory(no-compile)

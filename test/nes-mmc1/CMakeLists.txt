@@ -19,6 +19,7 @@ add_nes_test(prg-rom-32)
 add_nes_test(prg-rom-64)
 add_nes_test(prg-rom-128)
 add_nes_test(prg-rom-256)
+add_nes_test(prg-rom-512)
 
 add_nes_test(prg-ram)
 
